@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code + OMC V52 速查表</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #22263a;
+    --border: #2e3350;
+    --accent: #7c6af5;
+    --accent2: #4fc3f7;
+    --accent3: #69f0ae;
+    --accent4: #ffb74d;
+    --accent5: #f48fb1;
+    --text: #e8eaf6;
+    --text-dim: #7986cb;
+    --text-muted: #546e7a;
+    --code-bg: #1e2235;
+    --tag-bg: #1a2040;
+    --green: #69f0ae;
+    --red: #ef5350;
+    --yellow: #ffee58;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Helvetica Neue', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 20px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 28px 20px 20px;
+    border-bottom: 2px solid var(--accent);
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #1a1d27 0%, #16193a 100%);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at top, rgba(124,106,245,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  .header h1 span { color: var(--accent); }
+  .header .meta {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+  }
+  .header .badges {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 10px;
+    color: var(--text-dim);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .badge.green { border-color: var(--green); color: var(--green); }
+  .badge.purple { border-color: var(--accent); color: var(--accent); }
+  .badge.blue { border-color: var(--accent2); color: var(--accent2); }
+
+  /* Layout */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 16px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .card.wide { grid-column: 1 / -1; }
+  .card.half { grid-column: span 1; }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+  }
+  .card-header .icon { font-size: 16px; }
+  .card-header h2 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.2px;
+  }
+  .card-body { padding: 12px; }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  th {
+    text-align: left;
+    padding: 6px 10px;
+    background: var(--code-bg);
+    color: var(--text-dim);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  td {
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(124,106,245,0.04); }
+  td:first-child { color: var(--accent2); font-family: 'SF Mono', 'Fira Code', monospace; font-size: 11px; white-space: nowrap; }
+
+  .kw { font-weight: 700; color: var(--accent); }
+  .dim { color: var(--text-muted); }
+  .tag-green { color: var(--green); }
+  .tag-warn { color: var(--accent4); }
+  .tag-red { color: var(--red); }
+
+  /* Code blocks */
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px;
+    line-height: 1.7;
+    overflow-x: auto;
+    color: #c5cae9;
+    margin: 0;
+  }
+  pre .comment { color: var(--text-muted); }
+  pre .cmd { color: var(--accent3); }
+  pre .arg { color: var(--accent4); }
+  pre .str { color: var(--accent5); }
+
+  /* Skills sub-section */
+  .skill-group {
+    margin-bottom: 14px;
+  }
+  .skill-group:last-child { margin-bottom: 0; }
+  .skill-group-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    background: var(--code-bg);
+    border-radius: 4px;
+    margin-bottom: 4px;
+  }
+
+  /* Permission pills */
+  .pill {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .pill-auto { background: rgba(105,240,174,0.15); color: var(--green); }
+  .pill-confirm { background: rgba(255,183,77,0.15); color: var(--accent4); }
+  .pill-yolo { background: rgba(124,106,245,0.15); color: var(--accent); }
+
+  /* Status dots */
+  .dot-online { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); margin-right: 5px; box-shadow: 0 0 4px var(--green); }
+  .dot-warn { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent4); margin-right: 5px; }
+
+  /* Print */
+  @media print {
+    body { background: #fff; color: #111; padding: 10px; }
+    .card { border: 1px solid #ddd; break-inside: avoid; }
+    .card-header { background: #f5f5f5; }
+    pre { background: #f8f8f8; }
+    td:first-child { color: #1565c0; }
+    .kw { color: #6200ea; }
+    :root {
+      --text: #111;
+      --text-dim: #555;
+      --text-muted: #888;
+    }
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 24px;
+    padding: 14px;
+    color: var(--text-muted);
+    font-size: 11px;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Claude Code + <span>OMC V52</span> 速查表</h1>
+  <div class="meta">CLI v2.1.175 · Desktop v1.9659.4 · oh-my-claudecode V52.2</div>
+  <div class="badges">
+    <span class="badge green">✅ 官方直连</span>
+    <span class="badge purple">151 Skills</span>
+    <span class="badge purple">10 Workflows</span>
+    <span class="badge blue">50+ Hooks</span>
+    <span class="badge blue">4 MCPs</span>
+    <span class="badge">2026-06-12</span>
+  </div>
+</div>
+
+<div class="grid">
+
+  <!-- 口语触发词 -->
+  <div class="card wide">
+    <div class="card-header">
+      <span class="icon">🗣️</span>
+      <h2>口语触发词 — 最常用</h2>
+    </div>
+    <div class="card-body">
+      <table>
+        <thead><tr><th>说这些话</th><th>触发效果</th></tr></thead>
+        <tbody>
+          <tr><td><span class="kw">队长</span> / leader / boss</td><td>四步完整工作流 + bypass 权限</td></tr>
+          <tr><td><span class="kw">火力全开</span> / 活力全开 / YOLO</td><td>极限并发模式（15 agent 并发）</td></tr>
+          <tr><td>继续 / 下一步</td><td>接着当前任务往下做</td></tr>
+          <tr><td><span class="kw">autopilot</span></td><td>自动驾驶执行模式</td></tr>
+          <tr><td><span class="kw">ulw</span></td><td>ultrawork 超级执行</td></tr>
+          <tr><td><span class="kw">ralph</span></td><td>ralph 循环模式</td></tr>
+          <tr><td><span class="kw">tdd</span></td><td>TDD 测试驱动开发模式（红→绿→重构）</td></tr>
+          <tr><td><span class="kw">全面升级</span> / 融汇贯通</td><td>claude-code-better 全面升级扫描</td></tr>
+          <tr><td><span class="kw">又报错</span> / 反复错误</td><td>systematic-error-analysis 系统排错</td></tr>
+          <tr><td><span class="kw">调研一下</span> / deepsearch</td><td>deep-research 多渠道深度调研（≥5渠道）</td></tr>
+          <tr><td><span class="kw">深度分析</span></td><td>进入深度分析模式</td></tr>
+          <tr><td><span class="kw">deslop</span> / anti-slop</td><td>AI 生成内容去水分清洗</td></tr>
+          <tr><td>司聪查官网 &lt;主题&gt;</td><td>查官方文档后给有来源的结论</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 内置命令 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">⌨️</span>
+      <h2>内置命令速查</h2>
+    </div>
+    <div class="card-body">
+      <table>
+        <thead><tr><th>命令</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td>/clear</td><td>清空开新会话</td></tr>
+          <tr><td>/compact</td><td>压缩超长上下文</td></tr>
+          <tr><td>/model</td><td>切换模型（opus / sonnet / haiku）</td></tr>
+          <tr><td>/goal</td><td>设定任务完成标准（&gt;5轮必用）</td></tr>
+          <tr><td>/btw</td><td>侧问，不污染主上下文</td></tr>
+          <tr><td>/cd</td><td>切目录不重开 session（v2.1.169+）</td></tr>
+          <tr><td>/safe-mode</td><td>纯净启动，禁所有插件/hooks，专用排障</td></tr>
+          <tr><td>/rewind</td><td>撤回到上一个检查点</td></tr>
+          <tr><td>/init</td><td>初始化项目 CLAUDE.md</td></tr>
+          <tr><td>/code-review</td><td>代码审查</td></tr>
+          <tr><td>/code-review --fix</td><td>审查 + 自动修复</td></tr>
+          <tr><td>/simplify</td><td>代码简化/重构</td></tr>
+          <tr><td>/loop 5m /cmd</td><td>循环执行命令</td></tr>
+          <tr><td>/run</td><td>启动项目</td></tr>
+          <tr><td>/verify</td><td>验证功能是否正常</td></tr>
+          <tr><td>Esc Esc</td><td>中断 Claude 当前操作</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Workflow -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🔄</span>
+      <h2>10 个 Workflow（直接 /名字 调用）</h2>
+    </div>
+    <div class="card-body">
+      <table>
+        <thead><tr><th>命令</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td>/bughunt</td><td>自动找 bug + 提修复方案</td></tr>
+          <tr><td>/ceo-pipeline</td><td>CEO 6阶段完整商业分析流水线</td></tr>
+          <tr><td>/code-review</td><td>代码审查 workflow 版</td></tr>
+          <tr><td>/config-audit-better</td><td>配置健康审计</td></tr>
+          <tr><td>/domain-audit-better</td><td>领域专项深度审计</td></tr>
+          <tr><td>/harness-audit</td><td>Harness 六层评分（满分100）</td></tr>
+          <tr><td>/judge-panel</td><td>多视角评审面板</td></tr>
+          <tr><td>/n-step-pipeline</td><td>N步自定义流水线</td></tr>
+          <tr><td>/self-evolve-loop</td><td>自我进化闭环（evaluator-optimizer）</td></tr>
+          <tr><td>/v29-deep-research</td><td>深度多渠道调研 workflow</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Skills - Dev -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🎯</span>
+      <h2>Skills 速查 — 开发 + 质量</h2>
+    </div>
+    <div class="card-body">
+      <div class="skill-group">
+        <div class="skill-group-title">💻 开发执行</div>
+        <table>
+          <tbody>
+            <tr><td>/autopilot</td><td>全自动驾驶执行</td></tr>
+            <tr><td>/ultrawork</td><td>超级高强度执行</td></tr>
+            <tr><td>/feature-dev:feature-dev</td><td>完整功能开发（探索→架构→实现→审查）</td></tr>
+            <tr><td>/deep-dive</td><td>深度专项代码分析</td></tr>
+            <tr><td>说 "tdd"</td><td>TDD 红绿重构三步循环</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">🛡️ 代码质量</div>
+        <table>
+          <tbody>
+            <tr><td>/code-review</td><td>审查代码</td></tr>
+            <tr><td>/code-review --fix</td><td>审查 + 自动修复</td></tr>
+            <tr><td>/code-review ultra</td><td>云端多 agent 深度审查</td></tr>
+            <tr><td>/simplify</td><td>简化代码，去多余复杂度</td></tr>
+            <tr><td>/security-audit</td><td>安全专项审计</td></tr>
+            <tr><td>/security-review</td><td>OWASP 快速安全扫描</td></tr>
+            <tr><td>/ultraqa</td><td>超级 QA 验收</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skills - Content + Strategy -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">📝</span>
+      <h2>Skills 速查 — 内容 + 战略 + 部署</h2>
+    </div>
+    <div class="card-body">
+      <div class="skill-group">
+        <div class="skill-group-title">📝 内容文档</div>
+        <table>
+          <tbody>
+            <tr><td>/article-writing</td><td>写技术文章 / README</td></tr>
+            <tr><td>/baoyu-translate</td><td>翻译（中英互译高质量）</td></tr>
+            <tr><td>/baoyu-slide-deck</td><td>生成演示 PPT</td></tr>
+            <tr><td>/baoyu-diagram</td><td>生成架构图/流程图</td></tr>
+            <tr><td>/baoyu-markdown-to-html</td><td>Markdown 转 HTML</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">👥 团队战略</div>
+        <table>
+          <tbody>
+            <tr><td>/ceo-mode</td><td>CEO 战略分析模式</td></tr>
+            <tr><td>/ceo-pipeline</td><td>6阶段完整商业流水线</td></tr>
+            <tr><td>/team</td><td>多 agent 协作团队</td></tr>
+            <tr><td>/n-step-pipeline</td><td>自定义 N 步流水线</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">🚀 部署发布</div>
+        <table>
+          <tbody>
+            <tr><td>/commit-commands:commit</td><td>智能 git commit（自动写提交信息）</td></tr>
+            <tr><td>/commit-commands:commit-push-pr</td><td>提交 + push + 自动开 PR</td></tr>
+            <tr><td>/gh-ci-fix</td><td>自动修复 CI/CD 失败</td></tr>
+            <tr><td>/deploy-ship</td><td>部署脚本 + 发布流程</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">💰 营销创作</div>
+        <table>
+          <tbody>
+            <tr><td>/card-xiaohongshu</td><td>生成小红书卡片</td></tr>
+            <tr><td>/social-publisher</td><td>社交媒体发布</td></tr>
+            <tr><td>/marketing</td><td>营销文案</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Agents -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🤖</span>
+      <h2>常用 Agent 类型</h2>
+    </div>
+    <div class="card-body">
+      <table>
+        <thead><tr><th>Agent</th><th>适用场景</th></tr></thead>
+        <tbody>
+          <tr><td>executor</td><td>执行具体实现任务</td></tr>
+          <tr><td>architect</td><td>架构设计、技术选型</td></tr>
+          <tr><td>engineer</td><td>TDD + 变更闭环工程实现</td></tr>
+          <tr><td>debugger</td><td>报错排查、根因分析</td></tr>
+          <tr><td>code-reviewer</td><td>独立代码审查（Writer≠Reviewer）</td></tr>
+          <tr><td>designer</td><td>UI/UX 设计</td></tr>
+          <tr><td>researcher</td><td>深度多渠道调研</td></tr>
+          <tr><td>security-analyst</td><td>安全威胁分析</td></tr>
+          <tr><td>devops-engineer</td><td>CI/CD、容器化、部署</td></tr>
+          <tr><td>product-manager</td><td>PRD、用户故事、RICE 优先级</td></tr>
+          <tr><td>Explore</td><td>快速代码库搜索定位</td></tr>
+          <tr><td>planner</td><td>复杂任务规划</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 权限模式 + 外部CLI -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🔑</span>
+      <h2>权限模式 + 外部 AI CLI</h2>
+    </div>
+    <div class="card-body">
+      <div class="skill-group">
+        <div class="skill-group-title">🔑 权限模式</div>
+        <table>
+          <tbody>
+            <tr>
+              <td>默认模式</td>
+              <td><span class="pill pill-confirm">每步确认</span> 每个操作都要按 Y</td>
+            </tr>
+            <tr>
+              <td>acceptEdits</td>
+              <td><span class="pill pill-auto">半自动</span> 文件编辑自动允许</td>
+            </tr>
+            <tr>
+              <td><span class="kw">YOLO / 火力全开</span></td>
+              <td><span class="pill pill-yolo">全自动</span> 全部允许，不打断</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top:8px; padding: 6px 10px; background: var(--code-bg); border-radius:4px; font-size:11px; color:var(--text-muted);">
+          确认提示：<code style="color:var(--green)">Y/回车</code>=允许 &nbsp;
+          <code style="color:var(--red)">N</code>=拒绝 &nbsp;
+          <code style="color:var(--accent4)">q</code>=退出
+        </div>
+      </div>
+      <div class="skill-group" style="margin-top:14px;">
+        <div class="skill-group-title">📱 外部 AI CLI（省 Claude token）</div>
+        <table>
+          <tbody>
+            <tr>
+              <td>gemini</td>
+              <td><span class="dot-online"></span><span class="tag-green">在线</span> 快速调研、多模态、搜索</td>
+            </tr>
+            <tr>
+              <td>kimi</td>
+              <td><span class="dot-online"></span><span class="tag-green">在线</span> 256K context，超长文档处理</td>
+            </tr>
+            <tr>
+              <td>mmx</td>
+              <td><span class="dot-online"></span><span class="tag-green">在线</span> 中文创作优化</td>
+            </tr>
+            <tr>
+              <td>opencode</td>
+              <td><span class="dot-warn"></span><span class="tag-warn">订阅过期</span> 代码任务（续订后启用）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop 路径 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🌐</span>
+      <h2>Desktop 客户端关键路径</h2>
+    </div>
+    <div class="card-body">
+      <table>
+        <thead><tr><th>功能</th><th>路径</th></tr></thead>
+        <tbody>
+          <tr><td>全局 Instructions</td><td>Settings → General → "Instructions for Claude"</td></tr>
+          <tr><td>MCP Extensions</td><td>Settings → Desktop app → Extensions ★</td></tr>
+          <tr><td>Cowork Instructions</td><td>Settings → Cowork（仅限 Cowork session）</td></tr>
+          <tr><td>账户/订阅</td><td>Settings → Account / Billing</td></tr>
+          <tr><td>Claude Code 设置</td><td>Settings → Claude Code</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top: 10px; padding: 8px 10px; background: rgba(124,106,245,0.1); border-left: 3px solid var(--accent); border-radius: 4px; font-size: 11px; color: var(--text-dim);">
+        ⚠️ Desktop MCP 同步只能通过 GUI 安装（Extensions 标签）<br>
+        禁止直接写 mcpServers 段（会被 Desktop 还原）
+      </div>
+    </div>
+  </div>
+
+  <!-- 快捷技巧 -->
+  <div class="card wide">
+    <div class="card-header">
+      <span class="icon">⚡</span>
+      <h2>快捷技巧 + 常用组合命令</h2>
+    </div>
+    <div class="card-body">
+      <pre><span class="comment"># ── 基础操作 ──────────────────────────────────</span>
+<span class="cmd">/cd ~/projects/mall</span>         <span class="comment"># 切目录不重开session（v2.1.169+）</span>
+<span class="cmd">/btw 这个函数叫什么名字？</span>     <span class="comment"># 侧问，不污染主对话</span>
+<span class="cmd">claude --safe-mode</span>          <span class="comment"># 纯净启动（排障用，禁所有插件/hooks）</span>
+<span class="cmd">/compact</span>                    <span class="comment"># 压缩长对话上下文</span>
+<span class="cmd">/rewind</span>                     <span class="comment"># 撤回到上一个检查点</span>
+<span class="cmd">Esc Esc</span>                     <span class="comment"># 中断 Claude 正在做的事</span>
+
+<span class="comment"># ── 任务规划 ──────────────────────────────────</span>
+<span class="cmd">/goal <span class="arg">"购物车页面可以正常加减商品、显示总价"</span></span>   <span class="comment"># 设任务完成条件（>5轮必用）</span>
+
+<span class="comment"># ── 外部 AI 并发对抗（省Claude token）──────────</span>
+<span class="cmd">scripts/ai-panel.sh <span class="arg">"调研 Next.js vs Nuxt.js"</span> gemini kimi mmx</span>
+<span class="cmd">scripts/ai-cli.sh kimi <span class="arg">"分析这份 100 页行业报告"</span></span>  <span class="comment"># 256K context</span>
+
+<span class="comment"># ── 健康检查 ──────────────────────────────────</span>
+<span class="cmd">python3 ~/.claude/lib/version-consistency-check.py --json</span>
+<span class="cmd">/config-audit-better</span>        <span class="comment"># 配置健康审计</span>
+<span class="cmd">/audit-all-better</span>           <span class="comment"># 30维健康诊断</span>
+<span class="cmd">omc update</span>                  <span class="comment"># 更新 OMC（当前有 v4.14.6 可用）</span></pre>
+    </div>
+  </div>
+
+  <!-- 升级进化类 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">⬆️</span>
+      <h2>进化升级 Skills</h2>
+    </div>
+    <div class="card-body">
+      <table>
+        <thead><tr><th>命令</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>/claude-code-better</td><td>全面升级（唯一升级入口，30维诊断+修复）</td></tr>
+          <tr><td>/audit-all-better</td><td>30维健康诊断（只诊断不修复）</td></tr>
+          <tr><td>/self-evolve-loop</td><td>自我进化闭环（evaluator-optimizer pattern）</td></tr>
+          <tr><td>/harness-audit</td><td>Harness 六层评分，满分100</td></tr>
+          <tr><td>/skill-audit</td><td>装新 skill 前安全检查（防重复+防恶意）</td></tr>
+          <tr><td>/update-all</td><td>版本更新</td></tr>
+          <tr><td>/omc-doctor</td><td>诊断 OMC 配置问题</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:10px; padding: 8px 10px; background: rgba(105,240,174,0.08); border-left: 3px solid var(--green); border-radius:4px; font-size:11px; color:var(--text-dim);">
+        💡 升级顺序：<code>/audit-all-better</code> 诊断 → <code>/claude-code-better</code> 修复 → <code>/harness-audit</code> 评分验收
+      </div>
+    </div>
+  </div>
+
+  <!-- 配置工具 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🔧</span>
+      <h2>配置工具 Skills</h2>
+    </div>
+    <div class="card-body">
+      <table>
+        <thead><tr><th>命令</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>/hookify:hookify</td><td>设置自动行为（"每次X做Y"）</td></tr>
+          <tr><td>/remember:remember</td><td>保存重要信息到永久记忆</td></tr>
+          <tr><td>/omc-setup</td><td>初始化 OMC 配置</td></tr>
+          <tr><td>/update-config</td><td>修改 settings.json 配置</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:10px; padding: 8px 10px; background: rgba(239,83,80,0.08); border-left: 3px solid var(--red); border-radius:4px; font-size:11px; color:var(--text-dim);">
+        🔒 安全红线：<code>settings.json</code> 禁设 <code>ANTHROPIC_BASE_URL</code> / <code>API_KEY</code> / <code>MODEL</code><br>
+        🔒 <code>settings.local.json</code> 有 block-sensitive-files.sh 保护，变更需独立脚本
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Claude Code + OMC V52 速查表 · 2026-06-12 · 仅供本机参考
+</div>
+
+</body>
+</html>

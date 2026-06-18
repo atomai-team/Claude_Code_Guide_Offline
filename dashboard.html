@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MYCC V53 能力速查表</title>
+<style>
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --surface2: #22263a;
+  --border: #2e3350;
+  --accent: #7c6af5;
+  --accent2: #4fc3f7;
+  --accent3: #69f0ae;
+  --accent4: #ffb74d;
+  --accent5: #f48fb1;
+  --text: #e8eaf6;
+  --text-dim: #7986cb;
+  --text-muted: #546e7a;
+  --code-bg: #1e2235;
+  --tag-bg: #1a2040;
+  --green: #69f0ae;
+  --red: #ef5350;
+  --yellow: #ffee58;
+  --orange: #ffb74d;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f5f6fa;
+    --surface: #fff;
+    --surface2: #f0f2f8;
+    --border: #e0e4f0;
+    --accent: #5b4ce6;
+    --accent2: #0288d1;
+    --accent3: #2e7d32;
+    --accent4: #e65100;
+    --accent5: #c2185b;
+    --text: #1a1c2e;
+    --text-dim: #556;
+    --text-muted: #889;
+    --code-bg: #f0f2f8;
+    --tag-bg: #e8ecf8;
+    --green: #2e7d32;
+    --red: #c62828;
+    --yellow: #f9a825;
+    --orange: #e65100;
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, 'PingFang SC', 'Helvetica Neue', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 20px;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 28px 20px 20px;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #1a1d27 0%, #16193a 100%);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+[data-theme="light"] .header {
+  background: linear-gradient(135deg, #eef0ff 0%, #f5f6fa 100%);
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at top, rgba(124,106,245,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+.header h1 span { color: var(--accent); }
+.header .meta {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+}
+.header .badges {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.badge {
+  background: var(--tag-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 10px;
+  color: var(--text-dim);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.badge.green { border-color: var(--green); color: var(--green); }
+.badge.purple { border-color: var(--accent); color: var(--accent); }
+.badge.blue { border-color: var(--accent2); color: var(--accent2); }
+.badge.orange { border-color: var(--accent4); color: var(--accent4); }
+
+/* Layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.card.wide { grid-column: 1 / -1; }
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+}
+.card-header .icon { font-size: 16px; }
+.card-header h2 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+.card-body { padding: 12px; }
+.card-body.compact { padding: 8px 10px; }
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+th {
+  text-align: left;
+  padding: 6px 10px;
+  background: var(--code-bg);
+  color: var(--text-dim);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(124,106,245,0.04); }
+td:first-child {
+  color: var(--accent2);
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.kw { font-weight: 700; color: var(--accent); }
+.dim { color: var(--text-muted); }
+.tag-green { color: var(--green); }
+.tag-warn { color: var(--orange); }
+.tag-red { color: var(--red); }
+
+/* Skill groups */
+.skill-group { margin-bottom: 14px; }
+.skill-group:last-child { margin-bottom: 0; }
+.skill-group-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  background: var(--code-bg);
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+/* Code blocks */
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 11px;
+  line-height: 1.7;
+  overflow-x: auto;
+  color: #c5cae9;
+  margin: 0;
+}
+pre .comment { color: var(--text-muted); }
+pre .cmd { color: var(--accent3); }
+pre .arg { color: var(--accent4); }
+pre .str { color: var(--accent5); }
+
+/* Pills */
+.pill {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.pill-auto { background: rgba(105,240,174,0.15); color: var(--green); }
+.pill-confirm { background: rgba(255,183,77,0.15); color: var(--accent4); }
+.pill-yolo { background: rgba(124,106,245,0.15); color: var(--accent); }
+
+/* Dots */
+.dot-online { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); margin-right: 5px; box-shadow: 0 0 4px var(--green); }
+.dot-warn { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent4); margin-right: 5px; }
+
+/* Info box */
+.info-box {
+  padding: 8px 10px;
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: rgba(124,106,245,0.08);
+  line-height: 1.6;
+}
+.info-box.green { border-color: var(--green); background: rgba(105,240,174,0.06); }
+.info-box.red { border-color: var(--red); background: rgba(239,83,80,0.06); }
+.info-box code { color: var(--accent2); }
+
+/* Tag cloud */
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 4px; }
+.tag-cloud .tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 10px;
+  color: var(--text-dim);
+  background: var(--tag-bg);
+}
+
+/* Hook bars */
+.hook-bar-wrap { margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.hook-bar-label { font-size: 10px; color: var(--text-dim); width: 130px; text-align: right; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hook-bar-track { flex: 1; height: 14px; background: var(--code-bg); border-radius: 7px; overflow: hidden; position: relative; }
+.hook-bar-fill { height: 100%; border-radius: 7px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 0.6s ease; }
+.hook-bar-num { font-size: 10px; color: var(--text-muted); min-width: 22px; }
+
+/* Path list */
+.path-item {
+  display: block;
+  padding: 3px 0;
+  font-size: 10px;
+  color: var(--text-dim);
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.path-item code { color: var(--accent2); font-size: 9px; }
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 24px;
+  padding: 14px;
+  color: var(--text-muted);
+  font-size: 11px;
+  border-top: 1px solid var(--border);
+}
+
+/* Priority bar */
+.prio-bar { margin-bottom: 3px; display: flex; align-items: center; gap: 6px; }
+.prio-bar-label { font-size: 10px; color: var(--text-dim); width: 120px; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.prio-bar-track { flex: 1; height: 10px; background: var(--code-bg); border-radius: 5px; overflow: hidden; }
+.prio-bar-fill { height: 100%; border-radius: 5px; }
+.prio-bar-num { font-size: 10px; color: var(--text-muted); min-width: 20px; text-align: center; font-weight: 600; }
+
+/* Print */
+@media print {
+  body { background: #fff; color: #111; padding: 10px; font-size: 11px; }
+  .card { border: 1px solid #ddd; break-inside: avoid; }
+  .card-header { background: #f5f5f5; }
+  pre { background: #f8f8f8; }
+  td:first-child { color: #1565c0; }
+  .kw { color: #6200ea; }
+  .grid { grid-template-columns: 1fr 1fr; }
+  :root { --text: #111; --text-dim: #555; --text-muted: #888; }
+}
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+  .card.wide { grid-column: span 1; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>MYCC <span>V53</span> 能力速查表</h1>
+  <div class="meta" id="headerMeta">扫描中...</div>
+  <div class="badges" id="headerBadges"></div>
+</div>
+
+<div class="grid">
+
+  <!-- 口语入口 -->
+  <div class="card wide">
+    <div class="card-header"><span class="icon">🗣️</span><h2>口语入口 — 最常用（说人话就行）</h2></div>
+    <div class="card-body">
+      <table><thead><tr><th>你说</th><th>系统自动做</th><th>引擎</th></tr></thead>
+      <tbody id="tblEntry"></tbody></table>
+    </div>
+  </div>
+
+  <!-- 内置命令 + Workflow -->
+  <div class="card">
+    <div class="card-header"><span class="icon">⌨️</span><h2>内置命令 + Workflow 速查</h2></div>
+    <div class="card-body">
+      <div class="skill-group">
+        <div class="skill-group-title">⌨️ 内置命令</div>
+        <table>
+          <tbody>
+            <tr><td>/clear</td><td>清空开新会话</td></tr>
+            <tr><td>/compact</td><td>压缩超长上下文</td></tr>
+            <tr><td>/model</td><td>切换模型（opus / sonnet / haiku）</td></tr>
+            <tr><td>/goal "完成状态"</td><td>设定任务完成标准（>5轮必用）</td></tr>
+            <tr><td>/btw 问题</td><td>侧问，不污染主上下文</td></tr>
+            <tr><td>/cd ~/path</td><td>切目录不重开 session</td></tr>
+            <tr><td>/safe-mode</td><td>纯净启动，排障专用</td></tr>
+            <tr><td>/rewind</td><td>撤回到上一个检查点</td></tr>
+            <tr><td>/init</td><td>初始化项目 CLAUDE.md</td></tr>
+            <tr><td>/code-review</td><td>代码审查</td></tr>
+            <tr><td>/verify</td><td>验证功能是否正常</td></tr>
+            <tr><td>/run</td><td>启动项目</td></tr>
+            <tr><td>Esc Esc</td><td>中断 Claude 当前操作</td></tr>
+            <tr><td>/reload-plugins</td><td>重载插件</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="skill-group" style="margin-top:14px;">
+        <div class="skill-group-title">⚡ Workflow（/名字 直接调用）</div>
+        <table><tbody id="tblWorkflow"></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 权限 + 外部CLI -->
+  <div class="card">
+    <div class="card-header"><span class="icon">🔑</span><h2>权限模式 + 外部 AI CLI</h2></div>
+    <div class="card-body">
+      <div class="skill-group">
+        <div class="skill-group-title">🔑 权限模式</div>
+        <table>
+          <tbody>
+            <tr><td>默认模式</td><td><span class="pill pill-confirm">每步确认</span> 每个操作都要按 Y</td></tr>
+            <tr><td>acceptEdits</td><td><span class="pill pill-auto">半自动</span> 文件编辑自动允许</td></tr>
+            <tr><td><span class="kw">YOLO / 火力全开</span></td><td><span class="pill pill-yolo">全自动</span> 全部允许，不打断</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:6px; padding:6px 10px; background:var(--code-bg); border-radius:4px; font-size:10px; color:var(--text-muted);">
+          确认提示：<code style="color:var(--green)">Y/回车</code>=允许 <code style="color:var(--red)">N</code>=拒绝 <code style="color:var(--orange)">q</code>=退出
+        </div>
+      </div>
+      <div class="skill-group" style="margin-top:14px;">
+        <div class="skill-group-title">📱 外部 AI CLI（省 Claude token）</div>
+        <table><tbody id="tblCLI"></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skills by Category -->
+  <div class="card">
+    <div class="card-header"><span class="icon">🎯</span><h2>Skills 速查 — 按分类</h2></div>
+    <div class="card-body"><div id="skillsSections"></div></div>
+  </div>
+
+  <!-- Hook 体系 -->
+  <div class="card">
+    <div class="card-header"><span class="icon">🔧</span><h2>Hook 体系（自动化开关）</h2></div>
+    <div class="card-body">
+      <div id="hookBars" style="margin-bottom:10px;"></div>
+      <div class="tag-cloud" id="hookTags"></div>
+    </div>
+  </div>
+
+  <!-- Agent 一览 -->
+  <div class="card">
+    <div class="card-header"><span class="icon">🤖</span><h2>Agent 类型一览（常用）</h2></div>
+    <div class="card-body">
+      <div class="skill-group">
+        <div class="skill-group-title">👤 调度层 Agent（顶层 20 个）</div>
+        <div class="tag-cloud" id="agentTagsTop"></div>
+      </div>
+      <div class="skill-group" style="margin-top:10px;">
+        <div class="skill-group-title">👔 CEO 顾问（18 个）+ 🏭 行业专家（7 个）+ 👥 交付团队（6 个）</div>
+        <div class="tag-cloud" id="agentTagsTeams"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 业务能力 -->
+  <div class="card">
+    <div class="card-header"><span class="icon">🌍</span><h2>出海创投 — 行业专家矩阵</h2></div>
+    <div class="card-body">
+      <table><thead><tr><th>场景</th><th>主力专家</th><th>支持专家</th><th>触发词</th></tr></thead>
+      <tbody id="tblBiz"></tbody></table>
+    </div>
+  </div>
+
+  <!-- 常用命令 -->
+  <div class="card wide">
+    <div class="card-header"><span class="icon">⚡</span><h2>快捷命令 + 常用组合</h2></div>
+    <div class="card-body">
+      <pre><span class="comment"># ── 基础操作 ──────────────────────────────────</span>
+<span class="cmd">claude --safe-mode</span>              <span class="comment"># 纯净启动（排障用，禁所有插件/hooks）</span>
+<span class="cmd">/cd ~/projects/xxx</span>              <span class="comment"># 切目录不重开 session</span>
+<span class="cmd">/btw 这个函数叫什么？</span>             <span class="comment"># 侧问，不污染主对话</span>
+<span class="cmd">/compact</span>                        <span class="comment"># 压缩长对话上下文</span>
+
+<span class="comment"># ── 健康检查 ──────────────────────────────────</span>
+<span class="cmd">python3 ~/.claude/lib/mycc-stats.py</span>          <span class="comment"># 刷新全机数据 → 自动更新此页</span>
+<span class="cmd">python3 ~/.claude/lib/version-consistency-check.py --json</span>
+<span class="cmd">/doctor</span>                          <span class="comment"># 诊断当前会话状态</span>
+<span class="cmd">omc update</span>                       <span class="comment"># 更新 OMC 插件</span>
+
+<span class="comment"># ── 外部 AI 并发对抗 ──────────────────────────</span>
+<span class="cmd">bash ~/.claude/scripts/ai-panel.sh <span class="arg">"调研 Next.js vs Nuxt"</span> gemini kimi mmx</span>
+<span class="cmd">bash ~/.claude/scripts/ai-cli.sh kimi <span class="arg">"分析行业报告"</span></span>
+
+<span class="comment"># ── 配置升级路径 ──────────────────────────────</span>
+<span class="cmd">/audit-all-better</span>    <span class="comment"># 30维诊断</span>
+<span class="cmd">/claude-code-better</span>  <span class="comment"># 诊断+修复</span>
+<span class="cmd">/harness-audit</span>       <span class="comment"># 六层评分</span>
+<span class="comment"># ── 升级顺序: /audit-all-better → /claude-code-better → /harness-audit</span></pre>
+    </div>
+  </div>
+
+  <!-- 文档路径 -->
+  <div class="card wide">
+    <div class="card-header"><span class="icon">📁</span><h2>文档路径速查</h2></div>
+    <div class="card-body compact" id="docPaths"></div>
+  </div>
+
+</div>
+
+<div class="footer" id="pageFooter"></div>
+
+<script>
+// ===== Embedded Data =====
+const D = {"generated_at": "2026-06-16T11:00:33.112211Z", "version": {"claude_code": "2.1.178 (Claude Code)", "omc": "4.14.7", "stats_engine": "V53", "cc_switch": "ON"}, "counts": {"skills": 125, "workflows": 15, "hooks_registered": 33, "hook_events": 13, "hook_files": 30, "agents_total": 57, "agents_core": 6, "agents_ceo_roles": 18, "agents_industry": 7, "agents_teams": 6, "mcp_servers": 4, "enabled_plugins": 0, "total_plugins": 9, "rules": 46, "intent_words_routes": 90, "external_clis": 3}, "lists": {"priority_routes": [{"name": "队长", "priority": 95, "keywords": ["队长", "leader", "boss", "老大"]}, {"name": "活力全开", "priority": 95, "keywords": ["活力全开", "火力全开", "全力", "yolo_l4"]}, {"name": "ceo_decision_council", "priority": 88, "keywords": ["ceo决策", "战略分析", "顾问委员会", "帮我想清楚这件事", "决策备忘录"]}, {"name": "comprehensive_upgrade_workflow", "priority": 86, "keywords": ["系统级升级", "全栈升级", "跑一遍综合升级", "comprehensive upgrade"]}, {"name": "smart_captain", "priority": 85, "keywords": ["smart", "flow", "自动化", "智能"]}, {"name": "claude_code_better", "priority": 85, "keywords": ["claude_code_better", "claude code better", "全面升级", "配置优化", "进化升级"]}, {"name": "workflow_orchestrate", "priority": 85, "keywords": ["workflow", "多agent", "并行调度", "fan out"]}, {"name": "开team", "priority": 85, "keywords": ["多人协作", "并行做", "跨域协同", "team prompt", "拆任务"]}, {"name": "upgrade_full_v40", "priority": 84, "keywords": ["全面升级", "全量升级", "系统升级", "融汇贯通", "升级一下"]}, {"name": "ceo_pipeline_voice", "priority": 84, "keywords": ["全流水线", "CEO流水线", "ceo流水线", "端到端交付", "全流程交付"]}, {"name": "n_step_pipeline_voice", "priority": 84, "keywords": ["N步流水线", "n步流水线", "多步流水线", "自定义流水线", "n步管线"]}, {"name": "boardroom_voice", "priority": 84, "keywords": ["董事会汇报", "board deck", "董事会准备", "董事会材料"]}, {"name": "fundraising_voice", "priority": 84, "keywords": ["融资准备", "BP撰写", "term sheet", "融资BP"]}, {"name": "overseas_compliance_voice", "priority": 84, "keywords": ["出海合规", "跨境数据合规", "数据本地化", "出海数据合规"]}, {"name": "audit_all_route", "priority": 82, "keywords": ["30维扫描", "cchealth", "全身检查", "系统检查", "深度检查"]}, {"name": "error_analysis", "priority": 82, "keywords": ["error analysis", "error_analysis", "又报错", "反复错误", "同样问题"]}, {"name": "audit_internal", "priority": 82, "keywords": ["内部审计", "内部纠错", "本机审计", "自我审计", "系统自检"]}, {"name": "harness_audit_route", "priority": 82, "keywords": ["harness评分", "harness审计", "六层评分", "harness", "审计"]}, {"name": "config_audit_route", "priority": 82, "keywords": ["配置审计", "配置升级"]}, {"name": "domain_audit_route", "priority": 82, "keywords": ["域审计", "全域升级"]}, {"name": "external_benchmark_route", "priority": 82, "keywords": ["外部对标", "全球获取", "外部学习", "全球对比", "对比社区"]}, {"name": "clarify_skip", "priority": 80, "keywords": ["按你理解做", "按你的方式来", "你看着办", "你决定", "use your best judgment"]}, {"name": "security_audit_v403", "priority": 80, "keywords": ["安全审查", "OWASP", "安全审计", "代码安全", "漏洞扫描"]}, {"name": "ceo_mode", "priority": 80, "keywords": ["组建团队", "建团队", "搭团队", "建专家组", "拉专家"]}, {"name": "advisor_mode", "priority": 80, "keywords": ["盘点", "今天搞什么", "我跑偏没", "给我建议", "当前状态"]}, {"name": "secretary_route", "priority": 80, "keywords": ["秘书", "巡检一下", "本周有啥新", "情报简报"]}, {"name": "benchmark_route", "priority": 80, "keywords": ["对标", "全球对标", "社区对标"]}, {"name": "official_verify_route", "priority": 80, "keywords": ["官方核查", "Tier0核查", "官方对照"]}, {"name": "sop_upgrade_route", "priority": 80, "keywords": ["SOP升级", "sop进化", "SOP复用", "SOP沉淀"]}, {"name": "archive_evolution_route", "priority": 80, "keywords": ["归档进化", "归档汇总", "会话归档"]}, {"name": "business_analysis", "priority": 80, "keywords": ["评估项目", "商业分析", "尽调", "选址", "加盟模型"]}, {"name": "c_level_advisory", "priority": 80, "keywords": ["GTM", "获客成本", "营销预算", "增长模型", "营销ROI"]}, {"name": "business_flow_scenarios", "priority": 80, "keywords": ["销售预测", "sales forecast", "定价实验", "价格AB测试", "危机公关"]}], "skill_categories": {"dev": [], "business": [], "pm": [], "security": [], "ops": [], "ai": [], "docs": [], "system": [], "other": []}, "workflows": ["ceo-pipeline", "fundraising", "domain-audit-better", "v29-deep-research", "code-review", "self-evolve-loop", "bughunt", "n-step-pipeline", "dev-pipeline", "judge-panel", "config-audit-better", "harness-audit", "overseas-compliance", "boardroom", "comprehensive-upgrade"], "workflow_map": {"boardroom": "董事会汇报准备", "bughunt": "系统性 Bug 排查", "ceo-pipeline": "CEO 全流水线 PM→Arch→Eng→QA→CEO", "code-review": "代码审查", "comprehensive-upgrade": "综合升级流水线", "config-audit-better": "配置审计", "dev-pipeline": "开发流水线 spec→scaffold→impl→test→review→deploy", "domain-audit-better": "域审计", "fundraising": "融资准备", "harness-audit": "Harness 六层健康评分", "judge-panel": "多视角评审", "n-step-pipeline": "N步自适应流水线", "overseas-compliance": "出海合规", "self-evolve-loop": "自我进化闭环", "v29-deep-research": "深度调研"}, "ceo_roles": ["README", "architect", "ceo-orchestrator", "cfo-advisor", "chief-of-staff", "cmo-advisor", "coo-advisor", "designer", "devops-engineer", "engineer", "financial-analyst", "market-analyst", "product-manager", "project-manager", "qa-validator", "researcher", "security-analyst", "test-engineer"], "industry_agents": ["README", "capital-ir", "chain-expansion", "consumer-trend", "overseas-entry", "supply-chain", "unit-economics"], "teams": ["README", "team-data-ai", "team-fullstack", "team-infra", "team-research", "team-security"], "core_agents": ["captain", "evolution-scout", "needs-analyst", "product-manager", "project-director", "technical-writer"], "orchestration": {"entry_points": [{"say": "队长 + 任务", "priority": 95, "engine": "smart-flow-all"}, {"say": "活力全开 + 任务", "priority": 95, "engine": "smart-flow-all YOLO L4"}, {"say": "全面升级", "priority": 85, "engine": "claude-code-better"}, {"say": "又报错", "priority": 82, "engine": "systematic-error-analysis"}, {"say": "评估项目", "priority": 80, "engine": "ceo-mode"}, {"say": "秘书巡检", "priority": 80, "engine": "secretary"}], "workflow_map": {"boardroom": "董事会汇报准备", "bughunt": "系统性 Bug 排查", "ceo-pipeline": "CEO 全流水线 PM→Arch→Eng→QA→CEO", "code-review": "代码审查", "comprehensive-upgrade": "综合升级流水线", "config-audit-better": "配置审计", "dev-pipeline": "开发流水线 spec→scaffold→impl→test→review→deploy", "domain-audit-better": "域审计", "fundraising": "融资准备", "harness-audit": "Harness 六层健康评分", "judge-panel": "多视角评审", "n-step-pipeline": "N步自适应流水线", "overseas-compliance": "出海合规", "self-evolve-loop": "自我进化闭环", "v29-deep-research": "深度调研"}}, "business_capabilities": {"行业专家矩阵": {"连锁/开店/加盟": ["chain-expansion", "unit-economics", "supply-chain"], "出海/海外/合规": ["overseas-entry", "capital-ir"], "单店/盈亏/回本": ["unit-economics", "chain-expansion"], "融资/BP/估值": ["capital-ir", "unit-economics"], "品牌/爆品/内容": ["consumer-trend", "supply-chain"], "供应链/采购": ["supply-chain", "unit-economics"]}}}, "hooks": {"total_files": 30, "by_event": {"PreToolUse": 10, "SubagentStop": 3, "UserPromptSubmit": 3, "SessionStart": 5, "PostToolUse": 2, "Stop": 3, "PostToolUseFailure": 1, "PermissionRequest": 1, "PreCompact": 1, "PostCompact": 1, "SessionEnd": 1, "SubagentStart": 1, "StopFailure": 1}}};
+
+// ===== Init =====
+(function() {
+  if (!D || !D.counts) return showError();
+  const c = D.counts;
+  const v = D.version || {};
+  const l = D.lists || {};
+  const h = D.hooks || {};
+
+  // Header
+  document.getElementById('headerMeta').textContent =
+    `CLI ${v.claude_code||'?'} · OMC ${v.omc||'?'} · CC Switch ${v.cc_switch||'?'} · ${D.generated_at ? new Date(D.generated_at).toLocaleString('zh-CN') : ''}`;
+  document.getElementById('headerBadges').innerHTML = [
+    `<span class="badge green">✅ ${v.cc_switch==='ON'?'CC Switch':'官方直连'}</span>`,
+    `<span class="badge purple">${c.skills} Skills</span>`,
+    `<span class="badge purple">${c.workflows} Workflows</span>`,
+    `<span class="badge blue">${c.hooks_registered} Hooks</span>`,
+    `<span class="badge blue">${c.mcp_servers} MCPs</span>`,
+    `<span class="badge orange">${c.agents_total} Agents</span>`,
+    `<span class="badge">${c.rules} Rules</span>`,
+  ].join('');
+
+  // Entry points
+  document.getElementById('tblEntry').innerHTML = (l.orchestration?.entry_points||[]).map(e =>
+    `<tr><td><span class="kw">${esc(e.say)}</span></td><td>${esc(e.engine)}</td><td>P${e.priority}</td></tr>`
+  ).join('');
+
+  // Workflow table
+  const wfMap = l.workflow_map||{};
+  document.getElementById('tblWorkflow').innerHTML = (l.workflows||[]).map(w =>
+    `<tr><td>/<span class="kw">${esc(w)}</span></td><td>${esc(wfMap[w]||'—')}</td></tr>`
+  ).join('');
+
+  // External CLI
+  document.getElementById('tblCLI').innerHTML = [
+    {n:'kimi',s:'online',d:'256K context，超长文档处理+Agentic读多文件'},
+    {n:'gemini',s:'online',d:'快速调研、多模态、搜索'},
+    {n:'mmx',s:'degraded',d:'中文创作优化（纯文本补全，非agentic）'},
+    {n:'opencode',s:'online',d:'代码专长（deepseek-chat后端）'},
+  ].map(x =>
+    `<tr><td>${x.n}</td><td>${x.s==='online'?'<span class="dot-online"></span><span class="tag-green">在线</span>':'<span class="dot-warn"></span><span class="tag-warn">降级</span>'} ${x.d}</td></tr>`
+  ).join('');
+
+  // Skill categories
+  const cats = l.skill_categories||{};
+  const catIcons = {dev:'💻',business:'💼',pm:'📋',security:'🛡️',ops:'⚙️',ai:'🤖',docs:'📝',system:'🔄',other:'📦'};
+  const catNames = {dev:'开发',business:'商业',pm:'产品/营销',security:'安全',ops:'运维',ai:'AI/ML',docs:'文档',system:'系统/进化',other:'其他'};
+  let skillsHTML = '';
+  const shown = new Set();
+  for (const [cat, skills] of Object.entries(cats)) {
+    if (!skills || !skills.length) continue;
+    const uniq = skills.filter(s => !shown.has(s));
+    uniq.forEach(s => shown.add(s));
+    skillsHTML += `<div class="skill-group">
+      <div class="skill-group-title">${catIcons[cat]||'📦'} ${catNames[cat]||cat}（${uniq.length} 个）</div>
+      <div class="tag-cloud">${uniq.map(s => `<span class="tag">${esc(s)}</span>`).join('')}</div>
+    </div>`;
+  }
+  document.getElementById('skillsSections').innerHTML = skillsHTML;
+
+  // Hook bars
+  const byEvent = h.by_event || {};
+  const maxHook = Math.max(1, ...Object.values(byEvent));
+  document.getElementById('hookBars').innerHTML = Object.entries(byEvent).sort((a,b)=>b[1]-a[1]).map(([ev,n]) =>
+    `<div class="hook-bar-wrap">
+      <span class="hook-bar-label">${esc(ev)}</span>
+      <div class="hook-bar-track"><div class="hook-bar-fill" style="width:${(n/maxHook*100).toFixed(0)}%"></div></div>
+      <span class="hook-bar-num">${n}</span>
+    </div>`
+  ).join('');
+  document.getElementById('hookTags').innerHTML = Object.entries(byEvent).map(([ev,n]) =>
+    `<span class="tag">${esc(ev)}×${n}</span>`
+  ).join('');
+
+  // Agents
+  document.getElementById('agentTagsTop').innerHTML = (l.core_agents||[]).map(a=>`<span class="tag">${esc(a)}</span>`).join('');
+  const teams = [...(l.ceo_roles||[]).map(a=>`<span class="tag"><b>CEO</b> ${esc(a)}</span>`),
+    ...(l.industry_agents||[]).map(a=>`<span class="tag"><b>🏭</b> ${esc(a)}</span>`),
+    ...(l.teams||[]).map(a=>`<span class="tag"><b>👥</b> ${esc(a)}</span>`)];
+  document.getElementById('agentTagsTeams').innerHTML = teams.join('');
+
+  // Business matrix
+  const biz = l.business_capabilities?.['行业专家矩阵'] || {};
+  document.getElementById('tblBiz').innerHTML = Object.entries(biz).map(([scene, experts]) => {
+    const [main, support] = experts.length>1 ? [experts[0], experts.slice(1).join(' + ')] : [experts[0], '—'];
+    return `<tr><td>${esc(scene)}</td><td><span class="tag-green">${esc(main)}</span></td><td>${esc(support)}</td><td>"${esc(scene.split('/')[0])}"</td></tr>`;
+  }).join('');
+
+  // Doc paths
+  const home = '~';
+  document.getElementById('docPaths').innerHTML = [
+    ['能力仪表盘 HTML', `${home}/claude-code-guides/dashboard.html`],
+    ['全机数据 JSON', `${home}/claude-code-guides/mycc-stats.json`],
+    ['能力全景 MD', `${home}/claude-code-guides/mycc-stats.md`],
+    ['MYCC 用户手册', `${home}/.claude/docs/MYCC-用户手册.md`],
+    ['小白入门手册', `${home}/.claude/docs/xiaobai/xiaobai-manual.md`],
+    ['便携速查卡', `${home}/.claude/docs/xiaobai/quick-reference-card.md`],
+    ['商城案例', `${home}/.claude/docs/xiaobai/mall-project-case-study.md`],
+    ['CEO 速用手册', `${home}/.claude/docs/references/CEO-能力速用手册.md`],
+    ['外部调研员提示词', `${home}/.claude/docs/external-intel-prompt-v6.md`],
+    ['文档更新 SOP', `${home}/.claude/docs/mycc-doc-update-sop.md`],
+    ['数据引擎脚本', `${home}/.claude/lib/mycc-stats.py`],
+    ['每周调研驱动', `${home}/.claude/scripts/weekly-external-driver.sh`],
+  ].map(([label, path]) => `<span class="path-item">${esc(label)}: <code>${esc(path)}</code></span>`).join('');
+
+  // Footer
+  const genAt = D.generated_at || new Date().toISOString();
+  document.getElementById('pageFooter').innerHTML =
+    `MYCC V53 能力速查表 · 数据时间：<time datetime="${genAt}">${new Date(genAt).toLocaleString('zh-CN')}</time> · 数据引擎自动刷新`;
+
+  function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function showError() {
+    document.getElementById('headerMeta').textContent = '⚠️ 数据加载失败 - 请运行 python3 ~/.claude/lib/mycc-stats.py';
+  }
+})();
+</script>
+</body>
+</html>
