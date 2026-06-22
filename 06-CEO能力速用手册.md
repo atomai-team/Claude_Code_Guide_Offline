@@ -1,7 +1,7 @@
 ---
 title: CEO 能力速用手册（非开发型创始人）
-version: V28.1
-date: 2026-06-16
+version: V28.2
+date: 2026-06-22
 status: active
 category: reference
 author: williammacst

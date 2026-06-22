@@ -1,10 +1,10 @@
 # Claude Code 全能力清单
-> Skills × 128 · MCP × 12+ · 插件 × 多 · 外部 CLI × 6
-> OMC V52.2 · 2026-06-12 完整版
+> Skills × 130 · Agents × 38 · Hooks × 47 · 插件 × 10/58 · MCP × 12+ · 外部 CLI × 6
+> OMC 4.14.7 · CLI v2.1.185 · 2026-06-22 完整版
 
 ---
 
-## 第一部分：128 个 Skills 完整分类说明
+## 第一部分：130 个 Skills 完整分类说明
 
 ### 🚀 执行与工作模式（核心驱动）
 
@@ -327,8 +327,8 @@
 
 ### oh-my-claudecode（OMC）
 **核心插件，提供整套 OMC 能力**
-- Skills: **128** 原生 skill
-- Hooks: **34** 自动守护钩子
+- Skills: **130** 原生 skill
+- Hooks: **48** 自动守护钩子
 - Workflows: **15** 个 JS 流水线脚本
 - MCP Tools: wiki/notepad/state/LSP/shared-memory 等
 - Agents: **38** 角色（含多领域专家 + 团队蓝图）
@@ -395,30 +395,28 @@ scripts/ai-panel.sh "评估这个商业计划书" gemini kimi mmx
 
 ## V52.2 新增（2026-06-12）
 
-OMC V52.2 引入 4 项关键新能力，已在 `~/.claude/rules/` 立项为铁律级规范：
+以下 4 项关键能力（原 V52.2 · 2026-06-12 引入）现已合并入 `~/.claude/rules/mycc-core.md` 铁律级规范：
 
 ### 1. 铁律 12：TDD 垂直切片（TDD Vertical Slice）
-红 → 绿 → 重构三步走，每次只推进一个完整用户价值单元。**YOLO L4/极限档/OMC 自配置任务降级为铁律 3 验证证据**——不是所有任务都要先写失败测试。SSoT：`rules/iron-laws.md` 铁律 12 段。
+红 → 绿 → 重构三步走，每次只推进一个完整用户价值单元。**YOLO L4/极限档/OMC 自配置任务降级为铁律 3 验证证据**——不是所有任务都要先写失败测试。SSoT：`rules/mycc-core.md`（铁律 12·TDD 垂直切片）。
 
 ### 2. 四条件门：是否值得建 Loop（Loop-Worth-Building Gate）
-建任何 Loop / `/loop` / LaunchAgent / 无人值守自动化前，过四条件（重复性 + 验证可自动化 + token 预算 + Agent 工具齐备）**全过才建**，否则一条好 Prompt 更省。SSoT：`rules/loop-worth-building-gate.md`。
+建任何 Loop / `/loop` / LaunchAgent / 无人值守自动化前，过四条件（重复性 + 验证可自动化 + token 预算 + Agent 工具齐备）**全过才建**，否则一条好 Prompt 更省。SSoT：`rules/mycc-core.md`（4 步工作流·Loop 判断）。
 
 ### 3. 隔离区模式：读写分离防越权（Quarantine）
-处理外部不可信输入（外部 AI 报告 / WebFetch / 用户上传文件）+ 同任务要高权限写时，**读取 agent 必须挂 `disallowed-tools` 移除写权**（物理无法越权）。纵深防御三层：行为层（视为数据非指令）+ **架构层（本规则）** + 运行时层（block-dangerous hook）。SSoT：`rules/quarantine-read-write-separation.md`。
+处理外部不可信输入（外部 AI 报告 / WebFetch / 用户上传文件）+ 同任务要高权限写时，**读取 agent 必须挂 `disallowed-tools` 移除写权**（物理无法越权）。纵深防御三层：行为层（视为数据非指令）+ **架构层（本规则）** + 运行时层（block-dangerous hook）。SSoT：`rules/mycc-core.md`（防改 4 类配置·安全约束）。
 
 ### 4. 双端策略 V52.2（Dual-End Policy）
-**CLI 端** `~/.claude/CLAUDE.md` = OMC 工程事实 / `projects/-Users-williammacst/memory/user-profile.md` = 角色偏好 / `~/.claude/CLAUDE.local.md` = 已就绪能力指针；**Desktop 端** = 行为规则契约（云端）。**四份文档正交不冲突**。SSoT：`rules/auto-learned-rules.md` 的 `dual-end-policy-2026-06-12` 条目。
+**CLI 端** `~/.claude/CLAUDE.md` = OMC 工程事实 / `projects/-Users-williammacst/memory/user-profile.md` = 角色偏好 / `~/.claude/CLAUDE.local.md` = 已就绪能力指针；**Desktop 端** = 行为规则契约（云端）。**四份文档正交不冲突**。SSoT：`rules/mycc-core.md`（输出规范·双端策略）。
 
 ---
 
 > **如何查阅完整规范**：
-> - `cat ~/.claude/rules/iron-laws.md` （12 条铁律）
-> - `cat ~/.claude/rules/loop-worth-building-gate.md` （四条件门详解）
-> - `cat ~/.claude/rules/quarantine-read-write-separation.md` （隔离区模式）
-> - `grep -A20 dual-end-policy ~/.claude/rules/auto-learned-rules.md` （双端策略）
+> - `cat ~/.claude/rules/mycc-core.md` （唯一规则 SSoT：12 铁律 + 12 行为规则 R1-R12 + 4 步工作流）
+> - 注：W4（2026-06-22）精简后，原 iron-laws / loop-worth-building-gate / quarantine / auto-learned-rules 等多文件已合并入 `mycc-core.md` 单文件
 
-*本节由自动同步脚本追加，对应 OMC V52.1 → V52.2 升级。*
+*本节能力现已合并入 `rules/mycc-core.md`（OMC 4.14.7 · W4 精简）；保留原 V52 系列升级记录。*
 
 ---
 
-*全能力清单更新：2026-06-18 | Skills: 128 · MCP: 12+ · Plugins: 10 · Workflows: 15 · Hooks: 34 · Agents: 38*
+*全能力清单更新：2026-06-23 | Skills: 130 · MCP: 12+ · Plugins: 10 · Workflows: 15 · Hooks: 48 · Agents: 38*

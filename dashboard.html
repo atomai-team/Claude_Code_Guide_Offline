@@ -500,7 +500,7 @@ pre .str { color: var(--accent5); }
 <span class="cmd">omc update</span>                       <span class="comment"># 更新 OMC 插件</span>
 
 <span class="comment"># ── 外部 AI 并发对抗 ──────────────────────────</span>
-<span class="cmd">bash ~/.claude/scripts/ai-panel.sh <span class="arg">"调研 Next.js vs Nuxt"</span> gemini kimi mmx</span>
+<span class="cmd">bash ~/.claude/scripts/ai-panel.sh <span class="arg">"调研 Next.js vs Nuxt"</span> kimi mmx qwen opencode mavis</span>
 <span class="cmd">bash ~/.claude/scripts/ai-cli.sh kimi <span class="arg">"分析行业报告"</span></span>
 
 <span class="comment"># ── 配置升级路径 ──────────────────────────────</span>
@@ -523,7 +523,7 @@ pre .str { color: var(--accent5); }
 
 <script>
 // ===== Embedded Data =====
-const D = {"generated_at": "2026-06-18T10:20:12.457099Z", "version": {"claude_code": "2.1.181 (Claude Code)", "omc": "4.14.7", "stats_engine": "V53", "cc_switch": "OFF"}, "counts": {"skills": 128, "workflows": 15, "hooks_registered": 34, "hook_events": 14, "hook_files": 39, "agents_total": 38, "agents_core": 6, "agents_ceo_roles": 18, "agents_industry": 7, "agents_teams": 6, "mcp_servers": 0, "enabled_plugins": 10, "total_plugins": 55, "rules": 40, "intent_words_routes": 92, "external_clis": 3}, "lists": {"priority_routes": [{"name": "队长", "priority": 95, "keywords": ["队长", "leader", "boss", "老大"]}, {"name": "活力全开", "priority": 95, "keywords": ["活力全开", "火力全开", "全力", "yolo_l4"]}, {"name": "ceo_decision_council", "priority": 88, "keywords": ["ceo决策", "战略分析", "顾问委员会", "帮我想清楚这件事", "决策备忘录"]}, {"name": "comprehensive_upgrade_workflow", "priority": 86, "keywords": ["系统级升级", "全栈升级", "跑一遍综合升级", "comprehensive upgrade"]}, {"name": "smart_captain", "priority": 85, "keywords": ["smart", "flow", "自动化", "智能"]}, {"name": "claude_code_better", "priority": 85, "keywords": ["claude_code_better", "claude code better", "全面升级", "配置优化", "进化升级"]}, {"name": "workflow_orchestrate", "priority": 85, "keywords": ["workflow", "多agent", "并行调度", "fan out"]}, {"name": "开team", "priority": 85, "keywords": ["多人协作", "并行做", "跨域协同", "team prompt", "拆任务"]}, {"name": "upgrade_full_v40", "priority": 84, "keywords": ["全面升级", "全量升级", "系统升级", "融汇贯通", "升级一下"]}, {"name": "ceo_pipeline_voice", "priority": 84, "keywords": ["全流水线", "CEO流水线", "ceo流水线", "端到端交付", "全流程交付"]}, {"name": "n_step_pipeline_voice", "priority": 84, "keywords": ["N步流水线", "n步流水线", "多步流水线", "自定义流水线", "n步管线"]}, {"name": "boardroom_voice", "priority": 84, "keywords": ["董事会汇报", "board deck", "董事会准备", "董事会材料"]}, {"name": "fundraising_voice", "priority": 84, "keywords": ["融资准备", "BP撰写", "term sheet", "融资BP"]}, {"name": "overseas_compliance_voice", "priority": 84, "keywords": ["出海合规", "跨境数据合规", "数据本地化", "出海数据合规"]}, {"name": "cross_model_adversarial", "priority": 83, "keywords": ["异构对抗", "对抗验证", "三方对抗", "三方cli", "五方对抗"]}, {"name": "audit_all_route", "priority": 82, "keywords": ["30维扫描", "cchealth", "全身检查", "系统检查", "深度检查"]}, {"name": "error_analysis", "priority": 82, "keywords": ["error analysis", "error_analysis", "又报错", "反复错误", "同样问题"]}, {"name": "audit_internal", "priority": 82, "keywords": ["内部审计", "内部纠错", "本机审计", "自我审计", "系统自检"]}, {"name": "harness_audit_route", "priority": 82, "keywords": ["harness评分", "harness审计", "六层评分", "harness", "审计"]}, {"name": "config_audit_route", "priority": 82, "keywords": ["配置审计", "配置升级"]}, {"name": "domain_audit_route", "priority": 82, "keywords": ["域审计", "全域升级"]}, {"name": "external_benchmark_route", "priority": 82, "keywords": ["外部对标", "全球获取", "外部学习", "全球对比", "对比社区"]}, {"name": "cross_project_memory", "priority": 81, "keywords": ["跨项目查", "项目记忆", "项目上次", "项目决策", "multica怎么"]}, {"name": "clarify_skip", "priority": 80, "keywords": ["按你理解做", "按你的方式来", "你看着办", "你决定", "use your best judgment"]}, {"name": "security_audit_v403", "priority": 80, "keywords": ["安全审查", "OWASP", "安全审计", "代码安全", "漏洞扫描"]}, {"name": "ceo_mode", "priority": 80, "keywords": ["组建团队", "建团队", "搭团队", "建专家组", "拉专家"]}, {"name": "advisor_mode", "priority": 80, "keywords": ["盘点", "今天搞什么", "我跑偏没", "给我建议", "当前状态"]}, {"name": "secretary_route", "priority": 80, "keywords": ["秘书", "巡检一下", "本周有啥新", "情报简报"]}, {"name": "benchmark_route", "priority": 80, "keywords": ["对标", "全球对标", "社区对标"]}, {"name": "official_verify_route", "priority": 80, "keywords": ["官方核查", "Tier0核查", "官方对照"]}, {"name": "sop_upgrade_route", "priority": 80, "keywords": ["SOP升级", "sop进化", "SOP复用", "SOP沉淀"]}, {"name": "archive_evolution_route", "priority": 80, "keywords": ["归档进化", "归档汇总", "会话归档"]}, {"name": "business_analysis", "priority": 80, "keywords": ["评估项目", "商业分析", "尽调", "选址", "加盟模型"]}, {"name": "c_level_advisory", "priority": 80, "keywords": ["GTM", "获客成本", "营销预算", "增长模型", "营销ROI"]}, {"name": "business_flow_scenarios", "priority": 80, "keywords": ["销售预测", "sales forecast", "定价实验", "价格AB测试", "危机公关"]}], "skill_categories": {"dev": [], "business": [], "pm": [], "security": [], "ops": [], "ai": [], "docs": [], "system": [], "other": []}, "workflows": ["ceo-pipeline", "fundraising", "domain-audit-better", "v29-deep-research", "code-review", "self-evolve-loop", "bughunt", "n-step-pipeline", "dev-pipeline", "judge-panel", "config-audit-better", "harness-audit", "overseas-compliance", "boardroom", "comprehensive-upgrade"], "workflow_map": {"boardroom": "董事会汇报准备", "bughunt": "系统性 Bug 排查", "ceo-pipeline": "CEO 全流水线 PM→Arch→Eng→QA→CEO", "code-review": "代码审查", "comprehensive-upgrade": "综合升级流水线", "config-audit-better": "配置审计", "dev-pipeline": "开发流水线 spec→scaffold→impl→test→review→deploy", "domain-audit-better": "域审计", "fundraising": "融资准备", "harness-audit": "Harness 六层健康评分", "judge-panel": "多视角评审", "n-step-pipeline": "N步自适应流水线", "overseas-compliance": "出海合规", "self-evolve-loop": "自我进化闭环", "v29-deep-research": "深度调研"}, "ceo_roles": ["README", "architect", "ceo-orchestrator", "cfo-advisor", "chief-of-staff", "cmo-advisor", "coo-advisor", "designer", "devops-engineer", "engineer", "financial-analyst", "market-analyst", "product-manager", "project-manager", "qa-validator", "researcher", "security-analyst", "test-engineer"], "industry_agents": ["README", "capital-ir", "chain-expansion", "consumer-trend", "overseas-entry", "supply-chain", "unit-economics"], "teams": ["README", "team-data-ai", "team-fullstack", "team-infra", "team-research", "team-security"], "core_agents": ["captain", "evolution-scout", "needs-analyst", "product-manager", "project-director", "technical-writer"], "orchestration": {"entry_points": [{"say": "队长 + 任务", "priority": 95, "engine": "smart-flow-all"}, {"say": "活力全开 + 任务", "priority": 95, "engine": "smart-flow-all YOLO L4"}, {"say": "全面升级", "priority": 85, "engine": "claude-code-better"}, {"say": "又报错", "priority": 82, "engine": "systematic-error-analysis"}, {"say": "评估项目", "priority": 80, "engine": "ceo-mode"}, {"say": "秘书巡检", "priority": 80, "engine": "secretary"}], "workflow_map": {"boardroom": "董事会汇报准备", "bughunt": "系统性 Bug 排查", "ceo-pipeline": "CEO 全流水线 PM→Arch→Eng→QA→CEO", "code-review": "代码审查", "comprehensive-upgrade": "综合升级流水线", "config-audit-better": "配置审计", "dev-pipeline": "开发流水线 spec→scaffold→impl→test→review→deploy", "domain-audit-better": "域审计", "fundraising": "融资准备", "harness-audit": "Harness 六层健康评分", "judge-panel": "多视角评审", "n-step-pipeline": "N步自适应流水线", "overseas-compliance": "出海合规", "self-evolve-loop": "自我进化闭环", "v29-deep-research": "深度调研"}}, "business_capabilities": {"行业专家矩阵": {"连锁/开店/加盟": ["chain-expansion", "unit-economics", "supply-chain"], "出海/海外/合规": ["overseas-entry", "capital-ir"], "单店/盈亏/回本": ["unit-economics", "chain-expansion"], "融资/BP/估值": ["capital-ir", "unit-economics"], "品牌/爆品/内容": ["consumer-trend", "supply-chain"], "供应链/采购": ["supply-chain", "unit-economics"]}}}, "hooks": {"total_files": 39, "by_event": {"PreToolUse": 5, "SubagentStop": 3, "UserPromptSubmit": 4, "SessionStart": 7, "PostToolUse": 2, "Stop": 5, "PostToolUseFailure": 1, "PermissionRequest": 1, "PreCompact": 1, "PostCompact": 1, "SessionEnd": 1, "SubagentStart": 1, "StopFailure": 1, "MessageDisplay": 1}}};
+const D = {"generated_at": "2026-06-22T16:02:49.162592Z", "version": {"claude_code": "2.1.185 (Claude Code)", "omc": "4.14.7", "stats_engine": "V53", "cc_switch": "OFF"}, "counts": {"skills": 130, "workflows": 15, "hooks_registered": 48, "hook_events": 14, "hook_files": 57, "agents_total": 38, "agents_core": 6, "agents_ceo_roles": 18, "agents_industry": 7, "agents_teams": 6, "mcp_servers": 1, "enabled_plugins": 10, "total_plugins": 58, "rules": 2, "intent_words_routes": 92, "external_clis": 3}, "lists": {"priority_routes": [{"name": "队长", "priority": 95, "keywords": ["队长", "leader", "boss", "老大"]}, {"name": "活力全开", "priority": 95, "keywords": ["活力全开", "火力全开", "全力", "yolo_l4"]}, {"name": "ceo_decision_council", "priority": 88, "keywords": ["ceo决策", "战略分析", "顾问委员会", "帮我想清楚这件事", "决策备忘录"]}, {"name": "comprehensive_upgrade_workflow", "priority": 86, "keywords": ["系统级升级", "全栈升级", "跑一遍综合升级", "comprehensive upgrade"]}, {"name": "smart_captain", "priority": 85, "keywords": ["smart", "flow", "自动化", "智能"]}, {"name": "claude_code_better", "priority": 85, "keywords": ["claude_code_better", "claude code better", "全面升级", "配置优化", "进化升级"]}, {"name": "workflow_orchestrate", "priority": 85, "keywords": ["workflow", "多agent", "并行调度", "fan out"]}, {"name": "开team", "priority": 85, "keywords": ["多人协作", "并行做", "跨域协同", "team prompt", "拆任务"]}, {"name": "upgrade_full_v40", "priority": 84, "keywords": ["全面升级", "全量升级", "系统升级", "融汇贯通", "升级一下"]}, {"name": "ceo_pipeline_voice", "priority": 84, "keywords": ["全流水线", "CEO流水线", "ceo流水线", "端到端交付", "全流程交付"]}, {"name": "n_step_pipeline_voice", "priority": 84, "keywords": ["N步流水线", "n步流水线", "多步流水线", "自定义流水线", "n步管线"]}, {"name": "boardroom_voice", "priority": 84, "keywords": ["董事会汇报", "board deck", "董事会准备", "董事会材料"]}, {"name": "fundraising_voice", "priority": 84, "keywords": ["融资准备", "BP撰写", "term sheet", "融资BP"]}, {"name": "overseas_compliance_voice", "priority": 84, "keywords": ["出海合规", "跨境数据合规", "数据本地化", "出海数据合规"]}, {"name": "cross_model_adversarial", "priority": 83, "keywords": ["异构对抗", "对抗验证", "三方对抗", "三方cli", "五方对抗"]}, {"name": "audit_all_route", "priority": 82, "keywords": ["30维扫描", "cchealth", "全身检查", "系统检查", "深度检查"]}, {"name": "error_analysis", "priority": 82, "keywords": ["error analysis", "error_analysis", "又报错", "反复错误", "同样问题"]}, {"name": "audit_internal", "priority": 82, "keywords": ["内部审计", "内部纠错", "本机审计", "自我审计", "系统自检"]}, {"name": "harness_audit_route", "priority": 82, "keywords": ["harness评分", "harness审计", "六层评分", "harness", "审计"]}, {"name": "config_audit_route", "priority": 82, "keywords": ["配置审计", "配置升级"]}, {"name": "domain_audit_route", "priority": 82, "keywords": ["域审计", "全域升级"]}, {"name": "external_benchmark_route", "priority": 82, "keywords": ["外部对标", "全球获取", "外部学习", "全球对比", "对比社区"]}, {"name": "cross_project_memory", "priority": 81, "keywords": ["跨项目查", "项目记忆", "项目上次", "项目决策", "multica怎么"]}, {"name": "clarify_skip", "priority": 80, "keywords": ["按你理解做", "按你的方式来", "你看着办", "你决定", "use your best judgment"]}, {"name": "security_audit_v403", "priority": 80, "keywords": ["安全审查", "OWASP", "安全审计", "代码安全", "漏洞扫描"]}, {"name": "ceo_mode", "priority": 80, "keywords": ["组建团队", "建团队", "搭团队", "建专家组", "拉专家"]}, {"name": "advisor_mode", "priority": 80, "keywords": ["盘点", "今天搞什么", "我跑偏没", "给我建议", "当前状态"]}, {"name": "secretary_route", "priority": 80, "keywords": ["秘书", "巡检一下", "本周有啥新", "情报简报"]}, {"name": "benchmark_route", "priority": 80, "keywords": ["对标", "全球对标", "社区对标"]}, {"name": "official_verify_route", "priority": 80, "keywords": ["官方核查", "Tier0核查", "官方对照"]}, {"name": "sop_upgrade_route", "priority": 80, "keywords": ["SOP升级", "sop进化", "SOP复用", "SOP沉淀"]}, {"name": "archive_evolution_route", "priority": 80, "keywords": ["归档进化", "归档汇总", "会话归档"]}, {"name": "business_analysis", "priority": 80, "keywords": ["评估项目", "商业分析", "尽调", "选址", "加盟模型"]}, {"name": "c_level_advisory", "priority": 80, "keywords": ["GTM", "获客成本", "营销预算", "增长模型", "营销ROI"]}, {"name": "business_flow_scenarios", "priority": 80, "keywords": ["销售预测", "sales forecast", "定价实验", "价格AB测试", "危机公关"]}], "skill_categories": {"dev": ["api-and-interface-design", "auto-collector-github", "ce-code-review", "claude-code-better", "code-behavior-audit", "codebase-memory", "codesight", "deploy-ship", "diagnose", "doubt-driven-development", "ecc-tdd-workflow", "improve-codebase-architecture", "shipping-and-launch", "source-driven-development", "sp-requesting-code-review", "sp-subagent-driven-development", "sp-test-driven-development", "sp-writing-plans", "test-driven-development"], "business": ["ceo-decision", "ceo-mode", "marketing", "pricing-strategy"], "pm": ["baoyu-xhs-images", "brand", "brand-voice", "cold-email", "content-engine", "customer-research", "seo-audit", "social-publisher", "xhs-operations-method"], "security": ["antigravity-claude-settings-audit", "audit-all-better", "auto-auditor-internal", "harness-audit", "security-audit", "self-audit-loop", "skill-audit"], "ops": ["canary-monitor", "ci-template", "gh-ci-fix", "observability-and-instrumentation", "secretary-orchestrator", "secretary-tongues"], "ai": ["baoyu-markdown-to-html", "context-engineering", "deep-research-sop", "ecc-eval-harness", "web-access"], "docs": ["article-writing", "baoyu-article-illustrator", "baoyu-compress-image", "baoyu-cover-image", "baoyu-diagram", "baoyu-format-markdown", "baoyu-image-gen", "baoyu-slide-deck", "documentation-and-adrs", "graphify", "grill-with-docs", "handoff", "notion-knowledge-capture", "notion-spec-to-implementation", "slides"], "system": ["ask-cli", "auto-collector-community", "auto-collector-official", "caveman", "cmmi-tracker", "ecc-skill-comply", "grill-me", "humanize-chinese", "humanizer", "macos-automation", "mmx-cli", "mycc-selfheal", "neat-freak", "no-plugin-prompts", "nuwa-skill", "obsidian-vault", "omc-hitl", "omc-project-init", "omc-prompt-lib", "qwen-cli", "smart-flow-all", "teleport", "token-budget", "triage", "update-all"], "other": ["_deprecated", "_local", "agent-reach", "antigravity-memory-systems", "banner-design", "baoyu-comic", "baoyu-electron-extract", "baoyu-infographic", "baoyu-translate", "baoyu-url-to-markdown", "baoyu-wechat-summary", "baoyu-youtube-transcript", "card-xiaohongshu", "ce-optimize", "ce-plan", "ce-strategy", "ce-work", "composition-patterns", "deprecation-and-migration", "design", "design-system", "diff-generator", "ecc-continuous-learning-v2", "ecc-gateguard", "ecc-parallel-execution-optimizer", "interview-me", "last30days", "memory-dream-consolidation", "prototype", "ra-qm-team", "sp-brainstorming", "spec-generator", "systematic-error-analysis", "teach", "team-prompt-template", "to-issues", "ui-styling", "ui-ux-pro-max", "vercel-react-best-practices", "zoom-out"]}, "workflows": ["ceo-pipeline", "fundraising", "domain-audit-better", "v29-deep-research", "code-review", "self-evolve-loop", "bughunt", "n-step-pipeline", "dev-pipeline", "judge-panel", "config-audit-better", "harness-audit", "overseas-compliance", "boardroom", "comprehensive-upgrade"], "workflow_map": {"boardroom": "董事会汇报准备", "bughunt": "系统性 Bug 排查", "ceo-pipeline": "CEO 全流水线 PM→Arch→Eng→QA→CEO", "code-review": "代码审查", "comprehensive-upgrade": "综合升级流水线", "config-audit-better": "配置审计", "dev-pipeline": "开发流水线 spec→scaffold→impl→test→review→deploy", "domain-audit-better": "域审计", "fundraising": "融资准备", "harness-audit": "Harness 六层健康评分", "judge-panel": "多视角评审", "n-step-pipeline": "N步自适应流水线", "overseas-compliance": "出海合规", "self-evolve-loop": "自我进化闭环", "v29-deep-research": "深度调研"}, "ceo_roles": ["architect", "ceo-orchestrator", "cfo-advisor", "chief-of-staff", "cmo-advisor", "coo-advisor", "designer", "devops-engineer", "engineer", "financial-analyst", "market-analyst", "product-manager", "project-manager", "qa-validator", "researcher", "security-analyst", "test-engineer"], "industry_agents": ["capital-ir", "chain-expansion", "consumer-trend", "overseas-entry", "supply-chain", "unit-economics"], "teams": ["team-data-ai", "team-fullstack", "team-infra", "team-research", "team-security"], "core_agents": ["captain", "evolution-scout", "needs-analyst", "product-manager", "project-director", "technical-writer"], "orchestration": {"entry_points": [{"say": "队长 + 任务", "priority": 95, "engine": "smart-flow-all"}, {"say": "活力全开 + 任务", "priority": 95, "engine": "smart-flow-all YOLO L4"}, {"say": "全面升级", "priority": 85, "engine": "claude-code-better"}, {"say": "又报错", "priority": 82, "engine": "systematic-error-analysis"}, {"say": "评估项目", "priority": 80, "engine": "ceo-mode"}, {"say": "秘书巡检", "priority": 80, "engine": "secretary"}], "workflow_map": {"boardroom": "董事会汇报准备", "bughunt": "系统性 Bug 排查", "ceo-pipeline": "CEO 全流水线 PM→Arch→Eng→QA→CEO", "code-review": "代码审查", "comprehensive-upgrade": "综合升级流水线", "config-audit-better": "配置审计", "dev-pipeline": "开发流水线 spec→scaffold→impl→test→review→deploy", "domain-audit-better": "域审计", "fundraising": "融资准备", "harness-audit": "Harness 六层健康评分", "judge-panel": "多视角评审", "n-step-pipeline": "N步自适应流水线", "overseas-compliance": "出海合规", "self-evolve-loop": "自我进化闭环", "v29-deep-research": "深度调研"}}, "business_capabilities": {"行业专家矩阵": {"连锁/开店/加盟": ["chain-expansion", "unit-economics", "supply-chain"], "出海/海外/合规": ["overseas-entry", "capital-ir"], "单店/盈亏/回本": ["unit-economics", "chain-expansion"], "融资/BP/估值": ["capital-ir", "unit-economics"], "品牌/爆品/内容": ["consumer-trend", "supply-chain"], "供应链/采购": ["supply-chain", "unit-economics"]}}}, "hooks": {"total_files": 57, "by_event": {"PreToolUse": 14, "SubagentStop": 3, "UserPromptSubmit": 7, "SessionStart": 7, "PostToolUse": 5, "Stop": 3, "PostToolUseFailure": 2, "PermissionRequest": 1, "PreCompact": 1, "PostCompact": 1, "SessionEnd": 1, "SubagentStart": 1, "StopFailure": 1, "MessageDisplay": 1}}};
 
 // ===== Init =====
 (function() {
@@ -557,15 +557,21 @@ const D = {"generated_at": "2026-06-18T10:20:12.457099Z", "version": {"claude_co
     `<tr><td>/<span class="kw">${esc(w)}</span></td><td>${esc(wfMap[w]||'—')}</td></tr>`
   ).join('');
 
-  // External CLI
+  // External CLI（5 联自动 + codex 手动 · gemini 已退役 · 2026-06-22 钦定）
+  // 调用：bash ~/.claude/scripts/ai-cli.sh <provider> "<prompt>"  ·  对抗：ai-panel.sh "<prompt>" kimi mmx qwen opencode mavis
   document.getElementById('tblCLI').innerHTML = [
-    {n:'kimi',s:'online',d:'256K context，超长文档处理+Agentic读多文件'},
-    {n:'gemini',s:'online',d:'快速调研、多模态、搜索'},
-    {n:'mmx',s:'degraded',d:'中文创作优化（纯文本补全，非agentic）'},
-    {n:'opencode',s:'online',d:'代码专长（deepseek-chat后端）'},
-  ].map(x =>
-    `<tr><td>${x.n}</td><td>${x.s==='online'?'<span class="dot-online"></span><span class="tag-green">在线</span>':'<span class="dot-warn"></span><span class="tag-warn">降级</span>'} ${x.d}</td></tr>`
-  ).join('');
+    {n:'kimi',s:'online',d:'Moonshot/MiniMax-M3 · 256K context 长文档 + agentic 多文件读取'},
+    {n:'mmx',s:'online',d:'MiniMax · 中文内容/创作优化（纯文本基础任务）'},
+    {n:'opencode',s:'online',d:'Kimi K2.7 Code · 代码专长/写代码外包'},
+    {n:'qwen',s:'online',d:'通义千问 · 阿里系生态/中文异构视角'},
+    {n:'mavis',s:'online',d:'OpenCode+MiniMax · 多 agent 编排/独立对抗审查'},
+    {n:'codex',s:'manual',d:'OpenAI Codex · 仅手动交互 TUI（headless 受限，不入自动 panel）'},
+  ].map(x => {
+    const badge = x.s==='online'
+      ? '<span class="dot-online"></span><span class="tag-green">自动·在线</span>'
+      : '<span class="dot-warn"></span><span class="tag-warn">仅手动</span>';
+    return `<tr><td>${x.n}</td><td>${badge} ${x.d}</td></tr>`;
+  }).join('');
 
   // Skill categories
   const cats = l.skill_categories||{};
@@ -598,11 +604,68 @@ const D = {"generated_at": "2026-06-18T10:20:12.457099Z", "version": {"claude_co
     `<span class="tag">${esc(ev)}×${n}</span>`
   ).join('');
 
-  // Agents
-  document.getElementById('agentTagsTop').innerHTML = (l.core_agents||[]).map(a=>`<span class="tag">${esc(a)}</span>`).join('');
-  const teams = [...(l.ceo_roles||[]).map(a=>`<span class="tag"><b>CEO</b> ${esc(a)}</span>`),
-    ...(l.industry_agents||[]).map(a=>`<span class="tag"><b>🏭</b> ${esc(a)}</span>`),
-    ...(l.teams||[]).map(a=>`<span class="tag"><b>👥</b> ${esc(a)}</span>`)];
+  // Agents — 中文描述映射（按名匹配，缺失则只显示名字）
+  const AGENT_DESC = {
+    // 核心
+    'captain':'队长 — 极限档全权统筹调度，说"队长/活力全开"激活',
+    'evolution-scout':'进化侦察兵 — 扫官方新版/GitHub/社区，给升级清单',
+    'needs-analyst':'需求分析师 — 把模糊口语需求转成精确任务蓝图',
+    'product-manager':'产品经理 — JTBD 需求挖掘 + BDD 验收 + RICE 优先级',
+    'project-director':'项目总监 — 大型项目时间线/跨职能协调',
+    'technical-writer':'技术文档撰写 — 开发者指南/文档质量',
+    // CEO 战略 + 研发角色
+    'ceo-orchestrator':'CEO 总编排 — 战略拆解/团队调度/质量验收',
+    'architect':'架构师 — C4 模型/ADR 决策/技术选型',
+    'cfo-advisor':'CFO 顾问 — runway/现金流/融资/估值掌舵',
+    'caio-advisor':'首席 AI 官 — AI Build-vs-Buy/EU AI Act/三年 TCO',
+    'ciso-advisor':'首席信安官 — 安全 ALE 量化/合规路线/零信任',
+    'cmo-advisor':'CMO 顾问 — GTM/品牌定位/增长模型',
+    'coo-advisor':'COO 顾问 — 执行落地/SOP/OKR 级联',
+    'cro-advisor':'首席营收官 — 收入模型/销售预测/NRR',
+    'chief-of-staff':'参谋长 — 跨部门决策路由/多顾问编排',
+    'customer-success-manager':'客户成功 — 健康度评分/流失分级/续约',
+    'deal-desk':'交易审批台 — 折扣审批路由/交易评分/条款地雷',
+    'designer':'设计师 — UX/线框→高保真/设计系统',
+    'devops-engineer':'DevOps — CI/CD/容器/部署/灰度回滚',
+    'engineer':'工程师 — 强制 TDD 三阶段/变更闭环',
+    'financial-analyst':'财务分析师 — 单位经济/三情景预测/ROI',
+    'founder-coach':'创始人教练 — 原型识别/授权梯度/精力管理',
+    'general-counsel-advisor':'法务顾问 — 合同风险/IP 策略/牌照评估',
+    'market-analyst':'市场分析师 — TAM/SAM/SOM/竞品矩阵/趋势',
+    'partnerships-architect':'渠道生态架构 — 合作分层/联合 GTM/revshare',
+    'pricing-strategist':'定价策略 — 定价模型/价格敏感度/套餐设计',
+    'project-manager':'项目经理 — WBS/关键路径/风险/阻塞升级',
+    'qa-validator':'QA 验证 — 独立验证/BDD 逐条核实/缺陷分级',
+    'researcher':'调研员 — ≥5 渠道深度调研/交叉+对抗验证',
+    'revenue-operations':'收入运营 — pipeline 健康/预测准确性/GTM 效率',
+    'rfp-responder':'投标响应 — RFP 解析/Win Theme/Bid 裁决',
+    'saas-metrics-coach':'SaaS 指标 — ARR/NRR/LTV:CAC 基准校准',
+    'security-analyst':'安全分析师 — OWASP/威胁建模/密钥扫描',
+    'test-engineer':'测试工程师 — BDD→Gherkin/测试金字塔/TDD 红阶段',
+    // 行业专家（出海创投）
+    'capital-ir':'投融资/BP — 财务建模/估值逻辑/投资人对接',
+    'chain-expansion':'连锁扩张 — 加盟/直营/选址/扩张节奏',
+    'consumer-trend':'新消费/品牌 — 品类机会/爆品方法论/私域',
+    'overseas-entry':'海外准入 — 市场准入/法务牌照/本地化',
+    'supply-chain':'供应链/成本 — 采购/仓配/成本结构拆解',
+    'unit-economics':'单店模型 — 收入成本/盈亏平衡/回本周期',
+    // 团队
+    'team-data-ai':'数据/AI 团队 — 数据管道+ML+RAG+向量库',
+    'team-fullstack':'全栈团队 — 前端+后端+数据库+部署一条龙',
+    'team-infra':'基础设施团队 — K8s+Terraform+CI/CD+监控',
+    'team-research':'调研团队 — 跨网汇集+对比表+建议',
+    'team-security':'安全团队 — 渗透+OWASP+密钥+合规',
+  };
+  const aTag = (prefix, a) => {
+    const d = AGENT_DESC[a];
+    const desc = d ? ` <span style="opacity:.62;font-weight:400">— ${esc(d.split(' — ').slice(1).join(' — ')||d)}</span>` : '';
+    const title = d ? ` title="${esc(d)}"` : '';
+    return `<span class="tag"${title}>${prefix}<b>${esc(a)}</b>${desc}</span>`;
+  };
+  document.getElementById('agentTagsTop').innerHTML = (l.core_agents||[]).map(a=>aTag('', a)).join('');
+  const teams = [...(l.ceo_roles||[]).map(a=>aTag('<b>CEO</b> ', a)),
+    ...(l.industry_agents||[]).map(a=>aTag('🏭 ', a)),
+    ...(l.teams||[]).map(a=>aTag('👥 ', a))];
   document.getElementById('agentTagsTeams').innerHTML = teams.join('');
 
   // Business matrix
@@ -615,17 +678,23 @@ const D = {"generated_at": "2026-06-18T10:20:12.457099Z", "version": {"claude_co
   // Doc paths
   const home = '~';
   document.getElementById('docPaths').innerHTML = [
+    // —— guides/ 七本手册（用户 SSoT）——
+    ['速查表', `${home}/claude-code-guides/00-速查表.md`],
+    ['小白使用手册', `${home}/claude-code-guides/01-小白使用手册.md`],
+    ['商城项目实战', `${home}/claude-code-guides/02-商城项目实战手册.md`],
+    ['全能力清单', `${home}/claude-code-guides/03-全能力清单-Skills+MCP+插件.md`],
+    ['CMMI 配置文档(PM)', `${home}/claude-code-guides/04-CMMI配置文档-PM专业版.md`],
+    ['创业分析系统', `${home}/claude-code-guides/05-创业分析专家系统.md`],
+    ['CEO 速用手册', `${home}/claude-code-guides/06-CEO能力速用手册.md`],
+    // —— 数据/仪表盘（引擎自动刷新）——
     ['能力仪表盘 HTML', `${home}/claude-code-guides/dashboard.html`],
     ['全机数据 JSON', `${home}/claude-code-guides/mycc-stats.json`],
     ['能力全景 MD', `${home}/claude-code-guides/mycc-stats.md`],
-    ['小白使用手册', `${home}/claude-code-guides/01-小白使用手册.md`],
-    ['速查表', `${home}/claude-code-guides/00-速查表.md`],
-    ['全能力清单', `${home}/claude-code-guides/03-全能力清单-Skills+MCP+插件.md`],
-    ['CEO 速用手册', `${home}/claude-code-guides/06-CEO能力速用手册.md`],
-    ['商城项目实战', `${home}/claude-code-guides/02-商城项目实战手册.md`],
-    ['创业分析系统', `${home}/claude-code-guides/05-创业分析专家系统.md`],
-    ['外部调研员提示词', `${home}/.claude/docs/external-intel-prompt-v7.md`],
     ['数据引擎脚本', `${home}/.claude/lib/mycc-stats.py`],
+    // —— 外部 AI 提示词 / 需求文档 ——
+    ['外部调研员提示词 v7', `${home}/.claude/docs/external-intel-prompt-v7.md`],
+    ['外部情报调查专员', `${home}/.claude/docs/external-investigator-prompt.md`],
+    ['需求总结(给外部AI)', `${home}/.claude/docs/requirements-summary-for-external-ai.md`],
     ['MYCC 能力全景总册', `${home}/.claude/docs/MYCC-能力全景总册.md`],
   ].map(([label, path]) => `<span class="path-item">${esc(label)}: <code>${esc(path)}</code></span>`).join('');
 
