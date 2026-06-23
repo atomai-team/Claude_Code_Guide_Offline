@@ -1,10 +1,10 @@
 # Claude Code 全能力清单
-> Skills × 130 · Agents × 38 · Hooks × 47 · 插件 × 10/58 · MCP × 12+ · 外部 CLI × 6
+> Skills × 144 · Agents × 38 · Hooks × 47 · 插件 × 10/58 · MCP × 12+ · 外部 CLI × 6
 > OMC 4.14.7 · CLI v2.1.185 · 2026-06-22 完整版
 
 ---
 
-## 第一部分：130 个 Skills 完整分类说明
+## 第一部分：144 个 Skills 完整分类说明
 
 ### 🚀 执行与工作模式（核心驱动）
 
@@ -327,11 +327,11 @@
 
 ### oh-my-claudecode（OMC）
 **核心插件，提供整套 OMC 能力**
-- Skills: **130** 原生 skill
-- Hooks: **48** 自动守护钩子
+- Skills: **144** 原生 skill
+- Hooks: **49** 自动守护钩子
 - Workflows: **15** 个 JS 流水线脚本
 - MCP Tools: wiki/notepad/state/LSP/shared-memory 等
-- Agents: **38** 角色（含多领域专家 + 团队蓝图）
+- Agents: **39** 角色（含多领域专家 + 团队蓝图）
 
 ### claude-hud
 **实时状态显示 HUD**
@@ -419,4 +419,4 @@ scripts/ai-panel.sh "评估这个商业计划书" gemini kimi mmx
 
 ---
 
-*全能力清单更新：2026-06-23 | Skills: 130 · MCP: 12+ · Plugins: 10 · Workflows: 15 · Hooks: 48 · Agents: 38*
+*全能力清单更新：2026-06-23 | Skills: 144 · MCP: 12+ · Plugins: 0 · Workflows: 15 · Hooks: 49 · Agents: 39*
