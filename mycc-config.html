@@ -4,76 +4,96 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MYCC 配置全景 · 工具/能力/自动化总览</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E⚙️%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0e1a; --surface: #131826; --surface2: #1a2138; --border: #2a3148;
-  --text: #e6e9f0; --text-dim: #8b92a8; --text-muted: #5a6075;
-  --accent: #6366f1; --accent2: #8b5cf6; --accent3: #06b6d4;
-  --green: #10b981; --red: #ef4444; --orange: #f59e0b;
+  color-scheme: light;
+  --bg: #ffffff; --bg-subtle: #f5f5f7; --surface: #ffffff; --surface2: #fafafc; --surface-hover: #f5f5f7;
+  --border: #e5e5ea; --border-strong: #d2d2d7; --code-bg: #f5f5f7;
+  --text: #1d1d1f; --text-dim: #515154; --text-muted: #86868b;
+  --accent: #0071e3; --accent-hover: #0077ed; --accent-soft: #e8f1fd;
+  --accent2: #007a96; --accent3: #007a96;
+  --green: #1a8c4a; --red: #d70015; --orange: #b25000; --purple: #6e3fd6;
+  --radius: 12px; --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); --shadow-hover: 0 4px 16px rgba(0,0,0,0.08);
+  --font-sans: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
+  --font-mono: 'JetBrains Mono','SF Mono','Fira Code',Menlo,monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0a0a0b; --bg-subtle: #141416; --surface: #161618; --surface2: #1c1c1f; --surface-hover: #232326;
+    --border: #2a2a2e; --border-strong: #3a3a3e; --code-bg: #1c1c1f;
+    --text: #f5f5f7; --text-dim: #aeaeb2; --text-muted: #8e8e93;
+    --accent: #2997ff; --accent-soft: #16263b; --accent2: #5ac8e0; --accent3: #5ac8e0;
+  }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter','Noto Sans SC',sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; padding: 32px; max-width: 1400px; margin: 0 auto; }
-h1 { font-size: 32px; font-weight: 700; background: linear-gradient(135deg,#6366f1,#ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; letter-spacing: -0.02em; }
-.subtitle { color: var(--text-dim); font-size: 13px; margin-bottom: 32px; font-family: 'JetBrains Mono',monospace; display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
-.subtitle .back { color: var(--accent3); text-decoration: none; padding: 4px 10px; border: 1px solid var(--accent3); border-radius: 6px; font-size: 12px; }
-.subtitle .back:hover { background: var(--surface2); }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.65; padding: 48px 32px; max-width: 1100px; margin: 0 auto; font-size: 15px; -webkit-font-smoothing: antialiased; }
+h1 { font-size: 34px; font-weight: 700; color: var(--text); margin-bottom: 8px; letter-spacing: -0.02em; }
+.subtitle { color: var(--text-muted); font-size: 13px; margin-bottom: 36px; display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+.subtitle code { font-family: var(--font-mono); background: var(--code-bg); padding: 1px 6px; border-radius: 5px; font-size: 12px; }
+.subtitle .back { color: var(--accent); text-decoration: none; padding: 5px 12px; border: 1px solid var(--border-strong); border-radius: 980px; font-size: 13px; transition: all .15s; }
+.subtitle .back:hover { background: var(--accent-soft); border-color: var(--accent); }
 .search-wrap { margin-left: auto; display: flex; gap: 8px; align-items: center; }
-.search-wrap input { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 6px 12px; border-radius: 6px; font-size: 12px; font-family: 'JetBrains Mono',monospace; width: 220px; outline: none; }
-.search-wrap input:focus { border-color: var(--accent); }
+.search-wrap input { background: var(--surface); border: 1px solid var(--border-strong); color: var(--text); padding: 8px 14px; border-radius: 980px; font-size: 13px; width: 240px; outline: none; transition: border-color .15s, box-shadow .15s; }
+.search-wrap input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 .search-wrap input::placeholder { color: var(--text-muted); }
-.search-wrap .count { color: var(--text-muted); font-size: 11px; min-width: 30px; }
-.nav { display:flex; gap:8px; margin-bottom:32px; padding:16px; background:var(--surface); border-radius:12px; border:1px solid var(--border); flex-wrap:wrap; }
-.nav a { color:var(--accent3); text-decoration:none; padding:8px 14px; border-radius:6px; font-size:13px; transition: all 0.2s; }
-.nav a:hover { background:var(--surface2); transform: translateY(-1px); }
-.section { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:32px; margin-bottom:24px; transition: border-color 0.2s; }
-.section:hover { border-color: var(--surface2); }
-.section h2 { font-size:20px; margin-bottom:20px; display:flex; align-items:center; gap:10px; }
-.section .count { margin-left:auto; font-size:12px; color:var(--text-muted); font-family:'JetBrains Mono',monospace; padding:4px 10px; background: var(--surface2); border-radius: 6px; }
-.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; }
-.tile { background:var(--surface2); border-left:3px solid var(--accent); padding:16px 18px; border-radius:8px; transition: transform 0.2s, border-color 0.2s; }
-.tile:hover { transform: translateY(-2px); border-left-color: var(--accent2); }
+.search-wrap .count { color: var(--text-muted); font-size: 12px; min-width: 30px; }
+.nav { display:flex; gap:6px; margin-bottom:36px; padding:10px; background:var(--bg-subtle); border-radius:14px; flex-wrap:wrap; position: sticky; top: 12px; z-index: 10; }
+.nav a { color:var(--text-dim); text-decoration:none; padding:7px 14px; border-radius:980px; font-size:13px; font-weight:500; transition: all .15s; }
+.nav a:hover { background:var(--surface); color:var(--accent); box-shadow: var(--shadow-sm); }
+.section { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:32px; margin-bottom:20px; box-shadow: var(--shadow-card); }
+.section h2 { font-size:21px; font-weight:600; margin-bottom:20px; display:flex; align-items:center; gap:10px; letter-spacing:-0.01em; }
+.section .count { margin-left:auto; font-size:12px; color:var(--text-muted); font-family:var(--font-mono); padding:4px 10px; background: var(--bg-subtle); border-radius: 980px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
+.tile { background:var(--surface2); border:1px solid var(--border); border-left:3px solid var(--accent); padding:16px 18px; border-radius:10px; transition: box-shadow .15s, transform .15s; }
+.tile:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
 .tile h3 { font-size:14px; margin-bottom:8px; font-weight: 600; }
-.tile .meta { font-size:11px; color:var(--text-dim); font-family:'JetBrains Mono',monospace; }
+.tile .meta { font-size:12px; color:var(--text-dim); font-family:var(--font-mono); }
 .hooks-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:8px; }
-.hook-tile { background:var(--surface2); padding:10px 12px; border-radius:6px; border-left:2px solid var(--accent3); display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:12px; }
-.hook-tile code { color:var(--accent3); font-size:11px; font-family:'JetBrains Mono',monospace; }
-.hook-tile .sz { color:var(--text-muted); font-size:10px; font-family:'JetBrains Mono',monospace; flex-shrink:0; }
-.skill-group { margin-bottom: 20px; }
-.skill-group-title { font-size: 13px; color: var(--text-dim); font-weight: 600; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
-.skill-group-title .badge { background: var(--surface2); color: var(--accent3); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-family: 'JetBrains Mono',monospace; font-weight: 500; }
+.hook-tile { background:var(--surface2); padding:10px 12px; border-radius:8px; border:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:12px; }
+.hook-tile code { color:var(--accent); font-size:11px; font-family:var(--font-mono); }
+.hook-tile .sz { color:var(--text-muted); font-size:10px; font-family:var(--font-mono); flex-shrink:0; }
+.skill-group { margin-bottom: 24px; }
+.skill-group-title { font-size: 13px; color: var(--text-dim); font-weight: 600; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+.skill-group-title .badge { background: var(--bg-subtle); color: var(--accent); padding: 2px 9px; border-radius: 980px; font-size: 10px; font-family: var(--font-mono); font-weight: 600; }
 .skill-list { display: flex; flex-direction: column; gap: 6px; }
-.skill-row { background: var(--surface2); padding: 10px 14px; border-radius: 6px; border-left: 2px solid var(--accent); display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: start; transition: border-color 0.15s, background 0.15s; }
-.skill-row:hover { border-left-color: var(--accent2); background: var(--surface); }
-.skill-row code { color: var(--accent3); font-size: 12px; font-family: 'JetBrains Mono',monospace; font-weight: 600; padding-top: 1px; }
-.skill-row .desc { font-size: 11px; color: var(--text-dim); line-height: 1.55; }
+.skill-row { background: var(--surface2); padding: 11px 14px; border-radius: 8px; border: 1px solid var(--border); display: grid; grid-template-columns: 200px 1fr; gap: 14px; align-items: start; transition: box-shadow .15s, border-color .15s; }
+.skill-row:hover { box-shadow: var(--shadow-sm); border-color: var(--border-strong); }
+.skill-row code { color: var(--accent); font-size: 12px; font-family: var(--font-mono); font-weight: 600; padding-top: 1px; }
+.skill-row .desc { font-size: 12px; color: var(--text-dim); line-height: 1.55; }
 .skill-row.hidden { display: none; }
 table { width:100%; border-collapse:collapse; font-size:13px; }
-th { text-align:left; padding:10px 12px; background:var(--surface2); color:var(--text-dim); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; }
+th { text-align:left; padding:10px 12px; background:var(--bg-subtle); color:var(--text-muted); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; }
 td { padding:10px 12px; border-top:1px solid var(--border); }
-.tag { display:inline-block; padding:3px 10px; border-radius:6px; font-size:10px; font-family:'JetBrains Mono',monospace; background:var(--surface2); }
+.tag { display:inline-block; padding:3px 10px; border-radius:980px; font-size:10px; font-family:var(--font-mono); background:var(--bg-subtle); }
 .tag-green{color:var(--green);border:1px solid var(--green)}
 .tag-orange{color:var(--orange);border:1px solid var(--orange)}
-.tag-cyan{color:var(--accent3);border:1px solid var(--accent3)}
-.bar { height:8px; background:var(--surface2); border-radius:4px; overflow:hidden; margin:8px 0; }
-.bar-fill { height:100%; background:linear-gradient(90deg,#6366f1,#8b5cf6); transition: width 0.4s ease; }
-.feature-card { background:linear-gradient(135deg,var(--surface2),var(--surface)); border:1px solid var(--border); padding:20px; border-radius:12px; transition: transform 0.2s, border-color 0.2s; }
-.feature-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+.tag-cyan{color:var(--accent2);border:1px solid var(--accent2)}
+.bar { height:8px; background:var(--bg-subtle); border-radius:4px; overflow:hidden; margin:8px 0; }
+.bar-fill { height:100%; background:var(--accent); transition: width 0.4s ease; }
+.feature-card { background:var(--surface2); border:1px solid var(--border); padding:20px; border-radius:12px; transition: box-shadow .15s, transform .15s; }
+.feature-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
 .feature-card h3 { font-size:15px; margin-bottom:10px; }
-.trigger { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--accent3); background:var(--bg); padding:4px 8px; border-radius:4px; display:inline-block; margin:2px 4px 2px 0; }
-.stat-num { font-size:36px; font-weight:700; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family:'JetBrains Mono',monospace; line-height:1.1; }
-.stat-row { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:16px; }
-.stat-box { background: var(--surface2); padding: 18px 14px; border-radius: 10px; text-align: center; border: 1px solid var(--border); transition: transform 0.2s, border-color 0.2s; }
-.stat-box:hover { transform: translateY(-2px); border-color: var(--accent); }
-.stat-box .label { font-size:11px; color:var(--text-dim); margin-top:8px; font-weight: 500; }
-.footer { margin-top:40px; padding:24px; text-align:center; color:var(--text-muted); font-size:11px; border-top:1px solid var(--border); }
-.footer a { color: var(--accent3); text-decoration: none; padding: 4px 10px; border: 1px solid var(--border); border-radius: 6px; margin: 0 4px; }
-.footer a:hover { border-color: var(--accent3); }
+.trigger { font-family:var(--font-mono); font-size:11px; color:var(--accent); background:var(--accent-soft); padding:4px 9px; border-radius:6px; display:inline-block; margin:2px 4px 2px 0; }
+.stat-num { font-size:34px; font-weight:700; color: var(--accent); font-family:var(--font-mono); line-height:1.1; letter-spacing:-0.02em; }
+.stat-row { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:14px; }
+.stat-box { background: var(--surface2); padding: 20px 14px; border-radius: 12px; text-align: center; border: 1px solid var(--border); transition: box-shadow .15s, transform .15s; }
+.stat-box:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+.stat-box .label { font-size:12px; color:var(--text-dim); margin-top:8px; font-weight: 500; }
+.footer { margin-top:48px; padding:24px; text-align:center; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+.footer a { color: var(--accent); text-decoration: none; padding: 5px 12px; border: 1px solid var(--border-strong); border-radius: 980px; margin: 0 4px; transition: all .15s; }
+.footer a:hover { background: var(--accent-soft); border-color: var(--accent); }
 @media (max-width: 720px) {
-  body { padding: 16px; }
+  body { padding: 24px 16px; }
   .section { padding: 20px; }
   .skill-row { grid-template-columns: 1fr; gap: 4px; }
   .stat-row { grid-template-columns: repeat(2, 1fr); }
+  .search-wrap { margin-left: 0; width: 100%; }
+  .search-wrap input { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -84,7 +104,7 @@ td { padding:10px 12px; border-top:1px solid var(--border); }
 
 <h1>⚙️ MYCC 配置全景</h1>
 <div class="subtitle">
-  <span>数据自动拉取自 <code>~/.claude/</code> · 生成时间 2026-06-25 21:20</span>
+  <span>数据自动拉取自 <code>~/.claude/</code> · 生成时间 2026-06-25 23:13</span>
   <a href="dashboard.html" class="back">← 返回主仪表盘</a>
   <div class="search-wrap">
     <input type="search" id="skill-search" placeholder="🔍 搜索 skills/agents/hooks..." />
@@ -99,19 +119,19 @@ td { padding:10px 12px; border-top:1px solid var(--border); }
   <a href="#plugins">🧩 插件</a>
   <a href="#skills">🎯 Skills (148)</a>
   <a href="#agents">🤖 Agents</a>
-  <a href="#hooks">🪝 Hooks (51)</a>
+  <a href="#hooks">🪝 Hooks (49)</a>
   <a href="#scheduler">⏰ 定时任务</a>
   <a href="#router">🛣️ 路由表</a>
 </div>
 
 <div class="section" id="overview">
-<h2>📊 一眼总览 <span class="count">2026-06-25 21:20</span></h2>
+<h2>📊 一眼总览 <span class="count">2026-06-25 23:13</span></h2>
 <div class="stat-row">
   <div class="stat-box"><div class="stat-num">3</div><div class="label">🔌 MCP 服务器</div></div>
   <div class="stat-box"><div class="stat-num">35</div><div class="label">🧩 启用插件</div></div>
   <div class="stat-box"><div class="stat-num">148</div><div class="label">🎯 Skills</div></div>
   <div class="stat-box"><div class="stat-num">31</div><div class="label">🤖 Agents</div></div>
-  <div class="stat-box"><div class="stat-num">51</div><div class="label">🪝 Hooks</div></div>
+  <div class="stat-box"><div class="stat-num">49</div><div class="label">🪝 Hooks</div></div>
   <div class="stat-box"><div class="stat-num">51</div><div class="label">🛣️ 路由 intents</div></div>
   <div class="stat-box"><div class="stat-num">8</div><div class="label">⏰ LaunchAgent</div></div>
   <div class="stat-box"><div class="stat-num">5</div><div class="label">🌟 高级功能</div></div>
@@ -214,10 +234,10 @@ td { padding:10px 12px; border-top:1px solid var(--border); }
 </div>
 
 <div class="section" id="hooks">
-<h2>🪝 Hooks <span class="count">51 个</span></h2>
+<h2>🪝 Hooks <span class="count">49 个</span></h2>
 <p style="font-size:12px;color:var(--text-dim);margin-bottom:16px">守护覆盖:安全/质量/记忆/并发/提示/自动归档 · 按文件大小降序</p>
 <div class="hooks-grid" id="hooks-grid">
-<div class="hook-tile"><code>bash-safety-dispatcher.sh</code><span class="sz">6768B</span></div><div class="hook-tile"><code>error-circuit-breaker.sh</code><span class="sz">6624B</span></div><div class="hook-tile"><code>env-sentinel.sh</code><span class="sz">5832B</span></div><div class="hook-tile"><code>direct-connect-guard.sh</code><span class="sz">5720B</span></div><div class="hook-tile"><code>research-standards-guard.sh</code><span class="sz">5251B</span></div><div class="hook-tile"><code>prompt-context-gateway.sh</code><span class="sz">5175B</span></div><div class="hook-tile"><code>llm-judge-completion.sh</code><span class="sz">5135B</span></div><div class="hook-tile"><code>block-dangerous-commands.sh</code><span class="sz">4094B</span></div><div class="hook-tile"><code>user-prompt-task-extractor.sh</code><span class="sz">3645B</span></div><div class="hook-tile"><code>session-state-reader.sh</code><span class="sz">3598B</span></div><div class="hook-tile"><code>auto-closure-detect.sh</code><span class="sz">3484B</span></div><div class="hook-tile"><code>session-context-injector.sh</code><span class="sz">3434B</span></div><div class="hook-tile"><code>serial-bash-circuit.sh</code><span class="sz">3290B</span></div><div class="hook-tile"><code>llm-judge-subagent.sh</code><span class="sz">3207B</span></div><div class="hook-tile"><code>drift-check.sh</code><span class="sz">3148B</span></div><div class="hook-tile"><code>ccswitch-verify-start.sh</code><span class="sz">3106B</span></div><div class="hook-tile"><code>teammate-quality-gate.sh</code><span class="sz">3033B</span></div><div class="hook-tile"><code>config-protection.sh</code><span class="sz">3004B</span></div><div class="hook-tile"><code>error-data-recorder.sh</code><span class="sz">2713B</span></div><div class="hook-tile"><code>stop-dispatcher.sh</code><span class="sz">2693B</span></div><div class="hook-tile"><code>decision-point-guard.sh</code><span class="sz">2621B</span></div><div class="hook-tile"><code>notion-queue-flusher.sh</code><span class="sz">2513B</span></div><div class="hook-tile"><code>no-agent-for-grep.sh</code><span class="sz">2432B</span></div><div class="hook-tile"><code>retrieval-precheck.sh</code><span class="sz">2387B</span></div><div class="hook-tile"><code>official-paradigm-guard.sh</code><span class="sz">2346B</span></div><div class="hook-tile"><code>sessionstart-guard-dispatcher.sh</code><span class="sz">2340B</span></div><div class="hook-tile"><code>smart-recommendation-injector.sh</code><span class="sz">2333B</span></div><div class="hook-tile"><code>behavior-audit-pretool.sh</code><span class="sz">2093B</span></div><div class="hook-tile"><code>session-end.sh</code><span class="sz">2051B</span></div><div class="hook-tile"><code>external-cli-router.sh</code><span class="sz">2006B</span></div><div class="hook-tile"><code>uncertainty-detector.sh</code><span class="sz">1981B</span></div><div class="hook-tile"><code>component-usage-tracker.sh</code><span class="sz">1893B</span></div><div class="hook-tile"><code>user-prompt-submit-confidence.sh</code><span class="sz">1828B</span></div><div class="hook-tile"><code>permission-request-handler.sh</code><span class="sz">1823B</span></div><div class="hook-tile"><code>intent-persistence.sh</code><span class="sz">1789B</span></div><div class="hook-tile"><code>session-touched-recorder.sh</code><span class="sz">1716B</span></div><div class="hook-tile"><code>post-write-scripts-guard.sh</code><span class="sz">1681B</span></div><div class="hook-tile"><code>production-context-guard.sh</code><span class="sz">1675B</span></div><div class="hook-tile"><code>daily-brief-inject.sh</code><span class="sz">1489B</span></div><div class="hook-tile"><code>block-sensitive-files.sh</code><span class="sz">1426B</span></div><div class="hook-tile"><code>stop-failure-monitor.sh</code><span class="sz">1399B</span></div><div class="hook-tile"><code>chinese-language-enforce.sh</code><span class="sz">1370B</span></div><div class="hook-tile"><code>post-bash-token-guard.sh</code><span class="sz">1365B</span></div><div class="hook-tile"><code>precompact-snapshot.sh</code><span class="sz">1314B</span></div><div class="hook-tile"><code>post-compact.sh</code><span class="sz">1149B</span></div><div class="hook-tile"><code>edit-write-dispatcher.sh</code><span class="sz">1127B</span></div><div class="hook-tile"><code>version-change-guard.sh</code><span class="sz">990B</span></div><div class="hook-tile"><code>agent-task-dispatcher.sh</code><span class="sz">965B</span></div><div class="hook-tile"><code>post-write-hooks-guard.sh</code><span class="sz">931B</span></div><div class="hook-tile"><code>two-probe-counter.sh</code><span class="sz">714B</span></div><div class="hook-tile"><code>config-dir.sh</code><span class="sz">360B</span></div></div>
+<div class="hook-tile"><code>bash-safety-dispatcher.sh</code><span class="sz">6988B</span></div><div class="hook-tile"><code>error-circuit-breaker.sh</code><span class="sz">6624B</span></div><div class="hook-tile"><code>env-sentinel.sh</code><span class="sz">5832B</span></div><div class="hook-tile"><code>research-standards-guard.sh</code><span class="sz">5251B</span></div><div class="hook-tile"><code>prompt-context-gateway.sh</code><span class="sz">5175B</span></div><div class="hook-tile"><code>llm-judge-completion.sh</code><span class="sz">5135B</span></div><div class="hook-tile"><code>block-dangerous-commands.sh</code><span class="sz">4334B</span></div><div class="hook-tile"><code>user-prompt-task-extractor.sh</code><span class="sz">3645B</span></div><div class="hook-tile"><code>session-state-reader.sh</code><span class="sz">3598B</span></div><div class="hook-tile"><code>auto-closure-detect.sh</code><span class="sz">3484B</span></div><div class="hook-tile"><code>session-context-injector.sh</code><span class="sz">3434B</span></div><div class="hook-tile"><code>serial-bash-circuit.sh</code><span class="sz">3290B</span></div><div class="hook-tile"><code>llm-judge-subagent.sh</code><span class="sz">3207B</span></div><div class="hook-tile"><code>drift-check.sh</code><span class="sz">3148B</span></div><div class="hook-tile"><code>ccswitch-verify-start.sh</code><span class="sz">3106B</span></div><div class="hook-tile"><code>teammate-quality-gate.sh</code><span class="sz">3033B</span></div><div class="hook-tile"><code>config-protection.sh</code><span class="sz">3004B</span></div><div class="hook-tile"><code>error-data-recorder.sh</code><span class="sz">2713B</span></div><div class="hook-tile"><code>stop-dispatcher.sh</code><span class="sz">2693B</span></div><div class="hook-tile"><code>decision-point-guard.sh</code><span class="sz">2621B</span></div><div class="hook-tile"><code>notion-queue-flusher.sh</code><span class="sz">2513B</span></div><div class="hook-tile"><code>no-agent-for-grep.sh</code><span class="sz">2432B</span></div><div class="hook-tile"><code>retrieval-precheck.sh</code><span class="sz">2387B</span></div><div class="hook-tile"><code>sessionstart-guard-dispatcher.sh</code><span class="sz">2361B</span></div><div class="hook-tile"><code>official-paradigm-guard.sh</code><span class="sz">2346B</span></div><div class="hook-tile"><code>smart-recommendation-injector.sh</code><span class="sz">2333B</span></div><div class="hook-tile"><code>behavior-audit-pretool.sh</code><span class="sz">2093B</span></div><div class="hook-tile"><code>permission-request-handler.sh</code><span class="sz">2086B</span></div><div class="hook-tile"><code>session-end.sh</code><span class="sz">2051B</span></div><div class="hook-tile"><code>external-cli-router.sh</code><span class="sz">2006B</span></div><div class="hook-tile"><code>uncertainty-detector.sh</code><span class="sz">1981B</span></div><div class="hook-tile"><code>component-usage-tracker.sh</code><span class="sz">1893B</span></div><div class="hook-tile"><code>user-prompt-submit-confidence.sh</code><span class="sz">1828B</span></div><div class="hook-tile"><code>intent-persistence.sh</code><span class="sz">1789B</span></div><div class="hook-tile"><code>session-touched-recorder.sh</code><span class="sz">1716B</span></div><div class="hook-tile"><code>post-write-scripts-guard.sh</code><span class="sz">1681B</span></div><div class="hook-tile"><code>daily-brief-inject.sh</code><span class="sz">1489B</span></div><div class="hook-tile"><code>block-sensitive-files.sh</code><span class="sz">1426B</span></div><div class="hook-tile"><code>stop-failure-monitor.sh</code><span class="sz">1399B</span></div><div class="hook-tile"><code>chinese-language-enforce.sh</code><span class="sz">1370B</span></div><div class="hook-tile"><code>post-bash-token-guard.sh</code><span class="sz">1365B</span></div><div class="hook-tile"><code>precompact-snapshot.sh</code><span class="sz">1314B</span></div><div class="hook-tile"><code>post-compact.sh</code><span class="sz">1149B</span></div><div class="hook-tile"><code>edit-write-dispatcher.sh</code><span class="sz">1127B</span></div><div class="hook-tile"><code>version-change-guard.sh</code><span class="sz">990B</span></div><div class="hook-tile"><code>agent-task-dispatcher.sh</code><span class="sz">965B</span></div><div class="hook-tile"><code>post-write-hooks-guard.sh</code><span class="sz">931B</span></div><div class="hook-tile"><code>two-probe-counter.sh</code><span class="sz">714B</span></div><div class="hook-tile"><code>config-dir.sh</code><span class="sz">360B</span></div></div>
 <div style="margin-top:16px;font-size:12px;color:var(--text-dim)">
   📌 完整列表：<code>ls ~/.claude/hooks/*.sh | wc -l</code> · 守护覆盖：安全/质量/记忆/并发/提示/自动归档
 </div>
@@ -243,7 +263,7 @@ td { padding:10px 12px; border-top:1px solid var(--border); }
 </div>
 
 <div class="footer">
-  ⚙️ MYCC 配置全景 · 数据自动拉取于 2026-06-25 21:20 ·
+  ⚙️ MYCC 配置全景 · 数据自动拉取于 2026-06-25 23:13 ·
   <a href="dashboard.html">主仪表盘</a> ·
   <a href="start-here.md">start-here 索引</a>
 </div>

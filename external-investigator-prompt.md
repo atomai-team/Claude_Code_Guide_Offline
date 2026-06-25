@@ -1,0 +1,1 @@
+/Users/williammacst/.claude/docs/external-investigator-prompt.md

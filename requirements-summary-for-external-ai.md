@@ -1,0 +1,1 @@
+/Users/williammacst/.claude/docs/requirements-summary-for-external-ai.md

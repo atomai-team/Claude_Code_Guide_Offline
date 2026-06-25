@@ -1,0 +1,1 @@
+/Users/williammacst/.claude/docs/external-intel-prompt-v7.md
