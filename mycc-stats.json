@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25T07:36:49.885497Z",
+  "generated_at": "2026-06-25T08:01:23.686713Z",
   "version": {
     "claude_code": "2.1.191 (Claude Code)",
     "omc": "4.15.0",
@@ -7,7 +7,7 @@
     "cc_switch": "ON"
   },
   "counts": {
-    "skills": 149,
+    "skills": 150,
     "workflows": 13,
     "hooks_registered": 53,
     "hook_events": 14,
@@ -21,7 +21,7 @@
     "enabled_plugins": 0,
     "total_plugins": 51,
     "rules": 3,
-    "intent_words_routes": 93,
+    "intent_words_routes": 94,
     "external_clis": 3
   },
   "lists": {
@@ -263,6 +263,17 @@
           "外部学习",
           "全球对比",
           "对比社区"
+        ]
+      },
+      {
+        "name": "memory_checkup_route",
+        "priority": 81,
+        "keywords": [
+          "记忆体检",
+          "清记忆",
+          "记忆卫生",
+          "归档孤儿记忆",
+          "记忆碎片清理"
         ]
       },
       {
@@ -673,6 +684,19 @@
           "外部学习",
           "全球对比",
           "对比社区"
+        ],
+        "target": ""
+      },
+      {
+        "name": "memory_checkup_route",
+        "priority": 81,
+        "keywords": [
+          "记忆体检",
+          "清记忆",
+          "记忆卫生",
+          "归档孤儿记忆",
+          "记忆碎片清理",
+          "记忆健康检查"
         ],
         "target": ""
       },
@@ -1599,6 +1623,7 @@
       "last30days": "Research what people actually say about any topic in the last 30 days. Pulls posts and engagement from Reddit, X, YouTube, TikTok, Hacker News, Polymarket, GitHub, and the web.",
       "macos-automation": "macOS 桌面自动化——操作Finder/系统设置/截图/AppleScript/Shortcuts。触发词：打开应用、截图、系统设置、mac控制、桌面操作。",
       "marketing": "营销活动完整流水线 — SEO+推广+邮件+合规+KPI+多平台发布。说\"做营销/营销活动/推广/SEO\"触发",
+      "memory-checkup": "记忆体检 — gated 自动化第 2 样板(记忆卫生链)。口语触发→只读诊断记忆完整率/孤儿碎片→改动前 HITL 确认→归档→复核。触发词：记忆体检/清记忆/记忆卫生/归档孤儿记忆/记忆碎片清理/记忆健康检查。复用 lib/memory-index-check.sh + lib/memory-orphan-triage.py,对齐 gated 范式(do",
       "memory-dream-consolidation": "Dream Consolidation（记忆整合）：后台定期清理重复、冲突、过期的记忆。灵感来自 Claude Code autoDream。触发词：记忆清理、dream consolidation、记忆整合、清理记忆",
       "mmx-cli": "Use mmx to generate text, images, video, speech, and music via the MiniMax AI platform. Use when the user wants to create media content, chat with MiniMax models, perform web searc",
       "mycc-selfheal": "Load when 用户说:自检/自愈/冲突修复/skill碰撞/重复skill/清重复/配置漂移/doctor修复/哪些skill重复了/重名冲突怎么清. Load when omc doctor reports skill conflicts or user wants to clean duplicate/legacy skills between ~",
@@ -1806,6 +1831,7 @@
         "gstack-review",
         "interview-me",
         "last30days",
+        "memory-checkup",
         "memory-dream-consolidation",
         "prototype",
         "ra-qm-team",
