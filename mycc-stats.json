@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25T07:28:38.750523Z",
+  "generated_at": "2026-06-25T07:34:34.343354Z",
   "version": {
     "claude_code": "2.1.191 (Claude Code)",
     "omc": "4.15.0",
@@ -7,7 +7,7 @@
     "cc_switch": "ON"
   },
   "counts": {
-    "skills": 148,
+    "skills": 149,
     "workflows": 13,
     "hooks_registered": 53,
     "hook_events": 14,
@@ -21,7 +21,7 @@
     "enabled_plugins": 0,
     "total_plugins": 51,
     "rules": 3,
-    "intent_words_routes": 92,
+    "intent_words_routes": 93,
     "external_clis": 3
   },
   "lists": {
@@ -170,6 +170,17 @@
           "跨境数据合规",
           "数据本地化",
           "出海数据合规"
+        ]
+      },
+      {
+        "name": "full_checkup_route",
+        "priority": 83,
+        "keywords": [
+          "全面体检",
+          "系统体检",
+          "三连体检",
+          "给系统做个体检",
+          "体检一下"
         ]
       },
       {
@@ -554,6 +565,19 @@
           "跨境数据合规",
           "数据本地化",
           "出海数据合规"
+        ],
+        "target": ""
+      },
+      {
+        "name": "full_checkup_route",
+        "priority": 83,
+        "keywords": [
+          "全面体检",
+          "系统体检",
+          "三连体检",
+          "给系统做个体检",
+          "体检一下",
+          "checkup"
         ],
         "target": ""
       },
@@ -1550,6 +1574,7 @@
       "ecc-tdd-workflow": "Use this skill when writing new features, fixing bugs, or refactoring code. Enforces test-driven development with 80%+ coverage including unit, integration, and E2E tests.",
       "eng-experts": "工程化专家团队口语翻译层 — 把\"卡帕西/资深 dev/架构师\"等口语关键词路由到 ~/.claude/agents/ 下 3 个工程化 expert agent（karpathy-discipline-expert / senior-developer-mindset / architect）。当用户说卡帕西/Karpathy/严格审查/资深 dev/架构",
       "engineering-scenario-router": "工程化场景智能路由器。把口语意图路由到正确的 skill/agent（工程化/卡帕西/架构师/开工/排查/梳理/收口/deep-interview/ultrawork/ultraqa/ultragoal/ralph/autopilot/team/走1/活力全开 等 30+ 触发词），并按风险档（execution_path）自动选执行路径。调前透明（先报\"我",
+      "full-checkup": "全面体检 — gated 自动化样板：口语触发→只读诊断自动跑→改配置前 HITL 确认→修复→复核。触发词：全面体检/系统体检/三连体检/给系统做个体检/体检一下/checkup/全面检查并修复。对齐 Claude 官方 plan-mode(只读先行)+ omc-hitl(人确认门),把 audit→better→harness 串成'诊断不需你管、改动必",
       "gh-ci-fix": "GitHub PR 的 CI 检查红灯时，定位失败→拉 Actions 日志→诊断根因→给修复计划(需批准)→实施→回验的闭环。纯 gh 原生命令(无脚本依赖)。仅处理 GitHub Actions，外部 provider(Buildkite等)只报 URL 不接管。触发词：CI失败/PR检查红灯/fix ci/CI红了/check failed/Actio",
       "graphify": "any input (code, docs, papers, images, videos) to knowledge graph. Use when user asks any question about a codebase, documents, or project content - especially if graphify-out/ exi",
       "grill-me": "Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan, g",
@@ -1770,6 +1795,7 @@
         "ecc-parallel-execution-optimizer",
         "eng-experts",
         "engineering-scenario-router",
+        "full-checkup",
         "gstack-careful",
         "gstack-cso",
         "gstack-freeze",
