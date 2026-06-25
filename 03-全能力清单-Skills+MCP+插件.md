@@ -1,10 +1,10 @@
 # Claude Code 全能力清单
-> Skills × 144 · Agents × 38 · Hooks × 47 · 插件 × 10/58 · MCP × 12+ · 外部 CLI × 6
-> OMC 4.14.7 · CLI v2.1.185 · 2026-06-22 完整版
+> Skills × 148 · Agents × 52 · Hooks × 53(50文件) · 插件 × 32启用/35总 · MCP × 12+ · 外部 CLI × 5联
+> OMC 4.15.0 · CLI v2.1.191 · 2026-06-25 完整版（mycc-stats 实测）
 
 ---
 
-## 第一部分：144 个 Skills 完整分类说明
+## 第一部分：148 个 Skills 完整分类说明
 
 ### 🚀 执行与工作模式（核心驱动）
 
@@ -55,7 +55,6 @@
 | **deep-interview** | 说"deep interview" 或 `/deep-interview` | 深度访谈，挖掘真实需求和痛点 |
 | **interview-me** | `/interview-me` | 模拟面试，准备技术/产品/融资面谈 |
 | **web-access** | `/web-access` | 直接访问网页内容 |
-| **autoresearch** | `/autoresearch` | 自动选择最优调研策略 |
 
 ---
 
@@ -203,7 +202,7 @@
 | Skill | 触发方式 | 说明 |
 |---|---|---|
 | **remember:remember** | `/remember:remember` | 保存重要信息到持久记忆（7天/永久两级）|
-| **wiki** | `/wiki` 或 `/oh-my-claudecode:wiki` | 知识库管理（797页 wiki 的查询/更新）|
+| **wiki** | `/wiki` 或 `/oh-my-claudecode:wiki` | 知识库管理（wiki 的查询/更新）|
 | **notion-knowledge-capture** | `/notion-knowledge-capture` | 将洞察直接保存到 Notion |
 | **notion-spec-to-implementation** | `/notion-spec-to-implementation` | Notion 需求文档→代码实现 |
 | **obsidian-vault** | `/obsidian-vault` | Obsidian 知识库操作 |
@@ -274,6 +273,207 @@
 
 ---
 
+## 🆕 最新工程化能力（2026-06 新增）
+
+### 异构对抗 ai-panel（5联外部 CLI）
+
+多模型并发对抗验证，破解同源盲点，节省 Claude 主力 token：
+
+| CLI | 状态 | 说明 |
+|---|---|---|
+| **kimi** | 自动 | Kimi K2 / 256K 上下文，中文长文档、竞品分析 |
+| **mmx** | 自动 | MiniMax-M3 1M，中文创作+对话优化 |
+| **qwen** | 自动 | 通义千问，中文推理+代码 |
+| **opencode** | 自动 | Volcengine，代码专项 |
+| **mavis** | 自动 | 多模态视觉分析 |
+
+```bash
+# 单模型调用
+~/.claude/scripts/ai-panel.sh "评估这个商业计划" kimi
+
+# 5联异构对抗（ai-panel 入口，唯一稳定调用方式）
+~/.claude/scripts/ai-panel.sh "分析这个架构方案"
+```
+
+典型场景：方案评审前的多视角反驳、升级决策前的独立校验、调研结论的对抗确认。
+
+---
+
+### self-evolve-loop — 自我进化闭环
+
+`/self-evolve-loop` 触发四阶段飞轮：
+
+1. **Scope** — 扫描会话错误+社区新实践，确定进化范围
+2. **Optimize** — 生成改进候选（skill/hook/rule 修改建议）
+3. **Evaluate** — 独立 evaluator 打分，≥阈值才落地
+4. **Land** — 写入文件+git commit+memory 更新
+
+含异构对抗节点：evaluator 阶段触发 ai-panel 做独立评分，防止自我强化偏见。
+
+---
+
+### ceo-pipeline — 战略编排流水线
+
+6 阶段商业分析 Workflow，含异构对抗节点：
+
+```
+市场分析 → 竞品矩阵 → 产品定位 → 财务建模 → 风险评估 → 路线图
+         ↑                                               ↑
+    ai-panel 5联验证                              ai-panel 裁决
+```
+
+输出：执行级战略备忘录 + 数据支撑的决策矩阵。
+
+---
+
+### automation-reality-check.py — 自动化虚假健康检测
+
+检测"看起来在跑但实际没效果"的 false-green 问题：
+
+- Hook 注册了但脚本无 +x 权限（接线病 Form 1）
+- 脚本在 `~/.claude/scripts/` 但未软链到 PATH（接线病 Form 2）
+- Hook 命令路径用 `$HOME` 变量而非绝对路径（接线病 Form 3）
+- LaunchAgent plist 存在但未 load（定时任务沉睡）
+- Mock 测试全绿但真实链路断路
+
+```bash
+python3 ~/.claude/scripts/automation-reality-check.py
+```
+
+---
+
+### 多层记忆体系
+
+| 层级 | 位置 | 内容 | 规模 |
+|---|---|---|---|
+| L1 即时记忆 | 会话上下文 | 当前对话内容 | session 级 |
+| L2 项目记忆 | `MEMORY.md` 索引 | 关键决策/能力指针/规则摘要 | ~200 条目 |
+| L3 知识归档 | `memory-archive-index.md` | 历史 session 摘要/评估记录/低频条目 | 分层存储 |
+| L4 知识图谱 | `.omc/wiki/` | 1526 个 wiki 文件，历史 session + 架构图 | 结构化检索 |
+
+记忆完整率监控：`memory-index-check` 脚本定期扫描，当前状态 **100% GREEN**（所有 MEMORY.md 引用的文件均存在）。
+
+auto-memory 系统（OMC v2.1.59+ 官方）接管 `memory/` 目录，SSoT 为 `MEMORY.md`。
+
+---
+
+### smoke-tests.sh + auto-rollback.sh — 冒烟测试与自动回滚
+
+**smoke-tests.sh**（5项冒烟，每次升级后自动触发）：
+
+| 测试项 | 验证内容 |
+|---|---|
+| Claude CLI 响应 | `claude --version` 返回有效版本号 |
+| OMC 基础加载 | smart-flow-all 路由可解析 |
+| Hook 注册健康 | 53 个 hook 均有 +x 权限 |
+| 记忆完整率 | MEMORY.md 引用文件 100% 存在 |
+| 外部 CLI 可达 | 5联 CLI 至少 3 个响应正常 |
+
+**auto-rollback.sh**（cleanroom 体系）：
+
+```bash
+# 升级前自动快照（存 ~/.claude-cleanroom-YYYYMMDD-HHMMSS/）
+~/.claude/bin/cleanroom-precheck.sh
+
+# 出错时 30 秒内回滚
+~/.claude/bin/auto-rollback.sh --to latest-snapshot
+```
+
+任何"清理/删除/瘦身"操作前必跑 `cleanroom-precheck.sh` 6步检查（rsync snapshot + git baseline + 4 detector），全部 OK 才动真实环境。
+
+---
+
+### Orchestrator 3组件 — 多 session 工程化协作
+
+**组件 1：多 session 状态管理**
+- `.omc/state/sessions/{sessionId}/` 存储每个 session 的上下文快照
+- `project-session-manager` skill 跨 session 续接任务
+- handoff 文档标准化：目标/进度/阻塞/下一步四段式
+
+**组件 2：智能路由（92 条意图词）**
+- 意图词从 59 条扩展至 92 条（W3 2026-06-22）
+- 6 → 33 路由词覆盖（session 2026-06-25 实测）
+- 优先级路由：队长(95) > 活力全开(95) > CEO决策(88) > 综合升级(86) > 智能流(85)
+
+**组件 3：提示词优化**
+- 动态注入上下文（用户画像 + 当前任务 + 历史决策）
+- 反讽刺铁律自动检查（R1-R5 五条规则内化为行为层）
+- 自动截断过长提示词，防 token 超额
+
+---
+
+### 风险分级 L0-L3 + verify-before-assert 铁律
+
+**操作风险分级**（3问定档）：
+
+| 档 | 触发条件 | 动作 |
+|---|---|---|
+| **L0** | 1-2 文件 + 可撤 + 不碰 config/hook | 直做+报告 |
+| **L1** | ≤5 文件 + 可撤 + 不碰 config/hook | 验证+clean 自动 commit（不 push）|
+| **L2** | 6-20 文件 / push / Notion | 一句话简报即开 |
+| **L3** | 不可逆 / 碰 settings/hook/cron / 架构 / security | plan+确认+ai-panel |
+
+3问：① 可逆？② 碰 config/hook？③ ≤5 文件？
+
+**verify-before-assert 铁律**（铁律 8，Karpathy 5 原则之一）：
+- 事实断言前必先查验，禁推测下结论
+- 输出分已验证/[未验证] 两类标注
+- LLM 模型能力/价格断言前必查 models.dev + 官方 docs
+- `uncertainty-detector.sh` hook 自动扫描高置信度推测性断言
+
+**Writer ≠ Reviewer 原则**（铁律 10）：
+- 写作 pass 和审查 pass 必须分离到不同 agent 或不同 context
+- 禁止同一 context 内自写自批
+- 审查入口：`/gstack-review`、`/code-review`、`verifier` agent
+
+---
+
+### WBS 工程化排期 + capability-activation-map
+
+**WBS 工程化排期**（`docs/plan/wbs-engineering-rollout-2026-06-24.md`）：
+
+- 188 行详细排期，覆盖 29 个行动项
+- Top 10 优先级 + 5联裁决结果
+- 每项含：负责角色 / 验收标准 / 回滚方案 / 预估工时
+
+**capability-activation-map（5大智能脑）**：
+
+| 智能脑 | 核心能力 | 激活条件 |
+|---|---|---|
+| **主调度器** | 意图识别 + 92词路由 + 风险分级 | 默认激活 |
+| **异构对抗脑** | ai-panel 5联 + 交叉验证 | 方案评审/升级决策时触发 |
+| **记忆脑** | auto-memory 200条 + wiki 1526页 | 涉及历史决策/配置时自动查 |
+| **进化脑** | self-evolve-loop + omc-skill-health | 月度自动 + 手动触发 |
+| **代码脑** | codebase-memory MCP + serena + understand-anything | 代码库理解任务时激活 |
+
+headroom MCP Server 为休眠状态（P0 激活后可用，参见 `docs/local-reference.md`）。
+
+---
+
+### cleanroom 快照备份/回滚体系
+
+```
+升级前自动快照
+    ↓
+~/.claude-cleanroom-YYYYMMDD-HHMMSS/
+    ├── .claude/（完整备份）
+    ├── settings.json（单独备份）
+    └── manifest.json（快照元数据）
+    ↓
+cleanroom-precheck.sh 6步检查：
+① rsync snapshot（30秒内可回滚）
+② git baseline（工作树干净）
+③ orphan plugin detector（无孤儿插件）
+④ orphan hook detector（无孤儿 hook）
+⑤ CLAUDE.md drift check（无未记录变更）
+⑥ settings drift check（防配置四类防改规则违反）
+    ↓
+全部 OK → 动真实环境
+任一失败 → 阻断 + 报告
+```
+
+---
+
 ## 第二部分：MCP 服务器完整说明
 
 ### 通过 settings.local.json 配置的 MCP
@@ -315,7 +515,7 @@
 | **code-review-graph** | 知识图谱代码审查 | 代码结构理解、影响分析 |
 | **memory** | 知识图谱记忆 | 实体关系记忆 |
 | **sequential-thinking** | 结构化推理链 | 复杂问题分步推理 |
-| **qmd** | 本地 Markdown 搜索（264页）| 查本地知识库、规则 |
+| **qmd** | 本地 Markdown 搜索（2058 文件）| 查本地知识库、规则 |
 | **Fellow.ai** | AI 会议助手 | 会议记录、行动项提取 |
 | **Gmail** | Gmail 操作 | 搜索/标记/草稿邮件 |
 | **Google Calendar** | 日历操作 | 查看/创建日程 |
@@ -325,18 +525,22 @@
 
 ## 第三部分：插件（Plugins）说明
 
+> 当前状态：35 总插件（32 启用 + 3 禁用），mycc-stats 2026-06-25 实测。
+
 ### oh-my-claudecode（OMC）
 **核心插件，提供整套 OMC 能力**
-- Skills: **144** 原生 skill
-- Hooks: **49** 自动守护钩子
-- Workflows: **15** 个 JS 流水线脚本
+- Skills: **148** 原生 skill
+- Hooks: **53** 自动守护钩子（50 个 hook 文件，14 个 hook 事件类型）
+- Workflows: **13** 个 JS 流水线脚本
 - MCP Tools: wiki/notepad/state/LSP/shared-memory 等
-- Agents: **39** 角色（含多领域专家 + 团队蓝图）
+- Agents: **52** 角色（核心6 + CEO角色12 + 行业专家7 + 团队蓝图6 + 通用21）
+- 意图路由: **92 条**词触发规则
 
 ### claude-hud
 **实时状态显示 HUD**
-- 显示：当前模型/token 使用/session 状态/git 分支
+- 显示：当前模型/token 使用/session 状态/git 分支/CC Switch provider
 - 配置：`/claude-hud:setup`
+- 真实配置文件：`~/.claude/plugins/claude-hud/config.json`（非 settings.json）
 
 ### Marketplace 插件（按需安装）
 
@@ -355,41 +559,82 @@
 
 ---
 
-## 第四部分：外部 AI CLI
+## 第四部分：外部 AI CLI（5 联异构对抗）
 
 | CLI | 状态 | 模型 | 最佳用途 |
 |---|---|---|---|
-| **gemini** | ✅ 在线 | Gemini 2.0 Flash | 快速调研、多模态、Google 搜索集成 |
-| **kimi** | ✅ 在线 | Kimi k1.5 | 256K 超长文档处理、中文内容 |
-| **mmx** | ✅ 在线 | MiniMax | 中文创作、对话优化 |
-| **opencode** | ⚠️ 订阅过期 | volcengine | 代码专项（续订后启用）|
+| **kimi** | 自动（5联默认）| Kimi K2 / 256K | 中文长文档处理、竞品研报 |
+| **mmx** | 自动（5联默认）| MiniMax-M3 1M | 中文创作、对话优化 |
+| **qwen** | 自动（5联默认）| 通义千问 | 中文推理、代码理解 |
+| **opencode** | 自动（5联默认）| Volcengine | 代码专项（续订后全力）|
+| **mavis** | 自动（5联默认）| 多模态 | 视觉分析、截图解读 |
+| **codex** | 手动（非自动）| OpenAI Codex | 对比验证（手动触发）|
+
+> 注：gemini 已退役（2026-06-22），kimi 实测后端走 MiniMax-M3 而非 Moonshot K1.5，带 `[1M]` 后缀才能解锁 1M 上下文。
 
 调用方式：
 ```bash
-# 单模型
-scripts/ai-cli.sh gemini "分析这份竞品报告"
-scripts/ai-cli.sh kimi "帮我处理这 200 页 PDF"
+# 唯一稳定入口：positional arg（非 pipe 非 flag）
+~/.claude/scripts/ai-panel.sh "评估这份竞品分析" kimi mmx qwen
 
-# 多模型并发对抗验证（烧外部 API 额度，省 Claude token）
-scripts/ai-panel.sh "评估这个商业计划书" gemini kimi mmx
+# 5联默认并发对抗（省 Claude token，外部 API 额度）
+~/.claude/scripts/ai-panel.sh "这个架构方案有没有致命缺陷？"
 ```
 
 ---
 
-## 第五部分：Workflow 脚本（10个）
+## 第五部分：Workflow 脚本（13个）
 
 | Workflow | 核心能力 | 阶段数 |
 |---|---|---|
+| **/boardroom** | 董事会汇报准备（含财务/风险/路线图）| 3 |
 | **/bughunt** | 全库 bug 猎捕（parallel finder → adversarial verify）| 2 |
 | **/ceo-pipeline** | 商业分析 6 阶段（市场→竞品→产品→财务→风险→路线图）| 6 |
 | **/code-review** | 多维代码审查（bugs/perf/security → verify）| 2 |
+| **/comprehensive-upgrade** | 综合升级流水线（全层 audit + apply + verify）| 5 |
 | **/config-audit-better** | 配置健康审计（30维 → P0自动修）| 3 |
+| **/dev-pipeline** | 开发流水线（spec→scaffold→impl→test→review→deploy）| 6 |
 | **/domain-audit-better** | 领域专项深度审计 | 4 |
+| **/fundraising** | 融资准备（BP + 财务模型 + 投资人 FAQ）| 4 |
 | **/harness-audit** | Harness 六层评分（L1-L6 量化）| 2 |
 | **/judge-panel** | 多视角评审面板（N维 judge → 综合裁决）| 2 |
 | **/n-step-pipeline** | N步自定义流水线（args 驱动）| N |
+| **/overseas-compliance** | 出海合规（法务+牌照+数据保护+支付）| 4 |
 | **/self-evolve-loop** | 自我进化闭环（scope→optimize→evaluate→land）| 4 |
 | **/v29-deep-research** | 深度多渠道调研（web抓取→合成→报告）| 3 |
+
+> 注：mycc-stats 显示 13 个 workflow，上表含所有已注册条目。
+
+---
+
+## 第六部分：定时任务体系
+
+### LaunchAgents（13 个 plist）
+
+| plist | 触发周期 | 任务 |
+|---|---|---|
+| com.mycc.auto-commit | 每日 23:00 | 自动提交 myclaude-test 仓库 |
+| com.mycc.daily-external-scanner | 每日 | 扫描外部 repo/社区新能力 |
+| com.mycc.drift-check | 每日 | 配置漂移检查（settings+CLAUDE.md）|
+| com.mycc.memory-compact | 每日 | 记忆整合压缩 |
+| com.mycc.memory-health | 每日 | 记忆完整率检查（100% GREEN 目标）|
+| com.mycc.monthly-expert-check | 每月 | 专家团队健康度评估 |
+| com.mycc.monthly-skill-audit | 每月 | skill 存活+触发率审计 |
+| com.mycc.snapshot | 每日 | cleanroom 快照备份 |
+| com.user.claude-daily-brief | 每日 | 日报生成（今日任务+待办+状态）|
+| com.user.claude-external-research | 每周 | 外部调研采集 |
+| com.user.claude-monthly-evolution | 每月 | 月度进化扫描+建议 |
+| com.user.claude-secretary | 每日 | 秘书任务（日程+提醒+归档）|
+| *(第13个 LaunchAgent)* | 按需 | 参见 docs/scheduled-tasks.md |
+
+### Cron 任务（2 个）
+
+| cron 表达式 | 任务 |
+|---|---|
+| `0 3 * * 1`（每周一凌晨3点）| certbot renew（SSL 证书续期）|
+| `0 21 * * 0`（每周日晚9点）| weekly-cron-orchestrator-clean.sh（周进化闭环）|
+
+> SSoT：`~/.claude/docs/scheduled-tasks.md`。定时任务相关操作前必查。
 
 ---
 
@@ -413,10 +658,13 @@ scripts/ai-panel.sh "评估这个商业计划书" gemini kimi mmx
 
 > **如何查阅完整规范**：
 > - `cat ~/.claude/rules/mycc-core.md` （唯一规则 SSoT：12 铁律 + 12 行为规则 R1-R12 + 4 步工作流）
+> - `cat ~/.claude/docs/capability-activation-map.md`（5大智能脑激活地图）
+> - `cat ~/.claude/docs/wbs-engineering-rollout-2026-06-24.md`（工程化排期 WBS）
 > - 注：W4（2026-06-22）精简后，原 iron-laws / loop-worth-building-gate / quarantine / auto-learned-rules 等多文件已合并入 `mycc-core.md` 单文件
 
-*本节能力现已合并入 `rules/mycc-core.md`（OMC 4.14.7 · W4 精简）；保留原 V52 系列升级记录。*
+*本节能力现已合并入 `rules/mycc-core.md`（OMC 4.15.0 · W4 精简）；保留原 V52 系列升级记录。*
 
 ---
 
-*全能力清单更新：2026-06-23 | Skills: 144 · MCP: 12+ · Plugins: 0 · Workflows: 15 · Hooks: 49 · Agents: 39*
+最后更新：2026-06-25 · 数字经 mycc-stats 实测
+*全能力清单：Skills: 148 · Agents: 52 · Hooks: 53(50文件) · Workflows: 13 · LaunchAgents: 13 · Cron: 2 · 插件启用/总: 32/35 · 外部CLI: 5联*
