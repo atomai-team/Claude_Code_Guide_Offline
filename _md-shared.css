@@ -1,6 +1,7 @@
-/* ═══════ MD→HTML 渲染共享样式 · CLAUDE NATIVE DESIGN(暖米底+黏土橘+衬线标题)═══════ */
+/* ═══════ MD→HTML 渲染共享样式 · CLAUDE NATIVE DESIGN(暖米底+黏土橘+衬线标题)═══════
+   全站默认亮色(去 dark 块;darker 仅 dashboard 手动切换) */
 :root {
-  color-scheme: light;
+  color-scheme: light only;
   --bg: #faf9f5; --bg-subtle: #f0eee6; --surface: #ffffff; --surface2: #f7f5ef; --surface-hover: #f0eee6;
   --border: #e6e1d6; --border-strong: #d8d2c4; --code-bg: #f0eee6; --tag-bg: #f0eee6;
   --text: #1f1e1d; --text-dim: #595650; --text-muted: #8a857b;
@@ -11,16 +12,6 @@
   --font-display: 'Fraunces','Noto Serif SC',Georgia,serif;
   --font-sans: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
   --font-mono: 'JetBrains Mono','SF Mono','Fira Code',Menlo,monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --bg: #262624; --bg-subtle: #1f1e1d; --surface: #30302e; --surface2: #353432; --surface-hover: #3a3937;
-    --border: #423f3a; --border-strong: #54504a; --code-bg: #1f1e1d;
-    --text: #f5f3ec; --text-dim: #c4bfb4; --text-muted: #918b80;
-    --accent: #e08a6a; --accent-hover: #e89c80; --accent-bright: #d97757; --accent-soft: rgba(217,119,87,0.16);
-    --green: #6cc189; --red: #e08576; --orange: #e0a667; --purple: #b79de0;
-  }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }

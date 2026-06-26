@@ -7,9 +7,10 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📘%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,560;9..144,600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
 <style>
-/* ═══════ MD→HTML 渲染共享样式 · CLAUDE NATIVE DESIGN(暖米底+黏土橘+衬线标题)═══════ */
+/* ═══════ MD→HTML 渲染共享样式 · CLAUDE NATIVE DESIGN(暖米底+黏土橘+衬线标题)═══════
+   全站默认亮色(去掉 prefers-color-scheme dark 块;darker 模式仅 dashboard 保留手动切换) */
 :root {
-  color-scheme: light;
+  color-scheme: light only;
   --bg: #faf9f5; --bg-subtle: #f0eee6; --surface: #ffffff; --surface2: #f7f5ef; --surface-hover: #f0eee6;
   --border: #e6e1d6; --border-strong: #d8d2c4; --code-bg: #f0eee6; --tag-bg: #f0eee6;
   --text: #1f1e1d; --text-dim: #595650; --text-muted: #8a857b;
@@ -20,16 +21,6 @@
   --font-display: 'Fraunces','Noto Serif SC',Georgia,serif;
   --font-sans: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
   --font-mono: 'JetBrains Mono','SF Mono','Fira Code',Menlo,monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --bg: #262624; --bg-subtle: #1f1e1d; --surface: #30302e; --surface2: #353432; --surface-hover: #3a3937;
-    --border: #423f3a; --border-strong: #54504a; --code-bg: #1f1e1d;
-    --text: #f5f3ec; --text-dim: #c4bfb4; --text-muted: #918b80;
-    --accent: #e08a6a; --accent-hover: #e89c80; --accent-bright: #d97757; --accent-soft: rgba(217,119,87,0.16);
-    --green: #6cc189; --red: #e08576; --orange: #e0a667; --purple: #b79de0;
-  }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -91,7 +82,7 @@ em { font-style: italic; color: var(--text-dim); }
 <body>
 <div class="doc-header">
   <a href="dashboard.html" class="back">← 返回 MYCC 仪表盘</a>
-  <span class="meta">渲染时间 2026-06-26 12:42 · 源: 04-CMMI配置文档-PM专业版.md</span>
+  <span class="meta">渲染时间 2026-06-26 13:05 · 源: 04-CMMI配置文档-PM专业版.md</span>
 </div>
 <h1 id="claude-code-pm">Claude Code 专业 PM 配置文档</h1>
 <h2 id="cmmi-level-3">CMMI Level 3 格式 · 完整配置方案说明</h2>

@@ -7,9 +7,10 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E⚙️%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,560;9..144,600&family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
 <style>
-/* CLAUDE NATIVE DESIGN · 暖米底 + 黏土橘 + 衬线标题(Fraunces) */
+/* CLAUDE NATIVE DESIGN · 暖米底 + 黏土橘 + 衬线标题(Fraunces)
+   全站默认亮色;dashboard.html 保留手动切换,此页固定亮 */
 :root {
-  color-scheme: light;
+  color-scheme: light only;
   --bg: #faf9f5; --bg-subtle: #f0eee6; --surface: #ffffff; --surface2: #f7f5ef; --surface-hover: #f0eee6;
   --border: #e6e1d6; --border-strong: #d8d2c4; --code-bg: #f0eee6;
   --text: #1f1e1d; --text-dim: #595650; --text-muted: #8a857b;
@@ -21,16 +22,6 @@
   --font-display: 'Fraunces','Noto Serif SC',Georgia,serif;
   --font-sans: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
   --font-mono: 'JetBrains Mono','SF Mono','Fira Code',Menlo,monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --bg: #262624; --bg-subtle: #1f1e1d; --surface: #30302e; --surface2: #353432; --surface-hover: #3a3937;
-    --border: #423f3a; --border-strong: #54504a; --code-bg: #1f1e1d;
-    --text: #f5f3ec; --text-dim: #c4bfb4; --text-muted: #918b80;
-    --accent: #e08a6a; --accent-hover: #e89c80; --accent-bright: #d97757; --accent-soft: rgba(217,119,87,0.16); --accent2: #6cbccb; --accent3: #6cc189;
-    --green: #6cc189; --red: #e08576; --orange: #e0a667; --purple: #b79de0;
-  }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -107,7 +98,7 @@ td { padding:10px 12px; border-top:1px solid var(--border); word-break:break-wor
 
 <h1>⚙️ MYCC 配置全景</h1>
 <div class="subtitle">
-  <span>数据自动拉取自 <code>~/.claude/</code> · 生成时间 2026-06-26 12:18</span>
+  <span>数据自动拉取自 <code>~/.claude/</code> · 生成时间 2026-06-26 13:05</span>
   <a href="dashboard.html" class="back">← 返回主仪表盘</a>
   <div class="search-wrap">
     <input type="search" id="skill-search" placeholder="🔍 搜索 skills/agents/hooks..." />
@@ -128,7 +119,7 @@ td { padding:10px 12px; border-top:1px solid var(--border); word-break:break-wor
 </div>
 
 <div class="section" id="overview">
-<h2>📊 一眼总览 <span class="count">2026-06-26 12:18</span></h2>
+<h2>📊 一眼总览 <span class="count">2026-06-26 13:05</span></h2>
 <div class="stat-row">
   <div class="stat-box"><div class="stat-num" data-stat="mcp_servers">4</div><div class="label">🔌 MCP 服务器</div></div>
   <div class="stat-box"><div class="stat-num" data-stat="enabled_plugins">32</div><div class="label">🧩 启用插件</div></div>
@@ -240,7 +231,7 @@ td { padding:10px 12px; border-top:1px solid var(--border); word-break:break-wor
 <h2>🪝 Hooks <span class="count">50 个</span></h2>
 <p style="font-size:12px;color:var(--text-dim);margin-bottom:16px">守护覆盖:安全/质量/记忆/并发/提示/自动归档 · 按文件大小降序</p>
 <div class="hooks-grid" id="hooks-grid">
-<div class="hook-tile"><code>bash-safety-dispatcher.sh</code><span class="sz">6988B</span></div><div class="hook-tile"><code>error-circuit-breaker.sh</code><span class="sz">6624B</span></div><div class="hook-tile"><code>env-sentinel.sh</code><span class="sz">5832B</span></div><div class="hook-tile"><code>research-standards-guard.sh</code><span class="sz">5251B</span></div><div class="hook-tile"><code>prompt-context-gateway.sh</code><span class="sz">5175B</span></div><div class="hook-tile"><code>llm-judge-completion.sh</code><span class="sz">5135B</span></div><div class="hook-tile"><code>block-dangerous-commands.sh</code><span class="sz">4334B</span></div><div class="hook-tile"><code>user-prompt-task-extractor.sh</code><span class="sz">3645B</span></div><div class="hook-tile"><code>session-state-reader.sh</code><span class="sz">3598B</span></div><div class="hook-tile"><code>auto-closure-detect.sh</code><span class="sz">3484B</span></div><div class="hook-tile"><code>session-context-injector.sh</code><span class="sz">3434B</span></div><div class="hook-tile"><code>serial-bash-circuit.sh</code><span class="sz">3290B</span></div><div class="hook-tile"><code>llm-judge-subagent.sh</code><span class="sz">3207B</span></div><div class="hook-tile"><code>drift-check.sh</code><span class="sz">3148B</span></div><div class="hook-tile"><code>ccswitch-verify-start.sh</code><span class="sz">3106B</span></div><div class="hook-tile"><code>teammate-quality-gate.sh</code><span class="sz">3033B</span></div><div class="hook-tile"><code>config-protection.sh</code><span class="sz">3004B</span></div><div class="hook-tile"><code>error-data-recorder.sh</code><span class="sz">2713B</span></div><div class="hook-tile"><code>stop-dispatcher.sh</code><span class="sz">2693B</span></div><div class="hook-tile"><code>decision-point-guard.sh</code><span class="sz">2621B</span></div><div class="hook-tile"><code>notion-queue-flusher.sh</code><span class="sz">2513B</span></div><div class="hook-tile"><code>no-agent-for-grep.sh</code><span class="sz">2432B</span></div><div class="hook-tile"><code>retrieval-precheck.sh</code><span class="sz">2387B</span></div><div class="hook-tile"><code>official-paradigm-guard.sh</code><span class="sz">2346B</span></div><div class="hook-tile"><code>smart-recommendation-injector.sh</code><span class="sz">2333B</span></div><div class="hook-tile"><code>sessionstart-guard-dispatcher.sh</code><span class="sz">2129B</span></div><div class="hook-tile"><code>behavior-audit-pretool.sh</code><span class="sz">2093B</span></div><div class="hook-tile"><code>permission-request-handler.sh</code><span class="sz">2086B</span></div><div class="hook-tile"><code>session-end.sh</code><span class="sz">2051B</span></div><div class="hook-tile"><code>external-cli-router.sh</code><span class="sz">2006B</span></div><div class="hook-tile"><code>uncertainty-detector.sh</code><span class="sz">1981B</span></div><div class="hook-tile"><code>component-usage-tracker.sh</code><span class="sz">1893B</span></div><div class="hook-tile"><code>user-prompt-submit-confidence.sh</code><span class="sz">1828B</span></div><div class="hook-tile"><code>intent-persistence.sh</code><span class="sz">1789B</span></div><div class="hook-tile"><code>session-touched-recorder.sh</code><span class="sz">1716B</span></div><div class="hook-tile"><code>post-write-scripts-guard.sh</code><span class="sz">1681B</span></div><div class="hook-tile"><code>cmmi-stop-sync.sh</code><span class="sz">1653B</span></div><div class="hook-tile"><code>daily-brief-inject.sh</code><span class="sz">1489B</span></div><div class="hook-tile"><code>block-sensitive-files.sh</code><span class="sz">1426B</span></div><div class="hook-tile"><code>stop-failure-monitor.sh</code><span class="sz">1399B</span></div><div class="hook-tile"><code>chinese-language-enforce.sh</code><span class="sz">1370B</span></div><div class="hook-tile"><code>post-bash-token-guard.sh</code><span class="sz">1365B</span></div><div class="hook-tile"><code>precompact-snapshot.sh</code><span class="sz">1314B</span></div><div class="hook-tile"><code>post-compact.sh</code><span class="sz">1149B</span></div><div class="hook-tile"><code>edit-write-dispatcher.sh</code><span class="sz">1127B</span></div><div class="hook-tile"><code>version-change-guard.sh</code><span class="sz">990B</span></div><div class="hook-tile"><code>agent-task-dispatcher.sh</code><span class="sz">965B</span></div><div class="hook-tile"><code>post-write-hooks-guard.sh</code><span class="sz">931B</span></div><div class="hook-tile"><code>two-probe-counter.sh</code><span class="sz">714B</span></div><div class="hook-tile"><code>config-dir.sh</code><span class="sz">360B</span></div></div>
+<div class="hook-tile"><code>bash-safety-dispatcher.sh</code><span class="sz">6988B</span></div><div class="hook-tile"><code>error-circuit-breaker.sh</code><span class="sz">6624B</span></div><div class="hook-tile"><code>env-sentinel.sh</code><span class="sz">5832B</span></div><div class="hook-tile"><code>llm-judge-completion.sh</code><span class="sz">5346B</span></div><div class="hook-tile"><code>research-standards-guard.sh</code><span class="sz">5251B</span></div><div class="hook-tile"><code>prompt-context-gateway.sh</code><span class="sz">5175B</span></div><div class="hook-tile"><code>block-dangerous-commands.sh</code><span class="sz">4334B</span></div><div class="hook-tile"><code>user-prompt-task-extractor.sh</code><span class="sz">3645B</span></div><div class="hook-tile"><code>session-state-reader.sh</code><span class="sz">3598B</span></div><div class="hook-tile"><code>auto-closure-detect.sh</code><span class="sz">3484B</span></div><div class="hook-tile"><code>session-context-injector.sh</code><span class="sz">3434B</span></div><div class="hook-tile"><code>serial-bash-circuit.sh</code><span class="sz">3290B</span></div><div class="hook-tile"><code>llm-judge-subagent.sh</code><span class="sz">3207B</span></div><div class="hook-tile"><code>drift-check.sh</code><span class="sz">3148B</span></div><div class="hook-tile"><code>ccswitch-verify-start.sh</code><span class="sz">3106B</span></div><div class="hook-tile"><code>teammate-quality-gate.sh</code><span class="sz">3033B</span></div><div class="hook-tile"><code>config-protection.sh</code><span class="sz">3004B</span></div><div class="hook-tile"><code>error-data-recorder.sh</code><span class="sz">2713B</span></div><div class="hook-tile"><code>stop-dispatcher.sh</code><span class="sz">2693B</span></div><div class="hook-tile"><code>decision-point-guard.sh</code><span class="sz">2621B</span></div><div class="hook-tile"><code>notion-queue-flusher.sh</code><span class="sz">2513B</span></div><div class="hook-tile"><code>no-agent-for-grep.sh</code><span class="sz">2432B</span></div><div class="hook-tile"><code>retrieval-precheck.sh</code><span class="sz">2387B</span></div><div class="hook-tile"><code>official-paradigm-guard.sh</code><span class="sz">2346B</span></div><div class="hook-tile"><code>smart-recommendation-injector.sh</code><span class="sz">2333B</span></div><div class="hook-tile"><code>sessionstart-guard-dispatcher.sh</code><span class="sz">2129B</span></div><div class="hook-tile"><code>behavior-audit-pretool.sh</code><span class="sz">2093B</span></div><div class="hook-tile"><code>permission-request-handler.sh</code><span class="sz">2086B</span></div><div class="hook-tile"><code>session-end.sh</code><span class="sz">2051B</span></div><div class="hook-tile"><code>external-cli-router.sh</code><span class="sz">2006B</span></div><div class="hook-tile"><code>uncertainty-detector.sh</code><span class="sz">1981B</span></div><div class="hook-tile"><code>component-usage-tracker.sh</code><span class="sz">1893B</span></div><div class="hook-tile"><code>user-prompt-submit-confidence.sh</code><span class="sz">1828B</span></div><div class="hook-tile"><code>intent-persistence.sh</code><span class="sz">1789B</span></div><div class="hook-tile"><code>session-touched-recorder.sh</code><span class="sz">1716B</span></div><div class="hook-tile"><code>post-write-scripts-guard.sh</code><span class="sz">1681B</span></div><div class="hook-tile"><code>cmmi-stop-sync.sh</code><span class="sz">1653B</span></div><div class="hook-tile"><code>daily-brief-inject.sh</code><span class="sz">1489B</span></div><div class="hook-tile"><code>block-sensitive-files.sh</code><span class="sz">1426B</span></div><div class="hook-tile"><code>stop-failure-monitor.sh</code><span class="sz">1399B</span></div><div class="hook-tile"><code>chinese-language-enforce.sh</code><span class="sz">1370B</span></div><div class="hook-tile"><code>post-bash-token-guard.sh</code><span class="sz">1365B</span></div><div class="hook-tile"><code>precompact-snapshot.sh</code><span class="sz">1314B</span></div><div class="hook-tile"><code>post-compact.sh</code><span class="sz">1149B</span></div><div class="hook-tile"><code>edit-write-dispatcher.sh</code><span class="sz">1127B</span></div><div class="hook-tile"><code>version-change-guard.sh</code><span class="sz">990B</span></div><div class="hook-tile"><code>agent-task-dispatcher.sh</code><span class="sz">965B</span></div><div class="hook-tile"><code>post-write-hooks-guard.sh</code><span class="sz">931B</span></div><div class="hook-tile"><code>two-probe-counter.sh</code><span class="sz">714B</span></div><div class="hook-tile"><code>config-dir.sh</code><span class="sz">360B</span></div></div>
 <div style="margin-top:16px;font-size:12px;color:var(--text-dim)">
   📌 完整列表：<code>ls ~/.claude/hooks/*.sh | wc -l</code> · 守护覆盖：安全/质量/记忆/并发/提示/自动归档
 </div>
@@ -267,7 +258,7 @@ td { padding:10px 12px; border-top:1px solid var(--border); word-break:break-wor
 </div>
 
 <div class="footer">
-  ⚙️ MYCC 配置全景 · 数据自动拉取于 2026-06-26 12:18 ·
+  ⚙️ MYCC 配置全景 · 数据自动拉取于 2026-06-26 13:05 ·
   <a href="dashboard.html">主仪表盘</a> ·
   <a href="start-here.md">start-here 索引</a>
 </div>
