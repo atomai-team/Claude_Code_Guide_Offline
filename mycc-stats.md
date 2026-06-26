@@ -1,6 +1,6 @@
 # MYCC 能力全景
 
-> 扫描时间: 2026-06-26T10:23:44.878714Z · CC 2.1.193 (Claude Code) · OMC 4.15.0 · CC Switch OFF
+> 扫描时间: 2026-06-26T10:40:04.753540Z · CC 2.1.193 (Claude Code) · OMC 4.15.0 · CC Switch OFF
 
 ## 能力总览
 | 维度 | 数量 |
