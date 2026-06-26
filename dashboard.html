@@ -885,6 +885,11 @@ kbd.orange { color: var(--orange); border-color: var(--orange); }
 .tbl-fixed th, .tbl-fixed td { word-break: break-word; overflow-wrap: anywhere; }
 .tbl-fixed code { white-space: normal; }
 
+/* 宽卡多列表格响应式：窄屏横滚 + 取消首列 nowrap，防 table-layout:fixed 下中文逐字竖排(截图2 bug) */
+.card.wide .card-body { overflow-x: auto; }
+.card.wide .tbl-fixed { min-width: 720px; }
+.tbl-fixed td:first-child { white-space: normal; }
+
 /* ── 警示行 ── */
 tr.warn td:first-child { color: var(--red); }
 tr.warn td { background: var(--red-soft); }
