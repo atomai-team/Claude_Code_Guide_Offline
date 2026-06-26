@@ -1,13 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
+<html lang="zh-CN"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude Code 指南 - 离线镜像版</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📘%3C/text%3E%3C/svg%3E">
+<title>MYCC · Claude Code 全局能力指导书</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-/* ═══════ MD→HTML 渲染共享样式(继承 dashboard 设计系统 v2)═══════ */
+<style>/* ═══════ MD→HTML 渲染共享样式(继承 dashboard 设计系统 v2)═══════ */
 :root {
   color-scheme: light;
   --bg: #ffffff; --bg-subtle: #f5f5f7; --surface: #ffffff; --surface2: #fafafc; --surface-hover: #f5f5f7;
@@ -83,35 +79,77 @@ strong { font-weight: 600; color: var(--text); }
 em { font-style: italic; color: var(--text-dim); }
 @media (max-width: 720px) { body { padding: 24px 16px 60px; } h1 { font-size: 26px; } h2 { font-size: 20px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style></head><body>
+<div class="doc-header"><a href="dashboard.html" class="back">← 返回 MYCC 仪表盘</a></div>
+<h1>MYCC · Claude Code 全局能力指导书</h1>
+<blockquote><strong>一个仪表盘看懂、用好 Claude Code</strong> —— 从零基础上手到工程化高阶编排，外加唐霜老师权威中文指南全文离线存档。</blockquote>
+<p><img alt="Claude Code" src="https://img.shields.io/badge/Claude_Code-2.1.193-0071e3" style="display:inline-block;margin:2px 5px 2px 0;vertical-align:middle"></p>
+<p><img alt="OMC" src="https://img.shields.io/badge/oh--my--claudecode-4.15.0-6e3fd6" style="display:inline-block;margin:2px 5px 2px 0;vertical-align:middle"></p>
+<p><img alt="Skills" src="https://img.shields.io/badge/Skills-148-1a8c4a" style="display:inline-block;margin:2px 5px 2px 0;vertical-align:middle"></p>
+<p><img alt="Agents" src="https://img.shields.io/badge/Agents-52-b25000" style="display:inline-block;margin:2px 5px 2px 0;vertical-align:middle"></p>
+<p><img alt="Hooks" src="https://img.shields.io/badge/Hooks-50-d70015" style="display:inline-block;margin:2px 5px 2px 0;vertical-align:middle"></p>
+<p><img alt="License" src="https://img.shields.io/badge/原版内容-唐霜_©-555" style="display:inline-block;margin:2px 5px 2px 0;vertical-align:middle"></p>
+<hr>
+<h2>📖 这是什么</h2>
+<p>本项目是一个<strong>双层知识系统</strong>，把"Claude Code 怎么用"从入门到精通一站式讲透：</p>
+<table><thead><tr><th>层</th><th>内容</th><th>受众</th></tr></thead><tbody>
+<tr><td><strong>① 能力指导层</strong>（原创）</td><td>交互式仪表盘 + 配置全景 + 7 本场景手册 + 全局搜索</td><td>想快速上手 / 工程化用好 CC 的人</td></tr>
+<tr><td><strong>② 权威指南层</strong>（唐霜原版）</td><td>《Claude Code 指南》全文离线存档，9 部分 / 36 章 / 207 节</td><td>想系统学习 CC 原理与实战的人</td></tr>
+</tbody></table>
+<p>入口只有一个：<strong><code>dashboard.html</code></strong> —— 打开它，所有内容按场景串联可达。</p>
+<hr>
+<h2>✨ 核心功能</h2>
+<ul>
+<li><strong>🎛️ 交互式仪表盘</strong>（<code>dashboard.html</code>）：30+ 能力速查卡，按「新手起步 → 命令参考 → 交互模式 → 高级编排 → 配置全景」分区，左侧导航 + 响应式抽屉 + 明暗主题切换。</li>
+<li><strong>🔍 全局搜索（⌘K）</strong>：客户端全文索引 13 份文档 / 19 万字符，搜 skill / agent / 口语 / 命令即时高亮。</li>
+<li><strong>🗂️ 二级详情页下钻</strong>：仪表盘当入口菜单，数据密集卡（Skills / Hooks / Agents / 高级功能）一键下钻到 <code>mycc-config.html</code> 对应专区。</li>
+<li><strong>⚙️ 配置全景</strong>（<code>mycc-config.html</code>）：自动从 <code>~/.claude/</code> 实时拉取，零手工维护，呈现已装的全部 MCP / 插件 / Skills / Hooks / 定时任务 / 路由表。</li>
+<li><strong>📚 7 本场景手册</strong>：小白上手、商城项目实战、全能力清单、CMMI 配置、创业分析专家系统、CEO 能力速用、能力全景总册 —— 均提供 Markdown + 渲染版 HTML。</li>
+<li><strong>⚡ 高级实战示例</strong>：goal 闭环 / loop 巡检 / Dynamic Workflow 编排 / 多 Agent 协同 / Skill 自优化，5 个复制即用的完整范例。</li>
+<li><strong>📊 实时数据注入</strong>：版本号、各项能力计数由 <code>mycc-stats.py</code> 自动生成，仪表盘启动即刷新。</li>
+</ul>
+<hr>
+<h2>📊 数据概览</h2>
+<blockquote>数据源：<code>mycc-stats.json</code>（由 <code>mycc-stats.py</code> 自动生成）· 截至 2026-06-26</blockquote>
+<table><thead><tr><th>维度</th><th>数量</th><th>说明</th></tr></thead><tbody>
+<tr><td><strong>Skills</strong></td><td>148</td><td>按 8 大类分组，口语触发</td></tr>
+<tr><td><strong>Agents</strong></td><td>52</td><td>6 核心 + 12 CEO 顾问 + 7 行业专家 + 6 交付团队</td></tr>
+<tr><td><strong>Hooks</strong></td><td>50</td><td>覆盖 14 类事件（安全 / 质量 / 记忆 / 并发…）</td></tr>
+<tr><td><strong>Workflows</strong></td><td>13</td><td>多阶段确定性编排</td></tr>
+<tr><td><strong>MCP 服务器</strong></td><td>4</td><td>外部工具与数据接入</td></tr>
+<tr><td><strong>权威指南</strong></td><td>9 部分 / 36 章 / 207 节</td><td>唐霜《Claude Code 指南》全文</td></tr>
+<tr><td><strong>场景手册</strong></td><td>7 本</td><td>原创，Markdown + HTML 双格式</td></tr>
+</tbody></table>
+<p>运行环境：Claude Code <code>2.1.193</code> · oh-my-claudecode <code>4.15.0</code> · 官方直连。</p>
+<hr>
+<h2>🚀 快速开始</h2>
+<pre><code># 1. 克隆
+git clone https://github.com/atomai-team/Claude_Code_Guide_Offline.git
+cd Claude_Code_Guide_Offline
 
-</style>
-</head>
-<body>
-<div class="doc-header">
-  <a href="dashboard.html" class="back">← 返回 MYCC 仪表盘</a>
-  <span class="meta">渲染时间 2026-06-26 01:13 · 源: README.md</span>
-</div>
-<h1 id="claude-code-">Claude Code 指南 - 离线镜像版</h1>
-<h3 id="_1">📌 项目初衷</h3>
-<p>本项目为 <strong>唐霜</strong> 老师作品集 <a href="https://claudecode.tangshuang.net/">Claude Code 指南</a> 的离线 Markdown 存档。</p>
-<p>建立本仓库的初衷在于：</p>
-<ol>
-<li><strong>访问优化</strong>：解决原网站在部分网络环境下访问波动、延迟较高的问题，提升阅读体验。</li>
-<li><strong>知识沉淀</strong>：通过 Markdown 格式化，便于进行本地全文搜索、笔记标注及深度学习。</li>
-<li><strong>离线阅读</strong>：支持在无网络环境下随时查阅。</li>
-</ol>
-<h3 id="_2">✍️ 版权声明</h3>
+# 2. 启本地服务（中文路径 + .html 渲染需经 HTTP，勿用 file://）
+python3 -m http.server 18765 --bind 127.0.0.1
+
+# 3. 浏览器打开仪表盘
+open http://127.0.0.1:18765/dashboard.html</code></pre>
+<p>从仪表盘的「5 分钟上手」卡开始，按「新手 30 天路径」推进；不确定找哪个能力时，用顶部 <strong>⌘K 全局搜索</strong>或「超级入口」兜底。</p>
+<hr>
+<h2>📂 目录结构</h2>
+<pre><code>.
+├── dashboard.html              # 🎛️ 主入口：能力仪表盘
+├── mycc-config.html            # ⚙️ 配置全景（自动生成）
+├── 00-速查表.md ~ 06-CEO能力速用手册.md     # 📚 7 本场景手册（含 .html 渲染版）
+├── start-here.md               # 新手第一站
+├── MYCC-能力全景总册.md          # 能力总索引
+├── mycc-stats.json             # 📊 实时数据源
+├── _md-shared.css              # 手册渲染共享样式
+└── 第1部分 ~ 第9部分/            # 📖 唐霜《Claude Code 指南》207 节原版</code></pre>
+<hr>
+<h2>🙏 致谢与版权</h2>
+<p>本项目分<strong>原创能力层</strong>与<strong>权威指南层</strong>，版权分别归属：</p>
 <ul>
-<li><strong>原作者</strong>：<a href="https://www.tangshuang.net/">唐霜 (Tang Shuang)</a></li>
-<li><strong>内容来源</strong>：https://claudecode.tangshuang.net/</li>
+<li><strong>权威指南层</strong>（<code>第N部分/</code> 下 207 节内容）：原作者 <strong><a href="https://www.tangshuang.net/">唐霜 (Tang Shuang)</a></strong>，来源 <https://claudecode.tangshuang.net/>。本仓库仅作个人学习与非营利备份，所有权 / 版权 / 最终解释权均归唐霜先生所有。转载引用请注明原作者及原始链接。</li>
+<li><strong>原创能力层</strong>（仪表盘 / 配置全景 / 7 本场景手册 / 数据引擎）：基于实际 Claude Code + oh-my-claudecode 使用经验编写。</li>
 </ul>
-<p><strong>注意：</strong></p>
-<ul>
-<li>本仓库仅作为个人学习与非营利性备份之用。</li>
-<li>作品的所有权、版权及最终解释权均归原作者 <strong>唐霜</strong> 先生所有。</li>
-<li>若您需要转载或引用，请务必注明原作者及原始链接，尊重原创劳动成果。</li>
-</ul>
-<h3 id="_3">✉️ 免责声明</h3>
-<p>本项目致力于知识的传播与分享。如原作者认为本仓库的建立侵犯了您的合法权益，请联系本人（kscbxxliuxp@linux.do），我将在收到通知后第一时间删除相关内容并致以歉意。</p>
-</body>
-</html>
+<blockquote><strong>免责声明</strong>：本项目致力于知识传播与分享。如原作者认为本仓库侵犯合法权益，请联系 <code>kscbxxliuxp@linux.do</code>，将在收到通知后第一时间删除相关内容并致歉。</blockquote>
+</body></html>
