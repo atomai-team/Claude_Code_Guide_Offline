@@ -506,6 +506,28 @@ body {
   padding: 2px 10px;
   letter-spacing: 0;
 }
+/* 📑 二级详情页入口菜单 + 卡片查看详情链接(截图3/4) */
+.detail-nav {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  margin: 2px 0 20px; padding: 12px 16px;
+  background: var(--accent-soft); border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.detail-nav .dn-label { font-size: 12px; font-weight: 600; color: var(--text); margin-right: 4px; }
+.detail-nav a {
+  font-size: 12px; color: var(--accent); text-decoration: none;
+  padding: 4px 11px; background: var(--surface);
+  border: 1px solid var(--border-strong); border-radius: 980px;
+  white-space: nowrap; transition: background .15s, border-color .15s, color .15s;
+}
+.detail-nav a:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.detail-link {
+  margin-left: auto; flex-shrink: 0; font-size: 11px; font-weight: 500;
+  color: var(--accent); text-decoration: none; white-space: nowrap;
+  padding: 3px 10px; border: 1px solid var(--border-strong); border-radius: 980px;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.detail-link:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
 .card-body { padding: 20px; }
 .card-body.compact { padding: 14px 18px; }
 
@@ -1093,6 +1115,19 @@ tr.warn td { background: var(--red-soft); }
   </div>
 </div>
 <div class="toast" id="toast"></div>
+
+<!-- 📑 二级详情页入口菜单(截图3) -->
+<div class="detail-nav">
+  <span class="dn-label">📑 二级详情页 · 点开看完整数据：</span>
+  <a href="mycc-config.html#skills">🎯 Skills</a>
+  <a href="mycc-config.html#agents">🤖 Agents</a>
+  <a href="mycc-config.html#hooks">🪝 Hooks</a>
+  <a href="mycc-config.html#mcp">🔌 MCP</a>
+  <a href="mycc-config.html#plugins">🧩 插件</a>
+  <a href="mycc-config.html#scheduler">⏰ 定时任务</a>
+  <a href="mycc-config.html#router">🛣️ 路由表</a>
+  <a href="mycc-config.html#overview">📊 配置总览</a>
+</div>
 
 <div class="grid">
 
@@ -2229,13 +2264,13 @@ tr.warn td { background: var(--red-soft); }
 
   <!-- Skills by Category -->
   <div class="card priority-2" id="s-skills">
-    <div class="card-header"><span class="icon">🎯</span><h2>Skills 速查 — 按分类</h2></div>
+    <div class="card-header"><span class="icon">🎯</span><h2>Skills 速查 — 按分类</h2><a class="detail-link" href="mycc-config.html#skills">查看全部 148 →</a></div>
     <div class="card-body"><div id="skillsSections"></div></div>
   </div>
 
   <!-- Hook 体系 -->
   <div class="card priority-2" id="s-hooks">
-    <div class="card-header"><span class="icon">🔧</span><h2>Hook 体系（自动化开关）</h2></div>
+    <div class="card-header"><span class="icon">🔧</span><h2>Hook 体系（自动化开关）</h2><a class="detail-link" href="mycc-config.html#hooks">查看全部 49 →</a></div>
     <div class="card-body">
       <div id="hookBars" style="margin-bottom:10px;"></div>
       <div class="tag-cloud" id="hookTags"></div>
@@ -2244,7 +2279,7 @@ tr.warn td { background: var(--red-soft); }
 
   <!-- Agent 一览 -->
   <div class="card priority-2" id="s-agent-types">
-    <div class="card-header"><span class="icon">🤖</span><h2>Agent 类型一览（常用）</h2></div>
+    <div class="card-header"><span class="icon">🤖</span><h2>Agent 类型一览（常用）</h2><a class="detail-link" href="mycc-config.html#agents">查看全部 →</a></div>
     <div class="card-body">
       <div class="skill-group">
         <div class="skill-group-title">👤 调度层 Agent（顶层 20 个）</div>
