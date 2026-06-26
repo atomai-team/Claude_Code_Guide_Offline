@@ -530,10 +530,10 @@ cleanroom-precheck.sh 6步检查：
 ### oh-my-claudecode（OMC）
 **核心插件，提供整套 OMC 能力**
 - Skills: **148** 原生 skill
-- Hooks: **50** 自动守护钩子（50 个 hook 文件，14 个 hook 事件类型）
+- Hooks: **51** 自动守护钩子（50 个 hook 文件，14 个 hook 事件类型）
 - Workflows: **13** 个 JS 流水线脚本
 - MCP Tools: wiki/notepad/state/LSP/shared-memory 等
-- Agents: **52** 角色（核心6 + CEO角色12 + 行业专家7 + 团队蓝图6 + 通用21）
+- Agents: **90** 角色（核心6 + CEO角色12 + 行业专家7 + 团队蓝图6 + 通用21）
 - 意图路由: **92 条**词触发规则
 
 ### claude-hud
