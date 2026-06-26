@@ -1,11 +1,11 @@
 # MYCC 能力全景
 
-> 扫描时间: 2026-06-26T02:14:20.871248Z · CC 2.1.193 (Claude Code) · OMC 4.15.0 · CC Switch OFF
+> 扫描时间: 2026-06-26T02:58:08.773337Z · CC 2.1.193 (Claude Code) · OMC 4.15.0 · CC Switch OFF
 
 ## 能力总览
 | 维度 | 数量 |
 |---|---|
-| 🎯 Skills | 150 |
+| 🎯 Skills | 148 |
 | ⚡ Workflows | 13 |
 | 🔧 Hook 已注册 | 50 |
 | 🤖 Agent | 52 (核心6+CEO12+行业7+团队6) |
