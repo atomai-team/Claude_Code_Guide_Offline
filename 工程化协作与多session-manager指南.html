@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mycc 工程化协作 + 多 session Manager 使用指南</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📘%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════ MD→HTML 渲染共享样式(继承 dashboard 设计系统 v2)═══════ */
+:root {
+  color-scheme: light;
+  --bg: #ffffff; --bg-subtle: #f5f5f7; --surface: #ffffff; --surface2: #fafafc; --surface-hover: #f5f5f7;
+  --border: #e5e5ea; --border-strong: #d2d2d7; --code-bg: #f5f5f7; --tag-bg: #f5f5f7;
+  --text: #1d1d1f; --text-dim: #515154; --text-muted: #86868b;
+  --accent: #0071e3; --accent-hover: #0077ed; --accent-soft: #e8f1fd;
+  --green: #1a8c4a; --red: #d70015; --orange: #b25000; --purple: #6e3fd6;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --font-sans: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
+  --font-mono: 'JetBrains Mono','SF Mono','Fira Code',Menlo,monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0a0a0b; --bg-subtle: #141416; --surface: #161618; --surface2: #1c1c1f; --surface-hover: #232326;
+    --border: #2a2a2e; --border-strong: #3a3a3e; --code-bg: #1c1c1f;
+    --text: #f5f5f7; --text-dim: #aeaeb2; --text-muted: #8e8e93;
+    --accent: #2997ff; --accent-soft: #16263b;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans); background: var(--bg); color: var(--text);
+  line-height: 1.7; font-size: 15px; padding: 48px 32px 80px; max-width: 880px; margin: 0 auto;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+.doc-header {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  margin-bottom: 28px; padding-bottom: 18px; border-bottom: 1px solid var(--border);
+}
+.doc-header .back {
+  color: var(--accent); text-decoration: none; padding: 6px 14px;
+  border: 1px solid var(--border-strong); border-radius: 980px; font-size: 13px; font-weight: 500;
+  transition: all .15s;
+}
+.doc-header .back:hover { background: var(--accent-soft); border-color: var(--accent); }
+.doc-header .meta { color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
+h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 12px 0 18px; color: var(--text); }
+h2 { font-size: 23px; font-weight: 600; margin: 40px 0 14px; padding-top: 12px; letter-spacing: -0.01em;
+     border-top: 1px solid var(--border); color: var(--text); }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+h3 { font-size: 18px; font-weight: 600; margin: 28px 0 10px; color: var(--text); }
+h4 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; color: var(--text-dim); }
+p { margin: 10px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+ul, ol { margin: 10px 0 10px 24px; }
+li { margin: 4px 0; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 28px 0; }
+code {
+  font-family: var(--font-mono); font-size: 0.9em; background: var(--code-bg);
+  padding: 1px 6px; border-radius: 5px; color: var(--text);
+}
+pre {
+  background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 16px; overflow-x: auto; margin: 14px 0; line-height: 1.55;
+}
+pre code { background: transparent; padding: 0; font-size: 13px; }
+blockquote {
+  border-left: 3px solid var(--accent); margin: 14px 0; padding: 8px 16px;
+  background: var(--accent-soft); border-radius: 0 8px 8px 0; color: var(--text-dim);
+}
+blockquote p { margin: 4px 0; }
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+th { text-align: left; padding: 9px 12px; background: var(--bg-subtle); color: var(--text-muted);
+     font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+td { padding: 9px 12px; border-top: 1px solid var(--border); }
+tr:hover td { background: var(--bg-subtle); }
+img { max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0; }
+strong { font-weight: 600; color: var(--text); }
+em { font-style: italic; color: var(--text-dim); }
+@media (max-width: 720px) { body { padding: 24px 16px 60px; } h1 { font-size: 26px; } h2 { font-size: 20px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <a href="dashboard.html" class="back">← 返回 MYCC 仪表盘</a>
+  <span class="meta">渲染时间 2026-06-26 01:13 · 源: 工程化协作与多session-manager指南.md</span>
+</div>
+<h1 id="mycc-session-manager">mycc 工程化协作 + 多 session Manager 使用指南</h1>
+<blockquote>
+<p>2026-06-25 创建 · 回答最早需求 B（专家团队怎么启用+协同关系）+ C（manager 中心）+ D（智能路由自动分配）<br>
+配套：场景索引 <code>docs/skill-index.md</code>（我想做X→用Y）；风险档 <code>docs/guardrail-risk-tiers.md</code></p>
+</blockquote>
+<hr>
+<h2 id="_1">一、协同关系全景 —— 你该用哪个？（最常问）</h2>
+<p>mycc 有 5 类"调度入口"，<strong>不重叠、各管一摊</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>入口</th>
+<th>口语触发</th>
+<th>管什么</th>
+<th>调用谁</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>队长</strong></td>
+<td>"队长/老大/活力全开/火力全开"</td>
+<td>极限档总统筹（最高权限，可调下面全部）</td>
+<td>smart-flow-all → 任意 agent/team/skill</td>
+</tr>
+<tr>
+<td><strong>ceo-mode</strong></td>
+<td>"评估/尽调/出海/商业可行性"</td>
+<td><strong>商业</strong>决策</td>
+<td>5 商业顾问（市场/财务/法务/CMO/CTO…）</td>
+</tr>
+<tr>
+<td><strong>eng-experts</strong></td>
+<td>"卡帕西/架构师/资深dev/严格审查"</td>
+<td><strong>工程</strong>深审</td>
+<td>3 工程专家（见第二节）</td>
+</tr>
+<tr>
+<td><strong>start-work</strong></td>
+<td>"开工/启动项目/做工程化"</td>
+<td>工程化<strong>项目编排</strong>（规划→专家→验证→收口）</td>
+<td>planner + eng-experts + 3 验证</td>
+</tr>
+<tr>
+<td><strong>team-*</strong></td>
+<td>"做app/安全审计/调研对比"</td>
+<td><strong>预制领域团队</strong></td>
+<td>team-fullstack/security/research…</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键关系（消除混乱）：</strong><br>
+- <strong>队长 ⊃ 全部</strong>：队长是总入口，内部会判断"这事该调商业顾问还是工程专家还是团队"，你说"队长"就不用记下面的。<br>
+- <strong>ceo(商业) ⊥ eng-experts(工程)</strong>：正交，一个管钱/市场/法务，一个管代码/架构。不会撞。<br>
+- <strong>start-work = 工程化项目的 facade</strong>：它内部<strong>调</strong> eng-experts（阶段2专家）+ 验证团队，是"把多 agent 编排"这件事打包。单点深审用 eng-experts，完整项目用 start-work。<br>
+- <strong>team-* = 蓝图</strong>：预先编好的固定团队，适合"做个网站"这种标准活。</p>
+<p><strong>一句话决策</strong>：<br>
+- 不确定/想省心 → <strong>说"队长"</strong>，它替你路由。<br>
+- 只想要某个专家看一眼 → <strong>直接喊专家名</strong>（"卡帕西审查这段"）。<br>
+- 要把一个项目从头做到尾 → <strong>"开工"</strong>（start-work）。<br>
+- 纯商业评估 → <strong>ceo-mode</strong>。</p>
+<hr>
+<h2 id="_2">二、工程化专家团队 —— 怎么启用（好用方案）</h2>
+<p><strong>★ 推荐：口语直接喊，不用记英文名、不用记 skill 名。</strong></p>
+<table>
+<thead>
+<tr>
+<th>你说</th>
+<th>自动调到</th>
+<th>他干什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"<strong>卡帕西</strong>审查这段代码" / "严格看下质量"</td>
+<td>karpathy-discipline-expert</td>
+<td>KISS/YAGNI/DRY/命名/错误处理 5 维 + verify-before-assert</td>
+</tr>
+<tr>
+<td>"<strong>资深dev</strong> 帮我决策" / "这架构选型对吗"</td>
+<td>senior-developer-mindset</td>
+<td>trade-off 表/SLA/SPOF/扩展性/成本 4 大决策框架</td>
+</tr>
+<tr>
+<td>"<strong>架构师</strong>看下系统设计" / "出个 ADR"</td>
+<td>architect</td>
+<td>C4 模型/ADR/系统一致性（只读不改）</td>
+</tr>
+<tr>
+<td>"<strong>三个专家一起看</strong>"</td>
+<td>eng-experts 三人并行</td>
+<td>并行审 → 我综合去重 + ★推荐</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工作机制</strong>：你说关键词 → <code>eng-experts</code> skill 自动激活 → 路由到 <code>~/.claude/agents/</code> 下对应 agent（Task 调度，opus）→ 输出含 file:line + ★推荐 + T0 口语档 + 工程化升级点（学习项）。</p>
+<p><strong>实例</strong>：<br>
+- "卡帕西看下我刚写的 hook" → 单点深审<br>
+- "开工做个 X，要专家把关" → start-work 阶段2 自动拉 3 专家并行</p>
+<hr>
+<h2 id="manager-session-2026-06-25">三、Manager 中心 —— 多 session 统一管理（2026-06-25 修通可用）</h2>
+<p>你开多个 session 处理 mycc 时，现在有 3 个能力<strong>自动</strong>帮你看住交叉：</p>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>触发</th>
+<th>你会看到</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>互可见</strong></td>
+<td>新 session 启动自动（SessionStart）</td>
+<td><code>👥 活跃 session（近30min）: - &lt;id&gt; \| &lt;项目&gt; \| &lt;在干什么&gt;</code></td>
+</tr>
+<tr>
+<td><strong>主动查询</strong></td>
+<td>任意时刻跑 <code>bash ~/.claude/bin/orchestrator-list.sh</code></td>
+<td>同上，复盘"我现在几个 session 各在干嘛"</td>
+</tr>
+<tr>
+<td><strong>冲突提示</strong></td>
+<td>你说"改 X 文件"时自动（UserPromptSubmit）</td>
+<td><code>⚠️[冲突] X 被 [其他session] 也在改</code></td>
+</tr>
+<tr>
+<td><strong>查重</strong></td>
+<td>你说新任务时自动</td>
+<td><code>🔁[查重] 命中已有记忆条目</code>（实义关键词才触发，不吵）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工作原理（修通后）</strong>：<br>
+- 每个 session 你发消息时，<code>user-prompt-task-extractor.sh</code> 把"本 session 在干什么"写到 <code>~/.omc/state/sessions/{id}/active.md</code>。<br>
+- 你 Edit/Write 文件时，<code>session-touched-recorder.sh</code> 记录到 <code>touched-files.json</code>。<br>
+- 别的 session 启动/你提新任务时，读这些文件 → 互可见 + 冲突检测。<br>
+- <strong>TTL 30 分钟</strong>：只显示近 30min 活跃的，session 结束自动清（不会堆积 535 个历史）。</p>
+<p><strong>熔断</strong>：<code>OMC_SKIP_HOOKS=1</code> 可关全部。</p>
+<hr>
+<h2 id="goalultrawork-d">四、智能路由 —— /goal、/ultrawork 等自动按需采用（需求 D）</h2>
+<p>你最早说"几乎没自动智能分配过"。机制是：</p>
+<ul>
+<li><code>engineering-scenario-router</code> skill 关键词触发 → 查 <strong><code>router-table.json</code>（46 intents，SSoT）</strong> → 路由到 <code>target_skill</code> + <code>execution_path</code>（L0-L3/YOLO-L4 风险档）。</li>
+<li><strong>透明路由</strong>：我会显式说"我要调 <code>&lt;skill&gt;</code> 因为你说了 <code>&lt;关键词&gt;</code>"，你能看到也能否决。</li>
+<li><strong>未命中</strong>：我会说"我不确定该调哪个"，不静默瞎调。</li>
+</ul>
+<p><strong>怎么让它更主动</strong>：直接在话里带场景词（"深度调研X" / "全面升级" / "又报错" / "发布提PR"），命中即自动路由。完整词表见 <code>router-table.json</code> 或 <code>docs/skill-index.md</code>。</p>
+<hr>
+<h2 id="2026-06-25">五、异构对抗融入策略（2026-06-25 · 触发策略而非到处硬接）</h2>
+<p>异构对抗 = 调外部 5 联 CLI（kimi/mmx/qwen/opencode/mavis，全非 Claude 模型）做对抗校验，破内部 Claude agent 同源盲思。入口 <code>ai-panel "&lt;问题&gt;"</code>（<code>~/.local/bin</code>）。</p>
+<p><strong>已接入（保持，~25 处）</strong>：claude-code-better(全面升级) / audit-all-better(审计) / smart-closure(高风险收口) / weekly-driver(周扫) / panel-harvest。</p>
+<p><strong>触发策略（2026-06-25 经外部 5 联对抗修订 · 三层，非单一"按需"）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>节点</th>
+<th>机制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>强制硬门控</strong>（不留判断层，防自我绕过）</td>
+<td>不可逆变更 / 写 config·hook·cron·skill 注册表 / 架构写入</td>
+<td><strong>执行前硬拦截</strong>，无豁免按钮</td>
+</tr>
+<tr>
+<td><strong>条件触发</strong>（降判断门槛，用客观信号非"我觉得是架构决策"）</td>
+<td>单次 &gt;500 行 / 改 &gt;3 模块 / 检测到"多 agent 零异议"</td>
+<td>客观阈值触发</td>
+</tr>
+<tr>
+<td><strong>手动/不调</strong></td>
+<td>大战略决策（你本就警觉，外部缺上下文）/ 纯执行 / 对话 / ≤2文件可逆</td>
+<td>手动按需 or 不调省 token</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ qwen 关键洞察：<strong>"触发分类器本身是另一个 Claude 调用 = 最偏的组件"</strong>。别让"判断是否架构决策"成为单点偏见——危险错误藏在"看起来 routine"的高频小调用里，不是大决策（大决策你本就警觉）。所以<strong>不可逆表面=硬接，不靠判断</strong>。</p>
+</blockquote>
+<p><strong>GAP 节点（外部一致收窄）</strong>：<br>
+- ✅ <strong>唯一现在必补：<code>omc-plan</code>/<code>ralplan</code> consensus</strong> —— Planner→Architect→Critic 全 Claude 血统 = "一个训练分布戴三顶帽子/rigor theater"，同源盲思温室，外部杠杆最大。建议 Planner 输出后、Architect 前注入一个外部视角（流程门控非建议）。<br>
+- 🔸 <code>ceo-pipeline</code> —— <strong>降级/可能过度</strong>：外部模型无领域上下文，对个人战略决策"廉价且自信地干扰"。仅月度/季度重大方向时手动跑，别自动。<br>
+- 🔸 <code>self-evolve-loop</code> —— <strong>改机制</strong>：别"外部评估我的提案"（=validation theater，多半附和），改"让外部<strong>生成替代演化方案</strong>"再由你选（生成才对抗，评估不对抗）。</p>
+<p><strong>反模式（单人维护者 · 外部 4/4 点名，按危害排序）</strong>：<br>
+- ❌ <strong>#1 权威洗白/责任转移幻觉</strong>（最隐蔽）：你选的 5 个、prompt 的 5 个、挑的输出——"5 个外部模型同意"感觉更客观，实则一样偏。<strong>修复：停止问"这好吗"，强制外部只论证"这为什么错"</strong>（steelman 反方）；若不敢让外部论证反方，你要的是 validation 不是对抗。<br>
+- ❌ <strong>#2 决策瘫痪/取平均</strong>：5 个意见取中位数 = 严格更差。异构对抗价值在<strong>找矛盾</strong>不是<strong>平均</strong>。<strong>预先定义"分歧→做什么"</strong>，否则是拖延战术。<br>
+- ❌ <strong>#3 操作税</strong>：5 个外部 CLI 各有 failure mode/auth/version churn，单人维护。<strong>季度审计 value &gt; maintenance tax</strong>，否则系统死于操作面膨胀。<br>
+- ❌ <strong>#4 监控/对抗工具自身不验证</strong>（2026-06-25 实证）：reality-check 工具误报 daemon"腐烂"，2 内部专家+2 外部 CLI 全被带偏 → <strong>工具自己必先 verify-before-assert</strong>。<br>
+- 📐 <strong>反事实自测</strong>（qwen）：取 3 个月前一个你自信的决策，让外部模型<strong>不知你的结论</strong>地重构+论证反方。反方弱=对抗层有效；反方强=你蒙对了。</p>
+<hr>
+<h2 id="_3">六、回滚与边界</h2>
+<ul>
+<li>Manager 中心全套：<code>OMC_SKIP_HOOKS=1</code> 关闭；回滚见各 hook 头部注释。</li>
+<li>安全不变量恒硬：配置防改 / 官方直连 / 改 hook 前 snapshot —— 任何档不放行。</li>
+<li>自动化健康自查：<code>python3 ~/.claude/bin/automation-reality-check.py</code>（虚假健康核查，launchctl 权威信号）。</li>
+</ul>
+</body>
+</html>

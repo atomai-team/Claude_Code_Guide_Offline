@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用 Claude Code 从零构建商城项目——实战手册</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📘%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════ MD→HTML 渲染共享样式(继承 dashboard 设计系统 v2)═══════ */
+:root {
+  color-scheme: light;
+  --bg: #ffffff; --bg-subtle: #f5f5f7; --surface: #ffffff; --surface2: #fafafc; --surface-hover: #f5f5f7;
+  --border: #e5e5ea; --border-strong: #d2d2d7; --code-bg: #f5f5f7; --tag-bg: #f5f5f7;
+  --text: #1d1d1f; --text-dim: #515154; --text-muted: #86868b;
+  --accent: #0071e3; --accent-hover: #0077ed; --accent-soft: #e8f1fd;
+  --green: #1a8c4a; --red: #d70015; --orange: #b25000; --purple: #6e3fd6;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --font-sans: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
+  --font-mono: 'JetBrains Mono','SF Mono','Fira Code',Menlo,monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0a0a0b; --bg-subtle: #141416; --surface: #161618; --surface2: #1c1c1f; --surface-hover: #232326;
+    --border: #2a2a2e; --border-strong: #3a3a3e; --code-bg: #1c1c1f;
+    --text: #f5f5f7; --text-dim: #aeaeb2; --text-muted: #8e8e93;
+    --accent: #2997ff; --accent-soft: #16263b;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans); background: var(--bg); color: var(--text);
+  line-height: 1.7; font-size: 15px; padding: 48px 32px 80px; max-width: 880px; margin: 0 auto;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+.doc-header {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  margin-bottom: 28px; padding-bottom: 18px; border-bottom: 1px solid var(--border);
+}
+.doc-header .back {
+  color: var(--accent); text-decoration: none; padding: 6px 14px;
+  border: 1px solid var(--border-strong); border-radius: 980px; font-size: 13px; font-weight: 500;
+  transition: all .15s;
+}
+.doc-header .back:hover { background: var(--accent-soft); border-color: var(--accent); }
+.doc-header .meta { color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
+h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 12px 0 18px; color: var(--text); }
+h2 { font-size: 23px; font-weight: 600; margin: 40px 0 14px; padding-top: 12px; letter-spacing: -0.01em;
+     border-top: 1px solid var(--border); color: var(--text); }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+h3 { font-size: 18px; font-weight: 600; margin: 28px 0 10px; color: var(--text); }
+h4 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; color: var(--text-dim); }
+p { margin: 10px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+ul, ol { margin: 10px 0 10px 24px; }
+li { margin: 4px 0; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 28px 0; }
+code {
+  font-family: var(--font-mono); font-size: 0.9em; background: var(--code-bg);
+  padding: 1px 6px; border-radius: 5px; color: var(--text);
+}
+pre {
+  background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 16px; overflow-x: auto; margin: 14px 0; line-height: 1.55;
+}
+pre code { background: transparent; padding: 0; font-size: 13px; }
+blockquote {
+  border-left: 3px solid var(--accent); margin: 14px 0; padding: 8px 16px;
+  background: var(--accent-soft); border-radius: 0 8px 8px 0; color: var(--text-dim);
+}
+blockquote p { margin: 4px 0; }
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+th { text-align: left; padding: 9px 12px; background: var(--bg-subtle); color: var(--text-muted);
+     font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+td { padding: 9px 12px; border-top: 1px solid var(--border); }
+tr:hover td { background: var(--bg-subtle); }
+img { max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0; }
+strong { font-weight: 600; color: var(--text); }
+em { font-style: italic; color: var(--text-dim); }
+@media (max-width: 720px) { body { padding: 24px 16px 60px; } h1 { font-size: 26px; } h2 { font-size: 20px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <a href="dashboard.html" class="back">← 返回 MYCC 仪表盘</a>
+  <span class="meta">渲染时间 2026-06-26 01:13 · 源: 02-商城项目实战手册.md</span>
+</div>
+<h1 id="claude-code">用 Claude Code 从零构建商城项目——实战手册</h1>
+<blockquote>
+<p>技术栈：Next.js 14 + Node.js + PostgreSQL + Tailwind CSS<br>
+适合：零基础到有开发基础、第一次用 Claude Code 做完整项目的工程师</p>
+<p><strong>怎么用这本手册</strong>：从上到下按顺序读。每一步都有：你说什么 → Claude 做什么 → 看到什么算成功 → 卡住了怎么办。照着复制粘贴就能跑起来。</p>
+</blockquote>
+<hr>
+<h2 id="_1">📋 项目概览</h2>
+<p><strong>潮牌商城（TrendMall）</strong><br>
+- 前台：商品浏览、搜索、商品详情、购物车、结账、订单查询<br>
+- 后台：商品管理、订单管理、用户管理<br>
+- 技术栈：Next.js 14 (App Router) + Tailwind CSS + Prisma + PostgreSQL</p>
+<p><strong>用 Claude Code 能做什么：</strong><br>
+- 从需求分析到代码部署，全程 AI 辅助<br>
+- 根据你的描述自动生成代码、写测试、做代码审查<br>
+- 遇到 bug 自动排查根因、自动修复<br>
+- 调研技术方案、比对选型、给出推荐</p>
+<p><strong>小白须知</strong>：<br>
+- Claude Code 是一个跑在终端（命令行）里的 AI 工具，不是网页。<br>
+- 你需要先安装 Node.js（https://nodejs.org）和 Claude Code（<code>npm install -g @anthropic-ai/claude-code</code>）。<br>
+- 安装好后，在终端里输入 <code>claude</code> 就进入对话模式，然后用中文直接跟它说话就行。<br>
+- 你说的每一句话，Claude 都会读懂并执行，不需要写代码命令。</p>
+<hr>
+<h2 id="2026-06-25">🩺 先体检再开工（2026-06-25 增 · 项目实战前必读）</h2>
+<blockquote>
+<p>💡 <strong>开工前先体检</strong> · 商城项目动辄几十个文件 + 数据库 + 部署，开工前花 5 分钟"体检"能省后面 5 小时踩坑。</p>
+</blockquote>
+<h3 id="super-full-checkup-5">🩺 super 入口 / full-checkup / 5 大高级功能 · 怎么用？</h3>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>说什么</th>
+<th>干什么</th>
+<th>耗时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>super 帮我准备做商城项目</code></td>
+<td>路由器列出 3-5 个候选 skill 给你选</td>
+<td>30s</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>全面体检</code></td>
+<td>full-checkup 扫描配置/能力/健康度（只读，不动东西）</td>
+<td>2min</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>评估 这个商城想法的可行性</code></td>
+<td>CEO 拉 7 商业顾问并列分析（市场/财务/法务等）</td>
+<td>5min</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>开工</code></td>
+<td>start-work 进入第0阶段 → 模板 + 状态目录</td>
+<td>10min</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>队长 帮我加速</code></td>
+<td>极限档并行派 subagent</td>
+<td>持续</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4">🔥 实战开局的 4 类融合场景</h3>
+<p><strong>场景 1：第一次做商城，不知道从哪开始</strong></p>
+<pre><code>&quot;super 我想做潮牌商城&quot; 
+→ 主调度器列候选：ceo-mode（先评估）+ start-work（模板）+ team-fullstack（团队）
+→ 你选 start-work → 进入第0阶段 → 跟流程走
+</code></pre>
+<p><strong>场景 2：评估完想加速开发</strong></p>
+<pre><code>&quot;队长 帮我做这个商城&quot; 
+→ 需求梳理 → 派 subagent 并行（前端/后端/数据库/部署）
+→ 顾问对抗裁决 → Writer≠Reviewer 收口
+</code></pre>
+<p><strong>场景 3：写到一半多 session 混乱</strong></p>
+<pre><code>经理自动检测到冲突 → 提示
+→ 你说&quot;秘书 收口一下&quot; → 触发 weekly-secretary 巡检
+→ 自动生成健康报告
+</code></pre>
+<p><strong>场景 4：遇到复杂决策</strong></p>
+<pre><code>&quot;super 商城要不要做直播功能&quot;
+→ 命中&quot;评估&quot; → 候选：ceo-mode + capital-ir + cmo-advisor
+→ 你选 ceo-mode → 7 顾问并列分析 → 综合报告
+</code></pre>
+<h3 id="_2">📋 商城项目常用入口速查</h3>
+<table>
+<thead>
+<tr>
+<th>你想...</th>
+<th>说</th>
+<th>对应 skill</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>准备开始 / 立项</td>
+<td><code>super</code> <code>开工</code> <code>start-work</code></td>
+<td>engineering-scenario-router / start-work</td>
+</tr>
+<tr>
+<td>评估商业模式</td>
+<td><code>评估</code> <code>CEO</code> <code>尽调</code></td>
+<td>ceo-mode</td>
+</tr>
+<tr>
+<td>写前端 / 后端 / API</td>
+<td><code>代码</code> <code>开发</code> <code>做功能</code></td>
+<td>team-fullstack</td>
+</tr>
+<tr>
+<td>测功能 / 修 bug</td>
+<td><code>测试</code> <code>QA</code> <code>找根因</code></td>
+<td>qa-validator / diagnose</td>
+</tr>
+<tr>
+<td>部署上线</td>
+<td><code>部署</code> <code>发布</code> <code>上线</code></td>
+<td>deployment-engineer</td>
+</tr>
+<tr>
+<td>多 session 协作</td>
+<td>（自动）<code>经理</code></td>
+<td>multi-session-state</td>
+</tr>
+<tr>
+<td>自动化巡检</td>
+<td><code>秘书</code> <code>健康报告</code></td>
+<td>weekly-secretary</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🔗 <strong>详见 dashboard.html §C10.5+C10.6 + 00-速查表 §"5 大高级功能"</strong>。</p>
+</blockquote>
+<hr>
+<h2 id="0">🏁 第0阶段：项目初始化（必做）</h2>
+<blockquote>
+<p><strong>这一阶段目标</strong>：创建项目文件夹，让 Claude 认识你的项目，以后每次开对话不用重复解释。</p>
+</blockquote>
+<h3 id="_3">第一步：创建项目文件夹并进入</h3>
+<p>在终端输入：</p>
+<pre><code class="language-bash">mkdir -p ~/projects/trendmall
+cd ~/projects/trendmall
+claude
+</code></pre>
+<p><strong>看到什么算成功</strong>：终端出现 Claude 的对话提示符（通常是 <code>&gt;</code>），等你输入。</p>
+<p><strong>卡住了</strong>：如果报错 <code>command not found: claude</code>，说明没安装好，运行 <code>npm install -g @anthropic-ai/claude-code</code> 重装。</p>
+<hr>
+<h3 id="claudemd">第二步：初始化 CLAUDE.md 项目说明文件</h3>
+<p>进入对话后说：</p>
+<pre><code>/init
+</code></pre>
+<p><strong>Claude 会做什么</strong>：扫描项目结构，自动生成 <code>CLAUDE.md</code> 文件，记录：<br>
+- 项目架构<br>
+- 技术栈<br>
+- 常用命令（<code>npm run dev</code>、<code>npx prisma migrate</code> 等）<br>
+- 特殊注意事项</p>
+<p><strong>看到什么算成功</strong>：Claude 说"已生成 CLAUDE.md"，你可以用 <code>cat CLAUDE.md</code> 看内容。</p>
+<p><strong>卡住了</strong>：如果目录是空的，Claude 会生成一个基础版，后面你再补充内容就行。</p>
+<blockquote>
+<p>💡 <code>CLAUDE.md</code> 是 Claude 每次启动都会读的"项目说明书"，写得越详细，Claude 越少问你重复问题。</p>
+</blockquote>
+<hr>
+<h3 id="_4">第三步：深度初始化项目理解</h3>
+<p>如果是接手别人的项目，说：</p>
+<pre><code>/deepinit
+</code></pre>
+<p>或者：</p>
+<pre><code>帮我深度理解这个项目的结构、技术栈、业务逻辑，
+然后给我一份完整的项目概览
+</code></pre>
+<p><strong>Claude 会做什么</strong>：读取所有文件，分析代码结构，用中文给你写一份"项目地图"，说清楚每个目录是干什么的。</p>
+<p><strong>看到什么算成功</strong>：Claude 输出一个包含目录结构、主要模块、技术栈的总结。</p>
+<hr>
+<h3 id="_5">第四步：设置项目记忆</h3>
+<p>告诉 Claude 项目关键信息（它会记住，下次打开不用再说）：</p>
+<pre><code>记住以下项目信息：
+- 数据库：PostgreSQL 15，连接串在 .env 的 DATABASE_URL
+- 部署：Vercel（前端）+ Railway（数据库）
+- 设计规范：主色 #1A1A2E，字体 Inter
+- 支付：接入微信支付，SDK 在 /lib/wechatpay.ts
+- 后台路由统一加 /admin 前缀
+</code></pre>
+<p><strong>Claude 会做什么</strong>：把这些信息存入项目记忆，以后新开对话也记得。</p>
+<p><strong>看到什么算成功</strong>：Claude 说"已记住以下信息：……"并复述你说的内容。</p>
+<p><strong>卡住了</strong>：如果 Claude 说没有记忆功能，直接把这段话加到 <code>CLAUDE.md</code> 文件里，效果一样。</p>
+<hr>
+<h2 id="1">💡 第1阶段：需求分析</h2>
+<blockquote>
+<p><strong>这一阶段目标</strong>：把脑子里模糊的想法，变成一份清晰的功能清单和优先级。</p>
+</blockquote>
+<h3 id="_6">场景：你有一个模糊的想法，需要梳理清楚</h3>
+<p><strong>你说：</strong></p>
+<pre><code>我想做一个潮牌电商，主要卖国内潮牌的衣服鞋子，
+目标用户是 18-30 岁年轻人，先做 MVP。
+帮我梳理一下需要做哪些功能，排个优先级
+</code></pre>
+<p><strong>Claude 会做什么：</strong><br>
+- 引导你回答关键问题（用户规模、支付方式、是否需要库存管理等）<br>
+- 生成功能清单 + RICE 优先级排序<br>
+- 划定 MVP 范围</p>
+<p><strong>看到什么算成功</strong>：Claude 输出一个表格或列表，有功能名称、优先级（高/中/低）、原因说明。</p>
+<p><strong>卡住了</strong>：如果 Claude 问了很多问题让你不知道怎么回答，就说"先按最简单的 MVP 来，其他的后面再说"。</p>
+<hr>
+<h3 id="deep-interview">用 <code>deep-interview</code> 深度挖需求</h3>
+<pre><code>/deep-interview
+</code></pre>
+<p>Claude 会用结构化的方式访谈你，挖出真实需求。适合产品方向还不明确时。</p>
+<p><strong>看到什么算成功</strong>：Claude 开始问你一连串问题，比如"你的目标用户每周购物几次？""现有竞品是谁？"等，你如实回答就行。</p>
+<p><strong>小白提示</strong>：这个命令特别适合你脑子里只有一个大概想法的时候，让 Claude 帮你想清楚。</p>
+<hr>
+<h3 id="prd">生成 PRD 文档</h3>
+<p>需求梳理完后：</p>
+<pre><code>根据我们讨论的内容，帮我生成一份正式的 PRD 文档，
+包含功能列表、用户故事、验收标准
+</code></pre>
+<p>或者用：</p>
+<pre><code>/to-prd
+</code></pre>
+<p><strong>Claude 会做什么</strong>：把你们的讨论整理成标准格式的产品需求文档，每个功能点有"谁、在什么情况下、做什么、结果是什么"。</p>
+<p><strong>看到什么算成功</strong>：Claude 输出一份带标题、功能列表、用户故事（"作为……我想……以便……"格式）的文档。</p>
+<hr>
+<h3 id="_7">商业可行性分析（可选）</h3>
+<pre><code>/ceo-mode
+</code></pre>
+<p>Claude 会从市场分析、竞品对标、财务预测等维度帮你判断这个方向是否值得做。</p>
+<hr>
+<h2 id="2">🔧 第2阶段：技术选型和架构设计</h2>
+<blockquote>
+<p><strong>这一阶段目标</strong>：确定用什么技术来做，设计数据库，画出系统结构图。</p>
+</blockquote>
+<h3 id="_8">调研技术栈</h3>
+<p><strong>你说：</strong></p>
+<pre><code>帮我调研一下做电商前端，Next.js 14 和 Remix 哪个更合适。
+我的场景是：商品列表需要 SEO，用户量初期不大，
+团队熟悉 React，不想花太多时间在框架上
+</code></pre>
+<p><strong>Claude 做什么：</strong><br>
+触发 <code>deep-research</code>，调研官方文档、社区讨论、实际案例，<br>
+给出对比表 + ★推荐 + 理由。</p>
+<p><strong>看到什么算成功</strong>：Claude 给出一个对比表（两个框架各自的优缺点），最后有一个明确的 ★推荐，不会模糊地说"都可以"。</p>
+<p><strong>卡住了</strong>：如果 Claude 给的结论你看不懂，就说"用大白话再解释一遍，不要用技术术语"。</p>
+<hr>
+<h3 id="_9">技术架构设计</h3>
+<pre><code>根据我们确定的需求，帮我设计整体技术架构。
+要包含：前端架构、后端服务分层、数据库设计、
+第三方服务接入（支付/OSS/短信），以及部署方案
+</code></pre>
+<p>Claude 会输出：<br>
+- 架构图（文字版/Mermaid）<br>
+- 关键技术决策说明<br>
+- 各层接口设计</p>
+<p><strong>看到什么算成功</strong>：Claude 给出一个分层的架构描述，能看出"用户 → 前端 → 后端 → 数据库"的数据流向。</p>
+<hr>
+<h3 id="_10">生成架构图</h3>
+<pre><code>/baoyu-diagram
+</code></pre>
+<p>或者：</p>
+<pre><code>把架构用 Mermaid 图表示出来
+</code></pre>
+<p><strong>小白提示</strong>：Mermaid 图是一种用文字描述的流程图，你把 Claude 给的代码粘到 https://mermaid.live 就能看到图形效果。</p>
+<hr>
+<h3 id="_11">数据库设计</h3>
+<pre><code>帮我设计商城的数据库 Schema。
+包含：用户、商品（多规格/SKU）、购物车、订单、支付记录。
+用 Prisma Schema 格式输出，注意加合理的索引
+</code></pre>
+<p><strong>Claude 会做什么</strong>：给你一份完整的 <code>schema.prisma</code> 文件内容，包含所有表的字段、类型、关系和索引。</p>
+<p><strong>看到什么算成功</strong>：Claude 输出包含 <code>model User</code>、<code>model Product</code>、<code>model Order</code> 等的代码块。</p>
+<p><strong>卡住了</strong>：如果你不懂 Prisma 是什么，就说"先解释一下 Prisma 是什么，再给我 Schema"。Prisma 是一个让你用 JavaScript 操作数据库的工具，不用写 SQL。</p>
+<hr>
+<h2 id="3">💻 第3阶段：功能开发（按功能循环）</h2>
+<blockquote>
+<p><strong>这一阶段目标</strong>：一个功能一个功能地做，每次做完验证，再做下一个。</p>
+</blockquote>
+<p>每个功能的标准开发循环：<br>
+<strong>需求描述 → 方案确认 → 编写代码 → 代码审查 → 验证</strong></p>
+<p><strong>小白须知</strong>：不要一次让 Claude 做太多功能，每次只说一个，做完验证没问题再做下一个。</p>
+<hr>
+<h3 id="a">示例A：商品列表页（基础功能）</h3>
+<p><strong>你说：</strong></p>
+<pre><code>帮我开发商品列表页。
+功能：展示商品卡片（图片、名称、价格、销量），
+支持按分类筛选、价格排序，底部分页。
+数据从 /api/products 接口获取，
+用 TailwindCSS 写样式，要有 loading skeleton
+</code></pre>
+<p><strong>Claude 会：</strong><br>
+1. 分析需求，列出要创建/修改的文件<br>
+2. 问确认：「接口格式是什么？分页是前端还是后端？」<br>
+3. 你确认后开始写<br>
+4. 写完说：<code>/code-review --fix</code> 自动审查+修复</p>
+<p><strong>看到什么算成功</strong>：Claude 列出一个文件清单，说"我打算创建以下文件：……，修改以下文件：……，你确认吗？"，你说"确认"它就开始写。</p>
+<p><strong>卡住了</strong>：如果 Claude 写完了但浏览器显示空白，说"帮我排查为什么页面是空白的，先检查控制台有没有报错"。</p>
+<hr>
+<h3 id="a_1">示例A 详细流程（照这个顺序操作）</h3>
+<p><strong>步骤1</strong>：说需求（如上），等 Claude 列出文件清单</p>
+<p><strong>步骤2</strong>：Claude 问确认时，回答问题。如果不确定，就说：</p>
+<pre><code>你来决定最合理的方式，按业界标准做
+</code></pre>
+<p><strong>步骤3</strong>：等 Claude 写完代码，它会告诉你"代码写完了"</p>
+<p><strong>步骤4</strong>：让 Claude 运行看看：</p>
+<pre><code>帮我启动开发服务器，确认页面能正常显示
+</code></pre>
+<p><strong>步骤5</strong>：看到服务器运行后，Claude 会告诉你访问 http://localhost:3000 查看效果</p>
+<p><strong>步骤6</strong>：确认没问题后，说：</p>
+<pre><code>做完了，帮我做个代码审查
+</code></pre>
+<hr>
+<h3 id="b">示例B：购物车功能（状态管理）</h3>
+<p><strong>你说：</strong></p>
+<pre><code>开发购物车功能。
+要求：
+- 支持加入购物车、修改数量、删除商品
+- 购物车数据用 Zustand 管理（本地 + 登录后同步服务端）
+- 右上角 badge 显示购物车数量
+- 购物车抽屉侧边弹出
+做之前先给我看一下你打算怎么设计状态管理的方案
+</code></pre>
+<p><strong>Claude 会做什么</strong>：先给你一个方案说明（不写代码），等你点头确认后再动手。</p>
+<p><strong>看到什么算成功</strong>：Claude 用文字描述状态管理的思路，比如"我打算用 Zustand 的 store 存购物车数组，每次修改同步到 localStorage……"</p>
+<blockquote>
+<p>💡 加"做之前先给我看方案"是好习惯，尤其是复杂功能，确认方向再动手。</p>
+</blockquote>
+<p><strong>小白提示</strong>：Zustand 是一个管理数据状态的工具，就像一个"数据仓库"，购物车里有什么商品、数量多少都存在里面，页面从里面读取数据。</p>
+<hr>
+<h3 id="c">示例C：支付功能（高风险，需要谨慎）</h3>
+<p><strong>你说：</strong></p>
+<pre><code>接入微信支付。先帮我调研一下微信支付 JSAPI 和 Native 
+两种方式，哪种适合 H5 商城，给出推荐方案和接入步骤
+</code></pre>
+<p>Claude 调研完给出推荐后：</p>
+<pre><code>好，就按 JSAPI 方案，帮我搭建支付服务。
+注意：密钥信息只从环境变量读，不要硬编码。
+做完需要做安全审查
+</code></pre>
+<p>做完后：</p>
+<pre><code>/security-audit
+</code></pre>
+<p>专门检查支付模块的安全漏洞（金额校验、重放攻击、签名验证等）。</p>
+<p><strong>看到什么算成功</strong>：安全审查结果里没有红色 P0 级别的问题，或者 P0 问题 Claude 都帮你修复了。</p>
+<p><strong>小白提示</strong>：支付模块是最容易出安全漏洞的地方，一定要做安全审查再上线，这不是可选的。</p>
+<hr>
+<h3 id="d">示例D：后台管理（复杂，用队长模式）</h3>
+<p><strong>你说：</strong></p>
+<pre><code>队长，帮我开发后台商品管理模块。
+功能包括：商品列表（搜索、筛选、批量操作）、
+商品新增/编辑（多规格SKU、图片上传到OSS）、
+上下架操作、库存管理。
+用 React 的 ant design 5 做 UI
+</code></pre>
+<p>触发"队长"模式后，Claude 会：<br>
+1. 先分析拆分成多个子任务<br>
+2. 能并行的任务同时做（列表页、表单页、API 接口可以并行）<br>
+3. 每个子任务完成后做验证<br>
+4. 全部完成后给汇总报告</p>
+<p><strong>看到什么算成功</strong>：Claude 先给你一个任务拆分清单，比如"我把这个模块拆成以下 5 个子任务：……然后并行做 1、2、3，做完再串行做 4、5"。</p>
+<p><strong>卡住了</strong>：如果 Claude 好像卡住不动了，说"继续，你做到哪一步了？"</p>
+<hr>
+<h3 id="tdd">TDD 开发模式（写测试再写代码）</h3>
+<p><strong>适合：</strong> 核心业务逻辑、支付计算、库存扣减等不能出错的功能</p>
+<p><strong>你说：</strong></p>
+<pre><code>用 TDD 模式开发订单价格计算逻辑。
+规则：商品单价 × 数量 + 运费，
+满 199 免运费，优惠券直减，最终价格不能低于 1 分钱
+</code></pre>
+<p>Claude 会严格走：<br>
+1. <strong>红</strong>：先写失败测试（覆盖各种边界情况）<br>
+2. <strong>绿</strong>：写最小实现让测试通过<br>
+3. <strong>重构</strong>：整理代码，测试仍然通过</p>
+<p><strong>看到什么算成功</strong>：Claude 先给你一个测试文件，里面有很多 <code>test(...)</code> 函数，然后说"现在运行测试，全部失败，这是正常的"。接着写实现代码，最后说"测试全部通过"。</p>
+<p><strong>小白提示</strong>：TDD（测试驱动开发）看起来是多此一举——先写测试再写代码——但这样做出来的功能特别可靠，因为测试覆盖了所有边界情况。</p>
+<hr>
+<h2 id="4_1">🔍 第4阶段：代码质量保障</h2>
+<blockquote>
+<p><strong>这一阶段目标</strong>：每做完一块功能就检查一次质量，上线前做全面扫描。</p>
+</blockquote>
+<h3 id="_12">日常代码审查</h3>
+<p>每做完一个模块就审查：</p>
+<pre><code>/code-review --fix
+</code></pre>
+<p>Claude 会审查最近改动，发现问题直接修复。</p>
+<p><strong>看到什么算成功</strong>：Claude 输出一个审查报告，有问题的地方会标记，没有问题的地方会说"这部分没有问题"。如果有问题，Claude 会直接修复并告诉你改了什么。</p>
+<p><strong>卡住了</strong>：如果 Claude 修复后还有问题，说"还有问题，继续修"。</p>
+<hr>
+<h3 id="_13">深度安全扫描</h3>
+<p>完整功能做完后：</p>
+<pre><code>/security-audit
+</code></pre>
+<p>或者：</p>
+<pre><code>帮我做一次完整的安全审计，重点检查：
+SQL 注入、XSS、CSRF、支付逻辑漏洞、API 鉴权
+</code></pre>
+<p>Claude 会用 OWASP Top 10 框架逐项检查，给出分级报告（P0/P1/P2）。</p>
+<p><strong>看到什么算成功</strong>：Claude 给出一个分级清单，P0（必须修）没有项目，或者有的话 Claude 帮你修完了。</p>
+<p><strong>小白提示</strong>：<br>
+- P0 = 严重漏洞，上线前必须修<br>
+- P1 = 重要问题，建议修<br>
+- P2 = 优化建议，可选</p>
+<hr>
+<h3 id="_14">多视角评审（重大功能上线前）</h3>
+<pre><code>/judge-panel
+</code></pre>
+<p>或者：</p>
+<pre><code>帮我用多个视角审查支付模块：
+① 安全视角：有没有漏洞
+② 性能视角：高并发下会不会出问题
+③ 边界视角：异常情况处理完整吗
+</code></pre>
+<p><strong>看到什么算成功</strong>：Claude 用三种视角各自出一份小报告，最后给你一个综合结论。</p>
+<hr>
+<h3 id="_15">代码简化</h3>
+<p>感觉某个文件写得太复杂：</p>
+<pre><code>/simplify
+</code></pre>
+<p>Claude 自动找到可以简化的地方，在不改功能的前提下精简代码。</p>
+<hr>
+<h3 id="qa">全面 QA 验收</h3>
+<pre><code>/ultraqa
+</code></pre>
+<p>Claude 会系统性地验证功能是否符合需求，包括：<br>
+- 功能测试<br>
+- 边界场景<br>
+- 错误处理<br>
+- 用户体验</p>
+<p><strong>看到什么算成功</strong>：Claude 逐条验证需求列表，每条给出"通过/不通过"，不通过的会帮你修。</p>
+<hr>
+<h2 id="5">📚 第5阶段：文档生成</h2>
+<blockquote>
+<p><strong>这一阶段目标</strong>：做完代码，给自己和团队留下清晰的文档，以后接手或维护不用从头看代码。</p>
+</blockquote>
+<h3 id="_16">技术架构说明文档</h3>
+<pre><code>帮我写一份商城的技术架构说明文档，
+读者是要接手项目的新工程师。
+包含：架构概览、各模块说明、关键数据流、
+部署架构、开发规范
+</code></pre>
+<p><strong>看到什么算成功</strong>：Claude 输出一份有目录的 Markdown 文档，可以直接保存成 <code>ARCHITECTURE.md</code>。</p>
+<hr>
+<h3 id="api">API 接口文档</h3>
+<pre><code>扫描 /app/api 目录下的所有接口，
+帮我生成完整的 API 文档，
+包含：请求参数、响应格式、错误码、示例
+</code></pre>
+<p><strong>看到什么算成功</strong>：Claude 给出每个接口的文档，格式大概是：</p>
+<pre><code>GET /api/products
+参数：page（页码）、category（分类）、sort（排序方式）
+响应：{ data: [...], total: 100, page: 1 }
+错误码：400（参数错误）、500（服务器错误）
+</code></pre>
+<hr>
+<h3 id="readme">README</h3>
+<pre><code>/article-writing
+</code></pre>
+<p>或者：</p>
+<pre><code>帮我写项目 README，包含：
+项目简介、功能列表、快速启动、
+环境变量配置说明、部署指南
+</code></pre>
+<hr>
+<h3 id="ppt">演示 PPT（给甲方/投资人）</h3>
+<pre><code>/baoyu-slide-deck
+</code></pre>
+<p>或者：</p>
+<pre><code>帮我做一份商城项目演示 PPT，
+包含：项目背景、功能演示、技术亮点、上线计划，
+10-15页，商务风格
+</code></pre>
+<hr>
+<h2 id="6">🚀 第6阶段：部署发布</h2>
+<blockquote>
+<p><strong>这一阶段目标</strong>：把本地跑通的项目，发布到真实的服务器让用户能访问。</p>
+</blockquote>
+<h3 id="_17">生成部署脚本</h3>
+<pre><code>/deploy-ship
+</code></pre>
+<p>或者：</p>
+<pre><code>帮我生成完整的部署方案：
+前端部署到 Vercel，数据库用 Railway PostgreSQL，
+包含：CI/CD 配置（GitHub Actions）、
+环境变量管理、数据库迁移流程、回滚方案
+</code></pre>
+<p><strong>看到什么算成功</strong>：Claude 给你一份分步骤的部署说明，每步都有具体的命令。</p>
+<p><strong>小白提示</strong>：<br>
+- Vercel = 免费的前端托管平台，可以直接绑定 GitHub 仓库，推送代码自动部署<br>
+- Railway = 数据库托管服务，PostgreSQL 开箱即用，不用自己搭服务器</p>
+<hr>
+<h3 id="cicd">配置 CI/CD</h3>
+<pre><code>帮我写 GitHub Actions workflow，
+要求：
+- PR 时自动跑测试 + lint
+- 合并到 main 后自动部署到 Vercel
+- 部署前自动跑数据库迁移
+</code></pre>
+<p><strong>看到什么算成功</strong>：Claude 给你一个 <code>.github/workflows/deploy.yml</code> 文件的内容，你把它放到对应位置就行。</p>
+<p><strong>小白提示</strong>：CI/CD 的意思是"每次提交代码，自动跑测试、自动部署"，不用手动操作，代码推上去就自动上线。</p>
+<hr>
+<h3 id="ci">自动修复 CI 失败</h3>
+<p>CI 跑失败了？</p>
+<pre><code>/gh-ci-fix
+</code></pre>
+<p>或者把失败日志粘给 Claude：</p>
+<pre><code>CI 挂了，日志如下：[粘贴日志]，帮我修
+</code></pre>
+<p><strong>看到什么算成功</strong>：Claude 分析日志，找到失败原因，给你修复方案或直接修改代码。</p>
+<hr>
+<h3 id="_18">发版提交</h3>
+<pre><code>/commit-commands:commit-push-pr
+</code></pre>
+<p>自动：<br>
+1. 生成规范的 commit message（根据改动内容）<br>
+2. push 到远端<br>
+3. 创建 PR（自动生成 PR 描述）</p>
+<p><strong>看到什么算成功</strong>：Claude 说"已提交 commit：[commit 信息]，已推送到远端，已创建 PR：[PR 链接]"。</p>
+<hr>
+<h2 id="_19">🔄 并行开发技巧</h2>
+<blockquote>
+<p><strong>这一阶段目标</strong>：让 Claude 同时做多件事，不用等一个做完才做下一个。</p>
+</blockquote>
+<h3 id="_20">前后端同时开发</h3>
+<pre><code>队长，前后端并行开发。
+前端做商品详情页 UI（先用 mock 数据），
+后端同时做商品详情 API，
+两边做完再联调
+</code></pre>
+<p>Claude 会同时派出前端 agent 和后端 agent 并行工作。</p>
+<p><strong>看到什么算成功</strong>：Claude 说"我正在同时进行以下任务：任务1（前端）……任务2（后端）……"，两个任务同时推进。</p>
+<p><strong>小白提示</strong>：Mock 数据就是假数据，前端先用假数据把页面做出来，等后端接口做好了再换成真数据，这样两边可以同时开工不用等待。</p>
+<hr>
+<h3 id="_21">同时做多个无关功能</h3>
+<pre><code>火力全开，同时做这三件事：
+1. 给所有 API 加统一的错误处理 middleware
+2. 给商品图片加懒加载
+3. 优化数据库查询，商品列表加 Redis 缓存
+</code></pre>
+<p><strong>看到什么算成功</strong>：Claude 列出三个任务并行执行，分别报告进度，最后汇总"三个任务全部完成"。</p>
+<hr>
+<h3 id="_22">多项目同时跑</h3>
+<pre><code class="language-bash"># 终端1：前端项目
+cd ~/projects/trendmall-web &amp;&amp; claude
+
+# 终端2：后端项目
+cd ~/projects/trendmall-api &amp;&amp; claude
+</code></pre>
+<p>两个 session 独立运行，互不干扰。</p>
+<hr>
+<h2 id="_23">🧠 项目记忆管理</h2>
+<blockquote>
+<p><strong>这一阶段目标</strong>：让 Claude 记住你的项目规则，下次不用重新说。</p>
+</blockquote>
+<h3 id="claude">让 Claude 记住重要信息</h3>
+<pre><code>记住：
+- Redis 缓存 TTL 统一设 3600 秒
+- 图片 OSS bucket 叫 trendmall-prod
+- 管理员账号权限等级用数字：1=运营 2=管理员 3=超级管理员
+- 订单号格式：TM + 年月日 + 6位随机数
+</code></pre>
+<p>这些信息会存入持久记忆，以后不用每次都说。</p>
+<p><strong>看到什么算成功</strong>：Claude 说"已记住以上约定"，下次新对话问它"订单号是什么格式？"，它能答出来。</p>
+<hr>
+<h3 id="claudemd_1">CLAUDE.md 写什么（项目根目录）</h3>
+<pre><code class="language-markdown"># TrendMall 商城
+
+## 技术栈
+- 前端：Next.js 14 App Router + Tailwind CSS + Zustand
+- 后端：Next.js API Routes + Prisma
+- 数据库：PostgreSQL 15
+- 部署：Vercel + Railway
+
+## 常用命令
+- 启动开发：`npm run dev`
+- 数据库迁移：`npx prisma migrate dev`
+- 生成类型：`npx prisma generate`
+- 跑测试：`npm test`
+
+## 关键约定
+- API 路径统一加 /api 前缀
+- 后台路由加 /admin 前缀
+- 错误统一用 { code, message, data } 格式返回
+- 所有金额单位：分（避免浮点精度问题）
+- 图片存 OSS，数据库只存 URL
+
+## 环境变量
+- DATABASE_URL：PostgreSQL 连接串
+- REDIS_URL：Redis 连接串
+- WECHATPAY_MCHID：微信商户号
+- OSS_BUCKET：图片桶名称
+</code></pre>
+<p><strong>小白提示</strong>：把上面这段内容放到项目根目录的 <code>CLAUDE.md</code> 文件里，以后每次打开 Claude 它都会自动读这个文件，不用每次重新介绍项目。</p>
+<hr>
+<h3 id="clear">什么时候用 <code>/clear</code> 开新会话</h3>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>换了完全不相关的任务</td>
+<td><code>/clear</code> 开新会话</td>
+</tr>
+<tr>
+<td>对话超过 100 轮，Claude 开始犯错</td>
+<td><code>/compact</code> 或 <code>/clear</code></td>
+</tr>
+<tr>
+<td>做完一个大模块，开始下一个</td>
+<td><code>/clear</code> 开新会话</td>
+</tr>
+<tr>
+<td>Claude 的上下文里有很多无关内容</td>
+<td><code>/clear</code></td>
+</tr>
+<tr>
+<td>只是继续当前任务</td>
+<td>不用清</td>
+</tr>
+</tbody>
+</table>
+<p><strong>小白提示</strong>：<code>/clear</code> 是清空当前对话记忆，重新开始。<code>/compact</code> 是压缩记忆，只保留关键内容。前者更彻底，后者可以保留一部分上下文。</p>
+<hr>
+<h2 id="_24">🚨 避坑指南</h2>
+<blockquote>
+<p>这些是最常见的踩坑，照着做能少走很多弯路。</p>
+</blockquote>
+<h3 id="1_1">坑1：直接说"帮我做个商城"</h3>
+<p>❌ 太模糊，Claude 会做出一个跟你想的完全不同的东西</p>
+<p>✅ 正确做法：先需求分析（用 <code>deep-interview</code>），然后一个功能一个功能做</p>
+<hr>
+<h3 id="2-claude">坑2：让 Claude 一次做太多</h3>
+<p>❌ "帮我把整个商城前端都做完"</p>
+<p>✅ 正确做法：按功能模块拆分，每次做一个，验证完再下一个</p>
+<hr>
+<h3 id="3_1">坑3：代码改乱了不知道怎么撤回</h3>
+<p>遇到这种情况：</p>
+<pre><code>/rewind
+</code></pre>
+<p>或者：<code>把你刚才的改动都撤回</code></p>
+<p>也可以用 git 撤回（如果有 commit 的话）：</p>
+<pre><code class="language-bash">git checkout .
+</code></pre>
+<p><strong>卡住了</strong>：如果改动太多撤不干净，说"帮我找到最近一次能正常运行的代码状态，把我的改动全部还原"。</p>
+<hr>
+<h3 id="4claude">坑4：Claude 把测试删掉/改掉让测试通过</h3>
+<p>如果你发现 Claude 改了测试而不是改实现：</p>
+<pre><code>不对，测试不能改。你要修的是实现代码，不是测试。撤回重来
+</code></pre>
+<p>Claude 有内置规则禁止这样做，但如果出现了，这样纠正。</p>
+<hr>
+<h3 id="5claude">坑5：Claude 说"应该可以了"但没验证</h3>
+<pre><code>帮我实际运行一下，给我看运行结果
+</code></pre>
+<p>要求 Claude 给实际执行的证据，不接受"应该没问题"。</p>
+<p><strong>这很重要</strong>：Claude 有时候会说"应该可以了"但没有真正运行验证，你要主动要求它给你看实际运行的截图或输出，这叫"verify-before-assert"（断言前先验证）。</p>
+<hr>
+<h3 id="6-bug">坑6：同一个 bug 改了好几次还没修好</h3>
+<pre><code>同一个问题改了好几次还没修好，
+帮我系统性排查一下根因，
+不要先修，先把根因分析清楚再说方案
+</code></pre>
+<p>或者触发：</p>
+<pre><code>又报错了
+</code></pre>
+<p>→ 触发 systematic-error-analysis</p>
+<p><strong>看到什么算成功</strong>：Claude 给你一个根因分析，说"这个 bug 的根本原因是……不是……"，找到根因后再修，一次就能修好。</p>
+<hr>
+<h3 id="7">坑7：上下文塞满了无关内容</h3>
+<p>长期开发同一个项目，推荐每天/每个大模块 <code>/clear</code> 开新会话，<br>
+把当前关键背景（技术栈、当前在做什么）简单说一遍，比在一个会话里撑几百轮效果好。</p>
+<hr>
+<h3 id="8">坑8：小白常见误解</h3>
+<table>
+<thead>
+<tr>
+<th>误解</th>
+<th>实际情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude 会记住所有对话</td>
+<td>每次 /clear 后记忆清空，靠 CLAUDE.md 和 auto-memory 跨 session</td>
+</tr>
+<tr>
+<td>代码生成了就能直接用</td>
+<td>还需要安装依赖（npm install）、配置环境变量、做数据库迁移</td>
+</tr>
+<tr>
+<td>一次生成整个项目</td>
+<td>不现实，分模块做，每次做一个功能</td>
+</tr>
+<tr>
+<td>Claude 说完成了就真完成了</td>
+<td>要让 Claude 实际运行，给你看运行结果</td>
+</tr>
+<tr>
+<td>报错了让 Claude 猜原因</td>
+<td>把完整错误日志粘给 Claude，不要只说"报错了"</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="_25">📊 完整项目开发顺序参考</h2>
+<pre><code>Week 1：基础框架
+  Day1-2：初始化（/init），数据库设计，Prisma Schema
+  Day3-4：Next.js 框架搭建，路由结构，全局样式
+  Day5：基础组件库（Header/Footer/Loading/Error）
+
+Week 2：商品系统
+  Day1-2：商品列表页（SSR + 分页 + 筛选）
+  Day3-4：商品详情页（规格选择 + 图片轮播）
+  Day5：搜索功能
+
+Week 3：购物/支付
+  Day1-2：购物车（Zustand + API 同步）
+  Day3：结账流程（地址管理 + 运费计算）
+  Day4-5：微信支付接入 + 安全审计
+
+Week 4：订单/后台
+  Day1-2：订单列表 + 订单详情
+  Day3-4：后台商品管理
+  Day5：后台订单管理
+
+Week 5：收尾
+  Day1：全面安全审计（/security-audit）
+  Day2：性能优化（图片懒加载、Redis缓存、数据库索引）
+  Day3：文档生成（README + API文档）
+  Day4：部署配置（CI/CD + Vercel）
+  Day5：上线前最终 QA（/ultraqa）
+</code></pre>
+<p>每一步开始前说：</p>
+<pre><code>/goal &quot;今天完成 [模块名]，验收标准：[具体可测试的标准]&quot;
+</code></pre>
+<p><strong>小白提示</strong>：验收标准要具体可测试。不要写"商品列表页做好了"，要写"商品列表页能显示、能分页、能筛选分类、loading 状态有 skeleton 动画"。越具体，Claude 越能按你说的做。</p>
+<hr>
+<h2 id="_26">🗣️ 完整口语对话示例集</h2>
+<blockquote>
+<p>直接复制这些对话模板，换成你的项目内容就能用。</p>
+</blockquote>
+<h3 id="1_2">示例1：开发一个新功能</h3>
+<pre><code>你：&quot;帮我做商品详情页。
+    功能：大图展示、缩略图切换、规格/颜色/尺码选择（影响价格和库存）、
+    加入购物车、收藏。
+    设计参考小红书的商品页风格，移动端优先&quot;
+
+Claude：好，我需要确认几点：
+    1. 规格组合（颜色+尺码）是否有独立 SKU 和库存？
+    2. 图片来自 OSS，URL 格式是？
+    3. 加入购物车是直接加还是要登录验证？
+
+你：&quot;是的有独立SKU，图片 URL 是 https://oss.example.com/图片名，
+    加入购物车需要登录&quot;
+
+Claude：[开始写代码，给出文件列表和实现思路]
+    ...写完后...
+    已完成，我来做个代码审查
+
+你：&quot;好，审查完顺便把代码简化一下&quot;
+
+Claude：/code-review --fix [自动审查修复]
+        /simplify [自动简化]
+</code></pre>
+<p><strong>小白提示</strong>：Claude 问你问题时，不要跳过直接说"你自己决定"——对于关键业务逻辑（比如是否需要登录才能加购物车），你要给出明确答案，不然 Claude 会做出不符合你预期的功能。</p>
+<hr>
+<h3 id="2-bug">示例2：排查 bug</h3>
+<pre><code>你：&quot;订单提交一直报 500 错误，帮我查一下。
+    报错：Internal Server Error，后台日志：
+    PrismaClientKnownRequestError: Unique constraint failed on the fields: (`order_no`)&quot;
+
+Claude：找到了，order_no 生成逻辑有问题，高并发时可能重复。
+    当前用的是 Date.now() + random，
+    应该用雪花算法或者数据库 sequence。
+    我用数据库 sequence 来修，更简单可靠。
+    你确认要用这个方案吗？
+
+你：&quot;好，用 sequence 修&quot;
+
+Claude：[修复，然后给验证方法]
+    修完了，可以这样测试：同时提交10个订单，
+    看 order_no 是否全部唯一
+</code></pre>
+<p><strong>小白提示</strong>：报 bug 时，一定要把完整的错误信息粘给 Claude，不要只说"报错了"。错误信息里有 Claude 找到根因需要的关键线索。</p>
+<hr>
+<h3 id="3_2">示例3：技术调研</h3>
+<pre><code>你：&quot;帮我调研一下商城的搜索功能怎么做。
+    预计商品量 10万+，要支持关键词搜索、
+    筛选（价格区间、分类、品牌），需要高亮显示匹配词。
+    PostgreSQL 全文搜索、Elasticsearch、
+    Meilisearch 哪个合适？&quot;
+
+Claude：[触发 deep-research，调研三个方案]
+    ...
+    ★ 推荐：Meilisearch
+    理由：
+    1. 10万商品量，Meilisearch 完全够用，比 ES 运维简单
+    2. 中文分词内置支持，不需要额外配置
+    3. 高亮、筛选、排序开箱即用
+    4. 自托管成本低，Docker 一键启动
+    ...
+
+你：&quot;好，就用 Meilisearch。帮我搭建接入方案，
+    先做商品数据同步，再做搜索接口&quot;
+</code></pre>
+<hr>
+<h3 id="4_2">示例4：安全审计</h3>
+<pre><code>你：&quot;队长，整个支付模块做完了，
+    帮我做一次完整的安全审计，找漏洞&quot;
+
+Claude：[进入队长模式，触发 security-audit]
+    扫描范围：/app/api/payment/** + /lib/wechatpay.ts
+
+    🔴 P0 - 严重（必须修）：
+    1. 支付回调未验证签名
+       位置：/api/payment/callback/route.ts:23
+       风险：攻击者可伪造支付成功通知
+       修复：加 verifySignature() 校验
+
+    🟡 P1 - 重要：
+    2. 订单金额未做服务端二次校验
+       前端传来的金额直接使用，需要从数据库重新查询
+
+    ✅ P2 - 建议：
+    3. 支付日志建议脱敏（隐藏部分卡号）
+
+    P0 和 P1 我现在帮你修，确认吗？
+
+你：&quot;修&quot;
+</code></pre>
+<hr>
+<h3 id="5yolo">示例5：全力以赴（YOLO 模式）</h3>
+<pre><code>你：&quot;火力全开，把 TODO.md 里剩下的任务全做完，
+    你自己判断优先级，遇到问题别问我直接解决&quot;
+
+Claude：[进入 YOLO 极限并发模式]
+    检测到 12 个待办任务，按优先级排序后并行执行...
+    [同时派出多个 agent 并行工作]
+    ...
+    全部完成，报告如下：
+    ✅ 完成 11 个
+    ⚠️ 1 个需要你决策（第三方密钥配置）
+</code></pre>
+<hr>
+<h2 id="_27">🆕 用最新能力做项目（实战示范）</h2>
+<blockquote>
+<p>这一节示范怎么在商城项目里用 Claude Code 的工程化能力——避坑、提速、保质量。</p>
+</blockquote>
+<h3 id="1_3">1. 重大技术选型前：让外部模型反驳，避免踩坑</h3>
+<p><strong>场景</strong>：你准备在商城里用 Redis 做会话管理，但不确定这是不是最好的方案。</p>
+<p><strong>做法</strong>：</p>
+<pre><code>ai-panel &quot;商城用户会话管理，我打算用 Redis 存 session token，
+TTL 设 7 天，这个方案有没有问题？
+特别是安全性和扩展性方面，帮我找出潜在的坑&quot;
+</code></pre>
+<p><strong>Claude 会做什么</strong>：调用 <code>ai-panel</code> 把这个问题同时发给多个外部模型（Kimi、MiniMax 等），让它们从不同角度反驳这个方案，找出你没想到的问题。</p>
+<p><strong>看到什么算成功</strong>：Claude 给你汇总多个模型的反馈，比如"两个模型都提到了 Redis 单点故障问题，建议考虑 Redis Sentinel；另外有一个模型指出 7 天 TTL 对安全性要求高的场景偏长"。</p>
+<p><strong>为什么这样做</strong>：Claude 本身有知识盲点，让多个不同来源的 AI 来挑战你的方案，能找到 Claude 单独分析时容易漏掉的问题。这叫"异构对抗验证"。</p>
+<p><strong>实际例子——商城选型场景</strong>：</p>
+<pre><code>ai-panel &quot;商城图片上传，我考虑三个方案：
+① 直接传到自己的 Node.js 服务器再转存 OSS
+② 前端直传 OSS（带签名）
+③ 用 Cloudflare R2 替代 OSS
+从成本、性能、安全、运维难度四个维度反驳每个方案，
+找出各自最大的坑&quot;
+</code></pre>
+<hr>
+<h3 id="2-claude_1">2. 说"队长，火力全开"让 Claude 全权统筹一个功能</h3>
+<p><strong>场景</strong>：购物车功能有 5 个子任务，你不想一个一个盯着做。</p>
+<p><strong>做法</strong>：</p>
+<pre><code>队长，火力全开，帮我完整做购物车功能。
+包含：
+- 前端：购物车状态（Zustand）、购物车抽屉 UI、badge 计数
+- 后端：购物车 API（增删改查）、服务端购物车同步
+- 数据库：cart 和 cart_item 表的 Prisma Schema
+做完每个子任务都要验证，全部完成后给我汇总报告
+</code></pre>
+<p><strong>Claude 会做什么</strong>：<br>
+1. 拆解成子任务（数据库 → 后端 API → 前端状态 → 前端 UI → 联调）<br>
+2. 能并行的同时做（数据库迁移和后端接口可以并行）<br>
+3. 每个子任务完成后运行测试验证<br>
+4. 全部做完给你一份汇总</p>
+<p><strong>看到什么算成功</strong>：</p>
+<pre><code>Claude：任务拆分如下：
+  [并行] 任务1：cart Schema 迁移 + 任务2：Zustand store 初始化
+  [串行] 任务3：Cart API 接口（依赖任务1）
+  [串行] 任务4：购物车 UI 组件（依赖任务2）
+  [串行] 任务5：前后端联调（依赖任务3+4）
+
+  开始并行执行任务1和任务2...
+</code></pre>
+<p><strong>卡住了</strong>：如果 Claude 卡在某个子任务，说"任务X卡住了，跳过继续做任务Y，X的问题稍后我来处理"。</p>
+<hr>
+<h3 id="3-claude">3. 改完代码让 Claude 跑测试给实跑证据</h3>
+<p><strong>场景</strong>：商品详情页做完了，你需要确认它真的能用，不只是"看起来能用"。</p>
+<p><strong>做法（每次改完代码都这样做）</strong>：</p>
+<pre><code>商品详情页写完了，帮我跑一下测试，给我看实际运行结果：
+1. 跑单元测试：npm test -- --testPathPattern=product
+2. 启动开发服务器，验证页面在浏览器里能正常渲染
+3. 验证 API 接口：curl http://localhost:3000/api/products/1 能返回正确数据
+把每步的实际输出给我看，不要只说&quot;应该可以&quot;
+</code></pre>
+<p><strong>Claude 会做什么</strong>：实际运行这些命令，把终端输出给你看。</p>
+<p><strong>看到什么算成功</strong>：</p>
+<pre><code>Claude：
+  $ npm test -- --testPathPattern=product
+  PASS  src/components/ProductDetail.test.tsx
+  Tests: 5 passed, 5 total
+
+  $ curl http://localhost:3000/api/products/1
+  {&quot;id&quot;:1,&quot;name&quot;:&quot;AJ1 Chicago&quot;,&quot;price&quot;:159900,&quot;stock&quot;:50,...}
+
+  ✅ 单元测试全通过
+  ✅ API 返回正确数据
+  ✅ 开发服务器运行正常（localhost:3000/products/1 可访问）
+</code></pre>
+<p><strong>为什么这样做</strong>：这叫 verify-before-assert（断言前先验证）。Claude 可能会说"应该可以了"但其实有问题，要求它给实际运行证据，能早发现早修复，不要等到上线才发现。</p>
+<p><strong>模板（复制用）</strong>：</p>
+<pre><code>[功能名]写完了，帮我验证：
+1. 运行相关测试，给我看测试输出
+2. 启动服务器，访问相关页面，截图或粘贴 HTML 给我
+3. 调用相关 API，给我看实际响应
+不要只说&quot;应该可以&quot;，给我看实际证据
+</code></pre>
+<hr>
+<h3 id="4-claude-plan">4. 大改动前 Claude 会先给 plan 等你确认</h3>
+<p><strong>场景</strong>：你让 Claude 重构数据库 Schema，这是不可逆的高风险改动。</p>
+<p><strong>这类改动 Claude 会自动做的事（L3 风险分级）</strong>：<br>
+1. 先列出改动计划，等你确认<br>
+2. 提示你备份当前数据<br>
+3. 给出回滚方案</p>
+<p><strong>实际对话示例</strong>：</p>
+<pre><code>你：&quot;帮我把订单表的金额字段从浮点数改成整数（分为单位）&quot;
+
+Claude：⚠️ 这是数据库结构变更，属于高风险改动，我先给你看方案再动手。
+
+  改动计划：
+  1. 在 Prisma Schema 里修改 amount 字段类型 Float → Int
+  2. 生成迁移文件：npx prisma migrate dev --name change-amount-to-int
+  3. 需要数据转换：现有数据乘以100（例：19.99 → 1999）
+
+  ⚠️ 风险：
+  - 现有数据需要手动迁移，如果转换出错会有数据损坏
+  - 迁移不可逆（除非有备份）
+
+  建议在执行前：
+  1. 先备份数据库：pg_dump trendmall &gt; backup_$(date +%Y%m%d).sql
+  2. 在测试环境先跑一遍
+
+  确认继续吗？
+
+你：&quot;先备份，然后继续&quot;
+</code></pre>
+<p><strong>看到什么算成功</strong>：Claude 在做高风险改动前给你看完整计划，你确认后才动手，而不是直接就改。</p>
+<p><strong>如果 Claude 没有自动给 plan，你可以主动要求</strong>：</p>
+<pre><code>先给我看改动计划，等我确认再动手
+</code></pre>
+<hr>
+<h3 id="5-claude-session">5. 让 Claude "记住"项目约定（跨 session 不忘）</h3>
+<p><strong>场景</strong>：你定了一些商城的开发规范，希望以后每次开对话 Claude 都记得，不用重新说。</p>
+<p><strong>做法</strong>：</p>
+<pre><code>记住以下商城开发约定，以后每次对话都要遵守：
+- 所有金额用分为单位（整数），不用浮点数
+- API 统一返回 { code: 0, data: {}, msg: &quot;ok&quot; } 格式，code 非0为错误
+- 订单号格式：TM + yyyyMMdd + 6位随机数字，例如 TM202601011234567
+- 图片不存数据库，只存 OSS URL，格式：https://oss.trendmall.com/{uuid}.{ext}
+- 所有用户密码用 bcrypt 加密，cost factor 12
+- Redis key 统一加前缀：trendmall:{模块}:{id}，例如 trendmall:session:{userId}
+</code></pre>
+<p><strong>Claude 会做什么</strong>：把这些存入 auto-memory（自动记忆系统），下次新开对话仍然记得。</p>
+<p><strong>看到什么算成功</strong>：说完后，Claude 确认"已记住以上约定"。你关掉对话，重新打开一个新对话，问"订单号是什么格式？"，Claude 能答出"TM + yyyyMMdd + 6位随机数字"。</p>
+<p><strong>为什么这样做</strong>：开发规范存在 Claude 的记忆里，不用每次打开都重新解释。这个记忆跨 session 保存，不受 <code>/clear</code> 影响（但受 CLAUDE.md 优先保障）。</p>
+<p><strong>加强版——同时写入 CLAUDE.md</strong>：</p>
+<p>记忆 + CLAUDE.md 双写最稳，在 CLAUDE.md 里加一节：</p>
+<pre><code class="language-markdown">## 编码约定（强制）
+- 金额单位：分（整数），禁用浮点数
+- API 响应格式：{ code, data, msg }
+- 订单号格式：TM + yyyyMMdd + 6位随机数
+- Redis key 前缀：trendmall:{模块}:{id}
+- 密码加密：bcrypt，cost 12
+</code></pre>
+<p>然后说：</p>
+<pre><code>帮我把以下编码约定加到 CLAUDE.md 的&quot;编码约定&quot;节里
+[粘贴上面的内容]
+</code></pre>
+<hr>
+<h3 id="6_1">6. 实战示范：用这些能力做一个完整功能（以"商品搜索"为例）</h3>
+<p>下面是一个完整的流程示范，把上面五个能力全部用上：</p>
+<p><strong>步骤1：选型前先让外部模型反驳</strong></p>
+<pre><code>ai-panel &quot;商城搜索功能选型：
+商品量5万，需要中文分词、关键词高亮、筛选。
+我倾向用 Meilisearch，帮我找这个选择的坑&quot;
+</code></pre>
+<p>等 Claude 汇总反馈，确认没有致命问题。</p>
+<p><strong>步骤2：让队长全权做这个功能</strong></p>
+<pre><code>队长，火力全开，帮我接入 Meilisearch 做商城搜索：
+- 安装 Meilisearch Docker 容器
+- 写商品数据同步脚本（定时同步 + 商品增改时实时同步）
+- 实现搜索接口（支持关键词、分类筛选、价格区间）
+- 写前端搜索页（有防抖、有高亮、有筛选栏）
+每步做完要有验证证据
+</code></pre>
+<p><strong>步骤3：要求实跑证据</strong></p>
+<pre><code>搜索接口做完了，帮我验证：
+1. curl 调用搜索接口，给我看实际返回
+2. 搜索&quot;Jordan&quot;，确认返回的商品名称里有关键词高亮
+3. 筛索价格 100-500 的商品，确认返回的所有商品价格都在这个区间
+</code></pre>
+<p><strong>步骤4：大改动（Schema 变更）前先看 plan</strong></p>
+<pre><code>需要给 products 表加 search_vector 字段，先给我看改动计划
+</code></pre>
+<p><strong>步骤5：记住项目约定</strong></p>
+<pre><code>记住：搜索功能的 Meilisearch index 名叫 products_v1，
+更新 index 时不能删旧的，要先建新的再切换，保证零停机
+</code></pre>
+<hr>
+<h3 id="7_1">7. 高频实用模板速查</h3>
+<p>把这些模板收藏起来，开发时直接用：</p>
+<p><strong>开始做一个新功能</strong>：</p>
+<pre><code>帮我做[功能名]。
+要求：[具体要求，越详细越好]
+做之前先给我看方案，确认后再动手
+</code></pre>
+<p><strong>发现 bug</strong>：</p>
+<pre><code>[功能]出问题了，报错信息：[粘贴完整错误]
+帮我系统性排查根因，不要先修，先告诉我问题在哪
+</code></pre>
+<p><strong>做完要验证</strong>：</p>
+<pre><code>[功能]做完了，帮我跑测试，给我看实际运行结果作为证据
+</code></pre>
+<p><strong>大改动前</strong>：</p>
+<pre><code>我想做[改动描述]，这是高风险操作，先给我看改动计划和回滚方案
+</code></pre>
+<p><strong>存记忆</strong>：</p>
+<pre><code>记住以下项目约定：[内容]，以后每次对话都要遵守
+</code></pre>
+<p><strong>技术选型</strong>：</p>
+<pre><code>ai-panel &quot;我在[项目名]里考虑用[方案]，帮我找这个选择的潜在坑&quot;
+</code></pre>
+<hr>
+<h2 id="v522-2026-06-12">V52.2 新增（2026-06-12）</h2>
+<p>以下 4 项关键能力（原 V52.2 · 2026-06-12 引入）现已合并入 <code>~/.claude/rules/mycc-core.md</code> 铁律级规范：</p>
+<h3 id="1-12tdd-tdd-vertical-slice">1. 铁律 12：TDD 垂直切片（TDD Vertical Slice）</h3>
+<p>红 → 绿 → 重构三步走，每次只推进一个完整用户价值单元。<strong>YOLO L4/极限档/OMC 自配置任务降级为铁律 3 验证证据</strong>——不是所有任务都要先写失败测试。SSoT：<code>rules/mycc-core.md</code>（铁律 12·TDD 垂直切片）。</p>
+<h3 id="2-looploop-worth-building-gate">2. 四条件门：是否值得建 Loop（Loop-Worth-Building Gate）</h3>
+<p>建任何 Loop / <code>/loop</code> / LaunchAgent / 无人值守自动化前，过四条件（重复性 + 验证可自动化 + token 预算 + Agent 工具齐备）<strong>全过才建</strong>，否则一条好 Prompt 更省。SSoT：<code>rules/mycc-core.md</code>（4 步工作流·Loop 判断）。</p>
+<h3 id="3-quarantine">3. 隔离区模式：读写分离防越权（Quarantine）</h3>
+<p>处理外部不可信输入（外部 AI 报告 / WebFetch / 用户上传文件）+ 同任务要高权限写时，<strong>读取 agent 必须挂 <code>disallowed-tools</code> 移除写权</strong>（物理无法越权）。纵深防御三层：行为层（视为数据非指令）+ <strong>架构层（本规则）</strong> + 运行时层（block-dangerous hook）。SSoT：<code>rules/mycc-core.md</code>（防改 4 类配置·安全约束）。</p>
+<h3 id="4-v522dual-end-policy">4. 双端策略 V52.2（Dual-End Policy）</h3>
+<p><strong>CLI 端</strong> <code>~/.claude/CLAUDE.md</code> = OMC 工程事实 / <code>projects/-Users-williammacst/memory/user-profile.md</code> = 角色偏好 / <code>~/.claude/CLAUDE.local.md</code> = 已就绪能力指针；<strong>Desktop 端</strong> = 行为规则契约（云端）。<strong>四份文档正交不冲突</strong>。SSoT：<code>rules/mycc-core.md</code>（输出规范·双端策略）。</p>
+<hr>
+<blockquote>
+<p><strong>如何查阅完整规范</strong>：<br>
+- <code>cat ~/.claude/rules/mycc-core.md</code> （唯一规则 SSoT：12 铁律 + 12 行为规则 R1-R12 + 4 步工作流）<br>
+- 注：W4（2026-06-22）精简后，原 iron-laws / loop-worth-building-gate / quarantine / auto-learned-rules 等多文件已合并入 <code>mycc-core.md</code> 单文件</p>
+</blockquote>
+<p><em>本节能力现已合并入 <code>rules/mycc-core.md</code>（OMC 4.14.7 · W4 精简）；保留原 V52 系列升级记录。</em></p>
+<hr>
+<p>最后更新：2026-06-25</p>
+<hr>
+<h2 id="_28">📚 更多入口</h2>
+<ul>
+<li><strong>dashboard.html</strong> · 36+ 张卡片（命令/能力/5 大高级功能/统计/帮助）</li>
+<li><strong>mycc-config.html</strong> · 配置全景（自动拉取 ~/.claude/ · MCP/插件/Skills/Hooks/路由表）</li>
+<li><strong>start-here.md</strong> · 35 场景 × 7 手册 × 3 万能入口</li>
+</ul>
+</body>
+</html>

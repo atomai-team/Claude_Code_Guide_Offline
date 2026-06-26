@@ -1,10 +1,10 @@
 # Claude Code 全能力清单
-> Skills × 148 · Agents × 52 · Hooks × 53(50文件) · 插件 × 32启用/35总 · MCP × 12+ · 外部 CLI × 5联
+> Skills × 150 · Agents × 52 · Hooks × 53(50文件) · 插件 × 32启用/35总 · MCP × 12+ · 外部 CLI × 5联
 > OMC 4.15.0 · CLI v2.1.191 · 2026-06-25 完整版（mycc-stats 实测）
 
 ---
 
-## 第一部分：148 个 Skills 完整分类说明
+## 第一部分：150 个 Skills 完整分类说明
 
 ### 🚀 执行与工作模式（核心驱动）
 
@@ -529,8 +529,8 @@ cleanroom-precheck.sh 6步检查：
 
 ### oh-my-claudecode（OMC）
 **核心插件，提供整套 OMC 能力**
-- Skills: **148** 原生 skill
-- Hooks: **53** 自动守护钩子（50 个 hook 文件，14 个 hook 事件类型）
+- Skills: **150** 原生 skill
+- Hooks: **50** 自动守护钩子（50 个 hook 文件，14 个 hook 事件类型）
 - Workflows: **13** 个 JS 流水线脚本
 - MCP Tools: wiki/notepad/state/LSP/shared-memory 等
 - Agents: **52** 角色（核心6 + CEO角色12 + 行业专家7 + 团队蓝图6 + 通用21）
@@ -668,3 +668,52 @@ cleanroom-precheck.sh 6步检查：
 
 最后更新：2026-06-25 · 数字经 mycc-stats 实测
 *全能力清单：Skills: 148 · Agents: 52 · Hooks: 53(50文件) · Workflows: 13 · LaunchAgents: 13 · Cron: 2 · 插件启用/总: 32/35 · 外部CLI: 5联*
+
+---
+
+## 🌟 5 大高级功能全景 + 超级入口（2026-06-25 增）
+
+> 148 个 skill 太多不知道用哪个？记住这 **5 大高级功能** + **超级入口**，覆盖 90% 场景。
+
+### 💎 5 大高级功能（各管一摊不重叠）
+
+| 功能 | 口语触发 | 对应 skill | 何时用 |
+|---|---|---|---|
+| **队长** | 队长 / 火力全开 / 活力全开 / YOLO | `smart-flow-all` | 极限档 · 复杂任务 · 多顾问 |
+| **CEO** | 评估 / 尽调 / 出海 / 商业可行性 | `ceo-mode` + `ceo-pipeline` | 商业决策 · 投资 · 立项 |
+| **经理** | 我几个 session / 别的 session 在干嘛 | `multi-session-state` | 多 session 互可见 + 冲突检测 |
+| **秘书** | 秘书 / daily-brief / weekly | `weekly-secretary` + `daily-brief` | 自动巡检 · 报告 |
+| **超级入口** | super / 超级入口 / 不知道找谁 | `engineering-scenario-router` | 不知道找谁时兜底 |
+
+### 🔗 高级功能融合矩阵（按"你想做什么"路由）
+
+| 你的意图 | 推荐组合 |
+|---|---|
+| 不知道找谁 | `super`（列出候选）→ 你选 → 执行 |
+| 商业评估 | `CEO`（7 顾问）→ 想工程化 → `队长` |
+| 复杂代码改动 | `队长` + `eng-experts`（3 专家盲评） |
+| 多 session 协作 | `经理`（自动）+ `start-work`（工程化） |
+| 系统健康 | `秘书`（自动）+ `full-checkup`（手动） |
+| 升级 + 改造 | `秘书` 发现 → `super` 路由 → `队长` 修 → `CEO` 评 |
+
+### 🚀 super 入口详解（51 个意图 SSoT）
+
+**SSoT**：`~/.claude/skills/engineering-scenario-router/router-table.json`
+
+**核心机制**：当用户说 `super` 或 `超级入口` 或 `不知道找谁` 时，主调度器读 router-table.json → 按意图关键词概率排序 → 列出 1-3 个候选 skill → 用户选 → 执行。
+
+**为什么不直接做而是列候选？** 单人维护者 + 51 路由分散 = 静默调错风险 > 多一步"选"的成本。
+
+**风险档**：`super` 触发时 execution_path = YOLO-L4（叠加 modifier，不降低安全不变量：配置防改 / 官方直连 / 改 hook 前 snapshot 仍硬）。
+
+> 📌 **学习路径**：先熟 5 大高级功能 → 再学 11 个高频入口（dashboard §C7）→ 最后学 super 兜底（diversity safety net）。
+
+---
+
+---
+
+## 📚 更多入口
+
+- **dashboard.html** · 36+ 张卡片（命令/能力/5 大高级功能/统计/帮助）
+- **mycc-config.html** · 配置全景（自动拉取 ~/.claude/ · MCP/插件/Skills/Hooks/路由表）
+- **start-here.md** · 35 场景 × 7 手册 × 3 万能入口

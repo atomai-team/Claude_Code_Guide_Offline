@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code 小白使用手册</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📘%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════ MD→HTML 渲染共享样式(继承 dashboard 设计系统 v2)═══════ */
+:root {
+  color-scheme: light;
+  --bg: #ffffff; --bg-subtle: #f5f5f7; --surface: #ffffff; --surface2: #fafafc; --surface-hover: #f5f5f7;
+  --border: #e5e5ea; --border-strong: #d2d2d7; --code-bg: #f5f5f7; --tag-bg: #f5f5f7;
+  --text: #1d1d1f; --text-dim: #515154; --text-muted: #86868b;
+  --accent: #0071e3; --accent-hover: #0077ed; --accent-soft: #e8f1fd;
+  --green: #1a8c4a; --red: #d70015; --orange: #b25000; --purple: #6e3fd6;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --font-sans: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
+  --font-mono: 'JetBrains Mono','SF Mono','Fira Code',Menlo,monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0a0a0b; --bg-subtle: #141416; --surface: #161618; --surface2: #1c1c1f; --surface-hover: #232326;
+    --border: #2a2a2e; --border-strong: #3a3a3e; --code-bg: #1c1c1f;
+    --text: #f5f5f7; --text-dim: #aeaeb2; --text-muted: #8e8e93;
+    --accent: #2997ff; --accent-soft: #16263b;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans); background: var(--bg); color: var(--text);
+  line-height: 1.7; font-size: 15px; padding: 48px 32px 80px; max-width: 880px; margin: 0 auto;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+.doc-header {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  margin-bottom: 28px; padding-bottom: 18px; border-bottom: 1px solid var(--border);
+}
+.doc-header .back {
+  color: var(--accent); text-decoration: none; padding: 6px 14px;
+  border: 1px solid var(--border-strong); border-radius: 980px; font-size: 13px; font-weight: 500;
+  transition: all .15s;
+}
+.doc-header .back:hover { background: var(--accent-soft); border-color: var(--accent); }
+.doc-header .meta { color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
+h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 12px 0 18px; color: var(--text); }
+h2 { font-size: 23px; font-weight: 600; margin: 40px 0 14px; padding-top: 12px; letter-spacing: -0.01em;
+     border-top: 1px solid var(--border); color: var(--text); }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+h3 { font-size: 18px; font-weight: 600; margin: 28px 0 10px; color: var(--text); }
+h4 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; color: var(--text-dim); }
+p { margin: 10px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+ul, ol { margin: 10px 0 10px 24px; }
+li { margin: 4px 0; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 28px 0; }
+code {
+  font-family: var(--font-mono); font-size: 0.9em; background: var(--code-bg);
+  padding: 1px 6px; border-radius: 5px; color: var(--text);
+}
+pre {
+  background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 16px; overflow-x: auto; margin: 14px 0; line-height: 1.55;
+}
+pre code { background: transparent; padding: 0; font-size: 13px; }
+blockquote {
+  border-left: 3px solid var(--accent); margin: 14px 0; padding: 8px 16px;
+  background: var(--accent-soft); border-radius: 0 8px 8px 0; color: var(--text-dim);
+}
+blockquote p { margin: 4px 0; }
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+th { text-align: left; padding: 9px 12px; background: var(--bg-subtle); color: var(--text-muted);
+     font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+td { padding: 9px 12px; border-top: 1px solid var(--border); }
+tr:hover td { background: var(--bg-subtle); }
+img { max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0; }
+strong { font-weight: 600; color: var(--text); }
+em { font-style: italic; color: var(--text-dim); }
+@media (max-width: 720px) { body { padding: 24px 16px 60px; } h1 { font-size: 26px; } h2 { font-size: 20px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <a href="dashboard.html" class="back">← 返回 MYCC 仪表盘</a>
+  <span class="meta">渲染时间 2026-06-26 01:13 · 源: 01-小白使用手册.md</span>
+</div>
+<h1 id="claude-code">Claude Code 小白使用手册</h1>
+<blockquote>
+<p>CLI v2.1.185 · Desktop v1.9659.4 · OMC 4.14.7<br>
+从零开始，5分钟上手</p>
+</blockquote>
+<hr>
+<h2 id="claude-code_1">🤔 Claude Code 是什么？</h2>
+<p>简单说：<strong>把 Claude AI 直接放进你的终端/编辑器，让它帮你写代码、改 bug、做调研、管理项目</strong>。</p>
+<p>不是网页版对话框——它可以直接读你电脑上的文件、执行命令、写代码、运行测试，就像雇了个程序员坐在你旁边随时帮你干活。</p>
+<p>加上 <strong>OMC（oh-my-claudecode）</strong> 这套增强系统，还多了 <strong>150 专项技能、50 自动守护钩子</strong>、可以同时派出多个 AI 并行工作。</p>
+<blockquote>
+<p><strong>小白比喻</strong>：普通 Claude 网页版像一个顾问，你只能和他聊聊；Claude Code 像把这个顾问接进你公司内网，他能直接翻你的文件柜、在你的电脑上动手改东西、还能帮你雇更多临时工同时干活。</p>
+</blockquote>
+<hr>
+<h2 id="_1">🚀 安装和启动</h2>
+<h3 id="cli">CLI（命令行版）</h3>
+<pre><code class="language-bash"># 安装
+npm install -g @anthropic-ai/claude-code
+
+# 启动（在你的项目目录里）
+cd ~/projects/my-project
+claude
+</code></pre>
+<p>第一次启动会让你登录 Anthropic 账号，登录后就能用了。</p>
+<blockquote>
+<p><strong>为什么要 cd 进项目目录？</strong> 因为 Claude 会读取你当前目录下的所有文件，在哪个目录启动，它就知道那个项目。就像你告诉新员工"你的工位在这里"，它才知道要看哪些文件。</p>
+</blockquote>
+<h3 id="desktop">Desktop（桌面客户端版）</h3>
+<p>直接打开 Claude Code 桌面应用，点击 New Project 或者直接拖入项目文件夹。</p>
+<h3 id="_2">两个版本的区别</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>CLI</th>
+<th>Desktop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>适合</td>
+<td>长任务、复杂项目、脚本自动化</td>
+<td>快速问答、轻量改动、可视化</td>
+</tr>
+<tr>
+<td>功能完整度</td>
+<td>100%</td>
+<td>~70%（部分 hooks/插件不支持）</td>
+</tr>
+<tr>
+<td>推荐用法</td>
+<td>主力工作</td>
+<td>辅助/临时</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>选哪个？</strong> 初学者两个都试试。日常重度使用推荐 CLI，因为钩子（Hooks）和技能（Skills）在 CLI 下功能完整；Desktop 适合快速查个问题或做轻量修改。</p>
+</blockquote>
+<hr>
+<h2 id="5">⚡ 5分钟快速上手</h2>
+<h3 id="_3">第一步：进入项目目录</h3>
+<pre><code class="language-bash">cd ~/projects/my-project
+claude
+</code></pre>
+<h3 id="claude">第二步：跟 Claude 说话（就像聊天一样）</h3>
+<pre><code>你：帮我看一下这个项目是做什么的
+
+你：把 src/utils/helper.js 里的 formatDate 函数改成支持时区
+
+你：现在报了一个错：TypeError: Cannot read property 'id' of undefined，帮我找一下哪里有问题
+
+你：帮我给这个项目写一个 README
+</code></pre>
+<p>就是这么简单。不需要学特殊语法，说人话就行。</p>
+<blockquote>
+<p><strong>为什么说人话就行？</strong> Claude 经过训练，能理解上下文和意图。你不需要像命令行那样精确，"帮我把这个按钮改成蓝色"就够了，不需要写"将 CSS 中 button 选择器的 color 属性改为 #0000FF"。</p>
+</blockquote>
+<h3 id="claude_1">第三步：回应 Claude 的确认请求</h3>
+<p>Claude 在做某些操作（比如修改文件、执行命令）前会问你：</p>
+<pre><code>Allow this action?
+&gt; Yes (y) / No (n) / Always allow (a)
+</code></pre>
+<ul>
+<li>按 <code>Y</code> 或回车 = 允许这一次</li>
+<li>按 <code>A</code> = 以后同类操作都允许</li>
+<li>按 <code>N</code> = 不允许</li>
+</ul>
+<p>嫌烦的话，可以说"<strong>火力全开</strong>"，之后就不再问了，全自动干活。</p>
+<blockquote>
+<p><strong>什么时候用 A（永久允许）？</strong> 比如 Claude 要运行 <code>ls</code> 查看文件列表，这类只读操作你可以永久允许。而"删除文件""执行部署"这类高风险操作，建议每次都手动确认。</p>
+</blockquote>
+<hr>
+<h2 id="_4">🧠 几个核心概念（用大白话理解）</h2>
+<h3 id="session">会话（Session）</h3>
+<p>每次 <code>claude</code> 启动就是一个新会话，Claude 只记得这次对话里的内容。说 <code>/clear</code> 就是清空重开，换个话题时建议用。</p>
+<blockquote>
+<p><strong>比喻</strong>：就像每次打开一个新的聊天窗口，Claude 不会自动记得上次说过的事。但是有了 OMC 的<strong>多层记忆系统</strong>（见后文），你说"记住这件事"它会跨会话记住。</p>
+</blockquote>
+<h3 id="skills">技能（Skills）</h3>
+<p>可以理解为"特定领域的专家模式"。比如 <code>/code-review</code> 是代码审查专家，<code>/design</code> 是 UI 设计专家。用 <code>/技能名</code> 或者口语关键词触发。</p>
+<blockquote>
+<p><strong>比喻</strong>：普通 Claude 是全能助理，技能相当于给它戴上"专业帽子"。戴上代码审查帽，它就会特别严格地挑代码问题；戴上 PM 帽，它就会从产品视角给建议。</p>
+</blockquote>
+<h3 id="hooks">钩子（Hooks）</h3>
+<p>在后台默默运行的守护程序，你不用管它。比如你一发消息，系统自动帮你检索相关历史记忆；你改了 settings.json，自动检测是不是有安全风险。</p>
+<blockquote>
+<p><strong>比喻</strong>：钩子像保安 + 助理的组合。你每次进门（发消息），保安自动核查（检测危险操作），助理自动准备好相关资料（检索记忆）。这些都在你不知情的情况下完成。</p>
+</blockquote>
+<h3 id="agents">Agents</h3>
+<p>当你说"队长，帮我做 XX"，Claude 会自动拆成多个任务，同时派出多个 AI 并行工作，最后汇总结果。速度是单线程的好几倍。</p>
+<blockquote>
+<p><strong>比喻</strong>：一个人干活 vs 派出一个项目组。Claude 是总指挥，它拆分任务后，同时让"前端 AI"、"后端 AI"、"测试 AI"各干各的，最后汇总。你只需要等最终结果，中间过程它帮你协调。</p>
+</blockquote>
+<hr>
+<h2 id="_5">💬 最常用的口语说法（直接抄就能用）</h2>
+<h3 id="_6">开始一个任务</h3>
+<pre><code>&quot;帮我做一个商品详情页&quot;
+&quot;给这个函数加单元测试&quot;
+&quot;把登录功能重构一下，现在代码太乱了&quot;
+&quot;帮我看看这个项目结构，然后给一个优化建议&quot;
+</code></pre>
+<h3 id="_7">触发特殊模式</h3>
+<pre><code>&quot;队长，把整个购物车模块做完&quot;        → 自动四步工作流，更细致、有验证
+&quot;火力全开，把剩下的 TODO 全做完&quot;    → 极限并发，全自动不打断
+&quot;帮我调研一下 tRPC 和 REST 的区别&quot;  → 自动深度调研多渠道
+&quot;做完之后做个全面的代码审查&quot;        → 审查+修复
+</code></pre>
+<h3 id="_8">调试报错</h3>
+<pre><code>&quot;这个地方报了 404，帮我查一下&quot;
+&quot;又报错了：[把报错信息粘贴进来]&quot;
+&quot;反复出这个错，系统排查一下根因&quot;
+</code></pre>
+<blockquote>
+<p><strong>小白技巧</strong>：报错信息直接完整粘贴，不要自己总结。Claude 需要看完整报错堆栈才能准确定位问题，你总结可能会丢掉关键信息。</p>
+</blockquote>
+<h3 id="claude_2">让 Claude 记住事情</h3>
+<pre><code>&quot;记住，这个项目用的是 PostgreSQL 14，不是 MySQL&quot;
+&quot;记一下，API 超时时间统一设 30 秒&quot;
+</code></pre>
+<blockquote>
+<p><strong>这条会真正保存</strong>：说"记住"后，系统会把这条信息写入持久记忆文件，下次新开会话仍然有效。不只是这次对话的便条，而是长期有效的笔记本。</p>
+</blockquote>
+<h3 id="_9">撤回和修改</h3>
+<pre><code>&quot;这个方向不对，撤回去重新做&quot;        → 说这句话或按 Esc Esc
+&quot;重新考虑一下，用另一种方式实现&quot;
+</code></pre>
+<hr>
+<h2 id="_10">🛡️ 权限确认怎么回</h2>
+<p>Claude 修改文件或运行命令前，会有这样的提示：</p>
+<pre><code>◆ Allow bash command?
+  ls -la src/
+  Yes / No (always skip with &quot;No&quot;)
+</code></pre>
+<p><strong>常见场景：</strong></p>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>怎么回</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正常操作，允许</td>
+<td><code>Y</code> 或回车</td>
+</tr>
+<tr>
+<td>这个不要执行</td>
+<td><code>N</code></td>
+</tr>
+<tr>
+<td>全部自动允许</td>
+<td>说"<strong>火力全开</strong>"或提前说"<strong>YOLO</strong>"</td>
+</tr>
+<tr>
+<td>不确定，先看看</td>
+<td><code>N</code>，然后问 Claude "你要执行什么，先说一下"</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>什么是 YOLO？</strong> "You Only Live Once"——在 Claude Code 里表示"放开限制，全自动跑，别问我"。适合你已经信任 Claude、想让它连续完成一大堆操作的时候。危险操作（删文件、部署到生产）不建议用 YOLO。</p>
+</blockquote>
+<hr>
+<h2 id="_11">📟 常用内置命令详解</h2>
+<h3 id="clear"><code>/clear</code> — 清空重开</h3>
+<p>用法：直接说 <code>/clear</code><br>
+场景：换了个完全不相关的任务，或者对话太长太乱了<br>
+效果：清空所有对话历史，上下文完全重置</p>
+<blockquote>
+<p><strong>什么时候用</strong>：比如你刚做完登录功能，现在要做支付功能，两个完全无关。这时清空，Claude 就不会把登录的记忆混入支付任务里。</p>
+</blockquote>
+<hr>
+<h3 id="compact"><code>/compact</code> — 压缩上下文</h3>
+<p>用法：<code>/compact</code><br>
+场景：对话已经很长了，Claude 开始忘前面说的事<br>
+效果：把对话压缩成摘要，腾出空间继续</p>
+<blockquote>
+<p><strong>什么时候知道要用</strong>：如果你发现 Claude 开始重复已经做过的事，或者问你已经告诉过它的信息，就说明上下文窗口快满了，该用 <code>/compact</code> 了。或者直接在长 session 开始时先主动 <code>/compact</code>，防患于未然。</p>
+</blockquote>
+<hr>
+<h3 id="model"><code>/model</code> — 切换模型</h3>
+<p>用法：<code>/model opus</code>  <code>/model sonnet</code>  <code>/model haiku</code><br>
+- opus：最强但慢，适合复杂架构/深度任务<br>
+- sonnet：平衡，日常主力<br>
+- haiku：最快，适合简单查询</p>
+<blockquote>
+<p><strong>小白选模型指南</strong>：不知道用哪个，就用默认的 sonnet。如果任务很重要/很复杂（比如设计整个系统架构），换 opus。如果只是问个小问题（"这个函数叫什么"），haiku 更快。</p>
+</blockquote>
+<hr>
+<h3 id="goal"><code>/goal</code> — 设定任务完成标准</h3>
+<p>用法：<code>/goal "购物车可以正常加减商品并显示总价"</code><br>
+场景：长任务（做超过5轮的）开始前说，防止跑偏<br>
+效果：Claude 会一直拿这个标准来检查自己做完没有</p>
+<blockquote>
+<p><strong>为什么重要</strong>：没有目标的话，Claude 可能做到一半觉得"差不多了"就停了，但实际还没满足你的要求。设定 goal 就是给它一个明确的终点线。</p>
+</blockquote>
+<hr>
+<h3 id="btw"><code>/btw</code> — 侧问（不影响主任务）</h3>
+<p>用法：<code>/btw 这个组件的名字叫什么？</code><br>
+场景：正在做一个大任务，突然想问个小问题<br>
+效果：Claude 回答这个问题，但<strong>不会把它算进主对话</strong>，不污染上下文</p>
+<blockquote>
+<p><strong>比喻</strong>：像你在会议室开会（主任务），突然想问旁边同事一个小问题（/btw），不用打断整个会议，问完继续。</p>
+</blockquote>
+<hr>
+<h3 id="cd"><code>/cd</code> — 切换工作目录</h3>
+<p>用法：<code>/cd ~/projects/backend</code><br>
+场景：同一个 session 里需要切到另一个项目<br>
+效果：切换目录但保留对话历史和缓存（比退出重开省多了）</p>
+<hr>
+<h3 id="safe-mode"><code>/safe-mode</code> — 纯净模式</h3>
+<p>用法：启动时加参数：<code>claude --safe-mode</code><br>
+场景：Claude 出现奇怪行为、hook 报错、插件冲突时排障<br>
+效果：禁用所有 CLAUDE.md、插件、skills、hooks、MCP，用最干净的 Claude</p>
+<blockquote>
+<p><strong>什么时候用</strong>：系统行为变奇怪了，怀疑是某个自定义配置搞的鬼，用 safe-mode 排查——如果 safe-mode 下正常，说明是配置问题，不是 Claude 本身的问题。</p>
+</blockquote>
+<hr>
+<h3 id="rewind"><code>/rewind</code> — 撤回</h3>
+<p>用法：<code>/rewind</code><br>
+场景：Claude 改了一堆代码，发现方向错了<br>
+效果：回退到上一个检查点（Claude 做大操作前会自动打 checkpoint）</p>
+<blockquote>
+<p><strong>小白注意</strong>：rewind 是回退代码修改，不是回退对话。如果 Claude 改了20个文件但方向全错了，<code>/rewind</code> 可以一键全部撤销，不用一个个手动改回去。</p>
+</blockquote>
+<hr>
+<h3 id="code-review"><code>/code-review</code> — 代码审查</h3>
+<p>用法：<br>
+- <code>/code-review</code> — 只看问题，不修改<br>
+- <code>/code-review --fix</code> — 看完直接修复<br>
+- <code>/code-review --comment</code> — 看完发 PR 评论<br>
+- <code>/code-review ultra</code> — 云端多 agent 深度审查</p>
+<blockquote>
+<p><strong>日常建议</strong>：每次做完一个功能，都跑一次 <code>/code-review --fix</code>，让 Claude 帮你找并修掉明显问题。这比自己盯着看要快得多，而且不会漏掉常见的安全漏洞。</p>
+</blockquote>
+<hr>
+<h2 id="skills_1">🎯 如何调用技能（Skills）</h2>
+<h3 id="1">方式1：直接说关键词（最自然）</h3>
+<pre><code>&quot;帮我调研一下...&quot;           → 自动触发 deep-research
+&quot;全面升级一下配置&quot;          → 触发 claude-code-better
+&quot;做个代码审查&quot;              → 触发 code-review
+&quot;帮我做个安全审计&quot;          → 触发 security-audit
+&quot;队长，全力以赴&quot;            → 触发完整工作流
+</code></pre>
+<h3 id="2">方式2：/ 命令触发</h3>
+<pre><code>/code-review --fix
+/design
+/security-audit
+/deploy-ship
+/deep-research
+/team
+</code></pre>
+<h3 id="3">方式3：在说话里嵌入技能名</h3>
+<pre><code>&quot;用 autopilot 模式把这个功能做完&quot;
+&quot;帮我 deep-dive 一下这个 bug 的根因&quot;
+&quot;用 tdd 模式开发这个功能&quot;
+</code></pre>
+<blockquote>
+<p><strong>技能太多记不住怎么办？</strong> 说"我想做 X，用哪个技能最合适？"Claude 会帮你推荐。或者直接说口语需求，系统会自动匹配最合适的技能，不需要你死记硬背命令名。</p>
+</blockquote>
+<hr>
+<h2 id="_12">🔥 四大常用工作流程</h2>
+<h3 id="1-bug">流程1：修 Bug</h3>
+<pre><code>1. 把报错信息直接粘给 Claude
+   &quot;这里报了：[报错内容]，帮我找一下&quot;
+
+2. Claude 会读相关文件，定位根因
+
+3. 问 Claude：
+   &quot;你打算怎么改？先说方案&quot;
+
+4. 确认方案没问题后：
+   &quot;好，按这个改&quot;
+
+5. 改完问：
+   &quot;改完了，帮我验证一下这个场景还能正常跑&quot;
+</code></pre>
+<blockquote>
+<p><strong>为什么第3步要先问方案？</strong> 防止 Claude 改了一大堆，结果方向你不认可，白做了。让它先说再做，你确认方向对了再动手，是处理复杂 bug 的最佳实践。</p>
+</blockquote>
+<h3 id="2_1">流程2：开发新功能</h3>
+<pre><code>1. 描述需求：
+   &quot;帮我做一个商品详情页，要有图片轮播、规格选择、加入购物车&quot;
+
+2. Claude 会先问一些关键问题（什么技术栈、什么框架等）
+
+3. 确认技术细节后它开始写代码
+
+4. 做完后说：
+   &quot;帮我做个代码审查&quot;  （/code-review --fix）
+
+5. 有问题自动修掉，没问题收工
+</code></pre>
+<blockquote>
+<p><strong>需求说得越具体越好</strong>：比如"商品详情页要跟我们现有的 ProductCard 组件风格一致，用 Tailwind 写，不要 antd"。这样 Claude 就不用猜，直接按你的规范来。</p>
+</blockquote>
+<h3 id="3_1">流程3：做调研</h3>
+<pre><code>1. 说：
+   &quot;帮我调研一下支付宝和微信支付接入，选哪个更合适，
+    我们是 Node.js 后端，交易量初期不大&quot;
+
+2. Claude 会用 deep-research 多渠道调研
+
+3. 给你一份有来源、有对比、有★推荐的报告
+
+4. 你说：&quot;好，就按推荐方案来，给我接入教程&quot;
+</code></pre>
+<h3 id="4">流程4：全面审计/升级</h3>
+<pre><code>1. 说：
+   &quot;帮我做一次全面的配置审计&quot;  → 触发 /audit-all-better
+
+2. 或者：
+   &quot;全面升级一下&quot;              → 触发 /claude-code-better
+
+3. 看报告，Claude 会给出 P0/P1/P2 分级的问题清单
+
+4. P0 问题（严重）自动修，P1/P2 问你要不要改
+</code></pre>
+<blockquote>
+<p><strong>P0/P1/P2 是什么意思？</strong> P0 = 最严重，必须立即修（比如安全漏洞、系统崩溃风险）。P1 = 重要但不紧急（性能问题、代码质量差）。P2 = 建议改进（规范性问题、小优化）。Claude 自动帮你分级，你只需要决定 P1/P2 改不改。</p>
+</blockquote>
+<hr>
+<h2 id="2026-06-25-dashboardhtml-c7">🪢 高频入口按场景串起来（2026-06-25 增 · 来自 dashboard.html §C7）</h2>
+<blockquote>
+<p>📌 <strong>场景化思维</strong> · 别死记命令，按你"想干什么"挑入口。每个入口都有完整 4 步链路，对应不同工作流。</p>
+</blockquote>
+<h3 id="_13">🎯 我想"先摸清情况再动手" → <code>全面体检 / 系统体检</code></h3>
+<p><strong>对应入口</strong>：<code>/full-checkup</code>（gated 范式）<br>
+<strong>完整链路</strong>：<br>
+1. <strong>只读诊断（自动）</strong> · Claude 自己扫你的配置/能力/健康度，不动任何东西<br>
+2. <strong>HITL 确认门（必问）</strong> · Claude 把发现的问题列出来，问你改哪些、改什么<br>
+3. <strong>mutation（人批后才动）</strong> · 改前先 snapshot 可回滚，触 hook/cron 单独再确认<br>
+4. <strong>复核对比</strong> · 改完跑一遍同样诊断，验证修复真生效</p>
+<blockquote>
+<p>💡 <strong>适合场景</strong> · 不确定哪里要改 · 升级前先体检 · 月度/季度巡检</p>
+</blockquote>
+<h3 id="cc">🔥 我想"升级 CC 本体" → <code>全面升级 / 进化一下 / 自我进化</code></h3>
+<p><strong>对应入口</strong>：<code>/claude-code-better</code><br>
+<strong>完整链路</strong>：<br>
+1. <strong>检查新版变更</strong> · 拉官方 changelog + 社区 ytb/reddit<br>
+2. <strong>对比我机现状</strong> · 我这版是什么、缺什么<br>
+3. <strong>异构对抗判定</strong> · 5 联 AI（kimi/mmx/opencode/qwen/mavis）各投一票要不要改<br>
+4. <strong>改造 + 回归验证</strong> · 真的改完后跑现有测试，确保没坏</p>
+<blockquote>
+<p>💡 <strong>适合场景</strong> · 看到 CC 升级弹窗 · 新功能觉得有用 · 想保持工程化</p>
+</blockquote>
+<h3 id="yolo">🪜 我想"复杂任务总编排" → <code>队长 / 火力全开 / 活力全开 / YOLO</code></h3>
+<p><strong>对应入口</strong>：<code>/smart-flow-all</code><br>
+<strong>完整链路</strong>：<br>
+1. <strong>需求梳理</strong> · 把"我要做 X"拆成子任务<br>
+2. <strong>派 subagent 并行</strong> · 多个子任务同时跑（节省时间）<br>
+3. <strong>顾问对抗裁决</strong> · 多顾问各给方案，主调度器裁决<br>
+4. <strong>Writer≠Reviewer 收口</strong> · 写的人不能自己审，换 agent 审</p>
+<blockquote>
+<p>💡 <strong>适合场景</strong> · 大改动 · 跨多个文件 · 不确定从哪开始 · 想让 Claude 极限输出</p>
+</blockquote>
+<h3 id="_14">🏢 我想"做商业评估/尽调/出海" → <code>评估 / 尽调 / 出海 / 商业分析</code></h3>
+<p><strong>对应入口</strong>：<code>/ceo-mode</code><br>
+<strong>完整链路</strong>：<br>
+1. <strong>ceo-pipeline 拉 7 顾问</strong> · 市场/财务/法务/运营/HR/技术/产品<br>
+2. <strong>市场/财务/法务/运营并列分析</strong> · 每位顾问同时看<br>
+3. <strong>对抗裁决</strong> · 顾问间互相挑刺<br>
+4. <strong>综合报告</strong> · 出一份可执行结论</p>
+<blockquote>
+<p>💡 <strong>适合场景</strong> · 投资前 · 立项前 · 跨境业务前</p>
+</blockquote>
+<h3 id="_15">🔍 我想"调研/对比/选型" → <code>调研 / 深度调研 / 对比 / 选型 / 横评</code></h3>
+<p><strong>对应入口</strong>：<code>/deep-research-sop</code><br>
+<strong>完整链路</strong>：<br>
+1. <strong>intake 分诊（查重）</strong> · 先查 <code>docs/research-library/INDEX.md</code>，别重复调研<br>
+2. <strong>5 渠道并发</strong> · kimi/mmx/opencode/qwen/mavis 同时调研<br>
+3. <strong>对抗裁决</strong> · 各模型结论对比，识别盲点<br>
+4. <strong>落 INDEX.md</strong> · 结论存档，下次可复用</p>
+<blockquote>
+<p>💡 <strong>适合场景</strong> · 选 React vs Vue · 对比 ChatGPT vs Claude · 评估新工具</p>
+</blockquote>
+<h3 id="rm">🗑️ 我想"删除/清理/瘦身"（破坏性） → <code>删除 / 清理 / 瘦身 / rm</code></h3>
+<p><strong>对应入口</strong>：<code>/gstack-careful</code><br>
+<strong>完整链路</strong>：<br>
+1. <strong>cleanroom-precheck 6 步</strong> · rsync snapshot + git baseline + 4 detector<br>
+2. <strong>snapshot 自动备份</strong> · 改坏可以一键回滚<br>
+3. <strong>blast radius 评估</strong> · 影响多大、有没有连锁<br>
+4. <strong>确认后执行</strong> · 看清楚再点</p>
+<blockquote>
+<p>💡 <strong>适合场景</strong> · 删旧文件 · 精简配置 · 卸载插件 · 任何"删了就找不回来"的操作</p>
+</blockquote>
+<h3 id="bug-debug">🐛 我想"找 Bug 根因" → <code>深度调查 / 找根因 / 为什么 / debug</code></h3>
+<p><strong>对应入口</strong>：<code>/gstack-investigate</code><br>
+<strong>完整链路</strong>：<br>
+1. <strong>现象收集</strong> · 错误信息/日志/复现步骤<br>
+2. <strong>假设树（5+ 假设）</strong> · 别只盯一个原因<br>
+3. <strong>逐证伪</strong> · 用证据排除<br>
+4. <strong>根因 + 修复</strong> · 修真因而不是表面</p>
+<blockquote>
+<p>💡 <strong>适合场景</strong> · 同一个 Bug 反复修不好 · 错误信息看不懂 · 不确定从哪查</p>
+</blockquote>
+<h3 id="app-team-app">💻 我想"做完整 app/产品" → <code>开 team / 做 app / 全栈开发</code></h3>
+<p><strong>对应入口</strong>：<code>/team</code> · <code>/ralph</code> · <code>/autopilot</code><br>
+<strong>完整链路</strong>：<br>
+1. <strong>omc-plan 出 plan</strong> · 先规划再写<br>
+2. <strong>ralph 顺序执行 / team 并行</strong> · 选个执行模式<br>
+3. <strong>checkpoint 每步</strong> · 出错可回滚<br>
+4. <strong>端到端验证</strong> · 跑通才算完</p>
+<blockquote>
+<p>💡 <strong>适合场景</strong> · 新项目从 0 开始 · 跨多文件改动 · 想看完整产品（跟 02-商城实战）</p>
+</blockquote>
+<h3 id="plan">🎬 我想"出方案/做决策" → <code>规划 / 出 plan / 异构对抗</code></h3>
+<p><strong>对应入口</strong>：<code>/omc-plan --adversary</code><br>
+<strong>完整链路</strong>：<br>
+1. <strong>Planner 出方案</strong> · Claude 自己写方案<br>
+2. <strong>Architect 审视</strong> · 架构师视角挑刺<br>
+3. <strong>Critic 评估</strong> · 评估师视角挑刺<br>
+4. <strong>异构对抗 panel（5 联反方）</strong> · 让 5 个非 Claude AI 同时投反对票</p>
+<blockquote>
+<p>💡 <strong>适合场景</strong> · 重要决策 · 跨领域 · 想多视角验证</p>
+</blockquote>
+<h3 id="_16">🧑‍💼 我想"多人/专家协作" → <code>工程化协作 / 专家 / 多人协作</code></h3>
+<p><strong>对应入口</strong>：<code>/eng-experts</code><br>
+<strong>完整链路</strong>：<br>
+1. <strong>拉 3 专家（架构师/安全/性能）</strong> · 同时看你的代码<br>
+2. <strong>三视角盲评</strong> · 各打各的分<br>
+3. <strong>双轨开发</strong> · 改 A 方案 + 改 B 方案，看哪个好<br>
+4. <strong>合并 + 测试</strong> · 取最优 + 跑测试</p>
+<blockquote>
+<p>💡 <strong>适合场景</strong> · 复杂代码改动 · 架构决策 · 多人接手</p>
+</blockquote>
+<h3 id="_17">🚀 我想"开新项目/有模板可套" → <code>干 / 开始 / 启动项目</code></h3>
+<p><strong>对应入口</strong>：<code>/start-work</code><br>
+<strong>完整链路</strong>：<br>
+1. <strong>选模板（start-work-template）</strong> · 已有现成模板直接套<br>
+2. <strong>状态目录建好</strong> · 4 子目录（待办/进行/已完/归档）自动建<br>
+3. <strong>自评打分</strong> · 启动时打 5 维分（0/5/10）<br>
+4. <strong>进入迭代循环</strong> · 每轮更新打分</p>
+<blockquote>
+<p>💡 <strong>适合场景</strong> · 新项目第一行 · 想用现成项目结构 · 想自动化追踪进度</p>
+</blockquote>
+<h3 id="_18">🔗 真实案例 · "审计升级进化"完整链路</h3>
+<blockquote>
+<p>🔥 <strong>组合用法</strong> · 把 4 个入口串起来用：<br>
+1. <code>/full-checkup</code>（全面体检）—— 摸清现状<br>
+2. <code>/claude-code-better</code>（全面升级）—— 吸收新版<br>
+3. <code>/eng-experts</code>（专家改造）—— 三视角优化<br>
+4. <code>/smart-flow-all</code>（总编排收口）—— 极限档统一收口</p>
+<p><strong>每一步都有 HITL 门，不直接黑盒改</strong>。这是 MYCC V53 强调的"gated 范式"。</p>
+</blockquote>
+<hr>
+<h2 id="2026-06-25">📚 高级功能怎么入门（2026-06-25 增）</h2>
+<blockquote>
+<p>小白阶段不要急着学 super/队长/CEO，先把基础命令用熟。等你用 CC 用了 2 周以上，再来看这节。</p>
+</blockquote>
+<h3 id="5_1">🗺️ 5 大高级功能学习路径</h3>
+<p><strong>第 1 阶段（用 1-2 周后）</strong> · 只需要记住 1 个：<br>
+- <code>super</code> / 超级入口 / 不知道找谁 → 主调度器列候选让你选</p>
+<p><strong>第 2 阶段（用 1 个月后）</strong> · 加 2 个：<br>
+- <code>秘书</code> / daily-brief → 看系统健康报告（自动）<br>
+- <code>经理</code> / 我几个 session → 看多 session 互可见（自动）</p>
+<p><strong>第 3 阶段（用 2 个月后）</strong> · 再加 2 个：<br>
+- <code>队长</code> / 火力全开 → 复杂任务极限档<br>
+- <code>CEO</code> / 评估 → 商业判断</p>
+<h3 id="_19">🎯 我怎么知道自己到了哪阶段？</h3>
+<table>
+<thead>
+<tr>
+<th>你最近在做什么</th>
+<th>推荐阶段</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>装好 CC，第一次用</td>
+<td>还没到 · 先学基础命令（§5分钟上手）</td>
+</tr>
+<tr>
+<td>改了几个 bug，跑了几次</td>
+<td>第 1 阶段 · 学 <code>super</code></td>
+</tr>
+<tr>
+<td>多个项目同时进行</td>
+<td>第 2 阶段 · 用 <code>秘书</code> 自动报告 + <code>经理</code> 看多 session</td>
+</tr>
+<tr>
+<td>开始接大需求 / 创业</td>
+<td>第 3 阶段 · 用 <code>队长</code> + <code>CEO</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>完整文档</strong>：00-速查表 §"5 大高级功能" + dashboard.html §C10.5+10.6 + 02-商城 §"先体检再开工" + 03-全能力清单 §"高级功能全景"</p>
+</blockquote>
+<hr>
+<h2 id="2026-06-25-dashboardhtml-c8">🎛️ 三种调用方式怎么选（2026-06-25 增 · 来自 dashboard.html §C8）</h2>
+<blockquote>
+<p>💡 <strong>小白友好</strong> · 这 5 种方式都是"叫 Claude 做事"的方法，但适用场景完全不同。前 2 周只用<strong>口语触发</strong>就行。</p>
+</blockquote>
+<h3 id="1-90">1️⃣ 口语触发（首选 · 90% 场景）</h3>
+<p><strong>怎么用</strong> · 直接说人话，比如：<br>
+- "<strong>队长</strong> 帮我优化 dashboard"<br>
+- "<strong>全面体检</strong> 一下"<br>
+- "<strong>找根因</strong> 这个报错"<br>
+- "<strong>调研</strong> Next.js vs Remix"</p>
+<p><strong>适合</strong> · 第一次用 · 忘了命令 · 自然对话</p>
+<h3 id="2_2">2️⃣ 斜杠命令（精确触发 · 熟手用）</h3>
+<p><strong>怎么用</strong> · 输入 <code>/</code> 加命令名：<br>
+- <code>/smart-flow-all</code> · <code>/full-checkup</code> · <code>/clear</code> · <code>/compact</code></p>
+<p><strong>适合</strong> · 明确知道要哪个 · 反复用 · 触发效率高</p>
+<h3 id="3-claude">3️⃣ @文件（把文件喂给 Claude）</h3>
+<p><strong>怎么用</strong> · 用 <code>@</code> 引用文件：<br>
+- "读 <code>@~/.claude/CLAUDE.md</code> 总结"<br>
+- "改 <code>@dashboard.html</code> 把按钮变蓝"</p>
+<p><strong>适合</strong> · 不用切换目录 · 多个文件同时操作</p>
+<h3 id="4-bash">4️⃣ !命令（直接跑 bash）</h3>
+<p><strong>怎么用</strong> · 用 <code>!</code> 跑 bash：<br>
+- <code>!git status</code> · <code>!ls -la</code> · <code>!pip list</code> · <code>!npm test</code></p>
+<p><strong>适合</strong> · 要结果 · 调试 · 跑测试 · Claude 不解释</p>
+<h3 id="5-skill">5️⃣ Skill 嵌入（高级 · 熟手用）</h3>
+<p><strong>怎么用</strong> · 说话里嵌 skill 名：<br>
+- "用 <strong>code-review</strong> 帮我看这段"<br>
+- "用 <strong>sp-brainstorming</strong> 脑暴新产品"</p>
+<p><strong>适合</strong> · 多 skill 串联 · 混合提示词</p>
+<h3 id="_20">📊 决策表</h3>
+<table>
+<thead>
+<tr>
+<th>你现在</th>
+<th>推荐用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>完全新手 · 第一次用</td>
+<td>口语触发（说人话）</td>
+</tr>
+<tr>
+<td>用了 3 次以上 · 知道名字</td>
+<td>斜杠命令（精确快）</td>
+</tr>
+<tr>
+<td>要操作某个文件</td>
+<td>@文件</td>
+</tr>
+<tr>
+<td>要跑命令看结果</td>
+<td>!命令</td>
+</tr>
+<tr>
+<td>多 skill 配合 · 高级用法</td>
+<td>Skill 嵌入</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="_21">🆘 遇到问题怎么办</h2>
+<h3 id="claude_3">Claude 卡住不动了</h3>
+<p>按 <code>Esc Esc</code>（连按两次），中断当前操作。然后说说你想换个方向。</p>
+<h3 id="claude_4">Claude 方向跑偏了</h3>
+<pre><code>&quot;停一下，这个方向不对。我要的是 X，不是 Y。重新来&quot;
+</code></pre>
+<blockquote>
+<p><strong>小白常见坑</strong>：很多人觉得打断 Claude 不好意思，让它一直做下去，结果做了100行全是错的。<strong>你随时可以打断</strong>，这是正常操作，不是在为难 Claude。</p>
+</blockquote>
+<h3 id="claude_5">Claude 改了一堆错的东西</h3>
+<pre><code>/rewind
+</code></pre>
+<p>或者说：<code>"撤回所有修改，回到你开始之前的状态"</code></p>
+<h3 id="claude_6">对话太长 Claude 开始犯傻</h3>
+<pre><code>/compact
+</code></pre>
+<p>或者干脆 <code>/clear</code> 开新会话，把关键背景重新说一遍。</p>
+<h3 id="hook">Hook 报错、行为异常</h3>
+<pre><code>claude --safe-mode
+</code></pre>
+<p>在纯净模式下复现问题，判断是配置问题还是代码问题。</p>
+<h3 id="_22">想问一个问题但不想影响当前任务</h3>
+<pre><code>/btw [你的问题]
+</code></pre>
+<hr>
+<h2 id="desktop_1">🖥️ Desktop 客户端专属功能</h2>
+<h3 id="instructions">设置全局 Instructions</h3>
+<p><strong>路径：Settings &gt; General &gt; "Instructions for Claude"</strong></p>
+<p>这里可以写你希望 Claude 在所有对话里都遵守的规则，比如：</p>
+<pre><code>- 代码注释用中文
+- 每次改完代码都要告诉我改了哪些文件
+- 推荐时要给出至少 2 个备选方案
+</code></pre>
+<p>注意：这个作用于所有项目的对话，是全局生效的。</p>
+<h3 id="mcp">安装 MCP 扩展</h3>
+<p><strong>路径：Settings &gt; Desktop app &gt; Extensions</strong></p>
+<p>MCP 是给 Claude 装"插件"的机制，让它能访问 GitHub、Notion、数据库等外部工具。<br>
+Desktop 版的 MCP 必须通过 Extensions 页面安装，<strong>不能手动改配置文件</strong>。</p>
+<h3 id="cowork-instructions">Cowork 专属 Instructions</h3>
+<p><strong>路径：Settings &gt; Cowork</strong></p>
+<p>只在 Cowork 协作模式下生效，不影响普通对话。</p>
+<hr>
+<h2 id="_23">💡 实用小技巧</h2>
+<p><strong>1. 给 Claude 背景信息，让它更准</strong></p>
+<pre><code>&quot;这个项目是 Next.js 14 + PostgreSQL，ORM 用 Prisma，
+ 部署在 Vercel。现在帮我...&quot;
+</code></pre>
+<p>一开始说清楚技术栈，省去后面来回确认。</p>
+<p><strong>2. 让 Claude 先说方案再动手</strong></p>
+<pre><code>&quot;先告诉我你打算怎么实现，我确认了再做&quot;
+</code></pre>
+<p>复杂功能必备，防止写了一大堆方向错的代码。</p>
+<p><strong>3. 用 /btw 问不影响主任务的小问题</strong><br>
+正在做一个大功能，突然想确认一个细节：</p>
+<pre><code>/btw 咱们用的 React 版本是多少？
+</code></pre>
+<p>Claude 回答完继续做主任务，这个问题不会干扰它。</p>
+<p><strong>4. 说"帮我验证一下"而不是自己以为没问题</strong></p>
+<pre><code>&quot;功能写完了，帮我在几个典型场景下验证一下是否正常&quot;
+</code></pre>
+<p><strong>5. 多窗口 / 多项目同时跑</strong><br>
+每个项目目录开一个终端，各自 <code>claude</code>，互不干扰。</p>
+<p><strong>6. 长期项目的记忆技巧</strong></p>
+<pre><code>&quot;记住：这个商城项目的数据库密码在 .env 里，
+ 部署到 Vercel，域名是 shop.example.com&quot;
+</code></pre>
+<p>或者写进项目根目录的 CLAUDE.md 文件（用 <code>/init</code> 自动创建）。</p>
+<hr>
+<h2 id="desktop-settings">📁 Desktop Settings 完整标签路径</h2>
+<pre><code>Settings
+├── General          ← 全局 Instructions 在这里 ★
+├── Account
+├── Privacy
+├── Billing
+├── Usage
+├── Capabilities
+├── Connectors
+├── Claude Code
+├── Cowork           ← Cowork 专属 Instructions 在这里
+└── Desktop app
+    ├── General
+    ├── Extensions   ← MCP 扩展安装在这里 ★
+    └── Developer
+</code></pre>
+<hr>
+<h2 id="_24">🎓 进阶：理解"四步工作流"</h2>
+<p>当你说"<strong>队长</strong>"，Claude 进入完整工作流：</p>
+<ol>
+<li><strong>Plan（规划）</strong> — 先理解需求，列出要改哪些文件、怎么改、验证方法</li>
+<li><strong>Parallel（并行执行）</strong> — 能同时做的任务自动并行，速度快几倍</li>
+<li><strong>Force-Solve（强制解决）</strong> — 遇到问题不放弃，最少尝试5种思路</li>
+<li><strong>Verify（验证收口）</strong> — 做完给实际运行证据，不说"应该可以了"</li>
+</ol>
+<p>不说"队长"就是普通对话模式，适合简单任务。</p>
+<blockquote>
+<p><strong>小白理解</strong>：说"队长"相当于告诉 Claude"这件事很重要，我要你认真对待，不要偷懒"。它会更谨慎地规划、验证，最后给你实际跑过的证据，而不是猜测。普通任务就不用，免得大材小用。</p>
+</blockquote>
+<hr>
+<hr>
+<h2 id="_25">🚀 进阶场景一：飞书集成实战</h2>
+<h3 id="im-claude-code">飞书 IM 机器人 + Claude Code 联动</h3>
+<p><strong>场景：团队消息触发 Claude 执行任务</strong></p>
+<pre><code>你：帮我写一个飞书机器人 webhook，接收消息后调用 Claude API 处理
+
+Claude 需要知道：
+1. 飞书应用 App ID / App Secret（从飞书开放平台获取）
+2. 消息处理逻辑是什么
+3. 回调地址怎么配
+</code></pre>
+<p>典型口语用法：</p>
+<pre><code>&quot;帮我做一个飞书机器人，当 #产品讨论 群里有人@机器人时，
+ 自动分析需求并生成 PRD 草稿发回群里&quot;
+
+&quot;飞书 Webhook 那边接收到表单提交后，
+ 自动整理数据发到指定群，帮我写这个处理器&quot;
+
+&quot;帮我查一下飞书开放平台的最新 API 文档&quot;
+</code></pre>
+<p><strong>飞书文档云 + Claude 知识库</strong></p>
+<pre><code>你：帮我把这份飞书文档（粘贴内容）整理成结构化的需求清单
+
+你：读这份飞书多维表格导出的 CSV，帮我分析用户反馈的主要问题分类
+
+你：把这次项目的所有决策记录整理后，帮我写入 Notion（或推送到飞书群）
+</code></pre>
+<p><strong>飞书审批流 + 自动化</strong></p>
+<pre><code>你：帮我写一个脚本：当飞书审批通过后，
+    自动触发 GitHub Actions 部署
+
+你：做一个飞书卡片消息模板，
+    用于每日发送 Claude Code 任务执行报告
+</code></pre>
+<p><strong>MCP 快捷方式</strong>（本机已配置 Gmail/Google Calendar，飞书类似原理）：</p>
+<pre><code># 通过 MCP 直接操作（如已配置飞书 MCP）
+&quot;帮我查一下明天的飞书日程，有会议的话帮我准备会议材料&quot;
+&quot;把今天的工作总结发给飞书 AI 助手频道&quot;
+</code></pre>
+<hr>
+<h2 id="_26">🌍 进阶场景二：出海部署实战</h2>
+<h3 id="_27">海外技术栈选型</h3>
+<pre><code>你：帮我调研一下，在东南亚部署 SaaS，
+    选 AWS Singapore、GCP 还是 Azure？
+    给我对比报告含延迟、价格、合规要求
+
+Claude 会：用 deep-research 多渠道调研（官方定价+社区实测+合规文档），
+给出★推荐方案，附对比表
+</code></pre>
+<h3 id="i18n">国际化（i18n）开发</h3>
+<pre><code>&quot;帮我给这个商城项目加完整的 i18n 支持，
+ 需要支持中文、英文、马来语三种语言，
+ 用 next-i18next，所有文字都要提取出来&quot;
+
+&quot;帮我把这个组件里的中文硬编码全部提取到 i18n 文件，
+ 并生成对应的英文翻译&quot;
+
+&quot;帮我做一个 i18n 缺失检测脚本，
+ 找出 en 目录有但 zh 目录没有的 key&quot;
+</code></pre>
+<h3 id="_28">多货币/多支付</h3>
+<pre><code>&quot;帮我集成 Stripe，支持 USD/SGD/MYR 三种货币，
+ 汇率实时更新，结算时自动换算&quot;
+
+&quot;帮我做一个 PayPal + 本地支付（GrabPay/TNG）
+ 的统一抽象层，后端用 Node.js&quot;
+</code></pre>
+<h3 id="gdpr">海外合规（GDPR/数据本地化）</h3>
+<pre><code>&quot;帮我做一个 GDPR 合规自查，
+ 看我们现在的用户数据处理哪里不合规&quot;
+
+&quot;帮我添加 Cookie Banner，
+ 符合 GDPR 的数据同意要求，React 实现&quot;
+
+&quot;帮我做数据导出功能，
+ 用户可以下载自己所有的数据（GDPR Art.20 数据可携带权）&quot;
+</code></pre>
+<h3 id="_29">云端部署配置</h3>
+<pre><code>&quot;帮我写 Terraform，在 AWS Singapore 部署：
+ - ECS Fargate（应用层）
+ - RDS PostgreSQL（数据层）
+ - CloudFront CDN（加速层）
+ - WAF（安全层）&quot;
+
+&quot;帮我做 GitHub Actions CI/CD，
+ 开发推送 → 自动测试 → 自动部署到 staging，
+ 打 tag → 自动发到 production&quot;
+
+&quot;帮我配置 PM2 集群模式，
+ 充分利用多核 CPU，自动重启崩溃的进程&quot;
+</code></pre>
+<hr>
+<h2 id="_30">👥 进阶场景三：专业创业团队协作交付</h2>
+<h3 id="_31">多角色并行开发</h3>
+<pre><code>你：队长，我们团队3人并行开发商城，
+    小李负责用户模块，小王负责商品模块，小张负责订单模块，
+    帮我做好接口契约，让他们各自开发互不干扰
+
+Claude 会：
+1. 生成 OpenAPI/Swagger 接口规范
+2. 建立 Mock Server
+3. 写好集成测试方案
+4. 约定分支策略和 PR 模板
+</code></pre>
+<h3 id="_32">产品需求 → 技术拆解</h3>
+<pre><code>&quot;我是 PM，这是我写的 PRD（粘贴进来），
+ 帮我生成：
+ 1. 开发任务清单（按模块拆分，含预估工时）
+ 2. 技术风险点
+ 3. 接口设计草稿
+ 4. 数据库设计草稿
+ 5. Linear 任务格式（直接同步到项目管理）&quot;
+</code></pre>
+<h3 id="pr">代码审查 + PR 管理</h3>
+<pre><code>&quot;帮我审查这个 PR（粘贴 diff），
+ 重点看：安全漏洞、性能问题、逻辑错误、
+ 是否符合我们的代码规范&quot;
+
+&quot;/code-review --comment&quot;   ← 审查后直接把评论发到 GitHub PR
+
+&quot;帮我给团队制定代码规范文档，
+ 包含：命名规范、注释规范、Git commit 规范&quot;
+</code></pre>
+<h3 id="_33">技术债务管理</h3>
+<pre><code>&quot;帮我扫描项目里的技术债务：
+ 1. TODO/FIXME 注释清单
+ 2. 循环依赖
+ 3. 重复代码
+ 4. 过时的依赖
+ 5. 安全漏洞
+ 给我一个优先级排序的修复计划&quot;
+</code></pre>
+<h3 id="_34">团队知识库建设</h3>
+<pre><code>&quot;把这次的技术方案决策（ADR）整理成文档，
+ 说清楚：为什么这么选、放弃了什么方案、以后怎么改&quot;
+
+&quot;帮我把这次 bug 的根因分析整理成故障复盘报告，
+ 给团队分享学习&quot;
+
+&quot;用 /baoyu-slide-deck 把这次的架构设计做成演示文稿，
+ 给老板汇报用&quot;
+</code></pre>
+<hr>
+<h2 id="15-claude">🎯 15 个 Claude 经典专业产出场景</h2>
+<h3 id="5_2">一、技术产出类（5个）</h3>
+<p><strong>场景1：系统架构设计文档</strong></p>
+<pre><code>&quot;帮我做一个电商系统的完整架构设计：
+ - C4 模型（系统/容器/组件/代码四层）
+ - 数据流图
+ - 技术选型说明（含为什么不选 XXX）
+ - 非功能性需求（性能/可用性/安全）
+ - 架构决策记录（ADR）&quot;
+</code></pre>
+<p>产出：20-30页专业架构文档</p>
+<p><strong>场景2：全套 API 文档</strong></p>
+<pre><code>&quot;根据这个 Express 项目，帮我生成：
+ - OpenAPI 3.0 规范文件
+ - Postman Collection
+ - 接口使用示例（含错误处理）
+ - 变更日志&quot;
+</code></pre>
+<p><strong>场景3：数据库设计 + ER 图</strong></p>
+<pre><code>&quot;帮我设计一个多租户 SaaS 的数据库：
+ - 完整 ER 图（Mermaid 格式）
+ - 建表 SQL（含注释和索引）
+ - 分库分表方案
+ - 数据迁移脚本&quot;
+</code></pre>
+<p><strong>场景4：性能优化报告</strong></p>
+<pre><code>&quot;帮我分析这个 Next.js 应用的性能问题，
+ 给出：Lighthouse 分析、Core Web Vitals 优化方案、
+ Bundle 大小优化方案，附代码修改&quot;
+</code></pre>
+<p><strong>场景5：安全审计报告</strong></p>
+<pre><code>&quot;/security-audit 帮我做完整安全审计，
+ 包括 OWASP Top 10、STRIDE 威胁建模、
+ 给出 P0/P1/P2 修复清单&quot;
+</code></pre>
+<hr>
+<h3 id="5_3">二、产品产出类（5个）</h3>
+<p><strong>场景6：PRD 产品需求文档</strong></p>
+<pre><code>&quot;我要做一个 AI 写作助手，
+ 帮我写完整 PRD：
+ - 用户旅程地图
+ - 功能清单（RICE 排序）
+ - 验收标准（Given-When-Then）
+ - 竞品分析
+ - MVP 范围&quot;
+</code></pre>
+<p><strong>场景7：竞品分析报告</strong></p>
+<pre><code>&quot;帮我做一份线上教育赛道的竞品分析：
+ 对比 10 个主要竞品的
+ 功能矩阵/定价策略/用户评价/差异化定位，
+ 给我进入市场的建议&quot;
+</code></pre>
+<p><strong>场景8：用户调研方案</strong></p>
+<pre><code>&quot;我们要验证一个假设：用户愿意为 AI 学习助手每月付 98 元。
+ 帮我设计：用户访谈提纲、问卷、
+ PMF 评分方案（Sean Ellis Test）&quot;
+</code></pre>
+<p><strong>场景9：增长策略报告</strong></p>
+<pre><code>&quot;我们 SaaS 注册转付费率只有 2%，
+ 帮我分析 AARRR 漏斗，
+ 找出瓶颈，给出可执行的增长实验清单&quot;
+</code></pre>
+<p><strong>场景10：投资 BP 准备</strong></p>
+<pre><code>&quot;/ceo-pipeline 帮我做一次完整的商业分析：
+ 市场规模（TAM/SAM/SOM）、
+ 竞争格局、商业模式、
+ 18 个月财务预测（3 情景）、
+ 团队介绍框架&quot;
+</code></pre>
+<hr>
+<h3 id="5_4">三、运营与内容类（5个）</h3>
+<p><strong>场景11：内容营销矩阵</strong></p>
+<pre><code>&quot;我们做 B2B SaaS 的，
+ 帮我规划 Q3 的内容营销：
+ - 50 篇 SEO 文章选题（含关键词）
+ - 10 个白皮书主题
+ - LinkedIn/微信公众号发布日历
+ - 视频脚本框架&quot;
+</code></pre>
+<p><strong>场景12：SEO 优化方案</strong></p>
+<pre><code>&quot;帮我分析这个网站的 SEO 现状，
+ 给出：技术 SEO 检查清单、
+ 关键词策略（含长尾词）、
+ 内容优化建议、
+ 外链建设方案&quot;
+</code></pre>
+<p><strong>场景13：客户成功剧本</strong></p>
+<pre><code>&quot;帮我写 SaaS 客户成功手册：
+ - Onboarding 流程（0-30-60-90 天）
+ - 健康分评分模型
+ - 续费/扩容节点触发逻辑
+ - 流失预警指标&quot;
+</code></pre>
+<p><strong>场景14：数据分析报告</strong></p>
+<pre><code>&quot;帮我分析这份用户行为数据（CSV），
+ 找出：DAU/MAU 趋势、用户留存曲线、
+ 高价值用户特征、流失原因分布，
+ 给出可行的改进建议&quot;
+</code></pre>
+<p><strong>场景15：融资材料准备</strong></p>
+<pre><code>&quot;帮我准备 Pre-A 轮融资的数据材料：
+ - 关键指标一页纸（ARR/MRR/增速/NRR）
+ - 竞争壁垒说明
+ - 市场时机分析
+ - 用钱计划（24个月 Runway）&quot;
+</code></pre>
+<hr>
+<h2 id="5_5">💰 5 个直接变现的场景</h2>
+<h3 id="1ai">变现场景1：AI 自动化服务外包</h3>
+<p><strong>你帮客户做：</strong></p>
+<pre><code>&quot;我有一个企业客户，他们每天需要：
+ 1. 从官网抓取竞品价格（firecrawl MCP）
+ 2. 生成价格对比报告
+ 3. 发到飞书群
+ 帮我把这个自动化，能每天定时跑&quot;
+</code></pre>
+<p><strong>ROI 估算：</strong> 这类"AI 自动化打包"服务，单个客户月费 3000-10000 元，Claude Code 10 分钟可搭建原型。</p>
+<p><strong>口语指令：</strong></p>
+<pre><code>&quot;帮我做一个自动化系统，每天早上 9 点：
+ 1. 抓取这5个竞品官网的价格变化
+ 2. 用 AI 生成竞情摘要
+ 3. 推送到飞书/微信群&quot;
+</code></pre>
+<hr>
+<h3 id="2_3">变现场景2：代码审查/技术顾问</h3>
+<p><strong>你卖的是：</strong></p>
+<pre><code># 接到客户代码后，你运行：
+/security-audit         # 安全漏洞报告
+/code-review ultra      # 深度代码质量报告
+/domain-audit-better    # 架构健康报告
+
+# 输出一份专业报告，定价 500-5000 元/次
+</code></pre>
+<p><strong>口语指令：</strong></p>
+<pre><code>&quot;帮我对这个 Node.js 项目做完整的技术审计，
+ 输出一份专业的技术评估报告，包含：
+ 安全漏洞/代码质量/架构问题/改进优先级&quot;
+</code></pre>
+<hr>
+<h3 id="3ai">变现场景3：AI 内容工厂</h3>
+<p><strong>你卖的是：</strong></p>
+<pre><code>&quot;/content-engine 帮我给这个 SaaS 产品
+ 每周生成：
+ - 3篇 SEO 博客文章（2000字+）
+ - 5条 LinkedIn 帖子
+ - 10条 Twitter/X 内容
+ - 1份行业报告摘要&quot;
+</code></pre>
+<p><strong>ROI 估算：</strong> 内容外包月费 5000-20000 元，AI 辅助可接 5-10 个同类客户。</p>
+<hr>
+<h3 id="4_1">变现场景4：产品快速验证服务</h3>
+<p><strong>你帮创业者做：</strong></p>
+<pre><code>&quot;这是我的创业想法（描述），
+ 帮我做一个快速验证套件：
+ 1. Landing Page（用 Vercel 部署）
+ 2. 用户访谈脚本
+ 3. MVP 功能清单
+ 4. PMF 测试方案
+ 3 天内可以开始跑实验的程度&quot;
+</code></pre>
+<p><strong>ROI 估算：</strong> "48小时验证服务"定价 3000-8000 元，Claude Code 技术部分1天可完成。</p>
+<hr>
+<h3 id="5-ai">变现场景5：数字化顾问 + AI 落地咨询</h3>
+<p><strong>套路：</strong></p>
+<pre><code># Step 1：用 /ceo-pipeline 做完整商业分析
+&quot;帮我分析这家传统企业（描述业务），
+ 找出可以用 AI 自动化的3个最高 ROI 流程&quot;
+
+# Step 2：用 Claude Code 做原型演示
+&quot;帮我做一个自动化原型：
+ 把他们的报表生成从3天压缩到1小时&quot;
+
+# Step 3：收咨询费 + 实施费
+定价：咨询 5-20 万，实施按项目
+</code></pre>
+<p><strong>口语指令：</strong></p>
+<pre><code>&quot;帮我制作一个 AI 落地方案 PPT：
+ 分析这家企业的流程，找出 AI 切入点，
+ 预估 ROI，给出 3 个月实施路线图&quot;
+</code></pre>
+<hr>
+<blockquote>
+<p>📌 <strong>本手册是精简营销版</strong>。分端分册专业完整版见 <code>claude-code-manuals/01-cli-beginner-guide.md</code>（990行，含 CLI 完整教程+速查表）和 <code>claude-code-manuals/02-desktop-client-guide.md</code>（347行，Desktop 客户端独立版）。</p>
+</blockquote>
+<h2 id="secretary-cron">🔧 系统运维速查（回滚 / Secretary / Cron）</h2>
+<blockquote>
+<p>这一节是"出问题时怎么修系统"的快速参考，平时不需要看。</p>
+</blockquote>
+<h3 id="_35">📦 配置备份与一键回滚</h3>
+<p>系统每次重大变更都会自动建备份，出问题时一键还原：</p>
+<pre><code class="language-bash"># 查看所有可用备份
+python3 ~/.claude/lib/rollback.py list
+
+# 预览某个备份的差异
+python3 ~/.claude/lib/rollback.py preview &lt;备份文件名&gt;
+
+# 应用备份回滚
+python3 ~/.claude/lib/rollback.py apply &lt;备份文件名&gt; --yes
+</code></pre>
+<p><strong>常见问题→对应备份：</strong></p>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>用这个备份</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hook 配置乱了</td>
+<td><code>~/.claude/settings.local.json.bak-fix3</code></td>
+</tr>
+<tr>
+<td>hook 合并出问题</td>
+<td><code>~/.claude/settings.local.json.bak-consolidate</code></td>
+</tr>
+<tr>
+<td>SessionStart 合并出问题</td>
+<td><code>~/.claude/settings.local.json.bak-ss-consolidate</code></td>
+</tr>
+<tr>
+<td>关键词补全不工作</td>
+<td><code>~/.claude/lib/intent-words.json.bak-fix1</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="4-secretary">🤖 4 个 Secretary（系统管家）</h3>
+<table>
+<thead>
+<tr>
+<th>你遇到什么</th>
+<th>找哪个 Secretary</th>
+<th>怎么触发</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>任务完成后想看质量评分</td>
+<td><strong>secretary-tongues（毒舌秘书）</strong></td>
+<td>任务结束自动跑</td>
+</tr>
+<tr>
+<td>想看系统整体健康状态</td>
+<td><strong>secretary-orchestrator</strong></td>
+<td><code>python3 ~/.claude/lib/secretary-orchestrator.py report</code></td>
+</tr>
+<tr>
+<td>想看今天改了什么</td>
+<td><strong>.remember/today-YYYY-MM-DD.md</strong></td>
+<td>会话结束自动写入</td>
+</tr>
+<tr>
+<td>想看下一步要做什么</td>
+<td><strong>now.md</strong></td>
+<td>实时更新</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="cron">⏰ 每周自动任务（Cron · 无需操作）</h3>
+<p>系统每周自动在后台跑维护任务：</p>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W3</td>
+<td>Hook 互不冲突检查 + 超载检测</td>
+</tr>
+<tr>
+<td>W7</td>
+<td>Workflow 语法校验</td>
+</tr>
+<tr>
+<td>W8</td>
+<td>Baseline 漂移检测（drift &gt; 阈值告警）</td>
+</tr>
+<tr>
+<td>W9</td>
+<td>增量快照 + 30 天保留</td>
+</tr>
+<tr>
+<td>W10</td>
+<td>Hook command 精确计数</td>
+</tr>
+<tr>
+<td>W11</td>
+<td>upgrade.py 9 脚本全套</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两个真 Gate（自动告警，不是 bug）：</strong><br>
+- <strong>baseline drift</strong>：配置偏移过大自动提醒<br>
+- <strong>项目 goal 过期</strong>：30 天未更新项目自动告警</p>
+<hr>
+<h3 id="bigos-multica-mycc">📁 你的项目（BigOS / multica / MYCC）</h3>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>路径</th>
+<th>触发</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bigos-upgrade</td>
+<td><code>~/.claude/projects/bigos-upgrade/goal.md</code></td>
+<td>说"BigOS 升级"</td>
+</tr>
+<tr>
+<td>multica-ops</td>
+<td><code>~/.claude/projects/multica-ops/goal.md</code></td>
+<td>说"multica 运维"</td>
+</tr>
+<tr>
+<td>mycc-platform</td>
+<td><code>~/.claude/projects/mycc-platform/goal.md</code></td>
+<td>说"全面升级"</td>
+</tr>
+</tbody>
+</table>
+<p>新建项目：<code>python3 ~/.claude/lib/project-template.py &lt;name&gt; &lt;type&gt; [desc]</code></p>
+<hr>
+<h2 id="v522-2026-06-12">V52.2 新增（2026-06-12）</h2>
+<p>以下 4 项关键能力（原 V52.2 · 2026-06-12 引入）现已合并入 <code>~/.claude/rules/mycc-core.md</code> 铁律级规范：</p>
+<h3 id="1-12tdd-tdd-vertical-slice">1. 铁律 12：TDD 垂直切片（TDD Vertical Slice）</h3>
+<p>红 → 绿 → 重构三步走，每次只推进一个完整用户价值单元。<strong>YOLO L4/极限档/OMC 自配置任务降级为铁律 3 验证证据</strong>——不是所有任务都要先写失败测试。SSoT：<code>rules/mycc-core.md</code>（铁律 12·TDD 垂直切片）。</p>
+<h3 id="2-looploop-worth-building-gate">2. 四条件门：是否值得建 Loop（Loop-Worth-Building Gate）</h3>
+<p>建任何 Loop / <code>/loop</code> / LaunchAgent / 无人值守自动化前，过四条件（重复性 + 验证可自动化 + token 预算 + Agent 工具齐备）<strong>全过才建</strong>，否则一条好 Prompt 更省。SSoT：<code>rules/mycc-core.md</code>（4 步工作流·Loop 判断）。</p>
+<h3 id="3-quarantine">3. 隔离区模式：读写分离防越权（Quarantine）</h3>
+<p>处理外部不可信输入（外部 AI 报告 / WebFetch / 用户上传文件）+ 同任务要高权限写时，<strong>读取 agent 必须挂 <code>disallowed-tools</code> 移除写权</strong>（物理无法越权）。纵深防御三层：行为层（视为数据非指令）+ <strong>架构层（本规则）</strong> + 运行时层（block-dangerous hook）。SSoT：<code>rules/mycc-core.md</code>（防改 4 类配置·安全约束）。</p>
+<h3 id="4-v522dual-end-policy">4. 双端策略 V52.2（Dual-End Policy）</h3>
+<p><strong>CLI 端</strong> <code>~/.claude/CLAUDE.md</code> = OMC 工程事实 / <code>projects/-Users-williammacst/memory/user-profile.md</code> = 角色偏好 / <code>~/.claude/CLAUDE.local.md</code> = 已就绪能力指针；<strong>Desktop 端</strong> = 行为规则契约（云端）。<strong>四份文档正交不冲突</strong>。SSoT：<code>rules/mycc-core.md</code>（输出规范·双端策略）。</p>
+<hr>
+<blockquote>
+<p><strong>如何查阅完整规范</strong>：<br>
+- <code>cat ~/.claude/rules/mycc-core.md</code> （唯一规则 SSoT：12 铁律 + 12 行为规则 R1-R12 + 4 步工作流）<br>
+- 注：W4（2026-06-22）精简后，原 iron-laws / loop-worth-building-gate / quarantine / auto-learned-rules 等多文件已合并入 <code>mycc-core.md</code> 单文件</p>
+</blockquote>
+<p><em>本节能力现已合并入 <code>rules/mycc-core.md</code>（OMC 4.14.7 · W4 精简）；保留原 V52 系列升级记录。</em></p>
+<hr>
+<h2 id="_36">🆕 最新工程化能力（大白话版）</h2>
+<blockquote>
+<p>这一节把 OMC 系统的高级能力翻译成小白能懂、能直接用的语言。每个能力都附"一句话是什么 + 怎么触发 + 什么时候用"。</p>
+</blockquote>
+<hr>
+<h3 id="1-ai">1. 异构对抗：让其他 AI 帮你挑错</h3>
+<p><strong>一句话是什么：</strong><br>
+用 kimi、mmx、qwen、opencode 等非 Claude 模型，从反方角度挑你方案的毛病。就像你设计了一个方案，再去找几个"挑剔的外人"质疑它——他们会发现你自己看不到的盲点。</p>
+<p><strong>怎么触发：</strong></p>
+<pre><code class="language-bash">ai-panel &quot;你的问题或方案描述&quot;
+</code></pre>
+<p><strong>小白什么时候用：</strong></p>
+<p>在重大决定前用一句话问一下。比如：</p>
+<pre><code class="language-bash">ai-panel &quot;我们要用 MongoDB 还是 PostgreSQL 做主数据库，初期用户量1万，数据结构比较灵活&quot;
+</code></pre>
+<p>它会让多个 AI 同时从不同角度分析，给你一个更全面的视角，避免只听 Claude 一家之言。</p>
+<blockquote>
+<p><strong>为什么有用</strong>：每个 AI 模型都有自己的训练偏好和盲区。Claude 可能对某个方案特别看好，但 kimi 或 qwen 会从不同角度挑战它。多模型碰撞 = 更健壮的决策。</p>
+</blockquote>
+<hr>
+<h3 id="2_4">2. 队长模式：极限全权统筹</h3>
+<p><strong>一句话是什么：</strong><br>
+说"队长"或"火力全开"，Claude 进入最高配置的工作模式：先规划、后并行执行、遇到问题死磕不放弃、最后给你实跑证据。</p>
+<p><strong>怎么触发：</strong></p>
+<pre><code>&quot;队长，帮我把登录模块做完&quot;
+&quot;火力全开，把所有 TODO 清掉&quot;
+&quot;老大，这个项目全权交给你了&quot;
+</code></pre>
+<p><strong>小白什么时候用：</strong></p>
+<p>任务比较大、比较重要、你希望 Claude 认真对待的时候。比如：<br>
+- "队长，帮我做整个用户权限系统，包括登录、注册、JWT、权限控制"<br>
+- "火力全开，把这个项目的安全漏洞全修了"</p>
+<blockquote>
+<p><strong>普通模式 vs 队长模式的区别</strong>：普通模式 Claude 可能写完就说"好了"，但实际没跑通。队长模式它会强制验证，给你实际运行的截图或输出，不会假完成。</p>
+</blockquote>
+<hr>
+<h3 id="3-verify-before-assert">3. 要求实跑证据（Verify-Before-Assert）</h3>
+<p><strong>一句话是什么：</strong><br>
+Claude 有个内置铁律：下结论前必须先实测，不能凭感觉猜。你可以主动触发这个模式，让它给你"实跑证据"而不是"我猜应该可以"。</p>
+<p><strong>怎么触发：</strong></p>
+<pre><code>&quot;给我实跑证据，别猜&quot;
+&quot;你跑一下看看结果是什么&quot;
+&quot;不要告诉我'应该可以'，帮我验证一下&quot;
+</code></pre>
+<p><strong>小白什么时候用：</strong></p>
+<p>当 Claude 说"这个应该能跑""理论上没问题"这类话时，追一句：</p>
+<pre><code>&quot;别猜，帮我实际跑一下，把结果给我看&quot;
+</code></pre>
+<blockquote>
+<p><strong>为什么重要</strong>：AI 会"hallucinate"（幻觉），说得很自信但其实是错的。要求它实跑，就是逼它用真实结果说话，而不是凭印象。这是使用 AI 编程的核心防坑技巧之一。</p>
+</blockquote>
+<hr>
+<h3 id="4_2">4. 多层记忆系统：跨会话不忘事</h3>
+<p><strong>一句话是什么：</strong><br>
+系统有自动记忆功能——你说"记住"，它会把信息写入持久文件，下次新开会话（新聊天窗口）仍然有效。不只是这次对话的便条，而是真正的长期笔记本。</p>
+<p><strong>怎么触发：</strong></p>
+<pre><code>&quot;记住，这个项目用 Python 3.11，不是 3.12&quot;
+&quot;记一下，数据库连接字符串在 .env 的 DATABASE_URL&quot;
+&quot;记住我们团队的代码规范：变量名用驼峰，注释用中文&quot;
+</code></pre>
+<p><strong>小白什么时候用：</strong></p>
+<ul>
+<li>项目技术栈确定后，马上说"记住"</li>
+<li>发现 Claude 反复问同一个问题时，告诉它一次然后说"记住"</li>
+<li>重要配置、约定、决策都可以说"记住"</li>
+</ul>
+<blockquote>
+<p><strong>记忆存在哪里</strong>：写入 <code>~/.claude/projects/.../memory/MEMORY.md</code>，这是一个跨会话持久的文件。用 <code>MEMORY.md 里有什么</code> 可以让 Claude 回顾所有记住的事情。</p>
+</blockquote>
+<hr>
+<h3 id="5_6">5. 冒烟自检：一键查系统是否健康</h3>
+<p><strong>一句话是什么：</strong><br>
+一条命令检查整个 OMC 系统的5个关键健康指标，确认体系正常运转。就像汽车的"自检仪表盘"，绿灯表示没问题。</p>
+<p><strong>怎么触发：</strong></p>
+<pre><code class="language-bash">bash ~/.claude/scripts/smoke-tests.sh
+</code></pre>
+<p><strong>小白什么时候用：</strong></p>
+<ul>
+<li>系统升级后，跑一下确认没坏</li>
+<li>发现行为异常时，先跑这个看哪里不对</li>
+<li>很久没用了重新开始用时，跑一下确认状态</li>
+</ul>
+<blockquote>
+<p><strong>5项检查内容</strong>：钩子是否正常加载、技能是否可触发、记忆系统是否工作、模型是否正确、关键配置是否有效。全绿就可以放心用，有红的说明那块需要修。</p>
+</blockquote>
+<hr>
+<h3 id="6">6. 自动回滚：配置坏了一键恢复</h3>
+<p><strong>一句话是什么：</strong><br>
+如果 Claude 帮你改配置改坏了，或者你自己操作失误，这个命令可以从自动快照恢复到正常状态。默认是"dry-run"（预演模式），先让你看看会恢复什么，确认了再真正执行。</p>
+<p><strong>怎么触发：</strong></p>
+<pre><code class="language-bash"># 预览会恢复什么（安全，不会真的改动）
+bash ~/.claude/lib/auto-rollback.sh
+
+# 确认后真正执行回滚
+bash ~/.claude/lib/auto-rollback.sh --apply
+</code></pre>
+<p><strong>小白什么时候用：</strong></p>
+<ul>
+<li>升级或修改配置后系统行为变奇怪了</li>
+<li>Hook 报错找不到原因</li>
+<li>不小心改了配置文件想撤回</li>
+<li>系统管理员（Secretary）提示"配置漂移"时</li>
+</ul>
+<blockquote>
+<p><strong>为什么默认 dry-run 很重要</strong>：先预览、再执行，是安全操作的铁律。你可以先看"它要恢复哪些文件、恢复成什么样"，确认没问题再按确认。不会因为一个命令把好的配置搞坏。</p>
+</blockquote>
+<hr>
+<h3 id="7-l0-l3">7. 风险分级（L0-L3）：小改直做，大改先确认</h3>
+<p><strong>一句话是什么：</strong><br>
+系统会自动判断每个操作的风险等级，小操作直接做，大操作（尤其是删除、改配置、部署）会先给你计划，等你点头再动手。</p>
+<p><strong>怎么触发：</strong></p>
+<p>这个是自动的，不需要手动触发。但你可以理解分级含义：</p>
+<table>
+<thead>
+<tr>
+<th>等级</th>
+<th>触发条件</th>
+<th>系统做什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L0</td>
+<td>1-2个文件，可撤销，不碰配置</td>
+<td>直接做，完成后告诉你</td>
+</tr>
+<tr>
+<td>L1</td>
+<td>5个文件以内，可撤销</td>
+<td>做完自动备份，提交记录</td>
+</tr>
+<tr>
+<td>L2</td>
+<td>超过5个文件，或涉及推送/外部服务</td>
+<td>先给你一句话简报再开始</td>
+</tr>
+<tr>
+<td>L3</td>
+<td>不可逆操作、改配置/钩子、安全相关</td>
+<td>先给完整计划，等你确认再动</td>
+</tr>
+</tbody>
+</table>
+<p><strong>小白什么时候用：</strong></p>
+<p>你不需要记这些等级，只需要知道：<strong>如果 Claude 跟你确认计划，那是因为这个操作比较重要，认真看一眼再点头</strong>。不要因为嫌麻烦就随便说"是"，尤其是涉及删除、部署、改配置的操作。</p>
+<blockquote>
+<p><strong>实际例子</strong>：你说"帮我重构登录模块"（5个文件以上，L2），Claude 会先说"我打算改这些文件、顺序是这样、验证方式是这个"，你说"好"之后它才动手。这能防止 Claude 自作主张做了你不想要的事。</p>
+</blockquote>
+<hr>
+<h3 id="8">8. 定时秘书：自动巡检 + 每日简报</h3>
+<p><strong>一句话是什么：</strong><br>
+系统内置了"定时秘书"——每天/每周自动跑维护任务，开 session 时自动提示今天有什么需要关注的。你不需要手动管，它自动在后台帮你盯着。</p>
+<p><strong>怎么触发：</strong></p>
+<p>自动触发，每次开 session 会有提示。如果没有提示，说明没有需要关注的事项。</p>
+<p>手动查看：</p>
+<pre><code class="language-bash"># 查看今天的每日简报
+cat ~/.claude/reports/daily-brief-$(date +%Y-%m-%d).md
+
+# 查看系统整体健康
+python3 ~/.claude/lib/secretary-orchestrator.py report
+</code></pre>
+<p><strong>小白什么时候用：</strong></p>
+<ul>
+<li>每次开始工作前看一眼 session 开始时的提示</li>
+<li>如果提示说"有 X 个钩子冲突"或"baseline 漂移"，在开始正式任务前先处理这些</li>
+</ul>
+<blockquote>
+<p><strong>比喻</strong>：就像早上起来手机给你推送"今天有3个日历提醒、1条未读重要消息"，定时秘书做的是同样的事——把需要你注意的系统状态提前告诉你，不让小问题积累成大问题。</p>
+</blockquote>
+<hr>
+<h3 id="_37">工程化能力速查表</h3>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>触发方式</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>异构对抗</td>
+<td><code>ai-panel "问题"</code></td>
+<td>重大技术/产品决策前</td>
+</tr>
+<tr>
+<td>队长模式</td>
+<td>说"队长"/"火力全开"</td>
+<td>复杂大任务、要求高质量</td>
+</tr>
+<tr>
+<td>要求实跑证据</td>
+<td>"给我实跑证据"</td>
+<td>Claude 说"应该可以"时</td>
+</tr>
+<tr>
+<td>多层记忆</td>
+<td>"记住 X"</td>
+<td>重要信息跨会话保留</td>
+</tr>
+<tr>
+<td>冒烟自检</td>
+<td><code>bash ~/.claude/scripts/smoke-tests.sh</code></td>
+<td>升级后/行为异常时</td>
+</tr>
+<tr>
+<td>自动回滚</td>
+<td><code>bash ~/.claude/lib/auto-rollback.sh</code></td>
+<td>配置坏了/操作失误时</td>
+</tr>
+<tr>
+<td>风险分级</td>
+<td>自动触发</td>
+<td>Claude 给计划时认真看</td>
+</tr>
+<tr>
+<td>定时秘书</td>
+<td>自动，每次 session 提示</td>
+<td>每天开始工作前看提示</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><em>手册更新：2026-06-22 | 问题反馈：<code>/btw 手册里有个地方不对...</code></em></p>
+<p>最后更新：2026-06-25 · 已含最新工程化能力</p>
+<hr>
+<h2 id="_38">📚 更多入口</h2>
+<ul>
+<li><strong>dashboard.html</strong> · 36+ 张卡片（命令/能力/5 大高级功能/统计/帮助）</li>
+<li><strong>mycc-config.html</strong> · 配置全景（自动拉取 ~/.claude/ · MCP/插件/Skills/Hooks/路由表）</li>
+<li><strong>start-here.md</strong> · 35 场景 × 7 手册 × 3 万能入口</li>
+</ul>
+</body>
+</html>

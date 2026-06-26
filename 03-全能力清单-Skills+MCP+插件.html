@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code 全能力清单</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📘%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════ MD→HTML 渲染共享样式(继承 dashboard 设计系统 v2)═══════ */
+:root {
+  color-scheme: light;
+  --bg: #ffffff; --bg-subtle: #f5f5f7; --surface: #ffffff; --surface2: #fafafc; --surface-hover: #f5f5f7;
+  --border: #e5e5ea; --border-strong: #d2d2d7; --code-bg: #f5f5f7; --tag-bg: #f5f5f7;
+  --text: #1d1d1f; --text-dim: #515154; --text-muted: #86868b;
+  --accent: #0071e3; --accent-hover: #0077ed; --accent-soft: #e8f1fd;
+  --green: #1a8c4a; --red: #d70015; --orange: #b25000; --purple: #6e3fd6;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --font-sans: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
+  --font-mono: 'JetBrains Mono','SF Mono','Fira Code',Menlo,monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0a0a0b; --bg-subtle: #141416; --surface: #161618; --surface2: #1c1c1f; --surface-hover: #232326;
+    --border: #2a2a2e; --border-strong: #3a3a3e; --code-bg: #1c1c1f;
+    --text: #f5f5f7; --text-dim: #aeaeb2; --text-muted: #8e8e93;
+    --accent: #2997ff; --accent-soft: #16263b;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans); background: var(--bg); color: var(--text);
+  line-height: 1.7; font-size: 15px; padding: 48px 32px 80px; max-width: 880px; margin: 0 auto;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+.doc-header {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  margin-bottom: 28px; padding-bottom: 18px; border-bottom: 1px solid var(--border);
+}
+.doc-header .back {
+  color: var(--accent); text-decoration: none; padding: 6px 14px;
+  border: 1px solid var(--border-strong); border-radius: 980px; font-size: 13px; font-weight: 500;
+  transition: all .15s;
+}
+.doc-header .back:hover { background: var(--accent-soft); border-color: var(--accent); }
+.doc-header .meta { color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
+h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 12px 0 18px; color: var(--text); }
+h2 { font-size: 23px; font-weight: 600; margin: 40px 0 14px; padding-top: 12px; letter-spacing: -0.01em;
+     border-top: 1px solid var(--border); color: var(--text); }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+h3 { font-size: 18px; font-weight: 600; margin: 28px 0 10px; color: var(--text); }
+h4 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; color: var(--text-dim); }
+p { margin: 10px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+ul, ol { margin: 10px 0 10px 24px; }
+li { margin: 4px 0; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 28px 0; }
+code {
+  font-family: var(--font-mono); font-size: 0.9em; background: var(--code-bg);
+  padding: 1px 6px; border-radius: 5px; color: var(--text);
+}
+pre {
+  background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 16px; overflow-x: auto; margin: 14px 0; line-height: 1.55;
+}
+pre code { background: transparent; padding: 0; font-size: 13px; }
+blockquote {
+  border-left: 3px solid var(--accent); margin: 14px 0; padding: 8px 16px;
+  background: var(--accent-soft); border-radius: 0 8px 8px 0; color: var(--text-dim);
+}
+blockquote p { margin: 4px 0; }
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+th { text-align: left; padding: 9px 12px; background: var(--bg-subtle); color: var(--text-muted);
+     font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+td { padding: 9px 12px; border-top: 1px solid var(--border); }
+tr:hover td { background: var(--bg-subtle); }
+img { max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0; }
+strong { font-weight: 600; color: var(--text); }
+em { font-style: italic; color: var(--text-dim); }
+@media (max-width: 720px) { body { padding: 24px 16px 60px; } h1 { font-size: 26px; } h2 { font-size: 20px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <a href="dashboard.html" class="back">← 返回 MYCC 仪表盘</a>
+  <span class="meta">渲染时间 2026-06-26 01:13 · 源: 03-全能力清单-Skills+MCP+插件.md</span>
+</div>
+<h1 id="claude-code">Claude Code 全能力清单</h1>
+<blockquote>
+<p>Skills × 150 · Agents × 52 · Hooks × 53(50文件) · 插件 × 32启用/35总 · MCP × 12+ · 外部 CLI × 5联<br>
+OMC 4.15.0 · CLI v2.1.191 · 2026-06-25 完整版（mycc-stats 实测）</p>
+</blockquote>
+<hr>
+<h2 id="150-skills">第一部分：150 个 Skills 完整分类说明</h2>
+<h3 id="_1">🚀 执行与工作模式（核心驱动）</h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>触发方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>autopilot</strong></td>
+<td>说"autopilot" 或 <code>/autopilot</code></td>
+<td>自动驾驶：Claude 自主规划并连续执行任务，不打断确认</td>
+</tr>
+<tr>
+<td><strong>ultrawork</strong></td>
+<td>说"ulw" 或 <code>/ultrawork</code></td>
+<td>超级工作模式：高并发+高密度执行，opus 模型全力输出</td>
+</tr>
+<tr>
+<td><strong>ultragoal</strong></td>
+<td><code>/ultragoal</code></td>
+<td>超级目标：先用 rubric 定义完成标准，再全力达成</td>
+</tr>
+<tr>
+<td><strong>ultraqa</strong></td>
+<td><code>/ultraqa</code></td>
+<td>超级 QA：全维度质量验收，覆盖功能/边界/安全/体验</td>
+</tr>
+<tr>
+<td><strong>smart-flow-all</strong></td>
+<td>说"队长"</td>
+<td>总调度器：按意图自动路由到最合适的执行模式</td>
+</tr>
+<tr>
+<td><strong>cancel</strong></td>
+<td>说"cancelomc" 或 <code>/cancel</code></td>
+<td>终止当前执行模式</td>
+</tr>
+<tr>
+<td><strong>caveman</strong></td>
+<td><code>/caveman</code></td>
+<td>压缩主线程对话密度，节省 token（吸收自 Gemini cavecrew）</td>
+</tr>
+<tr>
+<td><strong>token-budget</strong></td>
+<td><code>/token-budget</code></td>
+<td>管理 token 预算，防止超额</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="_2">💻 功能开发类</h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>触发方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>feature-dev:feature-dev</strong></td>
+<td><code>/feature-dev:feature-dev</code></td>
+<td>完整功能开发流程：探索→架构→实现→代码审查</td>
+</tr>
+<tr>
+<td><strong>ecc-tdd-workflow</strong></td>
+<td>说"tdd"</td>
+<td>TDD 三阶段：红（失败测试）→绿（最小实现）→重构</td>
+</tr>
+<tr>
+<td><strong>ecc-parallel-execution-optimizer</strong></td>
+<td>自动触发</td>
+<td>并行执行优化，自动识别可并行任务</td>
+</tr>
+<tr>
+<td><strong>deep-dive</strong></td>
+<td>说"deep-analyze" 或 <code>/deep-dive</code></td>
+<td>深度专项分析：代码库结构、技术债、性能瓶颈</td>
+</tr>
+<tr>
+<td><strong>codesight</strong></td>
+<td><code>/codesight</code></td>
+<td>代码全局洞察，生成代码库理解报告</td>
+</tr>
+<tr>
+<td><strong>improve-codebase-architecture</strong></td>
+<td><code>/improve-codebase-architecture</code></td>
+<td>架构改进建议，从全局视角优化代码结构</td>
+</tr>
+<tr>
+<td><strong>source-driven-development</strong></td>
+<td><code>/source-driven-development</code></td>
+<td>源码驱动开发，先读源码再实现</td>
+</tr>
+<tr>
+<td><strong>doubt-driven-development</strong></td>
+<td><code>/doubt-driven-development</code></td>
+<td>质疑驱动开发，先质疑假设再动手</td>
+</tr>
+<tr>
+<td><strong>prototype</strong></td>
+<td><code>/prototype</code></td>
+<td>快速原型，30分钟内可演示的 MVP</td>
+</tr>
+<tr>
+<td><strong>vercel-react-best-practices</strong></td>
+<td><code>/vercel-react-best-practices</code></td>
+<td>Vercel + React 最佳实践指南</td>
+</tr>
+<tr>
+<td><strong>local-build-reminder</strong></td>
+<td>自动触发</td>
+<td>修改代码后提醒本地构建验证</td>
+</tr>
+<tr>
+<td><strong>context-engineering</strong></td>
+<td><code>/context-engineering</code></td>
+<td>Context 工程优化，提升 LLM 调用质量</td>
+</tr>
+<tr>
+<td><strong>api-and-interface-design</strong></td>
+<td><code>/api-and-interface-design</code></td>
+<td>API 和接口设计最佳实践</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="_3">🔍 调研与分析类</h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>触发方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>deep-research</strong></td>
+<td>说"调研" 或 <code>/deep-research</code></td>
+<td>≥5 渠道深度调研（官方/GitHub/社区/中文/视频），有来源有结论</td>
+</tr>
+<tr>
+<td><strong>deep-research-sop</strong></td>
+<td><code>/deep-research-sop</code></td>
+<td>调研 SOP wrapper，带六步决策闭环</td>
+</tr>
+<tr>
+<td><strong>autoresearch</strong></td>
+<td><code>/autoresearch</code></td>
+<td>自动调研，自主选择最优渠道组合</td>
+</tr>
+<tr>
+<td><strong>v29-deep-research</strong></td>
+<td><code>/v29-deep-research</code></td>
+<td>Workflow 版深度调研（多 agent 并行抓取+合成）</td>
+</tr>
+<tr>
+<td><strong>ask</strong></td>
+<td><code>/ask</code></td>
+<td>互动式问答，适合模糊需求澄清</td>
+</tr>
+<tr>
+<td><strong>grill-me</strong></td>
+<td><code>/grill-me</code></td>
+<td>苏格拉底式质询，帮你想清楚一个决策</td>
+</tr>
+<tr>
+<td><strong>grill-with-docs</strong></td>
+<td><code>/grill-with-docs</code></td>
+<td>结合文档的深度质询</td>
+</tr>
+<tr>
+<td><strong>deep-interview</strong></td>
+<td>说"deep interview" 或 <code>/deep-interview</code></td>
+<td>深度访谈，挖掘真实需求和痛点</td>
+</tr>
+<tr>
+<td><strong>interview-me</strong></td>
+<td><code>/interview-me</code></td>
+<td>模拟面试，准备技术/产品/融资面谈</td>
+</tr>
+<tr>
+<td><strong>web-access</strong></td>
+<td><code>/web-access</code></td>
+<td>直接访问网页内容</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="_4">🛡️ 代码质量与安全类</h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>触发方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>code-review</strong></td>
+<td><code>/code-review</code></td>
+<td>代码审查（--fix 自动修复，--comment 发 PR 评论，ultra 云端）</td>
+</tr>
+<tr>
+<td><strong>ce-code-review</strong></td>
+<td><code>/ce-code-review</code></td>
+<td>CE 模式代码审查（ECC 规范，覆盖 React/security/testing）</td>
+</tr>
+<tr>
+<td><strong>simplify</strong></td>
+<td><code>/simplify</code></td>
+<td>代码简化重构，去掉多余复杂度</td>
+</tr>
+<tr>
+<td><strong>security-audit</strong></td>
+<td><code>/security-audit</code></td>
+<td>完整安全审计（OWASP Top 10 + STRIDE 威胁建模）</td>
+</tr>
+<tr>
+<td><strong>security-review</strong></td>
+<td><code>/security-review</code></td>
+<td>快速安全扫描，重点看漏洞</td>
+</tr>
+<tr>
+<td><strong>ai-slop-cleaner</strong></td>
+<td>说"deslop" 或 <code>/ai-slop-cleaner</code></td>
+<td>清洗 AI 生成内容中的套话和低质量表达</td>
+</tr>
+<tr>
+<td><strong>neat-freak</strong></td>
+<td><code>/neat-freak</code></td>
+<td>代码洁癖模式，强制执行命名/格式/风格统一</td>
+</tr>
+<tr>
+<td><strong>ecc-skill-comply</strong></td>
+<td><code>/ecc-skill-comply</code></td>
+<td>ECC 规范合规检查</td>
+</tr>
+<tr>
+<td><strong>ecc-gateguard</strong></td>
+<td><code>/ecc-gateguard</code></td>
+<td>代码质量门控，阻止低质量代码合并</td>
+</tr>
+<tr>
+<td><strong>ecc-eval-harness</strong></td>
+<td><code>/ecc-eval-harness</code></td>
+<td>ECC 评估框架，量化代码质量</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="ceo">🎯 CEO/战略/创业类</h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>触发方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ceo-mode</strong></td>
+<td><code>/ceo-mode</code></td>
+<td>CEO 战略分析模式：市场/竞品/财务/风险全维度</td>
+</tr>
+<tr>
+<td><strong>smart-flow-all</strong></td>
+<td>说"队长"</td>
+<td>全流水线编排，ceo-mode + team-fullstack + 调研</td>
+</tr>
+<tr>
+<td><strong>ce-strategy</strong></td>
+<td><code>/ce-strategy</code></td>
+<td>CE 战略模式，专注战略决策</td>
+</tr>
+<tr>
+<td><strong>ce-plan</strong></td>
+<td><code>/ce-plan</code></td>
+<td>CE 规划模式，详细执行计划</td>
+</tr>
+<tr>
+<td><strong>ceo-pipeline</strong> (workflow)</td>
+<td><code>/ceo-pipeline</code></td>
+<td>6阶段商业分析流水线（市场→竞品→产品→财务→风险→路线图）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="_5">🏗️ 规划与架构类</h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>触发方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>omc-plan</strong></td>
+<td><code>/omc-plan</code></td>
+<td>OMC 任务规划，生成带验证步骤的执行计划</td>
+</tr>
+<tr>
+<td><strong>ralplan</strong></td>
+<td>说"ralplan" 或 <code>/ralplan</code></td>
+<td>快速详细规划</td>
+</tr>
+<tr>
+<td><strong>spec-generator</strong></td>
+<td><code>/spec-generator</code></td>
+<td>技术规格文档生成器</td>
+</tr>
+<tr>
+<td><strong>to-prd</strong></td>
+<td><code>/to-prd</code></td>
+<td>需求→PRD 文档转化</td>
+</tr>
+<tr>
+<td><strong>documentation-and-adrs</strong></td>
+<td><code>/documentation-and-adrs</code></td>
+<td>文档 + 架构决策记录（ADR）</td>
+</tr>
+<tr>
+<td><strong>planning-with-files-mode</strong></td>
+<td>自动触发</td>
+<td>文件级规划模式</td>
+</tr>
+<tr>
+<td><strong>omc-hitl</strong></td>
+<td><code>/omc-hitl</code></td>
+<td>Human-in-the-loop 审批点设置</td>
+</tr>
+<tr>
+<td><strong>cmmi-tracker</strong></td>
+<td><code>/cmmi-tracker</code></td>
+<td>CMMI 任务跟踪，同步到 Notion 看板</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="_6">📝 文档与内容创作类</h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>触发方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>article-writing</strong></td>
+<td><code>/article-writing</code></td>
+<td>写技术文章/博客/README，有结构有深度</td>
+</tr>
+<tr>
+<td><strong>writer-memory</strong></td>
+<td><code>/writer-memory</code></td>
+<td>保持写作风格一致，跨会话记忆写作偏好</td>
+</tr>
+<tr>
+<td><strong>baoyu-translate</strong></td>
+<td><code>/baoyu-translate</code></td>
+<td>高质量中英互译，保留技术术语</td>
+</tr>
+<tr>
+<td><strong>baoyu-slide-deck</strong></td>
+<td><code>/baoyu-slide-deck</code></td>
+<td>生成演示 PPT（Marp/Reveal.js）</td>
+</tr>
+<tr>
+<td><strong>baoyu-diagram</strong></td>
+<td><code>/baoyu-diagram</code></td>
+<td>生成架构图/流程图（Mermaid/PlantUML）</td>
+</tr>
+<tr>
+<td><strong>baoyu-markdown-to-html</strong></td>
+<td><code>/baoyu-markdown-to-html</code></td>
+<td>Markdown → 精美 HTML</td>
+</tr>
+<tr>
+<td><strong>baoyu-infographic</strong></td>
+<td><code>/baoyu-infographic</code></td>
+<td>信息图表设计</td>
+</tr>
+<tr>
+<td><strong>baoyu-article-illustrator</strong></td>
+<td><code>/baoyu-article-illustrator</code></td>
+<td>为文章生成配图</td>
+</tr>
+<tr>
+<td><strong>baoyu-wechat-summary</strong></td>
+<td><code>/baoyu-wechat-summary</code></td>
+<td>微信文章摘要提取</td>
+</tr>
+<tr>
+<td><strong>baoyu-url-to-markdown</strong></td>
+<td><code>/baoyu-url-to-markdown</code></td>
+<td>网页→Markdown 转换</td>
+</tr>
+<tr>
+<td><strong>baoyu-youtube-transcript</strong></td>
+<td><code>/baoyu-youtube-transcript</code></td>
+<td>YouTube 视频转文字+摘要</td>
+</tr>
+<tr>
+<td><strong>baoyu-format-markdown</strong></td>
+<td><code>/baoyu-format-markdown</code></td>
+<td>Markdown 格式美化</td>
+</tr>
+<tr>
+<td><strong>baoyu-comic</strong></td>
+<td><code>/baoyu-comic</code></td>
+<td>将内容转为漫画形式</td>
+</tr>
+<tr>
+<td><strong>slides</strong></td>
+<td><code>/slides</code></td>
+<td>演示文稿生成</td>
+</tr>
+<tr>
+<td><strong>diff-generator</strong></td>
+<td><code>/diff-generator</code></td>
+<td>生成变更对比文档</td>
+</tr>
+<tr>
+<td><strong>humanize-chinese</strong></td>
+<td><code>/humanize-chinese</code></td>
+<td>中文内容人性化，去除 AI 腔调</td>
+</tr>
+<tr>
+<td><strong>humanizer</strong></td>
+<td><code>/humanizer</code></td>
+<td>通用内容人性化</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="ui">🎨 设计与 UI 类</h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>触发方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>design</strong></td>
+<td><code>/design</code></td>
+<td>UI/UX 完整设计流程</td>
+</tr>
+<tr>
+<td><strong>ui-ux-pro-max</strong></td>
+<td><code>/ui-ux-pro-max</code></td>
+<td>专业级 UI/UX 设计，有用户旅程/信息架构/交互逻辑</td>
+</tr>
+<tr>
+<td><strong>design-system</strong></td>
+<td><code>/design-system</code></td>
+<td>设计系统建立，组件规范/色彩/字体</td>
+</tr>
+<tr>
+<td><strong>ui-styling</strong></td>
+<td><code>/ui-styling</code></td>
+<td>CSS/Tailwind 样式优化</td>
+</tr>
+<tr>
+<td><strong>banner-design</strong></td>
+<td><code>/banner-design</code></td>
+<td>横幅/封面设计</td>
+</tr>
+<tr>
+<td><strong>baoyu-cover-image</strong></td>
+<td><code>/baoyu-cover-image</code></td>
+<td>生成文章封面图</td>
+</tr>
+<tr>
+<td><strong>baoyu-image-gen</strong></td>
+<td><code>/baoyu-image-gen</code></td>
+<td>AI 图片生成（含提示词优化）</td>
+</tr>
+<tr>
+<td><strong>prototype</strong></td>
+<td><code>/prototype</code></td>
+<td>快速可交互原型</td>
+</tr>
+<tr>
+<td><strong>visual-verdict</strong></td>
+<td><code>/visual-verdict</code></td>
+<td>视觉审查，给设计稿打分+建议</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="_7">👥 团队协作类</h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>触发方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>team</strong></td>
+<td><code>/team</code> 或 <code>/oh-my-claudecode:team</code></td>
+<td>启动多 agent 协作团队</td>
+</tr>
+<tr>
+<td><strong>omc-teams</strong></td>
+<td><code>/omc-teams</code></td>
+<td>OMC 团队管理，配置 agent 团队</td>
+</tr>
+<tr>
+<td><strong>team-prompt-template</strong></td>
+<td><code>/team-prompt-template</code></td>
+<td>团队协作提示词模板</td>
+</tr>
+<tr>
+<td><strong>n-step-pipeline</strong> (workflow)</td>
+<td><code>/n-step-pipeline</code></td>
+<td>N步自定义流水线，每步可分配不同 agent</td>
+</tr>
+<tr>
+<td><strong>handoff</strong></td>
+<td><code>/handoff</code></td>
+<td>任务交接文档生成，新会话快速续接</td>
+</tr>
+<tr>
+<td><strong>teleport</strong></td>
+<td><code>/teleport</code></td>
+<td>跨会话上下文传送，复杂上下文接力</td>
+</tr>
+<tr>
+<td><strong>project-session-manager</strong></td>
+<td><code>/project-session-manager</code></td>
+<td>会话项目管理，多轮任务状态持久化</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="devops">🚀 部署与 DevOps 类</h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>触发方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>deploy-ship</strong></td>
+<td><code>/deploy-ship</code></td>
+<td>一站式部署（CI/CD + 环境变量 + 健康检查）</td>
+</tr>
+<tr>
+<td><strong>release</strong></td>
+<td><code>/release</code></td>
+<td>正式发版流程（CHANGELOG + tag + 发布说明）</td>
+</tr>
+<tr>
+<td><strong>gh-ci-fix</strong></td>
+<td><code>/gh-ci-fix</code></td>
+<td>自动修复 GitHub Actions 失败</td>
+</tr>
+<tr>
+<td><strong>ci-template</strong></td>
+<td><code>/ci-template</code></td>
+<td>CI/CD 模板生成（GitHub Actions/GitLab CI）</td>
+</tr>
+<tr>
+<td><strong>commit-commands:commit</strong></td>
+<td><code>/commit-commands:commit</code></td>
+<td>智能生成 git commit message</td>
+</tr>
+<tr>
+<td><strong>commit-commands:commit-push-pr</strong></td>
+<td><code>/commit-commands:commit-push-pr</code></td>
+<td>commit + push + 开 PR 全自动</td>
+</tr>
+<tr>
+<td><strong>commit-commands:clean_gone</strong></td>
+<td><code>/commit-commands:clean_gone</code></td>
+<td>清理已删除远端分支的本地追踪</td>
+</tr>
+<tr>
+<td><strong>shipping-and-launch</strong></td>
+<td><code>/shipping-and-launch</code></td>
+<td>产品上线全流程清单</td>
+</tr>
+<tr>
+<td><strong>deprecation-and-migration</strong></td>
+<td><code>/deprecation-and-migration</code></td>
+<td>废弃API/功能迁移指南生成</td>
+</tr>
+<tr>
+<td><strong>observability-and-instrumentation</strong></td>
+<td><code>/observability-and-instrumentation</code></td>
+<td>可观测性建设（日志/监控/追踪）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="_8">🔧 配置与系统维护类</h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>触发方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>claude-code-better</strong></td>
+<td>说"全面升级" 或 <code>/claude-code-better</code></td>
+<td>一站式全面升级（唯一升级入口）</td>
+</tr>
+<tr>
+<td><strong>audit-all-better</strong></td>
+<td><code>/audit-all-better</code></td>
+<td>30维健康诊断（只诊断不修改）</td>
+</tr>
+<tr>
+<td><strong>harness-audit</strong> (workflow)</td>
+<td><code>/harness-audit</code></td>
+<td>harness 六层评分（配置层质量评估）</td>
+</tr>
+<tr>
+<td><strong>config-audit-better</strong> (workflow)</td>
+<td><code>/config-audit-better</code></td>
+<td>配置专项审计</td>
+</tr>
+<tr>
+<td><strong>self-evolve-loop</strong> (workflow)</td>
+<td><code>/self-evolve-loop</code></td>
+<td>自我进化闭环（evaluator-optimizer 飞轮）</td>
+</tr>
+<tr>
+<td><strong>self-audit-loop</strong></td>
+<td><code>/self-audit-loop</code></td>
+<td>任务级自审循环（5问自检）</td>
+</tr>
+<tr>
+<td><strong>self-improve</strong></td>
+<td><code>/self-improve</code></td>
+<td>针对外部代码库跑 benchmark 改进</td>
+</tr>
+<tr>
+<td><strong>update-all</strong></td>
+<td><code>/update-all</code></td>
+<td>版本更新（CLI + 插件 + 依赖）</td>
+</tr>
+<tr>
+<td><strong>update-config</strong></td>
+<td><code>/update-config</code></td>
+<td>修改 settings.json/settings.local.json</td>
+</tr>
+<tr>
+<td><strong>hookify:hookify</strong></td>
+<td><code>/hookify:hookify</code></td>
+<td>分析对话行为，自动生成 hooks 防范重复错误</td>
+</tr>
+<tr>
+<td><strong>hookify:configure</strong></td>
+<td><code>/hookify:configure</code></td>
+<td>配置 hook 行为</td>
+</tr>
+<tr>
+<td><strong>hookify:list</strong></td>
+<td><code>/hookify:list</code></td>
+<td>查看已配置 hooks</td>
+</tr>
+<tr>
+<td><strong>omc-doctor</strong></td>
+<td><code>/omc-doctor</code></td>
+<td>诊断 OMC 配置问题</td>
+</tr>
+<tr>
+<td><strong>omc-setup</strong></td>
+<td><code>/omc-setup</code></td>
+<td>初始化/重置 OMC 配置</td>
+</tr>
+<tr>
+<td><strong>setup</strong></td>
+<td><code>/setup</code></td>
+<td>初始化项目环境</td>
+</tr>
+<tr>
+<td><strong>antigravity-claude-settings-audit</strong></td>
+<td><code>/antigravity-claude-settings-audit</code></td>
+<td>反向审计：找出过度复杂的配置并简化</td>
+</tr>
+<tr>
+<td><strong>antigravity-memory-systems</strong></td>
+<td><code>/antigravity-memory-systems</code></td>
+<td>记忆系统审计，清理过时记忆</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="_9">💾 记忆与知识管理类</h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>触发方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>remember:remember</strong></td>
+<td><code>/remember:remember</code></td>
+<td>保存重要信息到持久记忆（7天/永久两级）</td>
+</tr>
+<tr>
+<td><strong>wiki</strong></td>
+<td><code>/wiki</code> 或 <code>/oh-my-claudecode:wiki</code></td>
+<td>知识库管理（wiki 的查询/更新）</td>
+</tr>
+<tr>
+<td><strong>notion-knowledge-capture</strong></td>
+<td><code>/notion-knowledge-capture</code></td>
+<td>将洞察直接保存到 Notion</td>
+</tr>
+<tr>
+<td><strong>notion-spec-to-implementation</strong></td>
+<td><code>/notion-spec-to-implementation</code></td>
+<td>Notion 需求文档→代码实现</td>
+</tr>
+<tr>
+<td><strong>obsidian-vault</strong></td>
+<td><code>/obsidian-vault</code></td>
+<td>Obsidian 知识库操作</td>
+</tr>
+<tr>
+<td><strong>writer-memory</strong></td>
+<td><code>/writer-memory</code></td>
+<td>写作风格记忆</td>
+</tr>
+<tr>
+<td><strong>memory-dream-consolidation</strong></td>
+<td><code>/memory-dream-consolidation</code></td>
+<td>记忆整合，合并分散知识</td>
+</tr>
+<tr>
+<td><strong>ecc-continuous-learning-v2</strong></td>
+<td>自动触发</td>
+<td>会话观察→生成改进 instinct，持续学习</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="_10">🌐 营销与内容运营类</h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>触发方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>marketing</strong></td>
+<td><code>/marketing</code></td>
+<td>营销策略+文案，含 GTM 策略</td>
+</tr>
+<tr>
+<td><strong>brand</strong></td>
+<td><code>/brand</code></td>
+<td>品牌建设（定位/视觉/声音）</td>
+</tr>
+<tr>
+<td><strong>brand-voice</strong></td>
+<td><code>/brand-voice</code></td>
+<td>品牌语气一致性审查和建立</td>
+</tr>
+<tr>
+<td><strong>content-engine</strong></td>
+<td><code>/content-engine</code></td>
+<td>内容工厂：批量生成各平台内容</td>
+</tr>
+<tr>
+<td><strong>social-publisher</strong></td>
+<td><code>/social-publisher</code></td>
+<td>多平台社交媒体发布</td>
+</tr>
+<tr>
+<td><strong>card-xiaohongshu</strong></td>
+<td><code>/card-xiaohongshu</code></td>
+<td>小红书图文卡片生成</td>
+</tr>
+<tr>
+<td><strong>baoyu-xhs-images</strong></td>
+<td><code>/baoyu-xhs-images</code></td>
+<td>小红书风格图片</td>
+</tr>
+<tr>
+<td><strong>xhs-operations-method</strong></td>
+<td><code>/xhs-operations-method</code></td>
+<td>小红书运营方法论</td>
+</tr>
+<tr>
+<td><strong>baoyu-electron-extract</strong></td>
+<td><code>/baoyu-electron-extract</code></td>
+<td>从内容中提取精华</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="_11">🧰 工具与集成类</h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>触发方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>macos-automation</strong></td>
+<td><code>/macos-automation</code></td>
+<td>macOS 自动化（AppleScript/Shortcuts）</td>
+</tr>
+<tr>
+<td><strong>mmx-cli</strong></td>
+<td><code>/mmx-cli</code></td>
+<td>MiniMax CLI 调用接口</td>
+</tr>
+<tr>
+<td><strong>external-context</strong></td>
+<td><code>/external-context</code></td>
+<td>加载外部上下文文档</td>
+</tr>
+<tr>
+<td><strong>canary-monitor</strong></td>
+<td><code>/canary-monitor</code></td>
+<td>金丝雀监控，持续检查指标</td>
+</tr>
+<tr>
+<td><strong>hud</strong></td>
+<td><code>/hud</code></td>
+<td>状态 HUD 显示（实时状态栏）</td>
+</tr>
+<tr>
+<td><strong>claude-hud:setup</strong></td>
+<td><code>/claude-hud:setup</code></td>
+<td>配置 HUD 显示</td>
+</tr>
+<tr>
+<td><strong>configure-notifications</strong></td>
+<td><code>/configure-notifications</code></td>
+<td>配置完成通知（Mac 通知/声音）</td>
+</tr>
+<tr>
+<td><strong>mcp-setup</strong></td>
+<td><code>/mcp-setup</code></td>
+<td>设置和配置 MCP 服务器</td>
+</tr>
+<tr>
+<td><strong>trace</strong></td>
+<td><code>/trace</code></td>
+<td>执行路径追踪，调试复杂问题</td>
+</tr>
+<tr>
+<td><strong>diagnose</strong></td>
+<td><code>/diagnose</code></td>
+<td>系统诊断，快速定位问题</td>
+</tr>
+<tr>
+<td><strong>triage</strong></td>
+<td><code>/triage</code></td>
+<td>问题分类优先级排序</td>
+</tr>
+<tr>
+<td><strong>systematic-error-analysis</strong></td>
+<td>说"又报错"</td>
+<td>系统性错误分析，找根因</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="_12">🎓 学习与教学类</h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>触发方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>learner</strong></td>
+<td><code>/learner</code></td>
+<td>学习模式，解释复杂概念</td>
+</tr>
+<tr>
+<td><strong>teach</strong></td>
+<td><code>/teach</code></td>
+<td>教学模式，生成教程</td>
+</tr>
+<tr>
+<td><strong>zoom-out</strong></td>
+<td><code>/zoom-out</code></td>
+<td>拉远视角，从大局看问题</td>
+</tr>
+<tr>
+<td><strong>composition-patterns</strong></td>
+<td><code>/composition-patterns</code></td>
+<td>设计模式说明和应用</td>
+</tr>
+<tr>
+<td><strong>ecc-continuous-learning-v2</strong></td>
+<td>自动</td>
+<td>从会话中学习，生成改进提案</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="_13">🔄 进化与自我改进类</h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>触发方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>auto-evolve</strong></td>
+<td>月度触发</td>
+<td>自动进化：扫描社区→识别增量→吸收落地</td>
+</tr>
+<tr>
+<td><strong>auto-collector-official</strong></td>
+<td><code>/auto-collector-official</code></td>
+<td>采集官方最新能力/文档</td>
+</tr>
+<tr>
+<td><strong>auto-collector-github</strong></td>
+<td><code>/auto-collector-github</code></td>
+<td>采集 GitHub 高星项目能力</td>
+</tr>
+<tr>
+<td><strong>auto-collector-community</strong></td>
+<td><code>/auto-collector-community</code></td>
+<td>采集社区使用案例</td>
+</tr>
+<tr>
+<td><strong>skill-audit</strong></td>
+<td><code>/skill-audit</code></td>
+<td>安装新 skill 前安全审查（重复度+许可证+风险）</td>
+</tr>
+<tr>
+<td><strong>skillify</strong></td>
+<td><code>/skillify</code></td>
+<td>将常用对话模式转化为可复用 skill</td>
+</tr>
+<tr>
+<td><strong>omc-skill-health</strong></td>
+<td>月度触发</td>
+<td>skill 健康度扫描，清理过时 skill</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="2026-06">🆕 最新工程化能力（2026-06 新增）</h2>
+<h3 id="ai-panel5-cli">异构对抗 ai-panel（5联外部 CLI）</h3>
+<p>多模型并发对抗验证，破解同源盲点，节省 Claude 主力 token：</p>
+<table>
+<thead>
+<tr>
+<th>CLI</th>
+<th>状态</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>kimi</strong></td>
+<td>自动</td>
+<td>Kimi K2 / 256K 上下文，中文长文档、竞品分析</td>
+</tr>
+<tr>
+<td><strong>mmx</strong></td>
+<td>自动</td>
+<td>MiniMax-M3 1M，中文创作+对话优化</td>
+</tr>
+<tr>
+<td><strong>qwen</strong></td>
+<td>自动</td>
+<td>通义千问，中文推理+代码</td>
+</tr>
+<tr>
+<td><strong>opencode</strong></td>
+<td>自动</td>
+<td>Volcengine，代码专项</td>
+</tr>
+<tr>
+<td><strong>mavis</strong></td>
+<td>自动</td>
+<td>多模态视觉分析</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash"># 单模型调用
+~/.claude/scripts/ai-panel.sh &quot;评估这个商业计划&quot; kimi
+
+# 5联异构对抗（ai-panel 入口，唯一稳定调用方式）
+~/.claude/scripts/ai-panel.sh &quot;分析这个架构方案&quot;
+</code></pre>
+<p>典型场景：方案评审前的多视角反驳、升级决策前的独立校验、调研结论的对抗确认。</p>
+<hr>
+<h3 id="self-evolve-loop">self-evolve-loop — 自我进化闭环</h3>
+<p><code>/self-evolve-loop</code> 触发四阶段飞轮：</p>
+<ol>
+<li><strong>Scope</strong> — 扫描会话错误+社区新实践，确定进化范围</li>
+<li><strong>Optimize</strong> — 生成改进候选（skill/hook/rule 修改建议）</li>
+<li><strong>Evaluate</strong> — 独立 evaluator 打分，≥阈值才落地</li>
+<li><strong>Land</strong> — 写入文件+git commit+memory 更新</li>
+</ol>
+<p>含异构对抗节点：evaluator 阶段触发 ai-panel 做独立评分，防止自我强化偏见。</p>
+<hr>
+<h3 id="ceo-pipeline">ceo-pipeline — 战略编排流水线</h3>
+<p>6 阶段商业分析 Workflow，含异构对抗节点：</p>
+<pre><code>市场分析 → 竞品矩阵 → 产品定位 → 财务建模 → 风险评估 → 路线图
+         ↑                                               ↑
+    ai-panel 5联验证                              ai-panel 裁决
+</code></pre>
+<p>输出：执行级战略备忘录 + 数据支撑的决策矩阵。</p>
+<hr>
+<h3 id="automation-reality-checkpy">automation-reality-check.py — 自动化虚假健康检测</h3>
+<p>检测"看起来在跑但实际没效果"的 false-green 问题：</p>
+<ul>
+<li>Hook 注册了但脚本无 +x 权限（接线病 Form 1）</li>
+<li>脚本在 <code>~/.claude/scripts/</code> 但未软链到 PATH（接线病 Form 2）</li>
+<li>Hook 命令路径用 <code>$HOME</code> 变量而非绝对路径（接线病 Form 3）</li>
+<li>LaunchAgent plist 存在但未 load（定时任务沉睡）</li>
+<li>Mock 测试全绿但真实链路断路</li>
+</ul>
+<pre><code class="language-bash">python3 ~/.claude/scripts/automation-reality-check.py
+</code></pre>
+<hr>
+<h3 id="_14">多层记忆体系</h3>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>位置</th>
+<th>内容</th>
+<th>规模</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1 即时记忆</td>
+<td>会话上下文</td>
+<td>当前对话内容</td>
+<td>session 级</td>
+</tr>
+<tr>
+<td>L2 项目记忆</td>
+<td><code>MEMORY.md</code> 索引</td>
+<td>关键决策/能力指针/规则摘要</td>
+<td>~200 条目</td>
+</tr>
+<tr>
+<td>L3 知识归档</td>
+<td><code>memory-archive-index.md</code></td>
+<td>历史 session 摘要/评估记录/低频条目</td>
+<td>分层存储</td>
+</tr>
+<tr>
+<td>L4 知识图谱</td>
+<td><code>.omc/wiki/</code></td>
+<td>1526 个 wiki 文件，历史 session + 架构图</td>
+<td>结构化检索</td>
+</tr>
+</tbody>
+</table>
+<p>记忆完整率监控：<code>memory-index-check</code> 脚本定期扫描，当前状态 <strong>100% GREEN</strong>（所有 MEMORY.md 引用的文件均存在）。</p>
+<p>auto-memory 系统（OMC v2.1.59+ 官方）接管 <code>memory/</code> 目录，SSoT 为 <code>MEMORY.md</code>。</p>
+<hr>
+<h3 id="smoke-testssh-auto-rollbacksh">smoke-tests.sh + auto-rollback.sh — 冒烟测试与自动回滚</h3>
+<p><strong>smoke-tests.sh</strong>（5项冒烟，每次升级后自动触发）：</p>
+<table>
+<thead>
+<tr>
+<th>测试项</th>
+<th>验证内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude CLI 响应</td>
+<td><code>claude --version</code> 返回有效版本号</td>
+</tr>
+<tr>
+<td>OMC 基础加载</td>
+<td>smart-flow-all 路由可解析</td>
+</tr>
+<tr>
+<td>Hook 注册健康</td>
+<td>53 个 hook 均有 +x 权限</td>
+</tr>
+<tr>
+<td>记忆完整率</td>
+<td>MEMORY.md 引用文件 100% 存在</td>
+</tr>
+<tr>
+<td>外部 CLI 可达</td>
+<td>5联 CLI 至少 3 个响应正常</td>
+</tr>
+</tbody>
+</table>
+<p><strong>auto-rollback.sh</strong>（cleanroom 体系）：</p>
+<pre><code class="language-bash"># 升级前自动快照（存 ~/.claude-cleanroom-YYYYMMDD-HHMMSS/）
+~/.claude/bin/cleanroom-precheck.sh
+
+# 出错时 30 秒内回滚
+~/.claude/bin/auto-rollback.sh --to latest-snapshot
+</code></pre>
+<p>任何"清理/删除/瘦身"操作前必跑 <code>cleanroom-precheck.sh</code> 6步检查（rsync snapshot + git baseline + 4 detector），全部 OK 才动真实环境。</p>
+<hr>
+<h3 id="orchestrator-3-session">Orchestrator 3组件 — 多 session 工程化协作</h3>
+<p><strong>组件 1：多 session 状态管理</strong><br>
+- <code>.omc/state/sessions/{sessionId}/</code> 存储每个 session 的上下文快照<br>
+- <code>project-session-manager</code> skill 跨 session 续接任务<br>
+- handoff 文档标准化：目标/进度/阻塞/下一步四段式</p>
+<p><strong>组件 2：智能路由（92 条意图词）</strong><br>
+- 意图词从 59 条扩展至 92 条（W3 2026-06-22）<br>
+- 6 → 33 路由词覆盖（session 2026-06-25 实测）<br>
+- 优先级路由：队长(95) &gt; 活力全开(95) &gt; CEO决策(88) &gt; 综合升级(86) &gt; 智能流(85)</p>
+<p><strong>组件 3：提示词优化</strong><br>
+- 动态注入上下文（用户画像 + 当前任务 + 历史决策）<br>
+- 反讽刺铁律自动检查（R1-R5 五条规则内化为行为层）<br>
+- 自动截断过长提示词，防 token 超额</p>
+<hr>
+<h3 id="l0-l3-verify-before-assert">风险分级 L0-L3 + verify-before-assert 铁律</h3>
+<p><strong>操作风险分级</strong>（3问定档）：</p>
+<table>
+<thead>
+<tr>
+<th>档</th>
+<th>触发条件</th>
+<th>动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L0</strong></td>
+<td>1-2 文件 + 可撤 + 不碰 config/hook</td>
+<td>直做+报告</td>
+</tr>
+<tr>
+<td><strong>L1</strong></td>
+<td>≤5 文件 + 可撤 + 不碰 config/hook</td>
+<td>验证+clean 自动 commit（不 push）</td>
+</tr>
+<tr>
+<td><strong>L2</strong></td>
+<td>6-20 文件 / push / Notion</td>
+<td>一句话简报即开</td>
+</tr>
+<tr>
+<td><strong>L3</strong></td>
+<td>不可逆 / 碰 settings/hook/cron / 架构 / security</td>
+<td>plan+确认+ai-panel</td>
+</tr>
+</tbody>
+</table>
+<p>3问：① 可逆？② 碰 config/hook？③ ≤5 文件？</p>
+<p><strong>verify-before-assert 铁律</strong>（铁律 8，Karpathy 5 原则之一）：<br>
+- 事实断言前必先查验，禁推测下结论<br>
+- 输出分已验证/[未验证] 两类标注<br>
+- LLM 模型能力/价格断言前必查 models.dev + 官方 docs<br>
+- <code>uncertainty-detector.sh</code> hook 自动扫描高置信度推测性断言</p>
+<p><strong>Writer ≠ Reviewer 原则</strong>（铁律 10）：<br>
+- 写作 pass 和审查 pass 必须分离到不同 agent 或不同 context<br>
+- 禁止同一 context 内自写自批<br>
+- 审查入口：<code>/gstack-review</code>、<code>/code-review</code>、<code>verifier</code> agent</p>
+<hr>
+<h3 id="wbs-capability-activation-map">WBS 工程化排期 + capability-activation-map</h3>
+<p><strong>WBS 工程化排期</strong>（<code>docs/plan/wbs-engineering-rollout-2026-06-24.md</code>）：</p>
+<ul>
+<li>188 行详细排期，覆盖 29 个行动项</li>
+<li>Top 10 优先级 + 5联裁决结果</li>
+<li>每项含：负责角色 / 验收标准 / 回滚方案 / 预估工时</li>
+</ul>
+<p><strong>capability-activation-map（5大智能脑）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>智能脑</th>
+<th>核心能力</th>
+<th>激活条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>主调度器</strong></td>
+<td>意图识别 + 92词路由 + 风险分级</td>
+<td>默认激活</td>
+</tr>
+<tr>
+<td><strong>异构对抗脑</strong></td>
+<td>ai-panel 5联 + 交叉验证</td>
+<td>方案评审/升级决策时触发</td>
+</tr>
+<tr>
+<td><strong>记忆脑</strong></td>
+<td>auto-memory 200条 + wiki 1526页</td>
+<td>涉及历史决策/配置时自动查</td>
+</tr>
+<tr>
+<td><strong>进化脑</strong></td>
+<td>self-evolve-loop + omc-skill-health</td>
+<td>月度自动 + 手动触发</td>
+</tr>
+<tr>
+<td><strong>代码脑</strong></td>
+<td>codebase-memory MCP + serena + understand-anything</td>
+<td>代码库理解任务时激活</td>
+</tr>
+</tbody>
+</table>
+<p>headroom MCP Server 为休眠状态（P0 激活后可用，参见 <code>docs/local-reference.md</code>）。</p>
+<hr>
+<h3 id="cleanroom">cleanroom 快照备份/回滚体系</h3>
+<pre><code>升级前自动快照
+    ↓
+~/.claude-cleanroom-YYYYMMDD-HHMMSS/
+    ├── .claude/（完整备份）
+    ├── settings.json（单独备份）
+    └── manifest.json（快照元数据）
+    ↓
+cleanroom-precheck.sh 6步检查：
+① rsync snapshot（30秒内可回滚）
+② git baseline（工作树干净）
+③ orphan plugin detector（无孤儿插件）
+④ orphan hook detector（无孤儿 hook）
+⑤ CLAUDE.md drift check（无未记录变更）
+⑥ settings drift check（防配置四类防改规则违反）
+    ↓
+全部 OK → 动真实环境
+任一失败 → 阻断 + 报告
+</code></pre>
+<hr>
+<h2 id="mcp">第二部分：MCP 服务器完整说明</h2>
+<h3 id="settingslocaljson-mcp">通过 settings.local.json 配置的 MCP</h3>
+<table>
+<thead>
+<tr>
+<th>MCP</th>
+<th>说明</th>
+<th>典型用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>github</strong></td>
+<td>GitHub API 完整访问</td>
+<td>查 PR、搜索代码、管理 issues、获取仓库结构</td>
+</tr>
+<tr>
+<td><strong>context7</strong></td>
+<td>官方文档实时查询（库/框架/SDK）</td>
+<td>"查 Next.js 14 App Router 最新 API"</td>
+</tr>
+<tr>
+<td><strong>playwright</strong></td>
+<td>浏览器自动化测试</td>
+<td>E2E 测试、截图验证、表单自动填写</td>
+</tr>
+<tr>
+<td><strong>linear</strong></td>
+<td>Linear 项目管理</td>
+<td>创建/更新 issue、sprint 管理</td>
+</tr>
+</tbody>
+</table>
+<h3 id="desktop-extensions-mcp">Desktop Extensions 安装的 MCP</h3>
+<table>
+<thead>
+<tr>
+<th>MCP</th>
+<th>说明</th>
+<th>典型用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>chrome-control</strong></td>
+<td>Chrome 浏览器控制</td>
+<td>打开网页、点击操作、截图</td>
+</tr>
+<tr>
+<td><strong>filesystem</strong></td>
+<td>本地文件系统访问</td>
+<td>读写文件、目录操作</td>
+</tr>
+<tr>
+<td><strong>iMessage</strong></td>
+<td>iMessage 收发</td>
+<td>发送消息、读取对话</td>
+</tr>
+<tr>
+<td><strong>ms_office_powerpoint</strong></td>
+<td>PowerPoint 操作</td>
+<td>创建/修改 PPT</td>
+</tr>
+<tr>
+<td><strong>ms_office_word</strong></td>
+<td>Word 操作</td>
+<td>创建/修改 Word 文档</td>
+</tr>
+<tr>
+<td><strong>Apple Notes</strong></td>
+<td>Apple Notes 操作</td>
+<td>创建/读取笔记</td>
+</tr>
+<tr>
+<td><strong>figma</strong></td>
+<td>Figma 设计操作</td>
+<td>读取设计稿、获取组件</td>
+</tr>
+<tr>
+<td><strong>pdf-server-mcp</strong></td>
+<td>PDF 处理</td>
+<td>读取 PDF、提取内容</td>
+</tr>
+<tr>
+<td><strong>macos-mcp</strong></td>
+<td>macOS 系统操作</td>
+<td>系统设置、应用控制</td>
+</tr>
+<tr>
+<td><strong>osascript</strong></td>
+<td>AppleScript 执行</td>
+<td>自动化 macOS 操作</td>
+</tr>
+<tr>
+<td><strong>kapture</strong></td>
+<td>屏幕录制/截图</td>
+<td>录制操作过程</td>
+</tr>
+<tr>
+<td><strong>desktopcommandermcp</strong></td>
+<td>桌面命令执行</td>
+<td>执行系统命令</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mcp_1">通过插件系统提供的 MCP</h3>
+<table>
+<thead>
+<tr>
+<th>MCP</th>
+<th>说明</th>
+<th>典型用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>computer-use</strong></td>
+<td>桌面截图+鼠标键盘控制</td>
+<td>操作任何桌面应用</td>
+</tr>
+<tr>
+<td><strong>firecrawl</strong></td>
+<td>高级网页抓取+搜索</td>
+<td>深度调研、竞品分析、数据采集</td>
+</tr>
+<tr>
+<td><strong>Notion</strong></td>
+<td>Notion 完整操作</td>
+<td>创建页面/数据库、任务管理</td>
+</tr>
+<tr>
+<td><strong>chrome-devtools</strong></td>
+<td>Chrome 开发者工具</td>
+<td>性能分析、内存检测、LCP 优化</td>
+</tr>
+<tr>
+<td><strong>oh-my-claudecode tools</strong></td>
+<td>OMC 工具集（wiki/notepad/state/LSP等）</td>
+<td>项目记忆、代码分析</td>
+</tr>
+<tr>
+<td><strong>semgrep</strong></td>
+<td>静态代码分析</td>
+<td>安全扫描、代码规范检查</td>
+</tr>
+<tr>
+<td><strong>code-review-graph</strong></td>
+<td>知识图谱代码审查</td>
+<td>代码结构理解、影响分析</td>
+</tr>
+<tr>
+<td><strong>memory</strong></td>
+<td>知识图谱记忆</td>
+<td>实体关系记忆</td>
+</tr>
+<tr>
+<td><strong>sequential-thinking</strong></td>
+<td>结构化推理链</td>
+<td>复杂问题分步推理</td>
+</tr>
+<tr>
+<td><strong>qmd</strong></td>
+<td>本地 Markdown 搜索（2058 文件）</td>
+<td>查本地知识库、规则</td>
+</tr>
+<tr>
+<td><strong>Fellow.ai</strong></td>
+<td>AI 会议助手</td>
+<td>会议记录、行动项提取</td>
+</tr>
+<tr>
+<td><strong>Gmail</strong></td>
+<td>Gmail 操作</td>
+<td>搜索/标记/草稿邮件</td>
+</tr>
+<tr>
+<td><strong>Google Calendar</strong></td>
+<td>日历操作</td>
+<td>查看/创建日程</td>
+</tr>
+<tr>
+<td><strong>Google Drive</strong></td>
+<td>Google Drive</td>
+<td>文件管理、内容读取</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="plugins">第三部分：插件（Plugins）说明</h2>
+<blockquote>
+<p>当前状态：35 总插件（32 启用 + 3 禁用），mycc-stats 2026-06-25 实测。</p>
+</blockquote>
+<h3 id="oh-my-claudecodeomc">oh-my-claudecode（OMC）</h3>
+<p><strong>核心插件，提供整套 OMC 能力</strong><br>
+- Skills: <strong>150</strong> 原生 skill<br>
+- Hooks: <strong>50</strong> 自动守护钩子（50 个 hook 文件，14 个 hook 事件类型）<br>
+- Workflows: <strong>13</strong> 个 JS 流水线脚本<br>
+- MCP Tools: wiki/notepad/state/LSP/shared-memory 等<br>
+- Agents: <strong>52</strong> 角色（核心6 + CEO角色12 + 行业专家7 + 团队蓝图6 + 通用21）<br>
+- 意图路由: <strong>92 条</strong>词触发规则</p>
+<h3 id="claude-hud">claude-hud</h3>
+<p><strong>实时状态显示 HUD</strong><br>
+- 显示：当前模型/token 使用/session 状态/git 分支/CC Switch provider<br>
+- 配置：<code>/claude-hud:setup</code><br>
+- 真实配置文件：<code>~/.claude/plugins/claude-hud/config.json</code>（非 settings.json）</p>
+<h3 id="marketplace">Marketplace 插件（按需安装）</h3>
+<table>
+<thead>
+<tr>
+<th>插件</th>
+<th>来源</th>
+<th>核心能力</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>understand-anything</strong></td>
+<td>claude-code-plugins</td>
+<td>代码库知识图谱、架构分析、领域理解</td>
+</tr>
+<tr>
+<td><strong>feature-dev</strong></td>
+<td>claude-code-plugins</td>
+<td>完整功能开发流程（explorer+architect+reviewer）</td>
+</tr>
+<tr>
+<td><strong>pr-review-toolkit</strong></td>
+<td>claude-code-plugins</td>
+<td>PR 审查工具集（code/test/type/comment/silent-failure）</td>
+</tr>
+<tr>
+<td><strong>firecrawl</strong></td>
+<td>claude-plugins-official</td>
+<td>网页抓取/搜索/爬虫/监控</td>
+</tr>
+<tr>
+<td><strong>semgrep</strong></td>
+<td>claude-plugins-official</td>
+<td>代码安全扫描（SAST）</td>
+</tr>
+<tr>
+<td><strong>chrome-devtools</strong></td>
+<td>claude-plugins-official</td>
+<td>浏览器性能调试</td>
+</tr>
+<tr>
+<td><strong>context7</strong></td>
+<td>claude-plugins-official</td>
+<td>官方文档实时查询</td>
+</tr>
+<tr>
+<td><strong>hookify</strong></td>
+<td>claude-code-plugins</td>
+<td>从对话自动生成 hooks</td>
+</tr>
+<tr>
+<td><strong>remember</strong></td>
+<td>-</td>
+<td>持久记忆管理</td>
+</tr>
+<tr>
+<td><strong>Notion</strong></td>
+<td>claude-plugins-official</td>
+<td>Notion 完整操作</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="ai-cli5">第四部分：外部 AI CLI（5 联异构对抗）</h2>
+<table>
+<thead>
+<tr>
+<th>CLI</th>
+<th>状态</th>
+<th>模型</th>
+<th>最佳用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>kimi</strong></td>
+<td>自动（5联默认）</td>
+<td>Kimi K2 / 256K</td>
+<td>中文长文档处理、竞品研报</td>
+</tr>
+<tr>
+<td><strong>mmx</strong></td>
+<td>自动（5联默认）</td>
+<td>MiniMax-M3 1M</td>
+<td>中文创作、对话优化</td>
+</tr>
+<tr>
+<td><strong>qwen</strong></td>
+<td>自动（5联默认）</td>
+<td>通义千问</td>
+<td>中文推理、代码理解</td>
+</tr>
+<tr>
+<td><strong>opencode</strong></td>
+<td>自动（5联默认）</td>
+<td>Volcengine</td>
+<td>代码专项（续订后全力）</td>
+</tr>
+<tr>
+<td><strong>mavis</strong></td>
+<td>自动（5联默认）</td>
+<td>多模态</td>
+<td>视觉分析、截图解读</td>
+</tr>
+<tr>
+<td><strong>codex</strong></td>
+<td>手动（非自动）</td>
+<td>OpenAI Codex</td>
+<td>对比验证（手动触发）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注：gemini 已退役（2026-06-22），kimi 实测后端走 MiniMax-M3 而非 Moonshot K1.5，带 <code>[1M]</code> 后缀才能解锁 1M 上下文。</p>
+</blockquote>
+<p>调用方式：</p>
+<pre><code class="language-bash"># 唯一稳定入口：positional arg（非 pipe 非 flag）
+~/.claude/scripts/ai-panel.sh &quot;评估这份竞品分析&quot; kimi mmx qwen
+
+# 5联默认并发对抗（省 Claude token，外部 API 额度）
+~/.claude/scripts/ai-panel.sh &quot;这个架构方案有没有致命缺陷？&quot;
+</code></pre>
+<hr>
+<h2 id="workflow-13">第五部分：Workflow 脚本（13个）</h2>
+<table>
+<thead>
+<tr>
+<th>Workflow</th>
+<th>核心能力</th>
+<th>阶段数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>/boardroom</strong></td>
+<td>董事会汇报准备（含财务/风险/路线图）</td>
+<td>3</td>
+</tr>
+<tr>
+<td><strong>/bughunt</strong></td>
+<td>全库 bug 猎捕（parallel finder → adversarial verify）</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>/ceo-pipeline</strong></td>
+<td>商业分析 6 阶段（市场→竞品→产品→财务→风险→路线图）</td>
+<td>6</td>
+</tr>
+<tr>
+<td><strong>/code-review</strong></td>
+<td>多维代码审查（bugs/perf/security → verify）</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>/comprehensive-upgrade</strong></td>
+<td>综合升级流水线（全层 audit + apply + verify）</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>/config-audit-better</strong></td>
+<td>配置健康审计（30维 → P0自动修）</td>
+<td>3</td>
+</tr>
+<tr>
+<td><strong>/dev-pipeline</strong></td>
+<td>开发流水线（spec→scaffold→impl→test→review→deploy）</td>
+<td>6</td>
+</tr>
+<tr>
+<td><strong>/domain-audit-better</strong></td>
+<td>领域专项深度审计</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>/fundraising</strong></td>
+<td>融资准备（BP + 财务模型 + 投资人 FAQ）</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>/harness-audit</strong></td>
+<td>Harness 六层评分（L1-L6 量化）</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>/judge-panel</strong></td>
+<td>多视角评审面板（N维 judge → 综合裁决）</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>/n-step-pipeline</strong></td>
+<td>N步自定义流水线（args 驱动）</td>
+<td>N</td>
+</tr>
+<tr>
+<td><strong>/overseas-compliance</strong></td>
+<td>出海合规（法务+牌照+数据保护+支付）</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>/self-evolve-loop</strong></td>
+<td>自我进化闭环（scope→optimize→evaluate→land）</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>/v29-deep-research</strong></td>
+<td>深度多渠道调研（web抓取→合成→报告）</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注：mycc-stats 显示 13 个 workflow，上表含所有已注册条目。</p>
+</blockquote>
+<hr>
+<h2 id="_15">第六部分：定时任务体系</h2>
+<h3 id="launchagents13-plist">LaunchAgents（13 个 plist）</h3>
+<table>
+<thead>
+<tr>
+<th>plist</th>
+<th>触发周期</th>
+<th>任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>com.mycc.auto-commit</td>
+<td>每日 23:00</td>
+<td>自动提交 myclaude-test 仓库</td>
+</tr>
+<tr>
+<td>com.mycc.daily-external-scanner</td>
+<td>每日</td>
+<td>扫描外部 repo/社区新能力</td>
+</tr>
+<tr>
+<td>com.mycc.drift-check</td>
+<td>每日</td>
+<td>配置漂移检查（settings+CLAUDE.md）</td>
+</tr>
+<tr>
+<td>com.mycc.memory-compact</td>
+<td>每日</td>
+<td>记忆整合压缩</td>
+</tr>
+<tr>
+<td>com.mycc.memory-health</td>
+<td>每日</td>
+<td>记忆完整率检查（100% GREEN 目标）</td>
+</tr>
+<tr>
+<td>com.mycc.monthly-expert-check</td>
+<td>每月</td>
+<td>专家团队健康度评估</td>
+</tr>
+<tr>
+<td>com.mycc.monthly-skill-audit</td>
+<td>每月</td>
+<td>skill 存活+触发率审计</td>
+</tr>
+<tr>
+<td>com.mycc.snapshot</td>
+<td>每日</td>
+<td>cleanroom 快照备份</td>
+</tr>
+<tr>
+<td>com.user.claude-daily-brief</td>
+<td>每日</td>
+<td>日报生成（今日任务+待办+状态）</td>
+</tr>
+<tr>
+<td>com.user.claude-external-research</td>
+<td>每周</td>
+<td>外部调研采集</td>
+</tr>
+<tr>
+<td>com.user.claude-monthly-evolution</td>
+<td>每月</td>
+<td>月度进化扫描+建议</td>
+</tr>
+<tr>
+<td>com.user.claude-secretary</td>
+<td>每日</td>
+<td>秘书任务（日程+提醒+归档）</td>
+</tr>
+<tr>
+<td><em>(第13个 LaunchAgent)</em></td>
+<td>按需</td>
+<td>参见 docs/scheduled-tasks.md</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cron-2">Cron 任务（2 个）</h3>
+<table>
+<thead>
+<tr>
+<th>cron 表达式</th>
+<th>任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0 3 * * 1</code>（每周一凌晨3点）</td>
+<td>certbot renew（SSL 证书续期）</td>
+</tr>
+<tr>
+<td><code>0 21 * * 0</code>（每周日晚9点）</td>
+<td>weekly-cron-orchestrator-clean.sh（周进化闭环）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>SSoT：<code>~/.claude/docs/scheduled-tasks.md</code>。定时任务相关操作前必查。</p>
+</blockquote>
+<hr>
+<h2 id="v522-2026-06-12">V52.2 新增（2026-06-12）</h2>
+<p>以下 4 项关键能力（原 V52.2 · 2026-06-12 引入）现已合并入 <code>~/.claude/rules/mycc-core.md</code> 铁律级规范：</p>
+<h3 id="1-12tdd-tdd-vertical-slice">1. 铁律 12：TDD 垂直切片（TDD Vertical Slice）</h3>
+<p>红 → 绿 → 重构三步走，每次只推进一个完整用户价值单元。<strong>YOLO L4/极限档/OMC 自配置任务降级为铁律 3 验证证据</strong>——不是所有任务都要先写失败测试。SSoT：<code>rules/mycc-core.md</code>（铁律 12·TDD 垂直切片）。</p>
+<h3 id="2-looploop-worth-building-gate">2. 四条件门：是否值得建 Loop（Loop-Worth-Building Gate）</h3>
+<p>建任何 Loop / <code>/loop</code> / LaunchAgent / 无人值守自动化前，过四条件（重复性 + 验证可自动化 + token 预算 + Agent 工具齐备）<strong>全过才建</strong>，否则一条好 Prompt 更省。SSoT：<code>rules/mycc-core.md</code>（4 步工作流·Loop 判断）。</p>
+<h3 id="3-quarantine">3. 隔离区模式：读写分离防越权（Quarantine）</h3>
+<p>处理外部不可信输入（外部 AI 报告 / WebFetch / 用户上传文件）+ 同任务要高权限写时，<strong>读取 agent 必须挂 <code>disallowed-tools</code> 移除写权</strong>（物理无法越权）。纵深防御三层：行为层（视为数据非指令）+ <strong>架构层（本规则）</strong> + 运行时层（block-dangerous hook）。SSoT：<code>rules/mycc-core.md</code>（防改 4 类配置·安全约束）。</p>
+<h3 id="4-v522dual-end-policy">4. 双端策略 V52.2（Dual-End Policy）</h3>
+<p><strong>CLI 端</strong> <code>~/.claude/CLAUDE.md</code> = OMC 工程事实 / <code>projects/-Users-williammacst/memory/user-profile.md</code> = 角色偏好 / <code>~/.claude/CLAUDE.local.md</code> = 已就绪能力指针；<strong>Desktop 端</strong> = 行为规则契约（云端）。<strong>四份文档正交不冲突</strong>。SSoT：<code>rules/mycc-core.md</code>（输出规范·双端策略）。</p>
+<hr>
+<blockquote>
+<p><strong>如何查阅完整规范</strong>：<br>
+- <code>cat ~/.claude/rules/mycc-core.md</code> （唯一规则 SSoT：12 铁律 + 12 行为规则 R1-R12 + 4 步工作流）<br>
+- <code>cat ~/.claude/docs/capability-activation-map.md</code>（5大智能脑激活地图）<br>
+- <code>cat ~/.claude/docs/wbs-engineering-rollout-2026-06-24.md</code>（工程化排期 WBS）<br>
+- 注：W4（2026-06-22）精简后，原 iron-laws / loop-worth-building-gate / quarantine / auto-learned-rules 等多文件已合并入 <code>mycc-core.md</code> 单文件</p>
+</blockquote>
+<p><em>本节能力现已合并入 <code>rules/mycc-core.md</code>（OMC 4.15.0 · W4 精简）；保留原 V52 系列升级记录。</em></p>
+<hr>
+<p>最后更新：2026-06-25 · 数字经 mycc-stats 实测<br>
+<em>全能力清单：Skills: 148 · Agents: 52 · Hooks: 53(50文件) · Workflows: 13 · LaunchAgents: 13 · Cron: 2 · 插件启用/总: 32/35 · 外部CLI: 5联</em></p>
+<hr>
+<h2 id="5-2026-06-25">🌟 5 大高级功能全景 + 超级入口（2026-06-25 增）</h2>
+<blockquote>
+<p>148 个 skill 太多不知道用哪个？记住这 <strong>5 大高级功能</strong> + <strong>超级入口</strong>，覆盖 90% 场景。</p>
+</blockquote>
+<h3 id="5">💎 5 大高级功能（各管一摊不重叠）</h3>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>口语触发</th>
+<th>对应 skill</th>
+<th>何时用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>队长</strong></td>
+<td>队长 / 火力全开 / 活力全开 / YOLO</td>
+<td><code>smart-flow-all</code></td>
+<td>极限档 · 复杂任务 · 多顾问</td>
+</tr>
+<tr>
+<td><strong>CEO</strong></td>
+<td>评估 / 尽调 / 出海 / 商业可行性</td>
+<td><code>ceo-mode</code> + <code>ceo-pipeline</code></td>
+<td>商业决策 · 投资 · 立项</td>
+</tr>
+<tr>
+<td><strong>经理</strong></td>
+<td>我几个 session / 别的 session 在干嘛</td>
+<td><code>multi-session-state</code></td>
+<td>多 session 互可见 + 冲突检测</td>
+</tr>
+<tr>
+<td><strong>秘书</strong></td>
+<td>秘书 / daily-brief / weekly</td>
+<td><code>weekly-secretary</code> + <code>daily-brief</code></td>
+<td>自动巡检 · 报告</td>
+</tr>
+<tr>
+<td><strong>超级入口</strong></td>
+<td>super / 超级入口 / 不知道找谁</td>
+<td><code>engineering-scenario-router</code></td>
+<td>不知道找谁时兜底</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_16">🔗 高级功能融合矩阵（按"你想做什么"路由）</h3>
+<table>
+<thead>
+<tr>
+<th>你的意图</th>
+<th>推荐组合</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不知道找谁</td>
+<td><code>super</code>（列出候选）→ 你选 → 执行</td>
+</tr>
+<tr>
+<td>商业评估</td>
+<td><code>CEO</code>（7 顾问）→ 想工程化 → <code>队长</code></td>
+</tr>
+<tr>
+<td>复杂代码改动</td>
+<td><code>队长</code> + <code>eng-experts</code>（3 专家盲评）</td>
+</tr>
+<tr>
+<td>多 session 协作</td>
+<td><code>经理</code>（自动）+ <code>start-work</code>（工程化）</td>
+</tr>
+<tr>
+<td>系统健康</td>
+<td><code>秘书</code>（自动）+ <code>full-checkup</code>（手动）</td>
+</tr>
+<tr>
+<td>升级 + 改造</td>
+<td><code>秘书</code> 发现 → <code>super</code> 路由 → <code>队长</code> 修 → <code>CEO</code> 评</td>
+</tr>
+</tbody>
+</table>
+<h3 id="super-51-ssot">🚀 super 入口详解（51 个意图 SSoT）</h3>
+<p><strong>SSoT</strong>：<code>~/.claude/skills/engineering-scenario-router/router-table.json</code></p>
+<p><strong>核心机制</strong>：当用户说 <code>super</code> 或 <code>超级入口</code> 或 <code>不知道找谁</code> 时，主调度器读 router-table.json → 按意图关键词概率排序 → 列出 1-3 个候选 skill → 用户选 → 执行。</p>
+<p><strong>为什么不直接做而是列候选？</strong> 单人维护者 + 51 路由分散 = 静默调错风险 &gt; 多一步"选"的成本。</p>
+<p><strong>风险档</strong>：<code>super</code> 触发时 execution_path = YOLO-L4（叠加 modifier，不降低安全不变量：配置防改 / 官方直连 / 改 hook 前 snapshot 仍硬）。</p>
+<blockquote>
+<p>📌 <strong>学习路径</strong>：先熟 5 大高级功能 → 再学 11 个高频入口（dashboard §C7）→ 最后学 super 兜底（diversity safety net）。</p>
+</blockquote>
+<hr>
+<hr>
+<h2 id="_17">📚 更多入口</h2>
+<ul>
+<li><strong>dashboard.html</strong> · 36+ 张卡片（命令/能力/5 大高级功能/统计/帮助）</li>
+<li><strong>mycc-config.html</strong> · 配置全景（自动拉取 ~/.claude/ · MCP/插件/Skills/Hooks/路由表）</li>
+<li><strong>start-here.md</strong> · 35 场景 × 7 手册 × 3 万能入口</li>
+</ul>
+</body>
+</html>

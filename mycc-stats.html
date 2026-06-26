@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MYCC 能力全景</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📘%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════ MD→HTML 渲染共享样式(继承 dashboard 设计系统 v2)═══════ */
+:root {
+  color-scheme: light;
+  --bg: #ffffff; --bg-subtle: #f5f5f7; --surface: #ffffff; --surface2: #fafafc; --surface-hover: #f5f5f7;
+  --border: #e5e5ea; --border-strong: #d2d2d7; --code-bg: #f5f5f7; --tag-bg: #f5f5f7;
+  --text: #1d1d1f; --text-dim: #515154; --text-muted: #86868b;
+  --accent: #0071e3; --accent-hover: #0077ed; --accent-soft: #e8f1fd;
+  --green: #1a8c4a; --red: #d70015; --orange: #b25000; --purple: #6e3fd6;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --font-sans: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
+  --font-mono: 'JetBrains Mono','SF Mono','Fira Code',Menlo,monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0a0a0b; --bg-subtle: #141416; --surface: #161618; --surface2: #1c1c1f; --surface-hover: #232326;
+    --border: #2a2a2e; --border-strong: #3a3a3e; --code-bg: #1c1c1f;
+    --text: #f5f5f7; --text-dim: #aeaeb2; --text-muted: #8e8e93;
+    --accent: #2997ff; --accent-soft: #16263b;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans); background: var(--bg); color: var(--text);
+  line-height: 1.7; font-size: 15px; padding: 48px 32px 80px; max-width: 880px; margin: 0 auto;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+.doc-header {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  margin-bottom: 28px; padding-bottom: 18px; border-bottom: 1px solid var(--border);
+}
+.doc-header .back {
+  color: var(--accent); text-decoration: none; padding: 6px 14px;
+  border: 1px solid var(--border-strong); border-radius: 980px; font-size: 13px; font-weight: 500;
+  transition: all .15s;
+}
+.doc-header .back:hover { background: var(--accent-soft); border-color: var(--accent); }
+.doc-header .meta { color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
+h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 12px 0 18px; color: var(--text); }
+h2 { font-size: 23px; font-weight: 600; margin: 40px 0 14px; padding-top: 12px; letter-spacing: -0.01em;
+     border-top: 1px solid var(--border); color: var(--text); }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+h3 { font-size: 18px; font-weight: 600; margin: 28px 0 10px; color: var(--text); }
+h4 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; color: var(--text-dim); }
+p { margin: 10px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+ul, ol { margin: 10px 0 10px 24px; }
+li { margin: 4px 0; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 28px 0; }
+code {
+  font-family: var(--font-mono); font-size: 0.9em; background: var(--code-bg);
+  padding: 1px 6px; border-radius: 5px; color: var(--text);
+}
+pre {
+  background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 16px; overflow-x: auto; margin: 14px 0; line-height: 1.55;
+}
+pre code { background: transparent; padding: 0; font-size: 13px; }
+blockquote {
+  border-left: 3px solid var(--accent); margin: 14px 0; padding: 8px 16px;
+  background: var(--accent-soft); border-radius: 0 8px 8px 0; color: var(--text-dim);
+}
+blockquote p { margin: 4px 0; }
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+th { text-align: left; padding: 9px 12px; background: var(--bg-subtle); color: var(--text-muted);
+     font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+td { padding: 9px 12px; border-top: 1px solid var(--border); }
+tr:hover td { background: var(--bg-subtle); }
+img { max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0; }
+strong { font-weight: 600; color: var(--text); }
+em { font-style: italic; color: var(--text-dim); }
+@media (max-width: 720px) { body { padding: 24px 16px 60px; } h1 { font-size: 26px; } h2 { font-size: 20px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <a href="dashboard.html" class="back">← 返回 MYCC 仪表盘</a>
+  <span class="meta">渲染时间 2026-06-26 01:13 · 源: mycc-stats.md</span>
+</div>
+<h1 id="mycc">MYCC 能力全景</h1>
+<blockquote>
+<p>扫描时间: 2026-06-25T17:07:02.262604Z · CC 2.1.191 (Claude Code) · OMC 4.15.0 · CC Switch OFF</p>
+</blockquote>
+<h2 id="_1">能力总览</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🎯 Skills</td>
+<td>150</td>
+</tr>
+<tr>
+<td>⚡ Workflows</td>
+<td>13</td>
+</tr>
+<tr>
+<td>🔧 Hook 已注册</td>
+<td>50</td>
+</tr>
+<tr>
+<td>🤖 Agent</td>
+<td>52 (核心6+CEO12+行业7+团队6)</td>
+</tr>
+<tr>
+<td>🔌 MCP</td>
+<td>4</td>
+</tr>
+<tr>
+<td>📦 插件</td>
+<td>0启用/51已装</td>
+</tr>
+<tr>
+<td>📋 Rules</td>
+<td>3</td>
+</tr>
+<tr>
+<td>🗺️ 意图路由</td>
+<td>94 条</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">编排入口</h2>
+<table>
+<thead>
+<tr>
+<th>你说</th>
+<th>触发</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>队长 + 任务</td>
+<td>smart-flow-all</td>
+</tr>
+<tr>
+<td>全面升级</td>
+<td>claude-code-better</td>
+</tr>
+<tr>
+<td>评估项目</td>
+<td>ceo-mode 行业专家组</td>
+</tr>
+<tr>
+<td>又报错</td>
+<td>systematic-error-analysis</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_3">工作流</h2>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boardroom</td>
+<td>董事会汇报准备</td>
+</tr>
+<tr>
+<td>bughunt</td>
+<td>系统性 Bug 排查</td>
+</tr>
+<tr>
+<td>ceo-pipeline</td>
+<td>CEO 全流水线 PM→Arch→Eng→QA→CEO</td>
+</tr>
+<tr>
+<td>code-review</td>
+<td>代码审查</td>
+</tr>
+<tr>
+<td>comprehensive-upgrade</td>
+<td>综合升级流水线</td>
+</tr>
+<tr>
+<td>config-audit-better</td>
+<td>配置审计</td>
+</tr>
+<tr>
+<td>dev-pipeline</td>
+<td>开发流水线 spec→scaffold→impl→test→review→deploy</td>
+</tr>
+<tr>
+<td>domain-audit-better</td>
+<td>域审计</td>
+</tr>
+<tr>
+<td>fundraising</td>
+<td>融资准备</td>
+</tr>
+<tr>
+<td>harness-audit</td>
+<td>Harness 六层健康评分</td>
+</tr>
+<tr>
+<td>judge-panel</td>
+<td>多视角评审</td>
+</tr>
+<tr>
+<td>n-step-pipeline</td>
+<td>N步自适应流水线</td>
+</tr>
+<tr>
+<td>overseas-compliance</td>
+<td>出海合规</td>
+</tr>
+<tr>
+<td>self-evolve-loop</td>
+<td>自我进化闭环</td>
+</tr>
+<tr>
+<td>v29-deep-research</td>
+<td>深度调研</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

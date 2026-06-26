@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code 专业 PM 配置文档</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📘%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════ MD→HTML 渲染共享样式(继承 dashboard 设计系统 v2)═══════ */
+:root {
+  color-scheme: light;
+  --bg: #ffffff; --bg-subtle: #f5f5f7; --surface: #ffffff; --surface2: #fafafc; --surface-hover: #f5f5f7;
+  --border: #e5e5ea; --border-strong: #d2d2d7; --code-bg: #f5f5f7; --tag-bg: #f5f5f7;
+  --text: #1d1d1f; --text-dim: #515154; --text-muted: #86868b;
+  --accent: #0071e3; --accent-hover: #0077ed; --accent-soft: #e8f1fd;
+  --green: #1a8c4a; --red: #d70015; --orange: #b25000; --purple: #6e3fd6;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --font-sans: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
+  --font-mono: 'JetBrains Mono','SF Mono','Fira Code',Menlo,monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0a0a0b; --bg-subtle: #141416; --surface: #161618; --surface2: #1c1c1f; --surface-hover: #232326;
+    --border: #2a2a2e; --border-strong: #3a3a3e; --code-bg: #1c1c1f;
+    --text: #f5f5f7; --text-dim: #aeaeb2; --text-muted: #8e8e93;
+    --accent: #2997ff; --accent-soft: #16263b;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans); background: var(--bg); color: var(--text);
+  line-height: 1.7; font-size: 15px; padding: 48px 32px 80px; max-width: 880px; margin: 0 auto;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+.doc-header {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  margin-bottom: 28px; padding-bottom: 18px; border-bottom: 1px solid var(--border);
+}
+.doc-header .back {
+  color: var(--accent); text-decoration: none; padding: 6px 14px;
+  border: 1px solid var(--border-strong); border-radius: 980px; font-size: 13px; font-weight: 500;
+  transition: all .15s;
+}
+.doc-header .back:hover { background: var(--accent-soft); border-color: var(--accent); }
+.doc-header .meta { color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
+h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 12px 0 18px; color: var(--text); }
+h2 { font-size: 23px; font-weight: 600; margin: 40px 0 14px; padding-top: 12px; letter-spacing: -0.01em;
+     border-top: 1px solid var(--border); color: var(--text); }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+h3 { font-size: 18px; font-weight: 600; margin: 28px 0 10px; color: var(--text); }
+h4 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; color: var(--text-dim); }
+p { margin: 10px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+ul, ol { margin: 10px 0 10px 24px; }
+li { margin: 4px 0; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 28px 0; }
+code {
+  font-family: var(--font-mono); font-size: 0.9em; background: var(--code-bg);
+  padding: 1px 6px; border-radius: 5px; color: var(--text);
+}
+pre {
+  background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 16px; overflow-x: auto; margin: 14px 0; line-height: 1.55;
+}
+pre code { background: transparent; padding: 0; font-size: 13px; }
+blockquote {
+  border-left: 3px solid var(--accent); margin: 14px 0; padding: 8px 16px;
+  background: var(--accent-soft); border-radius: 0 8px 8px 0; color: var(--text-dim);
+}
+blockquote p { margin: 4px 0; }
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+th { text-align: left; padding: 9px 12px; background: var(--bg-subtle); color: var(--text-muted);
+     font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+td { padding: 9px 12px; border-top: 1px solid var(--border); }
+tr:hover td { background: var(--bg-subtle); }
+img { max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0; }
+strong { font-weight: 600; color: var(--text); }
+em { font-style: italic; color: var(--text-dim); }
+@media (max-width: 720px) { body { padding: 24px 16px 60px; } h1 { font-size: 26px; } h2 { font-size: 20px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <a href="dashboard.html" class="back">← 返回 MYCC 仪表盘</a>
+  <span class="meta">渲染时间 2026-06-26 01:13 · 源: 04-CMMI配置文档-PM专业版.md</span>
+</div>
+<h1 id="claude-code-pm">Claude Code 专业 PM 配置文档</h1>
+<h2 id="cmmi-level-3">CMMI Level 3 格式 · 完整配置方案说明</h2>
+<blockquote>
+<p>CLI v2.1.185 · OMC 4.14.7 · 2026-06-22<br>
+适用对象：项目 PM、技术负责人、CTO、创业团队全员</p>
+</blockquote>
+<hr>
+<h2 id="requirements-specification">一、需求说明（Requirements Specification）</h2>
+<h3 id="11">1.1 系统总体目标</h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>目标描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>效率</strong></td>
+<td>个人开发效率提升 5-10x；团队协作效率提升 3-5x</td>
+</tr>
+<tr>
+<td><strong>质量</strong></td>
+<td>代码安全性提升（OWASP 自动检测）；文档完整性 &gt;90%</td>
+</tr>
+<tr>
+<td><strong>交付</strong></td>
+<td>从需求到上线平均周期缩短 40-60%</td>
+</tr>
+<tr>
+<td><strong>知识</strong></td>
+<td>项目决策和错误模式 100% 落库，跨会话可复用</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12">1.2 核心用户角色与需求</h3>
+<p><strong>角色 1：CEO/创始人</strong><br>
+- 需求：30分钟内生成完整商业分析（竞品/财务/风险/路线图）<br>
+- 触发方式：<code>/ceo-pipeline</code> 或 说 "帮我分析这个商业机会"<br>
+- 产出物：市场规模报告 + 竞品矩阵 + 财务预测 + 融资材料框架</p>
+<p><strong>角色 2：产品经理</strong><br>
+- 需求：需求文档化、技术拆解、用户故事生成、优先级排序<br>
+- 触发方式：说 "帮我把这个需求拆解成开发任务"<br>
+- 产出物：PRD、用户故事、RICE 优先级表、验收标准（BDD）</p>
+<p><strong>角色 3：技术负责人</strong><br>
+- 需求：架构决策、代码审查、安全审计、技术债务管理<br>
+- 触发方式：<code>/code-review ultra</code> 或 <code>/security-audit</code><br>
+- 产出物：架构 ADR、安全报告、技术债务清单、重构方案</p>
+<p><strong>角色 4：全栈开发</strong><br>
+- 需求：功能开发、Bug 修复、测试覆盖、部署自动化<br>
+- 触发方式：说 "队长，把 XX 功能做完" 或 "tdd 模式开发"<br>
+- 产出物：可运行代码 + 测试 + CI/CD 配置 + 部署脚本</p>
+<p><strong>角色 5：增长/运营</strong><br>
+- 需求：内容生产、SEO 优化、数据分析、营销自动化<br>
+- 触发方式：<code>/content-engine</code> 或 <code>/marketing</code><br>
+- 产出物：内容矩阵 + SEO 报告 + 增长实验清单</p>
+<hr>
+<h3 id="13-fr">1.3 功能需求清单（FR）</h3>
+<h4 id="fr-01-must">FR-01 开发能力（必须 MUST）</h4>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>需求</th>
+<th>验收标准</th>
+<th>当前状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-01-01</td>
+<td>全栈功能开发</td>
+<td>从描述到可运行代码，覆盖前后端数据库</td>
+<td>✅ feature-dev skill</td>
+</tr>
+<tr>
+<td>FR-01-02</td>
+<td>TDD 开发流程</td>
+<td>红→绿→重构三阶段，有失败测试证据</td>
+<td>✅ tdd 关键词</td>
+</tr>
+<tr>
+<td>FR-01-03</td>
+<td>自动代码审查</td>
+<td>OWASP + 代码质量 + 逻辑错误，可发 PR 评论</td>
+<td>✅ /code-review</td>
+</tr>
+<tr>
+<td>FR-01-04</td>
+<td>安全审计</td>
+<td>STRIDE 威胁建模 + OWASP Top 10 + P0/P1/P2</td>
+<td>✅ /security-audit</td>
+</tr>
+<tr>
+<td>FR-01-05</td>
+<td>数据库设计</td>
+<td>ER 图 + 建表 SQL + 索引 + 迁移脚本</td>
+<td>✅ 通用能力</td>
+</tr>
+<tr>
+<td>FR-01-06</td>
+<td>CI/CD 配置</td>
+<td>GitHub Actions 自动测试+部署，含回滚</td>
+<td>✅ /gh-ci-fix</td>
+</tr>
+</tbody>
+</table>
+<h4 id="fr-02-must">FR-02 调研能力（必须 MUST）</h4>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>需求</th>
+<th>验收标准</th>
+<th>当前状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-02-01</td>
+<td>深度多渠道调研</td>
+<td>≥5 渠道，官方文档+社区+视频，有来源有结论</td>
+<td>✅ /deep-research</td>
+</tr>
+<tr>
+<td>FR-02-02</td>
+<td>实时官方文档</td>
+<td>任何库/框架/API 的最新文档即时查询</td>
+<td>✅ context7 MCP</td>
+</tr>
+<tr>
+<td>FR-02-03</td>
+<td>GitHub 仓库分析</td>
+<td>搜索代码/PR/Issues，深度分析高星仓库</td>
+<td>✅ github MCP</td>
+</tr>
+<tr>
+<td>FR-02-04</td>
+<td>网页抓取分析</td>
+<td>竞品官网/文档/新闻的深度内容提取</td>
+<td>✅ firecrawl MCP</td>
+</tr>
+<tr>
+<td>FR-02-05</td>
+<td>商业竞品分析</td>
+<td>功能矩阵/定价/差异化，含★推荐选型</td>
+<td>✅ /ceo-pipeline</td>
+</tr>
+</tbody>
+</table>
+<h4 id="fr-03-should">FR-03 协作与管理（应该 SHOULD）</h4>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>需求</th>
+<th>验收标准</th>
+<th>当前状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-03-01</td>
+<td>项目任务管理</td>
+<td>与 Linear 双向同步，自动创建/更新 issue</td>
+<td>✅ linear MCP</td>
+</tr>
+<tr>
+<td>FR-03-02</td>
+<td>GitHub PR 管理</td>
+<td>创建 PR/审查/发评论/合并，全流程</td>
+<td>✅ github MCP</td>
+</tr>
+<tr>
+<td>FR-03-03</td>
+<td>知识库管理</td>
+<td>与 Notion 4 个数据库双向同步</td>
+<td>✅ Notion MCP</td>
+</tr>
+<tr>
+<td>FR-03-04</td>
+<td>设计稿读取</td>
+<td>直接读取 Figma 设计规范，生成代码</td>
+<td>✅ figma MCP</td>
+</tr>
+<tr>
+<td>FR-03-05</td>
+<td>文档生成</td>
+<td>自动生成 Word/PPT/PDF 格式文档</td>
+<td>✅ Office MCP + PDF MCP</td>
+</tr>
+</tbody>
+</table>
+<h4 id="fr-04-can">FR-04 自动化与集成（可以 CAN）</h4>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>需求</th>
+<th>验收标准</th>
+<th>当前状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-04-01</td>
+<td>浏览器自动化</td>
+<td>E2E 测试 + 截图验证 + 表单操作</td>
+<td>✅ playwright MCP</td>
+</tr>
+<tr>
+<td>FR-04-02</td>
+<td>桌面操作自动化</td>
+<td>macOS 系统操作 + 应用控制</td>
+<td>✅ computer-use MCP</td>
+</tr>
+<tr>
+<td>FR-04-03</td>
+<td>邮件处理</td>
+<td>Gmail 搜索/回复/标记，自动化邮件工作流</td>
+<td>✅ Gmail MCP</td>
+</tr>
+<tr>
+<td>FR-04-04</td>
+<td>日历管理</td>
+<td>Google Calendar 查看/创建，会议材料自动准备</td>
+<td>✅ Calendar MCP</td>
+</tr>
+<tr>
+<td>FR-04-05</td>
+<td>外部 AI 对抗</td>
+<td>调用 Gemini/Kimi/MiniMax 多模型并发验证</td>
+<td>✅ ai-panel.sh</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="14-nfr">1.4 非功能性需求（NFR）</h3>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>需求</th>
+<th>指标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>性能</strong></td>
+<td>单任务响应时间</td>
+<td>简单查询 &lt;10s；复杂开发任务 &lt;5min</td>
+</tr>
+<tr>
+<td><strong>并发</strong></td>
+<td>并行 agent 数</td>
+<td>默认 8-16，YOLO 模式 15</td>
+</tr>
+<tr>
+<td><strong>准确性</strong></td>
+<td>事实断言准确率</td>
+<td>关键数据必须 <code>gh api</code>/官方文档核实</td>
+</tr>
+<tr>
+<td><strong>安全</strong></td>
+<td>配置保护</td>
+<td>settings.local.json 受 hook 保护；API Key 不暴露</td>
+</tr>
+<tr>
+<td><strong>可用性</strong></td>
+<td>断点续接</td>
+<td><code>/compact</code> 压缩上下文；<code>/cd</code> 切目录不重开</td>
+</tr>
+<tr>
+<td><strong>可追溯</strong></td>
+<td>决策记录</td>
+<td>所有架构决策生成 ADR；任务产物归档 <code>archive/tasks/</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="configuration-plan">二、配置方案说明（Configuration Plan）</h2>
+<h3 id="21">2.1 当前配置总览</h3>
+<pre><code>┌─────────────────────────────────────────────────────┐
+│               Claude Code 配置层级                   │
+├─────────────────────────────────────────────────────┤
+│ L1 模型层  │ sonnet 4.6（标准）/ opus 4.8（深度）    │
+│            │ haiku 4.5（快速查询）                   │
+├─────────────────────────────────────────────────────┤
+│ L2 规则层  │ ~/.claude/CLAUDE.md（全局指令）         │
+│            │ ~/.claude/rules/*.md（12 核心铁律）     │
+│            │ 项目 CLAUDE.md（项目级规则）            │
+├─────────────────────────────────────────────────────┤
+│ L3 Hook层  │ 50+ 自动守护钩子（全生命周期覆盖）      │
+│            │ 安全/质量/记忆/配置保护/并发防护        │
+├─────────────────────────────────────────────────────┤
+│ L4 Skill层 │ 151 个专项技能（本地 ~/.claude/skills/）│
+│            │ 10 个 Workflow JS 脚本                  │
+├─────────────────────────────────────────────────────┤
+│ L5 MCP层   │ 4 个核心 MCP（settings.local.json）     │
+│            │ 12 个 Desktop Extensions               │
+│            │ 插件提供的 ~10 个 MCP                   │
+├─────────────────────────────────────────────────────┤
+│ L6 外部AI  │ Gemini/Kimi/MiniMax（对抗验证）         │
+└─────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="22-mcp">2.2 MCP 服务器配置清单</h3>
+<h4 id="mcpsettingslocaljson">核心 MCP（settings.local.json 配置）</h4>
+<table>
+<thead>
+<tr>
+<th>服务器</th>
+<th>用途</th>
+<th>关键工具</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>github</strong></td>
+<td>GitHub 全操作</td>
+<td>search_code, list_pull_requests, add_issue_comment, create_pull_request, run_secret_scanning</td>
+</tr>
+<tr>
+<td><strong>context7</strong></td>
+<td>官方文档即时查询</td>
+<td>query-docs, resolve-library-id</td>
+</tr>
+<tr>
+<td><strong>playwright</strong></td>
+<td>浏览器自动化</td>
+<td>browser_navigate, browser_take_screenshot, browser_fill_form, browser_network_requests</td>
+</tr>
+<tr>
+<td><strong>linear</strong></td>
+<td>项目管理</td>
+<td>创建/更新 issue, sprint 管理</td>
+</tr>
+</tbody>
+</table>
+<h4 id="desktop-extensions-mcp">Desktop Extensions MCP</h4>
+<table>
+<thead>
+<tr>
+<th>扩展</th>
+<th>说明</th>
+<th>最佳用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>chrome-control</strong></td>
+<td>Chrome 浏览器控制</td>
+<td>网页截图、用户行为模拟</td>
+</tr>
+<tr>
+<td><strong>filesystem</strong></td>
+<td>文件系统操作</td>
+<td>批量文件处理、目录管理</td>
+</tr>
+<tr>
+<td><strong>figma</strong></td>
+<td>设计稿读取</td>
+<td>设计规范提取、UI 开发</td>
+</tr>
+<tr>
+<td><strong>ms_office_powerpoint</strong></td>
+<td>PPT 创建/编辑</td>
+<td>投资人 BP、技术汇报</td>
+</tr>
+<tr>
+<td><strong>ms_office_word</strong></td>
+<td>Word 文档</td>
+<td>合同模板、技术文档</td>
+</tr>
+<tr>
+<td><strong>pdf-server-mcp</strong></td>
+<td>PDF 处理</td>
+<td>合同/报告内容提取</td>
+</tr>
+<tr>
+<td><strong>macos-mcp</strong></td>
+<td>macOS 系统</td>
+<td>自动化系统操作</td>
+</tr>
+<tr>
+<td><strong>computer-use</strong></td>
+<td>桌面控制</td>
+<td>任何桌面应用操作</td>
+</tr>
+<tr>
+<td><strong>kapture</strong></td>
+<td>屏幕录制</td>
+<td>操作录制、培训材料</td>
+</tr>
+<tr>
+<td><strong>iMessage</strong></td>
+<td>iMessage</td>
+<td>消息自动化</td>
+</tr>
+</tbody>
+</table>
+<h4 id="mcp">插件提供的 MCP</h4>
+<table>
+<thead>
+<tr>
+<th>MCP</th>
+<th>来源</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Notion</strong></td>
+<td>claude-plugins-official</td>
+<td>CMMI 4 数据库（任务/需求/错误/版本）</td>
+</tr>
+<tr>
+<td><strong>firecrawl</strong></td>
+<td>claude-plugins-official</td>
+<td>深度网页抓取/竞品分析</td>
+</tr>
+<tr>
+<td><strong>semgrep</strong></td>
+<td>claude-plugins-official</td>
+<td>SAST 安全扫描</td>
+</tr>
+<tr>
+<td><strong>chrome-devtools</strong></td>
+<td>claude-plugins-official</td>
+<td>性能分析/前端调试</td>
+</tr>
+<tr>
+<td><strong>Gmail</strong></td>
+<td>claude.ai</td>
+<td>邮件自动化</td>
+</tr>
+<tr>
+<td><strong>Google Calendar</strong></td>
+<td>claude.ai</td>
+<td>日程管理</td>
+</tr>
+<tr>
+<td><strong>Google Drive</strong></td>
+<td>claude.ai</td>
+<td>文件协作</td>
+</tr>
+<tr>
+<td><strong>memory</strong></td>
+<td>OMC</td>
+<td>知识图谱记忆</td>
+</tr>
+<tr>
+<td><strong>sequential-thinking</strong></td>
+<td>OMC</td>
+<td>结构化推理</td>
+</tr>
+<tr>
+<td><strong>qmd</strong></td>
+<td>OMC</td>
+<td>本地文档搜索（264页）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="23-hook-50">2.3 Hook 守护体系（50+ 钩子）</h3>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>关键 Hook</th>
+<th>守护对象</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>安全守护</strong></td>
+<td>block-sensitive-files.sh</td>
+<td>禁止意外修改 settings.local.json 等敏感文件</td>
+</tr>
+<tr>
+<td></td>
+<td>direct-connect-guard.sh</td>
+<td>防止代理污染（CC Switch 自动修复）</td>
+</tr>
+<tr>
+<td></td>
+<td>env-sentinel.sh</td>
+<td>SubagentStart 前扫描环境变量污染</td>
+</tr>
+<tr>
+<td></td>
+<td>config-protection.sh</td>
+<td>防止弱化 linter/安全配置</td>
+</tr>
+<tr>
+<td><strong>质量守护</strong></td>
+<td>llm-judge-completion.sh</td>
+<td>Stop 时校验完成证据质量</td>
+</tr>
+<tr>
+<td></td>
+<td>uncertainty-detector.sh</td>
+<td>检测"应该可以了"等不确定词</td>
+</tr>
+<tr>
+<td></td>
+<td>error-circuit-breaker.sh</td>
+<td>同方法失败 2 次触发方法论切换</td>
+</tr>
+<tr>
+<td><strong>记忆守护</strong></td>
+<td>drift-check.sh</td>
+<td>SessionStart 时扫配置漂移</td>
+</tr>
+<tr>
+<td></td>
+<td>session-archive-spec.sh</td>
+<td>任务完成后自动归档产物</td>
+</tr>
+<tr>
+<td><strong>并发守护</strong></td>
+<td>serial-bash-circuit.sh</td>
+<td>超过 3 次串行 Bash 触发警告</td>
+</tr>
+<tr>
+<td></td>
+<td>multi-session-guard.sh</td>
+<td>多 Session 同时编辑同一文件防冲突</td>
+</tr>
+<tr>
+<td><strong>提示守护</strong></td>
+<td>clarity_scorer.py</td>
+<td>模糊度评分，高歧义触发澄清</td>
+</tr>
+<tr>
+<td></td>
+<td>retrieval-precheck.sh</td>
+<td>问题类 prompt 先查本地记忆</td>
+</tr>
+<tr>
+<td></td>
+<td>official-paradigm-guard.sh</td>
+<td>改原生机制前提醒查官方文档</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="24">2.4 权限与安全配置</h3>
+<h4 id="_1">核心安全原则</h4>
+<pre><code>✅ 官方直连：不设 ANTHROPIC_BASE_URL / ANTHROPIC_API_KEY
+✅ 敏感文件保护：settings.local.json 受 block-sensitive-files.sh 保护
+✅ 配置白名单保护：deny 规则 29 条（OWASP + 高危系统操作）
+✅ 环境变量清洁：设 CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS + ENABLE_TOOL_SEARCH
+✅ 多端同步：CLI 主力(100%) + Desktop 辅助(~70%)
+</code></pre>
+<h4 id="_2">权限模式说明</h4>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>适用场景</th>
+<th>风险</th>
+<th>触发方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>默认模式</strong></td>
+<td>日常开发，需要精细控制</td>
+<td>最低</td>
+<td>直接启动</td>
+</tr>
+<tr>
+<td><strong>acceptEdits</strong></td>
+<td>文件编辑密集型任务</td>
+<td>低</td>
+<td>系统自动</td>
+</tr>
+<tr>
+<td><strong>YOLO L4</strong></td>
+<td>信任完整工作流，全自动</td>
+<td>中</td>
+<td>"火力全开"</td>
+</tr>
+<tr>
+<td><strong>bypassPermissions</strong></td>
+<td>极限档，生产不建议</td>
+<td>高</td>
+<td>显式启动参数</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="capabilities-specification">三、专业能力说明（Capabilities Specification）</h2>
+<h3 id="31">3.1 核心能力矩阵</h3>
+<table>
+<thead>
+<tr>
+<th>能力域</th>
+<th>具体能力</th>
+<th>成熟度</th>
+<th>触发方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>代码开发</strong></td>
+<td>全栈开发 / TDD / 重构 / 调试</td>
+<td>★★★★★</td>
+<td>直接描述需求</td>
+</tr>
+<tr>
+<td><strong>安全</strong></td>
+<td>OWASP / STRIDE / 代码扫描 / 合规</td>
+<td>★★★★☆</td>
+<td>/security-audit</td>
+</tr>
+<tr>
+<td><strong>调研分析</strong></td>
+<td>多渠道调研 / 竞品分析 / 技术选型</td>
+<td>★★★★★</td>
+<td>/deep-research</td>
+</tr>
+<tr>
+<td><strong>文档产出</strong></td>
+<td>PRD / 架构文档 / API 文档 / ADR</td>
+<td>★★★★★</td>
+<td>直接描述</td>
+</tr>
+<tr>
+<td><strong>项目管理</strong></td>
+<td>任务拆解 / 进度追踪 / Linear 同步</td>
+<td>★★★★☆</td>
+<td>/cmmi-tracker</td>
+</tr>
+<tr>
+<td><strong>商业分析</strong></td>
+<td>市场/竞品/财务/风险/路线图</td>
+<td>★★★★☆</td>
+<td>/ceo-pipeline</td>
+</tr>
+<tr>
+<td><strong>UI/UX</strong></td>
+<td>设计稿读取 / 组件开发 / 设计系统</td>
+<td>★★★★☆</td>
+<td>/ui-ux-pro-max</td>
+</tr>
+<tr>
+<td><strong>部署运维</strong></td>
+<td>CI/CD / 容器化 / 云部署 / 监控</td>
+<td>★★★★☆</td>
+<td>/deploy-ship</td>
+</tr>
+<tr>
+<td><strong>内容创作</strong></td>
+<td>SEO / 营销文案 / 技术文章</td>
+<td>★★★★☆</td>
+<td>/content-engine</td>
+</tr>
+<tr>
+<td><strong>测试</strong></td>
+<td>E2E / 压测 / 安全测试 / 混沌</td>
+<td>★★★★☆</td>
+<td>/ultraqa</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="32-process-workflows">3.2 工作流程规范（Process Workflows）</h3>
+<h4 id="wf-01">WF-01 标准功能开发流程</h4>
+<pre><code>1. 需求澄清（铁律 11）
+   └─ clarity_scorer.py 评分 → 模糊度 &lt;0.5 先澄清
+
+2. 规划阶段（Step 1）
+   └─ 影响 ≥3 文件 → 生成 plans/{slug}.md
+   └─ 包含：Why/关键文件/执行顺序/验证方法/回滚路径
+
+3. 并行实现（Step 2）
+   └─ ≥2 独立子任务 → Agent/Workflow 并行
+   └─ 前端+后端 → OMC team 协作
+
+4. 质量门控（Step 4）
+   ├─ Gate 1: 测试/lint/typecheck
+   ├─ Gate 2: 实际运行证据（截图/CLI 输出）
+   ├─ Gate 3: 边界检查（空值/超限/并发）
+   └─ Gate 4: git diff --stat 确认影响面
+
+5. 代码审查（铁律 10, Writer≠Reviewer）
+   └─ /code-review --fix（独立 reviewer agent）
+
+6. 归档（铁律 4）
+   └─ archive-task.py 归档产物到 archive/tasks/
+   └─ 重要决策 → 推送 Notion 任务库
+</code></pre>
+<h4 id="wf-02-bug">WF-02 Bug 修复流程</h4>
+<pre><code>1. 问题定位
+   └─ 系统性错误分析（说&quot;又报错&quot;触发）
+   └─ 5-Why 根因分析
+
+2. 假说验证（铁律 8：先查再断言）
+   └─ 禁止推测，必须 ls/grep/实跑取证据
+
+3. 精准修复（铁律 8 K2）
+   └─ 只改必要的，禁止顺手重构
+
+4. 变更闭环（铁律 3 六步）
+   PRE-SCAN → EXECUTE → PROPAGATE →
+   ADVERSARIAL → EVIDENCE → SUBAGENT-EVIDENCE
+
+5. 失败 2 次切方法论（铁律 9）
+   └─ error-circuit-breaker.sh 自动触发
+</code></pre>
+<h4 id="wf-03-ceo-pipeline">WF-03 商业分析流程（/ceo-pipeline）</h4>
+<pre><code>Phase 1：市场分析
+  └─ TAM/SAM/SOM 市场规模
+  └─ 市场趋势 + 时机分析
+
+Phase 2：竞品分析
+  └─ 10 个主要竞品功能矩阵
+  └─ 定价策略对比
+  └─ 差异化机会识别
+
+Phase 3：产品策略
+  └─ 用户画像 + Jobs-to-be-Done
+  └─ MVP 功能清单 + RICE 排序
+  └─ 产品路线图（3 个月/6 个月/12 个月）
+
+Phase 4：财务建模
+  └─ 单位经济学（CAC/LTV/Payback）
+  └─ 三情景预测（悲/基/乐）
+  └─ 融资需求测算
+
+Phase 5：风险评估
+  └─ SWOT 分析
+  └─ 关键假设 + 风险矩阵
+  └─ 应对预案
+
+Phase 6：执行路线图
+  └─ 里程碑拆解
+  └─ 团队需求
+  └─ 融资时间线
+</code></pre>
+<hr>
+<h3 id="33-qa-framework">3.3 质量保证体系（QA Framework）</h3>
+<h4 id="_3">代码质量层级</h4>
+<pre><code>L1 静态分析
+  ├─ semgrep MCP（SAST 扫描）
+  ├─ /security-review（OWASP）
+  └─ linter/formatter（config-protection.sh 防弱化）
+
+L2 动态测试
+  ├─ /code-review（逻辑/安全/性能三维）
+  ├─ playwright MCP（E2E 自动化）
+  └─ chrome-devtools MCP（性能/内存）
+
+L3 审查验证
+  ├─ /code-review ultra（云端多 agent 审查）
+  ├─ /judge-panel（多视角评审面板）
+  └─ ai-panel.sh（跨模型对抗验证）
+
+L4 持续监控
+  ├─ /canary-monitor（指标监控）
+  ├─ /observability-and-instrumentation
+  └─ /self-evolve-loop（月度自我进化）
+</code></pre>
+<h4 id="cmmi-level-3_1">验收标准（CMMI Level 3）</h4>
+<p>每个任务完成前必须满足：<br>
+- [ ] 有实际运行证据（截图/CLI输出/API响应）<br>
+- [ ] 有单元/集成测试（或明确说明为何豁免）<br>
+- [ ] 有回滚路径（git stash / git revert）<br>
+- [ ] 有变更影响面说明（git diff --stat）<br>
+- [ ] 复杂任务有 ADR（Architecture Decision Record）<br>
+- [ ] 产物已归档（archive/tasks/ 或 Notion 任务库）</p>
+<hr>
+<h3 id="34">3.4 知识管理体系</h3>
+<h4 id="_4">四层记忆架构</h4>
+<pre><code>L1 会话记忆（当前 session）
+  └─ 对话上下文 + /compact 压缩保留
+
+L2 项目记忆（跨会话）
+  ├─ CLAUDE.md（项目级指令）
+  ├─ .omc/project-memory.json
+  └─ .omc/notepad.md
+
+L3 全局记忆（跨项目）
+  ├─ ~/.claude/projects/*/memory/MEMORY.md
+  └─ ~/.remember/*.md（自动叙述）
+
+L4 云端记忆（持久化协作）
+  ├─ Notion 任务库（CMMI PP/PMC）
+  ├─ Notion 需求库
+  ├─ Notion 错误库
+  └─ Notion 版本库
+</code></pre>
+<h4 id="5">知识检索顺序（检索前置，铁律 5）</h4>
+<pre><code>L1 本机检索（自动）
+  ├─ retrieval-precheck.sh hook（自动注入）
+  └─ qmd search（264 页 Markdown 本地库）
+
+L2 云端检索（按需）
+  ├─ Notion CMMI 4DB
+  └─ .omc/wiki/（801 页 wiki）
+
+L3 官方文档（按需）
+  └─ context7 MCP（任何库的最新文档）
+
+L4 网络调研（按需）
+  └─ firecrawl MCP + /v29-deep-research
+</code></pre>
+<hr>
+<h2 id="verification-checklist">四、配置验证清单（Verification Checklist）</h2>
+<h3 id="_5">快速健康检查</h3>
+<pre><code class="language-bash"># 1. 版本一致性检查
+python3 ~/.claude/lib/version-consistency-check.py --json
+
+# 2. 环境变量清洁度
+python3 -c &quot;import json,os; d=json.load(open(os.path.expanduser('~/.claude/settings.json'))); print('ENV keys:', list(d.get('env',{}).keys()))&quot;
+# 期望：只有 CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS 和 ENABLE_TOOL_SEARCH
+
+# 3. Hook 可执行性检查
+find ~/.claude/hooks -name &quot;*.sh&quot; ! -perm -111
+
+# 4. 配置漂移检查
+python3 ~/.claude/lib/unify-config-drift.py --dry-run
+
+# 5. Skills 可用性
+# 在 Claude Code 中说 &quot;帮我列出所有可用 skills&quot;
+</code></pre>
+<h3 id="harness">配置分级评分（Harness 六层）</h3>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>检查点</th>
+<th>评分方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1 配置完整性</td>
+<td>settings.json / settings.local.json 规范</td>
+<td>/config-audit-better</td>
+</tr>
+<tr>
+<td>L2 Hook 覆盖率</td>
+<td>50+ 生命周期钩子注册数</td>
+<td>version-consistency-check.py</td>
+</tr>
+<tr>
+<td>L3 Skill 健康度</td>
+<td>151 skills 可达率</td>
+<td>/omc-doctor</td>
+</tr>
+<tr>
+<td>L4 MCP 连通性</td>
+<td>4+12 MCP 在线状态</td>
+<td>claude --safe-mode 测试</td>
+</tr>
+<tr>
+<td>L5 记忆完整性</td>
+<td>MEMORY.md + Notion 同步状态</td>
+<td>grep MEMORY.md 行数</td>
+</tr>
+<tr>
+<td>L6 进化能力</td>
+<td>/self-evolve-loop 可运行</td>
+<td>/self-evolve-loop 测试运行</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="faq">五、常见配置问题 FAQ</h2>
+<p><strong>Q：Agent 调用立即失败怎么办？</strong></p>
+<pre><code class="language-bash"># 检查是否是 CC Switch 污染
+python3 -c &quot;import json,os; d=json.load(open(os.path.expanduser('~/.claude/settings.json'))); print([k for k in d.get('env',{}) if k.startswith('ANTHROPIC')])&quot;
+# 有输出 = 污染，需要清理后重启 Claude
+</code></pre>
+<p><strong>Q：/code-review ultra 和普通 /code-review 区别？</strong><br>
+- 普通：本地单 agent 审查，快（30s），覆盖主要问题<br>
+- ultra：云端多 agent 并行审查，慢（3-5min），覆盖率更高</p>
+<p><strong>Q：什么时候用 /compact 什么时候用 /clear？</strong><br>
+- <code>/compact</code>：对话太长，但还在同一个任务里，保留压缩摘要继续<br>
+- <code>/clear</code>：完全换了个任务，或对话上下文已经混乱，干净重开</p>
+<p><strong>Q：飞书集成怎么配？</strong><br>
+- 通过 Claude Code 写集成脚本：飞书 Webhook → 触发 Claude → 回调飞书群<br>
+- 暂无原生飞书 MCP，通过 osascript MCP 或自写脚本实现</p>
+<p><strong>Q：怎么让团队所有人用同一套配置？</strong></p>
+<pre><code class="language-bash"># 1. 将 ~/.claude/CLAUDE.md 和 rules/ 提交到团队 git 仓库
+# 2. 项目根目录的 CLAUDE.md 所有人共用
+# 3. ~/.claude/settings.json 个人配置各自维护
+</code></pre>
+<hr>
+<blockquote>
+<p>📌 <strong>本手册是精简营销版</strong>。完整 PM 专业版（含 CMMI 过程域 REQM/PP/PMC/CM/MA 详解）见 <code>claude-code-manuals/04-pm-cmmi-guide.md</code>（625行）。</p>
+</blockquote>
+<h2 id="v522-2026-06-12">V52.2 新增（2026-06-12）</h2>
+<p>以下 4 项关键能力（原 V52.2 · 2026-06-12 引入）现已合并入 <code>~/.claude/rules/mycc-core.md</code> 铁律级规范：</p>
+<h3 id="1-12tdd-tdd-vertical-slice">1. 铁律 12：TDD 垂直切片（TDD Vertical Slice）</h3>
+<p>红 → 绿 → 重构三步走，每次只推进一个完整用户价值单元。<strong>YOLO L4/极限档/OMC 自配置任务降级为铁律 3 验证证据</strong>——不是所有任务都要先写失败测试。SSoT：<code>rules/mycc-core.md</code>（铁律 12·TDD 垂直切片）。</p>
+<h3 id="2-looploop-worth-building-gate">2. 四条件门：是否值得建 Loop（Loop-Worth-Building Gate）</h3>
+<p>建任何 Loop / <code>/loop</code> / LaunchAgent / 无人值守自动化前，过四条件（重复性 + 验证可自动化 + token 预算 + Agent 工具齐备）<strong>全过才建</strong>，否则一条好 Prompt 更省。SSoT：<code>rules/mycc-core.md</code>（4 步工作流·Loop 判断）。</p>
+<h3 id="3-quarantine">3. 隔离区模式：读写分离防越权（Quarantine）</h3>
+<p>处理外部不可信输入（外部 AI 报告 / WebFetch / 用户上传文件）+ 同任务要高权限写时，<strong>读取 agent 必须挂 <code>disallowed-tools</code> 移除写权</strong>（物理无法越权）。纵深防御三层：行为层（视为数据非指令）+ <strong>架构层（本规则）</strong> + 运行时层（block-dangerous hook）。SSoT：<code>rules/mycc-core.md</code>（防改 4 类配置·安全约束）。</p>
+<h3 id="4-v522dual-end-policy">4. 双端策略 V52.2（Dual-End Policy）</h3>
+<p><strong>CLI 端</strong> <code>~/.claude/CLAUDE.md</code> = OMC 工程事实 / <code>projects/-Users-williammacst/memory/user-profile.md</code> = 角色偏好 / <code>~/.claude/CLAUDE.local.md</code> = 已就绪能力指针；<strong>Desktop 端</strong> = 行为规则契约（云端）。<strong>四份文档正交不冲突</strong>。SSoT：<code>rules/mycc-core.md</code>（输出规范·双端策略）。</p>
+<hr>
+<blockquote>
+<p><strong>如何查阅完整规范</strong>：<br>
+- <code>cat ~/.claude/rules/mycc-core.md</code> （唯一规则 SSoT：12 铁律 + 12 行为规则 R1-R12 + 4 步工作流）<br>
+- 注：W4（2026-06-22）精简后，原 iron-laws / loop-worth-building-gate / quarantine / auto-learned-rules 等多文件已合并入 <code>mycc-core.md</code> 单文件</p>
+</blockquote>
+<p><em>本节能力现已合并入 <code>rules/mycc-core.md</code>（OMC 4.14.7 · W4 精简）；保留原 V52 系列升级记录。</em></p>
+<hr>
+<p><em>文档更新：2026-06-22 | CMMI Level 3 | OMC 4.14.7</em></p>
+<hr>
+<h2 id="pm-2026-06-25">🌟 高级功能在 PM 工作流中的使用（2026-06-25 增）</h2>
+<blockquote>
+<p>PM 视角下 5 大高级功能怎么用——管理视角，与工程视角不同。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐入口</th>
+<th>做什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>周一发现项目混乱</td>
+<td><code>秘书</code> daily-brief + weekly-secretary</td>
+<td>看自动健康报告，先量化再行动</td>
+</tr>
+<tr>
+<td>不确定哪个 skill 能用</td>
+<td><code>super</code> 不知道找谁</td>
+<td>主调度器列候选让你选（路由层兜底）</td>
+</tr>
+<tr>
+<td>跨部门决策（市场+技术+财务）</td>
+<td><code>CEO</code> ceo-mode 拉 7 顾问</td>
+<td>一次跑完，避免来回开多个 session</td>
+</tr>
+<tr>
+<td>多个并行项目需要全权代理</td>
+<td><code>队长</code> smart-flow-all</td>
+<td>极限档派 subagent 并行处理</td>
+</tr>
+<tr>
+<td>多 session 协调</td>
+<td><code>经理</code> multi-session-state（自动）</td>
+<td>看谁在改什么文件，冲突检测</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>PM 实战建议</strong>：周一早上看 <code>秘书</code> 健康报告 → 不确定的事用 <code>super</code> 兜底 → 重要决策用 <code>CEO</code> → 极限任务用 <code>队长</code>。不要一开始就上 <code>队长</code>（容易黑盒改坏）。</p>
+</blockquote>
+<h3 id="pm-5-2026-06-25">📋 PM 视角的 5 大高级功能进阶（2026-06-25 增）</h3>
+<blockquote>
+<p>给 PM / 技术负责人的精细化使用 · 与工程师视角的"全权极限档"不同。</p>
+</blockquote>
+<p><strong>1. 周一晨会 30 分钟自动健康巡检</strong></p>
+<pre><code class="language-bash"># 触发&quot;秘书&quot;自动跑周报 + 健康检查
+&quot;秘书，跑下 weekly-driver 和 memory-health&quot;
+# → 输出：上周改了什么 · 配置漂移数 · 记忆碎片 · 下周该清理什么
+</code></pre>
+<p><strong>2. 跨部门决策的并行协调</strong></p>
+<table>
+<thead>
+<tr>
+<th>部门</th>
+<th>推荐入口</th>
+<th>配合动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>产品+技术+市场分歧</td>
+<td><code>CEO 启动 评估 X 方案</code></td>
+<td>7 顾问并列 45 分钟出报告</td>
+</tr>
+<tr>
+<td>不确定该用哪个 skill</td>
+<td><code>super 我想做 X</code></td>
+<td>路由器列候选</td>
+</tr>
+<tr>
+<td>团队产出质量存疑</td>
+<td><code>队长 + /code-review ultra</code></td>
+<td>独立 reviewer + 异构对抗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3. 项目分阶段升级策略</strong></p>
+<ul>
+<li><strong>Phase 1 启动</strong>：<code>super 启动项目 X</code>（轻量）</li>
+<li><strong>Phase 2 调研</strong>：<code>CEO + 调研 X 赛道</code>（商业可行性）</li>
+<li><strong>Phase 3 工程</strong>：<code>队长 工程化 MVP</code>（极限档全权）</li>
+<li><strong>Phase 4 维护</strong>：<code>秘书 weekly-driver</code>（自动化巡检）</li>
+</ul>
+<blockquote>
+<p>💡 <strong>PM 警示</strong>：Phase 4 后<strong>不要默认开队长</strong>，容易改坏稳态；用 <code>秘书</code> + <code>/code-review</code> 替代。</p>
+</blockquote>
+<p><strong>4. 多 session 协调的 PM 实务</strong></p>
+<p><code>经理</code> 不是手动触发的，是 <strong>自动激活</strong>。PM 实务里：<br>
+- 同时跑 3 个项目（每个项目一个 session）→ <code>经理</code> 自动显示活跃列表<br>
+- 切换项目前看 <code>经理</code> 列出的 "谁在改什么文件"<br>
+- 冲突时（同一文件多人改）→ <code>经理</code> 红字警告</p>
+<blockquote>
+<p>📖 <strong>详见</strong> dashboard.html §C10.5-10.10 + mycc-config.html §"高级功能" + start-here.md。</p>
+</blockquote>
+<hr>
+<hr>
+<h2 id="_6">📚 更多入口</h2>
+<ul>
+<li><strong>dashboard.html</strong> · 36+ 张卡片（命令/能力/5 大高级功能/统计/帮助）</li>
+<li><strong>mycc-config.html</strong> · 配置全景（自动拉取 ~/.claude/ · MCP/插件/Skills/Hooks/路由表）</li>
+<li><strong>start-here.md</strong> · 35 场景 × 7 手册 × 3 万能入口</li>
+</ul>
+</body>
+</html>

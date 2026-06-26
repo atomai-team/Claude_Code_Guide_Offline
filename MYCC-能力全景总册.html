@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MYCC 能力全景总册（Capability Master Index）</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📘%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════ MD→HTML 渲染共享样式(继承 dashboard 设计系统 v2)═══════ */
+:root {
+  color-scheme: light;
+  --bg: #ffffff; --bg-subtle: #f5f5f7; --surface: #ffffff; --surface2: #fafafc; --surface-hover: #f5f5f7;
+  --border: #e5e5ea; --border-strong: #d2d2d7; --code-bg: #f5f5f7; --tag-bg: #f5f5f7;
+  --text: #1d1d1f; --text-dim: #515154; --text-muted: #86868b;
+  --accent: #0071e3; --accent-hover: #0077ed; --accent-soft: #e8f1fd;
+  --green: #1a8c4a; --red: #d70015; --orange: #b25000; --purple: #6e3fd6;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --font-sans: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
+  --font-mono: 'JetBrains Mono','SF Mono','Fira Code',Menlo,monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0a0a0b; --bg-subtle: #141416; --surface: #161618; --surface2: #1c1c1f; --surface-hover: #232326;
+    --border: #2a2a2e; --border-strong: #3a3a3e; --code-bg: #1c1c1f;
+    --text: #f5f5f7; --text-dim: #aeaeb2; --text-muted: #8e8e93;
+    --accent: #2997ff; --accent-soft: #16263b;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans); background: var(--bg); color: var(--text);
+  line-height: 1.7; font-size: 15px; padding: 48px 32px 80px; max-width: 880px; margin: 0 auto;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+.doc-header {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  margin-bottom: 28px; padding-bottom: 18px; border-bottom: 1px solid var(--border);
+}
+.doc-header .back {
+  color: var(--accent); text-decoration: none; padding: 6px 14px;
+  border: 1px solid var(--border-strong); border-radius: 980px; font-size: 13px; font-weight: 500;
+  transition: all .15s;
+}
+.doc-header .back:hover { background: var(--accent-soft); border-color: var(--accent); }
+.doc-header .meta { color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
+h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 12px 0 18px; color: var(--text); }
+h2 { font-size: 23px; font-weight: 600; margin: 40px 0 14px; padding-top: 12px; letter-spacing: -0.01em;
+     border-top: 1px solid var(--border); color: var(--text); }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+h3 { font-size: 18px; font-weight: 600; margin: 28px 0 10px; color: var(--text); }
+h4 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; color: var(--text-dim); }
+p { margin: 10px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+ul, ol { margin: 10px 0 10px 24px; }
+li { margin: 4px 0; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 28px 0; }
+code {
+  font-family: var(--font-mono); font-size: 0.9em; background: var(--code-bg);
+  padding: 1px 6px; border-radius: 5px; color: var(--text);
+}
+pre {
+  background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 16px; overflow-x: auto; margin: 14px 0; line-height: 1.55;
+}
+pre code { background: transparent; padding: 0; font-size: 13px; }
+blockquote {
+  border-left: 3px solid var(--accent); margin: 14px 0; padding: 8px 16px;
+  background: var(--accent-soft); border-radius: 0 8px 8px 0; color: var(--text-dim);
+}
+blockquote p { margin: 4px 0; }
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+th { text-align: left; padding: 9px 12px; background: var(--bg-subtle); color: var(--text-muted);
+     font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+td { padding: 9px 12px; border-top: 1px solid var(--border); }
+tr:hover td { background: var(--bg-subtle); }
+img { max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0; }
+strong { font-weight: 600; color: var(--text); }
+em { font-style: italic; color: var(--text-dim); }
+@media (max-width: 720px) { body { padding: 24px 16px 60px; } h1 { font-size: 26px; } h2 { font-size: 20px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <a href="dashboard.html" class="back">← 返回 MYCC 仪表盘</a>
+  <span class="meta">渲染时间 2026-06-26 01:14 · 源: MYCC-能力全景总册.md</span>
+</div>
+<hr>
+<p>title: MYCC 能力全景总册（Capability Master Index）<br>
+version: V1.1<br>
+date: 2026-06-23<br>
+status: active<br>
+category: reference<br>
+author: williammacst<br>
+related: [MYCC-用户手册.md, xiaobai/xiaobai-manual.md, references/XIAOBAI-MALL-MANUAL.md, CLAUDE.md, rules/mycc-core.md]<br>
+data_source: 本机实跑统计（2026-06-23 引擎 mycc-stats.py V53 实跑），非记忆估算</p>
+<hr>
+<h1 id="mycc-capability-master-index">MYCC 能力全景总册（Capability Master Index）</h1>
+<blockquote>
+<p><strong>这是什么</strong>：你本机 Claude Code（代号 MYCC）当前<strong>所有能力的权威清单</strong>——装了多少、启用多少、每一类是什么、怎么用。<br>
+<strong>数据保证</strong>：下面每个数字都是 2026-06-17 在本机实跑命令数出来的，不是凭印象（铁律 8）。<br>
+<strong>唯一权威</strong>：本册是能力盘点的 SSoT（Single Source of Truth）。其他手册讲"怎么用"，本册讲"有什么"。</p>
+</blockquote>
+<hr>
+<h2 id="0">0. 文档地图 — 本册与其他手册如何联动</h2>
+<p>你本机已经有一套手册，各管一段。<strong>别重复看，按需求挑</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>你想要</th>
+<th>看哪份</th>
+<th>路径</th>
+<th>体量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>有什么能力</strong>（本册）</td>
+<td>能力全景总册</td>
+<td><code>docs/MYCC-能力全景总册.md</code></td>
+<td>本文件</td>
+</tr>
+<tr>
+<td>我是谁、出问题找谁（30秒版）</td>
+<td>MYCC 用户手册</td>
+<td><code>docs/MYCC-用户手册.md</code></td>
+<td>151 行</td>
+</tr>
+<tr>
+<td>小白怎么一句话用起来</td>
+<td>小白完全操作手册</td>
+<td><code>docs/xiaobai/xiaobai-manual.md</code></td>
+<td>768 行</td>
+</tr>
+<tr>
+<td><strong>跟着做一个完整项目</strong>（实战）</td>
+<td>微商城交付实战手册</td>
+<td><code>docs/references/XIAOBAI-MALL-MANUAL.md</code></td>
+<td>816 行</td>
+</tr>
+<tr>
+<td>商业/CEO 场景速用</td>
+<td>CEO 能力速用手册</td>
+<td><code>docs/references/CEO-能力速用手册.md</code></td>
+<td>61 行</td>
+</tr>
+<tr>
+<td>出海创投人话速查</td>
+<td>出海创投速查卡</td>
+<td><code>docs/出海创投-人话速查卡.md</code></td>
+<td>40 行</td>
+</tr>
+<tr>
+<td>配置怎么改</td>
+<td>CONFIG_GUIDE</td>
+<td><code>docs/references/CONFIG_GUIDE.md</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>行为铁律（机器执行层）</td>
+<td>12 铁律</td>
+<td><code>rules/iron-laws.md</code></td>
+<td>12 条</td>
+</tr>
+<tr>
+<td>四步工作流骨架</td>
+<td>4-step-workflow</td>
+<td><code>rules/4-step-workflow.md</code></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>联动关系图</strong>：</p>
+<pre><code>                  ┌─────────────────────────────┐
+                  │  MYCC 能力全景总册（本册）    │  ← &quot;有什么&quot;（SSoT）
+                  │  130 skill / 38 agent / ...  │
+                  └──────────────┬──────────────┘
+                                 │ 引用同一套数字
+          ┌──────────────────────┼──────────────────────┐
+          ▼                      ▼                      ▼
+  ┌──────────────┐      ┌──────────────┐      ┌──────────────┐
+  │ MYCC用户手册  │      │ 小白操作手册  │      │ 微商城实战手册 │
+  │ &quot;我是谁&quot;30秒  │      │ &quot;怎么一句话用&quot;│      │ &quot;跟着做项目&quot;   │
+  └──────────────┘      └──────────────┘      └──────────────┘
+          │                      │                      │
+          └──────────┬───────────┴──────────┬───────────┘
+                     ▼                       ▼
+            ┌──────────────┐        ┌──────────────┐
+            │ CLAUDE.md     │        │ iron-laws.md  │  ← 机器执行层（铁律/路由）
+            │ 路由+偏好     │        │ 12 铁律       │
+            └──────────────┘        └──────────────┘
+</code></pre>
+<blockquote>
+<p>⚠️ <strong>数字漂移提醒</strong>：本册（2026-06-23 V1.1）以 <code>mycc-stats.py</code> 引擎实跑为准：<strong>130 skill / 38 agent / 48 hooks / 2 rules / 10 插件</strong>。老手册的口语用法仍有效，只是数字过期——以本册第 1 节速查表为最新。</p>
+</blockquote>
+<hr>
+<h2 id="1">1. 总览速查表（一眼看全 — 全部实跑核实）</h2>
+<table>
+<thead>
+<tr>
+<th>能力类别</th>
+<th style="text-align: right;">本机自建</th>
+<th style="text-align: right;">插件提供（catalog 全量）</th>
+<th>启用状态</th>
+<th>权威路径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Skills 技能</strong></td>
+<td style="text-align: right;"><strong>130</strong></td>
+<td style="text-align: right;">403+</td>
+<td>本机 130 全可用 + 10 插件启用子集</td>
+<td><code>skills/*/</code></td>
+</tr>
+<tr>
+<td><strong>Agents 子代理</strong></td>
+<td style="text-align: right;"><strong>38</strong></td>
+<td style="text-align: right;">252+</td>
+<td>本机 38 全可用 + 插件按需</td>
+<td><code>agents/**/*.md</code></td>
+</tr>
+<tr>
+<td><strong>Hooks 钩子</strong></td>
+<td style="text-align: right;"><strong>57 文件 / 48 注册</strong></td>
+<td style="text-align: right;">—</td>
+<td>14 类事件</td>
+<td><code>hooks/</code> + settings.local</td>
+</tr>
+<tr>
+<td><strong>Rules 规则</strong></td>
+<td style="text-align: right;"><strong>2</strong>（mycc-core.md + auto-learned-rules.md）</td>
+<td style="text-align: right;">—</td>
+<td>全部常驻</td>
+<td><code>rules/*.md</code></td>
+</tr>
+<tr>
+<td><strong>铁律 Iron Laws</strong></td>
+<td style="text-align: right;"><strong>12 条</strong></td>
+<td style="text-align: right;">—</td>
+<td>强制</td>
+<td><code>rules/mycc-core.md</code></td>
+</tr>
+<tr>
+<td><strong>MCP 服务器</strong></td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+<td><strong>1 个启用</strong>（qmd）+ 插件提供 9+</td>
+<td>见 §6</td>
+</tr>
+<tr>
+<td><strong>Plugins 插件</strong></td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;"><strong>10 启用</strong> / 58 total</td>
+<td>10 enabled</td>
+<td>settings.json <code>enabledPlugins</code></td>
+</tr>
+<tr>
+<td><strong>Workflows 工作流</strong></td>
+<td style="text-align: right;">多个 .js</td>
+<td style="text-align: right;">—</td>
+<td>按需</td>
+<td><code>workflows/</code> + skill 形式</td>
+</tr>
+</tbody>
+</table>
+<p><strong>核心配置（settings.json，实读）</strong>：<br>
+- 模型：<code>opus[1m]</code>（Opus 4.8 + 1M 上下文档位）｜三档别名 Opus-M3 / Sonnet-M3 / Haiku-M3<br>
+- 实验开关：<code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1</code>（Agent Teams 启用）、<code>ENABLE_TOOL_SEARCH=true</code>（工具按需加载）<br>
+- 直连：官方直连（无第三方代理 BASE_URL/API_KEY）｜<code>skipDangerousModePermissionPrompt=true</code><br>
+- 语言：<code>chinese</code></p>
+<hr>
+<h2 id="2-iron-laws12">2. 铁律 Iron Laws（12 条 — 行为底座）</h2>
+<blockquote>
+<p>每条都有真实 hook 落地，不是口号。完整原文见 <code>rules/mycc-core.md</code>（W4 精简后合并为单文件）。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>铁律</th>
+<th>一句话</th>
+<th>落地机制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>并行优先</td>
+<td>≥2 独立子任务必并行</td>
+<td><code>serial-bash-circuit.sh</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>失败 11 分类 + 自动恢复</td>
+<td>失败归类→配方恢复→升级</td>
+<td><code>error-circuit-breaker.sh</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>验证证据 + 防偷懒 + Subagent 闭环</td>
+<td>完成必给实跑证据，禁"应该可以了"</td>
+<td>Stop hook <code>llm-judge-completion.sh</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td>记忆持久化</td>
+<td>错误/偏好/架构/进度分层落盘</td>
+<td>auto-memory</td>
+</tr>
+<tr>
+<td>5</td>
+<td>官方/已有优先</td>
+<td>官方&gt;skill&gt;agent&gt;MCP&gt;重造</td>
+<td>四级能力阶梯</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Subagent 模型显式</td>
+<td>model 必传 sonnet/opus/haiku 或注明 inherit</td>
+<td>软约束+frontmatter</td>
+</tr>
+<tr>
+<td>7</td>
+<td>官方直连</td>
+<td>禁第三方代理</td>
+<td><code>direct-connect-guard.sh</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Karpathy 五原则</td>
+<td>先读后写/精准改/反推测/声明目标/<strong>先验证再断言</strong></td>
+<td><code>uncertainty-detector.sh</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td>失败 2 次切方法论</td>
+<td>同法连败 2 次强制换思路</td>
+<td><code>error-circuit-breaker.sh</code></td>
+</tr>
+<tr>
+<td>10</td>
+<td>Writer ≠ Reviewer</td>
+<td>写代码与审代码不同 agent</td>
+<td>Workflow pipeline 分离</td>
+</tr>
+<tr>
+<td>11</td>
+<td>澄清优先 + 不可行硬声明</td>
+<td>模糊先问（≤2题+示例），不可行给替代</td>
+<td><code>clarity_scorer.py</code></td>
+</tr>
+<tr>
+<td>12</td>
+<td>TDD 垂直切片</td>
+<td>红→绿→重构，一次一个完整切片</td>
+<td>软约束+Gate 2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>四步工作流骨架</strong>（已合并入 <code>rules/mycc-core.md</code>）：</p>
+<pre><code>Step 1 规划 Plan    → ≥3文件或≥5轮触发，产出 plans/{slug}.md
+Step 2 并行 Parallel → ≥2独立子任务并行（Workflow/Agent/fork/tmux）
+Step 3 强制调试      → 失败≥2次，5思路选1+验证，禁说&quot;做不到&quot;
+Step 4 验收闭环      → 每次声称完成，5 道 Gate 门控，实跑证据
+</code></pre>
+<hr>
+<h2 id="3-hooks-57-48-14">3. Hooks 钩子（57 文件 / 48 注册 / 14 类事件 — 自动化规则核心）</h2>
+<blockquote>
+<p>Hook 是"由 harness 执行、不是 Claude 自己执行"的自动化——满足"每次 X 就 Y"的规则。</p>
+</blockquote>
+<p><strong>注册的 14 类事件（settings.local.json 实读 · 2026-06-23 · 共 48 挂载点）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th style="text-align: right;">挂载数</th>
+<th>典型作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PreToolUse</code></td>
+<td style="text-align: right;">9</td>
+<td>工具调用前拦截（危险命令阻断、并行提醒、隔离区检查）</td>
+</tr>
+<tr>
+<td><code>SubagentStop</code></td>
+<td style="text-align: right;">3</td>
+<td>子代理结束时（证据校验、模式捕获）</td>
+</tr>
+<tr>
+<td><code>UserPromptSubmit</code></td>
+<td style="text-align: right;">3</td>
+<td>你发消息时（intent 路由、官方源提醒、安全注入）</td>
+</tr>
+<tr>
+<td><code>SessionStart</code></td>
+<td style="text-align: right;">3</td>
+<td>开会话时（CC Switch 护甲、handoff 注入、Semgrep 检查）</td>
+</tr>
+<tr>
+<td><code>PostToolUse</code></td>
+<td style="text-align: right;">2</td>
+<td>工具调用后（结果处理）</td>
+</tr>
+<tr>
+<td><code>Stop</code></td>
+<td style="text-align: right;">2</td>
+<td>主任务停止时（<strong>完成质量门控 <code>llm-judge-completion.sh</code></strong>）</td>
+</tr>
+<tr>
+<td><code>PostToolUseFailure</code></td>
+<td style="text-align: right;">1</td>
+<td>工具失败后</td>
+</tr>
+<tr>
+<td><code>PermissionRequest</code></td>
+<td style="text-align: right;">1</td>
+<td>权限请求时</td>
+</tr>
+<tr>
+<td><code>PreCompact</code> / <code>PostCompact</code></td>
+<td style="text-align: right;">各1</td>
+<td>上下文压缩前后（防 resume 污染）</td>
+</tr>
+<tr>
+<td><code>SessionEnd</code></td>
+<td style="text-align: right;">1</td>
+<td>会话结束归档</td>
+</tr>
+<tr>
+<td><code>SubagentStart</code></td>
+<td style="text-align: right;">1</td>
+<td>子代理启动</td>
+</tr>
+<tr>
+<td><code>StopFailure</code></td>
+<td style="text-align: right;">1</td>
+<td>停止失败</td>
+</tr>
+<tr>
+<td><code>MessageDisplay</code></td>
+<td style="text-align: right;">1</td>
+<td>输出展示时（<code>uncertainty-detector.sh</code> 不确定词提醒）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>代表性 hook（66 个文件中的关键几个）</strong>：<br>
+- <code>serial-bash-circuit.sh</code> — 连续串行 Bash 熔断（强制并行，铁律1）<br>
+- <code>error-circuit-breaker.sh</code> — 失败计数 + 方法论切换（铁律2/9）<br>
+- <code>llm-judge-completion.sh</code> — 完成证据质量校验（铁律3）<br>
+- <code>direct-connect-guard.sh</code> — 官方直连守卫（铁律7）<br>
+- <code>clarity_scorer.py</code> — 模糊度评分 + 不可行拦截（铁律11）<br>
+- <code>block-dangerous-commands.sh</code> — 危险命令阻断（rm -r/rmtree/mv到Trash）<br>
+- <code>cleanroom-precheck.sh</code> — 清理类操作前快照（防雪崩）</p>
+<blockquote>
+<p>⚠️ 当前有 1 个注册指向缺失文件的告警：<code>MessageDisplay → uncertainty-detector.sh</code>（SessionStart 已提示）。修复：<code>python3 ~/.claude/hooks/register-hook-registration-guard.py --fix</code></p>
+</blockquote>
+<p><strong>管理命令</strong>：<code>/oh-my-claudecode:omc-hookify</code> 或说 <code>hookify</code> / <code>看看 hook</code></p>
+<hr>
+<h2 id="4-skills-130-10">4. Skills 技能（130 本机 + 10 插件启用 — 功能模块）</h2>
+<blockquote>
+<p>Skill = 一句话触发的能力包。<strong>本机 130 个直接可用</strong>（一层扫描），插件再带来数百个。</p>
+</blockquote>
+<h3 id="41-skills">4.1 本机高频 Skills（按场景分类，代表性列举）</h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>代表 skill</th>
+<th>触发</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>总入口</strong></td>
+<td><code>smart-flow-all</code></td>
+<td>说"队长/leader/boss"</td>
+</tr>
+<tr>
+<td><strong>全面升级</strong></td>
+<td><code>claude-code-better</code> / <code>audit-all-better</code></td>
+<td>"全面升级/体检"</td>
+</tr>
+<tr>
+<td><strong>调研</strong></td>
+<td><code>deep-research</code> / <code>web-access</code> / <code>auto-evolve</code></td>
+<td>"调研/联网搜"</td>
+</tr>
+<tr>
+<td><strong>CEO/商业</strong></td>
+<td><code>ceo-decision</code> / <code>content-engine</code> / <code>pricing-strategy</code></td>
+<td>"ceo决策/战略分析"</td>
+</tr>
+<tr>
+<td><strong>错误分析</strong></td>
+<td><code>systematic-error-analysis</code></td>
+<td>"又报错/debug"</td>
+</tr>
+<tr>
+<td><strong>代码审查</strong></td>
+<td><code>review</code> / <code>code-review</code> / <code>security-audit</code></td>
+<td>"审查/安全审计"</td>
+</tr>
+<tr>
+<td><strong>规划</strong></td>
+<td><code>ultraplan</code> / <code>omc-prp-plan</code> / <code>team-leader</code></td>
+<td>"深度规划"</td>
+</tr>
+<tr>
+<td><strong>自进化</strong></td>
+<td><code>self-evolve-loop</code> / <code>audit-all-better</code>(内嵌六层评分)</td>
+<td>"进化/harness评分"</td>
+</tr>
+<tr>
+<td><strong>秘书</strong></td>
+<td><code>secretary-orchestrator</code> / <code>secretary-tongues</code></td>
+<td>"秘书/巡检"</td>
+</tr>
+<tr>
+<td><strong>TDD</strong></td>
+<td><code>sp-test-driven-development</code></td>
+<td>"TDD/红绿重构"</td>
+</tr>
+<tr>
+<td><strong>文档对齐</strong></td>
+<td><code>neat-freak</code> / <code>memory-dream-consolidation</code></td>
+<td>"文档对齐/记忆整合"</td>
+</tr>
+<tr>
+<td><strong>写作</strong></td>
+<td><code>article-writing</code> / <code>baoyu-translate</code> / <code>humanize-chinese</code></td>
+<td>"写文章/翻译"</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-skills10-catalog-403">4.2 启用插件提供的 Skills（10 启用插件，catalog 共 403+）</h3>
+<table>
+<thead>
+<tr>
+<th>插件族</th>
+<th>提供</th>
+<th>数量级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>oh-my-claudecode@omc</code></td>
+<td>队长/autopilot/ralph/team/ultrawork 等 Tier-0</td>
+<td>40</td>
+</tr>
+<tr>
+<td><code>superpowers@official</code></td>
+<td>brainstorming/TDD/systematic-debugging/writing-plans</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>pm-skills@pm-skills</code>（9 插件）</td>
+<td>产品发现/策略/执行/市场/数据/GTM/营销/工具/AI出货</td>
+<td>68</td>
+</tr>
+<tr>
+<td><code>agent-skills@addy</code></td>
+<td>spec/build/test/ship/review/webperf + 24 子能力</td>
+<td>24</td>
+</tr>
+<tr>
+<td><code>minimax-skills</code></td>
+<td>全栈/移动/PPTX/PDF/DOCX/音乐/视觉</td>
+<td>23</td>
+</tr>
+<tr>
+<td><code>claude-code-workflows</code></td>
+<td>156 工作流式 skill</td>
+<td>156</td>
+</tr>
+<tr>
+<td>官方工具插件</td>
+<td>context7/github/notion/playwright/semgrep/firecrawl/chrome-devtools</td>
+<td>28</td>
+</tr>
+<tr>
+<td><code>understand-anything</code></td>
+<td>代码库知识图谱</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p><strong>查全部</strong>：说 <code>/oh-my-claudecode:skill</code>（list/search）或 <code>/skills-space</code>（智能推荐）</p>
+<hr>
+<h2 id="5-agents-38-252">5. Agents 子代理（38 本机 + 252+ 插件 — 专业角色）</h2>
+<blockquote>
+<p>Agent = 有独立上下文的专家。本机 38 个，按目录分族：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>族（目录）</th>
+<th style="text-align: right;">数量</th>
+<th>角色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_ceo-roles</code></td>
+<td style="text-align: right;">18</td>
+<td>CEO/CFO/CMO/COO/CRO/CISO/CAIO + 财务/市场/定价/法务...</td>
+</tr>
+<tr>
+<td><code>deploy</code></td>
+<td style="text-align: right;">10</td>
+<td>蓝绿/金丝雀/回滚/热修/发布协调</td>
+</tr>
+<tr>
+<td><code>testing</code></td>
+<td style="text-align: right;">10</td>
+<td>E2E/压测/混沌/回归/覆盖率/单测</td>
+</tr>
+<tr>
+<td><code>perf</code></td>
+<td style="text-align: right;">9</td>
+<td>CPU/内存/延迟/DB/前端/后端/缓存/查询优化</td>
+</tr>
+<tr>
+<td><code>docs</code></td>
+<td style="text-align: right;">9</td>
+<td>README/changelog/迁移指南/API文档/教程</td>
+</tr>
+<tr>
+<td><code>_industry</code></td>
+<td style="text-align: right;">7</td>
+<td>新消费/连锁/供应链/出海/单店模型/资本IR</td>
+</tr>
+<tr>
+<td><code>_core</code></td>
+<td style="text-align: right;">6</td>
+<td>captain/ceo-orchestrator/architect/engineer...</td>
+</tr>
+<tr>
+<td><code>teams</code></td>
+<td style="text-align: right;">6</td>
+<td>fullstack/research/security/data-ai/infra 团队蓝图</td>
+</tr>
+<tr>
+<td><code>_subagent</code></td>
+<td style="text-align: right;">3</td>
+<td>verifier/task-closer/pua-enforcer（验证闭环）</td>
+</tr>
+<tr>
+<td><code>_new</code></td>
+<td style="text-align: right;">2</td>
+<td>needs-analyst（需求澄清）等</td>
+</tr>
+</tbody>
+</table>
+<p><strong>插件 agents（252）</strong>：official 的 code-reviewer/security-auditor/test-engineer、pr-review-toolkit 的 silent-failure-hunter/type-design-analyzer、feature-dev、understand-anything 系列等。</p>
+<p><strong>怎么用</strong>：通常不用手点——说"队长"由 <code>smart-flow-all</code> 自动调度；或直接说角色名（"安全审计"→ team-security）。</p>
+<hr>
+<h2 id="6-mcp-10">6. MCP 服务器（≈10 个启用 — 外部能力接口）</h2>
+<table>
+<thead>
+<tr>
+<th>MCP</th>
+<th>来源</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>chrome-devtools</code></td>
+<td>全局</td>
+<td>浏览器调试/截图/性能</td>
+</tr>
+<tr>
+<td><code>claude-context</code></td>
+<td>全局</td>
+<td>代码库语义索引</td>
+</tr>
+<tr>
+<td><code>mcp-server-askecho-search-infinity</code></td>
+<td>全局</td>
+<td>联网搜索</td>
+</tr>
+<tr>
+<td><code>code-review-graph</code></td>
+<td>enabled</td>
+<td>tree-sitter 代码图谱（说"建图"）</td>
+</tr>
+<tr>
+<td><code>filesystem</code></td>
+<td>enabled</td>
+<td>文件系统操作</td>
+</tr>
+<tr>
+<td><code>memory</code></td>
+<td>enabled</td>
+<td>知识图谱记忆</td>
+</tr>
+<tr>
+<td><code>sequential-thinking</code></td>
+<td>enabled</td>
+<td>链式推理</td>
+</tr>
+<tr>
+<td><code>notion</code></td>
+<td>enabled</td>
+<td>Notion 读写（CMMI 任务库同步）</td>
+</tr>
+<tr>
+<td><code>firecrawl</code></td>
+<td>项目级</td>
+<td>高级网页抓取/爬取</td>
+</tr>
+<tr>
+<td><code>qmd</code></td>
+<td>项目级</td>
+<td>本地 264 markdown 搜索引擎</td>
+</tr>
+</tbody>
+</table>
+<p><strong>还可按需用</strong>（deferred，ToolSearch 加载）：computer-use（桌面控制）、github、playwright、semgrep、gmail/gcal/gdrive 等。</p>
+<p><strong>配置</strong>：<code>/oh-my-claudecode:mcp-setup</code></p>
+<hr>
+<h2 id="7-rules-2-w4">7. 自动化规则（Rules 2 个 — W4 精简后极简配置）</h2>
+<blockquote>
+<p>Rules 是常驻 context 的行为规范（≠hook，hook 是事件触发的脚本）。</p>
+</blockquote>
+<p><strong>当前 2 个（W4 2026-06-22 精简）</strong>：<br>
+- <code>mycc-core.md</code> — 12 铁律 + 四步工作流 + 12 行为规则 + 输出规范（合并精简主文件）<br>
+- <code>auto-learned-rules.md</code> — SessionStart 常驻规则索引（精简版，引用 mycc-core.md）</p>
+<blockquote>
+<p>历史文件 iron-laws.md / 4-step-workflow.md / output-contract.md 等已合并归档（内容在 mycc-core.md 中覆盖）。</p>
+</blockquote>
+<p><strong>自动化能力清单</strong>：<br>
+- <strong>定时任务</strong>：weekly cron（每周一 evolution-scout 进化扫描）、daily-brief（每天 09:00 秘书简报，<code>com.user.claude-daily-brief</code> plist）<br>
+- <strong>会话钩子</strong>：SessionStart 注入 handoff、CC Switch 护甲自愈<br>
+- <strong>质量门控</strong>：Stop hook 完成证据校验、PreCompact 防污染<br>
+- <strong>自进化</strong>：self-evolve-loop（自定优化→执行→独立验收→分级落地）</p>
+<hr>
+<h2 id="8">8. 速查卡（口语 → 能力 — 贴墙版）</h2>
+<pre><code>━━━━━━━━━━━━━━━ MYCC 口语速查卡 ━━━━━━━━━━━━━━━
+
+【总入口】
+  队长，&lt;需求&gt;          → 四步骨架+bypass+验证（最常用）
+  活力全开 / 火力全开    → 队长 + YOLO L4（15 并发极限档）
+  小白，&lt;需求&gt;          → 场景自动识别（非技术友好）
+
+【官方原生命令直触】
+  设目标 X              → /goal X（每轮重检完成条件）
+  顺便问 X              → /btw X（不污染主上下文）
+  撤回                  → /rewind（检查点回退）
+  建图                  → code-review-graph（代码项目架构图）
+
+【场景关键词】
+  全面升级 / 体检        → claude-code-better
+  又报错                → systematic-error-analysis
+  调研 X                → deep-research（≥3渠道）
+  安全审计              → team-security / security-audit
+  评估项目 / 战略分析    → ceo-decision / ceo-mode
+  出海合规 / 融资准备    → overseas-compliance / fundraising
+  秘书 / 巡检           → secretary-orchestrator
+  TDD                  → 红绿重构垂直切片
+  代码审查              → /code-review（--fix 直接修）
+
+【管理自查】
+  看看 hook            → hookify（管理钩子）
+  /skills-space        → 智能技能推荐
+  本册                 → docs/MYCC-能力全景总册.md（你在看的）
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+</code></pre>
+<hr>
+<h2 id="9">9. 实战示例 — 微商城项目怎么调动这些能力</h2>
+<blockquote>
+<p>完整 816 行实战见 <code>docs/references/XIAOBAI-MALL-MANUAL.md</code>。这里展示<strong>一个真实项目如何串起上面所有能力</strong>：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>你说</th>
+<th>调动的能力</th>
+<th>涉及组件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 需求</td>
+<td>"队长，做个微商城"</td>
+<td><code>smart-flow-all</code> + <code>needs-analyst</code></td>
+<td>skill + agent</td>
+</tr>
+<tr>
+<td>2. 规划</td>
+<td>（自动）Step 1</td>
+<td><code>ultraplan</code> / <code>product-manager</code></td>
+<td>skill + agent(_core)</td>
+</tr>
+<tr>
+<td>3. 设计</td>
+<td>（自动）并行</td>
+<td><code>architect</code> + <code>designer</code></td>
+<td>agent(_core)</td>
+</tr>
+<tr>
+<td>4. 开发</td>
+<td>（自动）Step 2</td>
+<td><code>engineer</code> TDD + Workflow 并发</td>
+<td>agent + 铁律12</td>
+</tr>
+<tr>
+<td>5. 审查</td>
+<td>（自动）Step 4</td>
+<td><code>code-reviewer</code> + <code>security-audit</code></td>
+<td>agent + skill（铁律10 Writer≠Reviewer）</td>
+</tr>
+<tr>
+<td>6. 验收</td>
+<td>（自动）Gate 1-5</td>
+<td><code>verifier</code> + Stop hook</td>
+<td>agent + hook</td>
+</tr>
+<tr>
+<td>7. 部署</td>
+<td>"上线"</td>
+<td><code>team-deploy</code>（蓝绿/回滚）</td>
+<td>agent(deploy)</td>
+</tr>
+<tr>
+<td>8. 归档</td>
+<td>（自动）收口</td>
+<td><code>task-closer</code> + Notion MCP</td>
+<td>agent + MCP</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一句话</strong>：你只说"队长，做个微商城"，背后是 <strong>skill 路由 → agent 编排 → hook 门控 → MCP 落地 → 铁律保障</strong> 的全链路自动协作。</p>
+<hr>
+<h2 id="10">10. 版本更新机制（本册如何保持新鲜）</h2>
+<p>本册采用<strong>语义化版本</strong>，更新分两档：</p>
+<h3 id="major-v1-v2">大版本（Major，如 V1 → V2）</h3>
+<p><strong>触发</strong>：能力结构性变化——<br>
+- 新增/删除一整类组件（如引入新的 MCP 类别、Workflow 体系重构）<br>
+- 铁律条数变化（12 → N）<br>
+- 插件市场大规模增减（±5 个 marketplace）<br>
+- 文档联动关系图变化</p>
+<p><strong>动作</strong>：重跑全套统计命令（见文末附录）+ 重写受影响章节 + 更新 frontmatter <code>version</code> 主号 + 在 §0 加"数字漂移提醒"。</p>
+<h3 id="minor-v10-v11">小版本（Minor，如 V1.0 → V1.1）</h3>
+<p><strong>触发</strong>：数量级微调——<br>
+- skill/agent/hook 个数变化（如 125 → 130 skill）<br>
+- 启用插件增减（35 → 37）<br>
+- 单个组件的用法/触发词更新</p>
+<p><strong>动作</strong>：只更新 §1 总览速查表对应数字 + frontmatter <code>date</code> + 改动章节，主号不变。</p>
+<h3 id="_1">更新触发方式</h3>
+<ul>
+<li><strong>手动</strong>：说 <code>更新能力总册</code> 或 <code>刷新 MYCC 总册</code></li>
+<li><strong>建议节奏</strong>：每次"全面升级"（claude-code-better）后顺带刷新；或每月一次</li>
+<li><strong>自动候选</strong>：可挂到 weekly evolution-scout（进化扫描）后自动比对数字漂移并提示</li>
+</ul>
+<h3 id="_2">附录 — 重跑统计命令（复制即用）</h3>
+<pre><code class="language-bash"># 本机 skills
+ls -1d ~/.claude/skills/*/ | wc -l
+# 本机 agents（排除归档）
+find ~/.claude/agents -name '*.md' -not -path '*/.archive/*' | wc -l
+# hooks 文件 + 注册事件
+ls -1 ~/.claude/hooks/* | wc -l
+python3 -c &quot;import json;d=json.load(open('$HOME/.claude/settings.local.json'));print({k:len(v) for k,v in d.get('hooks',{}).items()})&quot;
+# rules
+find ~/.claude/rules -name '*.md' | wc -l
+# 铁律
+grep -c '^## 铁律' ~/.claude/rules/iron-laws.md
+# 启用插件
+python3 -c &quot;import json;d=json.load(open('$HOME/.claude/settings.local.json'));print(len(d.get('enabledPlugins',{})))&quot;
+# MCP
+python3 -c &quot;import json;d=json.load(open('$HOME/.claude.json'));print(list(d.get('mcpServers',{}).keys()))&quot;
+python3 -c &quot;import json;d=json.load(open('$HOME/.claude/settings.local.json'));print(d.get('enabledMcpjsonServers'))&quot;
+# plugin catalog 全量
+find ~/.claude/plugins/marketplaces -name 'SKILL.md' | wc -l
+find ~/.claude/plugins/marketplaces -path '*/agents/*.md' | wc -l
+</code></pre>
+<hr>
+<h2 id="_3">变更日志</h2>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>日期</th>
+<th>变更</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V1.0</td>
+<td>2026-06-17</td>
+<td>首版。全量实跑统计：125 skill / 82 agent / 66 hook / 40 rule / 12 铁律 / ≈10 MCP / 35 插件。建立与 5 份现有手册的联动地图、速查卡、微商城实战示例、大小版本更新机制。</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<blockquote>
+<p><strong>回滚</strong>：<code>rm ~/.claude/docs/MYCC-能力全景总册.md</code><br>
+<strong>本册定位</strong>：能力盘点 SSoT。"有什么"看本册，"怎么用"看小白手册，"跟着做"看微商城手册。</p>
+</blockquote>
+</body>
+</html>

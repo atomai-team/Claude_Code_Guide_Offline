@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌐 浏览器自验 check 清单 · MYCC Dashboard v53-PRO</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📘%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════ MD→HTML 渲染共享样式(继承 dashboard 设计系统 v2)═══════ */
+:root {
+  color-scheme: light;
+  --bg: #ffffff; --bg-subtle: #f5f5f7; --surface: #ffffff; --surface2: #fafafc; --surface-hover: #f5f5f7;
+  --border: #e5e5ea; --border-strong: #d2d2d7; --code-bg: #f5f5f7; --tag-bg: #f5f5f7;
+  --text: #1d1d1f; --text-dim: #515154; --text-muted: #86868b;
+  --accent: #0071e3; --accent-hover: #0077ed; --accent-soft: #e8f1fd;
+  --green: #1a8c4a; --red: #d70015; --orange: #b25000; --purple: #6e3fd6;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --font-sans: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
+  --font-mono: 'JetBrains Mono','SF Mono','Fira Code',Menlo,monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0a0a0b; --bg-subtle: #141416; --surface: #161618; --surface2: #1c1c1f; --surface-hover: #232326;
+    --border: #2a2a2e; --border-strong: #3a3a3e; --code-bg: #1c1c1f;
+    --text: #f5f5f7; --text-dim: #aeaeb2; --text-muted: #8e8e93;
+    --accent: #2997ff; --accent-soft: #16263b;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans); background: var(--bg); color: var(--text);
+  line-height: 1.7; font-size: 15px; padding: 48px 32px 80px; max-width: 880px; margin: 0 auto;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+.doc-header {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  margin-bottom: 28px; padding-bottom: 18px; border-bottom: 1px solid var(--border);
+}
+.doc-header .back {
+  color: var(--accent); text-decoration: none; padding: 6px 14px;
+  border: 1px solid var(--border-strong); border-radius: 980px; font-size: 13px; font-weight: 500;
+  transition: all .15s;
+}
+.doc-header .back:hover { background: var(--accent-soft); border-color: var(--accent); }
+.doc-header .meta { color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
+h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 12px 0 18px; color: var(--text); }
+h2 { font-size: 23px; font-weight: 600; margin: 40px 0 14px; padding-top: 12px; letter-spacing: -0.01em;
+     border-top: 1px solid var(--border); color: var(--text); }
+h2:first-of-type { border-top: 0; padding-top: 0; }
+h3 { font-size: 18px; font-weight: 600; margin: 28px 0 10px; color: var(--text); }
+h4 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; color: var(--text-dim); }
+p { margin: 10px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+ul, ol { margin: 10px 0 10px 24px; }
+li { margin: 4px 0; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 28px 0; }
+code {
+  font-family: var(--font-mono); font-size: 0.9em; background: var(--code-bg);
+  padding: 1px 6px; border-radius: 5px; color: var(--text);
+}
+pre {
+  background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 16px; overflow-x: auto; margin: 14px 0; line-height: 1.55;
+}
+pre code { background: transparent; padding: 0; font-size: 13px; }
+blockquote {
+  border-left: 3px solid var(--accent); margin: 14px 0; padding: 8px 16px;
+  background: var(--accent-soft); border-radius: 0 8px 8px 0; color: var(--text-dim);
+}
+blockquote p { margin: 4px 0; }
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+th { text-align: left; padding: 9px 12px; background: var(--bg-subtle); color: var(--text-muted);
+     font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+td { padding: 9px 12px; border-top: 1px solid var(--border); }
+tr:hover td { background: var(--bg-subtle); }
+img { max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0; }
+strong { font-weight: 600; color: var(--text); }
+em { font-style: italic; color: var(--text-dim); }
+@media (max-width: 720px) { body { padding: 24px 16px 60px; } h1 { font-size: 26px; } h2 { font-size: 20px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <a href="dashboard.html" class="back">← 返回 MYCC 仪表盘</a>
+  <span class="meta">渲染时间 2026-06-26 01:13 · 源: browser-self-check.md</span>
+</div>
+<h1 id="check-mycc-dashboard-v53-pro">🌐 浏览器自验 check 清单 · MYCC Dashboard v53-PRO</h1>
+<blockquote>
+<p>📌 <strong>目的</strong>：3 联专家并行诊断 dashboard.html UI/UX/培训问题前，<strong>先确认本机渲染是否正常</strong>（sandbox 截图字体缺失是已知，本机 Chrome 应正常）。<br>
+📅 2026-06-25 · 配合 V53 PRO 升级 + 3 联异构对抗</p>
+</blockquote>
+<hr>
+<h2 id="_1">🎯 实操步骤</h2>
+<h3 id="1">第 1 步：打开页面（任选）</h3>
+<table>
+<thead>
+<tr>
+<th>入口</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主仪表盘</td>
+<td>http://127.0.0.1:18765/dashboard.html</td>
+</tr>
+<tr>
+<td>配置全景子页面</td>
+<td>http://127.0.0.1:18765/mycc-config.html</td>
+</tr>
+<tr>
+<td>一页索引</td>
+<td><code>file:///Users/williammacst/claude-code-guides/start-here.md</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-check-15">第 2 步：check 清单（15 项）</h3>
+<h4 id="a-5">A. 基础渲染（5 项）</h4>
+<ul>
+<li>[ ] <strong>A1</strong>: 中文显示正常（PingFang / 微软雅黑 / Noto Sans SC 三选一加载）</li>
+<li>[ ] <strong>A2</strong>: 字体层级清晰（H1 &gt; H2 &gt; body 三层字体大小差距明显）</li>
+<li>[ ] <strong>A3</strong>: 顶部 hero 紫色→粉色渐变（不是纯色背景）</li>
+<li>[ ] <strong>A4</strong>: 卡片有圆角 + 边框（不是方块）</li>
+<li>[ ] <strong>A5</strong>: 全屏 1.5 秒内渲染完毕（无白屏）</li>
+</ul>
+<h4 id="b-5">B. 视觉美学（5 项）</h4>
+<ul>
+<li>[ ] <strong>B1</strong>: 玻璃模糊效果（hover 卡片时背景虚化）</li>
+<li>[ ] <strong>B2</strong>: Bento 网格错落（卡片有大有小，不是规整 4 列）</li>
+<li>[ ] <strong>B3</strong>: 配色协调（紫/青/绿/橙/红 5 色 accent 不撞色）</li>
+<li>[ ] <strong>B4</strong>: 留白舒适（卡片间距 ≥12px，不挤）</li>
+<li>[ ] <strong>B5</strong>: 代码块用 JetBrains Mono 等宽字体（不是默认 sans-serif）</li>
+</ul>
+<h4 id="c-5">C. 信息架构（5 项）</h4>
+<ul>
+<li>[ ] <strong>C1</strong>: 顶部 A/B/C 区分类清晰（命令/能力/MYCC 专属）</li>
+<li>[ ] <strong>C2</strong>: C10.5-10.10 7 张新卡都在 C 区底部</li>
+<li>[ ] <strong>C3</strong>: 每个卡片有清晰标题 + icon + count（不是裸文字）</li>
+<li>[ ] <strong>C4</strong>: 跨文档链接（start-here.md / dashboard.html / mycc-config.html）互相跳转通</li>
+<li>[ ] <strong>C5</strong>: 5 大高级功能 C10.5/C10.6/C10.9 三张卡信息互补不重复</li>
+</ul>
+<h4 id="d-5">D. 交互细节（5 项）</h4>
+<ul>
+<li>[ ] <strong>D1</strong>: C10.8 的"+1"按钮可点击 → 数字 +1 + toast 提示</li>
+<li>[ ] <strong>D2</strong>: C10.8 的"📤 导出 SSoT"按钮 → 复制到剪贴板 + 提示</li>
+<li>[ ] <strong>D3</strong>: 暗色/亮色模式切换（如有）正常</li>
+<li>[ ] <strong>D4</strong>: 移动端响应式（缩窄到 600px，卡片自动堆叠）</li>
+<li>[ ] <strong>D5</strong>: 控制台 0 错误（F12 → Console）</li>
+</ul>
+<hr>
+<h2 id="_2">📸 反馈方式</h2>
+<p><strong>截图后给队长 3 件事</strong>：<br>
+1. <strong>中文显示情况</strong>（A1 是否过）<br>
+2. <strong>15 项 check 列表通过情况</strong>（✅ ❌ 数量）<br>
+3. <strong>3 联专家诊断前你最关心的 1 个问题</strong>（即"网站不够美观，UI 丑，结构不清晰"具体指哪）</p>
+<hr>
+<h2 id="_3">🆘 如果某项不过</h2>
+<table>
+<thead>
+<tr>
+<th>症状</th>
+<th>原因</th>
+<th>解决</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中文方块</td>
+<td>字体未加载</td>
+<td>macOS: PingFang 自带 · Windows: Noto Sans SC</td>
+</tr>
+<tr>
+<td>渐变 hero 不见</td>
+<td>backdrop-filter 不支持</td>
+<td>升级到 Chrome 90+ / Safari 14+</td>
+</tr>
+<tr>
+<td>卡片布局乱</td>
+<td>CSS 变量未生效</td>
+<td>F12 → 检查 :root 变量是否有值</td>
+</tr>
+<tr>
+<td>控制台报错</td>
+<td>缓存旧版</td>
+<td>Cmd+Shift+R 硬刷新</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="_4">🎯 完成后</h2>
+<p>把 check 结果给队长：</p>
+<pre><code>✅ A1-A5: 5/5
+✅ B1-B5: 4/5 (B2 略弱)
+✅ C1-C5: 5/5
+✅ D1-D5: 3/5 (D3 没找到切换按钮)
+我最关心的：卡片分组不够明显（A/B/C 大区在视觉上没区分）
+</code></pre>
+<p>队长会基于你的反馈 + 3 联专家诊断 → 出改造方案 → 你拍板 → 执行。</p>
+<hr>
+<p><em>配合 dashboard v53-PRO + 3 联异构对抗（UI 美学 / 信息架构 / 用户培训）</em><br>
+<em>生成时间：2026-06-25</em></p>
+</body>
+</html>
