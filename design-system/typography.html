@@ -1,0 +1,43 @@
+<!-- @dsCard group="Type" name="字体系统" subtitle="Fraunces 衬线标题 · Inter 正文 · JetBrains Mono 代码" -->
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Claude Design · Typography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,560;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="claude-tokens.css">
+<style>
+.wrap{max-width:820px;margin:0 auto;padding:48px 32px;}
+.label{font-size:11px;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);font-family:var(--font-sans);font-weight:600;margin:28px 0 4px;}
+.spec{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin-top:3px;}
+.d1{font-family:var(--font-display);font-size:40px;font-weight:560;letter-spacing:-0.02em;line-height:1.12;}
+.d2{font-family:var(--font-display);font-size:28px;font-weight:560;letter-spacing:-0.01em;}
+.d3{font-family:var(--font-display);font-size:21px;font-weight:600;}
+.body{font-size:15px;line-height:1.65;max-width:62ch;color:var(--text-dim);}
+.small{font-size:13px;color:var(--text-muted);}
+.mono{font-family:var(--font-mono);font-size:13px;background:var(--code-bg);padding:2px 7px;border-radius:6px;}
+</style></head>
+<body><div class="wrap">
+<div class="d1">用 Claude 的方式表达</div>
+<div class="spec">Fraunces · 40px · 560 · -0.02em — 展示级标题</div>
+
+<div class="label">H1 展示标题</div>
+<div class="d1">MYCC 全局使用指导书</div>
+<div class="spec">Fraunces 衬线 · 40px / 560</div>
+
+<div class="label">H2 区块标题</div>
+<div class="d2">五分钟上手 Claude Code</div>
+<div class="spec">Fraunces 衬线 · 28px / 560</div>
+
+<div class="label">H3 卡片标题</div>
+<div class="d3">内置命令 + Workflow</div>
+<div class="spec">Fraunces 衬线 · 21px / 600</div>
+
+<div class="label">正文 Body</div>
+<p class="body">Claude 的设计语言追求平静、清晰与编辑般的阅读体验。正文用 Inter（中文 Noto Sans SC），行高 1.65，最大宽度约 62 字符以保证可读性。强调用<a href="#">黏土橘链接</a>而非高饱和蓝。</p>
+<div class="spec">Inter / Noto Sans SC · 15px / 1.65</div>
+
+<div class="label">弱化与代码</div>
+<p class="small">次要说明文字用弱化灰，行内代码如 <span class="mono">/ceo-pipeline</span> 用 JetBrains Mono 配暖底。</p>
+<div class="spec">small 13px · mono JetBrains Mono 13px</div>
+</div></body></html>

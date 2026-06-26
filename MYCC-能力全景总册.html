@@ -5,28 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MYCC 能力全景总册（Capability Master Index）</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📘%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,560;9..144,600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
 <style>
-/* ═══════ MD→HTML 渲染共享样式(继承 dashboard 设计系统 v2)═══════ */
+/* ═══════ MD→HTML 渲染共享样式 · CLAUDE NATIVE DESIGN(暖米底+黏土橘+衬线标题)═══════ */
 :root {
   color-scheme: light;
-  --bg: #ffffff; --bg-subtle: #f5f5f7; --surface: #ffffff; --surface2: #fafafc; --surface-hover: #f5f5f7;
-  --border: #e5e5ea; --border-strong: #d2d2d7; --code-bg: #f5f5f7; --tag-bg: #f5f5f7;
-  --text: #1d1d1f; --text-dim: #515154; --text-muted: #86868b;
-  --accent: #0071e3; --accent-hover: #0077ed; --accent-soft: #e8f1fd;
-  --green: #1a8c4a; --red: #d70015; --orange: #b25000; --purple: #6e3fd6;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --bg: #faf9f5; --bg-subtle: #f0eee6; --surface: #ffffff; --surface2: #f7f5ef; --surface-hover: #f0eee6;
+  --border: #e6e1d6; --border-strong: #d8d2c4; --code-bg: #f0eee6; --tag-bg: #f0eee6;
+  --text: #1f1e1d; --text-dim: #595650; --text-muted: #8a857b;
+  --accent: #c15f3c; --accent-hover: #a94e2f; --accent-bright: #d97757; --accent-soft: #f6e7df;
+  --green: #3d7a4e; --red: #b3402f; --orange: #b06a1f; --purple: #7a5ba8;
+  --shadow-sm: 0 1px 2px rgba(60,50,40,0.05);
+  --shadow-card: 0 1px 3px rgba(60,50,40,0.06), 0 1px 2px rgba(60,50,40,0.04);
+  --font-display: 'Fraunces','Noto Serif SC',Georgia,serif;
   --font-sans: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
   --font-mono: 'JetBrains Mono','SF Mono','Fira Code',Menlo,monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
-    --bg: #0a0a0b; --bg-subtle: #141416; --surface: #161618; --surface2: #1c1c1f; --surface-hover: #232326;
-    --border: #2a2a2e; --border-strong: #3a3a3e; --code-bg: #1c1c1f;
-    --text: #f5f5f7; --text-dim: #aeaeb2; --text-muted: #8e8e93;
-    --accent: #2997ff; --accent-soft: #16263b;
+    --bg: #262624; --bg-subtle: #1f1e1d; --surface: #30302e; --surface2: #353432; --surface-hover: #3a3937;
+    --border: #423f3a; --border-strong: #54504a; --code-bg: #1f1e1d;
+    --text: #f5f3ec; --text-dim: #c4bfb4; --text-muted: #918b80;
+    --accent: #e08a6a; --accent-hover: #e89c80; --accent-bright: #d97757; --accent-soft: rgba(217,119,87,0.16);
+    --green: #6cc189; --red: #e08576; --orange: #e0a667; --purple: #b79de0;
   }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -47,11 +49,11 @@ body {
 }
 .doc-header .back:hover { background: var(--accent-soft); border-color: var(--accent); }
 .doc-header .meta { color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
-h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 12px 0 18px; color: var(--text); }
-h2 { font-size: 23px; font-weight: 600; margin: 40px 0 14px; padding-top: 12px; letter-spacing: -0.01em;
+h1 { font-family: var(--font-display); font-size: 32px; font-weight: 560; letter-spacing: -0.01em; margin: 12px 0 18px; color: var(--text); }
+h2 { font-family: var(--font-display); font-size: 23px; font-weight: 600; margin: 40px 0 14px; padding-top: 12px; letter-spacing: -0.01em;
      border-top: 1px solid var(--border); color: var(--text); }
 h2:first-of-type { border-top: 0; padding-top: 0; }
-h3 { font-size: 18px; font-weight: 600; margin: 28px 0 10px; color: var(--text); }
+h3 { font-family: var(--font-display); font-size: 18px; font-weight: 600; margin: 28px 0 10px; color: var(--text); }
 h4 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; color: var(--text-dim); }
 p { margin: 10px 0; }
 a { color: var(--accent); text-decoration: none; }
@@ -73,10 +75,10 @@ blockquote {
   background: var(--accent-soft); border-radius: 0 8px 8px 0; color: var(--text-dim);
 }
 blockquote p { margin: 4px 0; }
-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; table-layout: fixed; }
 th { text-align: left; padding: 9px 12px; background: var(--bg-subtle); color: var(--text-muted);
-     font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
-td { padding: 9px 12px; border-top: 1px solid var(--border); }
+     font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; word-break: break-word; }
+td { padding: 9px 12px; border-top: 1px solid var(--border); word-break: break-word; overflow-wrap: anywhere; }
 tr:hover td { background: var(--bg-subtle); }
 img { max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0; }
 strong { font-weight: 600; color: var(--text); }
@@ -89,7 +91,7 @@ em { font-style: italic; color: var(--text-dim); }
 <body>
 <div class="doc-header">
   <a href="dashboard.html" class="back">← 返回 MYCC 仪表盘</a>
-  <span class="meta">渲染时间 2026-06-26 01:14 · 源: MYCC-能力全景总册.md</span>
+  <span class="meta">渲染时间 2026-06-26 12:42 · 源: MYCC-能力全景总册.md</span>
 </div>
 <hr>
 <p>title: MYCC 能力全景总册（Capability Master Index）<br>

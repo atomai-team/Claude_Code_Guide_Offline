@@ -1,0 +1,57 @@
+<!-- @dsCard group="Colors" name="调色板" subtitle="暖米底 · 黏土橘强调 · 暖中性阶 · 功能语义色" -->
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Claude Design · Colors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,560&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="claude-tokens.css">
+<style>
+.wrap{max-width:900px;margin:0 auto;padding:48px 32px;}
+h1{font-size:32px;margin-bottom:6px;}
+.sub{color:var(--text-muted);margin-bottom:36px;}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);font-family:var(--font-sans);font-weight:600;margin:32px 0 14px;}
+.row{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;}
+.sw{border:1px solid var(--border);border-radius:var(--radius-inner);overflow:hidden;background:var(--surface);box-shadow:var(--shadow-sm);}
+.chip{height:72px;}
+.meta{padding:9px 11px;font-size:12px;}
+.meta b{display:block;font-weight:600;font-size:12.5px;}
+.meta span{color:var(--text-muted);font-family:var(--font-mono);font-size:11px;}
+</style></head>
+<body><div class="wrap">
+<h1>调色板 Colors</h1>
+<p class="sub">Claude 原生设计语言 · 暖米底配黏土橘，编辑感与平静感</p>
+
+<h2>背景与纸面</h2>
+<div class="row">
+  <div class="sw"><div class="chip" style="background:var(--bg)"></div><div class="meta"><b>背景 bg</b><span>#faf9f5</span></div></div>
+  <div class="sw"><div class="chip" style="background:var(--bg-subtle)"></div><div class="meta"><b>次级面板</b><span>#f0eee6</span></div></div>
+  <div class="sw"><div class="chip" style="background:var(--surface)"></div><div class="meta"><b>卡片纸面</b><span>#ffffff</span></div></div>
+  <div class="sw"><div class="chip" style="background:var(--surface2)"></div><div class="meta"><b>内嵌区</b><span>#f7f5ef</span></div></div>
+</div>
+
+<h2>强调色 · Claude 黏土橘</h2>
+<div class="row">
+  <div class="sw"><div class="chip" style="background:var(--accent)"></div><div class="meta"><b>accent 文字</b><span>#c15f3c</span></div></div>
+  <div class="sw"><div class="chip" style="background:var(--accent-bright)"></div><div class="meta"><b>品牌橘 按钮</b><span>#d97757</span></div></div>
+  <div class="sw"><div class="chip" style="background:var(--accent-hover)"></div><div class="meta"><b>hover</b><span>#a94e2f</span></div></div>
+  <div class="sw"><div class="chip" style="background:var(--accent-soft)"></div><div class="meta"><b>柔底</b><span>#f6e7df</span></div></div>
+</div>
+
+<h2>文字层级</h2>
+<div class="row">
+  <div class="sw"><div class="chip" style="background:var(--text)"></div><div class="meta"><b>正文</b><span>#1f1e1d</span></div></div>
+  <div class="sw"><div class="chip" style="background:var(--text-dim)"></div><div class="meta"><b>次要</b><span>#595650</span></div></div>
+  <div class="sw"><div class="chip" style="background:var(--text-muted)"></div><div class="meta"><b>弱化</b><span>#8a857b</span></div></div>
+  <div class="sw"><div class="chip" style="background:var(--border)"></div><div class="meta"><b>边框</b><span>#e6e1d6</span></div></div>
+</div>
+
+<h2>功能语义色（克制使用）</h2>
+<div class="row">
+  <div class="sw"><div class="chip" style="background:var(--green)"></div><div class="meta"><b>成功</b><span>#3d7a4e</span></div></div>
+  <div class="sw"><div class="chip" style="background:var(--red)"></div><div class="meta"><b>危险</b><span>#b3402f</span></div></div>
+  <div class="sw"><div class="chip" style="background:var(--orange)"></div><div class="meta"><b>警示</b><span>#b06a1f</span></div></div>
+  <div class="sw"><div class="chip" style="background:var(--purple)"></div><div class="meta"><b>强调2</b><span>#7a5ba8</span></div></div>
+  <div class="sw"><div class="chip" style="background:var(--cyan)"></div><div class="meta"><b>信息</b><span>#2f7d8a</span></div></div>
+</div>
+</div></body></html>

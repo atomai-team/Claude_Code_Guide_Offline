@@ -1,0 +1,106 @@
+/* ════════════════════════════════════════════════════════════════
+   CLAUDE NATIVE DESIGN SYSTEM · Anthropic 设计语言
+   暖米底 + 黏土橘强调 + 衬线标题(Fraunces/Copernicus风) + Inter 正文
+   编辑感 · 平静 · 大留白 · 克制配色 · 软圆角
+   一份产出两用：claude.ai/design 组件库 + dashboard 套用
+   ════════════════════════════════════════════════════════════════ */
+:root {
+  color-scheme: light;
+  /* ── 暖中性阶（背景 / 纸面 / 边框）── */
+  --bg:            #faf9f5;   /* Claude 主背景·暖米 */
+  --bg-subtle:     #f0eee6;   /* 次级面板·更暖 */
+  --surface:       #ffffff;   /* 卡片纸面（微亮于底，形成层次）*/
+  --surface-solid: #ffffff;
+  --surface2:      #f7f5ef;   /* 内嵌区/表头底 */
+  --surface-hover: #f0eee6;
+  --border:        #e6e1d6;   /* 暖边框 */
+  --border-strong: #d8d2c4;
+  --code-bg:       #f0eee6;
+  --tag-bg:        #f0eee6;
+  /* ── 文字层级（暖近黑）── */
+  --text:        #1f1e1d;
+  --text-dim:    #595650;
+  --text-muted:  #8a857b;
+  /* ── 主强调色：Claude 黏土橘 ── */
+  --accent:             #c15f3c;   /* 文字/链接用·过 AA 对比 */
+  --accent-hover:       #a94e2f;
+  --accent-bright:      #d97757;   /* 大色块/按钮底·品牌橘 */
+  --accent-soft:        #f6e7df;
+  --accent-soft-border: #ecc9b8;
+  /* ── 功能语义色（暖化·仅状态指示）── */
+  --green:  #3d7a4e;  --green-soft:  #e6f0e6;
+  --red:    #b3402f;  --red-soft:    #f8e6e2;
+  --orange: #b06a1f;  --orange-soft: #f7ead6;
+  --purple: #7a5ba8;  --purple-soft: #efe8f6;
+  --cyan:   #2f7d8a;  --cyan-soft:   #e2f0f1;
+  --yellow: #8a6d1f;
+  /* 兼容旧变量名（dashboard 沿用）*/
+  --accent2: #2f7d8a; --accent3: #3d7a4e; --accent4: #b06a1f; --accent5: #a8527a;
+  --accent-red: #b3402f; --accent-purple: #7a5ba8; --accent-cyan: #2f7d8a;
+  /* ── 字体：衬线标题 + 无衬线正文 + 等宽 ── */
+  --font-display: 'Fraunces', 'Noto Serif SC', Georgia, 'Times New Roman', serif;
+  --font-sans:    'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    'JetBrains Mono', 'SF Mono', 'Fira Code', Menlo, monospace;
+  /* ── 圆角（Claude 软角）── */
+  --radius-card: 14px;
+  --radius-inner: 9px;
+  --radius-pill: 980px;
+  /* ── 阴影（极轻·暖调）── */
+  --shadow-sm:   0 1px 2px rgba(60,50,40,0.05);
+  --shadow-card: 0 1px 3px rgba(60,50,40,0.06), 0 1px 2px rgba(60,50,40,0.04);
+  --shadow-hover:0 6px 20px rgba(60,50,40,0.09);
+  /* ── 布局 ── */
+  --sidebar-w: 248px;
+  --content-max: 960px;
+  /* ── 动效 ── */
+  --anim-fast: 120ms; --anim-mid: 200ms; --anim-slow: 320ms;
+  --easing: cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* ── 暗色：Claude 暖炭 ── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg:            #262624;
+    --bg-subtle:     #1f1e1d;
+    --surface:       #30302e;
+    --surface-solid: #30302e;
+    --surface2:      #353432;
+    --surface-hover: #3a3937;
+    --border:        #423f3a;
+    --border-strong: #54504a;
+    --code-bg:       #1f1e1d;
+    --tag-bg:        #353432;
+    --text:        #f5f3ec;
+    --text-dim:    #c4bfb4;
+    --text-muted:  #918b80;
+    --accent:             #e08a6a;
+    --accent-hover:       #e89c80;
+    --accent-bright:      #d97757;
+    --accent-soft:        rgba(217,119,87,0.16);
+    --accent-soft-border: rgba(217,119,87,0.38);
+    --green:  #6cc189; --green-soft:  rgba(108,193,137,0.15);
+    --red:    #e08576; --red-soft:    rgba(224,133,118,0.15);
+    --orange: #e0a667; --orange-soft: rgba(224,166,103,0.15);
+    --purple: #b79de0; --purple-soft: rgba(183,157,224,0.15);
+    --cyan:   #6cbccb; --cyan-soft:   rgba(108,188,203,0.15);
+    --yellow: #d8bc6c;
+    --accent2: #6cbccb; --accent3: #6cc189; --accent4: #e0a667; --accent5: #cf94b4;
+    --accent-red: #e08576; --accent-purple: #b79de0; --accent-cyan: #6cbccb;
+    --shadow-sm:   0 1px 2px rgba(0,0,0,0.4);
+    --shadow-card: 0 1px 3px rgba(0,0,0,0.5);
+    --shadow-hover:0 6px 20px rgba(0,0,0,0.55);
+  }
+}
+/* ── 手动主题 [data-theme] 优先 ── */
+[data-theme="light"]{color-scheme:light;--bg:#faf9f5;--bg-subtle:#f0eee6;--surface:#fff;--surface-solid:#fff;--surface2:#f7f5ef;--surface-hover:#f0eee6;--border:#e6e1d6;--border-strong:#d8d2c4;--code-bg:#f0eee6;--tag-bg:#f0eee6;--text:#1f1e1d;--text-dim:#595650;--text-muted:#8a857b;--accent:#c15f3c;--accent-hover:#a94e2f;--accent-bright:#d97757;--accent-soft:#f6e7df;--accent-soft-border:#ecc9b8;--green:#3d7a4e;--green-soft:#e6f0e6;--red:#b3402f;--red-soft:#f8e6e2;--orange:#b06a1f;--orange-soft:#f7ead6;--purple:#7a5ba8;--purple-soft:#efe8f6;--cyan:#2f7d8a;--cyan-soft:#e2f0f1;--yellow:#8a6d1f;--accent2:#2f7d8a;--accent3:#3d7a4e;--accent4:#b06a1f;--accent5:#a8527a;--accent-red:#b3402f;--accent-purple:#7a5ba8;--accent-cyan:#2f7d8a;--shadow-sm:0 1px 2px rgba(60,50,40,0.05);--shadow-card:0 1px 3px rgba(60,50,40,0.06),0 1px 2px rgba(60,50,40,0.04);--shadow-hover:0 6px 20px rgba(60,50,40,0.09);}
+[data-theme="dark"]{color-scheme:dark;--bg:#262624;--bg-subtle:#1f1e1d;--surface:#30302e;--surface-solid:#30302e;--surface2:#353432;--surface-hover:#3a3937;--border:#423f3a;--border-strong:#54504a;--code-bg:#1f1e1d;--tag-bg:#353432;--text:#f5f3ec;--text-dim:#c4bfb4;--text-muted:#918b80;--accent:#e08a6a;--accent-hover:#e89c80;--accent-bright:#d97757;--accent-soft:rgba(217,119,87,0.16);--accent-soft-border:rgba(217,119,87,0.38);--green:#6cc189;--green-soft:rgba(108,193,137,0.15);--red:#e08576;--red-soft:rgba(224,133,118,0.15);--orange:#e0a667;--orange-soft:rgba(224,166,103,0.15);--purple:#b79de0;--purple-soft:rgba(183,157,224,0.15);--cyan:#6cbccb;--cyan-soft:rgba(108,188,203,0.15);--yellow:#d8bc6c;--accent2:#6cbccb;--accent3:#6cc189;--accent4:#e0a667;--accent5:#cf94b4;--accent-red:#e08576;--accent-purple:#b79de0;--accent-cyan:#6cbccb;--shadow-sm:0 1px 2px rgba(0,0,0,0.4);--shadow-card:0 1px 3px rgba(0,0,0,0.5);--shadow-hover:0 6px 20px rgba(0,0,0,0.55);}
+
+/* ════════ 基础 ════════ */
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--text);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;}
+h1,h2,h3,.display{font-family:var(--font-display);font-weight:560;letter-spacing:-0.01em;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offset:2px;}
+code,kbd{font-family:var(--font-mono);font-size:0.88em;}

@@ -1,0 +1,75 @@
+<!-- @dsCard group="Components" name="组件库" subtitle="卡片 · 自适应表格 · 徽章 · 按钮 · 标签" -->
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Claude Design · Components</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,560;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="claude-tokens.css">
+<style>
+.wrap{max-width:920px;margin:0 auto;padding:48px 32px;}
+h1{font-size:30px;margin-bottom:28px;}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);font-family:var(--font-sans);font-weight:600;margin:34px 0 14px;}
+/* 卡片 */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-card);box-shadow:var(--shadow-card);overflow:hidden;min-width:0;transition:box-shadow var(--anim-mid) var(--easing),transform var(--anim-mid) var(--easing);}
+.card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px);}
+.card-header{display:flex;align-items:center;gap:10px;padding:16px 20px 0;}
+.card-header .icon{font-size:18px;}
+.card-header h3{font-size:18px;font-weight:600;}
+.card-body{padding:14px 20px 20px;overflow-x:auto;}
+.card-body p{color:var(--text-dim);font-size:14px;}
+/* 自适应表格（bug 修复核心：table-layout fixed + wrap + 滚动兜底）*/
+table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13.5px;}
+th{text-align:left;padding:9px 12px;font-size:11px;text-transform:uppercase;letter-spacing:0.4px;color:var(--text-muted);background:var(--surface2);font-weight:600;border-bottom:1px solid var(--border);}
+td{padding:9px 12px;border-bottom:1px solid var(--border);color:var(--text-dim);vertical-align:top;word-break:break-word;overflow-wrap:anywhere;}
+tr:last-child td{border-bottom:none;}
+td code{white-space:normal;color:var(--accent);background:var(--code-bg);padding:1px 5px;border-radius:5px;}
+/* 徽章 */
+.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:var(--radius-pill);font-size:12px;font-weight:500;background:var(--bg-subtle);color:var(--text-dim);border:1px solid var(--border);}
+.badge.accent{background:var(--accent-soft);color:var(--accent);border-color:var(--accent-soft-border);}
+.badge.green{background:var(--green-soft);color:var(--green);border-color:transparent;}
+.badge.purple{background:var(--purple-soft);color:var(--purple);border-color:transparent;}
+/* 按钮 */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:var(--radius-pill);font-size:14px;font-weight:500;font-family:var(--font-sans);cursor:pointer;border:1px solid transparent;transition:all var(--anim-fast) var(--easing);}
+.btn-primary{background:var(--accent-bright);color:#fff;}
+.btn-primary:hover{background:var(--accent-hover);text-decoration:none;}
+.btn-ghost{background:var(--surface);color:var(--text);border-color:var(--border-strong);}
+.btn-ghost:hover{background:var(--surface-hover);text-decoration:none;}
+.gap{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+</style></head>
+<body><div class="wrap">
+<h1>组件库 Components</h1>
+
+<h2>卡片 Cards（响应式栅格 auto-fit minmax）</h2>
+<div class="grid">
+  <div class="card"><div class="card-header"><span class="icon">🚀</span><h3>五分钟上手</h3></div>
+    <div class="card-body"><p>零基础先看这个。进项目 → 输入 claude → 说人话提需求 → 确认计划 → 开干。</p></div></div>
+  <div class="card"><div class="card-header"><span class="icon">⚡</span><h3>队长模式</h3></div>
+    <div class="card-body"><p>说「队长」即全权统筹：自动拆任务、并行调度、验证收口，一句话起飞。</p></div></div>
+</div>
+
+<h2>自适应表格 Table（修复内容裁切：固定布局 + 换行 + 滚动兜底）</h2>
+<div class="card"><div class="card-header"><span class="icon">⌨️</span><h3>WORKFLOW 命令</h3></div>
+<div class="card-body">
+<table><thead><tr><th style="width:34%">命令</th><th>完整链路</th></tr></thead><tbody>
+<tr><td><code>/ceo-pipeline</code></td><td>CEO 全流水线 PM→Arch→Eng→QA，长内容不再被裁切，自动换行撑高行高</td></tr>
+<tr><td><code>/fundraising</code></td><td>融资分析：BP→财务建模→估值逻辑→投资人对接</td></tr>
+<tr><td><code>/v29-deep-research</code></td><td>≥5 渠道深度调研 + 交叉验证 + 带引用结论</td></tr>
+</tbody></table>
+</div></div>
+
+<h2>徽章 Badges</h2>
+<div class="gap" style="margin-bottom:20px;">
+  <span class="badge accent">✦ 官方直连</span>
+  <span class="badge">148 Skills</span>
+  <span class="badge green">✓ 已验证</span>
+  <span class="badge purple">52 Agents</span>
+</div>
+
+<h2>按钮 Buttons</h2>
+<div class="gap">
+  <button class="btn btn-primary">🔄 刷新数据</button>
+  <button class="btn btn-ghost">配置总览</button>
+</div>
+</div></body></html>

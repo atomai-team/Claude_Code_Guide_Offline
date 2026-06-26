@@ -5,34 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MYCC 配置全景 · 工具/能力/自动化总览</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E⚙️%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,560;9..144,600&family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
 <style>
+/* CLAUDE NATIVE DESIGN · 暖米底 + 黏土橘 + 衬线标题(Fraunces) */
 :root {
   color-scheme: light;
-  --bg: #ffffff; --bg-subtle: #f5f5f7; --surface: #ffffff; --surface2: #fafafc; --surface-hover: #f5f5f7;
-  --border: #e5e5ea; --border-strong: #d2d2d7; --code-bg: #f5f5f7;
-  --text: #1d1d1f; --text-dim: #515154; --text-muted: #86868b;
-  --accent: #0071e3; --accent-hover: #0077ed; --accent-soft: #e8f1fd;
-  --accent2: #007a96; --accent3: #007a96;
-  --green: #1a8c4a; --red: #d70015; --orange: #b25000; --purple: #6e3fd6;
-  --radius: 12px; --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); --shadow-hover: 0 4px 16px rgba(0,0,0,0.08);
+  --bg: #faf9f5; --bg-subtle: #f0eee6; --surface: #ffffff; --surface2: #f7f5ef; --surface-hover: #f0eee6;
+  --border: #e6e1d6; --border-strong: #d8d2c4; --code-bg: #f0eee6;
+  --text: #1f1e1d; --text-dim: #595650; --text-muted: #8a857b;
+  --accent: #c15f3c; --accent-hover: #a94e2f; --accent-bright: #d97757; --accent-soft: #f6e7df;
+  --accent2: #2f7d8a; --accent3: #3d7a4e;
+  --green: #3d7a4e; --red: #b3402f; --orange: #b06a1f; --purple: #7a5ba8;
+  --radius: 14px; --shadow-sm: 0 1px 2px rgba(60,50,40,0.05);
+  --shadow-card: 0 1px 3px rgba(60,50,40,0.06), 0 1px 2px rgba(60,50,40,0.04); --shadow-hover: 0 6px 20px rgba(60,50,40,0.09);
+  --font-display: 'Fraunces','Noto Serif SC',Georgia,serif;
   --font-sans: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
   --font-mono: 'JetBrains Mono','SF Mono','Fira Code',Menlo,monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
-    --bg: #0a0a0b; --bg-subtle: #141416; --surface: #161618; --surface2: #1c1c1f; --surface-hover: #232326;
-    --border: #2a2a2e; --border-strong: #3a3a3e; --code-bg: #1c1c1f;
-    --text: #f5f5f7; --text-dim: #aeaeb2; --text-muted: #8e8e93;
-    --accent: #2997ff; --accent-soft: #16263b; --accent2: #5ac8e0; --accent3: #5ac8e0;
+    --bg: #262624; --bg-subtle: #1f1e1d; --surface: #30302e; --surface2: #353432; --surface-hover: #3a3937;
+    --border: #423f3a; --border-strong: #54504a; --code-bg: #1f1e1d;
+    --text: #f5f3ec; --text-dim: #c4bfb4; --text-muted: #918b80;
+    --accent: #e08a6a; --accent-hover: #e89c80; --accent-bright: #d97757; --accent-soft: rgba(217,119,87,0.16); --accent2: #6cbccb; --accent3: #6cc189;
+    --green: #6cc189; --red: #e08576; --orange: #e0a667; --purple: #b79de0;
   }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.65; padding: 48px 32px; max-width: 1100px; margin: 0 auto; font-size: 15px; -webkit-font-smoothing: antialiased; }
-h1 { font-size: 34px; font-weight: 700; color: var(--text); margin-bottom: 8px; letter-spacing: -0.02em; }
+h1 { font-family: var(--font-display); font-size: 34px; font-weight: 560; color: var(--text); margin-bottom: 8px; letter-spacing: -0.01em; }
 .subtitle { color: var(--text-muted); font-size: 13px; margin-bottom: 36px; display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
 .subtitle code { font-family: var(--font-mono); background: var(--code-bg); padding: 1px 6px; border-radius: 5px; font-size: 12px; }
 .subtitle .back { color: var(--accent); text-decoration: none; padding: 5px 12px; border: 1px solid var(--border-strong); border-radius: 980px; font-size: 13px; transition: all .15s; }
@@ -46,7 +49,7 @@ h1 { font-size: 34px; font-weight: 700; color: var(--text); margin-bottom: 8px; 
 .nav a { color:var(--text-dim); text-decoration:none; padding:7px 14px; border-radius:980px; font-size:13px; font-weight:500; transition: all .15s; }
 .nav a:hover { background:var(--surface); color:var(--accent); box-shadow: var(--shadow-sm); }
 .section { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:32px; margin-bottom:20px; box-shadow: var(--shadow-card); }
-.section h2 { font-size:21px; font-weight:600; margin-bottom:20px; display:flex; align-items:center; gap:10px; letter-spacing:-0.01em; }
+.section h2 { font-family: var(--font-display); font-size:21px; font-weight:600; margin-bottom:20px; display:flex; align-items:center; gap:10px; letter-spacing:-0.01em; }
 .section .count { margin-left:auto; font-size:12px; color:var(--text-muted); font-family:var(--font-mono); padding:4px 10px; background: var(--bg-subtle); border-radius: 980px; }
 .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
 .tile { background:var(--surface2); border:1px solid var(--border); border-left:3px solid var(--accent); padding:16px 18px; border-radius:10px; transition: box-shadow .15s, transform .15s; }
@@ -66,9 +69,9 @@ h1 { font-size: 34px; font-weight: 700; color: var(--text); margin-bottom: 8px; 
 .skill-row code { color: var(--accent); font-size: 12px; font-family: var(--font-mono); font-weight: 600; padding-top: 1px; }
 .skill-row .desc { font-size: 12px; color: var(--text-dim); line-height: 1.55; }
 .skill-row.hidden { display: none; }
-table { width:100%; border-collapse:collapse; font-size:13px; }
-th { text-align:left; padding:10px 12px; background:var(--bg-subtle); color:var(--text-muted); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; }
-td { padding:10px 12px; border-top:1px solid var(--border); }
+table { width:100%; border-collapse:collapse; font-size:13px; table-layout:fixed; }
+th { text-align:left; padding:10px 12px; background:var(--bg-subtle); color:var(--text-muted); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; word-break:break-word; }
+td { padding:10px 12px; border-top:1px solid var(--border); word-break:break-word; overflow-wrap:anywhere; }
 .tag { display:inline-block; padding:3px 10px; border-radius:980px; font-size:10px; font-family:var(--font-mono); background:var(--bg-subtle); }
 .tag-green{color:var(--green);border:1px solid var(--green)}
 .tag-orange{color:var(--orange);border:1px solid var(--orange)}
@@ -104,7 +107,7 @@ td { padding:10px 12px; border-top:1px solid var(--border); }
 
 <h1>⚙️ MYCC 配置全景</h1>
 <div class="subtitle">
-  <span>数据自动拉取自 <code>~/.claude/</code> · 生成时间 2026-06-26 10:58</span>
+  <span>数据自动拉取自 <code>~/.claude/</code> · 生成时间 2026-06-26 12:18</span>
   <a href="dashboard.html" class="back">← 返回主仪表盘</a>
   <div class="search-wrap">
     <input type="search" id="skill-search" placeholder="🔍 搜索 skills/agents/hooks..." />
@@ -119,13 +122,13 @@ td { padding:10px 12px; border-top:1px solid var(--border); }
   <a href="#plugins">🧩 插件</a>
   <a href="#skills">🎯 Skills (148)</a>
   <a href="#agents">🤖 Agents</a>
-  <a href="#hooks">🪝 Hooks (49)</a>
+  <a href="#hooks">🪝 Hooks (50)</a>
   <a href="#scheduler">⏰ 定时任务</a>
   <a href="#router">🛣️ 工程场景路由</a>
 </div>
 
 <div class="section" id="overview">
-<h2>📊 一眼总览 <span class="count">2026-06-26 10:58</span></h2>
+<h2>📊 一眼总览 <span class="count">2026-06-26 12:18</span></h2>
 <div class="stat-row">
   <div class="stat-box"><div class="stat-num" data-stat="mcp_servers">4</div><div class="label">🔌 MCP 服务器</div></div>
   <div class="stat-box"><div class="stat-num" data-stat="enabled_plugins">32</div><div class="label">🧩 启用插件</div></div>
@@ -234,10 +237,10 @@ td { padding:10px 12px; border-top:1px solid var(--border); }
 </div>
 
 <div class="section" id="hooks">
-<h2>🪝 Hooks <span class="count">49 个</span></h2>
+<h2>🪝 Hooks <span class="count">50 个</span></h2>
 <p style="font-size:12px;color:var(--text-dim);margin-bottom:16px">守护覆盖:安全/质量/记忆/并发/提示/自动归档 · 按文件大小降序</p>
 <div class="hooks-grid" id="hooks-grid">
-<div class="hook-tile"><code>bash-safety-dispatcher.sh</code><span class="sz">6988B</span></div><div class="hook-tile"><code>error-circuit-breaker.sh</code><span class="sz">6624B</span></div><div class="hook-tile"><code>env-sentinel.sh</code><span class="sz">5832B</span></div><div class="hook-tile"><code>research-standards-guard.sh</code><span class="sz">5251B</span></div><div class="hook-tile"><code>prompt-context-gateway.sh</code><span class="sz">5175B</span></div><div class="hook-tile"><code>llm-judge-completion.sh</code><span class="sz">5135B</span></div><div class="hook-tile"><code>block-dangerous-commands.sh</code><span class="sz">4334B</span></div><div class="hook-tile"><code>user-prompt-task-extractor.sh</code><span class="sz">3645B</span></div><div class="hook-tile"><code>session-state-reader.sh</code><span class="sz">3598B</span></div><div class="hook-tile"><code>auto-closure-detect.sh</code><span class="sz">3484B</span></div><div class="hook-tile"><code>session-context-injector.sh</code><span class="sz">3434B</span></div><div class="hook-tile"><code>serial-bash-circuit.sh</code><span class="sz">3290B</span></div><div class="hook-tile"><code>llm-judge-subagent.sh</code><span class="sz">3207B</span></div><div class="hook-tile"><code>drift-check.sh</code><span class="sz">3148B</span></div><div class="hook-tile"><code>ccswitch-verify-start.sh</code><span class="sz">3106B</span></div><div class="hook-tile"><code>teammate-quality-gate.sh</code><span class="sz">3033B</span></div><div class="hook-tile"><code>config-protection.sh</code><span class="sz">3004B</span></div><div class="hook-tile"><code>error-data-recorder.sh</code><span class="sz">2713B</span></div><div class="hook-tile"><code>stop-dispatcher.sh</code><span class="sz">2693B</span></div><div class="hook-tile"><code>decision-point-guard.sh</code><span class="sz">2621B</span></div><div class="hook-tile"><code>notion-queue-flusher.sh</code><span class="sz">2513B</span></div><div class="hook-tile"><code>no-agent-for-grep.sh</code><span class="sz">2432B</span></div><div class="hook-tile"><code>retrieval-precheck.sh</code><span class="sz">2387B</span></div><div class="hook-tile"><code>official-paradigm-guard.sh</code><span class="sz">2346B</span></div><div class="hook-tile"><code>smart-recommendation-injector.sh</code><span class="sz">2333B</span></div><div class="hook-tile"><code>sessionstart-guard-dispatcher.sh</code><span class="sz">2129B</span></div><div class="hook-tile"><code>behavior-audit-pretool.sh</code><span class="sz">2093B</span></div><div class="hook-tile"><code>permission-request-handler.sh</code><span class="sz">2086B</span></div><div class="hook-tile"><code>session-end.sh</code><span class="sz">2051B</span></div><div class="hook-tile"><code>external-cli-router.sh</code><span class="sz">2006B</span></div><div class="hook-tile"><code>uncertainty-detector.sh</code><span class="sz">1981B</span></div><div class="hook-tile"><code>component-usage-tracker.sh</code><span class="sz">1893B</span></div><div class="hook-tile"><code>user-prompt-submit-confidence.sh</code><span class="sz">1828B</span></div><div class="hook-tile"><code>intent-persistence.sh</code><span class="sz">1789B</span></div><div class="hook-tile"><code>session-touched-recorder.sh</code><span class="sz">1716B</span></div><div class="hook-tile"><code>post-write-scripts-guard.sh</code><span class="sz">1681B</span></div><div class="hook-tile"><code>daily-brief-inject.sh</code><span class="sz">1489B</span></div><div class="hook-tile"><code>block-sensitive-files.sh</code><span class="sz">1426B</span></div><div class="hook-tile"><code>stop-failure-monitor.sh</code><span class="sz">1399B</span></div><div class="hook-tile"><code>chinese-language-enforce.sh</code><span class="sz">1370B</span></div><div class="hook-tile"><code>post-bash-token-guard.sh</code><span class="sz">1365B</span></div><div class="hook-tile"><code>precompact-snapshot.sh</code><span class="sz">1314B</span></div><div class="hook-tile"><code>post-compact.sh</code><span class="sz">1149B</span></div><div class="hook-tile"><code>edit-write-dispatcher.sh</code><span class="sz">1127B</span></div><div class="hook-tile"><code>version-change-guard.sh</code><span class="sz">990B</span></div><div class="hook-tile"><code>agent-task-dispatcher.sh</code><span class="sz">965B</span></div><div class="hook-tile"><code>post-write-hooks-guard.sh</code><span class="sz">931B</span></div><div class="hook-tile"><code>two-probe-counter.sh</code><span class="sz">714B</span></div><div class="hook-tile"><code>config-dir.sh</code><span class="sz">360B</span></div></div>
+<div class="hook-tile"><code>bash-safety-dispatcher.sh</code><span class="sz">6988B</span></div><div class="hook-tile"><code>error-circuit-breaker.sh</code><span class="sz">6624B</span></div><div class="hook-tile"><code>env-sentinel.sh</code><span class="sz">5832B</span></div><div class="hook-tile"><code>research-standards-guard.sh</code><span class="sz">5251B</span></div><div class="hook-tile"><code>prompt-context-gateway.sh</code><span class="sz">5175B</span></div><div class="hook-tile"><code>llm-judge-completion.sh</code><span class="sz">5135B</span></div><div class="hook-tile"><code>block-dangerous-commands.sh</code><span class="sz">4334B</span></div><div class="hook-tile"><code>user-prompt-task-extractor.sh</code><span class="sz">3645B</span></div><div class="hook-tile"><code>session-state-reader.sh</code><span class="sz">3598B</span></div><div class="hook-tile"><code>auto-closure-detect.sh</code><span class="sz">3484B</span></div><div class="hook-tile"><code>session-context-injector.sh</code><span class="sz">3434B</span></div><div class="hook-tile"><code>serial-bash-circuit.sh</code><span class="sz">3290B</span></div><div class="hook-tile"><code>llm-judge-subagent.sh</code><span class="sz">3207B</span></div><div class="hook-tile"><code>drift-check.sh</code><span class="sz">3148B</span></div><div class="hook-tile"><code>ccswitch-verify-start.sh</code><span class="sz">3106B</span></div><div class="hook-tile"><code>teammate-quality-gate.sh</code><span class="sz">3033B</span></div><div class="hook-tile"><code>config-protection.sh</code><span class="sz">3004B</span></div><div class="hook-tile"><code>error-data-recorder.sh</code><span class="sz">2713B</span></div><div class="hook-tile"><code>stop-dispatcher.sh</code><span class="sz">2693B</span></div><div class="hook-tile"><code>decision-point-guard.sh</code><span class="sz">2621B</span></div><div class="hook-tile"><code>notion-queue-flusher.sh</code><span class="sz">2513B</span></div><div class="hook-tile"><code>no-agent-for-grep.sh</code><span class="sz">2432B</span></div><div class="hook-tile"><code>retrieval-precheck.sh</code><span class="sz">2387B</span></div><div class="hook-tile"><code>official-paradigm-guard.sh</code><span class="sz">2346B</span></div><div class="hook-tile"><code>smart-recommendation-injector.sh</code><span class="sz">2333B</span></div><div class="hook-tile"><code>sessionstart-guard-dispatcher.sh</code><span class="sz">2129B</span></div><div class="hook-tile"><code>behavior-audit-pretool.sh</code><span class="sz">2093B</span></div><div class="hook-tile"><code>permission-request-handler.sh</code><span class="sz">2086B</span></div><div class="hook-tile"><code>session-end.sh</code><span class="sz">2051B</span></div><div class="hook-tile"><code>external-cli-router.sh</code><span class="sz">2006B</span></div><div class="hook-tile"><code>uncertainty-detector.sh</code><span class="sz">1981B</span></div><div class="hook-tile"><code>component-usage-tracker.sh</code><span class="sz">1893B</span></div><div class="hook-tile"><code>user-prompt-submit-confidence.sh</code><span class="sz">1828B</span></div><div class="hook-tile"><code>intent-persistence.sh</code><span class="sz">1789B</span></div><div class="hook-tile"><code>session-touched-recorder.sh</code><span class="sz">1716B</span></div><div class="hook-tile"><code>post-write-scripts-guard.sh</code><span class="sz">1681B</span></div><div class="hook-tile"><code>cmmi-stop-sync.sh</code><span class="sz">1653B</span></div><div class="hook-tile"><code>daily-brief-inject.sh</code><span class="sz">1489B</span></div><div class="hook-tile"><code>block-sensitive-files.sh</code><span class="sz">1426B</span></div><div class="hook-tile"><code>stop-failure-monitor.sh</code><span class="sz">1399B</span></div><div class="hook-tile"><code>chinese-language-enforce.sh</code><span class="sz">1370B</span></div><div class="hook-tile"><code>post-bash-token-guard.sh</code><span class="sz">1365B</span></div><div class="hook-tile"><code>precompact-snapshot.sh</code><span class="sz">1314B</span></div><div class="hook-tile"><code>post-compact.sh</code><span class="sz">1149B</span></div><div class="hook-tile"><code>edit-write-dispatcher.sh</code><span class="sz">1127B</span></div><div class="hook-tile"><code>version-change-guard.sh</code><span class="sz">990B</span></div><div class="hook-tile"><code>agent-task-dispatcher.sh</code><span class="sz">965B</span></div><div class="hook-tile"><code>post-write-hooks-guard.sh</code><span class="sz">931B</span></div><div class="hook-tile"><code>two-probe-counter.sh</code><span class="sz">714B</span></div><div class="hook-tile"><code>config-dir.sh</code><span class="sz">360B</span></div></div>
 <div style="margin-top:16px;font-size:12px;color:var(--text-dim)">
   📌 完整列表：<code>ls ~/.claude/hooks/*.sh | wc -l</code> · 守护覆盖：安全/质量/记忆/并发/提示/自动归档
 </div>
@@ -254,9 +257,9 @@ td { padding:10px 12px; border-top:1px solid var(--border); }
 </div>
 
 <div class="section" id="router">
-<h2>🛣️ 工程场景路由表 <span class="count">51 条</span></h2>
+<h2>🛣️ 工程场景路由表 <span class="count">76 条</span></h2>
 <p style="font-size:12px;color:var(--text-dim);margin:-4px 0 6px">⚠️ 此表 = 工程场景兜底路由（router-table.json），与总览"口语路由词 94"（intent-words.json 全量口语触发）是两套不同的路由，数值不应相等。</p>
-<p style="font-size:12px;color:var(--text-dim);margin-bottom:8px">YOLO 档位分布：<span class="tag tag-green" style="margin-right:6px">?: 51</span></p>
+<p style="font-size:12px;color:var(--text-dim);margin-bottom:8px">YOLO 档位分布：<span class="tag tag-green" style="margin-right:6px">?: 76</span></p>
 <div class="bar"><div class="bar-fill" style="width:100%"></div></div>
 <p style="font-size:12px;color:var(--text-dim);margin-top:8px">
   SSoT：<code>~/.claude/skills/engineering-scenario-router/router-table.json</code> · 含 5 super 触发
@@ -264,7 +267,7 @@ td { padding:10px 12px; border-top:1px solid var(--border); }
 </div>
 
 <div class="footer">
-  ⚙️ MYCC 配置全景 · 数据自动拉取于 2026-06-26 10:58 ·
+  ⚙️ MYCC 配置全景 · 数据自动拉取于 2026-06-26 12:18 ·
   <a href="dashboard.html">主仪表盘</a> ·
   <a href="start-here.md">start-here 索引</a>
 </div>
