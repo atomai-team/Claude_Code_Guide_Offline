@@ -2,12 +2,12 @@
 
 > **一个仪表盘看懂、用好 Claude Code** —— 从零基础上手到工程化高阶编排，外加唐霜老师权威中文指南全文离线存档。
 
-![Claude Code](https://img.shields.io/badge/Claude_Code-2.1.193-0071e3)
-![OMC](https://img.shields.io/badge/oh--my--claudecode-4.15.0-6e3fd6)
-![Skills](https://img.shields.io/badge/Skills-148-1a8c4a)
-![Agents](https://img.shields.io/badge/Agents-52-b25000)
-![Hooks](https://img.shields.io/badge/Hooks-50-d70015)
-![License](https://img.shields.io/badge/原版内容-唐霜_©-555)
+![Claude Code](https://img.shields.io/badge/Claude_Code-2.1.193-c15f3c)
+![OMC](https://img.shields.io/badge/oh--my--claudecode-4.15.0-7a5ba8)
+![Skills](https://img.shields.io/badge/Skills-148-3d7a4e)
+![Agents](https://img.shields.io/badge/Agents-52-b06a1f)
+![Hooks](https://img.shields.io/badge/Hooks-50-2f7d8a)
+![License](https://img.shields.io/badge/原版内容-唐霜_©-595650)
 
 ---
 
