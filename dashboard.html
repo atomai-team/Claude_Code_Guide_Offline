@@ -545,6 +545,7 @@ h1, h2, h3, .header h1, .card-header h2, .card-header h3 {
 .card-accent-cyan   { border-top: 3px solid var(--cyan); }
 .card-accent-green  { border-top: 3px solid var(--green); }
 .card-accent-orange { border-top: 3px solid var(--orange); }
+.card-accent-blue   { border-top: 3px solid var(--accent2); }
 
 /* ════════════════════════════════════════════
    表格
@@ -1084,6 +1085,11 @@ tr.warn td { background: var(--red-soft); }
 <a class="nav-link" href="#s-globalsearch">📚 全局搜索</a>
 <a class="nav-link" href="#s-experts">工程化专家入口</a>
 <a class="nav-link" href="#s-entry-points">11 个高频入口</a>
+<a class="nav-link" href="#s-orchestration">编排全景图</a>
+<a class="nav-link" href="#s-scenarios">典型场景路由</a>
+<a class="nav-link" href="#s-evolution">进化闭环</a>
+<a class="nav-link" href="#s-automation">自动化流程</a>
+<a class="nav-link" href="#s-tool-collab">4 层工具协作</a>
 <a class="nav-link" href="#s-pro-matrix">高级功能矩阵</a>
 <a class="nav-link" href="#s-advanced-examples">⚡ 高级实战示例</a>
 <a class="nav-link" href="#s-super">超级入口指南</a>
@@ -1103,19 +1109,11 @@ tr.warn td { background: var(--red-soft); }
 <div class="nav-section">🌍 创投 · 数据</div>
 <a class="nav-link" href="#s-vc">出海创投专家</a>
 <a class="nav-link" href="#s-stats">我的使用统计</a>
-
-  <div class="nav-section">🧠 高级与详情</div>
-  <a class="nav-link" href="#s-ae-tier4">📚 Tier-4 工作流总览(8 例)</a>
-  <a class="nav-link" href="#s-ae-workflow">🔄 workflow · 多 agent 编排</a>
-  <a class="nav-link" href="#s-ae-ralph">🔁 ralph · 别停循环</a>
-  <a class="nav-link" href="#s-ae-ultrawork">⚡ ultrawork · 必完成并行</a>
-  <a class="nav-link" href="#s-ae-team">👥 team · N agent 协作</a>
-  <a class="nav-link" href="#s-ae-ceo-mode">💼 ceo-mode · 行业专家组</a>
-  <a class="nav-link" href="#s-ae-ultragoal">🎯 ultragoal · 目标达成</a>
-  <a class="nav-link" href="#s-ae-ralph-loop">🔃 ralph-loop · 进度查询</a>
-  <a class="nav-link" href="#s-ae-autopilot">✈️ autopilot · 自主巡航</a>
-  <a class="nav-link" href="#s-skill-cards">📋 Skill 中文说明卡(20)</a>
-  <a class="nav-link" href="#s-hook-explain">🛡️ 后台守卫 · Hook 保护体系</a>
+<div class="nav-section">🔗 互通与同步</div>
+<a class="nav-link" href="#s-notion-sync">📤 Notion 单投</a>
+<a class="nav-link" href="#s-obsidian-sync">📥 Obsidian 单投</a>
+<a class="nav-link" href="#s-codebase-search">🔍 Codebase 搜索</a>
+<a class="nav-link" href="#s-sync-history">📜 同步历史</a>
 </nav>
 </aside>
 <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
@@ -1682,7 +1680,7 @@ tr.warn td { background: var(--red-soft); }
     <div class="card-header"><span class="icon">🪢</span><h2>11 个高频入口按场景穿起来 — 一句话到完整链路</h2><span class="count">11 ENTRY POINTS</span></div>
     <div class="card-body">
       <p style="font-size:11px;color:var(--text-dim);margin-bottom:10px">📌 <b>说明</b> · 11 个高频入口来自 intent-words 路由（94 条中实际使用率 Top 11）。每条配 ① 口语触发词 ② 何时用 ③ 完整链路 ④ 该读哪本手册。</p>
-      <table class="tbl-sm tbl-fixed"><thead><tr><th style="width:28%">入口</th><th style="width:22%">口语触发</th><th style="width:20%">何时用</th><th style="width:22%">完整链路（4 步）</th><th style="width:8%">手册</th></tr></thead><tbody>
+      <table class="tbl-sm tbl-fixed"><thead><tr><th style="width:22%">入口</th><th style="width:18%">口语触发</th><th style="width:18%">何时用</th><th style="width:28%">完整链路（4 步）</th><th style="width:14%">看哪本手册</th></tr></thead><tbody>
         <tr>
           <td><span class="cmd-name">smart-flow-all</span><br><span class="kbd">/smart-flow-all</span></td>
           <td>队长 / 火力全开 / 活力全开 / YOLO / boss / leader</td>
@@ -1814,6 +1812,169 @@ tr.warn td { background: var(--red-soft); }
     </div>
   </div>
 
+  <!-- P2-6 · ③ 编排架构图 -->
+  <div class="card wide card-accent-purple" id="s-orchestration" style="margin-top:36px">
+    <div class="card-header">
+      <span class="icon">🏛️</span>
+      <h2>③ 编排架构图 — 怎么派/并行/串行</h2>
+      <span class="count">P2-6 · ORCHESTRATION</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:12px;color:var(--text-dim);margin-bottom:14px">📌 <b>触发词</b>:"怎么派/并行/串行"。层级关系与 s-experts/s-entry-points 一致,但本段标"任务→路由→执行→验证"的调用链。</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px">
+        <div style="background:var(--surface2);border-left:3px solid #8b5cf6;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#8b5cf6;margin-bottom:6px">👤 主调度器(Main)</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>职责</b>:理解意图 → 路由到 skill/agent → 收口五段<br>
+            <b>约束</b>:Writer≠Reviewer · 派完必自检 R1-R5(反讽刺)
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #ec4899;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#ec4899;margin-bottom:6px">🚪 入口路由器(Intake)</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>机制</b>:intake-gateway.sh / intent-matcher / engineering-scenario-router<br>
+            <b>职责</b>:用户口语 → 51 触发词匹配 → super/captain/ceo/start-work 入口
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #06b6d4;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#06b6d4;margin-bottom:6px">🧠 专家矩阵(Experts)</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>类型</b>:<span id="expertTypes">90 agent / 51 hook / 147 skill</span><br>
+            <b>调用</b>:Agent(model=sonnet) / Task / Workflow / fork<br>
+            <b>边界</b>:opus = 架构/深度 / sonnet = 标准 / haiku = 轻量查询
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #f97316;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#f97316;margin-bottom:6px">⚡ 执行器(Executor)</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>角色</b>:executor / engineer / e2e-test-architect<br>
+            <b>职责</b>:TDD 三阶段 / 闭环六步 / 实跑证据<br>
+            <b>约束</b>:铁律3 必带 ★推荐 + 回滚 + 实跑
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #84cc16;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#84cc16;margin-bottom:6px">✅ 验证器(Verifier)</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>角色</b>:verifier / code-reviewer / test-engineer / qa-validator<br>
+            <b>职责</b>:独立 lane 复核 / 反推测扫描 / P0/P1/P2 缺陷分级<br>
+            <b>边界</b>:Writer≠Reviewer 铁律硬约束
+          </div>
+        </div>
+      </div>
+      <pre class="mermaid" style="margin-top:18px">
+flowchart LR
+  U([用户口语]) --> IN[入口路由器<br/>intake-gateway]
+  IN -->|super/captain/ceo| MAIN[主调度器]
+  IN -->|直答| ANSWER([快速回答])
+  MAIN -->|≥3 步骤| PLAN[planner<br/>opus 战略]
+  MAIN -->|≥2 子任务| PAR[并行派发<br/>Agent/Task/fork]
+  MAIN -->|复杂工程| SW[start-work<br/>manager 中心]
+  PLAN --> EXP[专家矩阵<br/>90 agent]
+  PAR --> EXP
+  SW --> EXP
+  EXP --> EXE[执行器<br/>TDD+实跑]
+  EXE --> VER[验证器<br/>独立 lane]
+  VER -->|不通过| EXE
+  VER -->|通过| CLOSE[smart-closure<br/>收口五段]
+  CLOSE --> U([回用户])
+  classDef main fill:#fce7f3,stroke:#ec4899
+  classDef exp fill:#cffafe,stroke:#06b6d4
+  classDef ver fill:#dcfce7,stroke:#84cc16
+  class MAIN,PLAN,PAR,SW main
+  class EXP,EXE exp
+  class VER,CLOSE ver
+      </pre>
+      <div class="info-box purple" style="margin-top:10px">
+        💡 <b>反范式</b> · 不要"主调度器直接写代码" — 必走 EXP→EXE→VER 三段;不要"verifier 和 writer 同会话" — 必独立 lane(铁律10)。
+      </div>
+    </div>
+  </div>
+
+  <!-- P2-6 · ④ 5 大场景剧本 -->
+  <div class="card wide card-accent-orange" id="s-scenarios" style="margin-top:36px">
+    <div class="card-header">
+      <span class="icon">🎬</span>
+      <h2>④ 5 大场景剧本 — 出海/做 app/升级/调研/团队</h2>
+      <span class="count">P2-6 · SCENARIOS</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:12px;color:var(--text-dim);margin-bottom:14px">📌 <b>触发词</b>:"出海/做 app/升级/调研/团队"。5 大场景对应 5 种典型任务流,从用户口语到收口的完整剧本。</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px">
+        <div style="background:var(--surface2);border-left:3px solid #f97316;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#f97316;margin-bottom:6px">🌍 S1 · 出海创投</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>入口</b>:ceo-mode / overseas-entry<br>
+            <b>链路</b>:market-analyst → overseas-entry → financial-analyst → capital-ir<br>
+            <b>产出</b>:BP / 三表预测 / Term Sheet
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #06b6d4;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#06b6d4;margin-bottom:6px">📱 S2 · 做 app / 全栈</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>入口</b>:team-fullstack / dev-pipeline<br>
+            <b>链路</b>:product-manager → architect → engineer(TDD) → e2e-test → devops-deploy<br>
+            <b>产出</b>:可上线代码 + 测试 + 部署脚本
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #8b5cf6;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#8b5cf6;margin-bottom:6px">⬆️ S3 · 升级 / 体检</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>入口</b>:comprehensive-upgrade / full-checkup / harness-audit<br>
+            <b>链路</b>:audit-all-better(6专家) → 配置改前 HITL → fix → 复核<br>
+            <b>产出</b>:P0/P1/P2 清单 + 修复 commit
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #10b981;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#10b981;margin-bottom:6px">🔍 S4 · 调研 / 评估</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>入口</b>:v29-deep-research / team-research / web-access<br>
+            <b>链路</b>:researcher(5渠道) → practical-comparator → 异构对抗(ai-panel)<br>
+            <b>产出</b>:对比表 + ★推荐 + 引用
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #ec4899;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#ec4899;margin-bottom:6px">👥 S5 · 团队 / 协作</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>入口</b>:team / multi-agent / oh-my-claudecode:team<br>
+            <b>链路</b>:team-lead → N 角色 agent 并行 → verifier 验收<br>
+            <b>产出</b>:多角色协作产物 + 共识报告
+          </div>
+        </div>
+      </div>
+      <pre class="mermaid" style="margin-top:18px">
+flowchart TD
+  subgraph "S1 出海"
+    S1A[market-analyst] --> S1B[overseas-entry] --> S1C[financial-analyst] --> S1D[capital-ir]
+  end
+  subgraph "S2 做 app"
+    S2A[product-manager] --> S2B[architect] --> S2C[engineer TDD] --> S2D[e2e-test] --> S2E[deploy-ship]
+  end
+  subgraph "S3 升级"
+    S3A[audit-all-better] --> S3B{HITL 确认} -->|yes| S3C[fix] --> S3D[复核]
+  end
+  subgraph "S4 调研"
+    S4A[researcher 5渠道] --> S4B[practical-comparator] --> S4C[ai-panel 对抗]
+  end
+  subgraph "S5 团队"
+    S5A[team-lead] --> S5B[N agent 并行] --> S5C[verifier 共识]
+  end
+  classDef s1 fill:#fed7aa,stroke:#f97316
+  classDef s2 fill:#cffafe,stroke:#06b6d4
+  classDef s3 fill:#ede9fe,stroke:#8b5cf6
+  classDef s4 fill:#d1fae5,stroke:#10b981
+  classDef s5 fill:#fce7f3,stroke:#ec4899
+  class S1A,S1B,S1C,S1D s1
+  class S2A,S2B,S2C,S2D,S2E s2
+  class S3A,S3B,S3C,S3D s3
+  class S4A,S4B,S4C s4
+  class S5A,S5B,S5C s5
+      </pre>
+      <div class="info-box orange" style="margin-top:10px">
+        💡 <b>实战</b> · 用户说"出海/做 app/升级/调研/团队" → intake 自动路由到对应剧本;若意图模糊,先 sp-brainstorming 澄清(铁律11)。
+      </div>
+    </div>
+  </div>
+
   <!-- C9 · 致谢与版权（README 同步） -->
   <div class="card priority-2" id="s-thanks">
     <div class="card-header"><span class="icon">🙏</span><h2>致谢 · 内容来源</h2></div>
@@ -1856,7 +2017,7 @@ tr.warn td { background: var(--red-soft); }
         </tr>
         <tr>
           <td><a href="03-全能力清单-Skills+MCP+插件.html" style="color:var(--accent2)">📦 03-全能力清单</a><br><span style="opacity:.6;font-size:9px">33 KB</span></td>
-          <td>148 本地Skills + 90 本地Agents + 419 插件Skills + 51 Hooks + MCP 完整说明</td>
+          <td><span id="m03counts">148 本地Skills + 90 本地Agents + 419 插件Skills + 51 Hooks + MCP 完整说明</span></td>
           <td>想用某个能力但不知道叫什么</td>
           <td>想搜「有没有 X 功能的 skill」</td>
         </tr>
@@ -2415,6 +2576,235 @@ tr.warn td { background: var(--red-soft); }
     </div>
   </div>
 
+  <!-- P2-6 · ⑤ 进化闭环(s-stats 上方) -->
+  <div class="card wide card-accent-cyan" id="s-evolution" style="margin-top:36px">
+    <div class="card-header">
+      <span class="icon">🧬</span>
+      <h2>⑤ 进化闭环 — 怎么扫描/评估/归档</h2>
+      <span class="count">P2-6 · EVOLUTION</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:12px;color:var(--text-dim);margin-bottom:14px">📌 <b>触发词</b>:"进化/扫描/归档"。实例化 s-stats 监督对象 — 4 个 collector + diff-generator + 飞书推送 + Obsidian 单向投影。</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px">
+        <div style="background:var(--surface2);border-left:3px solid #06b6d4;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#06b6d4;margin-bottom:6px">📡 S1-S4 · 4 通道自动采集</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>S1 官方</b>:auto-collector-official(Anthropic Changelog/docs)<br>
+            <b>S2 GitHub</b>:auto-collector-github(OMC 仓库 release/issue)<br>
+            <b>S3 社区</b>:auto-collector-community(Reddit/HN/公众号)<br>
+            <b>S4 内部</b>:memory-dream-consolidation(跨会话记忆归档)<br>
+            <b>频率</b>:月度 cron(每月 1 号)
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #8b5cf6;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#8b5cf6;margin-bottom:6px">📊 S5 · diff 生成</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>脚本</b>:diff-generator(S5 步骤)<br>
+            <b>产出</b>:MEMORY-diff.md(P0/P1/P2 分级)<br>
+            <b>推送</b>:P0/P1 → 飞书(必达) · Notion 单向(可选)<br>
+            <b>边界</b>:本机是 SSoT,Notion/Obsidian 只读投影
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #10b981;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#10b981;margin-bottom:6px">📥 归档与记忆合并</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>归档</b>:auto-archive-stop → archive-task.py → obsidian-note.py<br>
+            <b>合并</b>:memory-dream-consolidation(去重 + 压缩 + 跨会话)<br>
+            <b>健康检查</b>:memory-checkup(记忆体检,季度触发)<br>
+            <b>上限消费门</b>:2 次无下游行动 → 处决(防止造得比消费快)
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #f59e0b;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#f59e0b;margin-bottom:6px">🔨 落地 · 写回本机 SSoT</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>写回对象</b>:CLAUDE.md / rules/*.md / settings.local.json / hooks/* / memory/<br>
+            <b>工具</b>:Write/Edit + change-log.jsonl 留痕<br>
+            <b>门禁</b>:L2+必 HITL 确认 + git commit (不 push)<br>
+            <b>回滚</b>:git reset --hard + 配置 snapshot(7 天保留)
+          </div>
+        </div>
+      </div>
+      <pre class="mermaid" style="margin-top:18px">
+flowchart TB
+  subgraph "采集层(每月 1 号 cron)"
+    S1[auto-collector-official<br/>S1 官方 Changelog]
+    S2[auto-collector-github<br/>S2 仓库 release]
+    S3[auto-collector-community<br/>S3 社区 insight]
+    S4[memory-dream-consolidation<br/>S4 内部记忆]
+  end
+  S1 --> S5
+  S2 --> S5
+  S3 --> S5
+  S4 --> S5
+  S5{diff-generator<br/>MEMORY-diff.md}
+  S5 -->|P0/P1| FEISHU[飞书推送<br/>必达]
+  S5 -->|可选| NOTION[Notion 单向投影]
+  S5 --> ARCH[auto-archive-stop<br/>归档本机]
+  ARCH --> OBS[Obsidian Vault<br/>obsidian-note.py]
+  FEISHU --> REVIEW{人工审阅}
+  NOTION --> REVIEW
+  OBS --> REVIEW
+  REVIEW -->|批准| MAIN[写回 CLAUDE.md/rules]
+  REVIEW -->|拒绝| DROP[丢弃]
+  classDef collect fill:#cffafe,stroke:#06b6d4
+  classDef push fill:#dcfce7,stroke:#10b981
+  classDef arc fill:#ede9fe,stroke:#8b5cf6
+  classDef dec fill:#fef3c7,stroke:#f59e0b
+  class S1,S2,S3,S4 collect
+  class FEISHU,NOTION,OBS push
+  class S5,ARCH arc
+  class REVIEW,MAIN,DROP dec
+      </pre>
+      <div class="info-box cyan" style="margin-top:10px">
+        💡 <b>健康指标</b> · 月度 diff 行数 <100=稳定 / 100-500=常规升级 / >500=大变化需双仓 push。<b>反范式</b>:本机→Notion/Obsidian 禁双向同步(CLAUDE.local.md 单向铁律)。
+      </div>
+    </div>
+  </div>
+
+  <!-- P2-6 · ① 4 层工具协作方案(s-stats 旁,作为横切视角) -->
+  <div class="card wide card-accent-blue" id="s-tool-collab" style="margin-top:36px">
+    <div class="card-header">
+      <span class="icon">🧰</span>
+      <h2>① 4 层工具协作方案 — 工具/能力怎么配合用</h2>
+      <span class="count">P2-6 · LAYER MODEL</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:12px;color:var(--text-dim);margin-bottom:14px">📌 <b>横切视角</b> · 看每个工具/能力在 4 层哪一层、用什么配合、谁触发谁。<b>新段</b>不重复 P1 段实例化,只标"X 工具属于哪一层 + 何时配合谁"。</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px">
+        <div style="background:var(--surface2);border-left:3px solid #3b82f6;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#3b82f6;margin-bottom:6px">L1 · 配置层(基础设施)</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>成员</b>:settings.json / settings.local.json / CLAUDE.md / rules / hooks/<br>
+            <b>作用</b>:定义"什么能做/什么不能做/谁先被叫"<br>
+            <b>配合</b>:L2 通过读 CLAUDE.md 了解边界 → L3 派 agent 时按 hook 约束<br>
+            <b>修档</b>:改 settings 必须 snapshot(CLAUDE.md 铁律)
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #10b981;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#10b981;margin-bottom:6px">L2 · 上下文层(提示与记忆)</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>成员</b>:SKILL.md / agent frontmatter / auto-memory / MEMORY.md / notepad<br>
+            <b>作用</b>:让 Claude "知道你是谁、有什么偏好、能做什么"<br>
+            <b>配合</b>:L1 触发自动归档 → L2 沉淀 → 下次会话 recall<br>
+            <b>修档</b>:写规则走 binary 措辞(铁律),禁 scalar
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #f59e0b;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#f59e0b;margin-bottom:6px">L3 · 编排层(调度与执行)</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>成员</b>:Agent/Task/Workflow/team/smart-flow-all / captain<br>
+            <b>作用</b>:把任务拆给"对的人(agent)+对的方法(workflow)"<br>
+            <b>配合</b>:L4 出错时 L3 调 verifier / code-reviewer 复核<br>
+            <b>修档</b>:派任务前查 L1 风险档(可逆/≤5文件/不碰config)
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #ef4444;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#ef4444;margin-bottom:6px">L4 · 验证层(证据与闭环)</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>成员</b>:verifier / code-reviewer / test-engineer / Playwright / smart-closure<br>
+            <b>作用</b>:Write≠Reviewer · 实跑证据兜底 · 反讽刺自检<br>
+            <b>配合</b>:任何 L3 完成 → 必走 L4(铁律3 验证证据)<br>
+            <b>修档</b>:浏览器/HTTP 改动 100% 走 Playwright 实测
+          </div>
+        </div>
+      </div>
+      <pre class="mermaid" style="margin-top:18px">
+flowchart TB
+  L1[配置层<br/>settings/CLAUDE.md/rules/hooks] -->|约束边界| L2
+  L2[上下文层<br/>SKILL.md/memory/MEMORY] -->|recall 偏好| L3
+  L3[编排层<br/>Agent/Workflow/team] -->|执行任务| L4
+  L4[验证层<br/>verifier/Playwright/TDD] -->|回写证据| L1
+  L4 -.失败反馈.-> L3
+  classDef l1 fill:#dbeafe,stroke:#3b82f6,color:#1e40af
+  classDef l2 fill:#d1fae5,stroke:#10b981,color:#065f46
+  classDef l3 fill:#fef3c7,stroke:#f59e0b,color:#92400e
+  classDef l4 fill:#fee2e2,stroke:#ef4444,color:#991b1b
+  class L1 l1
+  class L2 l2
+  class L3 l3
+  class L4 l4
+      </pre>
+      <div class="info-box blue" style="margin-top:10px">
+        💡 <b>怎么读这张图</b> · 任何任务先看"我在 L3 哪一步" → 问"L1/L2/L4 配齐了吗" → 缺哪层先补哪层。<b>常见错</b>:跳过 L4 直接交付(铁律3 反范式)、跳过 L1 直接改 hook(铁律3 配置防改)。
+      </div>
+    </div>
+  </div>
+
+  <!-- P2-6 · ② 自动化流程图(s-stats 旁,作为自动化监督对象) -->
+  <div class="card wide card-accent-green" id="s-automation" style="margin-top:36px">
+    <div class="card-header">
+      <span class="icon">🤖</span>
+      <h2>② 自动化流程图 — 哪些活已被脚本/hook 接管</h2>
+      <span class="count">P2-6 · AUTOMATION</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:12px;color:var(--text-dim);margin-bottom:14px">📌 <b>触发词</b>:"自动/触发/巡检"。本段实例化 s-stats 监督对象 — 哪些 hook 自动跑了、跑多久、占多少成本。</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px">
+        <div style="background:var(--surface2);border-left:3px solid #10b981;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#10b981;margin-bottom:6px">⚙️ SessionStart 自动接电</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>跑什么</b>:sessionstart-guard / ccswitch-verify-start / daily-brief / session-context-injector<br>
+            <b>频率</b>:每次新会话 1 次<br>
+            <b>用途</b>:CC Switch armor / 每日简报注入 / notepad 上下文
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #f59e0b;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#f59e0b;margin-bottom:6px">🛡️ PreToolUse 安全护栏</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>跑什么</b>:block-dangerous-commands / serial-bash-circuit / official-paradigm-guard<br>
+            <b>频率</b>:每次 Bash/Edit/Write 前<br>
+            <b>用途</b>:拦 rm -rf / 拦截串行/防绕官方范式
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #3b82f6;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#3b82f6;margin-bottom:6px">📦 Stop 半自动归档</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>跑什么</b>:auto-archive-stop / auto-archive-trigger / cmmi-stop-sync / llm-judge-completion<br>
+            <b>频率</b>:每次会话结束(对话 ≥3 turn + diff 非空)<br>
+            <b>用途</b>:git diff → archive-task.py → obsidian-note.py 单向投影(半自动 + HITL)
+          </div>
+        </div>
+      </div>
+      <pre class="mermaid" style="margin-top:18px">
+sequenceDiagram
+  autonumber
+  participant U as 用户
+  participant CC as Claude Code
+  participant SS as SessionStart Hooks
+  participant PT as PreToolUse Hooks
+  participant ST as Stop Hooks
+  participant SE as SessionEnd Hooks
+  U->>CC: 启动会话
+  CC->>SS: 触发 SessionStart
+  SS-->>CC: 接电(armor+daily-brief+notepad)
+  loop 每个工具调用
+    CC->>PT: PreToolUse(Bash/Edit/Write)
+    PT-->>CC: 护栏检查(危险命令/串行/范式)
+    CC-->>U: 执行/拒绝
+  end
+  CC->>ST: 对话完成(≥3 turn + diff 非空)
+  ST->>U: HITL 询问"是否归档?"
+  U-->>ST: 确认
+  ST-->>CC: archive-task.py → obsidian-note.py
+  CC->>SE: SessionEnd
+  SE-->>CC: evolution 日报 + notepad 归档
+      </pre>
+      <div class="info-box green" style="margin-top:10px">
+        💡 <b>健康指标</b> · 51 hook 在跑,但 ≥3 turn 才触发归档(避免噪音);每次启动 ≤15s;失败 silent fail 由 circuit-breaker 熔断(铁律2)。
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:14px">
+        <div style="background:var(--surface2);border-left:3px solid #8b5cf6;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#8b5cf6;margin-bottom:6px">📝 PostToolUse 工具后置验证</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>跑什么</b>:config-change-log-mandatory / auto-archive-stop(辅助) / hook-self-trigger-prevention<br>
+            <b>频率</b>:每次 Write/Edit/Bash 完成后<br>
+            <b>用途</b>:敏感文件改前留痕(change-log.jsonl) / 防 hook 自触发循环 / 自动化归档
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- C10.8 · 我的使用统计（从 ~/.claude/logs/component-usage.jsonl 真数据渲染） -->
   <div class="card priority-2 card-accent-cyan" id="s-stats">
     <div class="card-header"><span class="icon">📊</span><h2>我的使用统计 — 跨 session 累计</h2><span class="count">MY STATS</span></div>
@@ -2434,6 +2824,228 @@ tr.warn td { background: var(--red-soft); }
         <button onclick="renderMyStatsFromJsonl()" style="background:var(--surface);border:1px solid var(--border-strong);color:var(--accent);padding:5px 12px;border-radius:980px;cursor:pointer;font-size:11px">🔃 刷新</button>
         <span id="lastVisit" style="margin-left:6px"></span>
         <span id="jsonlStatus" style="margin-left:6px;color:var(--text-dim)"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- P2-7 · 🔗 互通与同步 · 4 路互通(Notion / Obsidian / Codebase / 历史) -->
+  <div class="card wide card-accent-purple" id="s-notion-sync" style="margin-top:36px">
+    <div class="card-header">
+      <span class="icon">📤</span>
+      <h2>Notion 单投 — 任务/决策单向推送</h2>
+      <span class="count">P2-7 · NOTION</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:12px;color:var(--text-dim);margin-bottom:12px">📌 <b>单向铁律</b>(CLAUDE.local.md):本机是 SSoT,Notion 只读投影。<b>何时触发</b>:Stop 事件(2026-06-27 P2-7 从 SessionStart 改来,需要 HITL 确认)。<b>前提</b>:有挂起条目时,flusher 提示主调度器"是否推送"。</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px">
+        <div style="background:var(--surface2);border-left:3px solid #8b5cf6;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#8b5cf6;margin-bottom:6px">🔌 接入点</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>Hook</b>:<code>notion-queue-flusher.sh</code><br>
+            <b>事件</b>:Stop(2026-06-27 改)<br>
+            <b>路径</b>:<code>~/.claude/.cache/notion-queue/</code><br>
+            <b>Phase1 治本</b>:加 Notepad 过滤(本地 notepad 不入队)<br>
+            <b>标记</b>:50 条 skipped_local_notepad
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #ec4899;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#ec4899;margin-bottom:6px">📋 队列内容</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>CMMI 任务</b>:从 <code>~/.claude/data/cmmi/tasks.jsonl</code><br>
+            <b>决策记录</b>:从 <code>~/.claude/data/decision-ledger/</code><br>
+            <b>会话摘要</b>:从 <code>obsidian-note.py</code> 输出<br>
+            <b>过滤</b>:本机 notepad / 内部提醒(<b>不推</b>)
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #10b981;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#10b981;margin-bottom:6px">⚡ HITL 半自动</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>触发</b>:Stop 时检测到挂起条目 → 提示主调度器<br>
+            <b>确认</b>:用户 yes → 推送 / no → 跳过 / queue → 延后<br>
+            <b>补偿</b>:改 Stop 后老队列下次 SessionStart 消费(蓝图 §3 决策)
+          </div>
+        </div>
+      </div>
+      <pre class="mermaid" style="margin-top:18px">
+sequenceDiagram
+  autonumber
+  participant S as Session
+  participant ST as Stop Hook
+  participant F as notion-queue-flusher
+  participant Q as 队列(~/.claude/.cache/notion-queue)
+  participant N as Notion API
+  participant U as 用户
+  S->>ST: 会话结束
+  ST->>F: 触发 flusher(2026-06-27 改 Stop)
+  F->>Q: 扫描挂起条目
+  alt 有条目
+    F->>S: 注入 HITL 提示"是否推 Notion?"
+    S->>U: 用户看到提示
+    U-->>S: yes/no/queue
+    alt yes
+      S->>F: 确认推送
+      F->>N: 调 Notion API
+      N-->>F: 200/4xx
+      F->>Q: 清已推条目
+    else no/queue
+      F->>Q: 保留(下次再问)
+    end
+  else 队列空
+    F-->>S: 静默退出(exit 0)
+  end
+      </pre>
+      <div class="info-box purple" style="margin-top:10px">
+        💡 <b>反范式</b> · 禁自动推(无 HITL)· 禁双向同步(本机永远 SSoT)· 禁推本地 notepad 内容(Phase1 已治本:加 Notepad 过滤)。
+      </div>
+    </div>
+  </div>
+
+  <div class="card wide card-accent-cyan" id="s-obsidian-sync" style="margin-top:36px">
+    <div class="card-header">
+      <span class="icon">📥</span>
+      <h2>Obsidian 单投 — 长期知识沉淀</h2>
+      <span class="count">P2-7 · OBSIDIAN</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:12px;color:var(--text-dim);margin-bottom:12px">📌 <b>本机归档 → Obsidian Vault</b>(<code>~/Documents/Obsidian Vault/Claude-Sessions/</code>),写精炼摘要而非原始 session(铁律:本机 SSoT,Obsidian 只读投影)。</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px">
+        <div style="background:var(--surface2);border-left:3px solid #06b6d4;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#06b6d4;margin-bottom:6px">🔌 接入点</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>Hook</b>:<code>auto-archive-stop.sh</code>(已 2026-06-26 注册 Stop)<br>
+            <b>脚本</b>:<code>lib/archive-task.py</code> → <code>lib/obsidian-note.py</code><br>
+            <b>Vault</b>:<code>~/Documents/Obsidian Vault/Claude-Sessions/</code><br>
+            <b>已落</b>:3 条历史 session 摘要(2026-06-26 实跑)
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #f59e0b;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#f59e0b;margin-bottom:6px">⏱️ 半自动延迟</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>触发</b>:Stop 时 git diff 非空 + 对话 ≥3 turn<br>
+            <b>延迟</b>:5min 内可撤销(obsidian-note.py 留时间窗)<br>
+            <b>HITL</b>:"已写 X 条摘要,要归档吗?"<br>
+            <b>跳过</b>:<b>DO-NOT-ARCHIVE</b> 注释的 session
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #10b981;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#10b981;margin-bottom:6px">📚 内容格式</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>写什么</b>:session 摘要 + 关键决策 + 改了哪些文件 + ★推荐<br>
+            <b>不写</b>:原始对话全文(本机 SSoT 才存原始)<br>
+            <b>格式</b>:Markdown + YAML frontmatter(date/session-id/tags)<br>
+            <b>双向</b>:<b>禁</b>(单向投影,本机删则 Obsidian 失同步)
+          </div>
+        </div>
+      </div>
+      <pre class="mermaid" style="margin-top:18px">
+flowchart LR
+  S([Session 结束]) --> CK{git diff 非空<br/>且对话 ≥3 turn}
+  CK -->|no| SKIP[静默跳过]
+  CK -->|yes| HITL{HITL<br/>是否归档?}
+  HITL -->|no| DROP[丢弃,本机仍存]
+  HITL -->|yes| ARC[archive-task.py<br/>生成摘要]
+  ARC --> OBS[obsidian-note.py<br/>写精炼版]
+  OBS --> V[~/Documents/Obsidian Vault<br/>Claude-Sessions/*.md]
+  OBS -.5min 可撤销.-> WIN[撤回窗口]
+  V --> READ([未来 Obsidian 读])
+  classDef ok fill:#d1fae5,stroke:#10b981
+  classDef gate fill:#fef3c7,stroke:#f59e0b
+  classDef skip fill:#fee2e2,stroke:#ef4444
+  class HITL,CK gate
+  class ARC,OBS,V ok
+  class SKIP,DROP skip
+      </pre>
+      <div class="info-box cyan" style="margin-top:10px">
+        💡 <b>实战</b> · 短对话(≤3 turn)不归档(噪音)· 长工程 session 自动摘要入 Vault · 想强制归档说"<b>归档这次会话</b>"。
+      </div>
+    </div>
+  </div>
+
+  <div class="card wide card-accent-blue" id="s-codebase-search" style="margin-top:36px">
+    <div class="card-header">
+      <span class="icon">🔍</span>
+      <h2>Codebase 搜索 — MCP 桥接(本机代码知识图谱)</h2>
+      <span class="count">P2-7 · CODEBASE</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:12px;color:var(--text-dim);margin-bottom:12px">📌 <b>接入 Codebase Memory MCP</b>(deferred tool,需 ToolSearch 启用)。<b>目的</b>:统一 5 大项目(claude-code-guides/mycc-platform/multica/BigOS/community)的代码知识图谱入口。</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px">
+        <div style="background:var(--surface2);border-left:3px solid #3b82f6;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#3b82f6;margin-bottom:6px">🔌 桥接脚本</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>路径</b>:<code>~/.claude/lib/codebase-search-bridge.py</code>(P2-7 新建,~80 行)<br>
+            <b>用法</b>:<code>python3 lib/codebase-search-bridge.py "find Stop hooks"</code><br>
+            <b>输出</b>:JSON(stdout),统一 schema,degraded 兜底<br>
+            <b>依赖</b>:MCP codebase-memory 启用 + ToolSearch
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #f59e0b;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#f59e0b;margin-bottom:6px">📦 MCP 能力</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>search_code</b>:按字符串/语义搜索<br>
+            <b>query_graph</b>:调用链追踪<br>
+            <b>get_architecture</b>:取项目架构图<br>
+            <b>trace_path</b>:路径追溯<br>
+            <b>索引</b>:<code>mcp__codebase-memory-mcp__index_repository</code>
+          </div>
+        </div>
+        <div style="background:var(--surface2);border-left:3px solid #ef4444;padding:10px 14px;border-radius:6px">
+          <div style="font-weight:700;color:#ef4444;margin-bottom:6px">⚠️ 启用前置</div>
+          <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
+            <b>ToolSearch</b>:<code>select:mcp__codebase-memory-mcp__search_code</code><br>
+            <b>环境变量</b>:<code>OMC_CODEBASE_MCP_ENABLED=1</code>(启用标记)<br>
+            <b>未启用时</b>:bridge 返回 <code>degraded:true</code>(空结果,不报错)<br>
+            <b>反范式</b>:禁绕过 MCP 直接 grep(失去知识图谱)
+          </div>
+        </div>
+      </div>
+      <pre class="mermaid" style="margin-top:18px">
+flowchart LR
+  D[Dashboard 入口] --> BR[codebase-search-bridge.py]
+  BR -->|OMC_CODEBASE_MCP_ENABLED=1| MCP[MCP codebase-memory]
+  BR -->|unset| DEG[degraded response<br/>空结果]
+  MCP --> SC[search_code]
+  MCP --> QG[query_graph]
+  MCP --> GA[get_architecture]
+  MCP --> TP[trace_path]
+  SC --> RES[统一 JSON 结果]
+  QG --> RES
+  GA --> RES
+  TP --> RES
+  DEG --> RES
+  RES --> D
+  classDef ok fill:#dbeafe,stroke:#3b82f6
+  classDef deg fill:#fee2e2,stroke:#ef4444
+  class BR,MCP,SC,QG,GA,TP,RES ok
+  class DEG deg
+      </pre>
+      <div class="info-box blue" style="margin-top:10px">
+        💡 <b>健康指标</b> · bridge 是 1-shot CLI,无守护进程 · 启用 MCP 后延迟 &lt;500ms · degraded 路径绝不阻塞(铁律2)。
+      </div>
+    </div>
+  </div>
+
+  <div class="card wide card-accent-orange" id="s-sync-history" style="margin-top:36px">
+    <div class="card-header">
+      <span class="icon">📜</span>
+      <h2>同步历史 — 上次同步何时/推了什么</h2>
+      <span class="count">P2-7 · HISTORY</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:12px;color:var(--text-dim);margin-bottom:12px">📌 <b>审计用</b> · 每次同步的 timestamp/目标/HITL 选择/退出码,用于 Phase2-D 之后的回归验证。<b>关键反范式</b>:看到"<b>错位</b>"(例如 Notion 推了本机 notepad 内容)→ 立即报。</p>
+      <div id="syncHistoryTable" style="font-family:var(--font-mono);font-size:11px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px;max-height:420px;overflow-y:auto">
+        <div style="color:var(--text-muted);padding:20px;text-align:center">
+          ⏳ 加载同步历史中...<br>
+          <span style="font-size:10px">(从 <code>~/.claude/logs/sync-history.jsonl</code> 读 · fallback: 显示最近 5 条)</span>
+        </div>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+        <button onclick="loadSyncHistory()" style="background:var(--accent);border:1px solid var(--accent);color:#fff;padding:6px 14px;border-radius:980px;cursor:pointer;font-size:12px;font-weight:500">🔃 刷新历史</button>
+        <button onclick="window.open('file:///Users/williammacst/Documents/Obsidian%20Vault/Claude-Sessions/','_blank')" style="background:var(--surface);border:1px solid var(--border-strong);color:var(--accent);padding:6px 14px;border-radius:980px;cursor:pointer;font-size:12px">📂 打开 Obsidian Vault</button>
+        <span style="font-size:11px;color:var(--text-muted);align-self:center">P2-7 · 半自动 sync,半自动 HITL,禁双向</span>
+      </div>
+      <div class="info-box orange" style="margin-top:10px">
+        💡 <b>2026-06-27 状态</b> · Notion flusher 已改 Stop(主 session 落 settings.local.json)· Obsidian 已 3 条历史 · Codebase bridge 已建 · <b>P2-7 后端 hook 接电(settings.local.json + codebase-search-bridge.py)待 Phase4/6 补齐</b> · 未 commit(等主调度器收口)。
       </div>
     </div>
   </div>
@@ -2523,7 +3135,7 @@ tr.warn td { background: var(--red-soft); }
           <div style="font-size:11px;color:var(--text-dim);line-height:1.6">
             · 8 大区：总览/5 大功能/MCP/插件/Skills/Agents/Hooks/定时任务/路由表<br>
             · 数据自动拉取于 <code style="font-size:10px">~/.claude/</code><br>
-            · 当前规模：4 MCP · 32 插件 · 148 本地Skills(+419 插件) · 90 Agents · 51 Hooks · 13 LaunchAgent · 95 路由
+            · 当前规模：<span id="heroCounts">4 MCP · 32 插件 · 148 本地Skills(+419 插件) · 90 Agents · 51 Hooks · 12 LaunchAgent · 94 路由</span>
           </div>
         </a>
       </div>
@@ -2689,7 +3301,7 @@ tr.warn td { background: var(--red-soft); }
 
   <!-- Skills by Category -->
   <div class="card priority-2" id="s-skills">
-    <div class="card-header"><span class="icon">🎯</span><h2>Skills 速查 — 按分类</h2><a class="detail-link" href="mycc-config.html#skills">查看全部 148 →</a></div>
+    <div class="card-header"><span class="icon">🎯</span><h2>Skills 速查 — 按分类</h2><a class="detail-link" href="mycc-config.html#skills" id="skillsDetailLink">查看全部 148 →</a></div>
     <div class="card-body"><div id="skillsSections"></div></div>
   </div>
 <section id="s-skill-cards">
@@ -3358,9 +3970,23 @@ tr.warn td { background: var(--red-soft); }
 </div><!-- /.layout -->
 
 
+<!-- P2-6 · Mermaid (5 大段流程图渲染引擎) -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: (document.documentElement.getAttribute('data-theme') === 'light') ? 'default' : 'dark',
+      securityLevel: 'loose',
+      flowchart: { useMaxWidth: true, htmlLabels: true },
+      sequence: { useMaxWidth: true, showSequenceNumbers: true }
+    });
+  }
+</script>
+
 <script>
 // ===== Embedded Data =====
-const D = {"generated_at": "2026-06-26T18:00:26.920137Z", "version": {"claude_code": "2.1.193 (Claude Code)", "omc": "4.15.0", "stats_engine": "V53", "cc_switch": "ON"}, "counts": {"skills": 147, "workflows": 13, "hooks_registered": 54, "hook_events": 14, "hook_files": 56, "agents_total": 89, "agents_core": 5, "agents_ceo_roles": 12, "agents_industry": 7, "agents_teams": 6, "plugin_skills": 419, "plugin_agents": 164, "mcp_servers": 4, "enabled_plugins": 32, "total_plugins": 58, "rules": 3, "intent_words_routes": 95, "external_clis": 3}, "lists": {"priority_routes": [{"name": "队长", "priority": 95, "keywords": ["队长", "leader", "boss", "老大"]}, {"name": "活力全开", "priority": 95, "keywords": ["活力全开", "火力全开", "全力", "yolo_l4"]}, {"name": "ceo_decision_council", "priority": 88, "keywords": ["ceo决策", "战略分析", "顾问委员会", "帮我想清楚这件事", "决策备忘录"]}, {"name": "comprehensive_upgrade_workflow", "priority": 86, "keywords": ["系统级升级", "全栈升级", "跑一遍综合升级", "comprehensive upgrade"]}, {"name": "smart_captain", "priority": 85, "keywords": ["smart", "flow", "自动化", "智能"]}, {"name": "claude_code_better", "priority": 85, "keywords": ["claude_code_better", "claude code better", "全面升级", "配置优化", "进化升级"]}, {"name": "workflow_orchestrate", "priority": 85, "keywords": ["workflow", "多agent", "并行调度", "fan out"]}, {"name": "开team", "priority": 85, "keywords": ["多人协作", "并行做", "跨域协同", "team prompt", "拆任务"]}, {"name": "completion_enforcer_route", "priority": 85, "keywords": ["更新", "收口", "todo", "下一步", "/docs"]}, {"name": "upgrade_full_v40", "priority": 84, "keywords": ["全面升级", "全量升级", "系统升级", "融汇贯通", "升级一下"]}, {"name": "ceo_pipeline_voice", "priority": 84, "keywords": ["全流水线", "CEO流水线", "ceo流水线", "端到端交付", "全流程交付"]}, {"name": "n_step_pipeline_voice", "priority": 84, "keywords": ["N步流水线", "n步流水线", "多步流水线", "自定义流水线", "n步管线"]}, {"name": "boardroom_voice", "priority": 84, "keywords": ["董事会汇报", "board deck", "董事会准备", "董事会材料"]}, {"name": "fundraising_voice", "priority": 84, "keywords": ["融资准备", "BP撰写", "term sheet", "融资BP"]}, {"name": "overseas_compliance_voice", "priority": 84, "keywords": ["出海合规", "跨境数据合规", "数据本地化", "出海数据合规"]}, {"name": "full_checkup_route", "priority": 83, "keywords": ["全面体检", "系统体检", "三连体检", "给系统做个体检", "体检一下"]}, {"name": "cross_model_adversarial", "priority": 83, "keywords": ["异构对抗", "对抗验证", "三方对抗", "三方cli", "五方对抗"]}, {"name": "audit_all_route", "priority": 82, "keywords": ["30维扫描", "cchealth", "全身检查", "系统检查", "深度检查"]}, {"name": "error_analysis", "priority": 82, "keywords": ["error analysis", "error_analysis", "又报错", "反复错误", "同样问题"]}, {"name": "audit_internal", "priority": 82, "keywords": ["内部审计", "内部纠错", "本机审计", "自我审计", "系统自检"]}, {"name": "harness_audit_route", "priority": 82, "keywords": ["harness评分", "harness审计", "六层评分", "harness", "审计"]}, {"name": "config_audit_route", "priority": 82, "keywords": ["配置审计", "配置升级"]}, {"name": "domain_audit_route", "priority": 82, "keywords": ["域审计", "全域升级"]}, {"name": "external_benchmark_route", "priority": 82, "keywords": ["外部对标", "全球获取", "外部学习", "全球对比", "对比社区"]}, {"name": "memory_checkup_route", "priority": 81, "keywords": ["记忆体检", "清记忆", "记忆卫生", "归档孤儿记忆", "记忆碎片清理"]}, {"name": "cross_project_memory", "priority": 81, "keywords": ["跨项目查", "项目记忆", "项目上次", "项目决策", "multica怎么"]}, {"name": "clarify_skip", "priority": 80, "keywords": ["按你理解做", "按你的方式来", "你看着办", "你决定", "use your best judgment"]}, {"name": "security_audit_v403", "priority": 80, "keywords": ["安全审查", "OWASP", "安全审计", "代码安全", "漏洞扫描"]}, {"name": "ceo_mode", "priority": 80, "keywords": ["组建团队", "建团队", "搭团队", "建专家组", "拉专家"]}, {"name": "advisor_mode", "priority": 80, "keywords": ["盘点", "今天搞什么", "我跑偏没", "给我建议", "当前状态"]}, {"name": "secretary_route", "priority": 80, "keywords": ["秘书", "巡检一下", "本周有啥新", "情报简报"]}, {"name": "benchmark_route", "priority": 80, "keywords": ["对标", "全球对标", "社区对标"]}, {"name": "official_verify_route", "priority": 80, "keywords": ["官方核查", "Tier0核查", "官方对照"]}, {"name": "sop_upgrade_route", "priority": 80, "keywords": ["SOP升级", "sop进化", "SOP复用", "SOP沉淀"]}, {"name": "archive_evolution_route", "priority": 80, "keywords": ["归档进化", "归档汇总", "会话归档"]}, {"name": "business_analysis", "priority": 80, "keywords": ["评估项目", "商业分析", "尽调", "选址", "加盟模型"]}, {"name": "c_level_advisory", "priority": 80, "keywords": ["GTM", "获客成本", "营销预算", "增长模型", "营销ROI"]}, {"name": "business_flow_scenarios", "priority": 80, "keywords": ["销售预测", "sales forecast", "定价实验", "价格AB测试", "危机公关"]}], "all_routes": [{"name": "队长", "priority": 95, "keywords": ["队长", "leader", "boss", "老大"], "target": ""}, {"name": "活力全开", "priority": 95, "keywords": ["活力全开", "火力全开", "全力", "yolo_l4"], "target": ""}, {"name": "ceo_decision_council", "priority": 88, "keywords": ["ceo决策", "战略分析", "顾问委员会", "帮我想清楚这件事", "决策备忘录", "我该不该"], "target": ""}, {"name": "comprehensive_upgrade_workflow", "priority": 86, "keywords": ["系统级升级", "全栈升级", "跑一遍综合升级", "comprehensive upgrade"], "target": ""}, {"name": "smart_captain", "priority": 85, "keywords": ["smart", "flow", "自动化", "智能"], "target": ""}, {"name": "claude_code_better", "priority": 85, "keywords": ["claude_code_better", "claude code better", "全面升级", "配置优化", "进化升级", "自动进化"], "target": ""}, {"name": "workflow_orchestrate", "priority": 85, "keywords": ["workflow", "多agent", "并行调度", "fan out"], "target": ""}, {"name": "开team", "priority": 85, "keywords": ["多人协作", "并行做", "跨域协同", "team prompt", "拆任务", "开team"], "target": ""}, {"name": "completion_enforcer_route", "priority": 85, "keywords": ["更新", "收口", "todo", "下一步", "/docs", "不自动"], "target": ""}, {"name": "upgrade_full_v40", "priority": 84, "keywords": ["全面升级", "全量升级", "系统升级", "融汇贯通", "升级一下", "进化"], "target": "claude-code-better"}, {"name": "ceo_pipeline_voice", "priority": 84, "keywords": ["全流水线", "CEO流水线", "ceo流水线", "端到端交付", "全流程交付", "精英团队流水线"], "target": ""}, {"name": "n_step_pipeline_voice", "priority": 84, "keywords": ["N步流水线", "n步流水线", "多步流水线", "自定义流水线", "n步管线", "自定义N步"], "target": ""}, {"name": "boardroom_voice", "priority": 84, "keywords": ["董事会汇报", "board deck", "董事会准备", "董事会材料"], "target": ""}, {"name": "fundraising_voice", "priority": 84, "keywords": ["融资准备", "BP撰写", "term sheet", "融资BP"], "target": ""}, {"name": "overseas_compliance_voice", "priority": 84, "keywords": ["出海合规", "跨境数据合规", "数据本地化", "出海数据合规"], "target": ""}, {"name": "full_checkup_route", "priority": 83, "keywords": ["全面体检", "系统体检", "三连体检", "给系统做个体检", "体检一下", "checkup"], "target": ""}, {"name": "cross_model_adversarial", "priority": 83, "keywords": ["异构对抗", "对抗验证", "三方对抗", "三方cli", "五方对抗", "跑panel"], "target": ""}, {"name": "audit_all_route", "priority": 82, "keywords": ["30维扫描", "cchealth", "全身检查", "系统检查", "深度检查", "健康检查"], "target": ""}, {"name": "error_analysis", "priority": 82, "keywords": ["error analysis", "error_analysis", "又报错", "反复错误", "同样问题", "400错误"], "target": ""}, {"name": "audit_internal", "priority": 82, "keywords": ["内部审计", "内部纠错", "本机审计", "自我审计", "系统自检", "跑一下审计"], "target": "audit-all-better"}, {"name": "harness_audit_route", "priority": 82, "keywords": ["harness评分", "harness审计", "六层评分", "harness", "审计", "L1-L6"], "target": ""}, {"name": "config_audit_route", "priority": 82, "keywords": ["配置审计", "配置升级"], "target": ""}, {"name": "domain_audit_route", "priority": 82, "keywords": ["域审计", "全域升级"], "target": ""}, {"name": "external_benchmark_route", "priority": 82, "keywords": ["外部对标", "全球获取", "外部学习", "全球对比", "对比社区"], "target": ""}, {"name": "memory_checkup_route", "priority": 81, "keywords": ["记忆体检", "清记忆", "记忆卫生", "归档孤儿记忆", "记忆碎片清理", "记忆健康检查"], "target": ""}, {"name": "cross_project_memory", "priority": 81, "keywords": ["跨项目查", "项目记忆", "项目上次", "项目决策", "multica怎么", "mycc-platform"], "target": ""}, {"name": "clarify_skip", "priority": 80, "keywords": ["按你理解做", "按你的方式来", "你看着办", "你决定", "use your best judgment", "随你"], "target": "smart-flow-all"}, {"name": "security_audit_v403", "priority": 80, "keywords": ["安全审查", "OWASP", "安全审计", "代码安全", "漏洞扫描", "STRIDE"], "target": ""}, {"name": "ceo_mode", "priority": 80, "keywords": ["组建团队", "建团队", "搭团队", "建专家组", "拉专家", "拉齐专家"], "target": ""}, {"name": "advisor_mode", "priority": 80, "keywords": ["盘点", "今天搞什么", "我跑偏没", "给我建议", "当前状态", "现在做什么"], "target": ""}, {"name": "secretary_route", "priority": 80, "keywords": ["秘书", "巡检一下", "本周有啥新", "情报简报"], "target": ""}, {"name": "benchmark_route", "priority": 80, "keywords": ["对标", "全球对标", "社区对标"], "target": ""}, {"name": "official_verify_route", "priority": 80, "keywords": ["官方核查", "Tier0核查", "官方对照"], "target": ""}, {"name": "sop_upgrade_route", "priority": 80, "keywords": ["SOP升级", "sop进化", "SOP复用", "SOP沉淀"], "target": ""}, {"name": "archive_evolution_route", "priority": 80, "keywords": ["归档进化", "归档汇总", "会话归档"], "target": ""}, {"name": "business_analysis", "priority": 80, "keywords": ["评估项目", "商业分析", "尽调", "选址", "加盟模型", "单店模型"], "target": ""}, {"name": "c_level_advisory", "priority": 80, "keywords": ["GTM", "获客成本", "营销预算", "增长模型", "营销ROI", "营销漏斗"], "target": ""}, {"name": "business_flow_scenarios", "priority": 80, "keywords": ["销售预测", "sales forecast", "定价实验", "价格AB测试", "危机公关", "舆情应对"], "target": ""}, {"name": "clarify_verify", "priority": 78, "keywords": ["你理解对了吗", "你明白我的意思吗", "我说清楚了吗", "确认一下你的理解", "我想要的是", "重新理解一下"], "target": "smart-flow-all"}, {"name": "expert_analysis", "priority": 78, "keywords": ["帮我分析", "专家分析", "给我看看", "评估一下", "这个项目怎么样"], "target": ""}, {"name": "自愈", "priority": 78, "keywords": ["自愈", "mycc-selfheal", "去重", "重复skill", "skill碰撞", "冲突修复"], "target": ""}, {"name": "进化", "priority": 78, "keywords": ["进化", "self-evolve", "迭代改进", "evaluator-optimizer", "rubric", "self-evolve-loop"], "target": ""}, {"name": "research_quick", "priority": 76, "keywords": ["调研一下", "查一下", "找资料", "查资料", "查一下资料", "research"], "target": ""}, {"name": "bdd_tdd_ralph", "priority": 75, "keywords": ["bdd", "tdd", "先写测试", "红绿重构", "测试驱动开发", "测试驱动"], "target": ""}, {"name": "prompt_lib_save", "priority": 75, "keywords": ["保存这个prompt", "保存这个提示词", "存一下这个prompt", "把这个prompt存起来", "save this prompt", "记录这个提示词"], "target": "omc-prompt-lib"}, {"name": "prompt_lib_search", "priority": 75, "keywords": ["查我之前的prompt", "查历史prompt", "找我存过的提示词", "我之前怎么写的", "提示词库里有没有", "search my prompts"], "target": "omc-prompt-lib"}, {"name": "deep_research_sop", "priority": 75, "keywords": ["查资料", "research", "查一下", "调研", "搜一下", "搜索"], "target": ""}, {"name": "project_bigos", "priority": 75, "keywords": ["BigOS升级", "bigos升级", "BigOS v8", "bigos v8", "BigOS v9", "BigOS 跨 12 服务"], "target": ""}, {"name": "project_multica", "priority": 75, "keywords": ["multica运维", "multica升级", "multica self-host", "multica回滚", "multica backfill", "OrbStack"], "target": ""}, {"name": "prompt_lib_optimize", "priority": 72, "keywords": ["优化这个prompt", "改进这个提示词", "这个prompt怎么写更好", "帮我优化提示词", "optimize this prompt", "让这个prompt更好"], "target": "omc-prompt-lib"}, {"name": "infeasible_alternatives", "priority": 72, "keywords": ["这样能做吗", "可行吗", "有没有别的方法", "换个思路", "做不到的话怎么办", "有替代方案吗"], "target": "smart-flow-all"}, {"name": "prompt_lib_main", "priority": 70, "keywords": ["提示词库", "prompt库", "prompt library", "我的提示词", "查提示词", "打开提示词库"], "target": "omc-prompt-lib"}, {"name": "decision_ledger_view", "priority": 70, "keywords": ["决策记录", "查决策历史", "之前为什么这么决定", "decision ledger", "重大决策", "看看决策"], "target": "omc-prompt-lib"}, {"name": "cmmi_tracker", "priority": 70, "keywords": ["需求追踪", "任务追踪", "cmmi", "cmmi追踪", "版本追踪", "错误追踪"], "target": ""}, {"name": "baoyu_translate", "priority": 70, "keywords": ["翻译", "translate", "中英翻译", "英中翻译", "中译英", "英译中"], "target": ""}, {"name": "project_new", "priority": 70, "keywords": ["新项目", "新建项目", "开新项目", "创建项目", "从0开始", "从头开始"], "target": ""}, {"name": "prompt_lib_extract", "priority": 68, "keywords": ["从历史提炼prompt", "把好的prompt存起来", "提炼这次对话的prompt", "extract prompts", "自动提炼提示词", "这次对话有什么好prompt"], "target": "omc-prompt-lib"}, {"name": "memory_search_3layer", "priority": 68, "keywords": ["查记忆", "搜记忆", "memory search", "找之前记录的", "我之前说过什么", "记忆里有"], "target": "oh-my-claudecode:remember"}, {"name": "prompt_lib_sync", "priority": 65, "keywords": ["同步Notion", "prompt同步", "sync prompts to notion", "把提示词同步到notion", "上传提示词库", "提示词同步到notion"], "target": "omc-prompt-lib"}, {"name": "gstack_guard", "priority": 65, "keywords": ["防护检查", "guard", "安全检查guard", "gstack guard"], "target": ""}, {"name": "spec_generator", "priority": 62, "keywords": ["spec", "PRD", "规格文档", "产品规格", "product requirement"], "target": ""}, {"name": "prompt_lib_versions", "priority": 62, "keywords": ["提示词版本", "这个prompt的历史版本", "prompt变更记录", "看看这个提示词改过什么", "prompt changelog", "提示词改动历史"], "target": "omc-prompt-lib"}, {"name": "scenario_req", "priority": 60, "keywords": ["分析需求", "写规格", "做个PRD", "product spec", "需求规格", "梳理需求"], "target": ""}, {"name": "scenario_deploy", "priority": 60, "keywords": ["部署", "上线", "ship", "launch", "灰度", "发布上线"], "target": ""}, {"name": "token_budget_route", "priority": 60, "keywords": ["token_budget_route", "token budget route"], "target": ""}, {"name": "skill_audit_route", "priority": 60, "keywords": ["compliance", "合规"], "target": ""}, {"name": "deep_research_standards", "priority": 60, "keywords": ["deep research", "调研", "深度调研"], "target": ""}, {"name": "deploy_ship", "priority": 60, "keywords": ["发布", "上线部署", "deploy-ship", "安全部署"], "target": ""}, {"name": "plain_mode", "priority": 60, "keywords": ["小白模式", "小白", "新手", "帮我解释", "看不懂", "简单点"], "target": ""}, {"name": "teleport_route", "priority": 55, "keywords": ["teleport route", "teleport_route", "teleport", "上下文跳转", "跨会话", "接力"], "target": ""}, {"name": "web_access_route", "priority": 55, "keywords": ["web access route", "web_access_route", "上网查", "搜索", "联网", "web"], "target": ""}, {"name": "yolo", "priority": 50, "keywords": ["yolo", "全权限", "bypass"], "target": ""}, {"name": "review", "priority": 50, "keywords": ["全量review", "深度review", "六维review", "PR全面审查", "全面审查代码", "全面代码审查"], "target": ""}, {"name": "update_all_components", "priority": 50, "keywords": ["update_all_components", "update all components"], "target": ""}, {"name": "humanize_text", "priority": 50, "keywords": ["humanize_text", "humanize text"], "target": ""}, {"name": "codesight_route", "priority": 50, "keywords": ["codesight_route", "codesight route", "codesight", "项目摘要", "代码索引", "项目概览"], "target": ""}, {"name": "neat_freak_route", "priority": 50, "keywords": ["neat_freak_route", "neat freak route"], "target": ""}, {"name": "nuwa_skill_route", "priority": 50, "keywords": ["nuwa skill route", "nuwa_skill_route", "蒸馏", "nuwa", "思维方式", "人物分析"], "target": ""}, {"name": "desktop_automation", "priority": 50, "keywords": ["desktop automation", "desktop_automation", "打开应用", "截图", "系统设置", "mac控制"], "target": ""}, {"name": "screenshot_capture", "priority": 50, "keywords": ["screenshot_capture", "screenshot capture"], "target": ""}, {"name": "obsidian_sync", "priority": 50, "keywords": ["obsidian_sync", "obsidian sync"], "target": ""}, {"name": "dream_consolidation", "priority": 50, "keywords": ["dream consolidation", "dream_consolidation", "记忆清理", "dream", "consolidation", "记忆整合"], "target": ""}, {"name": "brand-voice", "priority": 50, "keywords": ["出品牌指南", "品牌声音", "统一文风"], "target": ""}, {"name": "article-writing", "priority": 50, "keywords": ["写文章", "长文", "写博客", "写教程"], "target": ""}, {"name": "auto-auditor-internal", "priority": 50, "keywords": ["/ce-compound", "月度进化", "内部审计"], "target": ""}, {"name": "auto-collector-community", "priority": 50, "keywords": ["/ce-compound", "月度进化"], "target": ""}, {"name": "auto-collector-github", "priority": 50, "keywords": ["/ce-compound", "月度进化"], "target": ""}, {"name": "auto-collector-official", "priority": 50, "keywords": ["/ce-compound", "月度进化"], "target": ""}, {"name": "canary-monitor", "priority": 50, "keywords": ["canary", "post-deploy", "check", "部署后监控", "watch", "production"], "target": ""}, {"name": "content-engine", "priority": 50, "keywords": ["写内容", "内容日历", "跨平台内容", "多平台分发"], "target": ""}, {"name": "diff-generator", "priority": 50, "keywords": ["/ce-compound", "月度进化", "diff-generator", "生成进化报告"], "target": ""}, {"name": "gh-ci-fix", "priority": 50, "keywords": ["CI失败", "PR检查红灯", "fix", "ci", "CI红了", "check"], "target": ""}, {"name": "sp-test-driven-development", "priority": 50, "keywords": ["TDD", "红绿重构", "测试驱动", "先写测试"], "target": ""}, {"name": "wiki", "priority": 50, "keywords": ["wiki", "wiki this", "wiki add", "wiki lint", "wiki query"], "target": ""}, {"name": "xhs-operations-method", "priority": 50, "keywords": ["小红书运营", "小红书养号", "小红书涨粉", "爆款标题", "小红书选题", "xhs运营"], "target": ""}], "skill_desc": {"agent-reach": "Give your AI agent eyes to see the entire internet. 17 platforms via CLI, MCP, curl, and Python scripts. Zero config for 8 channels.", "antigravity-memory-systems": "用于 agent 系统的持久化语义记忆:跨会话知识保留、实体追踪、时序有效性、图谱/向量检索、记忆整合、记忆基准选型。文件型 scratchpad 路由到 filesystem-context、handoff 摘要路由到 context-compression、token 效率策略路由到 context-optimization。", "api-and-interface-design": "指导稳定 API 与接口设计。用于设计 API、模块边界、任何 public interface,创建 REST/GraphQL endpoint,定义模块间 type contract,或建立前后端边界。", "article-writing": "长文创作 — 文章/指南/博客/教程/邮件 newsletter，按提供的风格示例写作（强调一致性+结构+可信度）。触发词：写文章/长文/写博客/写教程", "ask-cli": "把同一问题派发给本机钦定的外部 AI CLI 六联(kimi/mmx/opencode/qwen/mavis/codex)做异构对抗/交叉验证,Claude 综合各家观点裁决。复用已验证脚本 ai-cli.sh(单 CLI)/ai-panel.sh(多 CLI 并发),禁手拼裸 CLI 命令。触发词：异构对抗、交叉验证、问外部CLI、多模型验证、ask cl", "audit-all-better": "mycc 自审统一入口——67 维全量诊断(基础设施/能力/事件/连接/知识/质量) + Harness 六层评分(L1 上下文/L2 工具/L3 编排/L4 记忆/L5 评估/L6 约束) + MEMORY/rules 记忆专项审计 + 12 R 行为层自检。触发词：健康检查/全身体检/cchealth/深度检查/audit all/全局审计/全面排查/系", "auto-collector-community": "通过 firecrawl 扫描 Reddit/HN/公众号的 Claude Code 新 insight，作为月度记忆进化 S3 步骤", "auto-collector-github": "扫描 OMC 相关 GitHub 仓库的新 commit/issue/release，作为月度记忆进化 S2 步骤", "auto-collector-official": "抓取 Anthropic 官方 Changelog 和 Claude Code docs 的增量内容，作为月度记忆进化 S1 步骤", "banner-design": "横版 banner / 大图视觉设计。", "baoyu-article-illustrator": "为文章自动配图,支持多种 art style。", "baoyu-comic": "知识漫画创建器,支持多种 art style 与 tone。可创建带详细 panel 布局的原创教育漫画,支持批量图片生成。当用户要求创建「知识漫画」「教育漫画」「biography comic」「tutorial comic」「Logicomix-style comic」时使用。", "baoyu-compress-image": "图片压缩工具,降低图片体积同时尽量保持视觉质量。", "baoyu-cover-image": "为文章/书自动生成 cover image,支持多种 art style。", "baoyu-diagram": "自动生成示意图/信息图,支持多种 art style。", "baoyu-electron-extract": "Electron 应用解包/逆向辅助。", "baoyu-format-markdown": "Markdown 排版与格式美化。", "baoyu-image-gen": "通用图片生成入口,支持多种 art style。", "baoyu-infographic": "信息图/数据图自动生成。", "baoyu-markdown-to-html": "Markdown 转 HTML,常用于公众号/网页发布。", "baoyu-slide-deck": "PPT/Slide 自动生成。", "baoyu-translate": "多语言翻译工具——中英日韩等互译，保持Markdown格式。触发词：翻译、translate、中译英、英译中。", "baoyu-url-to-markdown": "把 URL 文章转 Markdown。", "baoyu-wechat-summary": "公众号文章摘要生成。", "baoyu-xhs-images": "小红书图文自动生成。", "baoyu-youtube-transcript": "YouTube 视频转文字稿。", "brand": "品牌定位/视觉系统设计。", "brand-voice": "品牌声音建模 — 从你提供的真实文章/帖子/文档提炼写作风格 profile，用于后续所有内容创作保持一致风格（避免 AI 腔）。触发词：出品牌指南/品牌声音/统一文风", "canary-monitor": "部署后 canary 哨兵监控——截图基线对比、console 错误检测、性能回归告警。触发词:canary、post-deploy check、部署后监控、canary check、watch production、monitor after deploy、verify deploy、部署验证。", "card-xiaohongshu": "小红书卡片图文自动生成。", "caveman": "「穴居人」极简通信模式:压缩 token 用量 ~75%,丢弃废话/冠词/客套,保留完整技术精度。触发词:caveman mode/talk like caveman/use caveman/less tokens/be brief/极简模式/节省 token/穴居人模式/简洁输出。", "ce-code-review": "Context Engineering 之代码审查。", "ce-optimize": "Context Engineering 优化——context 瘦身与精度提升。", "ce-plan": "Context Engineering 规划——先定 context 策略再写代码。", "ce-strategy": "Context Engineering 战略——长期 context 治理路线图。", "ce-work": "Context Engineering 日常工作流。", "ceo-decision": "CEO一站式战略决策顾问委员会 — 输入任何战略问题，5位顾问并行分析，产出Decision Memo。触发词：ceo决策/战略分析/顾问委员会/帮我想清楚这件事。model: opus", "ceo-mode": "CEO 模式 — 像 CEO 一样按需组建团队/专家组，并行干活，用完下线。本地化吸收自 revfactory/harness（Apache-2.0）的团队工厂 + 官方 Agent Teams。触发场景：(1) '组建团队/建专家组/拉齐N专家/搭个X组' — 临时组队干活；(2) 'CEO模式/像CEO一样/动态团队' — 显式调用；(3) '解散组/团", "ci-template": "CI 模板生成。", "claude-code-better": "V46.3全面配置升级流水线(动态N专家+调用audit-all-better 30维诊断+自身17维Phase2分析+8维环境预检+7维全球对标=67维全量)——按需N专家+双配置同步+Desktop对齐+★最优推荐合规+铁律1-12检查+audit-all全能力融合→输出升级方案→验证闭环。触发词：全面升级/配置优化/进化升级/自动进化/举一反三排查。", "cmmi-tracker": "CMMI L3 持续可见追踪体系 — 需求/任务/错误/版本四库管理 + Notion同步。触发词：需求追踪/任务追踪/cmmi/版本追踪/错误追踪/追溯矩阵/待处理任务", "codebase-memory": "用代码库知识图谱回答结构性查询:探索架构、理解结构、查函数存在、看模块结构、查调用方、查被调用方、追踪调用链、找 caller、看依赖、影响分析、死代码、未用函数、高 fan-out、重构候选、代码质量审计、图查询语法、Cypher 示例、edge 类型、search_graph 用法。", "codesight": "预生成项目上下文摘要，减少代码探索的Token开销（~11x节省）。新项目开始时自动激活。触发词：codesight、项目摘要、代码索引、项目概览。", "cold-email": "【中】cold-email (中文翻译补充中, 见下方原英文). Write B2B cold emails and follow-up sequences that get replies. Use when the user wants to write cold outreach emails, prospecting emails, cold ema", "completion-self-check": "任务完成前自检 — 5 维（实跑证据/★推荐/4 要素/反讽刺/回滚）逐项过一遍。触发词：\"完成了吗\"/\"通过了吗\"/\"做完了吗\"/\"自检\"/\"completion check\"/\"self-check\"。", "composition-patterns": "React 组合模式 — 避免 boolean prop 泛滥，用复合组件/状态提升/内部组合。React 组件设计触发。", "content-engine": "多平台内容引擎 — X/LinkedIn/小红书/抖音/YouTube/公众号原生内容系统，一份素材自动适配多平台分发。触发词：写内容/内容日历/跨平台内容/多平台分发", "context-engineering": "优化 agent 上下文配置：新会话启动或输出质量下降时重建最优上下文", "customer-research": "【中】customer-research (中文翻译补充中, 见下方原英文). When the user wants to conduct, analyze, or synthesize customer research. Use when the user mentions \"customer research,\" \"ICP research,\" \"t", "deep-research-sop": "deep-research 的六步决策闭环 SOP 入口——调研/搜索/deep research 任务前强制声明走六步 SOP（澄清→评估→对抗验证→实测核实→不盲信→落地），再路由到 deep-research 执行。触发词：调研/搜索/deep research/查资料", "deploy-ship": "安全部署/上线/发布流程。触发词：\"部署/上线/发布/ship/launch/灰度\"。支持 BigOS Docker/nginx 场景，五步闭环安全部署，吸收 gstack /ship 思想。", "deprecation-and-migration": "废弃管理与迁移：老 API 下线、系统替换、功能日落的全流程决策与执行", "design": "通用设计入口。", "design-system": "设计系统建设/对齐。", "diagnose": "硬 bug 与性能回归的纪律化诊断循环：复现 → 最小化 → 假设 → 检测 → 修复 → 回归测试", "diff-generator": "将 S1-S4 审计结果综合为 MEMORY-diff.md，并按 P0/P1 触发飞书推送，作为月度记忆进化 S5 步骤", "documentation-and-adrs": "记录架构决策(ADR)与文档：架构变更、API 变更、功能发布时留下未来可查的决策上下文", "doubt-driven-development": "怀疑驱动开发：每个重要决策用新鲜上下文做对抗审查，生产/安全/不可逆场景必用", "ecc-continuous-learning-v2": "【中】continuous-learning-v2 (中文翻译补充中, 见下方原英文). Instinct-based learning system that observes sessions via hooks, creates atomic instincts with confidence scoring, and evolves them int", "ecc-eval-harness": "评测 harness 搭建。", "ecc-gateguard": "行动前事实门控：阻止未经核实就直接 Edit/Write/Bash 的鲁莽操作，强制先调查再动手", "ecc-parallel-execution-optimizer": "并行执行优化器：把独立子任务拆为并发 agent 同时跑，大幅提速且不损正确性", "ecc-skill-comply": "可视化 skill/rule/agent 是否真正被遵守：自动生成测试场景并输出合规率报告", "eng-experts": "工程化专家团队口语翻译层 — 把\"卡帕西/资深 dev/架构师\"等口语关键词路由到 ~/.claude/agents/ 下 3 个工程化 expert agent（karpathy-discipline-expert / senior-developer-mindset / architect）。当用户说卡帕西/Karpathy/严格审查/资深 dev/架构", "engineering-scenario-router": "工程化场景智能路由器（含 super 入口）。把口语意图路由到正确的 skill/agent（super/超级入口/万能入口/超级大脑/不知道找谁/工程化/卡帕西/架构师/开工/排查/梳理/收口/deep-interview/ultrawork/ultraqa/ultragoal/ralph/autopilot/team/走1/活力全开/队长 等 51 触发", "full-checkup": "全面体检 — gated 自动化样板：口语触发→只读诊断自动跑→改配置前 HITL 确认→修复→复核。触发词：全面体检/系统体检/三连体检/给系统做个体检/体检一下/checkup/全面检查并修复。对齐 Claude 官方 plan-mode(只读先行)+ omc-hitl(人确认门),把 audit→better→harness 串成'诊断不需你管、改动必", "gh-ci-fix": "GitHub PR 的 CI 检查红灯时，定位失败→拉 Actions 日志→诊断根因→给修复计划(需批准)→实施→回验的闭环。纯 gh 原生命令(无脚本依赖)。仅处理 GitHub Actions，外部 provider(Buildkite等)只报 URL 不接管。触发词：CI失败/PR检查红灯/fix ci/CI红了/check failed/Actio", "graphify": "把概念/代码转成知识图谱。", "grill-me": "对计划或设计进行无情追问式深度审讯,触发:grill me/拷问我/压力测试方案/深度追问。", "grill-with-docs": "方案压力测试:用项目领域模型与 ADR 决策记录挑战计划,同步更新 CONTEXT.md/ADR 文档。", "gstack-careful": "破坏性命令安全护栏：执行删除、覆盖等危险操作前强制拦截并等待确认", "gstack-cso": "首席安全官模式：OWASP 漏洞扫描、安全策略审查、全方位安全分析", "gstack-design-html": "设计定稿工具：将视觉设计转化为生产级 HTML/CSS 代码", "gstack-freeze": "将本次会话的文件编辑范围冻结到指定目录，防止误改其他文件", "gstack-guard": "全安全模式：危险命令警告与编辑范围限制同时生效", "gstack-investigate": "系统化调试与根因调查，专门处理\"为什么坏了\"类深度问题排查", "gstack-land-and-deploy": "落地与部署工作流：代码合并到推上生产环境的完整闭环", "gstack-office-hours": "YC 创业答疑双模式：一对一创始人辅导或团队集体问答", "gstack-qa": "系统化 QA 测试 Web 应用，自动发现 bug 并给出修复方案", "gstack-repo": "无头浏览器驱动的 QA 自测：像真实用户一样点击验证网站各项功能", "gstack-review": "PR 合并前代码审查：检查 diff 质量、潜在问题与规范合规性", "gstack-ship": "一键发布工作流：合并主干 → 跑测试 → 更新版本号与 CHANGELOG → 推送 → 创建 PR", "handoff": "将当前对话压缩为结构化交接文档，让下一个 agent 无需上下文即可无缝接续", "humanize-chinese": "去 AI 味中文文本改写 — 评分/人性化/降AIGC/风格转换。触发：去AI味/降AIGC/论文降重/知网检测。", "humanizer": "Remove signs of AI-generated writing from text. Use when editing or reviewing text to make it sound more natural and human-written. Based on Wikipedia's comprehensive \"Signs of AI ", "improve-codebase-architecture": "代码库架构改进建议。", "interview-me": "通过结构化访谈澄清需求:从粗到细、按维度追问、明确边界与优先级。触发:需求澄清/不确定怎么做/先聊一下。", "last30days": "【中】last30days (中文翻译补充中, 见下方原英文). \"Research what people actually say about any topic in the last 30 days. Pulls posts and engagement from Reddit, X, YouTube, TikTok, Hacker News, Po", "macos-automation": "macOS 桌面自动化——操作Finder/系统设置/截图/AppleScript/Shortcuts。触发词：打开应用、截图、系统设置、mac控制、桌面操作。", "marketing": "营销活动完整流水线 — SEO+推广+邮件+合规+KPI+多平台发布。说\"做营销/营销活动/推广/SEO\"触发", "memory-checkup": "记忆体检 — gated 自动化第 2 样板(记忆卫生链)。口语触发→只读诊断记忆完整率/孤儿碎片→改动前 HITL 确认→归档→复核。触发词：记忆体检/清记忆/记忆卫生/归档孤儿记忆/记忆碎片清理/记忆健康检查。复用 lib/memory-index-check.sh + lib/memory-orphan-triage.py,对齐 gated 范式(do", "memory-dream-consolidation": "Dream Consolidation（记忆整合）：后台定期清理重复、冲突、过期的记忆。灵感来自 Claude Code autoDream。触发词：记忆清理、dream consolidation、记忆整合、清理记忆", "mmx-cli": "【中】mmx-cli (中文翻译补充中, 见下方原英文). Use mmx to generate text, images, video, speech, and music via the MiniMax AI platform. Use when the user wants to create media content, chat with Min", "mycc-selfheal": "mycc 自身问题自愈。", "mycc-skill-audit-cycle": "mycc Skill 工程化审计闭环（5步）— 审计→P1清单→用户决策→Agent并行修复→验证Workflow。月度自动触发（接入self-evolve-loop），用户说'开始修/fix skills/skill质量'即启动修复阶段。禁止跳过用户决策直接进入修复。", "neat-freak": "任务完成后自动三层对齐——项目文档↔CLAUDE.md↔跨会话记忆同步。解决'代码改7轮文档还停在第一版'的记忆腐烂。触发词：文档对齐、记忆同步、neat freak、整理文档。", "no-plugin-prompts": "不依赖任何插件的 6 步并行开发 Prompt 套件。在 Claude Code / 任意强模型环境中，纯 prompt 复现\"并行 + 高质量 + 不放弃\"的工程执行效果。适合团队复用、零依赖落地。触发词：不依赖插件 / 纯 prompt 模式 / 团队复用 prompt / 人肉并行。", "notion-knowledge-capture": "把对话与决策整理为结构化 Notion 页面,触发:沉淀到 Notion/整理笔记/决策日志/知识沉淀。", "notion-spec-to-implementation": "Notion 规格说明 → 代码实现。", "nuwa-skill": "蒸馏任何人的思维方式——6路采集→3重验证→5层提取→生成人物视角分析。内置13位人物(乔布斯/马斯克/芒格/费曼等)。触发词：蒸馏、nuwa、思维方式、人物分析、决策模式。", "observability-and-instrumentation": "代码可观测性埋点：为生产代码添加日志、指标、链路追踪，让线上问题有据可查", "obsidian-vault": "在 Obsidian 仓库中搜索、创建和管理笔记，支持 wikilinks 和索引笔记。当用户希望在 Obsidian 中查找、创建或整理笔记时触发。关键词：Obsidian、笔记管理、wikilinks、知识库。", "omc-hitl": "Human-In-The-Loop 强制确认门控 — bypass 模式下关键决策点（生产/不可逆/大额）自动暂停等用户。说\"开 HITL/关键决策门控/重大操作前确认\"触发。", "omc-plan": "战略规划 skill：支持访谈式工作流，输出结构化的多步可执行计划", "omc-project-init": "为一个具体业务项目生成它专属的 Claude Code 能力体系（项目级 skill / MCP / hook / 铁律 / 规则）。先用 understand 工具完整吃透项目，再按 Claude 官方 project-level 机制，基于项目实际技术栈与业务，为它现做一批个性化补充能力。Use this whenever the user wants ", "omc-prompt-lib": "提示词库管理系统。保存 / 搜索 / 优化 / 融合用户的高质量 prompt。 自动相似度比对（>0.85 触发融合提示），qmd 向量搜索 + Notion 双存储。 支持从历史对话提炼优质 prompt 入库。", "omc-reference": "OMC agent 目录与工具清单：委派 agent、编排团队、查 skill 注册表时的权威参考", "pricing-strategy": "【中】pricing-strategy (中文翻译补充中, 见下方原英文). \"Analyze and design pricing strategies including pricing models, competitive pricing analysis, willingness-to-pay estimation, and price elast", "prototype": "原型快速搭建。", "qwen-cli": "用 qwen (通义千问 Code CLI v0.17.1) 跨模型异构对抗验证。用于:加第 4 异构源到 ai-panel.sh (默认 panel = gemini/kimi/mmx/qwen) 或单跑 qwen 处理中文任务/通义/千问/aliyun。", "ra-qm-team": "合规/质量管理团队入口（RA/QM）— 路由到 5 个合规知识子技能：EU AI Act 风险分级、GDPR 数据权利、ISO 27001 ISMS、ISO 42001 AIMS、SOC 2 审计。任务涉及\"合规/认证/审计准备/数据保护/AI法案\"时使用。", "secretary-orchestrator": "副驾驶秘书 4 形态聚合入口 — 5/5 健康报告，perceive 数据点统计，greeter 打卡验证，tongues review 触发，quality-log 趋势，registry 项目状态。触发：用户问\"秘书\" / \"system health\" / \"MYCC 健康", "secretary-tongues": "高级专家小组 + 毒舌对抗风格秘书——每次主调度器给方案后，5 个独立 LLM 视角（架构师毒舌/产品经理毒舌/工程效率毒舌/安全/落地的PM）独立打 0-10 分并列出反对意见，输出\"毒舌综合 report\"给用户看。低 token（用 haiku 跑），高杠杆。触发：综合审计/全面升级/重大决策/用户问\"秘书觉得呢\"时按需调用。", "security-audit": "应用代码层安全审计——OWASP Top10 漏洞扫描 + STRIDE 威胁建模，静态分析注入/认证/密钥/SSRF/反序列化等风险，输出 P0-P2 分级修复清单。触发词：安全审计、安全审查、security audit、漏洞扫描、OWASP、威胁建模、STRIDE、查安全漏洞、代码安全。", "self-audit-loop": "任何主任务完成时自动自审5问，主动列盲点清单。触发：SubagentStop / 主任务声称完成 / 用户说'自审/audit-loop/自检一遍'。解决问题：完成信号过早、需用户追问才发现遗漏。", "seo-audit": "【中】seo-audit (中文翻译补充中, 见下方原英文). When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions \"SEO audit,\" \"technical SEO,\" \"why am I ", "shipping-and-launch": "发布/上线流程。", "skill-audit": "第三方 Skill 安全审计 — 安装前检查 skill 的安全性、权限需求、与现有能力的重复度。V26.3融合skill-judge 6维评分。当用户要安装新 skill/plugin/MCP 时自动激活。关键词：skill审计、安全检查、安装前检查、审计skill、安全扫描。", "slides": "PPT/Slide 生成。", "smart-closure": "任务闭环 SOP — 按任务类型自动判断并执行对应验证/提交档位（三档：L1对话/L2显式/L3高风险）", "smart-flow-all": "Smart-Flow V46.3 全模式统一入口（队长=此入口）：说\"队长\"自动按需融合 YOLO全权限+ceo-mode/teams路由+Plan Graph编排器+Queue任务依赖+深度调研≥3层默认+铁律1-12全保护。Intent Schema解析→场景识别→复杂度路由→execution_mode传递→方案菜单→路由执行", "social-publisher": "多平台社媒发布编排 — X/LinkedIn/小红书/朋友圈/公众号/B站。说\"发推文/发小红书/发朋友圈/多平台发布\"触发", "source-driven-development": "以官方文档为唯一依据驱动开发，用框架或库时杜绝过时 API 与错误模式", "sp-brainstorming": "Socratic 需求澄清 skill — 强迫用户输出具体 spec，禁\"我想要 X\"式模糊需求。触发词：脑暴/socratic/明确需求/具体化/想清楚", "sp-requesting-code-review": "按 superpowers 方法论在每个 task 完成后或 PR 前触发规范 code review 流程", "sp-subagent-driven-development": "每个任务派独立 subagent 并行执行，含两阶段 review（spec 合规 + 代码质量），不打断用户", "sp-test-driven-development": "TDD 红绿重构 skill — 先写失败测试（红）→ 最小实现（绿）→ 重构（保持绿）。触发词：TDD/红绿重构/测试驱动/先写测试", "sp-writing-plans": "将需求拆解为每步 2-5 分钟的细粒度任务列表，含 TDD 标注与复选框进度跟踪", "spec-generator": "口语需求→结构化 Spec/PRD。用户说\"帮我想清楚/分析需求/写规格/做个PRD/产品规格\"时触发。引导式访谈+结构化输出，吸收 GSD discuss+plan 思想。", "start-work": "工程化协作中心入口 — 用户说\"开工/开干/做工程化/启动项目/项目化\"时激活。本 skill 是\"manager 中心\"的轻量实现（≤120 行，避中台化）：调起 planner(opus) → 拉 3 工程化专家(karpathy/senior-dev/architect)并行 → 走 3 验证(test-engineer/code-reviewer/v", "systematic-error-analysis": "七维系统化错误分析——5W2H+第一性原理+多专家交叉论证+复发熔断升级。任何错误≥2次复发自动激活。触发词：又报错、反复错误、同样问题、400错误、一直失败、error loop、复发、syserr", "task-closer": "任务收口 SOP — 5 维自评 + 反推测扫描 + ★最优推荐 + 闭环归档。触发词：\"收口\"/\"闭环\"/\"任务结束\"/\"验收\"/\"close task\"/\"wrap up\"。", "teach": "Teach the user a new skill or concept, within this workspace.。在工作区内教学，讲解技能/概念，学习、教学、解释知识", "team": "同一任务列表上协同工作的 N 个并发 agent 团队，共享进度互不阻塞", "team-prompt-template": "Agent Teams 团队 Prompt 7 字段模板。触发词：开 team、多人协作、并行做、team prompt、agent teams、跨域协同、拆任务。吸收自《Claude Code Agent Teams 实战：怎么拆任务、控权限、收证据》(2026-05-27)，结合 OMC V28 四步骨架。", "teleport": "跨会话上下文跳转——从当前会话提炼关键上下文（目标/进度/决策/阻塞），打包注入新会话，实现无缝接力。触发词：teleport、上下文跳转、跨会话、接力、打包上下文。", "test-driven-development": "以测试驱动开发,覆盖任何逻辑实现、Bug 修复或行为变更。触发词:TDD/测试驱动开发/单元测试/修复 Bug。", "to-issues": "把 plan/spec/PRD 拆成可独立认领的 issue（tracer-bullet 垂直切片）。触发：拆 issue/创建 ticket/拆任务。", "token-budget": "Token预算自动管理(ECC增强: +战略压缩建议+成本追踪+CoD) — 监控context→主动压缩/清理→成本预警。当context>60%或对话>30轮时自动激活。关键词：token管理、节省token、上下文爆炸、省token、token budget、成本、cost。", "triage": "问题分诊/优先级排序。", "ui-styling": "UI 样式细节调整。", "ui-ux-pro-max": "高质量 UI/UX 设计与实现。", "update-all": "一键更新所有 Claude Code 相关组件：OMC、plugins、npm 全局包、MCP servers。自动发现新安装的组件并纳入更新流程。", "vercel-react-best-practices": "Vercel React/Next.js 性能优化最佳实践。写/重构/审查 React/Next.js 时触发。", "web-access": "智能联网能力——5层通道调度(WebSearch→WebFetch→Jina→CDP→子Agent)+中文平台反爬(小红书/知乎/公众号)+站点经验积累。触发词：上网查、搜索、联网、web access、查资料。", "xhs-operations-method": "小红书运营方法论（人工可执行版，非自动化）。覆盖养号7天SOP、8级流量池机制、爆款四要素、六类标题公式、关键词选题、违禁词规避、转化率优化。触发词：小红书运营/小红书养号/小红书涨粉/爆款标题/小红书选题/xhs运营/小红书笔记/小红书引流/小红书种草", "zoom-out": "放大视野获取更广上下文,理解代码整体架构和全局视角。", "ecc-tdd-workflow": "TDD 开发工作流：新功能/修 bug/重构时强制先写失败测试，覆盖率要求 80%+ 含 E2E"}, "skill_categories": {"dev": ["api-and-interface-design", "auto-collector-github", "ce-code-review", "claude-code-better", "codebase-memory", "codesight", "deploy-ship", "diagnose", "doubt-driven-development", "gstack-land-and-deploy", "gstack-ship", "improve-codebase-architecture", "shipping-and-launch", "source-driven-development", "sp-requesting-code-review", "sp-subagent-driven-development", "sp-test-driven-development", "sp-writing-plans", "test-driven-development"], "business": ["ceo-decision", "ceo-mode", "gstack-investigate", "marketing", "pricing-strategy"], "pm": ["baoyu-xhs-images", "brand", "brand-voice", "cold-email", "content-engine", "customer-research", "seo-audit", "social-publisher", "xhs-operations-method"], "security": ["audit-all-better", "mycc-skill-audit-cycle", "security-audit", "self-audit-loop", "skill-audit"], "ops": ["canary-monitor", "ci-template", "gh-ci-fix", "observability-and-instrumentation", "secretary-orchestrator", "secretary-tongues"], "ai": ["baoyu-markdown-to-html", "context-engineering", "deep-research-sop", "ecc-eval-harness", "gstack-design-html", "web-access"], "docs": ["article-writing", "baoyu-article-illustrator", "baoyu-compress-image", "baoyu-cover-image", "baoyu-diagram", "baoyu-format-markdown", "baoyu-image-gen", "baoyu-slide-deck", "documentation-and-adrs", "graphify", "grill-with-docs", "handoff", "notion-knowledge-capture", "notion-spec-to-implementation", "slides"], "system": ["ask-cli", "auto-collector-community", "auto-collector-official", "caveman", "cmmi-tracker", "completion-self-check", "ecc-skill-comply", "grill-me", "humanize-chinese", "humanizer", "macos-automation", "mmx-cli", "mycc-selfheal", "neat-freak", "no-plugin-prompts", "nuwa-skill", "obsidian-vault", "omc-hitl", "omc-plan", "omc-project-init", "omc-prompt-lib", "omc-reference", "qwen-cli", "smart-flow-all", "teleport", "token-budget", "triage", "update-all"], "other": ["_deprecated", "_local", "agent-reach", "antigravity-memory-systems", "banner-design", "baoyu-comic", "baoyu-electron-extract", "baoyu-infographic", "baoyu-translate", "baoyu-url-to-markdown", "baoyu-wechat-summary", "baoyu-youtube-transcript", "card-xiaohongshu", "ce-optimize", "ce-plan", "ce-strategy", "ce-work", "composition-patterns", "deprecation-and-migration", "design", "design-system", "diff-generator", "ecc-continuous-learning-v2", "ecc-gateguard", "ecc-parallel-execution-optimizer", "eng-experts", "engineering-scenario-router", "full-checkup", "gstack-careful", "gstack-cso", "gstack-freeze", "gstack-guard", "gstack-office-hours", "gstack-qa", "gstack-repo", "gstack-review", "interview-me", "last30days", "memory-checkup", "memory-dream-consolidation", "prototype", "ra-qm-team", "smart-closure", "sp-brainstorming", "spec-generator", "start-work", "systematic-error-analysis", "task-closer", "teach", "team", "team-prompt-template", "to-issues", "ui-styling", "ui-ux-pro-max", "vercel-react-best-practices", "zoom-out"]}, "workflows": ["ceo-pipeline", "fundraising", "v29-deep-research", "code-review", "self-evolve-loop", "bughunt", "n-step-pipeline", "dev-pipeline", "judge-panel", "harness-audit", "overseas-compliance", "boardroom", "comprehensive-upgrade"], "workflow_map": {"boardroom": "董事会汇报准备", "bughunt": "系统性 Bug 排查", "ceo-pipeline": "CEO 全流水线 PM→Arch→Eng→QA→CEO", "code-review": "代码审查", "comprehensive-upgrade": "综合升级流水线", "config-audit-better": "配置审计", "dev-pipeline": "开发流水线 spec→scaffold→impl→test→review→deploy", "domain-audit-better": "域审计", "fundraising": "融资准备", "harness-audit": "Harness 六层健康评分", "judge-panel": "多视角评审", "n-step-pipeline": "N步自适应流水线", "overseas-compliance": "出海合规", "self-evolve-loop": "自我进化闭环", "v29-deep-research": "深度调研"}, "ceo_roles": ["architect", "ceo-orchestrator", "chief-of-staff", "cmo-advisor", "devops-engineer", "engineer", "product-manager", "qa-validator", "researcher", "security-analyst", "test-engineer"], "industry_agents": ["capital-ir", "chain-expansion", "consumer-trend", "overseas-entry", "supply-chain", "unit-economics"], "teams": ["team-data-ai", "team-fullstack", "team-infra", "team-research", "team-security"], "core_agents": ["captain", "evolution-scout", "needs-analyst", "project-director", "technical-writer"], "orchestration": {"entry_points": [{"say": "队长 + 任务", "priority": 95, "engine": "smart-flow-all"}, {"say": "活力全开 + 任务", "priority": 95, "engine": "smart-flow-all YOLO L4"}, {"say": "全面升级", "priority": 85, "engine": "claude-code-better"}, {"say": "又报错", "priority": 82, "engine": "systematic-error-analysis"}, {"say": "评估项目", "priority": 80, "engine": "ceo-mode"}, {"say": "秘书巡检", "priority": 80, "engine": "secretary"}], "workflow_map": {"boardroom": "董事会汇报准备", "bughunt": "系统性 Bug 排查", "ceo-pipeline": "CEO 全流水线 PM→Arch→Eng→QA→CEO", "code-review": "代码审查", "comprehensive-upgrade": "综合升级流水线", "config-audit-better": "配置审计", "dev-pipeline": "开发流水线 spec→scaffold→impl→test→review→deploy", "domain-audit-better": "域审计", "fundraising": "融资准备", "harness-audit": "Harness 六层健康评分", "judge-panel": "多视角评审", "n-step-pipeline": "N步自适应流水线", "overseas-compliance": "出海合规", "self-evolve-loop": "自我进化闭环", "v29-deep-research": "深度调研"}}, "business_capabilities": {"行业专家矩阵": {"连锁/开店/加盟": ["chain-expansion", "unit-economics", "supply-chain"], "出海/海外/合规": ["overseas-entry", "capital-ir"], "单店/盈亏/回本": ["unit-economics", "chain-expansion"], "融资/BP/估值": ["capital-ir", "unit-economics"], "品牌/爆品/内容": ["consumer-trend", "supply-chain"], "供应链/采购": ["supply-chain", "unit-economics"]}}}, "hooks": {"total_files": 56, "by_event": {"PreToolUse": 13, "SubagentStop": 3, "UserPromptSubmit": 9, "SessionStart": 7, "PostToolUse": 6, "Stop": 5, "PostToolUseFailure": 2, "PermissionRequest": 1, "PreCompact": 1, "PostCompact": 1, "SessionEnd": 3, "SubagentStart": 1, "StopFailure": 1, "MessageDisplay": 1}}};
+const D = {"generated_at": "2026-06-27T11:49:50.047932Z", "version": {"claude_code": "2.1.195 (Claude Code)", "omc": "4.15.0", "stats_engine": "V53", "cc_switch": "OFF"}, "counts": {"skills": 147, "workflows": 14, "hooks_registered": 54, "hook_events": 14, "hook_files": 55, "agents_total": 89, "agents_core": 5, "agents_ceo_roles": 12, "agents_industry": 7, "agents_teams": 6, "plugin_skills": 419, "plugin_agents": 164, "mcp_servers": 4, "enabled_plugins": 32, "total_plugins": 58, "rules": 3, "intent_words_routes": 95, "external_clis": 3}, "lists": {"priority_routes": [{"name": "队长", "priority": 95, "keywords": ["队长", "leader", "boss", "老大"]}, {"name": "活力全开", "priority": 95, "keywords": ["活力全开", "火力全开", "全力", "yolo_l4"]}, {"name": "ceo_decision_council", "priority": 88, "keywords": ["ceo决策", "战略分析", "顾问委员会", "帮我想清楚这件事", "决策备忘录"]}, {"name": "comprehensive_upgrade_workflow", "priority": 86, "keywords": ["系统级升级", "全栈升级", "跑一遍综合升级", "comprehensive upgrade"]}, {"name": "smart_captain", "priority": 85, "keywords": ["smart", "flow", "自动化", "智能"]}, {"name": "claude_code_better", "priority": 85, "keywords": ["claude_code_better", "claude code better", "全面升级", "配置优化", "进化升级"]}, {"name": "workflow_orchestrate", "priority": 85, "keywords": ["workflow", "多agent", "并行调度", "fan out"]}, {"name": "开team", "priority": 85, "keywords": ["多人协作", "并行做", "跨域协同", "team prompt", "拆任务"]}, {"name": "completion_enforcer_route", "priority": 85, "keywords": ["更新", "收口", "todo", "下一步", "/docs"]}, {"name": "upgrade_full_v40", "priority": 84, "keywords": ["全面升级", "全量升级", "系统升级", "融汇贯通", "升级一下"]}, {"name": "ceo_pipeline_voice", "priority": 84, "keywords": ["全流水线", "CEO流水线", "ceo流水线", "端到端交付", "全流程交付"]}, {"name": "n_step_pipeline_voice", "priority": 84, "keywords": ["N步流水线", "n步流水线", "多步流水线", "自定义流水线", "n步管线"]}, {"name": "boardroom_voice", "priority": 84, "keywords": ["董事会汇报", "board deck", "董事会准备", "董事会材料"]}, {"name": "fundraising_voice", "priority": 84, "keywords": ["融资准备", "BP撰写", "term sheet", "融资BP"]}, {"name": "overseas_compliance_voice", "priority": 84, "keywords": ["出海合规", "跨境数据合规", "数据本地化", "出海数据合规"]}, {"name": "full_checkup_route", "priority": 83, "keywords": ["全面体检", "系统体检", "三连体检", "给系统做个体检", "体检一下"]}, {"name": "cross_model_adversarial", "priority": 83, "keywords": ["异构对抗", "对抗验证", "三方对抗", "三方cli", "五方对抗"]}, {"name": "audit_all_route", "priority": 82, "keywords": ["30维扫描", "cchealth", "全身检查", "系统检查", "深度检查"]}, {"name": "error_analysis", "priority": 82, "keywords": ["error analysis", "error_analysis", "又报错", "反复错误", "同样问题"]}, {"name": "audit_internal", "priority": 82, "keywords": ["内部审计", "内部纠错", "本机审计", "自我审计", "系统自检"]}, {"name": "harness_audit_route", "priority": 82, "keywords": ["harness评分", "harness审计", "六层评分", "harness", "审计"]}, {"name": "config_audit_route", "priority": 82, "keywords": ["配置审计", "配置升级"]}, {"name": "domain_audit_route", "priority": 82, "keywords": ["域审计", "全域升级"]}, {"name": "external_benchmark_route", "priority": 82, "keywords": ["外部对标", "全球获取", "外部学习", "全球对比", "对比社区"]}, {"name": "memory_checkup_route", "priority": 81, "keywords": ["记忆体检", "清记忆", "记忆卫生", "归档孤儿记忆", "记忆碎片清理"]}, {"name": "cross_project_memory", "priority": 81, "keywords": ["跨项目查", "项目记忆", "项目上次", "项目决策", "multica怎么"]}, {"name": "clarify_skip", "priority": 80, "keywords": ["按你理解做", "按你的方式来", "你看着办", "你决定", "use your best judgment"]}, {"name": "security_audit_v403", "priority": 80, "keywords": ["安全审查", "OWASP", "安全审计", "代码安全", "漏洞扫描"]}, {"name": "ceo_mode", "priority": 80, "keywords": ["组建团队", "建团队", "搭团队", "建专家组", "拉专家"]}, {"name": "advisor_mode", "priority": 80, "keywords": ["盘点", "今天搞什么", "我跑偏没", "给我建议", "当前状态"]}, {"name": "secretary_route", "priority": 80, "keywords": ["秘书", "巡检一下", "本周有啥新", "情报简报"]}, {"name": "benchmark_route", "priority": 80, "keywords": ["对标", "全球对标", "社区对标"]}, {"name": "official_verify_route", "priority": 80, "keywords": ["官方核查", "Tier0核查", "官方对照"]}, {"name": "sop_upgrade_route", "priority": 80, "keywords": ["SOP升级", "sop进化", "SOP复用", "SOP沉淀"]}, {"name": "archive_evolution_route", "priority": 80, "keywords": ["归档进化", "归档汇总", "会话归档"]}, {"name": "business_analysis", "priority": 80, "keywords": ["评估项目", "商业分析", "尽调", "选址", "加盟模型"]}, {"name": "c_level_advisory", "priority": 80, "keywords": ["GTM", "获客成本", "营销预算", "增长模型", "营销ROI"]}, {"name": "business_flow_scenarios", "priority": 80, "keywords": ["销售预测", "sales forecast", "定价实验", "价格AB测试", "危机公关"]}], "all_routes": [{"name": "队长", "priority": 95, "keywords": ["队长", "leader", "boss", "老大"], "target": ""}, {"name": "活力全开", "priority": 95, "keywords": ["活力全开", "火力全开", "全力", "yolo_l4"], "target": ""}, {"name": "ceo_decision_council", "priority": 88, "keywords": ["ceo决策", "战略分析", "顾问委员会", "帮我想清楚这件事", "决策备忘录", "我该不该"], "target": ""}, {"name": "comprehensive_upgrade_workflow", "priority": 86, "keywords": ["系统级升级", "全栈升级", "跑一遍综合升级", "comprehensive upgrade"], "target": ""}, {"name": "smart_captain", "priority": 85, "keywords": ["smart", "flow", "自动化", "智能"], "target": ""}, {"name": "claude_code_better", "priority": 85, "keywords": ["claude_code_better", "claude code better", "全面升级", "配置优化", "进化升级", "自动进化"], "target": ""}, {"name": "workflow_orchestrate", "priority": 85, "keywords": ["workflow", "多agent", "并行调度", "fan out"], "target": ""}, {"name": "开team", "priority": 85, "keywords": ["多人协作", "并行做", "跨域协同", "team prompt", "拆任务", "开team"], "target": ""}, {"name": "completion_enforcer_route", "priority": 85, "keywords": ["更新", "收口", "todo", "下一步", "/docs", "不自动"], "target": ""}, {"name": "upgrade_full_v40", "priority": 84, "keywords": ["全面升级", "全量升级", "系统升级", "融汇贯通", "升级一下", "进化"], "target": "claude-code-better"}, {"name": "ceo_pipeline_voice", "priority": 84, "keywords": ["全流水线", "CEO流水线", "ceo流水线", "端到端交付", "全流程交付", "精英团队流水线"], "target": ""}, {"name": "n_step_pipeline_voice", "priority": 84, "keywords": ["N步流水线", "n步流水线", "多步流水线", "自定义流水线", "n步管线", "自定义N步"], "target": ""}, {"name": "boardroom_voice", "priority": 84, "keywords": ["董事会汇报", "board deck", "董事会准备", "董事会材料"], "target": ""}, {"name": "fundraising_voice", "priority": 84, "keywords": ["融资准备", "BP撰写", "term sheet", "融资BP"], "target": ""}, {"name": "overseas_compliance_voice", "priority": 84, "keywords": ["出海合规", "跨境数据合规", "数据本地化", "出海数据合规"], "target": ""}, {"name": "full_checkup_route", "priority": 83, "keywords": ["全面体检", "系统体检", "三连体检", "给系统做个体检", "体检一下", "checkup"], "target": ""}, {"name": "cross_model_adversarial", "priority": 83, "keywords": ["异构对抗", "对抗验证", "三方对抗", "三方cli", "五方对抗", "跑panel"], "target": ""}, {"name": "audit_all_route", "priority": 82, "keywords": ["30维扫描", "cchealth", "全身检查", "系统检查", "深度检查", "健康检查"], "target": ""}, {"name": "error_analysis", "priority": 82, "keywords": ["error analysis", "error_analysis", "又报错", "反复错误", "同样问题", "400错误"], "target": ""}, {"name": "audit_internal", "priority": 82, "keywords": ["内部审计", "内部纠错", "本机审计", "自我审计", "系统自检", "跑一下审计"], "target": "audit-all-better"}, {"name": "harness_audit_route", "priority": 82, "keywords": ["harness评分", "harness审计", "六层评分", "harness", "审计", "L1-L6"], "target": ""}, {"name": "config_audit_route", "priority": 82, "keywords": ["配置审计", "配置升级"], "target": ""}, {"name": "domain_audit_route", "priority": 82, "keywords": ["域审计", "全域升级"], "target": ""}, {"name": "external_benchmark_route", "priority": 82, "keywords": ["外部对标", "全球获取", "外部学习", "全球对比", "对比社区"], "target": ""}, {"name": "memory_checkup_route", "priority": 81, "keywords": ["记忆体检", "清记忆", "记忆卫生", "归档孤儿记忆", "记忆碎片清理", "记忆健康检查"], "target": ""}, {"name": "cross_project_memory", "priority": 81, "keywords": ["跨项目查", "项目记忆", "项目上次", "项目决策", "multica怎么", "mycc-platform"], "target": ""}, {"name": "clarify_skip", "priority": 80, "keywords": ["按你理解做", "按你的方式来", "你看着办", "你决定", "use your best judgment", "随你"], "target": "smart-flow-all"}, {"name": "security_audit_v403", "priority": 80, "keywords": ["安全审查", "OWASP", "安全审计", "代码安全", "漏洞扫描", "STRIDE"], "target": ""}, {"name": "ceo_mode", "priority": 80, "keywords": ["组建团队", "建团队", "搭团队", "建专家组", "拉专家", "拉齐专家"], "target": ""}, {"name": "advisor_mode", "priority": 80, "keywords": ["盘点", "今天搞什么", "我跑偏没", "给我建议", "当前状态", "现在做什么"], "target": ""}, {"name": "secretary_route", "priority": 80, "keywords": ["秘书", "巡检一下", "本周有啥新", "情报简报"], "target": ""}, {"name": "benchmark_route", "priority": 80, "keywords": ["对标", "全球对标", "社区对标"], "target": ""}, {"name": "official_verify_route", "priority": 80, "keywords": ["官方核查", "Tier0核查", "官方对照"], "target": ""}, {"name": "sop_upgrade_route", "priority": 80, "keywords": ["SOP升级", "sop进化", "SOP复用", "SOP沉淀"], "target": ""}, {"name": "archive_evolution_route", "priority": 80, "keywords": ["归档进化", "归档汇总", "会话归档"], "target": ""}, {"name": "business_analysis", "priority": 80, "keywords": ["评估项目", "商业分析", "尽调", "选址", "加盟模型", "单店模型"], "target": ""}, {"name": "c_level_advisory", "priority": 80, "keywords": ["GTM", "获客成本", "营销预算", "增长模型", "营销ROI", "营销漏斗"], "target": ""}, {"name": "business_flow_scenarios", "priority": 80, "keywords": ["销售预测", "sales forecast", "定价实验", "价格AB测试", "危机公关", "舆情应对"], "target": ""}, {"name": "clarify_verify", "priority": 78, "keywords": ["你理解对了吗", "你明白我的意思吗", "我说清楚了吗", "确认一下你的理解", "我想要的是", "重新理解一下"], "target": "smart-flow-all"}, {"name": "expert_analysis", "priority": 78, "keywords": ["帮我分析", "专家分析", "给我看看", "评估一下", "这个项目怎么样"], "target": ""}, {"name": "自愈", "priority": 78, "keywords": ["自愈", "mycc-selfheal", "去重", "重复skill", "skill碰撞", "冲突修复"], "target": ""}, {"name": "进化", "priority": 78, "keywords": ["进化", "self-evolve", "迭代改进", "evaluator-optimizer", "rubric", "self-evolve-loop"], "target": ""}, {"name": "research_quick", "priority": 76, "keywords": ["调研一下", "查一下", "找资料", "查资料", "查一下资料", "research"], "target": ""}, {"name": "bdd_tdd_ralph", "priority": 75, "keywords": ["bdd", "tdd", "先写测试", "红绿重构", "测试驱动开发", "测试驱动"], "target": ""}, {"name": "prompt_lib_save", "priority": 75, "keywords": ["保存这个prompt", "保存这个提示词", "存一下这个prompt", "把这个prompt存起来", "save this prompt", "记录这个提示词"], "target": "omc-prompt-lib"}, {"name": "prompt_lib_search", "priority": 75, "keywords": ["查我之前的prompt", "查历史prompt", "找我存过的提示词", "我之前怎么写的", "提示词库里有没有", "search my prompts"], "target": "omc-prompt-lib"}, {"name": "deep_research_sop", "priority": 75, "keywords": ["查资料", "research", "查一下", "调研", "搜一下", "搜索"], "target": ""}, {"name": "project_bigos", "priority": 75, "keywords": ["BigOS升级", "bigos升级", "BigOS v8", "bigos v8", "BigOS v9", "BigOS 跨 12 服务"], "target": ""}, {"name": "project_multica", "priority": 75, "keywords": ["multica运维", "multica升级", "multica self-host", "multica回滚", "multica backfill", "OrbStack"], "target": ""}, {"name": "prompt_lib_optimize", "priority": 72, "keywords": ["优化这个prompt", "改进这个提示词", "这个prompt怎么写更好", "帮我优化提示词", "optimize this prompt", "让这个prompt更好"], "target": "omc-prompt-lib"}, {"name": "infeasible_alternatives", "priority": 72, "keywords": ["这样能做吗", "可行吗", "有没有别的方法", "换个思路", "做不到的话怎么办", "有替代方案吗"], "target": "smart-flow-all"}, {"name": "prompt_lib_main", "priority": 70, "keywords": ["提示词库", "prompt库", "prompt library", "我的提示词", "查提示词", "打开提示词库"], "target": "omc-prompt-lib"}, {"name": "decision_ledger_view", "priority": 70, "keywords": ["决策记录", "查决策历史", "之前为什么这么决定", "decision ledger", "重大决策", "看看决策"], "target": "omc-prompt-lib"}, {"name": "cmmi_tracker", "priority": 70, "keywords": ["需求追踪", "任务追踪", "cmmi", "cmmi追踪", "版本追踪", "错误追踪"], "target": ""}, {"name": "baoyu_translate", "priority": 70, "keywords": ["翻译", "translate", "中英翻译", "英中翻译", "中译英", "英译中"], "target": ""}, {"name": "project_new", "priority": 70, "keywords": ["新项目", "新建项目", "开新项目", "创建项目", "从0开始", "从头开始"], "target": ""}, {"name": "prompt_lib_extract", "priority": 68, "keywords": ["从历史提炼prompt", "把好的prompt存起来", "提炼这次对话的prompt", "extract prompts", "自动提炼提示词", "这次对话有什么好prompt"], "target": "omc-prompt-lib"}, {"name": "memory_search_3layer", "priority": 68, "keywords": ["查记忆", "搜记忆", "memory search", "找之前记录的", "我之前说过什么", "记忆里有"], "target": "oh-my-claudecode:remember"}, {"name": "prompt_lib_sync", "priority": 65, "keywords": ["同步Notion", "prompt同步", "sync prompts to notion", "把提示词同步到notion", "上传提示词库", "提示词同步到notion"], "target": "omc-prompt-lib"}, {"name": "gstack_guard", "priority": 65, "keywords": ["防护检查", "guard", "安全检查guard", "gstack guard"], "target": ""}, {"name": "spec_generator", "priority": 62, "keywords": ["spec", "PRD", "规格文档", "产品规格", "product requirement"], "target": ""}, {"name": "prompt_lib_versions", "priority": 62, "keywords": ["提示词版本", "这个prompt的历史版本", "prompt变更记录", "看看这个提示词改过什么", "prompt changelog", "提示词改动历史"], "target": "omc-prompt-lib"}, {"name": "scenario_req", "priority": 60, "keywords": ["分析需求", "写规格", "做个PRD", "product spec", "需求规格", "梳理需求"], "target": ""}, {"name": "scenario_deploy", "priority": 60, "keywords": ["部署", "上线", "ship", "launch", "灰度", "发布上线"], "target": ""}, {"name": "token_budget_route", "priority": 60, "keywords": ["token_budget_route", "token budget route"], "target": ""}, {"name": "skill_audit_route", "priority": 60, "keywords": ["compliance", "合规"], "target": ""}, {"name": "deep_research_standards", "priority": 60, "keywords": ["deep research", "调研", "深度调研"], "target": ""}, {"name": "deploy_ship", "priority": 60, "keywords": ["发布", "上线部署", "deploy-ship", "安全部署"], "target": ""}, {"name": "plain_mode", "priority": 60, "keywords": ["小白模式", "小白", "新手", "帮我解释", "看不懂", "简单点"], "target": ""}, {"name": "teleport_route", "priority": 55, "keywords": ["teleport route", "teleport_route", "teleport", "上下文跳转", "跨会话", "接力"], "target": ""}, {"name": "web_access_route", "priority": 55, "keywords": ["web access route", "web_access_route", "上网查", "搜索", "联网", "web"], "target": ""}, {"name": "yolo", "priority": 50, "keywords": ["yolo", "全权限", "bypass"], "target": ""}, {"name": "review", "priority": 50, "keywords": ["全量review", "深度review", "六维review", "PR全面审查", "全面审查代码", "全面代码审查"], "target": ""}, {"name": "update_all_components", "priority": 50, "keywords": ["update_all_components", "update all components"], "target": ""}, {"name": "humanize_text", "priority": 50, "keywords": ["humanize_text", "humanize text"], "target": ""}, {"name": "codesight_route", "priority": 50, "keywords": ["codesight_route", "codesight route", "codesight", "项目摘要", "代码索引", "项目概览"], "target": ""}, {"name": "neat_freak_route", "priority": 50, "keywords": ["neat_freak_route", "neat freak route"], "target": ""}, {"name": "nuwa_skill_route", "priority": 50, "keywords": ["nuwa skill route", "nuwa_skill_route", "蒸馏", "nuwa", "思维方式", "人物分析"], "target": ""}, {"name": "desktop_automation", "priority": 50, "keywords": ["desktop automation", "desktop_automation", "打开应用", "截图", "系统设置", "mac控制"], "target": ""}, {"name": "screenshot_capture", "priority": 50, "keywords": ["screenshot_capture", "screenshot capture"], "target": ""}, {"name": "obsidian_sync", "priority": 50, "keywords": ["obsidian_sync", "obsidian sync"], "target": ""}, {"name": "dream_consolidation", "priority": 50, "keywords": ["dream consolidation", "dream_consolidation", "记忆清理", "dream", "consolidation", "记忆整合"], "target": ""}, {"name": "brand-voice", "priority": 50, "keywords": ["出品牌指南", "品牌声音", "统一文风"], "target": ""}, {"name": "article-writing", "priority": 50, "keywords": ["写文章", "长文", "写博客", "写教程"], "target": ""}, {"name": "auto-auditor-internal", "priority": 50, "keywords": ["/ce-compound", "月度进化", "内部审计"], "target": ""}, {"name": "auto-collector-community", "priority": 50, "keywords": ["/ce-compound", "月度进化"], "target": ""}, {"name": "auto-collector-github", "priority": 50, "keywords": ["/ce-compound", "月度进化"], "target": ""}, {"name": "auto-collector-official", "priority": 50, "keywords": ["/ce-compound", "月度进化"], "target": ""}, {"name": "canary-monitor", "priority": 50, "keywords": ["canary", "post-deploy", "check", "部署后监控", "watch", "production"], "target": ""}, {"name": "content-engine", "priority": 50, "keywords": ["写内容", "内容日历", "跨平台内容", "多平台分发"], "target": ""}, {"name": "diff-generator", "priority": 50, "keywords": ["/ce-compound", "月度进化", "diff-generator", "生成进化报告"], "target": ""}, {"name": "gh-ci-fix", "priority": 50, "keywords": ["CI失败", "PR检查红灯", "fix", "ci", "CI红了", "check"], "target": ""}, {"name": "sp-test-driven-development", "priority": 50, "keywords": ["TDD", "红绿重构", "测试驱动", "先写测试"], "target": ""}, {"name": "wiki", "priority": 50, "keywords": ["wiki", "wiki this", "wiki add", "wiki lint", "wiki query"], "target": ""}, {"name": "xhs-operations-method", "priority": 50, "keywords": ["小红书运营", "小红书养号", "小红书涨粉", "爆款标题", "小红书选题", "xhs运营"], "target": ""}], "skill_desc": {"agent-reach": "Give your AI agent eyes to see the entire internet. 17 platforms via CLI, MCP, curl, and Python scripts. Zero config for 8 channels.", "antigravity-memory-systems": "用于 agent 系统的持久化语义记忆:跨会话知识保留、实体追踪、时序有效性、图谱/向量检索、记忆整合、记忆基准选型。文件型 scratchpad 路由到 filesystem-context、handoff 摘要路由到 context-compression、token 效率策略路由到 context-optimization。", "api-and-interface-design": "指导稳定 API 与接口设计。用于设计 API、模块边界、任何 public interface,创建 REST/GraphQL endpoint,定义模块间 type contract,或建立前后端边界。", "article-writing": "长文创作 — 文章/指南/博客/教程/邮件 newsletter，按提供的风格示例写作（强调一致性+结构+可信度）。触发词：写文章/长文/写博客/写教程", "ask-cli": "把同一问题派发给本机钦定的外部 AI CLI 六联(kimi/mmx/opencode/qwen/mavis/codex)做异构对抗/交叉验证,Claude 综合各家观点裁决。复用已验证脚本 ai-cli.sh(单 CLI)/ai-panel.sh(多 CLI 并发),禁手拼裸 CLI 命令。触发词：异构对抗、交叉验证、问外部CLI、多模型验证、ask cl", "audit-all-better": "mycc 自审统一入口——67 维全量诊断(基础设施/能力/事件/连接/知识/质量) + Harness 六层评分(L1 上下文/L2 工具/L3 编排/L4 记忆/L5 评估/L6 约束) + MEMORY/rules 记忆专项审计 + 12 R 行为层自检。触发词：健康检查/全身体检/cchealth/深度检查/audit all/全局审计/全面排查/系", "auto-collector-community": "通过 firecrawl 扫描 Reddit/HN/公众号的 Claude Code 新 insight，作为月度记忆进化 S3 步骤", "auto-collector-github": "扫描 OMC 相关 GitHub 仓库的新 commit/issue/release，作为月度记忆进化 S2 步骤", "auto-collector-official": "抓取 Anthropic 官方 Changelog 和 Claude Code docs 的增量内容，作为月度记忆进化 S1 步骤", "banner-design": "横版 banner / 大图视觉设计。", "baoyu-article-illustrator": "为文章自动配图,支持多种 art style。", "baoyu-comic": "知识漫画创建器,支持多种 art style 与 tone。可创建带详细 panel 布局的原创教育漫画,支持批量图片生成。当用户要求创建「知识漫画」「教育漫画」「biography comic」「tutorial comic」「Logicomix-style comic」时使用。", "baoyu-compress-image": "图片压缩工具,降低图片体积同时尽量保持视觉质量。", "baoyu-cover-image": "为文章/书自动生成 cover image,支持多种 art style。", "baoyu-diagram": "自动生成示意图/信息图,支持多种 art style。", "baoyu-electron-extract": "Electron 应用解包/逆向辅助。", "baoyu-format-markdown": "Markdown 排版与格式美化。", "baoyu-image-gen": "通用图片生成入口,支持多种 art style。", "baoyu-infographic": "信息图/数据图自动生成。", "baoyu-markdown-to-html": "Markdown 转 HTML,常用于公众号/网页发布。", "baoyu-slide-deck": "PPT/Slide 自动生成。", "baoyu-translate": "多语言翻译工具——中英日韩等互译，保持Markdown格式。触发词：翻译、translate、中译英、英译中。", "baoyu-url-to-markdown": "把 URL 文章转 Markdown。", "baoyu-wechat-summary": "公众号文章摘要生成。", "baoyu-xhs-images": "小红书图文自动生成。", "baoyu-youtube-transcript": "YouTube 视频转文字稿。", "brand": "品牌定位/视觉系统设计。", "brand-voice": "品牌声音建模 — 从你提供的真实文章/帖子/文档提炼写作风格 profile，用于后续所有内容创作保持一致风格（避免 AI 腔）。触发词：出品牌指南/品牌声音/统一文风", "canary-monitor": "部署后 canary 哨兵监控——截图基线对比、console 错误检测、性能回归告警。触发词:canary、post-deploy check、部署后监控、canary check、watch production、monitor after deploy、verify deploy、部署验证。", "card-xiaohongshu": "小红书卡片图文自动生成。", "caveman": "「穴居人」极简通信模式:压缩 token 用量 ~75%,丢弃废话/冠词/客套,保留完整技术精度。触发词:caveman mode/talk like caveman/use caveman/less tokens/be brief/极简模式/节省 token/穴居人模式/简洁输出。", "ce-code-review": "Context Engineering 之代码审查。", "ce-optimize": "Context Engineering 优化——context 瘦身与精度提升。", "ce-plan": "Context Engineering 规划——先定 context 策略再写代码。", "ce-strategy": "Context Engineering 战略——长期 context 治理路线图。", "ce-work": "Context Engineering 日常工作流。", "ceo-decision": "CEO一站式战略决策顾问委员会 — 输入任何战略问题，5位顾问并行分析，产出Decision Memo。触发词：ceo决策/战略分析/顾问委员会/帮我想清楚这件事。model: opus", "ceo-mode": "CEO 模式 — 像 CEO 一样按需组建团队/专家组，并行干活，用完下线。本地化吸收自 revfactory/harness（Apache-2.0）的团队工厂 + 官方 Agent Teams。触发场景：(1) '组建团队/建专家组/拉齐N专家/搭个X组' — 临时组队干活；(2) 'CEO模式/像CEO一样/动态团队' — 显式调用；(3) '解散组/团", "ci-template": "CI 模板生成。", "claude-code-better": "V46.3全面配置升级流水线(动态N专家+调用audit-all-better 30维诊断+自身17维Phase2分析+8维环境预检+7维全球对标=67维全量)——按需N专家+双配置同步+Desktop对齐+★最优推荐合规+铁律1-12检查+audit-all全能力融合→输出升级方案→验证闭环。触发词：全面升级/配置优化/进化升级/自动进化/举一反三排查。", "cmmi-tracker": "CMMI L3 持续可见追踪体系 — 需求/任务/错误/版本四库管理 + Notion同步。触发词：需求追踪/任务追踪/cmmi/版本追踪/错误追踪/追溯矩阵/待处理任务", "codebase-memory": "用代码库知识图谱回答结构性查询:探索架构、理解结构、查函数存在、看模块结构、查调用方、查被调用方、追踪调用链、找 caller、看依赖、影响分析、死代码、未用函数、高 fan-out、重构候选、代码质量审计、图查询语法、Cypher 示例、edge 类型、search_graph 用法。", "codesight": "预生成项目上下文摘要，减少代码探索的Token开销（~11x节省）。新项目开始时自动激活。触发词：codesight、项目摘要、代码索引、项目概览。", "cold-email": "【中】cold-email (中文翻译补充中, 见下方原英文). Write B2B cold emails and follow-up sequences that get replies. Use when the user wants to write cold outreach emails, prospecting emails, cold ema", "completion-self-check": "任务完成前自检 — 5 维（实跑证据/★推荐/4 要素/反讽刺/回滚）逐项过一遍。触发词：\"完成了吗\"/\"通过了吗\"/\"做完了吗\"/\"自检\"/\"completion check\"/\"self-check\"。", "composition-patterns": "React 组合模式 — 避免 boolean prop 泛滥，用复合组件/状态提升/内部组合。React 组件设计触发。", "content-engine": "多平台内容引擎 — X/LinkedIn/小红书/抖音/YouTube/公众号原生内容系统，一份素材自动适配多平台分发。触发词：写内容/内容日历/跨平台内容/多平台分发", "context-engineering": "优化 agent 上下文配置：新会话启动或输出质量下降时重建最优上下文", "customer-research": "【中】customer-research (中文翻译补充中, 见下方原英文). When the user wants to conduct, analyze, or synthesize customer research. Use when the user mentions \"customer research,\" \"ICP research,\" \"t", "deep-research-sop": "deep-research 的六步决策闭环 SOP 入口——调研/搜索/deep research 任务前强制声明走六步 SOP（澄清→评估→对抗验证→实测核实→不盲信→落地），再路由到 deep-research 执行。触发词：调研/搜索/deep research/查资料", "deploy-ship": "安全部署/上线/发布流程。触发词：\"部署/上线/发布/ship/launch/灰度\"。支持 BigOS Docker/nginx 场景，五步闭环安全部署，吸收 gstack /ship 思想。", "deprecation-and-migration": "废弃管理与迁移：老 API 下线、系统替换、功能日落的全流程决策与执行", "design": "通用设计入口。", "design-system": "设计系统建设/对齐。", "diagnose": "硬 bug 与性能回归的纪律化诊断循环：复现 → 最小化 → 假设 → 检测 → 修复 → 回归测试", "diff-generator": "将 S1-S4 审计结果综合为 MEMORY-diff.md，并按 P0/P1 触发飞书推送，作为月度记忆进化 S5 步骤", "documentation-and-adrs": "记录架构决策(ADR)与文档：架构变更、API 变更、功能发布时留下未来可查的决策上下文", "doubt-driven-development": "怀疑驱动开发：每个重要决策用新鲜上下文做对抗审查，生产/安全/不可逆场景必用", "ecc-continuous-learning-v2": "【中】continuous-learning-v2 (中文翻译补充中, 见下方原英文). Instinct-based learning system that observes sessions via hooks, creates atomic instincts with confidence scoring, and evolves them int", "ecc-eval-harness": "评测 harness 搭建。", "ecc-gateguard": "行动前事实门控：阻止未经核实就直接 Edit/Write/Bash 的鲁莽操作，强制先调查再动手", "ecc-parallel-execution-optimizer": "并行执行优化器：把独立子任务拆为并发 agent 同时跑，大幅提速且不损正确性", "ecc-skill-comply": "可视化 skill/rule/agent 是否真正被遵守：自动生成测试场景并输出合规率报告", "eng-experts": "工程化专家团队口语翻译层 — 把\"卡帕西/资深 dev/架构师\"等口语关键词路由到 ~/.claude/agents/ 下 3 个工程化 expert agent（karpathy-discipline-expert / senior-developer-mindset / architect）。当用户说卡帕西/Karpathy/严格审查/资深 dev/架构", "engineering-scenario-router": "工程化场景智能路由器（含 super 入口）。把口语意图路由到正确的 skill/agent（super/超级入口/万能入口/超级大脑/不知道找谁/工程化/卡帕西/架构师/开工/排查/梳理/收口/deep-interview/ultrawork/ultraqa/ultragoal/ralph/autopilot/team/走1/活力全开/队长 等 51 触发", "full-checkup": "全面体检 — gated 自动化样板：口语触发→只读诊断自动跑→改配置前 HITL 确认→修复→复核。触发词：全面体检/系统体检/三连体检/给系统做个体检/体检一下/checkup/全面检查并修复。对齐 Claude 官方 plan-mode(只读先行)+ omc-hitl(人确认门),把 audit→better→harness 串成'诊断不需你管、改动必", "gh-ci-fix": "GitHub PR 的 CI 检查红灯时，定位失败→拉 Actions 日志→诊断根因→给修复计划(需批准)→实施→回验的闭环。纯 gh 原生命令(无脚本依赖)。仅处理 GitHub Actions，外部 provider(Buildkite等)只报 URL 不接管。触发词：CI失败/PR检查红灯/fix ci/CI红了/check failed/Actio", "graphify": "把概念/代码转成知识图谱。", "grill-me": "对计划或设计进行无情追问式深度审讯,触发:grill me/拷问我/压力测试方案/深度追问。", "grill-with-docs": "方案压力测试:用项目领域模型与 ADR 决策记录挑战计划,同步更新 CONTEXT.md/ADR 文档。", "gstack-careful": "破坏性命令安全护栏：执行删除、覆盖等危险操作前强制拦截并等待确认", "gstack-cso": "首席安全官模式：OWASP 漏洞扫描、安全策略审查、全方位安全分析", "gstack-design-html": "设计定稿工具：将视觉设计转化为生产级 HTML/CSS 代码", "gstack-freeze": "将本次会话的文件编辑范围冻结到指定目录，防止误改其他文件", "gstack-guard": "全安全模式：危险命令警告与编辑范围限制同时生效", "gstack-investigate": "系统化调试与根因调查，专门处理\"为什么坏了\"类深度问题排查", "gstack-land-and-deploy": "落地与部署工作流：代码合并到推上生产环境的完整闭环", "gstack-office-hours": "YC 创业答疑双模式：一对一创始人辅导或团队集体问答", "gstack-qa": "系统化 QA 测试 Web 应用，自动发现 bug 并给出修复方案", "gstack-repo": "无头浏览器驱动的 QA 自测：像真实用户一样点击验证网站各项功能", "gstack-review": "PR 合并前代码审查：检查 diff 质量、潜在问题与规范合规性", "gstack-ship": "一键发布工作流：合并主干 → 跑测试 → 更新版本号与 CHANGELOG → 推送 → 创建 PR", "handoff": "将当前对话压缩为结构化交接文档，让下一个 agent 无需上下文即可无缝接续", "humanize-chinese": "去 AI 味中文文本改写 — 评分/人性化/降AIGC/风格转换。触发：去AI味/降AIGC/论文降重/知网检测。", "humanizer": "Remove signs of AI-generated writing from text. Use when editing or reviewing text to make it sound more natural and human-written. Based on Wikipedia's comprehensive \"Signs of AI ", "improve-codebase-architecture": "代码库架构改进建议。", "interview-me": "通过结构化访谈澄清需求:从粗到细、按维度追问、明确边界与优先级。触发:需求澄清/不确定怎么做/先聊一下。", "last30days": "【中】last30days (中文翻译补充中, 见下方原英文). \"Research what people actually say about any topic in the last 30 days. Pulls posts and engagement from Reddit, X, YouTube, TikTok, Hacker News, Po", "macos-automation": "macOS 桌面自动化——操作Finder/系统设置/截图/AppleScript/Shortcuts。触发词：打开应用、截图、系统设置、mac控制、桌面操作。", "marketing": "营销活动完整流水线 — SEO+推广+邮件+合规+KPI+多平台发布。说\"做营销/营销活动/推广/SEO\"触发", "memory-checkup": "记忆体检 — gated 自动化第 2 样板(记忆卫生链)。口语触发→只读诊断记忆完整率/孤儿碎片→改动前 HITL 确认→归档→复核。触发词：记忆体检/清记忆/记忆卫生/归档孤儿记忆/记忆碎片清理/记忆健康检查。复用 lib/memory-index-check.sh + lib/memory-orphan-triage.py,对齐 gated 范式(do", "memory-dream-consolidation": "Dream Consolidation（记忆整合）：后台定期清理重复、冲突、过期的记忆。灵感来自 Claude Code autoDream。触发词：记忆清理、dream consolidation、记忆整合、清理记忆", "mmx-cli": "【中】mmx-cli (中文翻译补充中, 见下方原英文). Use mmx to generate text, images, video, speech, and music via the MiniMax AI platform. Use when the user wants to create media content, chat with Min", "mycc-selfheal": "mycc 自身问题自愈。", "mycc-skill-audit-cycle": "mycc Skill 工程化审计闭环（5步）— 审计→P1清单→用户决策→Agent并行修复→验证Workflow。月度自动触发（接入self-evolve-loop），用户说'开始修/fix skills/skill质量'即启动修复阶段。禁止跳过用户决策直接进入修复。", "neat-freak": "任务完成后自动三层对齐——项目文档↔CLAUDE.md↔跨会话记忆同步。解决'代码改7轮文档还停在第一版'的记忆腐烂。触发词：文档对齐、记忆同步、neat freak、整理文档。", "no-plugin-prompts": "不依赖任何插件的 6 步并行开发 Prompt 套件。在 Claude Code / 任意强模型环境中，纯 prompt 复现\"并行 + 高质量 + 不放弃\"的工程执行效果。适合团队复用、零依赖落地。触发词：不依赖插件 / 纯 prompt 模式 / 团队复用 prompt / 人肉并行。", "notion-knowledge-capture": "把对话与决策整理为结构化 Notion 页面,触发:沉淀到 Notion/整理笔记/决策日志/知识沉淀。", "notion-spec-to-implementation": "Notion 规格说明 → 代码实现。", "nuwa-skill": "蒸馏任何人的思维方式——6路采集→3重验证→5层提取→生成人物视角分析。内置13位人物(乔布斯/马斯克/芒格/费曼等)。触发词：蒸馏、nuwa、思维方式、人物分析、决策模式。", "observability-and-instrumentation": "代码可观测性埋点：为生产代码添加日志、指标、链路追踪，让线上问题有据可查", "obsidian-vault": "在 Obsidian 仓库中搜索、创建和管理笔记，支持 wikilinks 和索引笔记。当用户希望在 Obsidian 中查找、创建或整理笔记时触发。关键词：Obsidian、笔记管理、wikilinks、知识库。", "omc-hitl": "Human-In-The-Loop 强制确认门控 — bypass 模式下关键决策点（生产/不可逆/大额）自动暂停等用户。说\"开 HITL/关键决策门控/重大操作前确认\"触发。", "omc-plan": "战略规划 skill：支持访谈式工作流，输出结构化的多步可执行计划", "omc-project-init": "为一个具体业务项目生成它专属的 Claude Code 能力体系（项目级 skill / MCP / hook / 铁律 / 规则）。先用 understand 工具完整吃透项目，再按 Claude 官方 project-level 机制，基于项目实际技术栈与业务，为它现做一批个性化补充能力。Use this whenever the user wants ", "omc-prompt-lib": "提示词库管理系统。保存 / 搜索 / 优化 / 融合用户的高质量 prompt。 自动相似度比对（>0.85 触发融合提示），qmd 向量搜索 + Notion 双存储。 支持从历史对话提炼优质 prompt 入库。", "omc-reference": "OMC agent 目录与工具清单：委派 agent、编排团队、查 skill 注册表时的权威参考", "pricing-strategy": "【中】pricing-strategy (中文翻译补充中, 见下方原英文). \"Analyze and design pricing strategies including pricing models, competitive pricing analysis, willingness-to-pay estimation, and price elast", "prototype": "原型快速搭建。", "qwen-cli": "用 qwen (通义千问 Code CLI v0.17.1) 跨模型异构对抗验证。用于:加第 4 异构源到 ai-panel.sh (默认 panel = gemini/kimi/mmx/qwen) 或单跑 qwen 处理中文任务/通义/千问/aliyun。", "ra-qm-team": "合规/质量管理团队入口（RA/QM）— 路由到 5 个合规知识子技能：EU AI Act 风险分级、GDPR 数据权利、ISO 27001 ISMS、ISO 42001 AIMS、SOC 2 审计。任务涉及\"合规/认证/审计准备/数据保护/AI法案\"时使用。", "secretary-orchestrator": "副驾驶秘书 4 形态聚合入口 — 5/5 健康报告，perceive 数据点统计，greeter 打卡验证，tongues review 触发，quality-log 趋势，registry 项目状态。触发：用户问\"秘书\" / \"system health\" / \"MYCC 健康", "secretary-tongues": "高级专家小组 + 毒舌对抗风格秘书——每次主调度器给方案后，5 个独立 LLM 视角（架构师毒舌/产品经理毒舌/工程效率毒舌/安全/落地的PM）独立打 0-10 分并列出反对意见，输出\"毒舌综合 report\"给用户看。低 token（用 haiku 跑），高杠杆。触发：综合审计/全面升级/重大决策/用户问\"秘书觉得呢\"时按需调用。", "security-audit": "应用代码层安全审计——OWASP Top10 漏洞扫描 + STRIDE 威胁建模，静态分析注入/认证/密钥/SSRF/反序列化等风险，输出 P0-P2 分级修复清单。触发词：安全审计、安全审查、security audit、漏洞扫描、OWASP、威胁建模、STRIDE、查安全漏洞、代码安全。", "self-audit-loop": "任何主任务完成时自动自审5问，主动列盲点清单。触发：SubagentStop / 主任务声称完成 / 用户说'自审/audit-loop/自检一遍'。解决问题：完成信号过早、需用户追问才发现遗漏。", "seo-audit": "【中】seo-audit (中文翻译补充中, 见下方原英文). When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions \"SEO audit,\" \"technical SEO,\" \"why am I ", "shipping-and-launch": "发布/上线流程。", "skill-audit": "第三方 Skill 安全审计 — 安装前检查 skill 的安全性、权限需求、与现有能力的重复度。V26.3融合skill-judge 6维评分。当用户要安装新 skill/plugin/MCP 时自动激活。关键词：skill审计、安全检查、安装前检查、审计skill、安全扫描。", "slides": "PPT/Slide 生成。", "smart-closure": "任务闭环 SOP — 按任务类型自动判断并执行对应验证/提交档位（三档：L1对话/L2显式/L3高风险）", "smart-flow-all": "Smart-Flow V46.3 全模式统一入口（队长=此入口）：说\"队长\"自动按需融合 YOLO全权限+ceo-mode/teams路由+Plan Graph编排器+Queue任务依赖+深度调研≥3层默认+铁律1-12全保护。Intent Schema解析→场景识别→复杂度路由→execution_mode传递→方案菜单→路由执行", "social-publisher": "多平台社媒发布编排 — X/LinkedIn/小红书/朋友圈/公众号/B站。说\"发推文/发小红书/发朋友圈/多平台发布\"触发", "source-driven-development": "以官方文档为唯一依据驱动开发，用框架或库时杜绝过时 API 与错误模式", "sp-brainstorming": "Socratic 需求澄清 skill — 强迫用户输出具体 spec，禁\"我想要 X\"式模糊需求。触发词：脑暴/socratic/明确需求/具体化/想清楚", "sp-requesting-code-review": "按 superpowers 方法论在每个 task 完成后或 PR 前触发规范 code review 流程", "sp-subagent-driven-development": "每个任务派独立 subagent 并行执行，含两阶段 review（spec 合规 + 代码质量），不打断用户", "sp-test-driven-development": "TDD 红绿重构 skill — 先写失败测试（红）→ 最小实现（绿）→ 重构（保持绿）。触发词：TDD/红绿重构/测试驱动/先写测试", "sp-writing-plans": "将需求拆解为每步 2-5 分钟的细粒度任务列表，含 TDD 标注与复选框进度跟踪", "spec-generator": "口语需求→结构化 Spec/PRD。用户说\"帮我想清楚/分析需求/写规格/做个PRD/产品规格\"时触发。引导式访谈+结构化输出，吸收 GSD discuss+plan 思想。", "start-work": "工程化协作中心入口 — 用户说\"开工/开干/做工程化/启动项目/项目化\"时激活。本 skill 是\"manager 中心\"的轻量实现（≤120 行，避中台化）：调起 planner(opus) → 拉 3 工程化专家(karpathy/senior-dev/architect)并行 → 走 3 验证(test-engineer/code-reviewer/v", "systematic-error-analysis": "七维系统化错误分析——5W2H+第一性原理+多专家交叉论证+复发熔断升级。任何错误≥2次复发自动激活。触发词：又报错、反复错误、同样问题、400错误、一直失败、error loop、复发、syserr", "task-closer": "任务收口 SOP — 5 维自评 + 反推测扫描 + ★最优推荐 + 闭环归档。触发词：\"收口\"/\"闭环\"/\"任务结束\"/\"验收\"/\"close task\"/\"wrap up\"。", "teach": "Teach the user a new skill or concept, within this workspace.。在工作区内教学，讲解技能/概念，学习、教学、解释知识", "team": "同一任务列表上协同工作的 N 个并发 agent 团队，共享进度互不阻塞", "team-prompt-template": "Agent Teams 团队 Prompt 7 字段模板。触发词：开 team、多人协作、并行做、team prompt、agent teams、跨域协同、拆任务。吸收自《Claude Code Agent Teams 实战：怎么拆任务、控权限、收证据》(2026-05-27)，结合 OMC V28 四步骨架。", "teleport": "跨会话上下文跳转——从当前会话提炼关键上下文（目标/进度/决策/阻塞），打包注入新会话，实现无缝接力。触发词：teleport、上下文跳转、跨会话、接力、打包上下文。", "test-driven-development": "以测试驱动开发,覆盖任何逻辑实现、Bug 修复或行为变更。触发词:TDD/测试驱动开发/单元测试/修复 Bug。", "to-issues": "把 plan/spec/PRD 拆成可独立认领的 issue（tracer-bullet 垂直切片）。触发：拆 issue/创建 ticket/拆任务。", "token-budget": "Token预算自动管理(ECC增强: +战略压缩建议+成本追踪+CoD) — 监控context→主动压缩/清理→成本预警。当context>60%或对话>30轮时自动激活。关键词：token管理、节省token、上下文爆炸、省token、token budget、成本、cost。", "triage": "问题分诊/优先级排序。", "ui-styling": "UI 样式细节调整。", "ui-ux-pro-max": "高质量 UI/UX 设计与实现。", "update-all": "一键更新所有 Claude Code 相关组件：OMC、plugins、npm 全局包、MCP servers。自动发现新安装的组件并纳入更新流程。", "vercel-react-best-practices": "Vercel React/Next.js 性能优化最佳实践。写/重构/审查 React/Next.js 时触发。", "web-access": "智能联网能力——5层通道调度(WebSearch→WebFetch→Jina→CDP→子Agent)+中文平台反爬(小红书/知乎/公众号)+站点经验积累。触发词：上网查、搜索、联网、web access、查资料。", "xhs-operations-method": "小红书运营方法论（人工可执行版，非自动化）。覆盖养号7天SOP、8级流量池机制、爆款四要素、六类标题公式、关键词选题、违禁词规避、转化率优化。触发词：小红书运营/小红书养号/小红书涨粉/爆款标题/小红书选题/xhs运营/小红书笔记/小红书引流/小红书种草", "zoom-out": "放大视野获取更广上下文,理解代码整体架构和全局视角。", "ecc-tdd-workflow": "TDD 开发工作流：新功能/修 bug/重构时强制先写失败测试，覆盖率要求 80%+ 含 E2E"}, "skill_categories": {"dev": ["api-and-interface-design", "auto-collector-github", "ce-code-review", "claude-code-better", "codebase-memory", "codesight", "deploy-ship", "diagnose", "doubt-driven-development", "gstack-land-and-deploy", "gstack-ship", "improve-codebase-architecture", "shipping-and-launch", "source-driven-development", "sp-requesting-code-review", "sp-subagent-driven-development", "sp-test-driven-development", "sp-writing-plans", "test-driven-development"], "business": ["ceo-decision", "ceo-mode", "gstack-investigate", "marketing", "pricing-strategy"], "pm": ["baoyu-xhs-images", "brand", "brand-voice", "cold-email", "content-engine", "customer-research", "seo-audit", "social-publisher", "xhs-operations-method"], "security": ["audit-all-better", "mycc-skill-audit-cycle", "security-audit", "self-audit-loop", "skill-audit"], "ops": ["canary-monitor", "ci-template", "gh-ci-fix", "observability-and-instrumentation", "secretary-orchestrator", "secretary-tongues"], "ai": ["baoyu-markdown-to-html", "context-engineering", "deep-research-sop", "ecc-eval-harness", "gstack-design-html", "web-access"], "docs": ["article-writing", "baoyu-article-illustrator", "baoyu-compress-image", "baoyu-cover-image", "baoyu-diagram", "baoyu-format-markdown", "baoyu-image-gen", "baoyu-slide-deck", "documentation-and-adrs", "graphify", "grill-with-docs", "handoff", "notion-knowledge-capture", "notion-spec-to-implementation", "slides"], "system": ["ask-cli", "auto-collector-community", "auto-collector-official", "caveman", "cmmi-tracker", "completion-self-check", "ecc-skill-comply", "grill-me", "humanize-chinese", "humanizer", "macos-automation", "mmx-cli", "mycc-selfheal", "neat-freak", "no-plugin-prompts", "nuwa-skill", "obsidian-vault", "omc-hitl", "omc-plan", "omc-project-init", "omc-prompt-lib", "omc-reference", "qwen-cli", "smart-flow-all", "teleport", "token-budget", "triage", "update-all"], "other": ["_deprecated", "_local", "agent-reach", "antigravity-memory-systems", "banner-design", "baoyu-comic", "baoyu-electron-extract", "baoyu-infographic", "baoyu-translate", "baoyu-url-to-markdown", "baoyu-wechat-summary", "baoyu-youtube-transcript", "card-xiaohongshu", "ce-optimize", "ce-plan", "ce-strategy", "ce-work", "composition-patterns", "deprecation-and-migration", "design", "design-system", "diff-generator", "ecc-continuous-learning-v2", "ecc-gateguard", "ecc-parallel-execution-optimizer", "eng-experts", "engineering-scenario-router", "full-checkup", "gstack-careful", "gstack-cso", "gstack-freeze", "gstack-guard", "gstack-office-hours", "gstack-qa", "gstack-repo", "gstack-review", "interview-me", "last30days", "memory-checkup", "memory-dream-consolidation", "prototype", "ra-qm-team", "smart-closure", "sp-brainstorming", "spec-generator", "start-work", "systematic-error-analysis", "task-closer", "teach", "team", "team-prompt-template", "to-issues", "ui-styling", "ui-ux-pro-max", "vercel-react-best-practices", "zoom-out"]}, "workflows": ["ceo-pipeline", "fundraising", "v29-deep-research", "code-review", "self-evolve-loop", "bughunt", "n-step-pipeline", "dev-pipeline", "judge-panel", "harness-audit", "mycc-audit-pipeline", "overseas-compliance", "boardroom", "comprehensive-upgrade"], "workflow_map": {"boardroom": "董事会汇报准备", "bughunt": "系统性 Bug 排查", "ceo-pipeline": "CEO 全流水线 PM→Arch→Eng→QA→CEO", "code-review": "代码审查", "comprehensive-upgrade": "综合升级流水线", "config-audit-better": "配置审计", "dev-pipeline": "开发流水线 spec→scaffold→impl→test→review→deploy", "domain-audit-better": "域审计", "fundraising": "融资准备", "harness-audit": "Harness 六层健康评分", "judge-panel": "多视角评审", "n-step-pipeline": "N步自适应流水线", "overseas-compliance": "出海合规", "self-evolve-loop": "自我进化闭环", "v29-deep-research": "深度调研"}, "ceo_roles": ["architect", "ceo-orchestrator", "chief-of-staff", "cmo-advisor", "devops-engineer", "engineer", "product-manager", "qa-validator", "researcher", "security-analyst", "test-engineer"], "industry_agents": ["capital-ir", "chain-expansion", "consumer-trend", "overseas-entry", "supply-chain", "unit-economics"], "teams": ["team-data-ai", "team-fullstack", "team-infra", "team-research", "team-security"], "core_agents": ["captain", "evolution-scout", "needs-analyst", "project-director", "technical-writer"], "orchestration": {"entry_points": [{"say": "队长 + 任务", "priority": 95, "engine": "smart-flow-all"}, {"say": "活力全开 + 任务", "priority": 95, "engine": "smart-flow-all YOLO L4"}, {"say": "全面升级", "priority": 85, "engine": "claude-code-better"}, {"say": "又报错", "priority": 82, "engine": "systematic-error-analysis"}, {"say": "评估项目", "priority": 80, "engine": "ceo-mode"}, {"say": "秘书巡检", "priority": 80, "engine": "secretary"}], "workflow_map": {"boardroom": "董事会汇报准备", "bughunt": "系统性 Bug 排查", "ceo-pipeline": "CEO 全流水线 PM→Arch→Eng→QA→CEO", "code-review": "代码审查", "comprehensive-upgrade": "综合升级流水线", "config-audit-better": "配置审计", "dev-pipeline": "开发流水线 spec→scaffold→impl→test→review→deploy", "domain-audit-better": "域审计", "fundraising": "融资准备", "harness-audit": "Harness 六层健康评分", "judge-panel": "多视角评审", "n-step-pipeline": "N步自适应流水线", "overseas-compliance": "出海合规", "self-evolve-loop": "自我进化闭环", "v29-deep-research": "深度调研"}}, "business_capabilities": {"行业专家矩阵": {"连锁/开店/加盟": ["chain-expansion", "unit-economics", "supply-chain"], "出海/海外/合规": ["overseas-entry", "capital-ir"], "单店/盈亏/回本": ["unit-economics", "chain-expansion"], "融资/BP/估值": ["capital-ir", "unit-economics"], "品牌/爆品/内容": ["consumer-trend", "supply-chain"], "供应链/采购": ["supply-chain", "unit-economics"]}}}, "hooks": {"total_files": 55, "by_event": {"PreToolUse": 13, "SubagentStop": 3, "UserPromptSubmit": 9, "SessionStart": 7, "PostToolUse": 6, "Stop": 5, "PostToolUseFailure": 2, "PermissionRequest": 1, "PreCompact": 1, "PostCompact": 1, "SessionEnd": 3, "SubagentStart": 1, "StopFailure": 1, "MessageDisplay": 1}}};
 
 // ===== Theme Toggle =====
 (function() {
@@ -3381,9 +4007,21 @@ const D = {"generated_at": "2026-06-26T18:00:26.920137Z", "version": {"claude_co
 })();
 
 // ===== Init =====
-(function() {
+(async function() {
   if (!D || !D.counts) return showError();
-  const c = D.counts;
+
+  // P0-1+A1 · 数字计数从 mycc-stats.json 拉（动态 SSoT），失败降级到 D.counts
+  let S = null;
+  try {
+    const r = await fetch('mycc-stats.json', {cache:'no-store'});
+    if (!r.ok) throw new Error('HTTP '+r.status);
+    S = await r.json();
+    console.log('[P0-1] mycc-stats.json 加载完成', S.counts);
+  } catch(e) {
+    console.warn('[P0-1] mycc-stats.json fetch 失败,降级内联 D.counts:', e.message);
+    S = {counts: D.counts, generated_at: D.generated_at};
+  }
+  const c = S.counts || D.counts;  // S 优先(外部 SSoT),失败用 D 兜底
   const v = D.version || {};
   const l = D.lists || {};
   const h = D.hooks || {};
@@ -3403,6 +4041,19 @@ const D = {"generated_at": "2026-06-26T18:00:26.920137Z", "version": {"claude_co
     `<span class="badge red">${c.intent_words_routes} Routes</span>`,
     `<span class="badge">${c.rules} Rules</span>`,
   ].filter(Boolean).join('');
+
+  // A1 · 4 处硬编码计数 → 动态 (S 来自 mycc-stats.json 外部 SSoT)
+  const heroCounts = document.getElementById('heroCounts');
+  if (heroCounts) heroCounts.textContent =
+    `${c.mcp_servers||'?'} MCP · ${c.enabled_plugins||'?'} 插件 · ${c.skills||'?'} 本地Skills(+${c.plugin_skills||'?'} 插件) · ${c.agents_total||'?'} Agents · ${c.hooks_registered||'?'} Hooks · 12 LaunchAgent · ${c.intent_words_routes||'?'} 路由`;
+  const expertTypes = document.getElementById('expertTypes');
+  if (expertTypes) expertTypes.textContent =
+    `${c.agents_total||'?'} agent / ${c.hooks_registered||'?'} hook / ${c.skills||'?'} skill`;
+  const m03counts = document.getElementById('m03counts');
+  if (m03counts) m03counts.textContent =
+    `${c.skills||'?'} 本地Skills + ${c.agents_total||'?'} 本地Agents + ${c.plugin_skills||'?'} 插件Skills + ${c.hooks_registered||'?'} Hooks + MCP 完整说明`;
+  const skillsLink = document.getElementById('skillsDetailLink');
+  if (skillsLink) skillsLink.textContent = `查看全部 ${c.skills||'?'} →`;
 
   // Entry points
   document.getElementById('tblEntry').innerHTML = (l.orchestration?.entry_points||[]).map(e =>
@@ -3788,6 +4439,43 @@ window.renderMyStats = renderMyStats;
 window.renderMyStatsFromJsonl = renderMyStatsFromJsonl;
 window.exportFeatureUsage = exportFeatureUsage;
 
+/* ── 同步历史: 从 ~/.claude/logs/sync-history.jsonl 渲染 ── */
+const SYNC_HISTORY_JSONL = '_sync-history.jsonl';
+async function loadSyncHistory() {
+  const box = document.getElementById('syncHistoryTable');
+  if (!box) return;
+  box.innerHTML = '<div style="color:var(--text-muted);padding:20px;text-align:center">⏳ 加载同步历史中...</div>';
+  let lines = [];
+  try {
+    const r = await fetch(SYNC_HISTORY_JSONL, {cache:'no-store'});
+    if (!r.ok) throw new Error('HTTP '+r.status);
+    const text = await r.text();
+    lines = text.split('\n').filter(Boolean);
+  } catch(e) {
+    box.innerHTML = '<div style="color:var(--text-muted);padding:20px;text-align:center">暂无同步记录<br><span style="font-size:10px">(' + SYNC_HISTORY_JSONL + ' 不可达: ' + e.message + ')</span></div>';
+    return;
+  }
+  if (lines.length === 0) {
+    box.innerHTML = '<div style="color:var(--text-muted);padding:20px;text-align:center">暂无同步记录</div>';
+    return;
+  }
+  const entries = [];
+  for (const line of lines.slice(-20).reverse()) {
+    try { entries.push(JSON.parse(line)); } catch(e){}
+  }
+  if (entries.length === 0) {
+    box.innerHTML = '<div style="color:var(--text-muted);padding:20px;text-align:center">暂无有效同步记录</div>';
+    return;
+  }
+  const e = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  const rows = entries.map(d => {
+    const ts = d.ts ? new Date(d.ts).toLocaleString('zh-CN') : '-';
+    return `<tr><td style="padding:6px 8px;border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:10px">${e(ts)}</td><td style="padding:6px 8px;border-bottom:1px solid var(--border);font-size:10px">${e(d.target||'-')}</td><td style="padding:6px 8px;border-bottom:1px solid var(--border);font-size:10px">${e(d.action||'-')}</td><td style="padding:6px 8px;border-bottom:1px solid var(--border);font-size:10px">${e(d.status||'-')}</td><td style="padding:6px 8px;border-bottom:1px solid var(--border);font-size:10px">${e(d.note||'')}</td></tr>`;
+  }).join('');
+  box.innerHTML = `<table style="width:100%;border-collapse:collapse"><thead><tr style="color:var(--text-dim);font-size:10px;text-align:left"><th style="padding:6px 8px;border-bottom:1px solid var(--border-strong)">时间</th><th style="padding:6px 8px;border-bottom:1px solid var(--border-strong)">目标</th><th style="padding:6px 8px;border-bottom:1px solid var(--border-strong)">动作</th><th style="padding:6px 8px;border-bottom:1px solid var(--border-strong)">状态</th><th style="padding:6px 8px;border-bottom:1px solid var(--border-strong)">备注</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+window.loadSyncHistory = loadSyncHistory;
+
 /* ── 全局搜索: minisearch 客户端索引 + 懒加载 ── */
 const GS_DOCS = [
   'start-here.html','00-速查表.html','01-小白使用手册.html','02-商城项目实战手册.html',
@@ -3981,68 +4669,9 @@ function showToast(msg) {
 }
 </script>
 <script>
-/* 窄屏侧栏抽屉 + 导航 active 高亮 */
-(function(){
-  var sb=document.querySelector('.sidebar'),
-      bd=document.getElementById('sidebarBackdrop'),
-      btn=document.getElementById('menuBtn');
-  function close(){ if(sb)sb.classList.remove('open'); if(bd)bd.classList.remove('open'); if(btn)btn.setAttribute('aria-expanded','false'); }
-  function toggle(){ if(!sb)return; var o=sb.classList.toggle('open'); if(bd)bd.classList.toggle('open',o); if(btn)btn.setAttribute('aria-expanded',o?'true':'false'); }
-  if(btn) btn.addEventListener('click', toggle);
-  if(bd)  bd.addEventListener('click', close);
-  var links=[].slice.call(document.querySelectorAll('.nav-link'));
-  links.forEach(function(a){ a.addEventListener('click', close); });
-  var map={}; links.forEach(function(a){ var id=a.getAttribute('href').slice(1); if(document.getElementById(id)) map[id]=a; });
-  if('IntersectionObserver' in window){
-    var obs=new IntersectionObserver(function(es){
-      es.forEach(function(e){ if(e.isIntersecting){ var id=e.target.getAttribute('id');
-        links.forEach(function(x){x.classList.remove('active');}); if(map[id]) map[id].classList.add('active'); } });
-    },{rootMargin:'-15% 0px -75% 0px'});
-    document.querySelectorAll('.card[id]').forEach(function(c){obs.observe(c);});
-  }
-})();
-</script>
-
-<!-- ═══ Cmd-K 全局搜索浮层 ═══ -->
-<div class="cmdk-overlay" id="cmdkOverlay" style="display:none" onclick="if(event.target.id==='cmdkOverlay')closeCmdK()" role="dialog" aria-modal="true" aria-label="全局搜索">
-  <div class="cmdk-panel">
-    <div class="cmdk-input-wrap">
-      <span class="cmdk-icon">🔍</span>
-      <input id="cmdkInput" type="text" autocomplete="off" placeholder="输入关键词… (ESC 关闭 · ↑↓ 选择 · ↵ 跳转)" />
-      <kbd class="cmdk-esc">ESC</kbd>
-    </div>
-    <div class="cmdk-tabs" id="cmdkTabs"></div>
-    <div id="cmdkResults" class="cmdk-results"><div class="cmdk-hint">⏳ 索引懒加载中…先点开本页底部 s-globalsearch 触发,或等待 Cmd-K 唤起</div></div>
-    <div class="cmdk-footer"><span id="cmdkCount">0</span> 条结果 · <span class="cmdk-hk">⌘K</span> 全局唤起</div>
-  </div>
-</div>
-
-<!-- P2-4 · 详情 Modal -->
-<div class="cmdk-overlay" id="detailOverlay" style="display:none" onclick="if(event.target.id==='detailOverlay')closeDetail()" role="dialog" aria-modal="true" aria-label="详情弹窗">
-  <div class="cmdk-panel" style="max-width:680px;max-height:80vh;overflow:auto">
-    <div class="cmdk-input-wrap" style="background:var(--bg2)">
-      <span class="cmdk-icon">📋</span>
-      <span id="detailTitle" style="font-weight:600;font-size:14px;color:var(--text)">详情</span>
-      <span class="kbd" style="margin-left:auto;font-size:10px;opacity:.6">点击外部或 ESC 关闭</span>
-    </div>
-    <div id="detailBody" style="padding:14px 18px;font-size:12px;line-height:1.65;color:var(--text)">
-      <div style="text-align:center;color:var(--text-muted);padding:20px">加载中…</div>
-    </div>
-    <div class="cmdk-footer" id="detailFooter" style="display:flex;justify-content:space-between;align-items:center">
-      <span id="detailMeta" style="font-size:11px;color:var(--text-muted)"></span>
-      <span style="font-size:10px;color:var(--text-muted)">P2-4 · 详情 Modal</span>
-    </div>
-  </div>
-</div>
-
-<script type="application/json" id="detailData">
-{"generated_at":"2026-06-26T15:43:53.151905Z","version":"P2-4-sample","counts":{"skills_total":147,"skills_sample":20,"hooks_total":55,"hooks_sample":10,"agents_total":51,"agents_sample":6},"skills":[{"id":"canary-monitor","name_zh":"| 部署后 canary 哨兵监控——截图基线对比、console 错误检测、性能回归告警。触发词:canary、post-deploy check、部署后监控","name_en":"canary-monitor","description":"| 部署后 canary 哨兵监控——截图基线对比、console 错误检测、性能回归告警。触发词:canary、post-deploy check、部署后监控、canary check、watch production、monitor after deploy、verify deploy、部署验证。","trigger_words":[],"what_for":"","example":"","body_short":"/canary-monitor — Post-Deploy Canary Monitor\n\n> V40.3 新增 · 从 garrytan/gstack canary (106K★) cherry-pick 核心监控思路。\n> 原版依赖 gstack browse 专属二进制；本机版用已装的 playwright/chrome-devtools MCP 或 Bash curl 替代。\n> 灵感：Release Reliability Engineering — 部署通过 CI 不等于生产正常。\n\n与本机已有能力的分工（铁律5）\n\n| 已有资产 | 职责 | 本 skill 边界 |\n|---|---|---|\n| deploy-ship | 部署执行 | 不做部署，只在部署后监控 |\n| playwright MCP | 单次截图/交互 | 本 skill 编排多页循环监控 |\n| chr"},{"id":"auto-collector-community","name_zh":"通过 firecrawl 扫描 Reddit/HN/公众号的 Claude Code 新 insight，作为月度记忆进化 S3 步骤","name_en":"auto-collector-community","description":"通过 firecrawl 扫描 Reddit/HN/公众号的 Claude Code 新 insight，作为月度记忆进化 S3 步骤","trigger_words":[],"what_for":"","example":"","body_short":"Auto Collector — 社区渠道（S3）\n\n任务\n\n从英文社区 + 中文社区发现本机未收录的高价值实践。\n\n渠道（6 通道）\n\n| 渠道 | 工具 | 关键词 |\n|---|---|---|\n| Reddit r/ClaudeAI | `firecrawl_search` | \"claude code hooks\" \"claude code workflow\" |\n| Hacker News | `firecrawl_search` | \"claude code\" \"anthropic claude\" |\n| GitHub Discussions | `firecrawl_search` site:github.com | \"claude code tips\" |\n| 搜狗公众号 | `firecrawl_search` | \"Claude Code 最佳实践\" |\n| B站 |"},{"id":"gstack-careful","name_zh":"破坏性命令安全护栏：执行删除、覆盖等危险操作前强制拦截并等待确认","name_en":"careful","description":"Safety guardrails for destructive commands. (gstack)。破坏性命令安全护栏，删除/覆盖操作前必确认，防止误操作","trigger_words":[],"what_for":"","example":"","body_short":"When to invoke this skill\n\nWarns before rm -rf, DROP TABLE,\nforce-push, git reset --hard, kubectl delete, and similar destructive operations.\nUser can override each warning. Use when touching prod, debugging live systems,\nor working in a shared environment. Use when asked to \"be careful\", \"safety mode\",\n\"prod mode\", or \"careful mode\".\n\n/careful — Destructive Command Guardrails\n\nSafety mode is now "},{"id":"ecc-skill-comply","name_zh":"可视化 skill/rule/agent 是否真正被遵守：自动生成测试场景并输出合规率报告","name_en":"skill-comply","description":"| 评测 skill 合规检查。","trigger_words":[],"what_for":"","example":"","body_short":"skill-comply: Automated Compliance Measurement\n\nMeasures whether coding agents actually follow skills, rules, or agent definitions by:\n1. Auto-generating expected behavioral sequences (specs) from any .md file\n2. Auto-generating scenarios with decreasing prompt strictness (supportive → neutral → competing)\n3. Running `claude -p` and capturing tool call traces via stream-json\n4. Classifying tool ca"},{"id":"doubt-driven-development","name_zh":"怀疑驱动开发：每个重要决策用新鲜上下文做对抗审查，生产/安全/不可逆场景必用","name_en":"doubt-driven-development","description":"| 质疑驱动开发——先质疑再实现。","trigger_words":[],"what_for":"","example":"","body_short":"Doubt-Driven Development\n\nOverview\n\nA confident answer is not a correct one. Long sessions accumulate context that quietly turns assumptions into \"facts\" without anyone noticing. Doubt-driven development is the discipline of materializing a fresh-context reviewer — biased to **disprove**, not approve — before any non-trivial output stands.\n\nThis is not `/review`. `/review` is a verdict on a finish"},{"id":"ce-work","name_zh":"| Context Engineering 日常工作流。","name_en":"ce-work","description":"| Context Engineering 日常工作流。","trigger_words":[],"what_for":"","example":"","body_short":"Work Execution Command\n\nExecute work efficiently while maintaining quality and finishing features.\n\nIntroduction\n\nThis command takes a work document (plan or specification) or a bare prompt describing the work, and executes it systematically. The focus is on **shipping complete features** by understanding requirements quickly, following existing patterns, and maintaining quality throughout.\n\nInput"},{"id":"brand","name_zh":"| 品牌定位/视觉系统设计。","name_en":"ckm:brand","description":"| 品牌定位/视觉系统设计。","trigger_words":[],"what_for":"","example":"","body_short":"Brand\n\nBrand identity, voice, messaging, asset management, and consistency frameworks.\n\nWhen to Use\n\n- Brand voice definition and content tone guidance\n- Visual identity standards and style guide development\n- Messaging framework creation\n- Brand consistency review and audit\n- Asset organization, naming, and approval\n- Color palette management and typography specs\n\nQuick Start\n\n**Inject brand cont"},{"id":"triage","name_zh":"| 问题分诊/优先级排序。","name_en":"triage","description":"| 问题分诊/优先级排序。","trigger_words":[],"what_for":"","example":"","body_short":"Triage\n\nMove issues on the project issue tracker through a small state machine of triage roles.\n\nEvery comment or issue posted to the issue tracker during triage **must** start with this disclaimer:\n\n[代码块省略]\n\nReference docs\n\n- AGENT-BRIEF.md — how to write durable agent briefs\n- OUT-OF-SCOPE.md — how the `.out-of-scope/` knowledge base works\n\nRoles\n\nTwo **category** roles:\n\n- `bug` — something is "},{"id":"baoyu-url-to-markdown","name_zh":"| 把 URL 文章转 Markdown。","name_en":"baoyu-url-to-markdown","description":"| 把 URL 文章转 Markdown。","trigger_words":[],"what_for":"","example":"","body_short":"URL to Markdown\n\nFetches any URL via `baoyu-fetch` CLI (Chrome CDP + site-specific adapters) and converts it to clean markdown.\n\nUser Input Tools\n\nWhen this skill prompts the user, follow this tool-selection rule (priority order):\n\n1. **Prefer built-in user-input tools** exposed by the current agent runtime — e.g., `AskUserQuestion`, `request_user_input`, `clarify`, `ask_user`, or any equivalent.\n"},{"id":"prototype","name_zh":"| 原型快速搭建。","name_en":"prototype","description":"| 原型快速搭建。","trigger_words":[],"what_for":"","example":"","body_short":"Prototype\n\nA prototype is **throwaway code that answers a question**. The question decides the shape.\n\nPick a branch\n\nIdentify which question is being answered — from the user's prompt, the surrounding code, or by asking if the user is around:\n\n- **\"Does this logic / state model feel right?\"** → LOGIC.md. Build a tiny interactive terminal app that pushes the state machine through cases that are ha"},{"id":"auto-collector-official","name_zh":"抓取 Anthropic 官方 Changelog 和 Claude Code docs 的增量内容，作为月度记忆进化 S1 步骤","name_en":"auto-collector-official","description":"抓取 Anthropic 官方 Changelog 和 Claude Code docs 的增量内容，作为月度记忆进化 S1 步骤","trigger_words":[],"what_for":"","example":"","body_short":"Auto Collector — 官方渠道（S1）\n\n任务\n\n抓取 Anthropic 官方最新动态，识别与本机配置有关的增量内容。\n\n执行步骤\n\n1. **Claude Code 官方文档扫描**\n   [代码块省略]\n\n2. **与本机规则对比**（只读，不修改）\n   - 对比 `rules/iron-laws.md` 中引用的版本号/API 是否已过时\n   - 识别官方新 hook 事件未在 `settings.local.json` 中注册的\n   - 识别官方新命令（如 `/effort`, `/ultracode`）未在 `rules/` 中记录的\n\n3. **输出格式**\n   [代码块省略]\n\n4. 写入 `~/.claude/evolution/YYYY-MM-DD/official.md`\n\n注意\n\n- 禁凭印象下结论（铁律8）：必须 WebFetch 后再判断\n-"},{"id":"auto-collector-github","name_zh":"扫描 OMC 相关 GitHub 仓库的新 commit/issue/release，作为月度记忆进化 S2 步骤","name_en":"auto-collector-github","description":"扫描 OMC 相关 GitHub 仓库的新 commit/issue/release，作为月度记忆进化 S2 步骤","trigger_words":[],"what_for":"","example":"","body_short":"Auto Collector — GitHub 渠道（S2）\n\n任务\n\n扫描本机 ~/.claude 依赖的核心 GitHub 仓库，发现新 release / 高质量 issue / breaking change。\n\n目标仓库（优先级顺序）\n\n[代码块省略]\n\n执行步骤\n\n1. **gh api 抓各仓库最新 release**\n   [代码块省略]\n\n2. **对比本机版本**（读 CLAUDE.md Status 段版本号）\n\n3. **识别增量**\n   - 新版本 > 本机版本 → P1 升级提示\n   - Breaking change 关键词 → P0 告警\n   - 新 skill/hook/event 未本机安装 → P1\n\n4. **输出格式**\n   [代码块省略]\n\n5. 写入 `~/.claude/evolution/YYYY-MM-DD/github.md`\n"},{"id":"baoyu-wechat-summary","name_zh":"| 公众号文章摘要生成。","name_en":"baoyu-wechat-summary","description":"| 公众号文章摘要生成。","trigger_words":[],"what_for":"","example":"","body_short":"WeChat Group Summary\n\n群聊精华提取专家。把零散的微信群聊记录提炼成结构化、可读性强的简报，并维护跨次运行的群聊历史与群友画像。底层依赖外部 wx-cli 二进制（`wx` 命令），不打包脚本。\n\n> **⚠️ Sandbox restriction**\n>\n> wx-cli reads from `~/.wx-cli/` (config, cache, daemon socket) and from WeChat's data directory (`~/Library/Containers/com.tencent.xinWeChat/` on macOS). Both paths are outside Claude Code's default sandbox. Every `wx` command in this skill needs to run with "},{"id":"diff-generator","name_zh":"将 S1-S4 审计结果综合为 MEMORY-diff.md，并按 P0/P1 触发飞书推送，作为月度记忆进化 S5 步骤","name_en":"diff-generator","description":"将 S1-S4 审计结果综合为 MEMORY-diff.md，并按 P0/P1 触发飞书推送，作为月度记忆进化 S5 步骤","trigger_words":[],"what_for":"","example":"","body_short":"Diff Generator — 进化产出（S5）\n\n任务\n\n综合 S1-S4 输出，生成最终 MEMORY-diff.md，并按优先级推送飞书通知。\n\n执行步骤\n\nStep 1：读取 S4 审计结果\n\n[代码块省略]\n\nStep 2：生成 MEMORY-diff.md\n\n[代码块省略]\n\n写入 `~/.claude/evolution/YYYY-MM-DD/MEMORY-diff.md`\n\nStep 3：飞书推送\n\n**触发条件**：P0 > 0 OR P1 > 0\n\n[代码块省略]\n\n无 P0/P1 → 飞书推\"本月无重大变化，系统健康\"\n\nStep 4：Notion 同步（可选）\n\n若 `NOTION_TOKEN` 已配置，调 `lib/cmmi-notion-push.py` 同步版本库\n\n产物清单\n\n| 文件 | 必须 | 说明 |\n|---|---|---|\n| `MEMORY"},{"id":"ecc-eval-harness","name_zh":"| 评测 harness 搭建。","name_en":"eval-harness","description":"| 评测 harness 搭建。","trigger_words":[],"what_for":"","example":"","body_short":"Eval Harness Skill\n\nA formal evaluation framework for Claude Code sessions, implementing eval-driven development (EDD) principles.\n\nWhen to Activate\n\n- Setting up eval-driven development (EDD) for AI-assisted workflows\n- Defining pass/fail criteria for Claude Code task completion\n- Measuring agent reliability with pass@k metrics\n- Creating regression test suites for prompt or agent changes\n- Bench"},{"id":"start-work","name_zh":"工程化协作中心入口 — 用户说\"开工/开干/做工程化/启动项目/项目化\"时激活。本 skill 是\"manager 中心\"的轻量实现（≤120 行，避中台化）：","name_en":"start-work","description":"工程化协作中心入口 — 用户说\"开工/开干/做工程化/启动项目/项目化\"时激活。本 skill 是\"manager 中心\"的轻量实现（≤120 行，避中台化）：调起 planner(opus) → 拉 3 工程化专家(karpathy/senior-dev/architect)并行 → 走 3 验证(test-engineer/code-reviewer/verifier) → smart-closure 收口。所有过程产物落到 .omc/projects/{slug}/ 隔离目录。","trigger_words":[],"what_for":"","example":"","body_short":"start-work — 工程化协作中心入口（薄 facade）\n\n目的\n\n把\"调 N 个 agent + 走验证 + 收口\"这件事从主调度器搬走。**主调度器只负责\"理解用户意图 → 调 start-work\"**，子流程由本 skill 自己编排。\n\n⚠️ 设计原则（反架构中台化）\n\n- **薄**：≤200 行（v2.0 修订 3 显式承认膨胀：v1.0 113 行 → v2.0 ≤200 行，加执行路径段）\n- **不建数据库/不装 dashboard/不做 IPC**——消费者=1（你自己），架构师铁律硬约束（`architecture-claude-dir-no-middleplatform`）\n- **状态目录隔离**：`.omc/projects/{slug}/` 每个项目独立，不污染全局 `.omc/state/`\n\n触发 SOP（5 阶段编排 · 阶段 0-4 · 默认"},{"id":"vercel-react-best-practices","name_zh":"Vercel React/Next.js 性能优化最佳实践。写/重构/审查 React/Next.js 时触发。","name_en":"vercel-react-best-practices","description":"Vercel React/Next.js 性能优化最佳实践。写/重构/审查 React/Next.js 时触发。","trigger_words":[],"what_for":"","example":"","body_short":"Vercel React Best Practices\n\nComprehensive performance optimization guide for React and Next.js applications, maintained by Vercel. Contains 70 rules across 8 categories, prioritized by impact to guide automated refactoring and code generation.\n\nWhen to Apply\n\nReference these guidelines when:\n- Writing new React components or Next.js pages\n- Implementing data fetching (client or server-side)\n- Rev"},{"id":"deploy-ship","name_zh":"安全部署/上线/发布流程。触发词：\"部署/上线/发布/ship/launch/灰度\"。支持 BigOS Docker/nginx 场景，五步闭环安全部署，吸收 ","name_en":"deploy-ship","description":"安全部署/上线/发布流程。触发词：\"部署/上线/发布/ship/launch/灰度\"。支持 BigOS Docker/nginx 场景，五步闭环安全部署，吸收 gstack /ship 思想。","trigger_words":[],"what_for":"- 用户要部署/发布/上线任何服务\n- 需要灰度发布或蓝绿部署\n- Docker 容器更新/重启\n- nginx 配置变更 + reload\n- 任何\"推到生产\"操作","example":"","body_short":"Deploy-Ship — 安全部署五步闭环\n\n提供标准化、安全的部署/发布流程。吸收 gstack /ship 思想：\n先确认环境和依赖，再执行部署，最后验证结果，全程有回滚路径。\n支持 BigOS Docker/nginx、通用 Web 应用、CLI 工具等场景。\n\n- 用户要部署/发布/上线任何服务\n- 需要灰度发布或蓝绿部署\n- Docker 容器更新/重启\n- nginx 配置变更 + reload\n- 任何\"推到生产\"操作\n\nStep 1：预检（Pre-flight Check）\n\n**自动执行以下检查（并行）：**\n\n[代码块省略]\n\n必须回答：\n1. 目标环境：开发/测试/生产？\n2. 当前运行版本是什么？（建立回滚基线）\n3. 此次变更内容是什么？（changelog）\n4. 是否有数据库迁移或不可逆操作？\n\n**硬阻断条件（任一触发即停）：**\n- 生产环境 + 无备份"},{"id":"pricing-strategy","name_zh":"| 【中】pricing-strategy (中文翻译补充中, 见下方原英文). \"Analyze and design pricing strategies ","name_en":"pricing-strategy","description":"| 【中】pricing-strategy (中文翻译补充中, 见下方原英文). \"Analyze and design pricing strategies including pricing models, competitive pricing analysis, willingness-to-pay estimation, and price elasticity. Use when setting prices, evaluating pricing models, preparing for a pricing change, or comparing freemium vs pa","trigger_words":[],"what_for":"","example":"","body_short":"Pricing Strategy\n\nDesign a pricing strategy grounded in value delivery, competitive positioning, and willingness to pay.\n\nContext\n\nYou are developing a pricing strategy for **$ARGUMENTS**.\n\nIf the user provides files (competitor pricing, survey data, financial models, or usage data), read them first. Use web search to research competitor pricing if needed.\n\nInstructions\n\n1. **Understand the value "},{"id":"documentation-and-adrs","name_zh":"记录架构决策(ADR)与文档：架构变更、API 变更、功能发布时留下未来可查的决策上下文","name_en":"documentation-and-adrs","description":"| 文档与 ADR(架构决策记录)撰写。","trigger_words":[],"what_for":"","example":"","body_short":"Documentation and ADRs\n\nOverview\n\nDocument decisions, not just code. The most valuable documentation captures the *why* — the context, constraints, and trade-offs that led to a decision. Code shows *what* was built; documentation explains *why it was built this way* and *what alternatives were considered*. This context is essential for future humans and agents working in the codebase.\n\nWhen to Use"}],"hooks":[{"id":"official-paradigm-guard.sh","name_zh":"official-paradigm-guard.sh — PreToolUse(Edit|Write|MultiEdit) 官方范式守卫","hook_type":"advisory","events":["Edit"],"registered":true,"what_protects":"official-paradigm-guard.sh — PreToolUse(Edit|Write|MultiEdit) 官方范式守卫","kill_switch":"OMC_SKIP_HOOKS","size_lines":48},{"id":"retrieval-precheck.sh","name_zh":"retrieval-precheck.sh — UserPromptSubmit hook (advisory only)","hook_type":"advisory","events":["?"],"registered":true,"what_protects":"retrieval-precheck.sh — UserPromptSubmit hook (advisory only)","kill_switch":"OMC_SKIP_HOOKS","size_lines":61},{"id":"env-sentinel.sh","name_zh":"U5: env 哨兵 — SubagentStart hook（V52 · 2026-06-10）","hook_type":"enforcement","events":["?"],"registered":true,"what_protects":"U5: env 哨兵 — SubagentStart hook（V52 · 2026-06-10）","kill_switch":"OMC_SKIP_HOOKS","size_lines":112},{"id":"user-prompt-submit-confidence.sh","name_zh":"user-prompt-submit-confidence.sh — Confidence Gate 轻量版挂载点","hook_type":"advisory","events":["?"],"registered":true,"what_protects":"user-prompt-submit-confidence.sh — Confidence Gate 轻量版挂载点","kill_switch":"OMC_SKIP_HOOKS","size_lines":45},{"id":"agent-task-dispatcher.sh","name_zh":"agent-task-dispatcher.sh — PreToolUse Skill|Agent|Task 统一调度器","hook_type":"enforcement","events":["?"],"registered":true,"what_protects":"agent-task-dispatcher.sh — PreToolUse Skill|Agent|Task 统一调度器","kill_switch":"","size_lines":38},{"id":"teammate-quality-gate.sh","name_zh":"V26.4 Agent Team 质量门控 Hook","hook_type":"enforcement","events":["?"],"registered":true,"what_protects":"V26.4 Agent Team 质量门控 Hook","kill_switch":"","size_lines":82},{"id":"cmmi-stop-sync.sh","name_zh":"cmmi-stop-sync.sh — Stop 事件：更新 task-ledger 状态到 cmmi/tasks.jsonl","hook_type":"advisory","events":["?"],"registered":false,"what_protects":"cmmi-stop-sync.sh — Stop 事件：更新 task-ledger 状态到 cmmi/tasks.jsonl","kill_switch":"","size_lines":42},{"id":"smart-recommendation-injector.sh","name_zh":"smart-recommendation-injector.sh — UserPromptSubmit 智能推荐注入（Layer 3 · 2026-06-22）","hook_type":"(未标注)","events":["?"],"registered":true,"what_protects":"smart-recommendation-injector.sh — UserPromptSubmit 智能推荐注入（Layer 3 · 2026-06-22）","kill_switch":"OMC_SKIP_HOOKS","size_lines":75},{"id":"notion-queue-flusher.sh","name_zh":"notion-queue-flusher.sh — SessionStart 检测 Notion 推送队列并通知主调度器","hook_type":"advisory","events":["?"],"registered":true,"what_protects":"notion-queue-flusher.sh — SessionStart 检测 Notion 推送队列并通知主调度器","kill_switch":"","size_lines":76},{"id":"intake-gateway.sh","name_zh":"intake-gateway.sh — 自动入口触发 hook（I 基础设施 · 2026-06-26）","hook_type":"advisory","events":["?"],"registered":true,"what_protects":"intake-gateway.sh — 自动入口触发 hook（I 基础设施 · 2026-06-26）","kill_switch":"","size_lines":24}],"agents":[{"id":"planner","category":"agents","name_zh":"planner","model":"opus","level":"4","description":"Strategic planning consultant with interview workflow (Opus)。战略规划顾问，含访谈流程，制定计划、梳理需求、战略分析","trigger_words":[],"body_short":"You are Planner. Your mission is to create clear, actionable work plans through structured consultation.\n    You are responsible for interviewing users, gathering requirements, researching the codebase via agents, and producing work plans saved to `.omc/plans/*.md`.\n    You are not responsible for implementing code (executor), analyzing requirements gaps (analyst), reviewing plans (critic), or ana"},{"id":"architect","category":"_ceo-roles","name_zh":"architect","model":"opus","level":"?","description":"架构师角色 — C4模型系统设计、ADR决策记录、技术选型（官方优先）、接口契约定义、非功能性需求、风险矩阵。CEO 团队的技术方案总负责人，每个重大技术决策必须有 ADR 记录。","trigger_words":[],"body_short":"架构师（Principal Software Architect）\n\n核心角色\n你是 Principal-level 软件架构师，用 **C4 模型**（Context/Container/Component）分层设计，用 **ADR（Architecture Decision Record）** 记录每个重大技术决策。对\"把事做对\"负责——防止技术债在早期埋下。\n\n专业能力\n- **C4 架构建模**：Context（系统边界）/ Container（部署单元）/ Component（模块职责）\n- **ADR 决策记录**：背景+选项+决策+结果+状态（Proposed/Accepted/Superseded）\n- **技术选型**：官方优先（铁律5）→ 高星社区 → 自研，有量化对比表\n- **接口契约**：RESTful/GraphQL/gRPC 标准定义（OpenAPI/Prot"},{"id":"overseas-entry","category":"_industry","name_zh":"overseas-entry","model":"opus","level":"?","description":"海外市场准入专家 — 出海落地的合规与本地化全链路：区域市场准入、法务/牌照、本地化运营、跨境支付与资金、地缘与政策风险。服务新消费/连锁项目的海外扩张分析。","trigger_words":[],"body_short":"海外市场准入专家（Overseas Market Entry Strategist）\n\n核心角色\n你是帮中国新消费/连锁品牌落地东南亚/中东/欧洲/拉美的出海实战专家，深知\"国内跑通的模式照搬出海必死\"，对各区域的市场准入门槛、本地化深度、合规雷区、资金通道有一线经验。\n\n专业能力\n- **市场准入**：目标国的行业牌照/食品/进口/外资准入门槛，落地路径（独资/合资/加盟/代理）\n- **法务合规**：公司注册、劳工法、税务、数据合规（GDPR等）、知识产权保护\n- **本地化运营**：产品本地化（口味/规格/宗教禁忌如清真）、团队本地化、营销本地化\n- **跨境支付与资金**：收款通道、利润汇回、外汇管制、转移定价\n- **地缘与政策风险**：政局稳定性、对华政策、关税/贸易壁垒、突发监管\n\n输出契约（必含四件套）\n1. **核心结论**（先行：目标市场进入难度分级、推荐落地模式、最大"},{"id":"technical-writer","category":"_core","name_zh":"technical-writer","model":"sonnet","level":"?","description":"Use this agent when creating technical documentation, writing developer guides, or improving documentation quality.","trigger_words":[],"body_short":"You are a technical writer who creates clear, accurate, and accessible documentation for developers and users. Structure information logically, write concise explanations, and include practical examples. Ensure documentation stays current with code changes and addresses common pain points."},{"id":"team-fullstack","category":"teams","name_zh":"team-fullstack","model":"sonnet","level":"?","description":"全栈交付团队 — 前端+后端+数据库+部署一条龙。任务命中：'做个网站/做个app/全栈开发/上线一个功能'时优先用此团队。","trigger_words":[],"body_short":"Team Fullstack — 全栈一条龙\n\n何时激活\n- 用户说：\"做个网站\"、\"做个 app\"、\"上线功能\"、\"全栈实现\"\n- intent-matcher 置信度 ≥0.7 时自动派此团队\n- 否则提议升级/新建（铁律 19）\n\n团队成员（角色链流水线 — V26.4 升级 | 吸收自 gstack 角色链设计）\n\n> 核心升级：从纯并行改为串行链，前序角色的输出自动作为后续角色的 systemMessage 注入。\n> 链式传递保证流程连贯性，避免信息在并行交接中丢失。\n\n角色链\n\n[代码块省略]\n\n角色定义（含链式注入）\n\n| 顺序 | 角色 | Model | 输入来源 | 输出 |\n|:---:|------|:---:|------|------|\n| 1 | **product-manager** | sonnet | 用户原始需求 | 用户故事 + 5W1H + 验收"},{"id":"threat-modeling-expert","category":"_subagent","name_zh":"threat-modeling-expert","model":"opus","level":"?","description":"Expert in threat modeling methodologies, security architecture review, and risk assessment. Masters STRIDE, PASTA, attack trees, and security requirement extraction. Use PROACTIVELY for security architecture reviews, threat identification, or building secure-by-design systems.","trigger_words":[],"body_short":"Threat Modeling Expert\n\nExpert in threat modeling methodologies, security architecture review, and risk assessment. Masters STRIDE, PASTA, attack trees, and security requirement extraction. Use PROACTIVELY for security architecture reviews, threat identification, or building secure-by-design systems.\n\nCapabilities\n\n- STRIDE threat analysis\n- Attack tree construction\n- Data flow diagram analysis\n- "}]}
-</script>
-
-<script>
 // P1-3 · 详情弹窗 + 全量目录
-// - 优先 fetch dashboard-details.json（动态/同源/321KB）
-// - 失败降级到 #detailData 内联（旧 P2-4 sample）
+// - 优先 fetch dashboard-details.json（动态/同源/~320KB）
+// - 失败降级到 #detailData 内联（snapshot）
 // - 修 2 bug：标题优先 name_en（非 name_zh 长描述）、meta 只显示 total（无 _sample）
 (function() {
   // tab 按钮样式
@@ -4068,7 +4697,7 @@ function showToast(msg) {
       });
   }
 
-  // 共享工具(提到顶层,initModal + initCatalog 共用)
+  // 共享工具
   function esc(s) {
     if (s === undefined || s === null) return '';
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -4076,7 +4705,8 @@ function showToast(msg) {
 
   loadData().then(DATA => {
     if (!DATA) {
-      document.getElementById('catalogStatus').textContent = '❌ 数据加载失败(file:// 打开需 http.server)';
+      const s = document.getElementById('catalogStatus');
+      if (s) s.textContent = '❌ 数据加载失败(file:// 打开需 http.server)';
       return;
     }
     initModal(DATA);
@@ -4101,6 +4731,7 @@ function showToast(msg) {
         return;
       }
       const overlay = document.getElementById('detailOverlay');
+      if (!overlay) { console.error('detailOverlay 不存在'); return; }
       // P1-3 fix: 标题优先 name_en(id 对应简洁名),非 name_zh 长描述
       document.getElementById('detailTitle').textContent = item.name_en || item.name_zh || item.id || id;
       let html = '';
@@ -4137,7 +4768,8 @@ function showToast(msg) {
     };
 
     window.closeDetail = function() {
-      document.getElementById('detailOverlay').style.display = 'none';
+      const o = document.getElementById('detailOverlay');
+      if (o) o.style.display = 'none';
     };
 
     document.addEventListener('keydown', function(e) {
@@ -4157,7 +4789,7 @@ function showToast(msg) {
       ...DATA.hooks.map(h => ({type:'hooks', id:h.id, label:h.id, desc:h.what_protects || h.name_zh || ''})),
       ...DATA.agents.map(a => ({type:'agents', id:a.id, label:a.id, desc:a.description || ''})),
     ];
-    status.textContent = `✓ 已加载 ${DATA.counts.skills_total}+${DATA.counts.hooks_total}+${DATA.counts.agents_total} = ${all.length} 条`;
+    if (status) status.textContent = `✓ 已加载 ${DATA.counts.skills_total||DATA.skills.length}+${DATA.counts.hooks_total||DATA.hooks.length}+${DATA.counts.agents_total||DATA.agents.length} = ${all.length} 条`;
 
     let curTab = 'all';
     let curQuery = '';
@@ -4172,13 +4804,13 @@ function showToast(msg) {
         return true;
       });
       const typeIcon = {skills:'🛠', hooks:'🪝', agents:'🤖'};
-      chips.innerHTML = filtered.map(item =>
+      if (chips) chips.innerHTML = filtered.map(item =>
         `<span class="catalog-chip" data-type="${item.type}" data-id="${esc(item.id)}" title="${esc(item.desc.slice(0,200))}"><span class="chip-type">${typeIcon[item.type]}</span>${esc(item.label)}</span>`
       ).join('');
-      chips.querySelectorAll('.catalog-chip').forEach(el => {
+      if (chips) chips.querySelectorAll('.catalog-chip').forEach(el => {
         el.addEventListener('click', () => openDetail(el.dataset.type, el.dataset.id));
       });
-      status.textContent = `✓ ${filtered.length} / ${all.length} 条`;
+      if (status) status.textContent = `✓ ${filtered.length} / ${all.length} 条`;
     }
 
     tabs.forEach(btn => btn.addEventListener('click', () => {
@@ -4187,13 +4819,72 @@ function showToast(msg) {
       curTab = btn.dataset.tab;
       render();
     }));
-    search.addEventListener('input', () => {
+    if (search) search.addEventListener('input', () => {
       curQuery = search.value.trim();
       render();
     });
     render();
   }
 })();
+</script>
+<script>
+/* 窄屏侧栏抽屉 + 导航 active 高亮 */
+(function(){
+  var sb=document.querySelector('.sidebar'),
+      bd=document.getElementById('sidebarBackdrop'),
+      btn=document.getElementById('menuBtn');
+  function close(){ if(sb)sb.classList.remove('open'); if(bd)bd.classList.remove('open'); if(btn)btn.setAttribute('aria-expanded','false'); }
+  function toggle(){ if(!sb)return; var o=sb.classList.toggle('open'); if(bd)bd.classList.toggle('open',o); if(btn)btn.setAttribute('aria-expanded',o?'true':'false'); }
+  if(btn) btn.addEventListener('click', toggle);
+  if(bd)  bd.addEventListener('click', close);
+  var links=[].slice.call(document.querySelectorAll('.nav-link'));
+  links.forEach(function(a){ a.addEventListener('click', close); });
+  var map={}; links.forEach(function(a){ var id=a.getAttribute('href').slice(1); if(document.getElementById(id)) map[id]=a; });
+  if('IntersectionObserver' in window){
+    var obs=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ var id=e.target.getAttribute('id');
+        links.forEach(function(x){x.classList.remove('active');}); if(map[id]) map[id].classList.add('active'); } });
+    },{rootMargin:'-15% 0px -75% 0px'});
+    document.querySelectorAll('.card[id]').forEach(function(c){obs.observe(c);});
+  }
+})();
+</script>
+
+<!-- ═══ Cmd-K 全局搜索浮层 ═══ -->
+<div class="cmdk-overlay" id="cmdkOverlay" style="display:none" onclick="if(event.target.id==='cmdkOverlay')closeCmdK()" role="dialog" aria-modal="true" aria-label="全局搜索">
+  <div class="cmdk-panel">
+    <div class="cmdk-input-wrap">
+      <span class="cmdk-icon">🔍</span>
+      <input id="cmdkInput" type="text" autocomplete="off" placeholder="输入关键词… (ESC 关闭 · ↑↓ 选择 · ↵ 跳转)" />
+      <kbd class="cmdk-esc">ESC</kbd>
+    </div>
+    <div class="cmdk-tabs" id="cmdkTabs"></div>
+    <div id="cmdkResults" class="cmdk-results"><div class="cmdk-hint">⏳ 索引懒加载中…先点开本页底部 s-globalsearch 触发,或等待 Cmd-K 唤起</div></div>
+    <div class="cmdk-footer"><span id="cmdkCount">0</span> 条结果 · <span class="cmdk-hk">⌘K</span> 全局唤起</div>
+  </div>
+</div>
+
+<!-- P1-3 · 详情 Modal · 弹出 skill/hook/agent 完整信息 -->
+<div class="cmdk-overlay" id="detailOverlay" style="display:none" onclick="if(event.target.id==='detailOverlay')closeDetail()">
+  <div class="cmdk-panel" style="max-width:680px;max-height:80vh;overflow:auto">
+    <div class="cmdk-input-wrap" style="background:var(--bg2)">
+      <span class="cmdk-icon">📋</span>
+      <span id="detailTitle" style="font-weight:600;font-size:14px;color:var(--text)">详情</span>
+      <span class="kbd" style="margin-left:auto;font-size:10px;opacity:.6">点击外部或 ESC 关闭</span>
+    </div>
+    <div id="detailBody" style="padding:14px 18px;font-size:12px;line-height:1.65;color:var(--text)">
+      <div style="text-align:center;color:var(--text-muted);padding:20px">加载中…</div>
+    </div>
+    <div class="cmdk-footer" id="detailFooter" style="display:flex;justify-content:space-between;align-items:center">
+      <span id="detailMeta" style="font-size:11px;color:var(--text-muted)"></span>
+      <span style="font-size:10px;color:var(--text-muted)">P1-3 · 详情 Modal</span>
+    </div>
+  </div>
+</div>
+
+<!-- P1-3 · 详情数据 fallback (fetch 失败时用) -->
+<script type="application/json" id="detailData">
+{"generated_at":"2026-06-27T10:00:00Z","version":"P2-4-fallback","counts":{"skills_total":147,"hooks_total":55,"agents_total":49},"skills":[],"hooks":[],"agents":[]}
 </script>
 </body>
 </html>

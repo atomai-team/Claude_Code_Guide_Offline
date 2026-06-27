@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-26T18:11:22.513106Z",
+  "generated_at": "2026-06-27T11:49:51.470270Z",
   "version": "P2-4-full",
   "counts": {
     "skills_total": 147,
-    "hooks_total": 55,
+    "hooks_total": 54,
     "agents_total": 49
   },
   "skills": [
@@ -1562,18 +1562,6 @@
       "size_lines": 47
     },
     {
-      "id": "block-dangerous-commands.sh",
-      "name_zh": "PreToolUse hook: 硬阻断高危命令（退出码 2 = 强制阻断）",
-      "hook_type": "enforcement",
-      "events": [
-        "(未注册)"
-      ],
-      "registered": false,
-      "what_protects": "PreToolUse hook: 硬阻断高危命令（退出码 2 = 强制阻断）",
-      "kill_switch": "",
-      "size_lines": 128
-    },
-    {
       "id": "block-sensitive-files.sh",
       "name_zh": "PreToolUse hook: 阻断对敏感文件的直接编辑",
       "hook_type": "enforcement",
@@ -1691,7 +1679,7 @@
       "registered": true,
       "what_protects": "edit-write-dispatcher.sh — PreToolUse Edit|Write|MultiEdit 统一调度器",
       "kill_switch": "",
-      "size_lines": 41
+      "size_lines": 42
     },
     {
       "id": "env-sentinel.sh",
@@ -1707,16 +1695,16 @@
     },
     {
       "id": "error-circuit-breaker.sh",
-      "name_zh": "V26 错误熔断 — 融合 claw-code Failure Taxonomy（差异化分类熔断）",
+      "name_zh": "V31 错误熔断 — 共享 error_taxonomy.py SSoT（Anthropic error.subtype）",
       "hook_type": "enforcement",
       "events": [
         "SubagentStop",
         "PostToolUseFailure"
       ],
       "registered": true,
-      "what_protects": "V26 错误熔断 — 融合 claw-code Failure Taxonomy（差异化分类熔断）",
+      "what_protects": "V31 错误熔断 — 共享 error_taxonomy.py SSoT（Anthropic error.subtype）",
       "kill_switch": "",
-      "size_lines": 178
+      "size_lines": 177
     },
     {
       "id": "error-data-recorder.sh",
@@ -1741,6 +1729,19 @@
       "what_protects": "external-cli-router.sh — PreToolUse WebSearch|WebFetch: 外部CLI路由提醒",
       "kill_switch": "",
       "size_lines": 42
+    },
+    {
+      "id": "hud-guard.sh",
+      "name_zh": "hud-guard.sh — HUD 配置全字节哈希锁守卫 + session 自动命名 (Task 4 · 2026-06-27)",
+      "hook_type": "advisory",
+      "events": [
+        "Task ",
+        "SessionStart"
+      ],
+      "registered": false,
+      "what_protects": "hud-guard.sh — HUD 配置全字节哈希锁守卫 + session 自动命名 (Task 4 · 2026-06-27)",
+      "kill_switch": "",
+      "size_lines": 117
     },
     {
       "id": "intake-gateway.sh",
@@ -1947,18 +1948,6 @@
       "size_lines": 61
     },
     {
-      "id": "serial-bash-circuit.sh",
-      "name_zh": "serial-bash-circuit.sh v5.1 — V26.5.3 修复语法错误",
-      "hook_type": "enforcement",
-      "events": [
-        "(未注册)"
-      ],
-      "registered": false,
-      "what_protects": "serial-bash-circuit.sh v5.1 — V26.5.3 修复语法错误",
-      "kill_switch": "",
-      "size_lines": 96
-    },
-    {
       "id": "session-context-injector.sh",
       "name_zh": "session-context-injector.sh — SessionStart 自动注入未完成任务摘要",
       "hook_type": "advisory (SessionStart)",
@@ -2016,7 +2005,19 @@
       "registered": true,
       "what_protects": "sessionstart-guard-dispatcher.sh — W5-D (2026-06-22) + HUD guard (2026-06-23)",
       "kill_switch": "",
-      "size_lines": 60
+      "size_lines": 62
+    },
+    {
+      "id": "smart-closure-learning-trace.sh",
+      "name_zh": "smart-closure-learning-trace.sh — 任务收口时提示用户写一条 learning-trace",
+      "hook_type": "advisory",
+      "events": [
+        "Write "
+      ],
+      "registered": false,
+      "what_protects": "smart-closure-learning-trace.sh — 任务收口时提示用户写一条 learning-trace",
+      "kill_switch": "",
+      "size_lines": 120
     },
     {
       "id": "smart-recommendation-injector.sh",
@@ -2043,28 +2044,16 @@
       "size_lines": 58
     },
     {
-      "id": "stop-dispatcher.sh",
-      "name_zh": "stop-dispatcher.sh — Stop 事件 dispatcher: 真正分发 6 个 advisory hook（2026-06-22 审计修复）",
-      "hook_type": "advisory",
-      "events": [
-        "Stop"
-      ],
-      "registered": true,
-      "what_protects": "stop-dispatcher.sh — Stop 事件 dispatcher: 真正分发 6 个 advisory hook（2026-06-22 审计修复）",
-      "kill_switch": "OMC_SKIP_HOOKS",
-      "size_lines": 74
-    },
-    {
       "id": "stop-failure-monitor.sh",
-      "name_zh": "stop-failure-monitor.sh — V52.3（修复 commit 6d6d814 4 个安全漏洞）",
+      "name_zh": "stop-failure-monitor.sh — V31（共享 error_taxonomy.py SSoT）",
       "hook_type": "advisory",
       "events": [
         "StopFailure"
       ],
       "registered": true,
-      "what_protects": "stop-failure-monitor.sh — V52.3（修复 commit 6d6d814 4 个安全漏洞）",
+      "what_protects": "stop-failure-monitor.sh — V31（共享 error_taxonomy.py SSoT）",
       "kill_switch": "",
-      "size_lines": 20
+      "size_lines": 29
     },
     {
       "id": "teammate-quality-gate.sh",
