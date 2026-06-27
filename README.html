@@ -4,218 +4,355 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MYCC · Claude Code 全局能力指导书</title>
+<meta name="description" content="MYCC 一个仪表盘看懂、用好 Claude Code · 7 本场景手册 + 唐霜权威指南全文离线存档">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📘%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,560;9..144,600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="design-system/tokens.css">
+<link rel="stylesheet" href="design-system/components.css">
 <style>
-/* ═══════ MD→HTML 渲染共享样式 · CLAUDE NATIVE DESIGN(暖米底+黏土橘+衬线标题)═══════
-   全站默认亮色(去掉 prefers-color-scheme dark 块;darker 模式仅 dashboard 保留手动切换) */
-:root {
-  color-scheme: light only;
-  --bg: #faf9f5; --bg-subtle: #f0eee6; --surface: #ffffff; --surface2: #f7f5ef; --surface-hover: #f0eee6;
-  --border: #e6e1d6; --border-strong: #d8d2c4; --code-bg: #f0eee6; --tag-bg: #f0eee6;
-  --text: #1f1e1d; --text-dim: #595650; --text-muted: #8a857b;
-  --accent: #c15f3c; --accent-hover: #a94e2f; --accent-bright: #d97757; --accent-soft: #f6e7df;
-  --green: #3d7a4e; --red: #b3402f; --orange: #b06a1f; --purple: #7a5ba8;
-  --shadow-sm: 0 1px 2px rgba(60,50,40,0.05);
-  --shadow-card: 0 1px 3px rgba(60,50,40,0.06), 0 1px 2px rgba(60,50,40,0.04);
-  --font-display: 'Fraunces','Noto Serif SC',Georgia,serif;
-  --font-sans: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
-  --font-mono: 'JetBrains Mono','SF Mono','Fira Code',Menlo,monospace;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
 body {
-  font-family: var(--font-sans); background: var(--bg); color: var(--text);
-  line-height: 1.7; font-size: 15px; padding: 48px 32px 80px; max-width: 880px; margin: 0 auto;
-  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
 }
-.doc-header {
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
-  margin-bottom: 28px; padding-bottom: 18px; border-bottom: 1px solid var(--border);
-}
-.doc-header .back {
-  color: var(--accent); text-decoration: none; padding: 6px 14px;
-  border: 1px solid var(--border-strong); border-radius: 980px; font-size: 13px; font-weight: 500;
-  transition: all .15s;
-}
-.doc-header .back:hover { background: var(--accent-soft); border-color: var(--accent); }
-.doc-header .meta { color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
-h1 { font-family: var(--font-display); font-size: 32px; font-weight: 560; letter-spacing: -0.01em; margin: 12px 0 18px; color: var(--text); }
-h2 { font-family: var(--font-display); font-size: 23px; font-weight: 600; margin: 40px 0 14px; padding-top: 12px; letter-spacing: -0.01em;
-     border-top: 1px solid var(--border); color: var(--text); }
-h2:first-of-type { border-top: 0; padding-top: 0; }
-h3 { font-family: var(--font-display); font-size: 18px; font-weight: 600; margin: 28px 0 10px; color: var(--text); }
-h4 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; color: var(--text-dim); }
-p { margin: 10px 0; }
-a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
-ul, ol { margin: 10px 0 10px 24px; }
-li { margin: 4px 0; }
-hr { border: 0; border-top: 1px solid var(--border); margin: 28px 0; }
-code {
-  font-family: var(--font-mono); font-size: 0.9em; background: var(--code-bg);
-  padding: 1px 6px; border-radius: 5px; color: var(--text);
-}
-pre {
-  background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px;
-  padding: 14px 16px; overflow-x: auto; margin: 14px 0; line-height: 1.55;
-}
-pre code { background: transparent; padding: 0; font-size: 13px; }
-blockquote {
-  border-left: 3px solid var(--accent); margin: 14px 0; padding: 8px 16px;
-  background: var(--accent-soft); border-radius: 0 8px 8px 0; color: var(--text-dim);
-}
-blockquote p { margin: 4px 0; }
-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; table-layout: fixed; }
-th { text-align: left; padding: 9px 12px; background: var(--bg-subtle); color: var(--text-muted);
-     font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; word-break: break-word; }
-td { padding: 9px 12px; border-top: 1px solid var(--border); word-break: break-word; overflow-wrap: anywhere; }
-tr:hover td { background: var(--bg-subtle); }
-img { max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0; }
-strong { font-weight: 600; color: var(--text); }
-em { font-style: italic; color: var(--text-dim); }
-@media (max-width: 720px) { body { padding: 24px 16px 60px; } h1 { font-size: 26px; } h2 { font-size: 20px; } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 
+.site-header {
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface);
+}
+.site-header .container {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px;
+}
+.brand { display: flex; align-items: center; gap: var(--sp-3); text-decoration: none; color: var(--text); }
+.brand-mark {
+  width: 28px; height: 28px; border-radius: var(--radius-sm);
+  background: var(--accent); color: var(--text-inverse);
+  display: grid; place-items: center; font-weight: 700; font-size: 13px;
+}
+.brand-name { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-lg); letter-spacing: -0.01em; }
+.nav-links { display: flex; gap: var(--sp-2); }
+.nav-links a {
+  color: var(--text-dim); text-decoration: none;
+  padding: 6px 12px; border-radius: var(--radius-pill);
+  font-size: var(--fs-sm); transition: all var(--dur-fast);
+}
+.nav-links a:hover { background: var(--surface-hover); color: var(--text); }
+.nav-links a.active { background: var(--accent-soft); color: var(--accent); }
+
+/* 浅徽章组 */
+.hero-badges {
+  display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-4);
+}
+.hero-badges .badge { font-family: var(--font-mono); }
+
+/* 双层卡 */
+.layer-card { padding: var(--sp-5); }
+.layer-num {
+  display: inline-block; font-family: var(--font-display); font-weight: 700;
+  font-size: var(--fs-2xl); color: var(--accent);
+  margin-bottom: var(--sp-2);
+}
+.layer-title {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: var(--fs-xl); margin-bottom: var(--sp-2);
+  letter-spacing: -0.01em;
+}
+.layer-desc { color: var(--text-dim); font-size: var(--fs-sm); line-height: var(--lh-normal); margin-bottom: var(--sp-3); }
+.layer-audience {
+  font-size: var(--fs-xs); color: var(--text-muted);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--bg-subtle);
+  border-radius: var(--radius-md);
+}
+
+/* 7 项核心功能:列表卡 */
+.feature-list {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-3);
+}
+.feature-item {
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: var(--fs-sm); line-height: var(--lh-normal);
+  display: flex; gap: var(--sp-3); align-items: flex-start;
+}
+.feature-item .fi-icon { font-size: 20px; flex-shrink: 0; line-height: 1; }
+.feature-item strong { color: var(--text); }
+.feature-item code { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--accent); }
+@media (max-width: 768px) { .feature-list { grid-template-columns: 1fr; } }
+
+/* 目录树 code */
+.tree-block {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--text-dim);
+  overflow-x: auto;
+}
+.tree-block .t-folder { color: var(--text); }
+.tree-block .t-accent { color: var(--accent); }
+.tree-block .t-comment { color: var(--text-muted); }
+
+/* 致谢卡 */
+.ack-author {
+  font-family: var(--font-display); font-weight: 600; font-size: var(--fs-lg);
+  color: var(--text);
+}
+.ack-link { color: var(--accent); text-decoration: none; }
+.ack-link:hover { text-decoration: underline; }
+
+.site-footer {
+  border-top: 1px solid var(--border-subtle);
+  padding: var(--sp-5) 0; color: var(--text-muted); font-size: var(--fs-xs);
+}
+.site-footer .container { display: flex; justify-content: space-between; gap: var(--sp-3); flex-wrap: wrap; }
 </style>
 </head>
 <body>
-<div class="doc-header">
-  <a href="dashboard.html" class="back">← 返回 MYCC 仪表盘</a>
-  <span class="meta">渲染时间 2026-06-26 13:05 · 源: README.md</span>
-</div>
-<h1 id="mycc-claude-code">MYCC · Claude Code 全局能力指导书</h1>
-<blockquote>
-<p><strong>一个仪表盘看懂、用好 Claude Code</strong> —— 从零基础上手到工程化高阶编排，外加唐霜老师权威中文指南全文离线存档。</p>
-</blockquote>
-<p><img alt="Claude Code" src="https://img.shields.io/badge/Claude_Code-2.1.193-c15f3c"><br>
-<img alt="OMC" src="https://img.shields.io/badge/oh--my--claudecode-4.15.0-7a5ba8"><br>
-<img alt="Skills" src="https://img.shields.io/badge/Skills-148-3d7a4e"><br>
-<img alt="Agents" src="https://img.shields.io/badge/Agents-52-b06a1f"><br>
-<img alt="Hooks" src="https://img.shields.io/badge/Hooks-50-2f7d8a"><br>
-<img alt="License" src="https://img.shields.io/badge/原版内容-唐霜_©-595650"></p>
-<hr>
-<h2 id="_1">📖 这是什么</h2>
-<p>本项目是一个<strong>双层知识系统</strong>，把"Claude Code 怎么用"从入门到精通一站式讲透：</p>
-<table>
-<thead>
-<tr>
-<th>层</th>
-<th>内容</th>
-<th>受众</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>① 能力指导层</strong>（原创）</td>
-<td>交互式仪表盘 + 配置全景 + 7 本场景手册 + 全局搜索</td>
-<td>想快速上手 / 工程化用好 CC 的人</td>
-</tr>
-<tr>
-<td><strong>② 权威指南层</strong>（唐霜原版）</td>
-<td>《Claude Code 指南》全文离线存档，9 部分 / 36 章 / 207 节</td>
-<td>想系统学习 CC 原理与实战的人</td>
-</tr>
-</tbody>
-</table>
-<p>入口只有一个：<strong><code>dashboard.html</code></strong> —— 打开它，所有内容按场景串联可达。</p>
-<hr>
-<h2 id="_2">✨ 核心功能</h2>
-<ul>
-<li><strong>🎛️ 交互式仪表盘</strong>（<code>dashboard.html</code>）：30+ 能力速查卡，按「新手起步 → 命令参考 → 交互模式 → 高级编排 → 配置全景」分区，左侧导航 + 响应式抽屉 + 明暗主题切换。</li>
-<li><strong>🔍 全局搜索（⌘K）</strong>：客户端全文索引 13 份文档 / 19 万字符，搜 skill / agent / 口语 / 命令即时高亮。</li>
-<li><strong>🗂️ 二级详情页下钻</strong>：仪表盘当入口菜单，数据密集卡（Skills / Hooks / Agents / 高级功能）一键下钻到 <code>mycc-config.html</code> 对应专区。</li>
-<li><strong>⚙️ 配置全景</strong>（<code>mycc-config.html</code>）：自动从 <code>~/.claude/</code> 实时拉取，零手工维护，呈现已装的全部 MCP / 插件 / Skills / Hooks / 定时任务 / 路由表。</li>
-<li><strong>📚 7 本场景手册</strong>：小白上手、商城项目实战、全能力清单、CMMI 配置、创业分析专家系统、CEO 能力速用、能力全景总册 —— 均提供 Markdown + 渲染版 HTML。</li>
-<li><strong>⚡ 高级实战示例</strong>：goal 闭环 / loop 巡检 / Dynamic Workflow 编排 / 多 Agent 协同 / Skill 自优化，5 个复制即用的完整范例。</li>
-<li><strong>📊 实时数据注入</strong>：版本号、各项能力计数由 <code>mycc-stats.py</code> 自动生成，仪表盘启动即刷新。</li>
-</ul>
-<hr>
-<h2 id="_3">📊 数据概览</h2>
-<blockquote>
-<p>数据源：<code>mycc-stats.json</code>（由 <code>mycc-stats.py</code> 自动生成）· 截至 2026-06-26</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th style="text-align: right;">数量</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Skills</strong></td>
-<td style="text-align: right;">148</td>
-<td>按 8 大类分组，口语触发</td>
-</tr>
-<tr>
-<td><strong>Agents</strong></td>
-<td style="text-align: right;">52</td>
-<td>6 核心 + 12 CEO 顾问 + 7 行业专家 + 6 交付团队</td>
-</tr>
-<tr>
-<td><strong>Hooks</strong></td>
-<td style="text-align: right;">50</td>
-<td>覆盖 14 类事件（安全 / 质量 / 记忆 / 并发…）</td>
-</tr>
-<tr>
-<td><strong>Workflows</strong></td>
-<td style="text-align: right;">13</td>
-<td>多阶段确定性编排</td>
-</tr>
-<tr>
-<td><strong>MCP 服务器</strong></td>
-<td style="text-align: right;">4</td>
-<td>外部工具与数据接入</td>
-</tr>
-<tr>
-<td><strong>权威指南</strong></td>
-<td style="text-align: right;">9 部分 / 36 章 / 207 节</td>
-<td>唐霜《Claude Code 指南》全文</td>
-</tr>
-<tr>
-<td><strong>场景手册</strong></td>
-<td style="text-align: right;">7 本</td>
-<td>原创，Markdown + HTML 双格式</td>
-</tr>
-</tbody>
-</table>
-<p>运行环境：Claude Code <code>2.1.193</code> · oh-my-claudecode <code>4.15.0</code> · 官方直连。</p>
-<hr>
-<h2 id="_4">🚀 快速开始</h2>
-<pre><code class="language-bash"># 1. 克隆
+<a href="#about" class="skip-link">跳到主体内容</a>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">M</span>
+      <span class="brand-name">MYCC</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">首页</a>
+      <a href="dashboard.html">仪表盘</a>
+      <a href="start-here.html">新手起步</a>
+      <a href="README.html" class="active">关于</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="about">
+  <div class="container">
+    <h1 class="hero-title">MYCC · Claude Code<br><span style="color:var(--accent)">全局能力指导书</span></h1>
+    <p class="hero-subtitle">
+      <strong>一个仪表盘看懂、用好 Claude Code</strong> —— 从零基础上手到工程化高阶编排,外加唐霜老师权威中文指南全文离线存档。
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="dashboard.html">🎛️ 进入仪表盘</a>
+      <a class="btn" href="start-here.html">🚀 新手起步</a>
+      <a class="btn" href="#data">📊 数据概览</a>
+    </div>
+    <div class="hero-badges">
+      <span class="badge badge-accent">Claude Code 2.1.193</span>
+      <span class="badge badge-purple">oh-my-claudecode 4.15.0</span>
+      <span class="badge badge-green">Skills · 148</span>
+      <span class="badge badge-orange">Agents · 52</span>
+      <span class="badge badge-cyan">Hooks · 50</span>
+      <span class="badge">License · 唐霜 ©</span>
+    </div>
+  </div>
+</section>
+
+<!-- 📖 这是什么 · 双层卡 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">📖 这是什么</h2>
+      <p class="section-subtitle">本项目是一个<strong>双层知识系统</strong>,把"Claude Code 怎么用"从入门到精通一站式讲透。</p>
+    </div>
+    <div class="grid grid-2">
+
+      <div class="card card-priority layer-card">
+        <span class="layer-num">①</span>
+        <div class="layer-title">能力指导层(原创)</div>
+        <p class="layer-desc">交互式仪表盘 + 配置全景 + 7 本场景手册 + 全局搜索</p>
+        <div class="layer-audience">🎯 受众:想快速上手 / 工程化用好 CC 的人</div>
+      </div>
+
+      <div class="card card-priority layer-card">
+        <span class="layer-num" style="color:var(--cyan)">②</span>
+        <div class="layer-title">权威指南层(唐霜原版)</div>
+        <p class="layer-desc">《Claude Code 指南》全文离线存档 · 9 部分 / 36 章 / 207 节</p>
+        <div class="layer-audience">🎯 受众:想系统学习 CC 原理与实战的人</div>
+      </div>
+
+    </div>
+    <div class="callout" style="margin-top:var(--sp-5)">
+      入口只有一个:<strong style="color:var(--accent)"><a href="dashboard.html" style="color:inherit">dashboard.html</a></strong> —— 打开它,所有内容按场景串联可达。
+    </div>
+  </div>
+</section>
+
+<!-- ✨ 核心功能 -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">✨ 核心功能</h2>
+      <p class="section-subtitle">7 大能力 · 一个仪表盘 · 7 本手册 · 全局搜索</p>
+    </div>
+    <div class="card">
+      <div class="feature-list">
+
+        <div class="feature-item">
+          <span class="fi-icon">🎛️</span>
+          <span><strong>交互式仪表盘</strong>(<a href="dashboard.html"><code>dashboard.html</code></a>):30+ 能力速查卡,按「新手起步 → 命令参考 → 交互模式 → 高级编排 → 配置全景」分区,左侧导航 + 响应式抽屉 + 明暗主题切换。</span>
+        </div>
+
+        <div class="feature-item">
+          <span class="fi-icon">🔍</span>
+          <span><strong>全局搜索(⌘K)</strong>:客户端全文索引 13 份文档 / 19 万字符,搜 skill / agent / 口语 / 命令即时高亮。</span>
+        </div>
+
+        <div class="feature-item">
+          <span class="fi-icon">🗂️</span>
+          <span><strong>二级详情页下钻</strong>:仪表盘当入口菜单,数据密集卡(Skills / Hooks / Agents / 高级功能)一键下钻到 <a href="mycc-config.html"><code>mycc-config.html</code></a> 对应专区。</span>
+        </div>
+
+        <div class="feature-item">
+          <span class="fi-icon">⚙️</span>
+          <span><strong>配置全景</strong>(<a href="mycc-config.html"><code>mycc-config.html</code></a>):自动从 <code>~/.claude/</code> 实时拉取,零手工维护,呈现已装的全部 MCP / 插件 / Skills / Hooks / 定时任务 / 路由表。</span>
+        </div>
+
+        <div class="feature-item">
+          <span class="fi-icon">📚</span>
+          <span><strong>7 本场景手册</strong>:小白上手、商城项目实战、全能力清单、CMMI 配置、创业分析专家系统、CEO 能力速用、能力全景总册 —— 均提供 Markdown + 渲染版 HTML。</span>
+        </div>
+
+        <div class="feature-item">
+          <span class="fi-icon">⚡</span>
+          <span><strong>高级实战示例</strong>:goal 闭环 / loop 巡检 / Dynamic Workflow 编排 / 多 Agent 协同 / Skill 自优化,5 个复制即用的完整范例。</span>
+        </div>
+
+        <div class="feature-item">
+          <span class="fi-icon">📊</span>
+          <span><strong>实时数据注入</strong>:版本号、各项能力计数由 <code>mycc-stats.py</code> 自动生成,仪表盘启动即刷新。</span>
+        </div>
+
+        <div class="feature-item">
+          <span class="fi-icon">🧭</span>
+          <span><strong>新手 35 场景路由</strong>(<a href="start-here.html"><code>start-here.html</code></a>):按身份/动作路由到对应手册与仪表盘卡,30 秒找到入口。</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 📊 数据概览 -->
+<section class="section" id="data" style="padding-top: 0;">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">📊 数据概览</h2>
+      <p class="section-subtitle">数据源 mycc-stats.json(由 mycc-stats.py 自动生成) · 截至 2026-06-26</p>
+    </div>
+    <div class="grid grid-2" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="card card-priority"><div class="metric"><span class="metric-value">148</span><span class="metric-label">Skills · 8 大类</span></div></div>
+      <div class="card card-priority"><div class="metric"><span class="metric-value">52</span><span class="metric-label">Agents · 6+12+7+6</span></div></div>
+      <div class="card card-priority"><div class="metric"><span class="metric-value">50</span><span class="metric-label">Hooks · 14 类事件</span></div></div>
+      <div class="card card-priority"><div class="metric"><span class="metric-value">13</span><span class="metric-label">Workflows · 多阶段</span></div></div>
+      <div class="card"><div class="metric"><span class="metric-value">4</span><span class="metric-label">MCP 服务器</span></div></div>
+      <div class="card"><div class="metric"><span class="metric-value">9 / 36 / 207</span><span class="metric-label">指南 · 部分 / 章 / 节</span></div></div>
+      <div class="card"><div class="metric"><span class="metric-value">7</span><span class="metric-label">场景手册 · md + html</span></div></div>
+      <div class="card"><div class="metric"><span class="metric-value">2.1.193</span><span class="metric-label">Claude Code 版本</span></div></div>
+    </div>
+    <div class="callout callout-info" style="margin-top:var(--sp-4)">
+      运行环境:Claude Code <code>2.1.193</code> · oh-my-claudecode <code>4.15.0</code> · 官方直连。
+    </div>
+  </div>
+</section>
+
+<!-- 🚀 快速开始 -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">🚀 快速开始</h2>
+      <p class="section-subtitle">3 步本地起服务 · 中文路径需经 HTTP · 勿用 file://</p>
+    </div>
+    <div class="card">
+      <pre class="tree-block"><code><span class="t-comment"># 1. 克隆</span>
 git clone https://github.com/atomai-team/Claude_Code_Guide_Offline.git
 cd Claude_Code_Guide_Offline
 
-# 2. 启本地服务（中文路径 + .html 渲染需经 HTTP，勿用 file://）
+<span class="t-comment"># 2. 启本地服务(中文路径 + .html 渲染需经 HTTP,勿用 file://)</span>
 python3 -m http.server 18765 --bind 127.0.0.1
 
-# 3. 浏览器打开仪表盘
-open http://127.0.0.1:18765/dashboard.html
-</code></pre>
-<p>从仪表盘的「5 分钟上手」卡开始，按「新手 30 天路径」推进；不确定找哪个能力时，用顶部 <strong>⌘K 全局搜索</strong>或「超级入口」兜底。</p>
-<hr>
-<h2 id="_5">📂 目录结构</h2>
-<pre><code>.
-├── dashboard.html              # 🎛️ 主入口：能力仪表盘
-├── mycc-config.html            # ⚙️ 配置全景（自动生成）
-├── 00-速查表.md ~ 06-CEO能力速用手册.md     # 📚 7 本场景手册（含 .html 渲染版）
-├── start-here.md               # 新手第一站
-├── MYCC-能力全景总册.md          # 能力总索引
-├── mycc-stats.json             # 📊 实时数据源
-├── _md-shared.css              # 手册渲染共享样式
-└── 第1部分 ~ 第9部分/            # 📖 唐霜《Claude Code 指南》207 节原版
-</code></pre>
-<hr>
-<h2 id="_6">🙏 致谢与版权</h2>
-<p>本项目分<strong>原创能力层</strong>与<strong>权威指南层</strong>，版权分别归属：</p>
-<ul>
-<li><strong>权威指南层</strong>（<code>第N部分/</code> 下 207 节内容）：原作者 <strong><a href="https://www.tangshuang.net/">唐霜 (Tang Shuang)</a></strong>，来源 <a href="https://claudecode.tangshuang.net/">https://claudecode.tangshuang.net/</a>。本仓库仅作个人学习与非营利备份，所有权 / 版权 / 最终解释权均归唐霜先生所有。转载引用请注明原作者及原始链接。</li>
-<li><strong>原创能力层</strong>（仪表盘 / 配置全景 / 7 本场景手册 / 数据引擎）：基于实际 Claude Code + oh-my-claudecode 使用经验编写。</li>
-</ul>
-<blockquote>
-<p><strong>免责声明</strong>：本项目致力于知识传播与分享。如原作者认为本仓库侵犯合法权益，请联系 <code>kscbxxliuxp@linux.do</code>，将在收到通知后第一时间删除相关内容并致歉。</p>
-</blockquote>
+<span class="t-comment"># 3. 浏览器打开</span>
+open <span class="t-accent">http://127.0.0.1:18765/</span>   <span class="t-comment">← 新顶层入口(index.html)</span></code></pre>
+    </div>
+    <div class="callout" style="margin-top:var(--sp-4)">
+      从仪表盘的「5 分钟上手」卡开始,按「新手 30 天路径」推进;不确定找哪个能力时,用顶部 <strong>⌘K 全局搜索</strong>或「超级入口」兜底。
+    </div>
+  </div>
+</section>
+
+<!-- 📂 目录结构 -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">📂 目录结构</h2>
+      <p class="section-subtitle">原创能力层 + 权威指南层 · 双层知识系统</p>
+    </div>
+    <div class="card">
+      <pre class="tree-block"><code>.
+├── <span class="t-accent">index.html</span>                  <span class="t-comment"># 🏠 顶层入口(4 大区选择)</span>
+├── <span class="t-folder">dashboard.html</span>              <span class="t-comment"># 🎛️ 主入口:能力仪表盘</span>
+├── <span class="t-folder">mycc-config.html</span>            <span class="t-comment"># ⚙️ 配置全景(自动生成)</span>
+├── <span class="t-folder">start-here.html</span>             <span class="t-comment"># 🧭 35 场景路由</span>
+├── <span class="t-folder">README.html</span>                 <span class="t-comment"># 📖 本文件</span>
+├── <span class="t-folder">00-速查表.md ~ 06-CEO能力速用手册.md</span>  <span class="t-comment"># 📚 7 本场景手册(含 .html 渲染版)</span>
+├── <span class="t-folder">MYCC-能力全景总册.md</span>          <span class="t-comment"># 能力总索引</span>
+├── <span class="t-folder">design-system/</span>             <span class="t-comment"># 🎨 设计 SSoT(tokens.css + components.css)</span>
+├── <span class="t-folder">mycc-stats.json</span>             <span class="t-comment"># 📊 实时数据源</span>
+├── <span class="t-folder">_md-shared.css</span>              <span class="t-comment"># 手册渲染共享样式</span>
+└── <span class="t-folder">第1部分 ~ 第9部分/</span>            <span class="t-comment"># 📖 唐霜《Claude Code 指南》207 节原版</span></code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- 🙏 致谢与版权 -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">🙏 致谢与版权</h2>
+      <p class="section-subtitle">原创能力层 + 权威指南层 · 版权分别归属</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card card-priority layer-card">
+        <div class="layer-title">权威指南层(唐霜原版)</div>
+        <p class="layer-desc">
+          第N部分/ 下 207 节内容,原作者 <span class="ack-author">唐霜 (Tang Shuang)</span>,
+          来源 <a href="https://claudecode.tangshuang.net/" class="ack-link">https://claudecode.tangshuang.net/</a>。
+        </p>
+        <div class="layer-audience">
+          本仓库仅作个人学习与非营利备份,所有权 / 版权 / 最终解释权均归唐霜先生所有。转载引用请注明原作者及原始链接。
+        </div>
+      </div>
+      <div class="card card-priority layer-card" style="border-left-color:var(--cyan)">
+        <div class="layer-title">原创能力层</div>
+        <p class="layer-desc">
+          仪表盘 / 配置全景 / 7 本场景手册 / 数据引擎 / 设计系统。
+        </p>
+        <div class="layer-audience">
+          基于实际 Claude Code + oh-my-claudecode 使用经验编写 · MIT-style 个人原创。
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-warn" style="margin-top:var(--sp-4)">
+      <strong>免责声明</strong>:本项目致力于知识传播与分享。如原作者认为本仓库侵犯合法权益,请联系 <code>kscbxxliuxp@linux.do</code>,将在收到通知后第一时间删除相关内容并致歉。
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>MYCC · Claude Code 全局能力指导书 · 2.1.193 · 4.15.0 · 官方直连</span>
+    <span>设计 · Fraunces · Inter · JetBrains Mono</span>
+  </div>
+</footer>
 </body>
 </html>
