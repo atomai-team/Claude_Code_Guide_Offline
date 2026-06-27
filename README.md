@@ -1,5 +1,8 @@
 # MYCC · Claude Code 全局能力指导书
 
+<meta http-equiv="refresh" content="0;url=README.html">
+
+
 > **一个仪表盘看懂、用好 Claude Code** —— 从零基础上手到工程化高阶编排，外加唐霜老师权威中文指南全文离线存档。
 
 ![Claude Code](https://img.shields.io/badge/Claude_Code-2.1.193-c15f3c)

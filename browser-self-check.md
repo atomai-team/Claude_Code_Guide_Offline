@@ -1,5 +1,8 @@
 # 🌐 浏览器自验 check 清单 · MYCC Dashboard v53-PRO
 
+<meta http-equiv="refresh" content="0;url=browser-self-check.html">
+
+
 > 📌 **目的**：3 联专家并行诊断 dashboard.html UI/UX/培训问题前，**先确认本机渲染是否正常**（sandbox 截图字体缺失是已知，本机 Chrome 应正常）。
 > 📅 2026-06-25 · 配合 V53 PRO 升级 + 3 联异构对抗
 

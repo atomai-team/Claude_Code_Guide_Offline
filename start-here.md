@@ -1,5 +1,8 @@
 # 🚀 start-here.md — MYCC 一页索引（按场景找入口）
 
+<meta http-equiv="refresh" content="0;url=start-here.html">
+
+
 > 📌 **目的** · 7 本手册 + 9 大部分章节 + 36 张 dashboard 卡 = 内容多到不知道从哪看。本文件按"我想做 X"路由，30 秒找到入口。
 >
 > 📅 **更新** · 2026-06-25 · 配套 dashboard.html §C10.5-10.8

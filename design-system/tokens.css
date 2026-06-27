@@ -1,0 +1,253 @@
+/* ════════════════════════════════════════════════════════════════════
+   MYCC Design Tokens · 2026-06-27 全套重做 SSoT
+   所有页面 (dashboard / mycc-config / 7 手册 / 营销页) 共享此文件
+   用法: <link rel="stylesheet" href="design-system/tokens.css">
+   改色改字改间距: 只改本文件,全站同步生效
+   ════════════════════════════════════════════════════════════════════ */
+
+:root {
+  color-scheme: light dark;
+
+  /* ── 1. 颜色 (Apple/Linear 极简风 · 暖米底 + 黏土橘) ── */
+  --bg:           #faf9f5;        /* 暖米底 · 主背景 */
+  --bg-subtle:    #f3f1ea;        /* 次级背景 (card 内嵌套区) */
+  --bg-elevated:  #ffffff;        /* 抬升表面 (悬浮卡片/modal) */
+  --bg-gradient:  linear-gradient(180deg, #faf9f5 0%, #f3f1ea 100%);
+
+  --surface:           #ffffff;
+  --surface-hover:     #f7f5ef;
+  --surface-active:    #f0eee6;
+  --surface-overlay:   rgba(26, 26, 26, 0.6);   /* modal backdrop */
+
+  --border:        #e6e1d6;       /* 主边框 */
+  --border-strong: #d8d2c4;       /* 强调边框 */
+  --border-subtle: #efece4;       /* 弱边框 (input/divider) */
+  --divider:       rgba(0,0,0,0.06);
+
+  --text:          #1f1e1d;       /* 主文字 */
+  --text-dim:      #595650;       /* 次文字 */
+  --text-muted:    #8a857b;       /* 弱文字 (注释/placeholder) */
+  --text-inverse:  #faf9f5;       /* 反色 (深底上文字) */
+
+  /* ── 主品牌色: Claude 黏土橘 ── */
+  --accent:        #c15f3c;       /* 主强调 */
+  --accent-hover:  #a94e2f;
+  --accent-active: #8a3f25;
+  --accent-soft:   #f6e7df;       /* 浅底 (badge/highlight bg) */
+  --accent-soft-border: #ecc9b8;
+
+  /* ── 辅助色 ── */
+  --green:         #3d7a4e;  --green-soft: #e6f0e6;
+  --red:           #b3402f;  --red-soft:   #f8e6e2;
+  --orange:        #b06a1f;  --orange-soft:#f7ead6;
+  --purple:        #7a5ba8;  --purple-soft:#efe8f6;
+  --cyan:          #2f7d8a;  --cyan-soft:  #e2f0f1;
+  --yellow:        #8a6d1f;
+  --blue:          #3b82f6;  --blue-soft:  #dbeafe;
+
+  /* ── 同义 alias (历史兼容, 别名指向主色) ── */
+  --accent2: var(--cyan);
+  --accent3: var(--green);
+  --accent4: var(--orange);
+  --accent5: #a8527a;        /* 品红保留 */
+  --accent-red:    var(--red);
+  --accent-purple: var(--purple);
+  --accent-cyan:   var(--cyan);
+
+  /* ── 2. 字体 (Fraunces 衬线标题 + Inter 无衬线 + JetBrains Mono) ── */
+  --font-display: 'Fraunces', 'Noto Serif SC', Georgia, serif;
+  --font-sans:    'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ── 3. 字号 (8 token · 18→8 收敛 · 旧版兼容映射) ── */
+  --fs-2xs: 10px;   /* 极小 (badge 内文/copyright) */
+  --fs-xs:  11px;   /* 注释 (kbd/tag/timestamp) */
+  --fs-sm:  12px;   /* 次要正文 (input/badge/小卡) */
+  --fs-base:13px;   /* 默认正文 */
+  --fs-md:  14px;   /* 强调正文 */
+  --fs-lg:  16px;   /* 副标题 */
+  --fs-xl:  20px;   /* card title */
+  --fs-2xl: 28px;   /* section title */
+  --fs-3xl: 40px;   /* page hero */
+  --fs-4xl: 56px;   /* marketing hero */
+
+  /* ── 行高 ── */
+  --lh-tight:   1.15;
+  --lh-snug:    1.35;
+  --lh-normal:  1.55;
+  --lh-relaxed: 1.75;
+
+  /* ── 4. 间距 (8px grid) ── */
+  --sp-0: 0;
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+
+  /* ── 5. 圆角 ── */
+  --radius-xs:   4px;
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --radius-xl:   20px;
+  --radius-2xl:  28px;
+  --radius-pill: 999px;
+
+  /* ── 6. 阴影 (柔和,克制的层级) ── */
+  --shadow-xs: 0 1px 2px rgba(60,50,40,0.04);
+  --shadow-sm: 0 1px 2px rgba(60,50,40,0.06), 0 1px 3px rgba(60,50,40,0.04);
+  --shadow-md: 0 2px 4px rgba(60,50,40,0.04), 0 4px 12px rgba(60,50,40,0.06);
+  --shadow-lg: 0 4px 12px rgba(60,50,40,0.06), 0 12px 32px rgba(60,50,40,0.08);
+  --shadow-xl: 0 8px 24px rgba(60,50,40,0.08), 0 24px 64px rgba(60,50,40,0.12);
+  --shadow-card-hover: var(--shadow-lg);
+  --shadow-modal: var(--shadow-xl);
+
+  /* ── 7. 动效 ── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:   120ms;
+  --dur-normal: 200ms;
+  --dur-slow:   360ms;
+
+  /* ── 8. 布局常量 ── */
+  --layout-max-width: 1280px;
+  --layout-content-pad: 32px;
+  --sidebar-width: 240px;
+
+  /* ── 9. Z-index 层级 ── */
+  --z-base:    0;
+  --z-dropdown: 100;
+  --z-sticky:  200;
+  --z-overlay: 900;
+  --z-modal:   1000;
+  --z-toast:   1100;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:           #161616;
+  --bg-subtle:    #1f1f1f;
+  --bg-elevated:  #242424;
+  --bg-gradient:  linear-gradient(180deg, #161616 0%, #1f1f1f 100%);
+
+  --surface:         #242424;
+  --surface-hover:   #2a2a2a;
+  --surface-active:  #303030;
+  --surface-overlay: rgba(0,0,0,0.7);
+
+  --border:        #2f2f2f;
+  --border-strong: #404040;
+  --border-subtle: #262626;
+  --divider:       rgba(255,255,255,0.06);
+
+  --text:          #f5f3ec;
+  --text-dim:      #c4bfb4;
+  --text-muted:    #918b80;
+  --text-inverse:  #1f1e1d;
+
+  --accent:        #e08a6a;
+  --accent-hover:  #e89c80;
+  --accent-soft:   rgba(217,119,87,0.16);
+  --accent-soft-border: rgba(217,119,87,0.38);
+
+  --green:         #6cc189;  --green-soft: rgba(108,193,137,0.15);
+  --red:           #e08576;  --red-soft:   rgba(224,133,118,0.15);
+  --orange:        #e0a667;  --orange-soft:rgba(224,166,103,0.15);
+  --purple:        #b79de0;  --purple-soft:rgba(183,157,224,0.15);
+  --cyan:          #6cbccb;  --cyan-soft:  rgba(108,188,203,0.15);
+  --blue:          #6aa3f8;  --blue-soft:  rgba(106,163,248,0.15);
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md: 0 2px 4px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.5);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.5), 0 12px 32px rgba(0,0,0,0.5);
+  --shadow-xl: 0 8px 24px rgba(0,0,0,0.6), 0 24px 64px rgba(0,0,0,0.6);
+}
+
+/* ── 10. 通用工具类 (跨页面复用) ── */
+
+/* · 排版 */
+.display { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; line-height: var(--lh-tight); }
+.heading { font-family: var(--font-sans); font-weight: 700; letter-spacing: -0.01em; line-height: var(--lh-snug); }
+.mono    { font-family: var(--font-mono); }
+.muted   { color: var(--text-muted); }
+.dim     { color: var(--text-dim); }
+
+/* · 卡片 */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  transition: box-shadow var(--dur-normal) var(--ease-out), transform var(--dur-normal) var(--ease-out);
+}
+.card:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-2px); }
+.card-priority { border-left: 3px solid var(--accent); }
+
+/* · 按钮 */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: var(--radius-pill);
+  font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 500;
+  border: 1px solid var(--border-strong);
+  background: var(--surface); color: var(--text);
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+.btn:hover { background: var(--surface-hover); border-color: var(--accent); }
+.btn-primary {
+  background: var(--accent); color: var(--text-inverse); border-color: var(--accent);
+}
+.btn-primary:hover { background: var(--accent-hover); }
+
+/* · badge / chip */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 9px; border-radius: var(--radius-pill);
+  font-size: var(--fs-xs); font-weight: 500;
+  background: var(--bg-subtle); color: var(--text);
+  border: 1px solid var(--border-subtle);
+}
+.badge-accent { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-soft-border); }
+.badge-green  { background: var(--green-soft);  color: var(--green); }
+.badge-blue   { background: var(--blue-soft);   color: var(--blue); }
+.badge-purple { background: var(--purple-soft); color: var(--purple); }
+.badge-orange { background: var(--orange-soft); color: var(--orange); }
+.badge-red    { background: var(--red-soft);    color: var(--red); }
+.badge-cyan   { background: var(--cyan-soft);   color: var(--cyan); }
+
+/* · kbd */
+kbd {
+  display: inline-block; padding: 1px 6px;
+  font-family: var(--font-mono); font-size: var(--fs-2xs);
+  background: var(--bg-subtle); color: var(--text);
+  border: 1px solid var(--border-strong); border-radius: var(--radius-xs);
+}
+
+/* · a11y */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* · 焦点环 */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+
+/* · 滚动条 */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: var(--radius-pill); }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* · 减少动效 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

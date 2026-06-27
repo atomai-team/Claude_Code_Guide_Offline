@@ -1,0 +1,212 @@
+/* ════════════════════════════════════════════════════════════════════
+   MYCC Components · 2026-06-27 全套重做 SSoT
+   跨页面通用组件 · 依赖 tokens.css (第 1 层)
+   用法: <link rel="stylesheet" href="design-system/components.css">
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. 布局容器 ── */
+.container {
+  width: 100%;
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding: 0 var(--layout-content-pad);
+}
+
+.stack { display: flex; flex-direction: column; gap: var(--sp-4); }
+.stack-sm { gap: var(--sp-2); }
+.stack-md { gap: var(--sp-4); }
+.stack-lg { gap: var(--sp-6); }
+.stack-xl { gap: var(--sp-7); }
+
+.row { display: flex; align-items: center; gap: var(--sp-3); }
+.row-between { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); }
+.row-wrap { flex-wrap: wrap; }
+
+.grid {
+  display: grid;
+  gap: var(--sp-5);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+.grid-sm { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+.grid-lg { grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* ── 2. Hero (营销页/首页大标题) ── */
+.hero {
+  padding: var(--sp-9) 0 var(--sp-7);
+  background: var(--bg-gradient);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-4xl);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: var(--sp-4);
+}
+.hero-subtitle {
+  font-size: var(--fs-lg);
+  color: var(--text-dim);
+  line-height: var(--lh-normal);
+  max-width: 640px;
+}
+.hero-actions { display: flex; gap: var(--sp-3); margin-top: var(--sp-5); }
+
+@media (max-width: 768px) {
+  .hero { padding: var(--sp-7) 0 var(--sp-5); }
+  .hero-title { font-size: var(--fs-3xl); }
+}
+
+/* ── 3. Section 标题 ── */
+.section { padding: var(--sp-7) 0; }
+.section-header { margin-bottom: var(--sp-5); }
+.section-title {
+  font-family: var(--font-sans);
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: var(--sp-2);
+}
+.section-subtitle {
+  font-size: var(--fs-md);
+  color: var(--text-dim);
+}
+
+/* ── 4. 数据展示 ── */
+.metric {
+  display: flex; flex-direction: column; gap: var(--sp-1);
+}
+.metric-value {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: 600;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.metric-label {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── 5. 列表项 ── */
+.list { list-style: none; padding: 0; margin: 0; }
+.list-item {
+  display: flex; align-items: flex-start; gap: var(--sp-3);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--divider);
+}
+.list-item:last-child { border-bottom: none; }
+.list-item-icon { flex-shrink: 0; font-size: var(--fs-lg); }
+.list-item-content { flex: 1; min-width: 0; }
+.list-item-title { font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.list-item-desc { font-size: var(--fs-sm); color: var(--text-dim); }
+
+/* ── 6. Callout (提示框) ── */
+.callout {
+  padding: var(--sp-4);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+}
+.callout-info   { border-color: var(--cyan);   background: var(--cyan-soft); }
+.callout-warn   { border-color: var(--orange); background: var(--orange-soft); }
+.callout-error  { border-color: var(--red);    background: var(--red-soft); }
+.callout-success{ border-color: var(--green);  background: var(--green-soft); }
+
+/* ── 7. Modal (点击示例放大) ── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: var(--surface-overlay);
+  z-index: var(--z-modal);
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--sp-5);
+  animation: fadeIn var(--dur-normal) var(--ease-out);
+}
+.modal-panel {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-modal);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  animation: scaleIn var(--dur-normal) var(--ease-out);
+}
+.modal-close {
+  position: absolute; top: var(--sp-4); right: var(--sp-4);
+  width: 32px; height: 32px;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+/* ── 8. Lightbox (图片点击放大) ── */
+.lightbox-trigger { cursor: zoom-in; transition: transform var(--dur-fast); }
+.lightbox-trigger:hover { transform: scale(1.02); }
+
+/* ── 9. Tabs ── */
+.tabs {
+  display: flex; gap: var(--sp-2);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--sp-4);
+}
+.tab {
+  padding: var(--sp-2) var(--sp-4);
+  font-size: var(--fs-sm); font-weight: 500;
+  color: var(--text-dim);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--dur-fast);
+  margin-bottom: -1px;
+}
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ── 10. 可访问 Skip link ── */
+.skip-link {
+  position: absolute;
+  top: -100px; left: 0;
+  background: var(--accent); color: var(--text-inverse);
+  padding: var(--sp-2) var(--sp-4);
+  z-index: var(--z-toast);
+}
+.skip-link:focus { top: 0; }
+
+/* ── 11. Empty state / Loading ── */
+.empty-state {
+  padding: var(--sp-7);
+  text-align: center;
+  color: var(--text-muted);
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-subtle) 25%, var(--surface-hover) 50%, var(--bg-subtle) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ── 12. Responsive utilities ── */
+.hide-mobile { display: initial; }
+.show-mobile { display: none; }
+@media (max-width: 768px) {
+  .hide-mobile { display: none; }
+  .show-mobile { display: initial; }
+}
