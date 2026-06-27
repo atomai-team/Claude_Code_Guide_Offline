@@ -3,5 +3,8 @@
 .omc/
 dashboard-screenshot.png
 dashboard-qa-*.png
+dashboard-validation-*.png
 _component-usage.jsonl
 *.pre-p1.bak
+*.pre-p2-*.bak
+dashboard.html.pre-*.bak
