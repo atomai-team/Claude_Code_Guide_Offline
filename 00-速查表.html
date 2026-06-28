@@ -4,232 +4,196 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Claude Code + OMC V52 速查表</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,560;9..144,600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="design-system/tokens.css">
+<link rel="stylesheet" href="design-system/components.css">
 <style>
-  :root {
-    --bg: #0f1117;
-    --surface: #1a1d27;
-    --surface2: #22263a;
-    --border: #2e3350;
-    --accent: #7c6af5;
-    --accent2: #4fc3f7;
-    --accent3: #69f0ae;
-    --accent4: #ffb74d;
-    --accent5: #f48fb1;
-    --text: #e8eaf6;
-    --text-dim: #7986cb;
-    --text-muted: #546e7a;
-    --code-bg: #1e2235;
-    --tag-bg: #1a2040;
-    --green: #69f0ae;
-    --red: #ef5350;
-    --yellow: #ffee58;
-  }
+/* ═══════ 速查表专用样式 · SSoT 暖米底+黏土橘（卡片网格版）═══════
+   继承 tokens.css 的颜色/字号/间距；本文件只放布局特定规则 */
+body {
+  font-family: var(--font-sans); background: var(--bg); color: var(--text);
+  line-height: 1.55; font-size: var(--fs-base);
+  padding: var(--sp-5) var(--sp-4) var(--sp-7);
+  max-width: 1400px; margin: 0 auto;
+  -webkit-font-smoothing: antialiased;
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* Header */
+.header {
+  text-align: center;
+  padding: var(--sp-6) var(--sp-4) var(--sp-5);
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: var(--sp-5);
+  background: var(--bg-gradient);
+  border-radius: var(--radius-lg);
+  position: relative; overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at top, var(--accent-soft) 0%, transparent 70%);
+  pointer-events: none;
+}
+.header h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--sp-2);
+}
+.header h1 span { color: var(--accent); }
+.header .meta {
+  font-size: var(--fs-xs);
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+}
+.header .badges {
+  display: flex; justify-content: center; gap: var(--sp-2);
+  margin-top: var(--sp-3); flex-wrap: wrap;
+}
 
-  body {
-    font-family: -apple-system, 'PingFang SC', 'Helvetica Neue', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 13px;
-    line-height: 1.5;
-    padding: 20px;
-  }
+/* Layout · 卡片网格 */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: var(--sp-4);
+}
+.card { display: flex; flex-direction: column; }
+.card.wide { grid-column: 1 / -1; }
 
-  /* Header */
-  .header {
-    text-align: center;
-    padding: 28px 20px 20px;
-    border-bottom: 2px solid var(--accent);
-    margin-bottom: 24px;
-    background: linear-gradient(135deg, #1a1d27 0%, #16193a 100%);
-    border-radius: 12px;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(ellipse at top, rgba(124,106,245,0.12) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .header h1 {
-    font-size: 26px;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: -0.5px;
-    margin-bottom: 6px;
-  }
-  .header h1 span { color: var(--accent); }
-  .header .meta {
-    font-size: 11px;
-    color: var(--text-dim);
-    letter-spacing: 0.5px;
-  }
-  .header .badges {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 10px;
-    flex-wrap: wrap;
-  }
-  .badge {
-    background: var(--tag-bg);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 3px 10px;
-    font-size: 10px;
-    color: var(--text-dim);
-    font-weight: 600;
-    letter-spacing: 0.3px;
-  }
-  .badge.green { border-color: var(--green); color: var(--green); }
-  .badge.purple { border-color: var(--accent); color: var(--accent); }
-  .badge.blue { border-color: var(--accent2); color: var(--accent2); }
+.card-header {
+  display: flex; align-items: center; gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+.card-header .icon { font-size: var(--fs-lg); }
+.card-header h2 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.card-body { padding: var(--sp-3); }
 
-  /* Layout */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-    gap: 16px;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
+/* Tables */
+table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+th {
+  text-align: left; padding: var(--sp-2) var(--sp-3);
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  font-size: var(--fs-xs); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+td {
+  padding: var(--sp-2) var(--sp-3);
+  border-bottom: 1px solid var(--divider);
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--surface-hover); }
+td:first-child {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  white-space: nowrap;
+}
 
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .card.wide { grid-column: 1 / -1; }
-  .card.half { grid-column: span 1; }
+.kw   { font-weight: 700; color: var(--accent); }
+.dim  { color: var(--text-muted); }
+.tag-green { color: var(--green); font-weight: 500; }
+.tag-warn  { color: var(--orange); font-weight: 500; }
+.tag-red   { color: var(--red);   font-weight: 500; }
 
-  .card-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 14px;
-    background: var(--surface2);
-    border-bottom: 1px solid var(--border);
-  }
-  .card-header .icon { font-size: 16px; }
-  .card-header h2 {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: 0.2px;
-  }
-  .card-body { padding: 12px; }
+/* Code blocks */
+pre {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-3) var(--sp-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  line-height: 1.7;
+  overflow-x: auto;
+  color: var(--text);
+  margin: 0;
+}
+pre .comment { color: var(--text-muted); }
+pre .cmd { color: var(--green); font-weight: 500; }
+pre .arg { color: var(--orange); }
+pre .str { color: var(--purple); }
 
-  /* Tables */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12px;
-  }
-  th {
-    text-align: left;
-    padding: 6px 10px;
-    background: var(--code-bg);
-    color: var(--text-dim);
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-  }
-  td {
-    padding: 6px 10px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: top;
-  }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: rgba(124,106,245,0.04); }
-  td:first-child { color: var(--accent2); font-family: 'SF Mono', 'Fira Code', monospace; font-size: 11px; white-space: nowrap; }
+/* Skills sub-section */
+.skill-group { margin-bottom: var(--sp-3); }
+.skill-group:last-child { margin-bottom: 0; }
+.skill-group-title {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--sp-1) var(--sp-3);
+  background: var(--bg-subtle);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--sp-1);
+}
 
-  .kw { font-weight: 700; color: var(--accent); }
-  .dim { color: var(--text-muted); }
-  .tag-green { color: var(--green); }
-  .tag-warn { color: var(--accent4); }
-  .tag-red { color: var(--red); }
+/* Permission pills */
+.pill {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.pill-auto    { background: var(--green-soft);  color: var(--green); }
+.pill-confirm { background: var(--orange-soft); color: var(--orange); }
+.pill-yolo    { background: var(--accent-soft); color: var(--accent); }
 
-  /* Code blocks */
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 12px 14px;
-    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
-    font-size: 11px;
-    line-height: 1.7;
-    overflow-x: auto;
-    color: #c5cae9;
-    margin: 0;
-  }
-  pre .comment { color: var(--text-muted); }
-  pre .cmd { color: var(--accent3); }
-  pre .arg { color: var(--accent4); }
-  pre .str { color: var(--accent5); }
+/* Status dots */
+.dot-online { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); margin-right: 5px; box-shadow: 0 0 4px var(--green); }
+.dot-warn   { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); margin-right: 5px; }
 
-  /* Skills sub-section */
-  .skill-group {
-    margin-bottom: 14px;
-  }
-  .skill-group:last-child { margin-bottom: 0; }
-  .skill-group-title {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 4px 10px;
-    background: var(--code-bg);
-    border-radius: 4px;
-    margin-bottom: 4px;
-  }
+/* Inline note box */
+.note-box {
+  margin-top: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--bg-subtle);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-xs);
+  color: var(--text-dim);
+  line-height: var(--lh-normal);
+}
+.note-box.warn   { border-left-color: var(--orange); background: var(--orange-soft); }
+.note-box.error  { border-left-color: var(--red);    background: var(--red-soft); }
+.note-box.info   { border-left-color: var(--cyan);   background: var(--cyan-soft); }
+.note-box.success{ border-left-color: var(--green);  background: var(--green-soft); }
 
-  /* Permission pills */
-  .pill {
-    display: inline-block;
-    padding: 1px 7px;
-    border-radius: 12px;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-  }
-  .pill-auto { background: rgba(105,240,174,0.15); color: var(--green); }
-  .pill-confirm { background: rgba(255,183,77,0.15); color: var(--accent4); }
-  .pill-yolo { background: rgba(124,106,245,0.15); color: var(--accent); }
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: var(--sp-5);
+  padding: var(--sp-3);
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+  border-top: 1px solid var(--border);
+}
 
-  /* Status dots */
-  .dot-online { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); margin-right: 5px; box-shadow: 0 0 4px var(--green); }
-  .dot-warn { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent4); margin-right: 5px; }
-
-  /* Print */
-  @media print {
-    body { background: #fff; color: #111; padding: 10px; }
-    .card { border: 1px solid #ddd; break-inside: avoid; }
-    .card-header { background: #f5f5f5; }
-    pre { background: #f8f8f8; }
-    td:first-child { color: #1565c0; }
-    .kw { color: #6200ea; }
-    :root {
-      --text: #111;
-      --text-dim: #555;
-      --text-muted: #888;
-    }
-  }
-
-  /* Footer */
-  .footer {
-    text-align: center;
-    margin-top: 24px;
-    padding: 14px;
-    color: var(--text-muted);
-    font-size: 11px;
-    border-top: 1px solid var(--border);
-  }
+/* Responsive */
+@media (max-width: 720px) {
+  body { padding: var(--sp-3) var(--sp-2) var(--sp-5); }
+  .header h1 { font-size: var(--fs-2xl); }
+  .grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
 </style>
 </head>
 <body>
@@ -238,11 +202,11 @@
   <h1>Claude Code + <span>OMC V52</span> 速查表</h1>
   <div class="meta">CLI v2.1.175 · Desktop v1.9659.4 · oh-my-claudecode V52.2</div>
   <div class="badges">
-    <span class="badge green">✅ 官方直连</span>
-    <span class="badge purple">151 Skills</span>
-    <span class="badge purple">10 Workflows</span>
-    <span class="badge blue">50+ Hooks</span>
-    <span class="badge blue">4 MCPs</span>
+    <span class="badge badge-green">✅ 官方直连</span>
+    <span class="badge badge-accent">151 Skills</span>
+    <span class="badge badge-accent">10 Workflows</span>
+    <span class="badge badge-blue">50+ Hooks</span>
+    <span class="badge badge-blue">4 MCPs</span>
     <span class="badge">2026-06-12</span>
   </div>
 </div>
@@ -475,10 +439,10 @@
             </tr>
           </tbody>
         </table>
-        <div style="margin-top:8px; padding: 6px 10px; background: var(--code-bg); border-radius:4px; font-size:11px; color:var(--text-muted);">
+        <div class="note-box">
           确认提示：<code style="color:var(--green)">Y/回车</code>=允许 &nbsp;
           <code style="color:var(--red)">N</code>=拒绝 &nbsp;
-          <code style="color:var(--accent4)">q</code>=退出
+          <code style="color:var(--orange)">q</code>=退出
         </div>
       </div>
       <div class="skill-group" style="margin-top:14px;">
@@ -524,7 +488,7 @@
           <tr><td>Claude Code 设置</td><td>Settings → Claude Code</td></tr>
         </tbody>
       </table>
-      <div style="margin-top: 10px; padding: 8px 10px; background: rgba(124,106,245,0.1); border-left: 3px solid var(--accent); border-radius: 4px; font-size: 11px; color: var(--text-dim);">
+      <div class="note-box">
         ⚠️ Desktop MCP 同步只能通过 GUI 安装（Extensions 标签）<br>
         禁止直接写 mcpServers 段（会被 Desktop 还原）
       </div>
@@ -580,7 +544,7 @@
           <tr><td>/omc-doctor</td><td>诊断 OMC 配置问题</td></tr>
         </tbody>
       </table>
-      <div style="margin-top:10px; padding: 8px 10px; background: rgba(105,240,174,0.08); border-left: 3px solid var(--green); border-radius:4px; font-size:11px; color:var(--text-dim);">
+      <div class="note-box success">
         💡 升级顺序：<code>/audit-all-better</code> 诊断 → <code>/claude-code-better</code> 修复 → <code>/harness-audit</code> 评分验收
       </div>
     </div>
@@ -602,7 +566,7 @@
           <tr><td>/update-config</td><td>修改 settings.json 配置</td></tr>
         </tbody>
       </table>
-      <div style="margin-top:10px; padding: 8px 10px; background: rgba(239,83,80,0.08); border-left: 3px solid var(--red); border-radius:4px; font-size:11px; color:var(--text-dim);">
+      <div class="note-box error">
         🔒 安全红线：<code>settings.json</code> 禁设 <code>ANTHROPIC_BASE_URL</code> / <code>API_KEY</code> / <code>MODEL</code><br>
         🔒 <code>settings.local.json</code> 有 block-sensitive-files.sh 保护，变更需独立脚本
       </div>

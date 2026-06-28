@@ -3,550 +3,455 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🚀 start-here.md — MYCC 一页索引（按场景找入口）</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📘%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,560;9..144,600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<title>🚀 start-here.md — MYCC 一页索引(35 个场景路由)</title>
+<meta name="description" content="MYCC 7 本手册 + 9 大部分章节 + 36 张 dashboard 卡 · 按场景路由,30 秒找到入口">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🧭%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="design-system/tokens.css">
+<link rel="stylesheet" href="design-system/components.css">
 <style>
-/* ═══════ MD→HTML 渲染共享样式 · CLAUDE NATIVE DESIGN(暖米底+黏土橘+衬线标题)═══════
-   全站默认亮色(去掉 prefers-color-scheme dark 块;darker 模式仅 dashboard 保留手动切换) */
-:root {
-  color-scheme: light only;
-  --bg: #faf9f5; --bg-subtle: #f0eee6; --surface: #ffffff; --surface2: #f7f5ef; --surface-hover: #f0eee6;
-  --border: #e6e1d6; --border-strong: #d8d2c4; --code-bg: #f0eee6; --tag-bg: #f0eee6;
-  --text: #1f1e1d; --text-dim: #595650; --text-muted: #8a857b;
-  --accent: #c15f3c; --accent-hover: #a94e2f; --accent-bright: #d97757; --accent-soft: #f6e7df;
-  --green: #3d7a4e; --red: #b3402f; --orange: #b06a1f; --purple: #7a5ba8;
-  --shadow-sm: 0 1px 2px rgba(60,50,40,0.05);
-  --shadow-card: 0 1px 3px rgba(60,50,40,0.06), 0 1px 2px rgba(60,50,40,0.04);
-  --font-display: 'Fraunces','Noto Serif SC',Georgia,serif;
-  --font-sans: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
-  --font-mono: 'JetBrains Mono','SF Mono','Fira Code',Menlo,monospace;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+/* start-here 页面专属微调(全靠 tokens + components) */
 body {
-  font-family: var(--font-sans); background: var(--bg); color: var(--text);
-  line-height: 1.7; font-size: 15px; padding: 48px 32px 80px; max-width: 880px; margin: 0 auto;
-  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
 }
-.doc-header {
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
-  margin-bottom: 28px; padding-bottom: 18px; border-bottom: 1px solid var(--border);
-}
-.doc-header .back {
-  color: var(--accent); text-decoration: none; padding: 6px 14px;
-  border: 1px solid var(--border-strong); border-radius: 980px; font-size: 13px; font-weight: 500;
-  transition: all .15s;
-}
-.doc-header .back:hover { background: var(--accent-soft); border-color: var(--accent); }
-.doc-header .meta { color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
-h1 { font-family: var(--font-display); font-size: 32px; font-weight: 560; letter-spacing: -0.01em; margin: 12px 0 18px; color: var(--text); }
-h2 { font-family: var(--font-display); font-size: 23px; font-weight: 600; margin: 40px 0 14px; padding-top: 12px; letter-spacing: -0.01em;
-     border-top: 1px solid var(--border); color: var(--text); }
-h2:first-of-type { border-top: 0; padding-top: 0; }
-h3 { font-family: var(--font-display); font-size: 18px; font-weight: 600; margin: 28px 0 10px; color: var(--text); }
-h4 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; color: var(--text-dim); }
-p { margin: 10px 0; }
-a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
-ul, ol { margin: 10px 0 10px 24px; }
-li { margin: 4px 0; }
-hr { border: 0; border-top: 1px solid var(--border); margin: 28px 0; }
-code {
-  font-family: var(--font-mono); font-size: 0.9em; background: var(--code-bg);
-  padding: 1px 6px; border-radius: 5px; color: var(--text);
-}
-pre {
-  background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px;
-  padding: 14px 16px; overflow-x: auto; margin: 14px 0; line-height: 1.55;
-}
-pre code { background: transparent; padding: 0; font-size: 13px; }
-blockquote {
-  border-left: 3px solid var(--accent); margin: 14px 0; padding: 8px 16px;
-  background: var(--accent-soft); border-radius: 0 8px 8px 0; color: var(--text-dim);
-}
-blockquote p { margin: 4px 0; }
-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; table-layout: fixed; }
-th { text-align: left; padding: 9px 12px; background: var(--bg-subtle); color: var(--text-muted);
-     font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; word-break: break-word; }
-td { padding: 9px 12px; border-top: 1px solid var(--border); word-break: break-word; overflow-wrap: anywhere; }
-tr:hover td { background: var(--bg-subtle); }
-img { max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0; }
-strong { font-weight: 600; color: var(--text); }
-em { font-style: italic; color: var(--text-dim); }
-@media (max-width: 720px) { body { padding: 24px 16px 60px; } h1 { font-size: 26px; } h2 { font-size: 20px; } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 
+.site-header {
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface);
+}
+.site-header .container {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px;
+}
+.brand { display: flex; align-items: center; gap: var(--sp-3); text-decoration: none; color: var(--text); }
+.brand-mark {
+  width: 28px; height: 28px; border-radius: var(--radius-sm);
+  background: var(--accent); color: var(--text-inverse);
+  display: grid; place-items: center; font-weight: 700; font-size: 13px;
+}
+.brand-name { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-lg); letter-spacing: -0.01em; }
+.nav-links { display: flex; gap: var(--sp-2); }
+.nav-links a {
+  color: var(--text-dim); text-decoration: none;
+  padding: 6px 12px; border-radius: var(--radius-pill);
+  font-size: var(--fs-sm); transition: all var(--dur-fast);
+}
+.nav-links a:hover { background: var(--surface-hover); color: var(--text); }
+.nav-links a.active { background: var(--accent-soft); color: var(--accent); }
+
+/* 场景卡(每张子表 → 一张大区卡,行用 list-item) */
+.scenario-card { padding: var(--sp-5); }
+.scenario-head {
+  display: flex; align-items: center; gap: var(--sp-3);
+  margin-bottom: var(--sp-4); padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.scenario-emoji { font-size: 28px; }
+.scenario-title {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: var(--fs-xl); color: var(--text); letter-spacing: -0.01em;
+}
+.scenario-count {
+  margin-left: auto;
+  font-family: var(--font-mono); font-size: var(--fs-xs);
+  color: var(--text-muted);
+  background: var(--bg-subtle); padding: 2px 9px;
+  border-radius: var(--radius-pill);
+}
+
+.scenario-list { list-style: none; padding: 0; margin: 0; }
+.scenario-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1.6fr 1.4fr;
+  gap: var(--sp-3);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--divider);
+  font-size: var(--fs-sm);
+  align-items: baseline;
+}
+.scenario-row:last-child { border-bottom: none; }
+.scenario-row .s-want { color: var(--text); font-weight: 500; }
+.scenario-row .s-where a { color: var(--accent); text-decoration: none; font-family: var(--font-mono); font-size: var(--fs-xs); }
+.scenario-row .s-where a:hover { text-decoration: underline; }
+.scenario-row .s-detail { color: var(--text-dim); font-size: var(--fs-xs); }
+
+/* 7 本手册表格用 table 样式,但靠 .card 包 */
+.book-table {
+  width: 100%; border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+.book-table th {
+  text-align: left; padding: var(--sp-3);
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+.book-table td {
+  padding: var(--sp-3);
+  border-top: 1px solid var(--border-subtle);
+  vertical-align: top;
+}
+.book-table tr:hover td { background: var(--surface-hover); }
+.book-table td code { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--accent); }
+
+/* 高级功能:5 张并列小卡 */
+.feat-card { padding: var(--sp-4); }
+.feat-name {
+  font-family: var(--font-display); font-weight: 600; font-size: var(--fs-lg);
+  color: var(--text); margin-bottom: var(--sp-1);
+}
+.feat-trigger {
+  font-family: var(--font-mono); font-size: var(--fs-xs);
+  color: var(--accent); margin-bottom: var(--sp-2);
+  background: var(--accent-soft); padding: 2px 8px;
+  border-radius: var(--radius-pill); display: inline-block;
+}
+.feat-when { font-size: var(--fs-xs); color: var(--text-dim); line-height: var(--lh-normal); }
+.feat-when strong { color: var(--green); }
+.feat-when em { color: var(--red); font-style: normal; }
+
+/* 3 万能入口:大 callout */
+.universal-callout {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4);
+  margin-top: var(--sp-4);
+}
+.universal-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+}
+.universal-item .u-num {
+  font-family: var(--font-display); font-weight: 700; font-size: var(--fs-2xl);
+  color: var(--accent); margin-bottom: var(--sp-2);
+}
+.universal-item .u-title { font-weight: 600; color: var(--text); margin-bottom: var(--sp-1); }
+.universal-item .u-desc { color: var(--text-dim); font-size: var(--fs-xs); }
+
+@media (max-width: 768px) {
+  .scenario-row { grid-template-columns: 1fr; gap: var(--sp-1); }
+  .universal-callout { grid-template-columns: 1fr; }
+}
+
+.site-footer {
+  border-top: 1px solid var(--border-subtle);
+  padding: var(--sp-5) 0; color: var(--text-muted); font-size: var(--fs-xs);
+}
+.site-footer .container { display: flex; justify-content: space-between; gap: var(--sp-3); flex-wrap: wrap; }
 </style>
 </head>
 <body>
-<div class="doc-header">
-  <a href="dashboard.html" class="back">← 返回 MYCC 仪表盘</a>
-  <span class="meta">渲染时间 2026-06-26 13:05 · 源: start-here.md</span>
-</div>
-<h1 id="start-heremd-mycc">🚀 start-here.md — MYCC 一页索引（按场景找入口）</h1>
-<blockquote>
-<p>📌 <strong>目的</strong> · 7 本手册 + 9 大部分章节 + 36 张 dashboard 卡 = 内容多到不知道从哪看。本文件按"我想做 X"路由，30 秒找到入口。</p>
-<p>📅 <strong>更新</strong> · 2026-06-25 · 配套 dashboard.html §C10.5-10.8</p>
-</blockquote>
-<hr>
-<h2 id="35">🎯 按场景快速路由（35 个真实场景）</h2>
-<h3 id="cc">🐣 完全新手（第一次用 CC）</h3>
-<table>
-<thead>
-<tr>
-<th>我想...</th>
-<th>看哪本</th>
-<th>哪一章/哪张卡</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>是什么？怎么装？</td>
-<td><code>01-小白使用手册.md</code></td>
-<td>§🤔 Claude Code 是什么 + §🚀 安装和启动</td>
-</tr>
-<tr>
-<td>5 分钟跑通</td>
-<td><code>01-小白使用手册.md</code></td>
-<td>§⚡ 5分钟快速上手</td>
-</tr>
-<tr>
-<td>第一次报错怎么办</td>
-<td><code>01-小白使用手册.md</code></td>
-<td>§🆘 遇到问题怎么办</td>
-</tr>
-<tr>
-<td>想知道"提示词"怎么写</td>
-<td><code>dashboard.html</code></td>
-<td>A 区 · 提示词怎么写</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_1">💻 开发者（写代码）</h3>
-<table>
-<thead>
-<tr>
-<th>我想...</th>
-<th>看哪本</th>
-<th>哪一章/哪张卡</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>跟着做完整项目</td>
-<td><code>02-商城项目实战手册.md</code></td>
-<td>§🏁 第0阶段 + 全程</td>
-</tr>
-<tr>
-<td>修 Bug 找根因</td>
-<td><code>01-小白使用手册.md</code></td>
-<td>§🔥 流程1：修 Bug</td>
-</tr>
-<tr>
-<td>开发新功能</td>
-<td><code>01-小白使用手册.md</code></td>
-<td>§🔥 流程2：开发新功能</td>
-</tr>
-<tr>
-<td>代码审查</td>
-<td><code>01-小白使用手册.md</code></td>
-<td>§🔥 流程3：做调研 + <code>/code-review</code></td>
-</tr>
-<tr>
-<td>全面审计/升级</td>
-<td><code>01-小白使用手册.md</code></td>
-<td>§🔥 流程4：全面审计/升级</td>
-</tr>
-<tr>
-<td>不知道找哪个 skill</td>
-<td><code>00-速查表.md</code></td>
-<td>§🌟 5 大高级功能 + super</td>
-</tr>
-<tr>
-<td>想知道有什么 skill</td>
-<td><code>03-全能力清单-Skills+MCP+插件.md</code></td>
-<td>全本</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ceo">💼 CEO / 创业者（不写代码）</h3>
-<table>
-<thead>
-<tr>
-<th>我想...</th>
-<th>看哪本</th>
-<th>哪一章/哪张卡</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>评估创业想法</td>
-<td><code>05-创业分析专家系统.md</code></td>
-<td>全本 + ceo-mode</td>
-</tr>
-<tr>
-<td>尽调 / 出海 / 商业可行性</td>
-<td><code>06-CEO能力速用手册.md</code></td>
-<td>全本 + ceo-mode</td>
-</tr>
-<tr>
-<td>看市场/财务/法务报告</td>
-<td><code>dashboard.html</code></td>
-<td>C 区 · CEO 入口</td>
-</tr>
-<tr>
-<td>PM 视角管理</td>
-<td><code>04-CMMI配置文档-PM专业版.md</code></td>
-<td>全本</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_2">🔧 想知道有哪些功能（盘点）</h3>
-<table>
-<thead>
-<tr>
-<th>我想...</th>
-<th>看哪本</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>看 148 个 skill 全清单</td>
-<td><code>03-全能力清单-Skills+MCP+插件.md</code></td>
-</tr>
-<tr>
-<td>看 11 个高频入口按场景</td>
-<td><code>dashboard.html</code> §C7 + <code>00-速查表.md</code></td>
-</tr>
-<tr>
-<td>看 5 大高级功能</td>
-<td><code>dashboard.html</code> §C10.5 + <code>00-速查表.md</code></td>
-</tr>
-<tr>
-<td>看 super 入口怎么用</td>
-<td><code>dashboard.html</code> §C10.6 + <code>00-速查表.md</code></td>
-</tr>
-<tr>
-<td>按周学习路径</td>
-<td><code>dashboard.html</code> §C10.7</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_3">⚡ 自动化 / 定时任务</h3>
-<table>
-<thead>
-<tr>
-<th>我想...</th>
-<th>看哪本</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>自动巡检 / daily-brief</td>
-<td><code>01-小白使用手册.md</code> §🔧 系统运维速查</td>
-</tr>
-<tr>
-<td>自动周报 / 秘书</td>
-<td><code>dashboard.html</code> C 区 · 秘书</td>
-</tr>
-<tr>
-<td>加新定时任务</td>
-<td><code>~/.claude/docs/scheduled-tasks.md</code>（SSoT）</td>
-</tr>
-</tbody>
-</table>
-<h3 id="claude-code">🌐 想学 Claude Code 原理</h3>
-<table>
-<thead>
-<tr>
-<th>我想...</th>
-<th>看哪本</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>命令速查 / 9 大分类</td>
-<td><code>dashboard.html</code> B 区 + <code>第2部分：命令参考/</code></td>
-</tr>
-<tr>
-<td>MCP / Skills / 插件</td>
-<td><code>第4部分：模型上下文协议 MCP/</code> + <code>第5部分：技能 Skills/</code> + <code>第6部分：插件系统/</code></td>
-</tr>
-<tr>
-<td>编程开发实战</td>
-<td><code>第7部分：利用 Claude Code 进行编程开发/</code></td>
-</tr>
-<tr>
-<td>原理 / 技术</td>
-<td><code>第8部分：Claude Code 原理与技术/</code></td>
-</tr>
-<tr>
-<td>企业级部署</td>
-<td><code>第9部分：企业级Claude Code部署/</code></td>
-</tr>
-</tbody>
-</table>
-<h3 id="_4">🆘 故障 / 出错</h3>
-<table>
-<thead>
-<tr>
-<th>我想...</th>
-<th>看哪本</th>
-<th>哪一章</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>卡住不动</td>
-<td><code>01-小白使用手册.md</code></td>
-<td>§🆘 卡住不动了</td>
-</tr>
-<tr>
-<td>方向跑偏</td>
-<td><code>01-小白使用手册.md</code></td>
-<td>§🆘 方向跑偏了</td>
-</tr>
-<tr>
-<td>改了一堆错的东西</td>
-<td><code>01-小白使用手册.md</code></td>
-<td>§🆘 改了一堆错的东西</td>
-</tr>
-<tr>
-<td>对话太长犯傻</td>
-<td><code>01-小白使用手册.md</code></td>
-<td>§🆘 对话太长 Claude 开始犯傻</td>
-</tr>
-<tr>
-<td>Hook 报错</td>
-<td><code>01-小白使用手册.md</code></td>
-<td>§🆘 Hook 报错</td>
-</tr>
-<tr>
-<td>想侧问不污染</td>
-<td><code>/btw</code> 命令</td>
-<td><code>01-小白</code> §📟 内置命令详解</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="7">📚 7 本手册（按使用频率排序）</h2>
-<table>
-<thead>
-<tr>
-<th>#</th>
-<th>手册</th>
-<th>大小</th>
-<th>何时查</th>
-<th>何时跳过</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td><code>01-小白使用手册.md</code></td>
-<td>51KB · 1467 行</td>
-<td><strong>80% 场景必看</strong></td>
-<td>不会</td>
-</tr>
-<tr>
-<td>2</td>
-<td><code>00-速查表.md</code></td>
-<td>21KB · 407 行</td>
-<td>忘了命令 · 不知道说什么</td>
-<td>不需要时</td>
-</tr>
-<tr>
-<td>3</td>
-<td><code>03-全能力清单-Skills+MCP+插件.md</code></td>
-<td>36KB · 711 行</td>
-<td>想找某个能力</td>
-<td>不需要时</td>
-</tr>
-<tr>
-<td>4</td>
-<td><code>02-商城项目实战手册.md</code></td>
-<td>45KB · 1361 行</td>
-<td>跟做完整项目</td>
-<td>不做项目时</td>
-</tr>
-<tr>
-<td>5</td>
-<td><code>05-创业分析专家系统.md</code></td>
-<td>21KB · 682 行</td>
-<td>商业评估 / 尽调</td>
-<td>非 CEO 时</td>
-</tr>
-<tr>
-<td>6</td>
-<td><code>04-CMMI配置文档-PM专业版.md</code></td>
-<td>23KB · 520 行</td>
-<td>团队协作 / PM 视角</td>
-<td>单人开发者</td>
-</tr>
-<tr>
-<td>7</td>
-<td><code>06-CEO能力速用手册.md</code></td>
-<td>4KB · 91 行</td>
-<td>商业背景 CEO 速查</td>
-<td>深度开发者</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="9">📊 9 大部分章节（按主题索引）</h2>
-<table>
-<thead>
-<tr>
-<th>部分</th>
-<th>章节</th>
-<th>主题</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>第1部分</td>
-<td>Ch1-3</td>
-<td>基础入门（概述/安装/基础使用）</td>
-</tr>
-<tr>
-<td>第2部分</td>
-<td>Ch4-8</td>
-<td>命令参考（系统/CLI/标志/斜杠/组合）</td>
-</tr>
-<tr>
-<td>第3部分</td>
-<td>Ch9-10</td>
-<td>交互模式与工具</td>
-</tr>
-<tr>
-<td>第4部分</td>
-<td>Ch11-13</td>
-<td>模型上下文协议 MCP</td>
-</tr>
-<tr>
-<td>第5部分</td>
-<td>Ch14-19</td>
-<td>技能 Skills</td>
-</tr>
-<tr>
-<td>第6部分</td>
-<td>Ch20-22</td>
-<td>插件系统</td>
-</tr>
-<tr>
-<td>第7部分</td>
-<td>Ch23-26</td>
-<td>编程开发实战</td>
-</tr>
-<tr>
-<td>第8部分</td>
-<td>Ch27-29</td>
-<td>原理与技术</td>
-</tr>
-<tr>
-<td>第9部分</td>
-<td>Ch30-34</td>
-<td>企业级部署</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="5">🌟 5 大高级功能（详细对照）</h2>
-<table>
-<thead>
-<tr>
-<th>功能</th>
-<th>口语触发</th>
-<th>何时用</th>
-<th>何时<strong>不</strong>用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>队长</strong></td>
-<td>队长/火力全开/YOLO</td>
-<td>极限档全权</td>
-<td>第一次用 / 小任务</td>
-</tr>
-<tr>
-<td><strong>CEO</strong></td>
-<td>评估/尽调/出海</td>
-<td>商业决策</td>
-<td>技术活</td>
-</tr>
-<tr>
-<td><strong>经理</strong></td>
-<td>（自动）</td>
-<td>多 session 互可见</td>
-<td>单 session</td>
-</tr>
-<tr>
-<td><strong>秘书</strong></td>
-<td>秘书/daily-brief</td>
-<td>自动巡检</td>
-<td>实时任务</td>
-</tr>
-<tr>
-<td><strong>超级入口</strong></td>
-<td>super/不知道找谁</td>
-<td>不确定时</td>
-<td>已经知道用谁</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="_5">🔗 跨文档交叉引用</h2>
-<table>
-<thead>
-<tr>
-<th>当你看到...</th>
-<th>跳到...</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>dashboard §A 区（新手起步）</td>
-<td><code>01-小白</code> §⚡ 5分钟快速上手</td>
-</tr>
-<tr>
-<td>dashboard §B 区（命令体系）</td>
-<td><code>00-速查</code> §⌨️ 内置命令速查 + <code>第2部分：命令参考/</code></td>
-</tr>
-<tr>
-<td>dashboard §C 区（MYCC 专属）</td>
-<td><code>00-速查</code> §🆕 最新工程化能力</td>
-</tr>
-<tr>
-<td>dashboard §C10.5（高级功能矩阵）</td>
-<td><code>00-速查</code> §🌟 5 大高级功能</td>
-</tr>
-<tr>
-<td>dashboard §C10.6（super 入口）</td>
-<td>router-table.json（51 intents）</td>
-</tr>
-<tr>
-<td>dashboard §C10.10（配置全景）</td>
-<td><code>mycc-config.html</code>（自动生成 · 数据零手工）</td>
-</tr>
-<tr>
-<td>dashboard §C10.7（30 天路径）</td>
-<td>本文件 §🐣 完全新手</td>
-</tr>
-<tr>
-<td>dashboard §C10.8（我的使用统计）</td>
-<td>localStorage 累计</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="3">🆘 完全找不到？用 3 个万能入口</h2>
-<ol>
-<li><strong>super</strong> / 超级入口 / 不知道找谁 → 主调度器列 1-3 候选让你选</li>
-<li><strong>打开 dashboard.html</strong> → C10.5+C10.6+C10.7 三张卡看场景链路</li>
-<li><strong>看本文件</strong> → 按场景快速路由（35 个场景）</li>
-</ol>
-<hr>
-<p><em>最后更新：2026-06-25 · 配合 dashboard.html §C10.5-10.8</em></p>
+<a href="#scenarios" class="skip-link">跳到 35 个场景</a>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">M</span>
+      <span class="brand-name">MYCC</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">首页</a>
+      <a href="dashboard.html">仪表盘</a>
+      <a href="start-here.html" class="active">新手起步</a>
+      <a href="README.html">关于</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-title">🧭 start-here<br><span style="color:var(--accent)">35 个真实场景路由</span></h1>
+    <p class="hero-subtitle">
+      7 本手册 + 9 大部分章节 + 36 张 dashboard 卡 = 内容多到不知道从哪看。
+      <br>按「我想做 X」路由,<strong>30 秒找到入口</strong>。
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#scenarios">🎯 跳到 35 场景</a>
+      <a class="btn" href="dashboard.html">🎛️ 仪表盘</a>
+      <a class="btn" href="index.html">🏠 顶层入口</a>
+    </div>
+    <div class="hero-meta" style="display:flex;gap:var(--sp-3);margin-top:var(--sp-4);flex-wrap:wrap">
+      <span class="badge badge-accent">📅 更新 2026-06-25</span>
+      <span class="badge">配合 dashboard §C10.5-10.8</span>
+      <span class="badge">7 本手册 · 9 大部分</span>
+    </div>
+  </div>
+</section>
+
+<!-- 35 个场景路由(7 个子表) -->
+<section class="section" id="scenarios">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">🎯 按场景快速路由</h2>
+      <p class="section-subtitle">7 个身份维度 · 共 35 个真实场景</p>
+    </div>
+
+    <div class="stack-xl" style="display:flex;flex-direction:column;gap:var(--sp-5)">
+
+      <!-- 1. 完全新手 -->
+      <div class="card scenario-card">
+        <div class="scenario-head">
+          <span class="scenario-emoji">🐣</span>
+          <span class="scenario-title">完全新手(第一次用 CC)</span>
+          <span class="scenario-count">4 场景</span>
+        </div>
+        <ul class="scenario-list">
+          <li class="scenario-row"><span class="s-want">是什么?怎么装?</span><span class="s-where"><a href="01-小白使用手册.html">01-小白使用手册.md</a></span><span class="s-detail">§🤔 是什么 + §🚀 安装和启动</span></li>
+          <li class="scenario-row"><span class="s-want">5 分钟跑通</span><span class="s-where"><a href="01-小白使用手册.html">01-小白使用手册.md</a></span><span class="s-detail">§⚡ 5分钟快速上手</span></li>
+          <li class="scenario-row"><span class="s-want">第一次报错怎么办</span><span class="s-where"><a href="01-小白使用手册.html">01-小白使用手册.md</a></span><span class="s-detail">§🆘 遇到问题怎么办</span></li>
+          <li class="scenario-row"><span class="s-want">想知道「提示词」怎么写</span><span class="s-where"><a href="dashboard.html">dashboard.html</a></span><span class="s-detail">A 区 · 提示词怎么写</span></li>
+        </ul>
+      </div>
+
+      <!-- 2. 开发者 -->
+      <div class="card scenario-card">
+        <div class="scenario-head">
+          <span class="scenario-emoji">💻</span>
+          <span class="scenario-title">开发者(写代码)</span>
+          <span class="scenario-count">7 场景</span>
+        </div>
+        <ul class="scenario-list">
+          <li class="scenario-row"><span class="s-want">跟着做完整项目</span><span class="s-where"><a href="02-商城项目实战手册.html">02-商城项目实战手册.md</a></span><span class="s-detail">§🏁 第0阶段 + 全程</span></li>
+          <li class="scenario-row"><span class="s-want">修 Bug 找根因</span><span class="s-where"><a href="01-小白使用手册.html">01-小白使用手册.md</a></span><span class="s-detail">§🔥 流程1:修 Bug</span></li>
+          <li class="scenario-row"><span class="s-want">开发新功能</span><span class="s-where"><a href="01-小白使用手册.html">01-小白使用手册.md</a></span><span class="s-detail">§🔥 流程2:开发新功能</span></li>
+          <li class="scenario-row"><span class="s-want">代码审查</span><span class="s-where"><a href="01-小白使用手册.html">01-小白使用手册.md</a></span><span class="s-detail">§🔥 流程3:做调研 + /code-review</span></li>
+          <li class="scenario-row"><span class="s-want">全面审计 / 升级</span><span class="s-where"><a href="01-小白使用手册.html">01-小白使用手册.md</a></span><span class="s-detail">§🔥 流程4:全面审计/升级</span></li>
+          <li class="scenario-row"><span class="s-want">不知道找哪个 skill</span><span class="s-where"><a href="00-速查表.html">00-速查表.md</a></span><span class="s-detail">§🌟 5 大高级功能 + super</span></li>
+          <li class="scenario-row"><span class="s-want">想知道有什么 skill</span><span class="s-where"><a href="03-全能力清单-Skills+MCP+插件.html">03-全能力清单.md</a></span><span class="s-detail">全本</span></li>
+        </ul>
+      </div>
+
+      <!-- 3. CEO/创业者 -->
+      <div class="card scenario-card">
+        <div class="scenario-head">
+          <span class="scenario-emoji">💼</span>
+          <span class="scenario-title">CEO / 创业者(不写代码)</span>
+          <span class="scenario-count">4 场景</span>
+        </div>
+        <ul class="scenario-list">
+          <li class="scenario-row"><span class="s-want">评估创业想法</span><span class="s-where"><a href="05-创业分析专家系统.html">05-创业分析专家系统.md</a></span><span class="s-detail">全本 + ceo-mode</span></li>
+          <li class="scenario-row"><span class="s-want">尽调 / 出海 / 商业可行性</span><span class="s-where"><a href="06-CEO能力速用手册.html">06-CEO能力速用手册.md</a></span><span class="s-detail">全本 + ceo-mode</span></li>
+          <li class="scenario-row"><span class="s-want">看市场/财务/法务报告</span><span class="s-where"><a href="dashboard.html">dashboard.html</a></span><span class="s-detail">C 区 · CEO 入口</span></li>
+          <li class="scenario-row"><span class="s-want">PM 视角管理</span><span class="s-where"><a href="04-CMMI配置文档-PM专业版.html">04-CMMI配置文档.md</a></span><span class="s-detail">全本</span></li>
+        </ul>
+      </div>
+
+      <!-- 4. 盘点 -->
+      <div class="card scenario-card">
+        <div class="scenario-head">
+          <span class="scenario-emoji">🔧</span>
+          <span class="scenario-title">想知道有哪些功能(盘点)</span>
+          <span class="scenario-count">5 场景</span>
+        </div>
+        <ul class="scenario-list">
+          <li class="scenario-row"><span class="s-want">看 148 个 skill 全清单</span><span class="s-where"><a href="03-全能力清单-Skills+MCP+插件.html">03-全能力清单.md</a></span><span class="s-detail">全本</span></li>
+          <li class="scenario-row"><span class="s-want">看 11 个高频入口按场景</span><span class="s-where"><a href="dashboard.html">dashboard.html §C7</a> + <a href="00-速查表.html">00-速查表.md</a></span><span class="s-detail">—</span></li>
+          <li class="scenario-row"><span class="s-want">看 5 大高级功能</span><span class="s-where"><a href="dashboard.html">dashboard.html §C10.5</a> + <a href="00-速查表.html">00-速查表.md</a></span><span class="s-detail">—</span></li>
+          <li class="scenario-row"><span class="s-want">看 super 入口怎么用</span><span class="s-where"><a href="dashboard.html">dashboard.html §C10.6</a> + <a href="00-速查表.html">00-速查表.md</a></span><span class="s-detail">—</span></li>
+          <li class="scenario-row"><span class="s-want">按周学习路径</span><span class="s-where"><a href="dashboard.html">dashboard.html §C10.7</a></span><span class="s-detail">—</span></li>
+        </ul>
+      </div>
+
+      <!-- 5. 自动化/定时任务 -->
+      <div class="card scenario-card">
+        <div class="scenario-head">
+          <span class="scenario-emoji">⚡</span>
+          <span class="scenario-title">自动化 / 定时任务</span>
+          <span class="scenario-count">3 场景</span>
+        </div>
+        <ul class="scenario-list">
+          <li class="scenario-row"><span class="s-want">自动巡检 / daily-brief</span><span class="s-where"><a href="01-小白使用手册.html">01-小白使用手册.md §🔧</a></span><span class="s-detail">系统运维速查</span></li>
+          <li class="scenario-row"><span class="s-want">自动周报 / 秘书</span><span class="s-where"><a href="dashboard.html">dashboard.html C 区</a></span><span class="s-detail">秘书</span></li>
+          <li class="scenario-row"><span class="s-want">加新定时任务</span><span class="s-where"><a href="00-速查表.html">scheduled-tasks.md (SSoT)</a></span><span class="s-detail">~/.claude/docs/scheduled-tasks.md</span></li>
+        </ul>
+      </div>
+
+      <!-- 6. 学原理 -->
+      <div class="card scenario-card">
+        <div class="scenario-head">
+          <span class="scenario-emoji">🌐</span>
+          <span class="scenario-title">想学 Claude Code 原理</span>
+          <span class="scenario-count">5 场景</span>
+        </div>
+        <ul class="scenario-list">
+          <li class="scenario-row"><span class="s-want">命令速查 / 9 大分类</span><span class="s-where"><a href="dashboard.html">dashboard.html B 区</a> + 第2部分</span><span class="s-detail">命令参考</span></li>
+          <li class="scenario-row"><span class="s-want">MCP / Skills / 插件</span><span class="s-where">第4/5/6 部分</span><span class="s-detail">协议与扩展</span></li>
+          <li class="scenario-row"><span class="s-want">编程开发实战</span><span class="s-where">第7部分</span><span class="s-detail">Ch23-26</span></li>
+          <li class="scenario-row"><span class="s-want">原理 / 技术</span><span class="s-where">第8部分</span><span class="s-detail">Ch27-29</span></li>
+          <li class="scenario-row"><span class="s-want">企业级部署</span><span class="s-where">第9部分</span><span class="s-detail">Ch30-34</span></li>
+        </ul>
+      </div>
+
+      <!-- 7. 故障 -->
+      <div class="card scenario-card">
+        <div class="scenario-head">
+          <span class="scenario-emoji">🆘</span>
+          <span class="scenario-title">故障 / 出错</span>
+          <span class="scenario-count">6 场景</span>
+        </div>
+        <ul class="scenario-list">
+          <li class="scenario-row"><span class="s-want">卡住不动</span><span class="s-where"><a href="01-小白使用手册.html">01-小白使用手册.md</a></span><span class="s-detail">§🆘 卡住不动了</span></li>
+          <li class="scenario-row"><span class="s-want">方向跑偏</span><span class="s-where"><a href="01-小白使用手册.html">01-小白使用手册.md</a></span><span class="s-detail">§🆘 方向跑偏了</span></li>
+          <li class="scenario-row"><span class="s-want">改了一堆错的东西</span><span class="s-where"><a href="01-小白使用手册.html">01-小白使用手册.md</a></span><span class="s-detail">§🆘 改了一堆错的东西</span></li>
+          <li class="scenario-row"><span class="s-want">对话太长犯傻</span><span class="s-where"><a href="01-小白使用手册.html">01-小白使用手册.md</a></span><span class="s-detail">§🆘 对话太长 Claude 开始犯傻</span></li>
+          <li class="scenario-row"><span class="s-want">Hook 报错</span><span class="s-where"><a href="01-小白使用手册.html">01-小白使用手册.md</a></span><span class="s-detail">§🆘 Hook 报错</span></li>
+          <li class="scenario-row"><span class="s-want">想侧问不污染</span><span class="s-where">/btw 命令</span><span class="s-detail">01-小白 §📟 内置命令详解</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 7 本手册总览 -->
+<section class="section" style="padding-top: var(--sp-5);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">📚 7 本手册(按使用频率排序)</h2>
+      <p class="section-subtitle">01-小白使用手册 80% 场景必看,其余按身份按需</p>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table class="book-table">
+        <thead>
+          <tr><th>#</th><th>手册</th><th>大小</th><th>何时查</th><th>何时跳过</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td><a href="01-小白使用手册.html"><code>01-小白使用手册.md</code></a></td><td>51KB · 1467 行</td><td><strong style="color:var(--green)">80% 场景必看</strong></td><td>不会</td></tr>
+          <tr><td>2</td><td><a href="00-速查表.html"><code>00-速查表.md</code></a></td><td>21KB · 407 行</td><td>忘了命令 · 不知道说什么</td><td>不需要时</td></tr>
+          <tr><td>3</td><td><a href="03-全能力清单-Skills+MCP+插件.html"><code>03-全能力清单.md</code></a></td><td>36KB · 711 行</td><td>想找某个能力</td><td>不需要时</td></tr>
+          <tr><td>4</td><td><a href="02-商城项目实战手册.html"><code>02-商城项目实战.md</code></a></td><td>45KB · 1361 行</td><td>跟做完整项目</td><td>不做项目时</td></tr>
+          <tr><td>5</td><td><a href="05-创业分析专家系统.html"><code>05-创业分析专家系统.md</code></a></td><td>21KB · 682 行</td><td>商业评估 / 尽调</td><td>非 CEO 时</td></tr>
+          <tr><td>6</td><td><a href="04-CMMI配置文档-PM专业版.html"><code>04-CMMI配置文档.md</code></a></td><td>21KB · 520 行</td><td>团队协作 / PM 视角</td><td>单人开发者</td></tr>
+          <tr><td>7</td><td><a href="06-CEO能力速用手册.html"><code>06-CEO能力速用手册.md</code></a></td><td>4KB · 91 行</td><td>商业背景 CEO 速查</td><td>深度开发者</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 9 大部分章节 -->
+<section class="section" style="padding-top: var(--sp-5);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">📊 9 大部分章节(按主题索引)</h2>
+      <p class="section-subtitle">唐霜《Claude Code 指南》原版 · 9 部分 / 36 章 / 207 节</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><div class="metric"><span class="metric-value" style="font-size:var(--fs-xl)">第1部分</span><span class="metric-label">Ch1-3 · 基础入门</span></div><div class="muted" style="font-size:var(--fs-xs);margin-top:var(--sp-2)">概述 / 安装 / 基础使用</div></div>
+      <div class="card"><div class="metric"><span class="metric-value" style="font-size:var(--fs-xl)">第2部分</span><span class="metric-label">Ch4-8 · 命令参考</span></div><div class="muted" style="font-size:var(--fs-xs);margin-top:var(--sp-2)">系统 / CLI / 标志 / 斜杠 / 组合</div></div>
+      <div class="card"><div class="metric"><span class="metric-value" style="font-size:var(--fs-xl)">第3部分</span><span class="metric-label">Ch9-10 · 交互模式与工具</span></div><div class="muted" style="font-size:var(--fs-xs);margin-top:var(--sp-2)">—</div></div>
+      <div class="card"><div class="metric"><span class="metric-value" style="font-size:var(--fs-xl)">第4部分</span><span class="metric-label">Ch11-13 · MCP</span></div><div class="muted" style="font-size:var(--fs-xs);margin-top:var(--sp-2)">模型上下文协议</div></div>
+      <div class="card"><div class="metric"><span class="metric-value" style="font-size:var(--fs-xl)">第5部分</span><span class="metric-label">Ch14-19 · 技能 Skills</span></div><div class="muted" style="font-size:var(--fs-xs);margin-top:var(--sp-2)">6 章</div></div>
+      <div class="card"><div class="metric"><span class="metric-value" style="font-size:var(--fs-xl)">第6部分</span><span class="metric-label">Ch20-22 · 插件系统</span></div><div class="muted" style="font-size:var(--fs-xs);margin-top:var(--sp-2)">3 章</div></div>
+      <div class="card"><div class="metric"><span class="metric-value" style="font-size:var(--fs-xl)">第7部分</span><span class="metric-label">Ch23-26 · 编程开发实战</span></div><div class="muted" style="font-size:var(--fs-xs);margin-top:var(--sp-2)">4 章</div></div>
+      <div class="card"><div class="metric"><span class="metric-value" style="font-size:var(--fs-xl)">第8部分</span><span class="metric-label">Ch27-29 · 原理与技术</span></div><div class="muted" style="font-size:var(--fs-xs);margin-top:var(--sp-2)">3 章</div></div>
+      <div class="card"><div class="metric"><span class="metric-value" style="font-size:var(--fs-xl)">第9部分</span><span class="metric-label">Ch30-34 · 企业级部署</span></div><div class="muted" style="font-size:var(--fs-xs);margin-top:var(--sp-2)">5 章</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 大高级功能 -->
+<section class="section" style="padding-top: var(--sp-5);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">🌟 5 大高级功能(详细对照)</h2>
+      <p class="section-subtitle">队长 / CEO / 经理 / 秘书 / 超级入口 · 何时用 · 何时不用</p>
+    </div>
+    <div class="grid" style="grid-template-columns: repeat(5, 1fr);">
+      <div class="card feat-card">
+        <div class="feat-name">队长</div>
+        <span class="feat-trigger">队长 / 火力全开 / YOLO</span>
+        <p class="feat-when"><strong>用</strong>:极限档全权<br><em>不用</em>:第一次用 / 小任务</p>
+      </div>
+      <div class="card feat-card">
+        <div class="feat-name">CEO</div>
+        <span class="feat-trigger">评估 / 尽调 / 出海</span>
+        <p class="feat-when"><strong>用</strong>:商业决策<br><em>不用</em>:技术活</p>
+      </div>
+      <div class="card feat-card">
+        <div class="feat-name">经理</div>
+        <span class="feat-trigger">(自动)</span>
+        <p class="feat-when"><strong>用</strong>:多 session 互可见<br><em>不用</em>:单 session</p>
+      </div>
+      <div class="card feat-card">
+        <div class="feat-name">秘书</div>
+        <span class="feat-trigger">秘书 / daily-brief</span>
+        <p class="feat-when"><strong>用</strong>:自动巡检<br><em>不用</em>:实时任务</p>
+      </div>
+      <div class="card feat-card">
+        <div class="feat-name">超级入口</div>
+        <span class="feat-trigger">super / 不知道找谁</span>
+        <p class="feat-when"><strong>用</strong>:不确定时<br><em>不用</em>:已经知道用谁</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 跨文档交叉引用 -->
+<section class="section" style="padding-top: var(--sp-5);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">🔗 跨文档交叉引用</h2>
+      <p class="section-subtitle">从 dashboard 任意卡 → 直达对应手册章节</p>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table class="book-table">
+        <thead><tr><th>当你看到...</th><th>跳到...</th></tr></thead>
+        <tbody>
+          <tr><td>dashboard §A 区(新手起步)</td><td><a href="01-小白使用手册.html"><code>01-小白</code></a> §⚡ 5分钟快速上手</td></tr>
+          <tr><td>dashboard §B 区(命令体系)</td><td><a href="00-速查表.html"><code>00-速查</code></a> §⌨️ 内置命令速查 + 第2部分</td></tr>
+          <tr><td>dashboard §C 区(MYCC 专属)</td><td><a href="00-速查表.html"><code>00-速查</code></a> §🆕 最新工程化能力</td></tr>
+          <tr><td>dashboard §C10.5(高级功能矩阵)</td><td><a href="00-速查表.html"><code>00-速查</code></a> §🌟 5 大高级功能</td></tr>
+          <tr><td>dashboard §C10.6(super 入口)</td><td>router-table.json(51 intents)</td></tr>
+          <tr><td>dashboard §C10.10(配置全景)</td><td><a href="mycc-config.html"><code>mycc-config.html</code></a>(自动生成 · 数据零手工)</td></tr>
+          <tr><td>dashboard §C10.7(30 天路径)</td><td>本文件 §🐣 完全新手</td></tr>
+          <tr><td>dashboard §C10.8(我的使用统计)</td><td>localStorage 累计</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 3 个万能入口(兜底) -->
+<section class="section" style="padding-top: var(--sp-5);">
+  <div class="container">
+    <div class="callout">
+      <strong>🆘 完全找不到?</strong> · 用 3 个万能入口兜底
+    </div>
+    <div class="universal-callout">
+      <div class="universal-item">
+        <div class="u-num">1</div>
+        <div class="u-title">super / 超级入口</div>
+        <div class="u-desc">主调度器列 1-3 候选让你选 · 触发: super / 不知道找谁</div>
+      </div>
+      <div class="universal-item">
+        <div class="u-num">2</div>
+        <div class="u-title">打开 dashboard.html</div>
+        <div class="u-desc">C10.5+C10.6+C10.7 三张卡看场景链路</div>
+      </div>
+      <div class="universal-item">
+        <div class="u-num">3</div>
+        <div class="u-title">看本文件</div>
+        <div class="u-desc">按场景快速路由(35 个真实场景)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>MYCC · start-here 35 场景路由 · 最后更新 2026-06-25</span>
+    <span>配合 dashboard.html §C10.5-10.8</span>
+  </div>
+</footer>
 </body>
 </html>

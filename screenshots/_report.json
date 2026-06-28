@@ -1,0 +1,162 @@
+[
+  {
+    "file": "00-速查表.html",
+    "vp": "desktop",
+    "ok": true,
+    "title": "Claude Code + OMC V52 速查表",
+    "bodyHeight": 4456,
+    "png": "00-速查表-desktop.png",
+    "size": 714183,
+    "errs": 0
+  },
+  {
+    "file": "00-速查表.html",
+    "vp": "mobile",
+    "ok": true,
+    "title": "Claude Code + OMC V52 速查表",
+    "bodyHeight": 6918,
+    "png": "00-速查表-mobile.png",
+    "size": 342658,
+    "errs": 0
+  },
+  {
+    "file": "01-小白使用手册.html",
+    "vp": "desktop",
+    "ok": true,
+    "title": "Claude Code 小白使用手册",
+    "bodyHeight": 39036,
+    "png": "01-小白使用手册-desktop.png",
+    "size": 5675643,
+    "errs": 0
+  },
+  {
+    "file": "01-小白使用手册.html",
+    "vp": "mobile",
+    "ok": true,
+    "title": "Claude Code 小白使用手册",
+    "bodyHeight": 46016,
+    "png": "01-小白使用手册-mobile.png",
+    "size": 433671,
+    "errs": 0
+  },
+  {
+    "file": "02-商城项目实战手册.html",
+    "vp": "desktop",
+    "ok": true,
+    "title": "用 Claude Code 从零构建商城项目——实战手册",
+    "bodyHeight": 32564,
+    "png": "02-商城项目实战手册-desktop.png",
+    "size": 4793600,
+    "errs": 0
+  },
+  {
+    "file": "02-商城项目实战手册.html",
+    "vp": "mobile",
+    "ok": true,
+    "title": "用 Claude Code 从零构建商城项目——实战手册",
+    "bodyHeight": 38477,
+    "png": "02-商城项目实战手册-mobile.png",
+    "size": 412450,
+    "errs": 0
+  },
+  {
+    "file": "03-全能力清单-Skills+MCP+插件.html",
+    "vp": "desktop",
+    "ok": true,
+    "title": "Claude Code 全能力清单",
+    "bodyHeight": 23112,
+    "png": "03-全能力清单-Skills+MCP+插件-desktop.png",
+    "size": 3513464,
+    "errs": 0
+  },
+  {
+    "file": "03-全能力清单-Skills+MCP+插件.html",
+    "vp": "mobile",
+    "ok": true,
+    "title": "Claude Code 全能力清单",
+    "bodyHeight": 35536,
+    "png": "03-全能力清单-Skills+MCP+插件-mobile.png",
+    "size": 360247,
+    "errs": 0
+  },
+  {
+    "file": "04-CMMI配置文档-PM专业版.html",
+    "vp": "desktop",
+    "ok": true,
+    "title": "Claude Code 专业 PM 配置文档",
+    "bodyHeight": 16250,
+    "png": "04-CMMI配置文档-PM专业版-desktop.png",
+    "size": 2324140,
+    "errs": 0
+  },
+  {
+    "file": "04-CMMI配置文档-PM专业版.html",
+    "vp": "mobile",
+    "ok": true,
+    "title": "Claude Code 专业 PM 配置文档",
+    "bodyHeight": 22158,
+    "png": "04-CMMI配置文档-PM专业版-mobile.png",
+    "size": 385633,
+    "errs": 0
+  },
+  {
+    "file": "05-创业分析专家系统.html",
+    "vp": "desktop",
+    "ok": true,
+    "title": "Claude Code 创业分析专家系统",
+    "bodyHeight": 18125,
+    "png": "05-创业分析专家系统-desktop.png",
+    "size": 2415370,
+    "errs": 0
+  },
+  {
+    "file": "05-创业分析专家系统.html",
+    "vp": "mobile",
+    "ok": true,
+    "title": "Claude Code 创业分析专家系统",
+    "bodyHeight": 20437,
+    "png": "05-创业分析专家系统-mobile.png",
+    "size": 362826,
+    "errs": 0
+  },
+  {
+    "file": "06-CEO能力速用手册.html",
+    "vp": "desktop",
+    "ok": true,
+    "title": "CEO 能力速用手册",
+    "bodyHeight": 7200,
+    "png": "06-CEO能力速用手册-desktop.png",
+    "size": 1465072,
+    "errs": 0
+  },
+  {
+    "file": "06-CEO能力速用手册.html",
+    "vp": "mobile",
+    "ok": true,
+    "title": "CEO 能力速用手册",
+    "bodyHeight": 11630,
+    "png": "06-CEO能力速用手册-mobile.png",
+    "size": 387178,
+    "errs": 0
+  },
+  {
+    "file": "marketing.html",
+    "vp": "desktop",
+    "ok": true,
+    "title": "MYCC 完整使用指南 — Claude Code 中文实战手册 · 全栈开发到 CEO 决策",
+    "bodyHeight": 2068,
+    "png": "marketing-desktop.png",
+    "size": 406217,
+    "errs": 0
+  },
+  {
+    "file": "marketing.html",
+    "vp": "mobile",
+    "ok": true,
+    "title": "MYCC 完整使用指南 — Claude Code 中文实战手册 · 全栈开发到 CEO 决策",
+    "bodyHeight": 3765,
+    "png": "marketing-mobile.png",
+    "size": 300278,
+    "errs": 0
+  }
+]
