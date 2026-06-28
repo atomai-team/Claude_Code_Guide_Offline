@@ -299,6 +299,14 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
 </head>
 <body class="dashboard-body">
 
+<!-- P2-1 a11y: JS 关闭时降级提示 (Apple HIG 风格 · 顶部条幅 + 浅米底) -->
+<noscript>
+  <div style="padding:16px 24px;background:var(--bg-subtle);border-bottom:1px solid var(--border);text-align:center;font-size:var(--fs-md);color:var(--text);">
+    ⚠️ 本页依赖 JavaScript · Please enable JavaScript to view the dashboard.
+    静态文档版: <a href="https://github.com/atomai-team/Claude_Code_Guide_Offline" style="color:var(--accent);">GitHub Repo</a>
+  </div>
+</noscript>
+
 <!-- Skip link -->
 <a href="#main" class="skip-link">跳到主内容</a>
 
@@ -1720,6 +1728,10 @@ function initModal() {
     if (!item) { showToast('⚠️ 未找到详情: ' + type + '/' + id); return; }
     const overlay = document.getElementById('detailOverlay');
     if (!overlay) return;
+    // P2-1 a11y: 焦点陷阱 — Modal 开时主内容(<main>)加 inert, 背景不可 Tab,
+    // Modal 自身在 <body> 内但不在 <main> 内, 仍可访问.
+    const mainEl = document.getElementById('main') || document.querySelector('main');
+    if (mainEl) mainEl.setAttribute('inert', '');
     document.getElementById('detailTitle').textContent = item.name_en || item.name_zh || item.id || id;
     let html = '';
     if (type === 'skills') {
@@ -1756,6 +1768,9 @@ function initModal() {
   window.closeDetail = function() {
     const o = document.getElementById('detailOverlay');
     if (o) o.style.display = 'none';
+    // P2-1 a11y: 焦点陷阱解除
+    const mainEl = document.getElementById('main') || document.querySelector('main');
+    if (mainEl) mainEl.removeAttribute('inert');
   };
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
 }
@@ -1866,6 +1881,9 @@ const CMDK_CATS = [['all','🌐 全部'],['doc','📚 文档'],['manual','📖 �
 function openCmdK() {
   const o = document.getElementById('cmdkOverlay');
   if (!o) return;
+  // P2-1 a11y: 焦点陷阱 — CmdK 开时 <main> 加 inert (Modal 自身在 body 内但不在 main, 仍可访问)
+  const mainEl = document.getElementById('main') || document.querySelector('main');
+  if (mainEl) mainEl.setAttribute('inert', '');
   o.style.display = 'flex';
   const i = document.getElementById('cmdkInput');
   if (i) { i.value = ''; setTimeout(() => i.focus(), 30); }
@@ -1875,6 +1893,9 @@ function openCmdK() {
 function closeCmdK() {
   const o = document.getElementById('cmdkOverlay');
   if (o) o.style.display = 'none';
+  // P2-1 a11y: 焦点陷阱解除
+  const mainEl = document.getElementById('main') || document.querySelector('main');
+  if (mainEl) mainEl.removeAttribute('inert');
 }
 function renderCmdKTabs() {
   const t = document.getElementById('cmdkTabs');
