@@ -162,6 +162,26 @@
 .list-item-title { font-weight: 600; color: var(--text); margin-bottom: 2px; }
 .list-item-desc { font-size: var(--fs-sm); color: var(--text-dim); }
 
+/* ── 5.1 Deep-key utility (P1-4 Architect #1 · utility 工具集准备) ── */
+/* 实测 dashboard.html 6 个 section 各有 scoped #s-X .deep-key { min-width: NNNpx }
+   scoped CSS 因 specificity (id > class) 无法被全局 @media 重置, 故保留.
+   本批加 5 个 utility class 作为工具集, 供未来新建组件直接使用 (避免 scoped 反模式).
+
+   utility 对照表 (实测 2026-06-29):
+   s-entry(184) s-health(184) → .deep-key--184
+   s-github(172)             → .deep-key--172
+   s-knowledge(220)          → .deep-key--220
+   s-brains(132)             → .deep-key--132
+   s-architecture(156)       → .deep-key--156
+
+   未来新建 section: <span class="deep-key deep-key--184">...</span>
+   即可, 不需要在 <style> 写 scoped CSS. */
+.deep-key--132 { min-width: 132px; }
+.deep-key--156 { min-width: 156px; }
+.deep-key--172 { min-width: 172px; }
+.deep-key--184 { min-width: 184px; }
+.deep-key--220 { min-width: 220px; }
+
 /* ── 6. Callout (提示框) ── */
 .callout {
   padding: var(--sp-4);
