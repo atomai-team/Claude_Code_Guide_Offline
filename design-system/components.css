@@ -6,6 +6,7 @@
 
 /* ── 1. 布局容器 ── */
 .container {
+  box-sizing: border-box; /* padding 算进 width 内，防移动端横向溢出（无全局 border-box reset） */
   width: 100%;
   max-width: var(--layout-max-width);
   margin: 0 auto;

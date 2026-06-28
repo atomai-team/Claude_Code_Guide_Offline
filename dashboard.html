@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,560;9..144,600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="design-system/tokens.css">
-<link rel="stylesheet" href="design-system/components.css">
+<link rel="stylesheet" href="design-system/tokens.css?v=20260628">
+<link rel="stylesheet" href="design-system/components.css?v=20260628">
 <style>
 /* 仅本页面局部微调 (零硬编码色/字/距) */
 .dashboard-body { background: var(--bg); }
@@ -129,6 +129,65 @@
 .wf-name { font-family: var(--font-mono); font-size: var(--fs-sm); color: var(--accent); font-weight: 600; }
 .wf-desc { font-size: var(--fs-sm); color: var(--text-dim); }
 
+/* ── 命令体系深化 · 苹果风重制 (克制 · 细线 · 留白 · 零彩badge/callout框) ── */
+.deep-stack { display: flex; flex-direction: column; gap: var(--sp-5); }
+.deep-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-5); }
+@media (max-width: 820px) { .deep-grid-2 { grid-template-columns: 1fr; } }
+.deep-block { padding: var(--sp-6); }
+.deep-eyebrow { font-size: var(--fs-xs); font-weight: 600; color: var(--text-muted); letter-spacing: 0.04em; }
+.deep-block-title { font-family: var(--font-sans); font-size: var(--fs-lg); font-weight: 700; color: var(--text); letter-spacing: -0.01em; margin: var(--sp-1) 0 var(--sp-4); }
+.deep-rows { display: flex; flex-direction: column; }
+.deep-row { display: flex; align-items: baseline; gap: var(--sp-4); padding: var(--sp-3) 0; border-bottom: 1px solid var(--border-subtle); }
+.deep-row:last-child { border-bottom: none; padding-bottom: 0; }
+.deep-key { flex-shrink: 0; min-width: 128px; font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--accent); }
+.deep-key.keys { display: inline-flex; flex-wrap: wrap; gap: 3px; align-items: center; }
+.deep-key.keys kbd { font-family: var(--font-mono); font-size: var(--fs-2xs); background: var(--bg-subtle); border: 1px solid var(--border-subtle); border-radius: var(--radius-xs); padding: 1px 6px; color: var(--text-dim); }
+.deep-key.mode { color: var(--accent); font-weight: 600; }
+.deep-row-text { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.deep-row-name { font-size: var(--fs-sm); font-weight: 600; color: var(--text); }
+.deep-row-when { font-size: var(--fs-sm); color: var(--text-dim); line-height: var(--lh-relaxed); }
+.deep-id-row { display: flex; flex-direction: column; gap: 3px; padding: var(--sp-3) 0; border-bottom: 1px solid var(--border-subtle); }
+.deep-id-row:last-child { border-bottom: none; padding-bottom: 0; }
+.deep-id { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--accent); }
+.deep-id-desc { font-size: var(--fs-sm); color: var(--text-dim); line-height: var(--lh-relaxed); }
+.deep-note { margin-top: var(--sp-5); padding-top: var(--sp-4); border-top: 1px solid var(--border-subtle); font-size: var(--fs-sm); color: var(--text-muted); line-height: var(--lh-relaxed); }
+.deep-note strong { color: var(--text-dim); font-weight: 600; }
+.deep-inline { font-family: var(--font-mono); font-size: var(--fs-2xs); background: var(--bg-subtle); padding: 2px 6px; border-radius: var(--radius-xs); color: var(--accent); }
+/* 入口速查 · 引擎名列对齐（长名不挤压口语；窄屏改纵向堆叠） */
+#s-entry .deep-key { min-width: 184px; }
+@media (max-width: 700px) { #s-entry .deep-row { flex-direction: column; gap: 2px; } #s-entry .deep-key { min-width: 0; } }
+/* GitHub 生态全景 · 项目名列对齐（长名/中文类目不挤压裁决；窄屏纵向堆叠） */
+#s-github .deep-key { min-width: 172px; }
+@media (max-width: 700px) { #s-github .deep-row { flex-direction: column; gap: 2px; } #s-github .deep-key { min-width: 0; } }
+/* 本机知识体系 · 长文件名(如 system-of-systems.md)不挤压描述；窄屏纵向堆叠 */
+#s-knowledge .deep-key { min-width: 220px; }
+@media (max-width: 700px) { #s-knowledge .deep-row { flex-direction: column; gap: 2px; } #s-knowledge .deep-key { min-width: 0; } }
+
+/* 系统健康仪表盘 · P0/P1/P2/REFUTE 标记列宽稳定；窄屏纵向堆叠 */
+#s-health .deep-key { min-width: 184px; }
+@media (max-width: 700px) { #s-health .deep-row { flex-direction: column; gap: 2px; } #s-health .deep-key { min-width: 0; } }
+
+/* 五大智能大脑 · 脑名(D1 调研脑)短；窄屏纵向堆叠 */
+#s-brains .deep-key { min-width: 132px; }
+@media (max-width: 700px) { #s-brains .deep-row { flex-direction: column; gap: 2px; } #s-brains .deep-key { min-width: 0; } }
+
+/* 四系统架构宪法 · 阶段名(意图澄清/TDD 实现)短；窄屏纵向堆叠 */
+#s-architecture .deep-key { min-width: 156px; }
+@media (max-width: 700px) { #s-architecture .deep-row { flex-direction: column; gap: 2px; } #s-architecture .deep-key { min-width: 0; } }
+
+/* 配置升级路径 · how-it-works 序号块 (大留白 · 渐进 · 克制) */
+.upgrade-flow { display: flex; align-items: flex-start; gap: var(--sp-2); }
+@media (max-width: 820px) { .upgrade-flow { flex-direction: column; align-items: stretch; gap: var(--sp-4); } }
+.upgrade-step { flex: 1; display: flex; flex-direction: column; gap: var(--sp-3); padding: 0 var(--sp-3); }
+.upgrade-ordinal { font-family: var(--font-display); font-size: var(--fs-3xl); font-weight: 400; line-height: 1; color: var(--accent); opacity: 0.30; letter-spacing: -0.02em; }
+.upgrade-name { font-family: var(--font-sans); font-size: var(--fs-xl); font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+.upgrade-cmd { align-self: flex-start; font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-soft-border); padding: 4px 11px; border-radius: var(--radius-pill); }
+.upgrade-desc { font-size: var(--fs-sm); color: var(--text-dim); line-height: var(--lh-relaxed); margin: 0; }
+.upgrade-arrow { align-self: center; margin-top: var(--sp-6); color: var(--border-strong); font-size: var(--fs-2xl); flex-shrink: 0; }
+@media (max-width: 820px) { .upgrade-arrow { margin: 0 0 0 var(--sp-3); transform: rotate(90deg); } }
+.upgrade-note { margin-top: var(--sp-6); padding-top: var(--sp-4); border-top: 1px solid var(--border-subtle); display: flex; align-items: center; gap: var(--sp-2); font-size: var(--fs-sm); color: var(--text-muted); }
+.upgrade-note .reflow-icon { color: var(--accent); font-size: var(--fs-md); }
+
 /* footer */
 .dash-footer { padding: var(--sp-6) 0; border-top: 1px solid var(--border-subtle); margin-top: var(--sp-7); color: var(--text-muted); font-size: var(--fs-xs); }
 .dash-footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--sp-3); }
@@ -177,6 +236,41 @@
 .toast { position: fixed; bottom: var(--sp-5); left: 50%; transform: translateX(-50%) translateY(100px); background: var(--text); color: var(--text-inverse); padding: var(--sp-3) var(--sp-5); border-radius: var(--radius-pill); font-size: var(--fs-sm); box-shadow: var(--shadow-lg); z-index: var(--z-toast); transition: transform var(--dur-normal) var(--ease-out); pointer-events: none; }
 .toast.show { transform: translateX(-50%) translateY(0); }
 
+/* ── 分级导航侧栏 + scroll-spy (苹果风 · 桌面固定 / 移动抽屉) ── */
+:root { --header-h: 56px; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
+.nav-toggle { display: none; align-items: center; justify-content: center; width: 38px; height: 38px; padding: 0; margin-right: var(--sp-2); border-radius: var(--radius-sm); background: none; border: 1px solid var(--border-subtle); color: var(--text-dim); font-size: var(--fs-lg); line-height: 1; cursor: pointer; transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
+.nav-toggle:hover { color: var(--accent); border-color: var(--accent); }
+.side-nav { box-sizing: border-box; position: fixed; top: var(--header-h); left: 0; width: var(--sidebar-width); height: calc(100vh - var(--header-h)); overflow-y: auto; padding: var(--sp-4) var(--sp-2) var(--sp-6); border-right: 1px solid var(--border-subtle); background: var(--bg); z-index: var(--z-sticky); }
+.side-nav::-webkit-scrollbar { width: 6px; }
+.side-nav::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: var(--radius-pill); }
+.nav-group { margin-bottom: var(--sp-3); }
+.nav-group-title { display: block; font-size: var(--fs-2xs); font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; padding: var(--sp-2) var(--sp-3) var(--sp-1); }
+.nav-link { display: block; padding: var(--sp-1) var(--sp-3); margin: 1px 0; font-size: var(--fs-sm); color: var(--text-dim); text-decoration: none; border-left: 2px solid transparent; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
+.nav-link:hover { background: var(--surface-hover); color: var(--text); }
+.nav-link.active { color: var(--text); font-weight: 600; border-left-color: var(--accent); background: var(--accent-soft); }
+.nav-backdrop { display: none; position: fixed; inset: 0; background: var(--surface-overlay); z-index: var(--z-overlay); opacity: 0; transition: opacity var(--dur-normal) var(--ease-out); }
+@media (min-width: 1024px) {
+  #main { margin-left: var(--sidebar-width); }
+}
+@media (max-width: 1023px) {
+  .nav-toggle { display: inline-flex; }
+  .side-nav { z-index: var(--z-modal); transform: translateX(-100%); transition: transform var(--dur-normal) var(--ease-out); box-shadow: var(--shadow-lg); background: var(--bg-elevated); }
+  .side-nav.open { transform: translateX(0); }
+  .nav-backdrop.show { display: block; opacity: 1; }
+}
+
+/* ── 右侧悬浮按钮 · 回顶/回底 (苹果风 · 克制 · 滚动渐显) ── */
+.fab-stack { position: fixed; right: var(--sp-5); bottom: var(--sp-6); display: flex; flex-direction: column; gap: var(--sp-2); z-index: var(--z-sticky); opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity var(--dur-normal) var(--ease-out), transform var(--dur-normal) var(--ease-out); }
+.fab-stack.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.fab { width: 42px; height: 42px; display: inline-flex; align-items: center; justify-content: center; padding: 0; border-radius: var(--radius-pill); background: var(--surface); border: 1px solid var(--border-subtle); color: var(--text-muted); box-shadow: var(--shadow-md); cursor: pointer; transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+.fab:hover { color: var(--accent); border-color: var(--accent); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.fab:active { transform: translateY(0); }
+.fab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 600px) { .fab-stack { right: var(--sp-3); bottom: var(--sp-4); } .fab { width: 38px; height: 38px; } }
+
 /* 全能力检索 */
 .cap-search { width: 100%; padding: 9px 12px; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--bg-subtle); color: var(--text); font-size: var(--fs-sm); margin-bottom: var(--sp-3); }
 .cap-search:focus { outline: none; border-color: var(--accent); }
@@ -211,6 +305,7 @@
 <!-- 顶部 sticky header -->
 <header class="header-strip">
   <div class="container header-row">
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="打开导航菜单" aria-controls="sideNav" aria-expanded="false">☰</button>
     <a class="brand" href="#top">
       <span class="brand-mark">M</span>
       <span class="brand-text">MYCC<span class="brand-sub">· Claude Code 全局使用指导书</span></span>
@@ -226,6 +321,46 @@
   <div class="stale-warn" id="staleWarn"></div>
 </header>
 
+<!-- ═══ 分级导航侧栏 ═══ -->
+<aside class="side-nav" id="sideNav" aria-label="站内分级导航">
+  <nav>
+    <div class="nav-group">
+      <span class="nav-group-title">① 开始上手</span>
+      <a href="#top" class="nav-link">首屏概览</a>
+      <a href="#s-overview" class="nav-link">能力概览</a>
+      <a href="#s-entry" class="nav-link">入口编排 · 该喊谁</a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-group-title">② 命令速查</span>
+      <a href="#s-commands" class="nav-link">50+ 命令速查</a>
+      <a href="#s-commands-deep" class="nav-link">命令体系深化</a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-group-title">③ 智能体系</span>
+      <a href="#s-agents" class="nav-link">89 Agent 团队</a>
+      <a href="#s-workflows" class="nav-link">工作流 + 外部 AI</a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-group-title">④ 学习中心</span>
+      <a href="#s-docs" class="nav-link">手册 + 全量目录</a>
+      <a href="#s-github" class="nav-link">GitHub 生态 · 调研裁决</a>
+      <a href="#s-knowledge" class="nav-link">本机知识体系</a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-group-title">⑤ 数据检索</span>
+      <a href="#s-data" class="nav-link">数据后台</a>
+      <a href="#s-catalog" class="nav-link">全量能力目录</a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-group-title">⑥ 系统自审视</span>
+      <a href="#s-health" class="nav-link">系统健康仪表盘</a>
+      <a href="#s-brains" class="nav-link">五大智能大脑</a>
+      <a href="#s-architecture" class="nav-link">四系统架构宪法</a>
+    </div>
+  </nav>
+</aside>
+<div class="nav-backdrop" id="navBackdrop"></div>
+
 <main id="main">
 
 <!-- ═══ HERO ═══ -->
@@ -236,7 +371,7 @@
     从安装到跑通真实项目，从速查 50+ 命令到调用 89 个专家 agent——一份覆盖 MYCC 全栈能力的实战指南。数据每 5 分钟自动刷新，按 <kbd>⌘K</kbd> 全局搜索任意手册。
   </p>
   <div class="hero-actions">
-    <button class="btn btn-primary" onclick="document.getElementById('s-quickstart').scrollIntoView({behavior:'smooth'})">🚀 5 分钟上手</button>
+    <button class="btn btn-primary" onclick="document.getElementById('s-commands').scrollIntoView({behavior:'smooth'})">🚀 5 分钟上手</button>
     <button class="btn" onclick="openCmdK()">🔍 全局搜索</button>
     <button class="btn" onclick="refreshData()">🔄 刷新数据</button>
   </div>
@@ -269,7 +404,7 @@
       <div class="entry-icon green">🌐</div>
       <div class="entry-title">6 联外部 AI 对抗</div>
       <div class="entry-desc">kimi / mmx / qwen / opencode / mavis / codex 六联异构审查，写代码 / 长文档 / 跨模型验证一键调用。</div>
-      <a class="entry-cta" href="#s-external">查看入口 →</a>
+      <a class="entry-cta" href="#s-workflows">查看入口 →</a>
     </div>
   </div>
 </section>
@@ -292,17 +427,107 @@
   </div>
 </section>
 
-<!-- ═══ Section 2 · 入口编排 ═══ -->
+<!-- ═══ Section 2 · 入口编排 · 该喊谁（口语化速查）═══ -->
 <section class="section container" id="s-entry">
   <div class="section-header">
-    <h2 class="section-title">入口编排 · 谁先响应你的口语</h2>
-    <p class="section-subtitle">P0 优先级排序 · 队长 / 活力全开为最常用入口</p>
+    <h2 class="section-title">入口编排 · 该喊谁</h2>
+    <p class="section-subtitle">记不住命令？说一句口语就行 —— 不确定时，永远可以喊「队长」</p>
   </div>
-  <div class="card" style="padding:0;overflow:hidden">
-    <table class="tbl" id="tblEntry" style="margin:0">
-      <thead><tr><th style="padding-left:var(--sp-4)">口语关键词</th><th>引擎</th><th>优先级</th></tr></thead>
-      <tbody></tbody>
-    </table>
+
+  <div class="deep-stack">
+
+    <!-- 一句话入口 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">💬 最常用 · 一句话入口</div>
+      <h3 class="deep-block-title">说人话，mycc 自动调到对的入口</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">smart-flow-all</span><span class="deep-row-text"><span class="deep-row-name">「队长，帮我做 X」/「火力全开」</span><span class="deep-row-when">全自动：分析 → 规划 → 派专家 → 验证 → 收口</span></span></div>
+        <div class="deep-row"><span class="deep-key">ceo-mode</span><span class="deep-row-text"><span class="deep-row-name">「我想清楚 X 值不值得做」</span><span class="deep-row-when">5 位商业顾问并行分析 + 决策建议</span></span></div>
+        <div class="deep-row"><span class="deep-key">start-work</span><span class="deep-row-text"><span class="deep-row-name">「开工做 X」/「工程化项目」</span><span class="deep-row-when">完整 CEO 6 阶段流水线</span></span></div>
+        <div class="deep-row"><span class="deep-key">team-fullstack</span><span class="deep-row-text"><span class="deep-row-name">「做个网站」/「做个 app」</span><span class="deep-row-when">设计 + 前端 + 后端 + 部署 一条龙</span></span></div>
+        <div class="deep-row"><span class="deep-key">gstack-review</span><span class="deep-row-text"><span class="deep-row-name">「帮我审查这段代码」</span><span class="deep-row-when">5 维代码审查 + 真问题清单</span></span></div>
+        <div class="deep-row"><span class="deep-key">systematic-error-analysis</span><span class="deep-row-text"><span class="deep-row-name">「又报错了」/「找根因」</span><span class="deep-row-when">根因分析 + 修复方案</span></span></div>
+        <div class="deep-row"><span class="deep-key">audit-all-better</span><span class="deep-row-text"><span class="deep-row-name">「全面体检」/「健康检查」</span><span class="deep-row-when">全机扫描 + 问题清单</span></span></div>
+        <div class="deep-row"><span class="deep-key">gstack-ship</span><span class="deep-row-text"><span class="deep-row-name">「部署」/「上线」/「发版」</span><span class="deep-row-when">发布 checklist + PR</span></span></div>
+        <div class="deep-row"><span class="deep-key">deep-research-sop</span><span class="deep-row-text"><span class="deep-row-name">「深度调研 X」</span><span class="deep-row-when">官方 + 社区 + GitHub 多源报告</span></span></div>
+        <div class="deep-row"><span class="deep-key">ai-panel</span><span class="deep-row-text"><span class="deep-row-name">「问问其他 AI」/「异构对抗」</span><span class="deep-row-when">5 个外部 AI 同时评审</span></span></div>
+      </div>
+      <p class="deep-note"><strong>记不住？</strong>任何时候说「队长」都不会错 —— 它会替你选对的入口。这就是「记场景，不记名字」的设计哲学。</p>
+    </div>
+
+    <!-- 5 场景速查 -->
+    <div class="deep-grid-2">
+
+      <div class="card deep-block">
+        <div class="deep-eyebrow">✍️ 写代码 / 开发</div>
+        <h3 class="deep-block-title">从测试到根因，一句话调到位</h3>
+        <div class="deep-rows">
+          <div class="deep-row"><span class="deep-key">sp-test-driven-development</span><span class="deep-row-text"><span class="deep-row-name">「TDD 做这个功能」</span><span class="deep-row-when">红测试 → 实现 → 重构</span></span></div>
+          <div class="deep-row"><span class="deep-key">omc-plan</span><span class="deep-row-text"><span class="deep-row-name">「帮我拆一下实现步骤」</span><span class="deep-row-when">任务列表 + 依赖图</span></span></div>
+          <div class="deep-row"><span class="deep-key">gstack-review</span><span class="deep-row-text"><span class="deep-row-name">「帮我 review 这段」</span><span class="deep-row-when">5 维审查报告</span></span></div>
+          <div class="deep-row"><span class="deep-key">systematic-error-analysis</span><span class="deep-row-text"><span class="deep-row-name">「又报错了」</span><span class="deep-row-when">根因 + 修复</span></span></div>
+          <div class="deep-row"><span class="deep-key">karpathy-discipline-expert</span><span class="deep-row-text"><span class="deep-row-name">「卡帕西看下这段」</span><span class="deep-row-when">KISS / YAGNI / 可读性严审</span></span></div>
+        </div>
+      </div>
+
+      <div class="card deep-block">
+        <div class="deep-eyebrow">🚀 做 app / 全栈 / 上线</div>
+        <h3 class="deep-block-title">从一张设计稿到部署回滚</h3>
+        <div class="deep-rows">
+          <div class="deep-row"><span class="deep-key">team-fullstack</span><span class="deep-row-text"><span class="deep-row-name">「做个 landing page」</span><span class="deep-row-when">设计 + 前端 + 后端 + 部署</span></span></div>
+          <div class="deep-row"><span class="deep-key">gstack-ship</span><span class="deep-row-text"><span class="deep-row-name">「部署到 Vercel」</span><span class="deep-row-when">CI/CD + 回滚方案</span></span></div>
+          <div class="deep-row"><span class="deep-key">gstack-qa</span><span class="deep-row-text"><span class="deep-row-name">「测一下这个网站」</span><span class="deep-row-when">测试计划 + 报告</span></span></div>
+          <div class="deep-row"><span class="deep-key">visual-verdict</span><span class="deep-row-text"><span class="deep-row-name">「截图看看上线效果」</span><span class="deep-row-when">截图 + 对比验收</span></span></div>
+        </div>
+      </div>
+
+      <div class="card deep-block">
+        <div class="deep-eyebrow">💼 商业 / 战略 / 出海</div>
+        <h3 class="deep-block-title">一人成军的商业大脑</h3>
+        <div class="deep-rows">
+          <div class="deep-row"><span class="deep-key">ceo-mode</span><span class="deep-row-text"><span class="deep-row-name">「X 方向值不值得做」</span><span class="deep-row-when">市场 / 财务 / 法务 / CMO / CTO 五顾问</span></span></div>
+          <div class="deep-row"><span class="deep-key">pricing-strategy</span><span class="deep-row-text"><span class="deep-row-name">「怎么定价」</span><span class="deep-row-when">定价模型 + 套餐</span></span></div>
+          <div class="deep-row"><span class="deep-key">marketing</span><span class="deep-row-text"><span class="deep-row-name">「帮我做推广」</span><span class="deep-row-when">渠道 + 内容 + 预算</span></span></div>
+          <div class="deep-row"><span class="deep-key">content-engine</span><span class="deep-row-text"><span class="deep-row-name">「写篇小红书 / 公众号」</span><span class="deep-row-when">多平台文案</span></span></div>
+          <div class="deep-row"><span class="deep-key">cmmi-tracker</span><span class="deep-row-text"><span class="deep-row-name">「需求管理太乱」</span><span class="deep-row-when">需求 - 任务 - 验收链路</span></span></div>
+        </div>
+      </div>
+
+      <div class="card deep-block">
+        <div class="deep-eyebrow">🔍 调研 / 学习</div>
+        <h3 class="deep-block-title">多源 + 对抗，结论才靠得住</h3>
+        <div class="deep-rows">
+          <div class="deep-row"><span class="deep-key">deep-research-sop</span><span class="deep-row-text"><span class="deep-row-name">「调研一下 X」</span><span class="deep-row-when">官方 + 社区 + GitHub 多源报告</span></span></div>
+          <div class="deep-row"><span class="deep-key">ai-panel</span><span class="deep-row-text"><span class="deep-row-name">「问问其他 AI」</span><span class="deep-row-when">5 AI 对抗评审</span></span></div>
+          <div class="deep-row"><span class="deep-key">last30days</span><span class="deep-row-text"><span class="deep-row-name">「最近 X 有什么新动向」</span><span class="deep-row-when">近 30 天社区声音</span></span></div>
+          <div class="deep-row"><span class="deep-key">customer-research</span><span class="deep-row-text"><span class="deep-row-name">「做用户访谈」</span><span class="deep-row-when">访谈脚本 + 洞察</span></span></div>
+        </div>
+      </div>
+
+      <div class="card deep-block">
+        <div class="deep-eyebrow">🛠️ 维护 mycc 自己</div>
+        <h3 class="deep-block-title">让工具保持锋利</h3>
+        <div class="deep-rows">
+          <div class="deep-row"><span class="deep-key">claude-code-better</span><span class="deep-row-text"><span class="deep-row-name">「全面升级」</span><span class="deep-row-when">配置 / 规则 / 技能更新</span></span></div>
+          <div class="deep-row"><span class="deep-key">audit-all-better</span><span class="deep-row-text"><span class="deep-row-name">「全身体检」</span><span class="deep-row-when">全机扫描 + 修复建议</span></span></div>
+          <div class="deep-row"><span class="deep-key">mycc-skill-audit-cycle</span><span class="deep-row-text"><span class="deep-row-name">「skill 审计」</span><span class="deep-row-when">重复 / 冲突 skill 清单</span></span></div>
+          <div class="deep-row"><span class="deep-key">security-audit</span><span class="deep-row-text"><span class="deep-row-name">「找漏洞」</span><span class="deep-row-when">OWASP + 密钥扫描</span></span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 引擎里的实际优先级（保留动态表，JS 填充 #tblEntry） -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">⚙️ 引擎里的实际优先级</div>
+      <h3 class="deep-block-title">intent-words 路由表 · 谁先响应你的口语</h3>
+      <table class="tbl" id="tblEntry" style="margin:0">
+        <thead><tr><th>口语关键词</th><th>引擎</th><th>优先级</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <p class="deep-note">上面是「该说什么」，这张表是引擎「实际怎么排序」的真相 —— 优先级越高，越先抢答你的口语。</p>
+    </div>
+
   </div>
 </section>
 
@@ -358,6 +583,119 @@
       <div class="cmd-row"><code>/skill</code><span class="cmd-desc">调用 skill</span></div>
       <p class="muted" style="font-size:var(--fs-xs);margin-top:var(--sp-2)">@ 拉文件 / ! 跑命令 / / 触发 skill</p>
     </div>
+  </div>
+</section>
+
+<!-- ═══ Section 3.5 · 命令体系深化（苹果风重制）═══ -->
+<section class="section container" id="s-commands-deep">
+  <div class="section-header">
+    <h2 class="section-title">命令体系深化</h2>
+    <p class="section-subtitle">把 Claude Code 用顺手的四件事 · 键盘快捷键 · 启动参数 · 权限模式 · 配置升级</p>
+  </div>
+
+  <div class="deep-stack">
+
+    <!-- 键盘快捷键 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">⌨️ 键盘快捷键 · 必背 10 个</div>
+      <h3 class="deep-block-title">手指不离键盘，效率翻倍</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key keys"><kbd>Ctrl</kbd><kbd>C</kbd></span><span class="deep-row-text"><span class="deep-row-name">取消当前操作</span><span class="deep-row-when">它跑超时或做错了，立刻停</span></span></div>
+        <div class="deep-row"><span class="deep-key keys"><kbd>Ctrl</kbd><kbd>R</kbd></span><span class="deep-row-text"><span class="deep-row-name">反向搜索历史命令</span><span class="deep-row-when">想找上次用过的 prompt</span></span></div>
+        <div class="deep-row"><span class="deep-key keys"><kbd>Ctrl</kbd><kbd>L</kbd></span><span class="deep-row-text"><span class="deep-row-name">清屏（保留历史）</span><span class="deep-row-when">屏幕太乱，快速整理</span></span></div>
+        <div class="deep-row"><span class="deep-key keys"><kbd>↑</kbd><kbd>↓</kbd></span><span class="deep-row-text"><span class="deep-row-name">翻历史 prompt</span><span class="deep-row-when">重复上次类似的请求</span></span></div>
+        <div class="deep-row"><span class="deep-key keys"><kbd>Esc</kbd><kbd>Esc</kbd></span><span class="deep-row-text"><span class="deep-row-name">中断当前任务</span><span class="deep-row-when">它跑偏了，立刻打断</span></span></div>
+        <div class="deep-row"><span class="deep-key keys"><kbd>Shift</kbd><kbd>Tab</kbd></span><span class="deep-row-text"><span class="deep-row-name">循环切会话模式</span><span class="deep-row-when">默认 → acceptEdits → planMode</span></span></div>
+        <div class="deep-row"><span class="deep-key keys"><kbd>!</kbd></span><span class="deep-row-text"><span class="deep-row-name">在会话内跑 shell</span><span class="deep-row-when"><code class="deep-inline">!git status</code> 输出进对话可分析</span></span></div>
+        <div class="deep-row"><span class="deep-key keys"><kbd>@</kbd></span><span class="deep-row-text"><span class="deep-row-name">直接喂文件给 Claude</span><span class="deep-row-when">看 <code class="deep-inline">@src/app.js</code> 有什么 bug</span></span></div>
+        <div class="deep-row"><span class="deep-key keys"><kbd>/</kbd></span><span class="deep-row-text"><span class="deep-row-name">触发补全（斜杠命令 / 名字）</span><span class="deep-row-when">输入框打 <code class="deep-inline">/</code> 显示所有命令</span></span></div>
+        <div class="deep-row"><span class="deep-key keys"><kbd>Ctrl</kbd><kbd>D</kbd></span><span class="deep-row-text"><span class="deep-row-name">退出当前会话</span><span class="deep-row-when">结束当天工作（CLI）</span></span></div>
+      </div>
+      <p class="deep-note"><strong>Shift + Tab 三模式循环</strong> — 默认（每步确认，最安全）→ acceptEdits（文件编辑自动，最快）→ planMode（只读分析，最稳）。</p>
+    </div>
+
+    <!-- 启动参数 + 环境变量 -->
+    <div class="deep-grid-2">
+      <div class="card deep-block">
+        <div class="deep-eyebrow">🛠️ CLI 启动参数</div>
+        <h3 class="deep-block-title">在终端这一层就定好</h3>
+        <div class="deep-rows">
+          <div class="deep-id-row"><code class="deep-id">--print · -p</code><span class="deep-id-desc">非交互模式，输出完即退</span></div>
+          <div class="deep-id-row"><code class="deep-id">--continue · -c</code><span class="deep-id-desc">继续最近一次会话</span></div>
+          <div class="deep-id-row"><code class="deep-id">--resume</code><span class="deep-id-desc">列出 / 恢复历史会话</span></div>
+          <div class="deep-id-row"><code class="deep-id">--model NAME</code><span class="deep-id-desc">指定模型（opus / sonnet / haiku）</span></div>
+          <div class="deep-id-row"><code class="deep-id">--add-dir PATH</code><span class="deep-id-desc">把额外目录加进上下文</span></div>
+          <div class="deep-id-row"><code class="deep-id">--permission-mode MODE</code><span class="deep-id-desc">default / acceptEdits / plan / bypassPermissions</span></div>
+          <div class="deep-id-row"><code class="deep-id">--append-system-prompt</code><span class="deep-id-desc">追加系统提示词</span></div>
+          <div class="deep-id-row"><code class="deep-id">--dangerously-skip-permissions</code><span class="deep-id-desc">YOLO 模式（慎用）</span></div>
+          <div class="deep-id-row"><code class="deep-id">--verbose</code><span class="deep-id-desc">详细日志输出</span></div>
+          <div class="deep-id-row"><code class="deep-id">--help</code><span class="deep-id-desc">看所有 CLI 参数</span></div>
+        </div>
+        <p class="deep-note">例 — <code class="deep-inline">claude --model sonnet --add-dir ../shared</code> · <code class="deep-inline">cat error.log | claude -p "分析日志"</code></p>
+      </div>
+      <div class="card deep-block">
+        <div class="deep-eyebrow">🌐 环境变量</div>
+        <h3 class="deep-block-title">高级配置与开关</h3>
+        <div class="deep-rows">
+          <div class="deep-id-row"><code class="deep-id">ANTHROPIC_API_KEY</code><span class="deep-id-desc">官方 API Key（必填 · 禁代理直连）</span></div>
+          <div class="deep-id-row"><code class="deep-id">ANTHROPIC_BASE_URL</code><span class="deep-id-desc">自定义端点（默认 api.anthropic.com）</span></div>
+          <div class="deep-id-row"><code class="deep-id">ANTHROPIC_MODEL</code><span class="deep-id-desc">默认模型（覆盖 settings.json）</span></div>
+          <div class="deep-id-row"><code class="deep-id">ANTHROPIC_DEFAULT_OPUS_MODEL</code><span class="deep-id-desc">opus 路由别名解析</span></div>
+          <div class="deep-id-row"><code class="deep-id">CLAUDE_CODE_ENTRYPOINT</code><span class="deep-id-desc">入口标识（cli / sdk）</span></div>
+          <div class="deep-id-row"><code class="deep-id">DISABLE_OMC</code><span class="deep-id-desc">关闭 OMC 全部 hook（kill switch）</span></div>
+          <div class="deep-id-row"><code class="deep-id">OMC_SKIP_HOOKS</code><span class="deep-id-desc">跳过指定 hook（逗号分隔）</span></div>
+          <div class="deep-id-row"><code class="deep-id">OMC_STATE_DIR</code><span class="deep-id-desc">改 state 根目录（默认 ./.omc/）</span></div>
+          <div class="deep-id-row"><code class="deep-id">DISABLE_TELEMETRY</code><span class="deep-id-desc">关闭匿名使用统计</span></div>
+        </div>
+        <p class="deep-note">🔒 <strong>配置防改铁律</strong> — <code class="deep-inline">settings.json</code> 的 model + enabledPlugins + env.ANTHROPIC_* 三项 AI 不得擅改，豁免仅限你 <code class="deep-inline">/model</code> 或对话明示。</p>
+      </div>
+    </div>
+
+    <!-- 权限模式 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">🔐 权限模式 · 4 种</div>
+      <h3 class="deep-block-title">放多少权限给它，你说了算</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key mode">default</span><span class="deep-row-text"><span class="deep-row-name">每步要按 Y 确认</span><span class="deep-row-when">正式项目 · 最稳妥</span></span></div>
+        <div class="deep-row"><span class="deep-key mode">acceptEdits</span><span class="deep-row-text"><span class="deep-row-name">文件编辑自动，命令仍确认</span><span class="deep-row-when">迭代开发 · 最常用</span></span></div>
+        <div class="deep-row"><span class="deep-key mode">plan</span><span class="deep-row-text"><span class="deep-row-name">只读不写，出方案等你批</span><span class="deep-row-when">大改之前先理解</span></span></div>
+        <div class="deep-row"><span class="deep-key mode">bypassPermissions</span><span class="deep-row-text"><span class="deep-row-name">全部允许，YOLO 全自动</span><span class="deep-row-when">⚠️ 慎用 · 仅限可逆短任务</span></span></div>
+      </div>
+      <p class="deep-note">切换方式 — 会话里按 <strong>Shift + Tab</strong> 循环，或启动时加 <code class="deep-inline">--permission-mode MODE</code>。</p>
+    </div>
+
+    <!-- 配置升级路径（已批准的序号块）-->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">🚀 MYCC 配置升级路径</div>
+      <h3 class="deep-block-title">三步把配置养好 · 体检 → 修复 → 评分</h3>
+      <div class="upgrade-flow">
+        <div class="upgrade-step">
+          <span class="upgrade-ordinal">01</span>
+          <span class="upgrade-name">全面体检</span>
+          <span class="upgrade-cmd">/audit-all-better</span>
+          <p class="upgrade-desc">30 维全面诊断，只读摸底——先看清配置全貌：哪里冗余、哪里失效、哪里能升级。不动任何文件。</p>
+        </div>
+        <div class="upgrade-arrow" aria-hidden="true">→</div>
+        <div class="upgrade-step">
+          <span class="upgrade-ordinal">02</span>
+          <span class="upgrade-name">诊断 + 修复</span>
+          <span class="upgrade-cmd">/claude-code-better</span>
+          <p class="upgrade-desc">在体检结论上动手：可逆的小问题就地修好，高风险项列出来等你拍板。</p>
+        </div>
+        <div class="upgrade-arrow" aria-hidden="true">→</div>
+        <div class="upgrade-step">
+          <span class="upgrade-ordinal">03</span>
+          <span class="upgrade-name">六层评分</span>
+          <span class="upgrade-cmd">/harness-audit</span>
+          <p class="upgrade-desc">给整套配置打一个分（六层评分体系），量化这次升级到底变好了多少。</p>
+        </div>
+      </div>
+      <div class="upgrade-note">
+        <span class="reflow-icon" aria-hidden="true">↻</span>
+        <span>按需信息更新 · SOP 沉淀 · 吸收进化 —— 全年持续反哺，不是一次性体检。</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -513,6 +851,377 @@
   </figure>
 </section>
 
+<!-- ═══ GitHub 生态全景 · 调研裁决 ═══ -->
+<section class="section container" id="s-github">
+  <div class="section-header">
+    <h2 class="section-title">GitHub 生态全景 · 调研裁决</h2>
+    <p class="section-subtitle">4 批深调研 30+ 个外部项目 · 每条裁决都附「本机已有什么」对照 · 帮你判断哪些值得继续投入</p>
+  </div>
+
+  <div class="deep-stack">
+
+    <div class="callout callout-info">
+      <strong>一句话结论</strong> — Claude Code harness 赛道 2026 上半年严重红海:90% 是「团队 SaaS 化包装」或「垂直场景包装」,<strong>真正能补 mycc 能力缺口的 ≈ 0</strong>。你的需求 80% 不是缺能力,而是<strong>编排 · 可发现性 · 收口标准化</strong> —— 方向已经对了,继续打磨内功比追新项目更值。
+    </div>
+
+    <!-- ✅ 已吸收 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">✅ 已吸收 · 真正学到手的</div>
+      <h3 class="deep-block-title">从外部项目长出来的本机能力</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">spec-kit</span><span class="deep-row-text"><span class="deep-row-name">Constitution + anti-patterns 范式</span><span class="deep-row-when">→ project-constitution-template;劝退完整 CLI（75% 重叠）</span></span></div>
+        <div class="deep-row"><span class="deep-key">mattpocock/skills</span><span class="deep-row-text"><span class="deep-row-name">7 个配置范式</span><span class="deep-row-when">体系化非堆砌 · 瘦身=分档分层 · ECC profile 开关</span></span></div>
+        <div class="deep-row"><span class="deep-key">superpowers</span><span class="deep-row-text"><span class="deep-row-name">强制工作流方法论</span><span class="deep-row-when">brainstorming · writing-plans · subagent-driven · TDD 已内化</span></span></div>
+        <div class="deep-row"><span class="deep-key">12-factor-agents</span><span class="deep-row-text"><span class="deep-row-name">agent 行为层方法论</span><span class="deep-row-when">已映射到行为规则，可叠加 R13-R24</span></span></div>
+        <div class="deep-row"><span class="deep-key">SkillOpt</span><span class="deep-row-text"><span class="deep-row-name">skill 像权重一样被训练</span><span class="deep-row-when">4 批唯一净增量 · 给 self-evolve-loop 加 validationPass + 定向反思</span></span></div>
+        <div class="deep-row"><span class="deep-key">CHANGELOG 2.1.187</span><span class="deep-row-text"><span class="deep-row-name">官方 3 项新能力</span><span class="deep-row-when">disableBundledSkills · --safe-mode · additionalContext（hook 注入）</span></span></div>
+      </div>
+      <p class="deep-note">同属已消化吸收 —— <strong>system-prompts-leaks</strong>（已爬 453 行入 knowledge/）· <strong>MemPalace</strong>（3 范式）· <strong>knowledge-work-plugins</strong>（3 级加载）。</p>
+    </div>
+
+    <!-- 🔵 部分借鉴 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">🔵 部分借鉴 · 只学思路不照搬</div>
+      <h3 class="deep-block-title">值得关注，但只取一瓢</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">SkillSpector</span><span class="deep-row-text"><span class="deep-row-name">skill 安全检测范式</span><span class="deep-row-when">本机 skill-audit 缺安全层 · 权限声明 vs 实际代码对比 + AST 污点追踪</span></span></div>
+        <div class="deep-row"><span class="deep-key">markitdown</span><span class="deep-row-text"><span class="deep-row-name">统一转换接口契约</span><span class="deep-row-when">条件依赖分组范式 · 非「又一个 pdf 工具」</span></span></div>
+        <div class="deep-row"><span class="deep-key">skills-manager</span><span class="deep-row-text"><span class="deep-row-name">Preset 分组思路</span><span class="deep-row-when">劝退 app；真问题是可发现性 → 已建 skill-index</span></span></div>
+        <div class="deep-row"><span class="deep-key">taste-skill</span><span class="deep-row-text"><span class="deep-row-name">反 AI 审美 prompt</span><span class="deep-row-when">可内化；前端非 harness 核心，按需懒装</span></span></div>
+      </div>
+    </div>
+
+    <!-- ❌ 劝退 · 按原因分组 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">❌ 劝退 · 20+ 项目（按原因归类 + 本机对照）</div>
+      <h3 class="deep-block-title">为什么不吸收 —— 每类都有本机等价能力顶上</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">第二记忆系统</span><span class="deep-row-text"><span class="deep-row-name">supermemory · cognee · claude-mem · soulforge</span><span class="deep-row-when">违反「禁第二记忆」铁律 · auto-memory + qmd + MEMORY.md 已饱和覆盖</span></span></div>
+        <div class="deep-row"><span class="deep-key">团队 SaaS 化</span><span class="deep-row-text"><span class="deep-row-name">ruflo · omnigent · Chorus · agency-agents</span><span class="deep-row-when">单人 CLI 场景错配 · 不需 federation / cloud sandbox / 多用户 OIDC</span></span></div>
+        <div class="deep-row"><span class="deep-key">平行编排系统</span><span class="deep-row-text"><span class="deep-row-name">oh-my-agent · lazycodex · Continuous-Claude</span><span class="deep-row-when">与 OMC 重叠 70%+ · 范式已被 superpowers + karpathy 吸收</span></span></div>
+        <div class="deep-row"><span class="deep-key">非 harness 工具</span><span class="deep-row-text"><span class="deep-row-name">PaddleOCR · superset · YouDub · ppt-master · drawio-mcp</span><span class="deep-row-when">项目层工具非配置层 · 真正做项目用到时再装</span></span></div>
+        <div class="deep-row"><span class="deep-key">daemon 常驻督促</span><span class="deep-row-text"><span class="deep-row-name">OpenWhip · proactive-agent · claude-tag</span><span class="deep-row-when">撞「消费方门」铁律 · ralph 的 boulder 循环已是正解</span></span></div>
+        <div class="deep-row"><span class="deep-key">第三方中转</span><span class="deep-row-text"><span class="deep-row-name">GAC 平台 · gaccode.com</span><span class="deep-row-when">硬冲突铁律7「官方直连」· direct-connect-guard 会自动清它</span></span></div>
+      </div>
+      <p class="deep-note"><strong>4 批调研流程</strong> —— 批1 总表（15 项）→ 批2（4 个 sonnet agent 实测）→ 批3（4 源债补齐，0 adopt）→ 批4（用户补 11 项，仅 SkillOpt 净增量）。每条 reject 都列本机已有能力对照，这是「消费方门」铁律:<strong>先证明现有的不够用，才引入新的</strong>。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ 本机知识体系全景 · SSoT 与检索决策树 ═══ -->
+<section class="section container" id="s-knowledge">
+  <div class="section-header">
+    <h2 class="section-title">本机知识体系全景 · SSoT 与检索决策树</h2>
+    <p class="section-subtitle">6 类核心文档 + 4 知识库职责边界 + L1→L4 检索决策树 · 出处逐条标注 · 不杜撰</p>
+  </div>
+
+  <div class="deep-stack">
+
+    <div class="callout callout-info">
+      <strong>一句话结论</strong> — 本机 <code class="deep-inline">~/.claude/</code> = AI 下次要读的<strong>唯一真相源</strong>;Notion = 协作单向推送;Obsidian = 长期沉淀;<strong>禁双向同步 · 禁第二记忆系统</strong>。你看到的这份 dashboard 内容,100% 从本机 docs/ 里实读后写出,不存在网上抄来的数字。
+    </div>
+
+    <!-- 块 A:6 大 SSoT 文档 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 A · 6 大 SSoT 文档</div>
+      <h3 class="deep-block-title">每个文档管什么 + 何时来查</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">research-library/INDEX.md</span><span class="deep-row-text"><span class="deep-row-name">调研结论 SSoT</span><span class="deep-row-when">→ 4 批调研 30+ 项目裁决汇总 · 先查再去调研,避免重复造轮</span></span></div>
+        <div class="deep-row"><span class="deep-key">capability-activation-map.md</span><span class="deep-row-text"><span class="deep-row-name">五大智能大脑分工</span><span class="deep-row-when">→ 调研/代码/Token/自进化/质量门控 的 1+1>2 组合,激活状态盘点</span></span></div>
+        <div class="deep-row"><span class="deep-key">skill-index.md</span><span class="deep-row-text"><span class="deep-row-name">149 skill 场景索引</span><span class="deep-row-when">→ "我想做 X → 用 Y" 场景查找 · 不必记 skill 名,记场景</span></span></div>
+        <div class="deep-row"><span class="deep-key">system-of-systems.md</span><span class="deep-row-text"><span class="deep-row-name">四系统架构宪法</span><span class="deep-row-when">→ Superpower + gstack + OMC + 官方 四系统如何分工 / 生命周期权威表</span></span></div>
+        <div class="deep-row"><span class="deep-key">mycc-user-handbook.md</span><span class="deep-row-text"><span class="deep-row-name">口语化入口(开发/做 app/商业/调研/维护)</span><span class="deep-row-when">→ 双身份用户的 T0 口语→入口 速查表</span></span></div>
+        <div class="deep-row"><span class="deep-key">rules/mycc-core.md</span><span class="deep-row-text"><span class="deep-row-name">12 铁律 + 12 行为规则(R1-R12)</span><span class="deep-row-when">→ 治理底盘 · 输出规范/铁律应用方式/4 步工作流 SSoT</span></span></div>
+      </div>
+    </div>
+
+    <!-- 块 B:4 知识库职责边界 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 B · 4 知识库职责边界</div>
+      <h3 class="deep-block-title">每个库做什么 + 哪些坑</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">本机 ~/.claude/</span><span class="deep-row-text"><span class="deep-row-name">唯一真相源 · SSoT</span><span class="deep-row-when">AI 下次要读的 · 工程层面所有结论先写这里 · 单向广播给 Notion/Obsidian</span></span></div>
+        <div class="deep-row"><span class="deep-key">Notion</span><span class="deep-row-text"><span class="deep-row-name">协作 · 单向推送</span><span class="deep-row-when">CMMI 任务库 / 团队看 / 只读快照 · 禁双向同步(会变成第二记忆系统)</span></span></div>
+        <div class="deep-row"><span class="deep-key">Obsidian</span><span class="deep-row-text"><span class="deep-row-name">长期知识沉淀</span><span class="deep-row-when">真实库 ~/Documents/Obsidian Vault · 双向链接 · 禁往回写本机</span></span></div>
+        <div class="deep-row"><span class="deep-key">qmd</span><span class="deep-row-text"><span class="deep-row-name">本地全文检索</span><span class="deep-row-when">5 collections: claude-memory / claude-skills / claude-rules / notes / claude-tasks · 跨库 BM25/vec 混检</span></span></div>
+      </div>
+      <p class="deep-note"><strong>铁律</strong>:本机是唯一真相源,Notion / Obsidian 是只读单向投影(只出不进、可重建)。<strong>双向同步 = 第二记忆系统 = 漂移源</strong>。</p>
+    </div>
+
+    <!-- 块 C:检索决策树 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 C · 检索决策树 L1-L4</div>
+      <h3 class="deep-block-title">问 Claude Code 的机制/用法时,按这个顺序查</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">L1 · 本机沉淀</span><span class="deep-row-text"><span class="deep-row-name">memory / rules / qmd(本机)</span><span class="deep-row-when">已沉淀过的直接复用 · &lt;1s · 命中就不查上层</span></span></div>
+        <div class="deep-row"><span class="deep-key">L2 · 本机官方本地化</span><span class="deep-row-text"><span class="deep-row-name">~/.qclaw/knowledge/</span><span class="deep-row-when">与官方 Tier0 比对 · 本机已有的结论 vs 官方一致就直接用</span></span></div>
+        <div class="deep-row"><span class="deep-key">L3 · 官方 Tier0(必走)</span><span class="deep-row-text"><span class="deep-row-name">code.claude.com/docs</span><span class="deep-row-when">实操类问题 100% 必走 · 最高权威 · 验证后再下结论</span></span></div>
+        <div class="deep-row"><span class="deep-key">L4 · 外部 AI 兜底</span><span class="deep-row-text"><span class="deep-row-name">kimi / mmx / qwen + GitHub 榜单</span><span class="deep-row-when">L1/L2/L3 都无时 · 仅兜底,不跳过中间层直接问</span></span></div>
+      </div>
+      <p class="deep-note"><strong>反范式</strong>:一上来 WebFetch / 凭训练数据答 / 跳过 L3 直跳 L4 — 都会拿到过时或错误的机制说明。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ 系统健康仪表盘 · 8 维健康度 + P0/P1/P2 + REFUTE ═══ -->
+<section class="section container" id="s-health">
+  <div class="section-header">
+    <h2 class="section-title">系统健康仪表盘 · 诚实披露</h2>
+    <p class="section-subtitle">综合 70/100 · 仅 D3 + D1 两维已审 · 其余 6 维待排期 · 出处逐条标注 · 不夸大</p>
+  </div>
+
+  <div class="deep-stack">
+
+    <div class="callout callout-info">
+      <strong>诚实披露</strong> — 综合 <strong>70/100</strong>(来自 2026-06-27 全局审计) 是<strong>真实但有限</strong>的分数:<strong>仅 D3 Hooks(72) + D1 Agents(68) 两维加权</strong>,其余 6 维(Skills/Rules/Settings/Plugins/Documentation/Tests)<strong>未审计</strong>。透明度优先于假装完美。
+    </div>
+
+    <!-- 块 A:8 维健康度表 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 A · 8 维度健康度</div>
+      <h3 class="deep-block-title">哪个维度被审计过 · 哪些待排期</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">D1 · Agents</span><span class="deep-row-text"><span class="deep-row-name">68 · 中等风险(待复审)</span><span class="deep-row-when">→ 上轮审计值 · 本轮未刷新 · 下一轮排期复审</span></span></div>
+        <div class="deep-row"><span class="deep-key">D2 · Skills</span><span class="deep-row-text"><span class="deep-row-name">未审计</span><span class="deep-row-when">→ 待排期 · 149 skill 质量/触发词/重叠度 缺单点审计</span></span></div>
+        <div class="deep-row"><span class="deep-key">D3 · Hooks</span><span class="deep-row-text"><span class="deep-row-name">72 · 中等风险 ✦本轮新鲜</span><span class="deep-row-when">→ 55→72(+17) · P0 4→1 · P1 7→5 · P2 5→3</span></span></div>
+        <div class="deep-row"><span class="deep-key">D4 · Rules / Memory</span><span class="deep-row-text"><span class="deep-row-name">未审计</span><span class="deep-row-when">→ ★下一轮优先 · 11 条 [active] 规则待质量审查</span></span></div>
+        <div class="deep-row"><span class="deep-key">D5 · Settings</span><span class="deep-row-text"><span class="deep-row-name">未审计</span><span class="deep-row-when">→ settings.json + settings.local.json 漂移/缺索引 待审</span></span></div>
+        <div class="deep-row"><span class="deep-key">D6 · Plugins</span><span class="deep-row-text"><span class="deep-row-name">未审计</span><span class="deep-row-when">→ enabledPlugins vs 实际接线一致性 待审</span></span></div>
+        <div class="deep-row"><span class="deep-key">D7 · Documentation</span><span class="deep-row-text"><span class="deep-row-name">未审计</span><span class="deep-row-when">→ ★下一轮优先 · hooks/INDEX 缺失就是 D3 暴的 D7 债</span></span></div>
+        <div class="deep-row"><span class="deep-key">D8 · Tests / CI</span><span class="deep-row-text"><span class="deep-row-name">未审计</span><span class="deep-row-when">→ test_requirements-registry.py 6/6 PASS · 但仅 1 个测试文件,覆盖率极低</span></span></div>
+      </div>
+    </div>
+
+    <!-- 块 B:本轮亮点 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 B · 本轮亮点(D3)</div>
+      <h3 class="deep-block-title">7 步修复闭环 · 每步已验证</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">1/7 · D3-P0-03</span><span class="deep-row-text"><span class="deep-row-name">user-prompt-task-auto-split.sh 补注册</span><span class="deep-row-when">→ CLAUDE.md 声明但未挂载 → 本轮未复现 ✅</span></span></div>
+        <div class="deep-row"><span class="deep-key">2/7 · D3-P0-01</span><span class="deep-row-text"><span class="deep-row-name">stop-dispatcher.sh 重建</span><span class="deep-row-when">→ Stop 段 dispatcher 缺失 → 本轮未复现 ✅</span></span></div>
+        <div class="deep-row"><span class="deep-key">3/7 · D3-P0-02</span><span class="deep-row-text"><span class="deep-row-name">edit-write-dispatcher 移 checkpoint 引用</span><span class="deep-row-when">→ 已归档组件引用 → 本轮未复现 ✅</span></span></div>
+        <div class="deep-row"><span class="deep-key">4/7 · D3-P0-04</span><span class="deep-row-text"><span class="deep-row-name">PostToolUse matcher 合并</span><span class="deep-row-when">→ 旧 P0-04 消除 · 但引入新 P0-001(双重注册) ⚠️</span></span></div>
+        <div class="deep-row"><span class="deep-key">5/7 · D3-P1-10</span><span class="deep-row-text"><span class="deep-row-name">intake-gateway stdin 3-layer fallback</span><span class="deep-row-when">→ baseline 8f7f9bb 确认 ✅</span></span></div>
+        <div class="deep-row"><span class="deep-key">6/7 · D3-P1-11</span><span class="deep-row-text"><span class="deep-row-name">uncertainty-detector 官方双格式</span><span class="deep-row-when">→ baseline 74e02ea 确认 ✅</span></span></div>
+        <div class="deep-row"><span class="deep-key">7/7 · D3-P1-08</span><span class="deep-row-text"><span class="deep-row-name">OMC_SKIP_HOOKS 24 hook 逃生门批量接线</span><span class="deep-row-when">→ baseline 6c9ad30 确认 ✅</span></span></div>
+      </div>
+    </div>
+
+    <!-- 块 C:当前待修 findings -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 C · 当前待修 findings</div>
+      <h3 class="deep-block-title">P0×1 / P1×5 / P2×3 · 按严重度排列</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">P0 · D3-P0-001</span><span class="deep-row-text"><span class="deep-row-name">edit-write-dispatcher 双重注册</span><span class="deep-row-when">→ settings 二次注册 4 个 sub-hook · 长会话(&gt;50 Edit)性能损耗 · 重复审计日志</span></span></div>
+        <div class="deep-row"><span class="deep-key">P1 · D3-P1-001</span><span class="deep-row-text"><span class="deep-row-name">smart-closure-learning-trace 未挂载</span><span class="deep-row-when">→ 文件自带自触发防护 · 但永不触发 · CLAUDE.md G3 能力悬空</span></span></div>
+        <div class="deep-row"><span class="deep-key">P1 · D3-P1-002</span><span class="deep-row-text"><span class="deep-row-name">cmmi-stop-sync 未挂载(CMMI 投影管道断)</span><span class="deep-row-when">→ task-ledger 状态不更新到 cmmi/tasks.jsonl</span></span></div>
+        <div class="deep-row"><span class="deep-key">P1 · D3-P1-003</span><span class="deep-row-text"><span class="deep-row-name">stop-completion-enforcer 未挂载</span><span class="deep-row-when">→ 24h 观察期 kill switch on · 处于"待激活" · 无法验证观察期是否结束</span></span></div>
+        <div class="deep-row"><span class="deep-key">P1 · D3-P1-004</span><span class="deep-row-text"><span class="deep-row-name">缺 hooks/INDEX.md(55 hook 无单点真相)</span><span class="deep-row-when">→ HOOK_TYPE 头注释覆盖率 98.2% 但分散 · 接线病复发根因之一</span></span></div>
+        <div class="deep-row"><span class="deep-key">P1 · D3-P1-005</span><span class="deep-row-text"><span class="deep-row-name">UserPromptSubmit 10 hook 密度过高</span><span class="deep-row-when">→ 133s 总 timeout · 800ms 平均延迟 · 3 hook 职责重叠</span></span></div>
+        <div class="deep-row"><span class="deep-key">P2 · D3-P2-001</span><span class="deep-row-text"><span class="deep-row-name">hook-fire-shim 日志无轮转</span><span class="deep-row-when">→ 累积日志未做 rotate · 5ms/次开销微乎其微但未治理</span></span></div>
+        <div class="deep-row"><span class="deep-key">P2 · D3-P2-002</span><span class="deep-row-text"><span class="deep-row-name">PostToolUse Read two-probe-counter 用途不明</span><span class="deep-row-when">→ 840 行未充分审 · 每 Read 80ms · 疑似内部计数</span></span></div>
+        <div class="deep-row"><span class="deep-key">P2 · D3-P2-003</span><span class="deep-row-text"><span class="deep-row-name">teammate-quality-gate 事件错配</span><span class="deep-row-when">→ SubagentStop 注册但内部处理 TeammateIdle/TaskCreated/TaskCompleted → 永远空跑</span></span></div>
+      </div>
+    </div>
+
+    <!-- 块 D:已驳回风险 REFUTE×3 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 D · 已驳回风险 REFUTE×3</div>
+      <h3 class="deep-block-title">工程严谨 · 证伪过的怀疑,不必再担心</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">REFUTE-001 · 死循环</span><span class="deep-row-text"><span class="deep-row-name">Hook dispatcher 自我递归?</span><span class="deep-row-when">→ ❌ 4 dispatcher 不调自身 + sub-hook 不在 PostToolUse Edit 单独注册 + 5 PostToolUse Write 全有 kill switch</span></span></div>
+        <div class="deep-row"><span class="deep-key">REFUTE-002 · 权限 644 无+x</span><span class="deep-row-text"><span class="deep-row-name">Hook 不可执行?</span><span class="deep-row-when">→ ❌ 55 hook 全部 -rwxr-xr-x · post-write-hooks-guard.sh 自愈 Form 1 接线病</span></span></div>
+        <div class="deep-row"><span class="deep-key">REFUTE-003 · JSON 非法</span><span class="deep-row-text"><span class="deep-row-name">Hook 输出 JSON 解析失败?</span><span class="deep-row-when">→ ⚠️ 2 hook 含换行 · Claude Code 解析器可处理 · 如未来收紧需改单行 JSON</span></span></div>
+      </div>
+    </div>
+
+    <!-- 块 E:下一步审计方向 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 E · 下一步审计方向</div>
+      <h3 class="deep-block-title">★优先 D4(Rules/Memory) + D7(Documentation)</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">★首选 · D4 Rules/Memory</span><span class="deep-row-text"><span class="deep-row-name">11 条 [active] 规则待系统性质量审查</span><span class="deep-row-when">→ auto-learned-rules.md 月度瘦身/归档/接线病专项 · skill:mycc-skill-audit-cycle 同源</span></span></div>
+        <div class="deep-row"><span class="deep-key">★次选 · D7 Documentation</span><span class="deep-row-text"><span class="deep-row-name">hooks/INDEX.md 缺失是 D3 暴的 D7 债</span><span class="deep-row-when">→ D3 → D7 强耦合 · 修 D3 之前先补 D7 单点真相</span></span></div>
+        <div class="deep-row"><span class="deep-key">可重启 · D1 Agents 复审</span><span class="deep-row-text"><span class="deep-row-name">68 分是上轮值,本轮未刷新</span><span class="deep-row-when">→ 89 agent 数量 vs skill 149 比例 / 双仓 vs 单仓 / wiring 一致性</span></span></div>
+      </div>
+      <p class="deep-note"><strong>升级三步法</strong>见上方 <a href="#s-commands-deep" class="deep-inline">命令体系深化</a> 块的 <code class="deep-inline">MYCC 配置升级路径</code>(<code class="deep-inline">/audit-all-better</code> → <code class="deep-inline">/claude-code-better</code> → <code class="deep-inline">/harness-audit</code>) — 本块不重复,只做健康度披露。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ 五大智能大脑全景 · 5 大脑组合 + 三路代码检索分工 ═══ -->
+<section class="section container" id="s-brains">
+  <div class="section-header">
+    <h2 class="section-title">五大智能大脑全景 · 1+1&gt;2 涌现能力</h2>
+    <p class="section-subtitle">5 大脑组合 + 三路代码检索正交分工 · 数据来源 2026-06-24 实跑盘点 · 出处标注 · 不杜撰</p>
+  </div>
+
+  <div class="deep-stack">
+
+    <div class="callout callout-info">
+      <strong>一句话结论</strong> — 本机不是"装了 149 个 skill 的工具箱",而是 <strong>5 大"智能大脑"组合</strong>(代码理解 / 调研 / Token 效率 / 自进化 / 质量门控)各自已活;<strong>三路代码检索工具(语义 / 关系 / 符号)正交不重叠</strong>,各管一摊不抢活。<strong>数字陷阱</strong>:<code class="deep-inline">capability-activation-map.md</code> 标 156 skill 含 7 个 platform skill;<code class="deep-inline">skill-index.md</code> SSoT 标 149 = 剔除 platform 后的实跑 skill 数。<strong>两口径并存,本页以 SSoT 149 为准</strong>。
+    </div>
+
+    <!-- 块 A:激活状态盘点 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 A · 激活状态盘点</div>
+      <h3 class="deep-block-title">5 维度 · 已装多少 / 活多少 / 休眠多少</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">58 插件</span><span class="deep-row-text"><span class="deep-row-name">32 启用(55% 启用率)</span><span class="deep-row-when">→ 禁用 3 个(security-guidance / pm-data-analytics / pm-toolkit · 待 P2 复核) · 数据保鲜见我 cc-stats.json</span></span></div>
+        <div class="deep-row"><span class="deep-key">11 MCP</span><span class="deep-row-text"><span class="deep-row-name">6 配置 + 5 插件</span><span class="deep-row-when">→ 配置连通:chrome-devtools/claude-context/codebase-memory/askecho/headroom/serena · 插件:firecrawl/qmd/github/notion/semgrep</span></span></div>
+        <div class="deep-row"><span class="deep-key">149 skill</span><span class="deep-row-text"><span class="deep-row-name">36 可自动触发 · 113 休眠</span><span class="deep-row-when">→ 休眠多数 disable-model-invocation 有意(操作类) · 高频几个待 P3 评估自动触发</span></span></div>
+        <div class="deep-row"><span class="deep-key">58 agent</span><span class="deep-row-text"><span class="deep-row-name">全可显式派</span><span class="deep-row-when">→ 含 7 platform agent(本机 51 业务 agent) · activation-map 含 platform 口径 58 · skill-index 口径 51</span></span></div>
+        <div class="deep-row"><span class="deep-key">51 hook</span><span class="deep-row-text"><span class="deep-row-name">活跃(2026-06-27 D3 审计)</span><span class="deep-row-when">→ 详见上方 <a href="#s-health" class="deep-inline">系统健康仪表盘</a> 块 C(D3 评分 72 · P0×1 P1×5 P2×3)</span></span></div>
+      </div>
+      <p class="deep-note"><strong>口径备注</strong>:skill 行写 149 = skill-index.md SSoT 剔除 7 个 platform 后的实跑数;capability-activation-map.md 标 156 含 platform,对应 36 自动 / 120 休眠(156 口径)。两口径并存,以本页 149 为准 · plugins 58 是 mycc-stats.json 当前值(2026-06-28 更新),原 capability-activation-map.md §1 的 35 是 2026-06-24 旧快照。</p>
+    </div>
+
+    <!-- 块 B:五大智能大脑组合 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 B · 5 大智能大脑(1+1&gt;2 涌现能力)</div>
+      <h3 class="deep-block-title">谁 + 谁 = 什么新能力</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">A 代码理解脑</span><span class="deep-row-text"><span class="deep-row-name">理解任意代码库→精准改闭环</span><span class="deep-row-when">→ claude-context(语义) + codebase-memory-mcp(图谱) + understand-anything(知识图谱) + serena(LSP 符号) · 4/4 活</span></span></div>
+        <div class="deep-row"><span class="deep-key">B 调研脑</span><span class="deep-row-text"><span class="deep-row-name">查历史→深研→对抗→回收完整链</span><span class="deep-row-when">→ research-intake-sop(分诊) + qmd(本机 2058 文档) + firecrawl(网页) + ai-panel(5 联对抗) + deep-research · 全活</span></span></div>
+        <div class="deep-row"><span class="deep-key">C Token 效率脑</span><span class="deep-row-text"><span class="deep-row-name">prompt 侧 caveman(89%) + 按需 headroom compress</span><span class="deep-row-when">→ caveman prompt 侧 + headroom MCP 按需 · proxy 自动模式(47-92%)撞铁律7 官方直连不采用</span></span></div>
+        <div class="deep-row"><span class="deep-key">D 自进化脑</span><span class="deep-row-text"><span class="deep-row-name">自定优化→执行→验收→落地闭环</span><span class="deep-row-when">→ self-evolve-loop + mycc-skill-audit-cycle + evolution-scout + auto-memory + panel-harvest · 月度 cron 已接线</span></span></div>
+        <div class="deep-row"><span class="deep-key">E 质量门控脑</span><span class="deep-row-text"><span class="deep-row-name">Writer≠Reviewer 跨模型门控</span><span class="deep-row-when">→ code-reviewer + security-reviewer + verifier + pr-review-toolkit + semgrep(SAST) + ai-panel 异构对抗 · 活跃</span></span></div>
+      </div>
+      <p class="deep-note"><strong>关键</strong>:5 大脑不是"装好的工具",是"<strong>1+1&gt;2 的涌现能力</strong>" — 单用任一组件只是普通检索,组合起来才形成大脑级能力。详见 <code class="deep-inline">capability-activation-map.md</code> §2。</p>
+    </div>
+
+    <!-- 块 C:三路代码检索分工(正交不重叠) -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 C · 三路代码检索工具(正交不重叠)</div>
+      <h3 class="deep-block-title">想"找 X"时,先看 X 是哪类 → 用哪路</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">语义检索</span><span class="deep-row-text"><span class="deep-row-name">claude-context · search_code</span><span class="deep-row-when">→ 找"语义相关的代码段 / 某功能在哪"</span></span></div>
+        <div class="deep-row"><span class="deep-key">关系检索</span><span class="deep-row-text"><span class="deep-row-name">codebase-memory-mcp · search_graph / trace_path</span><span class="deep-row-when">→ 找"调用链 / 依赖 / 谁调用谁 / 改动影响面"</span></span></div>
+        <div class="deep-row"><span class="deep-key">符号操作</span><span class="deep-row-text"><span class="deep-row-name">serena · find_symbol / rename / replace_symbol_body</span><span class="deep-row-when">→ "精准符号操作 / 重命名 / 按符号编辑"(LSP 级)</span></span></div>
+      </div>
+      <p class="deep-note"><strong>反范式</strong>:一上来就用 grep 全文 / 用 claude-context 找调用链 / 用 serena 找语义相关 — 工具越强越要选对。<strong>三者正交</strong>:语义→claude-context · 关系→codebase-memory · 符号→serena。serena 2026-06-24 stdio 实测已连(非休眠)。</p>
+    </div>
+
+    <!-- 块 D:已闭环的 P0/P1 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 D · 已闭环的 P0/P1 行动</div>
+      <h3 class="deep-block-title">本轮已激活 · 不是承诺,是已跑通的事实</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">P0 · headroom MCP</span><span class="deep-row-text"><span class="deep-row-name">stdio 模式已连</span><span class="deep-row-when">→ compress / retrieve / stats 实跑通过 · Token 按需压缩(手动 compress)· proxy 自动模式(47-92%)撞铁律7 不采用</span></span></div>
+        <div class="deep-row"><span class="deep-key">P1 · serena LSP</span><span class="deep-row-text"><span class="deep-row-name">uvx stdio 实测已连(2026-06-24)</span><span class="deep-row-when">→ 符号级代码操作(精准重构 / 符号查找)· 配三路分工不重叠</span></span></div>
+      </div>
+    </div>
+
+    <!-- 块 E:下一步待办 P2/P3 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 E · 下一步待办(P2/P3)</div>
+      <h3 class="deep-block-title">两个还待处理的小项 · ★优先级排序</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">P2 · security-guidance 复核</span><span class="deep-row-text"><span class="deep-row-name">安全意识用户却关了官方安全插件</span><span class="deep-row-when">→ 收益:安全基线 · 风险:极低 · 行动:确认是误关还是有理由(单点检查,5min)</span></span></div>
+        <div class="deep-row"><span class="deep-key">P3 · 113 休眠 skill 审视</span><span class="deep-row-text"><span class="deep-row-name">多数 disable-model-invocation 有意,但可挑高频几个评估自动触发</span><span class="deep-row-when">→ 收益:减少手动 / 调用 · 风险:低 · 行动:从使用频率 top-20 起步审(149 口径) / 120 休眠(156 口径)</span></span></div>
+      </div>
+      <p class="deep-note"><strong>数据出处</strong>:<code class="deep-inline">~/.claude/docs/capability-activation-map.md</code>(2026-06-24 实跑盘点 · settings.local.json / .claude.json / skills 扫描)。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ 四系统架构宪法 · 5 层 L0-L4 + 12 阶段生命周期 + 8 行裁决路由 ═══ -->
+<section class="section container" id="s-architecture">
+  <div class="section-header">
+    <h2 class="section-title">四系统架构宪法 · 5 层 + 12 阶段生命周期</h2>
+    <p class="section-subtitle">OMC 主导(含 Superpowers 吸收) + gstack opt-in + 官方底座 · v0.5 精化版 2026-06-26 · conf 0.92</p>
+  </div>
+
+  <div class="deep-stack">
+
+    <div class="callout callout-info">
+      <strong>反范式修正</strong> — 旧叙事"四套对等系统"已 <strong>v0.4 修正</strong>。真实分层:<strong>OMC 主导(含 Superpowers 方法论吸收为 OMC 自有 SOP) + gstack 平行(opt-in 走 <code class="deep-inline">/gstack-*</code>) + 官方插件做能力底座</strong>。<strong>问题不是"协调四套",而是"OMC 内部四层路由 SSoT 化 + gstack 显式入口化"</strong>。详见 <code class="deep-inline">~/.claude/docs/system-of-systems.md</code> §0.5。
+    </div>
+
+    <!-- 块 A:5 层架构 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 A · 5 层架构 L0-L4</div>
+      <h3 class="deep-block-title">每层管什么 + 横切护栏</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">L4 进化层</span><span class="deep-row-text"><span class="deep-row-name">沉淀 + 进化</span><span class="deep-row-when">→ OMC self-evolve / evolution-scout / auto-memory · 把任务结果升华为长期资产</span></span></div>
+        <div class="deep-row"><span class="deep-key">L3 编排脊柱</span><span class="deep-row-text"><span class="deep-row-name">总指挥(唯一入口)</span><span class="deep-row-when">→ OMC intent-words.json(<strong>本机原创/fork</strong> 非 upstream) → smart-flow-all → team-lead + YOLO L0-L4</span></span></div>
+        <div class="deep-row"><span class="deep-key">L2 方法论纪律</span><span class="deep-row-text"><span class="deep-row-name">HOW 怎么做(刚性纪律)</span><span class="deep-row-when">→ Superpowers 吸收版:brainstorm / TDD / systematic-debug / subagent-driven / verification-before-completion</span></span></div>
+        <div class="deep-row"><span class="deep-key">L1 工程护栏</span><span class="deep-row-text"><span class="deep-row-name">安全 + 最后一公里</span><span class="deep-row-when">→ gstack:careful/guard/freeze(安全) · investigate(根因) · ship/qa/repo(发布+实测)</span></span></div>
+        <div class="deep-row"><span class="deep-key">L0 能力底座</span><span class="deep-row-text"><span class="deep-row-name">确定性原语</span><span class="deep-row-when">→ 官方:subagents/hooks/skills/MCP/plan-mode/memory + pr-review-toolkit / agent-skills / 65 agent</span></span></div>
+        <div class="deep-row"><span class="deep-key">横切护栏层</span><span class="deep-row-text"><span class="deep-row-name">全程生效(非某阶段)</span><span class="deep-row-when">→ gstack-careful/guard/freeze(破坏性操作) + OMC config-protection/direct-connect/block-dangerous-commands hooks</span></span></div>
+      </div>
+    </div>
+
+    <!-- 块 B:12 阶段生命周期唯一权威表 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 B · 12 阶段生命周期唯一权威表</div>
+      <h3 class="deep-block-title">每阶段的 ★ 唯一权威 + 备选分流</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">1 · 意图澄清</span><span class="deep-row-text"><span class="deep-row-name">deep-interview / interview-me</span><span class="deep-row-when">→ 备选:OMC prompt-context-gateway(hook 自动)· 需求模糊时强制澄清</span></span></div>
+        <div class="deep-row"><span class="deep-key">2 · 脑暴/需求</span><span class="deep-row-text"><span class="deep-row-name">sp-brainstorming(OMC 吸收版)</span><span class="deep-row-when">→ 备选:superpowers 原版 archived · 官方方法论+OMC 实施层</span></span></div>
+        <div class="deep-row"><span class="deep-key">3 · 规划</span><span class="deep-row-text"><span class="deep-row-name">任务级→sp-writing-plans · 战略级→planner(opus)</span><span class="deep-row-when">→ 备选:omc-plan / ultraplan · bite-sized vs 战略分层</span></span></div>
+        <div class="deep-row"><span class="deep-key">4 · TDD 实现</span><span class="deep-row-text"><span class="deep-row-name">sp-test-driven-development(吸收版)</span><span class="deep-row-when">→ 备选:git checkpoint+coverage→ecc-tdd-workflow · 红绿重构</span></span></div>
+        <div class="deep-row"><span class="deep-key">5 · 并行执行</span><span class="deep-row-text"><span class="deep-row-name">确定性扇出→Workflow · 口语→smart-flow-all</span><span class="deep-row-when">→ 备选:ecc-parallel-execution-optimizer(lane matrix 补充)· 编排归 OMC</span></span></div>
+        <div class="deep-row"><span class="deep-key">6 · 调试</span><span class="deep-row-text"><span class="deep-row-name">单次+不知从哪→diagnose(6 阶段)· 已知 bug→systematic-error-analysis(7 维)</span><span class="deep-row-when">→ 备选:gstack-investigate(opt-in 深度调查)· 起点差异</span></span></div>
+        <div class="deep-row"><span class="deep-key">7 · 代码审查</span><span class="deep-row-text"><span class="deep-row-name">本地快审→ce-code-review · 只读 pre-land→gstack-review</span><span class="deep-row-when">→ 按"是否改文件"分流 · 已 P0 接线修复(v0.5)</span></span></div>
+        <div class="deep-row"><span class="deep-key">8 · QA 实测</span><span class="deep-row-text"><span class="deep-row-name">gstack-qa(11 主阶段 + 5 setup + Phase 8 内 7 子步 = 16+)</span><span class="deep-row-when">→ 备选:OMC qa-tester · Web 实测归 gstack</span></span></div>
+        <div class="deep-row"><span class="deep-key">9 · 安全</span><span class="deep-row-text"><span class="deep-row-name">gstack-cso + semgrep MCP</span><span class="deep-row-when">→ 备选:team-security / security-reviewer · 安全工程归 gstack+官方</span></span></div>
+        <div class="deep-row"><span class="deep-key">10 · 发布/ship</span><span class="deep-row-text"><span class="deep-row-name">gstack-ship(22 步 ship 流水线)</span><span class="deep-row-when">→ 备选:commit-commands(轻量)· 完整发布归 gstack</span></span></div>
+        <div class="deep-row"><span class="deep-key">11 · 验证收口</span><span class="deep-row-text"><span class="deep-row-name">smart-closure(三档 L1/L2/L3 SSoT)</span><span class="deep-row-when">→ 备选:completion-self-check / task-closer · 三层正交:编排/用户/系统</span></span></div>
+        <div class="deep-row"><span class="deep-key">12 · 记忆沉淀/进化</span><span class="deep-row-text"><span class="deep-row-name">OMC auto-memory + self-evolve-loop</span><span class="deep-row-when">→ 备选:evolution-scout(周扫)· 唯一真相源=本机</span></span></div>
+      </div>
+      <p class="deep-note"><strong>权威原则</strong>:OMC 自吸收版 = 默认权威(sp-*/diagnose/smart-closure 等);gstack-* = 显式 opt-in(用户说 <code class="deep-inline">/gstack-*</code> 才走);官方插件 = 底座(被调用不直路由)。</p>
+    </div>
+
+    <!-- 块 C:8 行 binary 冲突裁决路由 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 C · 8 行 binary 冲突裁决路由(v0.5)</div>
+      <h3 class="deep-block-title">触发词有冲突 → 唯一权威 + 已 P0 接线</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">review / 代码审查</span><span class="deep-row-text"><span class="deep-row-name">本地快审→ce-code-review · 只读 pre-land→gstack-review</span><span class="deep-row-when">→ intent L121/440-445/1959-1970 + CLAUDE.md 入口 v0.5 已修 · conf 0.95</span></span></div>
+        <div class="deep-row"><span class="deep-key">先写测试 / TDD</span><span class="deep-row-text"><span class="deep-row-name">sp-test-driven-development(默认)· git checkpoint+coverage→ecc-tdd-workflow</span><span class="deep-row-when">→ 4 处指向 2 个目标 v0.5 已接 · conf 0.95</span></span></div>
+        <div class="deep-row"><span class="deep-key">debug / 调试</span><span class="deep-row-text"><span class="deep-row-name">起点未知→diagnose · 已知 bug→systematic-error-analysis</span><span class="deep-row-when">→ _conflict_rules 已加(v0.5)· conf 0.95</span></span></div>
+        <div class="deep-row"><span class="deep-key">又报错(≥2 复发)</span><span class="deep-row-text"><span class="deep-row-name">systematic-error-analysis</span><span class="deep-row-when">→ L2184 + CLAUDE.md 入口已对齐 ✓ · conf 0.95</span></span></div>
+        <div class="deep-row"><span class="deep-key">ship / 发布</span><span class="deep-row-text"><span class="deep-row-name">代码→gstack-ship · 多平台→social-publisher · 纯 deploy→deploy-ship</span><span class="deep-row-when">→ 3 目标 + _conflict_rules.ship 已加 · conf 0.92</span></span></div>
+        <div class="deep-row"><span class="deep-key">qa / 测试</span><span class="deep-row-text"><span class="deep-row-name">gstack-qa(opt-in)</span><span class="deep-row-when">→ _conflict_rules.qa 已加(v0.5)· conf 0.88→0.92</span></span></div>
+        <div class="deep-row"><span class="deep-key">ralph / hookify</span><span class="deep-row-text"><span class="deep-row-name">显式保留官方触发词,或撤 OMC 同名抢占</span><span class="deep-row-when">→ OMC 同名路由静默遮蔽官方插件 + _conflict_rules 已加 · conf 0.92</span></span></div>
+        <div class="deep-row"><span class="deep-key">chrome-devtools MCP</span><span class="deep-row-text"><span class="deep-row-name">留插件版,撤直连</span><span class="deep-row-when">→ ~/.claude.json 直连 + 插件版双注册 → v0.5 P0 接线 ✓ · conf 0.98</span></span></div>
+      </div>
+    </div>
+
+    <!-- 块 D:5 条协同放大链 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 D · 5 条协同放大链(1+1&gt;2)</div>
+      <h3 class="deep-block-title">把单点工具连成"完成一件事"的闭环</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">完整开发闭环</span><span class="deep-row-text"><span class="deep-row-name">deep-interview → brainstorming → writing-plans → TDD → Workflow → code-reviewer → gstack-qa → gstack-ship → smart-closure → auto-memory</span><span class="deep-row-when">→ 12 阶段串联 · 主路径</span></span></div>
+        <div class="deep-row"><span class="deep-key">安全发布链</span><span class="deep-row-text"><span class="deep-row-name">gstack-cso + semgrep(扫) → gstack-review(审) → gstack-careful(护栏) → gstack-ship(发)</span><span class="deep-row-when">→ 4 步安全发布</span></span></div>
+        <div class="deep-row"><span class="deep-key">硬 bug 攻坚链</span><span class="deep-row-text"><span class="deep-row-name">systematic-debugging(纪律) → tracer(因果链) → systematic-error-analysis(复发熔断) → ecc-tdd-workflow(回归测试锁定)</span><span class="deep-row-when">→ 4 步攻坚</span></span></div>
+        <div class="deep-row"><span class="deep-key">异构对抗验证链</span><span class="deep-row-text"><span class="deep-row-name">OMC external-cli-router(kimi/mmx/opencode/qwen/mavis) + judge-panel + critic → 多源裁决</span><span class="deep-row-when">→ 5 联 CLI + agent 组合</span></span></div>
+        <div class="deep-row"><span class="deep-key">学习脚手架链</span><span class="deep-row-text"><span class="deep-row-name">每次任务后 superpowers 方法论 explain + auto-memory 记"为什么这么做"</span><span class="deep-row-when">→ 针对"边学边做"开发者身份</span></span></div>
+      </div>
+    </div>
+
+    <!-- 块 E:3 阶段落地路线 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 E · 3 阶段落地路线(v0.5 收口)</div>
+      <h3 class="deep-block-title">已闭环 + ★下一步</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">P0 去重消歧 ✅</span><span class="deep-row-text"><span class="deep-row-name">chrome-devtools 双注册 + review 路由矛盾</span><span class="deep-row-when">→ 2-3 文件 · L3 碰 config · 已完成(v0.5)· 13 处 Edit 累计</span></span></div>
+        <div class="deep-row"><span class="deep-key">P1 路由整合 ✅</span><span class="deep-row-text"><span class="deep-row-name">intent-words §3 binary 裁决表</span><span class="deep-row-when">→ 1-2 文件 · 已完成 · _conflict_rules 加 binary</span></span></div>
+        <div class="deep-row"><span class="deep-key">P2 协同放大 ✅</span><span class="deep-row-text"><span class="deep-row-name">宪法落地 + learning-trace + intent-conflict-check.py + 5 联裁决半自动联动</span><span class="deep-row-when">→ 2026-06-26 P2 已闭环 · 教学反馈层 + 路由自检测试 + 草稿联动</span></span></div>
+        <div class="deep-row"><span class="deep-key">★ 下一步 · 缺口补</span><span class="deep-row-text"><span class="deep-row-name">跨系统统一可观测面板(HUD 只显 OMC)</span><span class="deep-row-when">→ 缺 superpowers/gstack 活跃度显示 · 优先级 P2 · 单点改造可</span></span></div>
+      </div>
+      <p class="deep-note"><strong>10 项反讽修正</strong>已修 7 项 / 无残留 2 项 / 前提错 1 项 · 全部基于 4 路上游深读 + 举一反三全文档扫描 · <strong>出处</strong><code class="deep-inline">~/.claude/docs/system-of-systems.md</code> §0.6。</p>
+    </div>
+
+  </div>
+</section>
+
 </main>
 
 <!-- ═══ Footer ═══ -->
@@ -558,7 +1267,79 @@
 <!-- toast -->
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<!-- 右侧悬浮：回顶 / 回底 -->
+<div class="fab-stack" id="fabStack" aria-hidden="true">
+  <button class="fab" id="fabTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部" title="回到顶部">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10l4-4 4 4"/></svg>
+  </button>
+  <button class="fab" id="fabBottom" type="button" onclick="window.scrollTo({top:document.documentElement.scrollHeight,behavior:'smooth'})" aria-label="回到底部" title="回到底部">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+  </button>
+</div>
+
 <script>
+/* ════════════════════════════════════════════════════════════════════
+   分级导航：header 高度测量 + scroll-spy + 移动抽屉
+   ════════════════════════════════════════════════════════════════════ */
+(function() {
+  // 1. 实测 header 高度 → 注入 --header-h（避免硬编码，随主题/换行自适应）
+  const header = document.querySelector('.header-strip');
+  const setHeaderH = () => { if (header) document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px'); };
+  setHeaderH();
+  window.addEventListener('resize', setHeaderH, { passive: true });
+
+  // 2. scroll-spy：位置法高亮"当前阅读"section（参考线 + 底部兜底，比纯 IO 稳）
+  const links = [...document.querySelectorAll('.side-nav .nav-link')];
+  const map = new Map();   // section 元素 → nav-link（保持 DOM 顺序）
+  links.forEach(a => { const id = a.getAttribute('href').slice(1); const el = document.getElementById(id); if (el) map.set(el, a); });
+  // 关键：按"物理位置"排序（导航分组顺序 ≠ 页面 DOM 顺序，如数据后台在导航里排末尾但物理在中部）
+  const sections = [...map.keys()].sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+  const setActive = (el) => {
+    links.forEach(l => { l.classList.remove('active'); l.removeAttribute('aria-current'); });
+    const a = map.get(el);
+    if (a) { a.classList.add('active'); a.setAttribute('aria-current', 'location'); }
+  };
+  let ticking = false;
+  const onSpy = () => {
+    ticking = false;
+    const ref = (header ? header.offsetHeight : 56) + 24;  // header 下方一点的参考线
+    let current = sections[0];
+    for (const sec of sections) { if (sec.getBoundingClientRect().top <= ref) current = sec; } // 取最后一个越过参考线的 section
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = sections[sections.length - 1]; // 底部兜底
+    setActive(current);
+  };
+  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onSpy); } }, { passive: true });
+  onSpy();
+
+  // 3. 移动端抽屉：汉堡开关 + 背景遮罩 + Esc/点链接关闭
+  const nav = document.getElementById('sideNav');
+  const toggle = document.getElementById('navToggle');
+  const backdrop = document.getElementById('navBackdrop');
+  if (nav && toggle && backdrop) {
+    const openNav = () => { nav.classList.add('open'); backdrop.classList.add('show'); toggle.setAttribute('aria-expanded', 'true'); };
+    const closeNav = () => { nav.classList.remove('open'); backdrop.classList.remove('show'); toggle.setAttribute('aria-expanded', 'false'); };
+    toggle.addEventListener('click', () => nav.classList.contains('open') ? closeNav() : openNav());
+    backdrop.addEventListener('click', closeNav);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
+    links.forEach(a => a.addEventListener('click', () => { if (window.matchMedia('(max-width: 1023px)').matches) closeNav(); }));
+  }
+})();
+
+/* ════════════════════════════════════════════════════════════════════
+   右侧悬浮按钮：滚动渐显 + 回顶/回底
+   ════════════════════════════════════════════════════════════════════ */
+(function() {
+  const stack = document.getElementById('fabStack');
+  if (!stack) return;
+  const onScroll = () => {
+    const show = window.scrollY > 400;
+    stack.classList.toggle('show', show);
+    stack.setAttribute('aria-hidden', show ? 'false' : 'true');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
 /* ════════════════════════════════════════════════════════════════════
    主题：localStorage + data-theme
    ════════════════════════════════════════════════════════════════════ */
@@ -586,11 +1367,11 @@
    Fetch mycc-stats.json (SSoT) · 失败降级内联
    ════════════════════════════════════════════════════════════════════ */
 const FALLBACK_COUNTS = {
-  skills: 147, plugin_skills: 419, agents_total: 89, agents_core: 5,
+  skills: 149, plugin_skills: 419, agents_total: 91, agents_core: 6,
   agents_ceo_roles: 12, agents_industry: 7, agents_teams: 6, plugin_agents: 164,
-  hooks_registered: 54, hook_events: 14, hook_files: 55,
+  hooks_registered: 42, hook_events: 14, hook_files: 58,
   workflows: 14, mcp_servers: 4, enabled_plugins: 32, total_plugins: 58,
-  rules: 3, intent_words_routes: 95, external_clis: 3
+  rules: 3, intent_words_routes: 107, external_clis: 3
 };
 const FALLBACK_VERSION = { claude_code: '2.1.195', omc: '4.15.0', cc_switch: 'OFF', stats_engine: 'V53' };
 

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-27T17:28:29.823810Z",
+  "generated_at": "2026-06-28T16:31:22.625449Z",
   "version": {
     "claude_code": "2.1.195 (Claude Code)",
     "omc": "4.15.0",
@@ -11,7 +11,7 @@
     "workflows": 14,
     "hooks_registered": 42,
     "hook_events": 14,
-    "hook_files": 59,
+    "hook_files": 58,
     "agents_total": 91,
     "agents_core": 6,
     "agents_ceo_roles": 12,
@@ -2288,19 +2288,19 @@
     }
   },
   "hooks": {
-    "total_files": 59,
+    "total_files": 58,
     "by_event": {
       "PreToolUse": 7,
       "SubagentStop": 3,
       "UserPromptSubmit": 1,
-      "SessionStart": 7,
+      "SessionStart": 6,
       "PostToolUse": 7,
-      "Stop": 6,
-      "PostToolUseFailure": 2,
+      "Stop": 7,
+      "PostToolUseFailure": 1,
       "PermissionRequest": 1,
       "PreCompact": 1,
       "PostCompact": 1,
-      "SessionEnd": 3,
+      "SessionEnd": 4,
       "SubagentStart": 1,
       "StopFailure": 1,
       "MessageDisplay": 1
