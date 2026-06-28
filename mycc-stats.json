@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-06-26T10:40:04.753540Z",
+  "generated_at": "2026-06-27T17:28:29.823810Z",
   "version": {
-    "claude_code": "2.1.193 (Claude Code)",
+    "claude_code": "2.1.195 (Claude Code)",
     "omc": "4.15.0",
     "stats_engine": "V53",
     "cc_switch": "OFF"
   },
   "counts": {
-    "skills": 148,
-    "workflows": 13,
-    "hooks_registered": 51,
+    "skills": 149,
+    "workflows": 14,
+    "hooks_registered": 42,
     "hook_events": 14,
-    "hook_files": 52,
-    "agents_total": 90,
+    "hook_files": 59,
+    "agents_total": 91,
     "agents_core": 6,
     "agents_ceo_roles": 12,
     "agents_industry": 7,
@@ -23,7 +23,7 @@
     "enabled_plugins": 32,
     "total_plugins": 58,
     "rules": 3,
-    "intent_words_routes": 94,
+    "intent_words_routes": 107,
     "external_clis": 3
   },
   "lists": {
@@ -49,6 +49,17 @@
         ]
       },
       {
+        "name": "p0_smart_flow_all",
+        "priority": 90,
+        "keywords": [
+          "队长",
+          "leader",
+          "boss",
+          "老大",
+          "火力全开"
+        ]
+      },
+      {
         "name": "ceo_decision_council",
         "priority": 88,
         "keywords": [
@@ -57,6 +68,28 @@
           "顾问委员会",
           "帮我想清楚这件事",
           "决策备忘录"
+        ]
+      },
+      {
+        "name": "phase6_comprehensive_upgrade_alias",
+        "priority": 87,
+        "keywords": [
+          "5 路并行升级",
+          "comprehensive upgrade 5-path",
+          "5-subagent upgrade",
+          "全面升级 5 路",
+          "全维度 subagent 升级"
+        ]
+      },
+      {
+        "name": "p0_comprehensive_upgrade",
+        "priority": 87,
+        "keywords": [
+          "五路并行升级",
+          "全面升级 5 路",
+          "全维度 subagent 升级",
+          "并行扫描升级",
+          "系统级升级"
         ]
       },
       {
@@ -109,6 +142,17 @@
           "跨域协同",
           "team prompt",
           "拆任务"
+        ]
+      },
+      {
+        "name": "completion_enforcer_route",
+        "priority": 85,
+        "keywords": [
+          "更新",
+          "收口",
+          "todo",
+          "下一步",
+          "/docs"
         ]
       },
       {
@@ -175,6 +219,28 @@
         ]
       },
       {
+        "name": "phase6_audit_pipeline_alias",
+        "priority": 84,
+        "keywords": [
+          "67 维 dry-run",
+          "mycc 67 维",
+          "8 大分组审计",
+          "dry-run 审计",
+          "mycc-audit pipeline"
+        ]
+      },
+      {
+        "name": "p0_mycc_audit_pipeline",
+        "priority": 84,
+        "keywords": [
+          "mycc 67 维",
+          "67 维 dry-run",
+          "8 大分组审计",
+          "mycc 审计",
+          "全面 dry-run 审计"
+        ]
+      },
+      {
         "name": "full_checkup_route",
         "priority": 83,
         "keywords": [
@@ -194,6 +260,17 @@
           "三方对抗",
           "三方cli",
           "五方对抗"
+        ]
+      },
+      {
+        "name": "p0_full_checkup",
+        "priority": 83,
+        "keywords": [
+          "系统体检",
+          "三连体检",
+          "给系统做个体检",
+          "体检一下",
+          "全面检查并修复"
         ]
       },
       {
@@ -265,6 +342,28 @@
           "外部学习",
           "全球对比",
           "对比社区"
+        ]
+      },
+      {
+        "name": "p0_user_training",
+        "priority": 82,
+        "keywords": [
+          "怎么做",
+          "教我",
+          "新手",
+          "不会用",
+          "想入门"
+        ]
+      },
+      {
+        "name": "p0_ceo_mode",
+        "priority": 82,
+        "keywords": [
+          "ceo 决策",
+          "战略分析",
+          "帮我想清楚",
+          "战略决策",
+          "出海"
         ]
       },
       {
@@ -412,6 +511,28 @@
           "价格AB测试",
           "危机公关"
         ]
+      },
+      {
+        "name": "p0_deep_research",
+        "priority": 80,
+        "keywords": [
+          "深度调研",
+          "deep research",
+          "做调研",
+          "查资料",
+          "全面调研"
+        ]
+      },
+      {
+        "name": "p0_audit_all",
+        "priority": 80,
+        "keywords": [
+          "审计一下",
+          "盘一下系统",
+          "系统自检",
+          "跑一下审计",
+          "自查"
+        ]
       }
     ],
     "all_routes": [
@@ -438,6 +559,19 @@
         "target": ""
       },
       {
+        "name": "p0_smart_flow_all",
+        "priority": 90,
+        "keywords": [
+          "队长",
+          "leader",
+          "boss",
+          "老大",
+          "火力全开",
+          "活力全开"
+        ],
+        "target": ""
+      },
+      {
         "name": "ceo_decision_council",
         "priority": 88,
         "keywords": [
@@ -447,6 +581,31 @@
           "帮我想清楚这件事",
           "决策备忘录",
           "我该不该"
+        ],
+        "target": ""
+      },
+      {
+        "name": "phase6_comprehensive_upgrade_alias",
+        "priority": 87,
+        "keywords": [
+          "5 路并行升级",
+          "comprehensive upgrade 5-path",
+          "5-subagent upgrade",
+          "全面升级 5 路",
+          "全维度 subagent 升级",
+          "并行扫描升级"
+        ],
+        "target": ""
+      },
+      {
+        "name": "p0_comprehensive_upgrade",
+        "priority": 87,
+        "keywords": [
+          "五路并行升级",
+          "全面升级 5 路",
+          "全维度 subagent 升级",
+          "并行扫描升级",
+          "系统级升级"
         ],
         "target": ""
       },
@@ -506,6 +665,19 @@
           "team prompt",
           "拆任务",
           "开team"
+        ],
+        "target": ""
+      },
+      {
+        "name": "completion_enforcer_route",
+        "priority": 85,
+        "keywords": [
+          "更新",
+          "收口",
+          "todo",
+          "下一步",
+          "/docs",
+          "不自动"
         ],
         "target": ""
       },
@@ -582,6 +754,30 @@
         "target": ""
       },
       {
+        "name": "phase6_audit_pipeline_alias",
+        "priority": 84,
+        "keywords": [
+          "67 维 dry-run",
+          "mycc 67 维",
+          "8 大分组审计",
+          "dry-run 审计",
+          "mycc-audit pipeline"
+        ],
+        "target": ""
+      },
+      {
+        "name": "p0_mycc_audit_pipeline",
+        "priority": 84,
+        "keywords": [
+          "mycc 67 维",
+          "67 维 dry-run",
+          "8 大分组审计",
+          "mycc 审计",
+          "全面 dry-run 审计"
+        ],
+        "target": ""
+      },
+      {
         "name": "full_checkup_route",
         "priority": 83,
         "keywords": [
@@ -604,6 +800,19 @@
           "三方cli",
           "五方对抗",
           "跑panel"
+        ],
+        "target": ""
+      },
+      {
+        "name": "p0_full_checkup",
+        "priority": 83,
+        "keywords": [
+          "系统体检",
+          "三连体检",
+          "给系统做个体检",
+          "体检一下",
+          "全面检查并修复",
+          "系统检查并修复"
         ],
         "target": ""
       },
@@ -686,6 +895,32 @@
           "外部学习",
           "全球对比",
           "对比社区"
+        ],
+        "target": ""
+      },
+      {
+        "name": "p0_user_training",
+        "priority": 82,
+        "keywords": [
+          "怎么做",
+          "教我",
+          "新手",
+          "不会用",
+          "想入门",
+          "带我上手"
+        ],
+        "target": ""
+      },
+      {
+        "name": "p0_ceo_mode",
+        "priority": 82,
+        "keywords": [
+          "ceo 决策",
+          "战略分析",
+          "帮我想清楚",
+          "战略决策",
+          "出海",
+          "商业想法"
         ],
         "target": ""
       },
@@ -859,6 +1094,30 @@
         "target": ""
       },
       {
+        "name": "p0_deep_research",
+        "priority": 80,
+        "keywords": [
+          "深度调研",
+          "deep research",
+          "做调研",
+          "查资料",
+          "全面调研"
+        ],
+        "target": ""
+      },
+      {
+        "name": "p0_audit_all",
+        "priority": 80,
+        "keywords": [
+          "审计一下",
+          "盘一下系统",
+          "系统自检",
+          "跑一下审计",
+          "自查"
+        ],
+        "target": ""
+      },
+      {
         "name": "clarify_verify",
         "priority": 78,
         "keywords": [
@@ -906,6 +1165,17 @@
           "evaluator-optimizer",
           "rubric",
           "self-evolve-loop"
+        ],
+        "target": ""
+      },
+      {
+        "name": "p0_skill_index",
+        "priority": 78,
+        "keywords": [
+          "用哪个 skill",
+          "找不到 skill",
+          "不知道用什么",
+          "skill 索引"
         ],
         "target": ""
       },
@@ -1088,6 +1358,17 @@
           "创建项目",
           "从0开始",
           "从头开始"
+        ],
+        "target": ""
+      },
+      {
+        "name": "p0_learning_trace",
+        "priority": 70,
+        "keywords": [
+          "学习跟踪",
+          "方法论决策",
+          "learning trace",
+          "记录决策"
         ],
         "target": ""
       },
@@ -1535,153 +1816,155 @@
     ],
     "skill_desc": {
       "agent-reach": "Give your AI agent eyes to see the entire internet. 17 platforms via CLI, MCP, curl, and Python scripts. Zero config for 8 channels.",
-      "antigravity-memory-systems": "This skill should be used for persistent semantic memory in agent systems: cross-session knowledge retention, entity tracking, temporal validity, graph or vector retrieval, memory ",
-      "api-and-interface-design": "Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface. Use when creating REST or GraphQL endpoints, defining type contracts be",
+      "antigravity-memory-systems": "用于 agent 系统的持久化语义记忆:跨会话知识保留、实体追踪、时序有效性、图谱/向量检索、记忆整合、记忆基准选型。文件型 scratchpad 路由到 filesystem-context、handoff 摘要路由到 context-compression、token 效率策略路由到 context-optimization。",
+      "api-and-interface-design": "指导稳定 API 与接口设计。用于设计 API、模块边界、任何 public interface,创建 REST/GraphQL endpoint,定义模块间 type contract,或建立前后端边界。",
       "article-writing": "长文创作 — 文章/指南/博客/教程/邮件 newsletter，按提供的风格示例写作（强调一致性+结构+可信度）。触发词：写文章/长文/写博客/写教程",
       "ask-cli": "把同一问题派发给本机钦定的外部 AI CLI 六联(kimi/mmx/opencode/qwen/mavis/codex)做异构对抗/交叉验证,Claude 综合各家观点裁决。复用已验证脚本 ai-cli.sh(单 CLI)/ai-panel.sh(多 CLI 并发),禁手拼裸 CLI 命令。触发词：异构对抗、交叉验证、问外部CLI、多模型验证、ask cl",
       "audit-all-better": "mycc 自审统一入口——67 维全量诊断(基础设施/能力/事件/连接/知识/质量) + Harness 六层评分(L1 上下文/L2 工具/L3 编排/L4 记忆/L5 评估/L6 约束) + MEMORY/rules 记忆专项审计 + 12 R 行为层自检。触发词：健康检查/全身体检/cchealth/深度检查/audit all/全局审计/全面排查/系",
       "auto-collector-community": "通过 firecrawl 扫描 Reddit/HN/公众号的 Claude Code 新 insight，作为月度记忆进化 S3 步骤",
       "auto-collector-github": "扫描 OMC 相关 GitHub 仓库的新 commit/issue/release，作为月度记忆进化 S2 步骤",
       "auto-collector-official": "抓取 Anthropic 官方 Changelog 和 Claude Code docs 的增量内容，作为月度记忆进化 S1 步骤",
-      "banner-design": "Design banners for social media, ads, website heroes, creative assets, and print. Multiple art direction options with AI-generated visuals. Actions: design, create, generate banner",
-      "baoyu-article-illustrator": "Analyzes article structure, identifies positions requiring visual aids, generates illustrations with Type × Style × Palette three-dimension approach. Use when user asks to \"illustr",
-      "baoyu-comic": "Knowledge comic creator supporting multiple art styles and tones. Creates original educational comics with detailed panel layouts and batch-capable image generation. Use when user ",
-      "baoyu-compress-image": "Compresses images to WebP (default) or PNG with automatic tool selection. Use when user asks to \"compress image\", \"optimize image\", \"convert to webp\", or reduce image file size。将图片",
-      "baoyu-cover-image": "Generates article cover images with 5 dimensions (type, palette, rendering, text, mood) combining 11 color palettes and 7 rendering styles. Supports cinematic (2.35:1), widescreen ",
-      "baoyu-diagram": "Create professional, dark-themed SVG diagrams of any type — architecture diagrams, flowcharts, sequence diagrams, structural diagrams, mind maps, timelines, illustrative/conceptual",
-      "baoyu-electron-extract": "Extracts resources and JavaScript from any installed Electron app (`.asar` bundle), restoring original sources from `.js.map` files when available or formatting minified code with ",
-      "baoyu-format-markdown": "Formats plain text or markdown files with frontmatter, titles, summaries, headings, bold, lists, and code blocks. Use when user asks to \"format markdown\", \"beautify article\", \"add ",
-      "baoyu-image-gen": "AI image generation with OpenAI GPT Image 2, Azure OpenAI, Google, OpenRouter, DashScope, Z.AI GLM-Image, MiniMax, Jimeng, Seedream and Replicate APIs. Supports text-to-image, refe",
-      "baoyu-infographic": "Generate professional infographics with 21 layout types and 22 visual styles. Analyzes content, recommends layout×style combinations, and generates publication-ready infographics. ",
-      "baoyu-markdown-to-html": "Converts Markdown to styled HTML with WeChat-compatible themes. Supports code highlighting, math, Mermaid (rendered to PNG via headless Chrome), PlantUML, footnotes, alerts, infogr",
-      "baoyu-slide-deck": "Generates professional slide deck images from content. Creates outlines with style instructions, then generates individual slide images. Use when user asks to \"create slides\", \"mak",
+      "banner-design": "横版 banner / 大图视觉设计。",
+      "baoyu-article-illustrator": "为文章自动配图,支持多种 art style。",
+      "baoyu-comic": "知识漫画创建器,支持多种 art style 与 tone。可创建带详细 panel 布局的原创教育漫画,支持批量图片生成。当用户要求创建「知识漫画」「教育漫画」「biography comic」「tutorial comic」「Logicomix-style comic」时使用。",
+      "baoyu-compress-image": "图片压缩工具,降低图片体积同时尽量保持视觉质量。",
+      "baoyu-cover-image": "为文章/书自动生成 cover image,支持多种 art style。",
+      "baoyu-diagram": "自动生成示意图/信息图,支持多种 art style。",
+      "baoyu-electron-extract": "Electron 应用解包/逆向辅助。",
+      "baoyu-format-markdown": "Markdown 排版与格式美化。",
+      "baoyu-image-gen": "通用图片生成入口,支持多种 art style。",
+      "baoyu-infographic": "信息图/数据图自动生成。",
+      "baoyu-markdown-to-html": "Markdown 转 HTML,常用于公众号/网页发布。",
+      "baoyu-slide-deck": "PPT/Slide 自动生成。",
       "baoyu-translate": "多语言翻译工具——中英日韩等互译，保持Markdown格式。触发词：翻译、translate、中译英、英译中。",
-      "baoyu-url-to-markdown": "Fetch any URL and convert to markdown using baoyu-fetch CLI (Chrome CDP with site-specific adapters). Built-in adapters for X/Twitter, YouTube transcripts, Hacker News threads, and",
-      "baoyu-wechat-summary": "Summarizes WeChat group chat highlights into a structured digest using the local wx-cli binary (https://github.com/jackwener/wx-cli). Generates a normal digest by default; a roast ",
-      "baoyu-xhs-images": "Generates infographic image card series with 12 visual styles, 8 layouts, and 3 color palettes. Breaks content into 1-10 cartoon-style image cards optimized for social media engage",
-      "baoyu-youtube-transcript": "Downloads YouTube video transcripts/subtitles and cover images by URL or video ID. Supports multiple languages, translation, chapters, and speaker identification. Caches raw data f",
-      "brand": "Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone of voice, marketing assets, brand compliance, style guid",
+      "baoyu-url-to-markdown": "把 URL 文章转 Markdown。",
+      "baoyu-wechat-summary": "公众号文章摘要生成。",
+      "baoyu-xhs-images": "小红书图文自动生成。",
+      "baoyu-youtube-transcript": "YouTube 视频转文字稿。",
+      "brand": "品牌定位/视觉系统设计。",
       "brand-voice": "品牌声音建模 — 从你提供的真实文章/帖子/文档提炼写作风格 profile，用于后续所有内容创作保持一致风格（避免 AI 腔）。触发词：出品牌指南/品牌声音/统一文风",
-      "canary-monitor": "部署后 canary 哨兵监控——截图基线对比、console 错误检测、性能回归告警。触发词：canary、post-deploy check、部署后监控、canary check、watch production、monitor after deploy、verify deploy、部署验证。",
-      "card-xiaohongshu": "Xiaohongshu-style knowledge cards, arranged as a swipeable multi-card carousel。小红书风格知识卡片，多张联排可滑动浏览展示",
-      "caveman": "Ultra-compressed communication mode. Cuts token usage ~75% by dropping filler, articles, and pleasantries while keeping full technical accuracy. Use when user says \"caveman mode\", ",
-      "ce-code-review": "Structured code review using tiered persona agents, confidence-gated findings, and a merge/dedup pipeline. In interactive mode it applies safe, verified fixes and commits them when",
-      "ce-optimize": "Run metric-driven iterative optimization loops -- define a measurable goal, run parallel experiments, measure each against hard gates or LLM-as-judge scores, keep improvements, and",
-      "ce-plan": "Create structured plans for multi-step tasks -- software features, research workflows, events, study plans, or any goal that benefits from breakdown. Also deepens existing plans wi",
-      "ce-strategy": "Create or maintain STRATEGY.md - the product's target problem, approach, users, key metrics, and tracks of work. Use when starting a new product, updating direction, or when prompt",
-      "ce-work": "Execute work efficiently while maintaining quality and finishing features。高效执行任务，保持代码质量并完成功能交付",
+      "canary-monitor": "部署后 canary 哨兵监控——截图基线对比、console 错误检测、性能回归告警。触发词:canary、post-deploy check、部署后监控、canary check、watch production、monitor after deploy、verify deploy、部署验证。",
+      "card-xiaohongshu": "小红书卡片图文自动生成。",
+      "caveman": "「穴居人」极简通信模式:压缩 token 用量 ~75%,丢弃废话/冠词/客套,保留完整技术精度。触发词:caveman mode/talk like caveman/use caveman/less tokens/be brief/极简模式/节省 token/穴居人模式/简洁输出。",
+      "ce-code-review": "Context Engineering 之代码审查。",
+      "ce-optimize": "Context Engineering 优化——context 瘦身与精度提升。",
+      "ce-plan": "Context Engineering 规划——先定 context 策略再写代码。",
+      "ce-strategy": "Context Engineering 战略——长期 context 治理路线图。",
+      "ce-work": "Context Engineering 日常工作流。",
       "ceo-decision": "CEO一站式战略决策顾问委员会 — 输入任何战略问题，5位顾问并行分析，产出Decision Memo。触发词：ceo决策/战略分析/顾问委员会/帮我想清楚这件事。model: opus",
       "ceo-mode": "CEO 模式 — 像 CEO 一样按需组建团队/专家组，并行干活，用完下线。本地化吸收自 revfactory/harness（Apache-2.0）的团队工厂 + 官方 Agent Teams。触发场景：(1) '组建团队/建专家组/拉齐N专家/搭个X组' — 临时组队干活；(2) 'CEO模式/像CEO一样/动态团队' — 显式调用；(3) '解散组/团",
-      "ci-template": "CI/CD 配置生成 — GitHub Actions / GitLab CI / Drone yaml 模板生成。说\"写 CI / GitHub Actions / 写 workflow yaml / 配 CI/CD / 加 pipeline\"触发。",
+      "ci-template": "CI 模板生成。",
       "claude-code-better": "V46.3全面配置升级流水线(动态N专家+调用audit-all-better 30维诊断+自身17维Phase2分析+8维环境预检+7维全球对标=67维全量)——按需N专家+双配置同步+Desktop对齐+★最优推荐合规+铁律1-12检查+audit-all全能力融合→输出升级方案→验证闭环。触发词：全面升级/配置优化/进化升级/自动进化/举一反三排查。",
       "cmmi-tracker": "CMMI L3 持续可见追踪体系 — 需求/任务/错误/版本四库管理 + Notion同步。触发词：需求追踪/任务追踪/cmmi/版本追踪/错误追踪/追溯矩阵/待处理任务",
-      "codebase-memory": "Use the codebase knowledge graph for structural code queries. Triggers on: explore the codebase, understand the architecture, what functions exist, show me the structure, who calls",
+      "codebase-memory": "用代码库知识图谱回答结构性查询:探索架构、理解结构、查函数存在、看模块结构、查调用方、查被调用方、追踪调用链、找 caller、看依赖、影响分析、死代码、未用函数、高 fan-out、重构候选、代码质量审计、图查询语法、Cypher 示例、edge 类型、search_graph 用法。",
       "codesight": "预生成项目上下文摘要，减少代码探索的Token开销（~11x节省）。新项目开始时自动激活。触发词：codesight、项目摘要、代码索引、项目概览。",
-      "cold-email": "Write B2B cold emails and follow-up sequences that get replies. Use when the user wants to write cold outreach emails, prospecting emails, cold email campaigns, sales development e",
+      "cold-email": "【中】cold-email (中文翻译补充中, 见下方原英文). Write B2B cold emails and follow-up sequences that get replies. Use when the user wants to write cold outreach emails, prospecting emails, cold ema",
       "completion-self-check": "任务完成前自检 — 5 维（实跑证据/★推荐/4 要素/反讽刺/回滚）逐项过一遍。触发词：\"完成了吗\"/\"通过了吗\"/\"做完了吗\"/\"自检\"/\"completion check\"/\"self-check\"。",
       "composition-patterns": "React 组合模式 — 避免 boolean prop 泛滥，用复合组件/状态提升/内部组合。React 组件设计触发。",
+      "comprehensive-upgrade": "全面升级 deterministic 触发链。1 句\"全面升级\"→自动派 4-5 路 subagent 并行扫描 mycc 全部能力维度(配置/代码/技能/工作流/文档)→出综合升级清单+冲突矩阵。Intent-words 路由:全面升级/全面大改/系统升级→本 skill。",
       "content-engine": "多平台内容引擎 — X/LinkedIn/小红书/抖音/YouTube/公众号原生内容系统，一份素材自动适配多平台分发。触发词：写内容/内容日历/跨平台内容/多平台分发",
-      "context-engineering": "Optimizes agent context setup. Use when starting a new session, when agent output quality degrades, when switching between tasks, or when you need to configure rules files and cont",
-      "customer-research": "When the user wants to conduct, analyze, or synthesize customer research. Use when the user mentions \"customer research,\" \"ICP research,\" \"talk to customers,\" \"analyze transcripts,",
+      "context-engineering": "优化 agent 上下文配置：新会话启动或输出质量下降时重建最优上下文",
+      "customer-research": "【中】customer-research (中文翻译补充中, 见下方原英文). When the user wants to conduct, analyze, or synthesize customer research. Use when the user mentions \"customer research,\" \"ICP research,\" \"t",
       "deep-research-sop": "deep-research 的六步决策闭环 SOP 入口——调研/搜索/deep research 任务前强制声明走六步 SOP（澄清→评估→对抗验证→实测核实→不盲信→落地），再路由到 deep-research 执行。触发词：调研/搜索/deep research/查资料",
       "deploy-ship": "安全部署/上线/发布流程。触发词：\"部署/上线/发布/ship/launch/灰度\"。支持 BigOS Docker/nginx 场景，五步闭环安全部署，吸收 gstack /ship 思想。",
-      "deprecation-and-migration": "Manages deprecation and migration. Use when removing old systems, APIs, or features. Use when migrating users from one implementation to another. Use when deciding whether to maint",
-      "design": "Comprehensive design skill: brand identity, design tokens, UI styling, logo generation (55 styles, Gemini AI), corporate identity program (50 deliverables, CIP mockups), HTML prese",
-      "design-system": "Token architecture, component specifications, and slide generation. Three-layer tokens (primitive→semantic→component), CSS variables, spacing/typography scales, component specs, st",
-      "diagnose": "Disciplined diagnosis loop for hard bugs and performance regressions. Reproduce → minimise → hypothesise → instrument → fix → regression-test. Use when user says \"diagnose this\" / ",
+      "deprecation-and-migration": "废弃管理与迁移：老 API 下线、系统替换、功能日落的全流程决策与执行",
+      "design": "通用设计入口。",
+      "design-system": "设计系统建设/对齐。",
+      "diagnose": "硬 bug 与性能回归的纪律化诊断循环：复现 → 最小化 → 假设 → 检测 → 修复 → 回归测试",
       "diff-generator": "将 S1-S4 审计结果综合为 MEMORY-diff.md，并按 P0/P1 触发飞书推送，作为月度记忆进化 S5 步骤",
-      "documentation-and-adrs": "Records decisions and documentation. Use when making architectural decisions, changing public APIs, shipping features, or when you need to record context that future engineers and ",
-      "doubt-driven-development": "Subjects every non-trivial decision to a fresh-context adversarial review before it stands. Use when correctness matters more than speed, when working in unfamiliar code, when stak",
-      "ecc-continuous-learning-v2": "Instinct-based learning system that observes sessions via hooks, creates atomic instincts with confidence scoring, and evolves them into skills/commands/agents. v2.1 adds project-s",
-      "ecc-eval-harness": "Formal evaluation framework for Claude Code sessions implementing eval-driven development (EDD) principles。Claude Code会话的正式评估框架，实现评估驱动开发（EDD）原则。触发词：评估框架/EDD/会话评估/质量评分",
-      "ecc-gateguard": "Fact-forcing gate that blocks Edit/Write/Bash (including MultiEdit) and demands concrete investigation (importers, data schemas, user instruction) before allowing the action. Measu",
-      "ecc-parallel-execution-optimizer": "Use when the user wants a task done much faster through parallel work, concurrent agents, batched tool calls, isolated worktrees, or many independent verification lanes without los",
-      "ecc-skill-comply": "Visualize whether skills, rules, and agent definitions are actually followed — auto-generates scenarios at 3 prompt strictness levels, runs agents, classifies behavioral sequences,",
-      "ecc-tdd-workflow": "Use this skill when writing new features, fixing bugs, or refactoring code. Enforces test-driven development with 80%+ coverage including unit, integration, and E2E tests.。测试驱动开发TD",
+      "documentation-and-adrs": "记录架构决策(ADR)与文档：架构变更、API 变更、功能发布时留下未来可查的决策上下文",
+      "doubt-driven-development": "怀疑驱动开发：每个重要决策用新鲜上下文做对抗审查，生产/安全/不可逆场景必用",
+      "ecc-continuous-learning-v2": "【中】continuous-learning-v2 (中文翻译补充中, 见下方原英文). Instinct-based learning system that observes sessions via hooks, creates atomic instincts with confidence scoring, and evolves them int",
+      "ecc-eval-harness": "评测 harness 搭建。",
+      "ecc-gateguard": "行动前事实门控：阻止未经核实就直接 Edit/Write/Bash 的鲁莽操作，强制先调查再动手",
+      "ecc-parallel-execution-optimizer": "并行执行优化器：把独立子任务拆为并发 agent 同时跑，大幅提速且不损正确性",
+      "ecc-skill-comply": "可视化 skill/rule/agent 是否真正被遵守：自动生成测试场景并输出合规率报告",
       "eng-experts": "工程化专家团队口语翻译层 — 把\"卡帕西/资深 dev/架构师\"等口语关键词路由到 ~/.claude/agents/ 下 3 个工程化 expert agent（karpathy-discipline-expert / senior-developer-mindset / architect）。当用户说卡帕西/Karpathy/严格审查/资深 dev/架构",
       "engineering-scenario-router": "工程化场景智能路由器（含 super 入口）。把口语意图路由到正确的 skill/agent（super/超级入口/万能入口/超级大脑/不知道找谁/工程化/卡帕西/架构师/开工/排查/梳理/收口/deep-interview/ultrawork/ultraqa/ultragoal/ralph/autopilot/team/走1/活力全开/队长 等 51 触发",
       "full-checkup": "全面体检 — gated 自动化样板：口语触发→只读诊断自动跑→改配置前 HITL 确认→修复→复核。触发词：全面体检/系统体检/三连体检/给系统做个体检/体检一下/checkup/全面检查并修复。对齐 Claude 官方 plan-mode(只读先行)+ omc-hitl(人确认门),把 audit→better→harness 串成'诊断不需你管、改动必",
       "gh-ci-fix": "GitHub PR 的 CI 检查红灯时，定位失败→拉 Actions 日志→诊断根因→给修复计划(需批准)→实施→回验的闭环。纯 gh 原生命令(无脚本依赖)。仅处理 GitHub Actions，外部 provider(Buildkite等)只报 URL 不接管。触发词：CI失败/PR检查红灯/fix ci/CI红了/check failed/Actio",
-      "graphify": "any input (code, docs, papers, images, videos) to knowledge graph. Use when user asks any question about a codebase, documents, or project content - especially if graphify-out/ exi",
-      "grill-me": "Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan, g",
-      "grill-with-docs": "Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates documentation (CONTEXT.md, ADRs) inline as decisions crystallise. Us",
-      "gstack-careful": "Safety guardrails for destructive commands. (gstack)。破坏性命令安全护栏，删除/覆盖操作前必确认，防止误操作",
-      "gstack-cso": "Chief Security Officer mode. (gstack)。首席安全官模式，安全审查/CSO/安全策略",
-      "gstack-design-html": "Design finalization: generates production-quality Pretext-native HTML/CSS. (gstack)。设计定稿，生成生产级Pretext原生HTML/CSS（gstack）。触发词：HTML设计/CSS生成/设计定稿",
-      "gstack-freeze": "Restrict file edits to a specific directory for the session. (gstack) 将本次会话的文件编辑限定在指定目录，触发：冻结编辑范围/限制文件修改/lock 目录",
-      "gstack-guard": "Full safety mode: destructive command warnings + directory-scoped edits. (gstack)。全安全模式：危险命令警告+目录范围编辑限制（gstack）",
-      "gstack-investigate": "Systematic debugging with root cause investigation. (gstack)。系统化调试与根因调查，深度排查问题根源",
-      "gstack-land-and-deploy": "Land and deploy workflow. (gstack)。落地与部署工作流，发布/部署/上线",
-      "gstack-office-hours": "YC Office Hours — two modes. (gstack)。YC创业答疑——双模式（gstack）。触发词：YC/创业答疑/办公室时间",
-      "gstack-qa": "Systematically QA test a web application and fix bugs found. (gstack) 系统化 QA 测试 Web 应用并修复发现的 bug，触发：QA 测试/质量测试/测试 Web 应用",
-      "gstack-repo": "Fast headless browser for QA testing and site dogfooding. (gstack)。无头浏览器QA测试与站点自测（gstack）",
-      "gstack-review": "Pre-landing PR review. (gstack)。PR合并前代码审查，代码review、质量检查",
-      "gstack-ship": "Ship workflow: detect + merge base branch, run tests, review diff, bump VERSION, update CHANGELOG, commit, push, create PR. (gstack)。发布工作流：合并基础分支/运行测试/版本号/CHANGELOG/提交/推送/创建PR",
-      "handoff": "Compact the current conversation into a handoff document for another agent to pick up。将当前对话压缩为交接文档，供其他agent继续接手。触发词：交接/handoff/任务传递/会话交接",
+      "graphify": "把概念/代码转成知识图谱。",
+      "grill-me": "对计划或设计进行无情追问式深度审讯,触发:grill me/拷问我/压力测试方案/深度追问。",
+      "grill-with-docs": "方案压力测试:用项目领域模型与 ADR 决策记录挑战计划,同步更新 CONTEXT.md/ADR 文档。",
+      "gstack-careful": "破坏性命令安全护栏：执行删除、覆盖等危险操作前强制拦截并等待确认",
+      "gstack-cso": "首席安全官模式：OWASP 漏洞扫描、安全策略审查、全方位安全分析",
+      "gstack-design-html": "设计定稿工具：将视觉设计转化为生产级 HTML/CSS 代码",
+      "gstack-freeze": "将本次会话的文件编辑范围冻结到指定目录，防止误改其他文件",
+      "gstack-guard": "全安全模式：危险命令警告与编辑范围限制同时生效",
+      "gstack-investigate": "系统化调试与根因调查，专门处理\"为什么坏了\"类深度问题排查",
+      "gstack-land-and-deploy": "落地与部署工作流：代码合并到推上生产环境的完整闭环",
+      "gstack-office-hours": "YC 创业答疑双模式：一对一创始人辅导或团队集体问答",
+      "gstack-qa": "系统化 QA 测试 Web 应用，自动发现 bug 并给出修复方案",
+      "gstack-repo": "无头浏览器驱动的 QA 自测：像真实用户一样点击验证网站各项功能",
+      "gstack-review": "PR 合并前代码审查：检查 diff 质量、潜在问题与规范合规性",
+      "gstack-ship": "一键发布工作流：合并主干 → 跑测试 → 更新版本号与 CHANGELOG → 推送 → 创建 PR",
+      "handoff": "将当前对话压缩为结构化交接文档，让下一个 agent 无需上下文即可无缝接续",
       "humanize-chinese": "去 AI 味中文文本改写 — 评分/人性化/降AIGC/风格转换。触发：去AI味/降AIGC/论文降重/知网检测。",
       "humanizer": "Remove signs of AI-generated writing from text. Use when editing or reviewing text to make it sound more natural and human-written. Based on Wikipedia's comprehensive \"Signs of AI ",
-      "improve-codebase-architecture": "Find deepening opportunities in a codebase, informed by the domain language in CONTEXT.md and the decisions in docs/adr/. Use when the user wants to improve architecture, find refa",
-      "interview-me": "Extracts what the user actually wants instead of what they think they should want. Achieves this through one-question-at-a-time interview until ~95% confidence about the underlying",
-      "last30days": "Research what people actually say about any topic in the last 30 days. Pulls posts and engagement from Reddit, X, YouTube, TikTok, Hacker News, Polymarket, GitHub, and the web.。研究近",
+      "improve-codebase-architecture": "代码库架构改进建议。",
+      "interview-me": "通过结构化访谈澄清需求:从粗到细、按维度追问、明确边界与优先级。触发:需求澄清/不确定怎么做/先聊一下。",
+      "last30days": "【中】last30days (中文翻译补充中, 见下方原英文). \"Research what people actually say about any topic in the last 30 days. Pulls posts and engagement from Reddit, X, YouTube, TikTok, Hacker News, Po",
       "macos-automation": "macOS 桌面自动化——操作Finder/系统设置/截图/AppleScript/Shortcuts。触发词：打开应用、截图、系统设置、mac控制、桌面操作。",
       "marketing": "营销活动完整流水线 — SEO+推广+邮件+合规+KPI+多平台发布。说\"做营销/营销活动/推广/SEO\"触发",
       "memory-checkup": "记忆体检 — gated 自动化第 2 样板(记忆卫生链)。口语触发→只读诊断记忆完整率/孤儿碎片→改动前 HITL 确认→归档→复核。触发词：记忆体检/清记忆/记忆卫生/归档孤儿记忆/记忆碎片清理/记忆健康检查。复用 lib/memory-index-check.sh + lib/memory-orphan-triage.py,对齐 gated 范式(do",
       "memory-dream-consolidation": "Dream Consolidation（记忆整合）：后台定期清理重复、冲突、过期的记忆。灵感来自 Claude Code autoDream。触发词：记忆清理、dream consolidation、记忆整合、清理记忆",
-      "mmx-cli": "Use mmx to generate text, images, video, speech, and music via the MiniMax AI platform. Use when the user wants to create media content, chat with MiniMax models, perform web searc",
-      "mycc-selfheal": "Load when 用户说:自检/自愈/冲突修复/skill碰撞/重复skill/清重复/配置漂移/doctor修复/哪些skill重复了/重名冲突怎么清. Load when omc doctor reports skill conflicts or user wants to clean duplicate/legacy skills between ~",
+      "mmx-cli": "【中】mmx-cli (中文翻译补充中, 见下方原英文). Use mmx to generate text, images, video, speech, and music via the MiniMax AI platform. Use when the user wants to create media content, chat with Min",
+      "mycc-audit-pipeline": "mycc 67 维 8 大分组 dry-run 审计。1 句\"67 维 dry-run / mycc 67 维 / 8 大分组审计\"→自动跑 8 大分组(配置 12 + 技能 10 + hook 8 + agent 7 + 记忆 10 + 文档 8 + 工具 6 + 安全 6)→出 P0/P1/P2 健康报告。区别于 full-checkup 30 维 / ",
+      "mycc-selfheal": "mycc 自身问题自愈。",
       "mycc-skill-audit-cycle": "mycc Skill 工程化审计闭环（5步）— 审计→P1清单→用户决策→Agent并行修复→验证Workflow。月度自动触发（接入self-evolve-loop），用户说'开始修/fix skills/skill质量'即启动修复阶段。禁止跳过用户决策直接进入修复。",
       "neat-freak": "任务完成后自动三层对齐——项目文档↔CLAUDE.md↔跨会话记忆同步。解决'代码改7轮文档还停在第一版'的记忆腐烂。触发词：文档对齐、记忆同步、neat freak、整理文档。",
       "no-plugin-prompts": "不依赖任何插件的 6 步并行开发 Prompt 套件。在 Claude Code / 任意强模型环境中，纯 prompt 复现\"并行 + 高质量 + 不放弃\"的工程执行效果。适合团队复用、零依赖落地。触发词：不依赖插件 / 纯 prompt 模式 / 团队复用 prompt / 人肉并行。",
-      "notion-knowledge-capture": "Capture conversations and decisions into structured Notion pages; use when turning chats/notes into wiki entries, how-tos, decisions, or FAQs with proper linking. 将对话与决策整理为结构化 Noti",
-      "notion-spec-to-implementation": "Turn Notion specs into implementation plans, tasks, and progress tracking; use when implementing PRDs/feature specs and creating Notion plans + tasks from them。将Notion规格文档转化为实现计划和任",
+      "notion-knowledge-capture": "把对话与决策整理为结构化 Notion 页面,触发:沉淀到 Notion/整理笔记/决策日志/知识沉淀。",
+      "notion-spec-to-implementation": "Notion 规格说明 → 代码实现。",
       "nuwa-skill": "蒸馏任何人的思维方式——6路采集→3重验证→5层提取→生成人物视角分析。内置13位人物(乔布斯/马斯克/芒格/费曼等)。触发词：蒸馏、nuwa、思维方式、人物分析、决策模式。",
-      "observability-and-instrumentation": "Instruments code so production behavior is visible and diagnosable. Use when adding logging, metrics, tracing, or alerting. Use when shipping any feature that runs in production an",
+      "observability-and-instrumentation": "代码可观测性埋点：为生产代码添加日志、指标、链路追踪，让线上问题有据可查",
       "obsidian-vault": "在 Obsidian 仓库中搜索、创建和管理笔记，支持 wikilinks 和索引笔记。当用户希望在 Obsidian 中查找、创建或整理笔记时触发。关键词：Obsidian、笔记管理、wikilinks、知识库。",
       "omc-hitl": "Human-In-The-Loop 强制确认门控 — bypass 模式下关键决策点（生产/不可逆/大额）自动暂停等用户。说\"开 HITL/关键决策门控/重大操作前确认\"触发。",
-      "omc-plan": "Strategic planning with optional interview workflow。战略规划，支持访谈式工作流，制定计划/策略规划",
+      "omc-plan": "战略规划 skill：支持访谈式工作流，输出结构化的多步可执行计划",
       "omc-project-init": "为一个具体业务项目生成它专属的 Claude Code 能力体系（项目级 skill / MCP / hook / 铁律 / 规则）。先用 understand 工具完整吃透项目，再按 Claude 官方 project-level 机制，基于项目实际技术栈与业务，为它现做一批个性化补充能力。Use this whenever the user wants ",
       "omc-prompt-lib": "提示词库管理系统。保存 / 搜索 / 优化 / 融合用户的高质量 prompt。 自动相似度比对（>0.85 触发融合提示），qmd 向量搜索 + Notion 双存储。 支持从历史对话提炼优质 prompt 入库。",
-      "omc-reference": "OMC agent catalog, available tools, team pipeline routing, commit protocol, and skills registry. Auto-loads when delegating to agents, using OMC tools, orchestrating teams, making ",
-      "pricing-strategy": "Analyze and design pricing strategies including pricing models, competitive pricing analysis, willingness-to-pay estimation, and price elasticity. Use when setting prices, evaluati",
-      "prototype": "Build a throwaway prototype to flesh out a design before committing to it. Routes between two branches — a runnable terminal app for state/business-logic questions, or several radi",
-      "qwen-cli": "Use qwen (通义千问 Code CLI v0.17.1) to chat with Qwen models from the terminal for cross-model heterogeneous adversarial verification. Use when the user wants to add a 4th异构源 to ai-pa",
+      "omc-reference": "OMC agent 目录与工具清单：委派 agent、编排团队、查 skill 注册表时的权威参考",
+      "pricing-strategy": "【中】pricing-strategy (中文翻译补充中, 见下方原英文). \"Analyze and design pricing strategies including pricing models, competitive pricing analysis, willingness-to-pay estimation, and price elast",
+      "prototype": "原型快速搭建。",
+      "qwen-cli": "用 qwen (通义千问 Code CLI v0.17.1) 跨模型异构对抗验证。用于:加第 4 异构源到 ai-panel.sh (默认 panel = gemini/kimi/mmx/qwen) 或单跑 qwen 处理中文任务/通义/千问/aliyun。",
       "ra-qm-team": "合规/质量管理团队入口（RA/QM）— 路由到 5 个合规知识子技能：EU AI Act 风险分级、GDPR 数据权利、ISO 27001 ISMS、ISO 42001 AIMS、SOC 2 审计。任务涉及\"合规/认证/审计准备/数据保护/AI法案\"时使用。",
       "secretary-orchestrator": "副驾驶秘书 4 形态聚合入口 — 5/5 健康报告，perceive 数据点统计，greeter 打卡验证，tongues review 触发，quality-log 趋势，registry 项目状态。触发：用户问\"秘书\" / \"system health\" / \"MYCC 健康",
       "secretary-tongues": "高级专家小组 + 毒舌对抗风格秘书——每次主调度器给方案后，5 个独立 LLM 视角（架构师毒舌/产品经理毒舌/工程效率毒舌/安全/落地的PM）独立打 0-10 分并列出反对意见，输出\"毒舌综合 report\"给用户看。低 token（用 haiku 跑），高杠杆。触发：综合审计/全面升级/重大决策/用户问\"秘书觉得呢\"时按需调用。",
       "security-audit": "应用代码层安全审计——OWASP Top10 漏洞扫描 + STRIDE 威胁建模，静态分析注入/认证/密钥/SSRF/反序列化等风险，输出 P0-P2 分级修复清单。触发词：安全审计、安全审查、security audit、漏洞扫描、OWASP、威胁建模、STRIDE、查安全漏洞、代码安全。",
       "self-audit-loop": "任何主任务完成时自动自审5问，主动列盲点清单。触发：SubagentStop / 主任务声称完成 / 用户说'自审/audit-loop/自检一遍'。解决问题：完成信号过早、需用户追问才发现遗漏。",
-      "seo-audit": "When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions \"SEO audit,\" \"technical SEO,\" \"why am I not ranking,\" \"SEO issues,\" \"on-",
-      "shipping-and-launch": "Prepares production launches. Use when preparing to deploy to production. Use when you need a pre-launch checklist, when setting up monitoring, when planning a staged rollout, or w",
+      "seo-audit": "【中】seo-audit (中文翻译补充中, 见下方原英文). When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions \"SEO audit,\" \"technical SEO,\" \"why am I ",
+      "shipping-and-launch": "发布/上线流程。",
       "skill-audit": "第三方 Skill 安全审计 — 安装前检查 skill 的安全性、权限需求、与现有能力的重复度。V26.3融合skill-judge 6维评分。当用户要安装新 skill/plugin/MCP 时自动激活。关键词：skill审计、安全检查、安装前检查、审计skill、安全扫描。",
-      "slides": "Create strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, and contextual slide strategies. 创建战略级 HTML 演示文稿，触发：做 PPT/做幻灯片/做演示/制作 sl",
+      "slides": "PPT/Slide 生成。",
       "smart-closure": "任务闭环 SOP — 按任务类型自动判断并执行对应验证/提交档位（三档：L1对话/L2显式/L3高风险）",
       "smart-flow-all": "Smart-Flow V46.3 全模式统一入口（队长=此入口）：说\"队长\"自动按需融合 YOLO全权限+ceo-mode/teams路由+Plan Graph编排器+Queue任务依赖+深度调研≥3层默认+铁律1-12全保护。Intent Schema解析→场景识别→复杂度路由→execution_mode传递→方案菜单→路由执行",
       "social-publisher": "多平台社媒发布编排 — X/LinkedIn/小红书/朋友圈/公众号/B站。说\"发推文/发小红书/发朋友圈/多平台发布\"触发",
-      "source-driven-development": "Grounds every implementation decision in official documentation. Use when you want authoritative, source-cited code free from outdated patterns. Use when building with any framewor",
+      "source-driven-development": "以官方文档为唯一依据驱动开发，用框架或库时杜绝过时 API 与错误模式",
       "sp-brainstorming": "Socratic 需求澄清 skill — 强迫用户输出具体 spec，禁\"我想要 X\"式模糊需求。触发词：脑暴/socratic/明确需求/具体化/想清楚",
-      "sp-requesting-code-review": "Use when completing tasks, implementing major features, or before merging. Mandatory: after each task in sp-subagent-driven-development. superpowers 方法论吸收 · V53 P1-C A 方案 · 2026-06",
-      "sp-subagent-driven-development": "Use when executing implementation plans with independent tasks in the current session. Fresh subagent per task + two-stage review (spec compliance + code quality). superpowers 方法论吸",
+      "sp-requesting-code-review": "按 superpowers 方法论在每个 task 完成后或 PR 前触发规范 code review 流程",
+      "sp-subagent-driven-development": "每个任务派独立 subagent 并行执行，含两阶段 review（spec 合规 + 代码质量），不打断用户",
       "sp-test-driven-development": "TDD 红绿重构 skill — 先写失败测试（红）→ 最小实现（绿）→ 重构（保持绿）。触发词：TDD/红绿重构/测试驱动/先写测试",
-      "sp-writing-plans": "Use when you have a spec or requirements for a multi-step task, before touching code. Bite-Sized Task Granularity (2-5 min/step) + TDD + checkbox tracking. superpowers 方法论吸收 · V53 ",
+      "sp-writing-plans": "将需求拆解为每步 2-5 分钟的细粒度任务列表，含 TDD 标注与复选框进度跟踪",
       "spec-generator": "口语需求→结构化 Spec/PRD。用户说\"帮我想清楚/分析需求/写规格/做个PRD/产品规格\"时触发。引导式访谈+结构化输出，吸收 GSD discuss+plan 思想。",
       "start-work": "工程化协作中心入口 — 用户说\"开工/开干/做工程化/启动项目/项目化\"时激活。本 skill 是\"manager 中心\"的轻量实现（≤120 行，避中台化）：调起 planner(opus) → 拉 3 工程化专家(karpathy/senior-dev/architect)并行 → 走 3 验证(test-engineer/code-reviewer/v",
       "systematic-error-analysis": "七维系统化错误分析——5W2H+第一性原理+多专家交叉论证+复发熔断升级。任何错误≥2次复发自动激活。触发词：又报错、反复错误、同样问题、400错误、一直失败、error loop、复发、syserr",
       "task-closer": "任务收口 SOP — 5 维自评 + 反推测扫描 + ★最优推荐 + 闭环归档。触发词：\"收口\"/\"闭环\"/\"任务结束\"/\"验收\"/\"close task\"/\"wrap up\"。",
       "teach": "Teach the user a new skill or concept, within this workspace.。在工作区内教学，讲解技能/概念，学习、教学、解释知识",
-      "team": "N coordinated agents on shared task list using Claude Code implicit agent teams。N个协调Agent共享任务列表，Claude Code隐式团队协作",
+      "team": "同一任务列表上协同工作的 N 个并发 agent 团队，共享进度互不阻塞",
       "team-prompt-template": "Agent Teams 团队 Prompt 7 字段模板。触发词：开 team、多人协作、并行做、team prompt、agent teams、跨域协同、拆任务。吸收自《Claude Code Agent Teams 实战：怎么拆任务、控权限、收证据》(2026-05-27)，结合 OMC V28 四步骨架。",
       "teleport": "跨会话上下文跳转——从当前会话提炼关键上下文（目标/进度/决策/阻塞），打包注入新会话，实现无缝接力。触发词：teleport、上下文跳转、跨会话、接力、打包上下文。",
-      "test-driven-development": "Drives development with tests. Use when implementing any logic, fixing any bug, or changing any behavior. Use when you need to prove that code works, when a bug report arrives, or ",
+      "test-driven-development": "以测试驱动开发,覆盖任何逻辑实现、Bug 修复或行为变更。触发词:TDD/测试驱动开发/单元测试/修复 Bug。",
       "to-issues": "把 plan/spec/PRD 拆成可独立认领的 issue（tracer-bullet 垂直切片）。触发：拆 issue/创建 ticket/拆任务。",
       "token-budget": "Token预算自动管理(ECC增强: +战略压缩建议+成本追踪+CoD) — 监控context→主动压缩/清理→成本预警。当context>60%或对话>30轮时自动激活。关键词：token管理、节省token、上下文爆炸、省token、token budget、成本、cost。",
-      "triage": "Triage issues through a state machine driven by triage roles. Use when user wants to create an issue, triage issues, review incoming bugs or feature requests, prepare issues for an",
-      "ui-styling": "Create beautiful, accessible user interfaces with shadcn/ui components (built on Radix UI + Tailwind), Tailwind CSS utility-first styling, and canvas-based visual designs. Use when",
-      "ui-ux-pro-max": "UI/UX design intelligence for web and mobile. Includes 50+ styles, 161 color palettes, 57 font pairings, 161 product types, 99 UX guidelines, and 25 chart types across 10 stacks (R",
+      "triage": "问题分诊/优先级排序。",
+      "ui-styling": "UI 样式细节调整。",
+      "ui-ux-pro-max": "高质量 UI/UX 设计与实现。",
       "update-all": "一键更新所有 Claude Code 相关组件：OMC、plugins、npm 全局包、MCP servers。自动发现新安装的组件并纳入更新流程。",
       "vercel-react-best-practices": "Vercel React/Next.js 性能优化最佳实践。写/重构/审查 React/Next.js 时触发。",
       "web-access": "智能联网能力——5层通道调度(WebSearch→WebFetch→Jina→CDP→子Agent)+中文平台反爬(小红书/知乎/公众号)+站点经验积累。触发词：上网查、搜索、联网、web access、查资料。",
       "xhs-operations-method": "小红书运营方法论（人工可执行版，非自动化）。覆盖养号7天SOP、8级流量池机制、爆款四要素、六类标题公式、关键词选题、违禁词规避、转化率优化。触发词：小红书运营/小红书养号/小红书涨粉/爆款标题/小红书选题/xhs运营/小红书笔记/小红书引流/小红书种草",
-      "zoom-out": "Tell the agent to zoom out and give broader context or a higher-level perspective. Use when you're unfamiliar with a section of code or need to understand how it fits into the bigg"
+      "zoom-out": "放大视野获取更广上下文,理解代码整体架构和全局视角。",
+      "ecc-tdd-workflow": "TDD 开发工作流：新功能/修 bug/重构时强制先写失败测试，覆盖率要求 80%+ 含 E2E"
     },
     "skill_categories": {
       "dev": [
@@ -1694,7 +1977,6 @@
         "deploy-ship",
         "diagnose",
         "doubt-driven-development",
-        "ecc-tdd-workflow",
         "gstack-land-and-deploy",
         "gstack-ship",
         "improve-codebase-architecture",
@@ -1726,6 +2008,7 @@
       ],
       "security": [
         "audit-all-better",
+        "mycc-audit-pipeline",
         "mycc-skill-audit-cycle",
         "security-audit",
         "self-audit-loop",
@@ -1771,6 +2054,7 @@
         "caveman",
         "cmmi-tracker",
         "completion-self-check",
+        "comprehensive-upgrade",
         "ecc-skill-comply",
         "grill-me",
         "humanize-chinese",
@@ -1864,6 +2148,7 @@
       "dev-pipeline",
       "judge-panel",
       "harness-audit",
+      "mycc-audit-pipeline",
       "overseas-compliance",
       "boardroom",
       "comprehensive-upgrade"
@@ -1917,9 +2202,9 @@
       "captain",
       "evolution-scout",
       "needs-analyst",
-      "product-manager",
       "project-director",
-      "technical-writer"
+      "technical-writer",
+      "user-training-specialist"
     ],
     "orchestration": {
       "entry_points": [
@@ -2003,19 +2288,19 @@
     }
   },
   "hooks": {
-    "total_files": 52,
+    "total_files": 59,
     "by_event": {
-      "PreToolUse": 12,
+      "PreToolUse": 7,
       "SubagentStop": 3,
-      "UserPromptSubmit": 9,
+      "UserPromptSubmit": 1,
       "SessionStart": 7,
-      "PostToolUse": 6,
-      "Stop": 4,
+      "PostToolUse": 7,
+      "Stop": 6,
       "PostToolUseFailure": 2,
       "PermissionRequest": 1,
       "PreCompact": 1,
       "PostCompact": 1,
-      "SessionEnd": 2,
+      "SessionEnd": 3,
       "SubagentStart": 1,
       "StopFailure": 1,
       "MessageDisplay": 1
