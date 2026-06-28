@@ -1,0 +1,15 @@
+# dashboard-tests/.gitignore
+# 排除 venv / pytest cache / omc runtime cache
+# 不入 git，clone 后用 `python3 -m venv .venv && pip install pytest requests` 重建
+
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+*.pyd
+.omc/
+.omc-cache/
+*.egg-info/
+.coverage
+htmlcov/
