@@ -161,38 +161,73 @@ class TestCrossSectionConsistency:
     def test_skill_count_single_canonical(self, section_index):
         """skill 总数必须只用一个口径 (149 OR 156, 不能并存).
 
-        149 = mycc-stats.json SSoT 实时数字 (本机).
-        156 = 早期 P0 阶段数字, 现已废.
-        147 = FALLBACK_COUNTS (dashboard L1370 内嵌), 已废.
+        149 = mycc-stats.json SSoT 实时数字 (本机) ← SSoT
+        156 = 早期 P0 阶段数字, dashboard.html L1065 在 <code> 标签内诚实披露
+        147 = FALLBACK 内嵌残留 (P1-2 commit 7573599 同步 dashboard L1370 后,
+               dashboard.html L782/L832 hero subtitle 的 "147 skill" 硬编码未跟进)
 
-        实际 dashboard.html 同时含 147/149/156 → 矛盾未修.
-        PM 共识 #9 + 本测试实证已 hard fail 一次. 当前标 xfail,
-        等 P1-2 (全局 Top-3 + 数字归一) 落地后改 strict.
+        实际 dashboard.html 同时含 147/149/156 → 三口径并存.
+        PM 共识 #9 + 本测试实证已 hard fail 多次 (P1-1 commit cc0e888 时).
 
-        反讽 R2: 多模型一致 ≠ 自动执行. dashboard 修改属 P1 范围外,
-        保留 bug 在测试里显眼暴露, 不静默放行.
+        P1-2 决策 (用户钦定): 按 SSoT 149 归一, 但保留 156 注释作诚实披露.
+
+        反讽 R2: 多模型一致 ≠ 自动执行. dashboard 全文数字归一属 P1-2.x
+        范围, 保留 xfail 但 stderr 详细报告, 让工程师看清三口径位置.
         """
         # 找所有形如 "skill N" / "N skill" 的 token
         skill_pattern = re.compile(r"\b(\d{2,3})\s*(?:个\s*)?skill", re.IGNORECASE)
         secondary_pattern = re.compile(r"skill[^\d]{0,8}(\d{2,3})", re.IGNORECASE)
 
-        seen = set()
+        # 数字 → [(section_id, is_disclosure), ...] 列表
+        # is_disclosure=True 表示该数字紧邻 <code> 标签 (诚实披露模式,
+        # 例如 L1065 "<code>capability-activation-map.md</code> 标 156 skill 含 7 个 platform"
+        # 数字 156 在 </code> 之后但属于 code 引用的延伸说明)
+        occurrences: dict[int, list[tuple[str, bool]]] = {}
         for sid, body in section_index.items():
             for m in skill_pattern.finditer(body):
-                seen.add(int(m.group(1)))
+                # 简化判定: token 之前 80 字符内最近一个 </code> 距离 <=30
+                # (紧邻 code 引用后的说明文字)
+                before = body[max(0, m.start() - 80):m.start()]
+                last_close_in_before = before.rfind("</code>")
+                distance_to_close = (m.start() - max(0, m.start() - 80)) - last_close_in_before
+                is_disclosure = last_close_in_before >= 0 and distance_to_close <= 30
+                for g in m.groups():
+                    if g and 100 <= int(g) <= 200:
+                        occurrences.setdefault(int(g), []).append((sid, is_disclosure))
             for m in secondary_pattern.finditer(body):
-                seen.add(int(m.group(1)))
+                before = body[max(0, m.start() - 80):m.start()]
+                last_close_in_before = before.rfind("</code>")
+                distance_to_close = (m.start() - max(0, m.start() - 80)) - last_close_in_before
+                is_disclosure = last_close_in_before >= 0 and distance_to_close <= 30
+                if m.group(1) and 100 <= int(m.group(1)) <= 200:
+                    occurrences.setdefault(int(m.group(1)), []).append((sid, is_disclosure))
 
-        # 滤掉 false-positive (如 1949 年份)
-        plausible = {n for n in seen if 100 <= n <= 200}
+        # 滤掉 false-positive (年份等)
+        plausible = {n: locs for n, locs in occurrences.items() if 100 <= n <= 200}
 
-        # stderr: 让工程师看到全部口径
-        print(
-            f"\n⚠️  SKILL 多口径并存: {sorted(plausible)} "
-            f"(SSoT=149 mycc-stats.json). 等 P1-2 数字归一后改 strict."
-        )
+        # stderr: 让工程师看到全部口径 + 位置 + 是否诚实披露
+        print("\n=== skill 多口径分布 ===")
+        for n in sorted(plausible):
+            locs_str = ", ".join(
+                f"{sid}{'(code)' if in_code else '(main)'}"
+                for sid, in_code in plausible[n]
+            )
+            print(f"  {n}: {len(plausible[n])}× at {locs_str}")
+        print("=" * 30)
 
-        if len(plausible) > 1:
-            pytest.xfail(
-                f"skill 多口径并存 {sorted(plausible)}, 待 P1-2 归一 (SSoT=149)"
+        # 严格断言 (P1-2 commit 7573599 同步 FALLBACK 后, dashboard.html
+        # L782/L832 的 hero subtitle "147 skill" 也已归一, 只剩 149 + 156 诚实披露):
+        # - SSoT=149 必须 0 main 位出现 (即不是数字断言, 只验证非 SSoT)
+        # - 156 允许在 <code> 标签附近 (诚实披露), 不允许在 main 位
+        # - 其他非 SSoT 数字 (147/151/...) 必须 0 出现
+        non_sso_main = {
+            n: [l for l in plausible[n] if not l[1]]
+            for n in plausible if n != 149
+        }
+        non_sso_main_with_occ = {n: locs for n, locs in non_sso_main.items() if locs}
+        if non_sso_main_with_occ:
+            pytest.fail(
+                f"skill 数字非 SSoT=149 仍出现在 main 位 (用户可见): "
+                f"{non_sso_main_with_occ}. "
+                f"允许 <code> 标签附近的诚实披露 (如 L1065 'capability-activation-map.md 标 156')."
             )
