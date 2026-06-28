@@ -130,11 +130,11 @@ body {
       <a class="btn" href="README.html">📖 了解 MYCC</a>
     </div>
     <div class="hero-meta">
-      <span class="badge badge-accent">Claude Code 2.1.193</span>
-      <span class="badge badge-purple">oh-my-claudecode 4.15.0</span>
+      <span class="badge badge-accent" id="idx-cc-ver">Claude Code …</span>
+      <span class="badge badge-purple" id="idx-omc-ver">oh-my-claudecode …</span>
       <span class="badge">7 本场景手册</span>
-      <span class="badge">148 个 Skills</span>
-      <span class="badge">52 个 Agents</span>
+      <span class="badge"><span id="idx-skills">—</span> 个 Skills</span>
+      <span class="badge"><span id="idx-agents">—</span> 个 Agents</span>
     </div>
   </div>
 </section>
@@ -144,24 +144,24 @@ body {
   <div class="container">
     <div class="section-header">
       <h2 class="section-title">📊 MYCC 一图看懂</h2>
-      <p class="section-subtitle">数据源 mycc-stats.json · 自动生成 · 截至 2026-06-26</p>
+      <p class="section-subtitle">数据源 mycc-stats.json · 自动生成 · <span id="idx-gen-at">加载中…</span></p>
     </div>
     <div class="grid grid-2" style="grid-template-columns: repeat(4, 1fr);">
       <div class="card card-priority">
         <div class="metric">
-          <span class="metric-value">148</span>
+          <span class="metric-value" id="idx-m-skills">—</span>
           <span class="metric-label">Skills · 8 大类</span>
         </div>
       </div>
       <div class="card card-priority">
         <div class="metric">
-          <span class="metric-value">52</span>
+          <span class="metric-value" id="idx-m-agents">—</span>
           <span class="metric-label">Agents · CEO+核心+专家</span>
         </div>
       </div>
       <div class="card card-priority">
         <div class="metric">
-          <span class="metric-value">50</span>
+          <span class="metric-value" id="idx-m-hooks">—</span>
           <span class="metric-label">Hooks · 14 类事件</span>
         </div>
       </div>
@@ -215,7 +215,7 @@ body {
       <!-- 资深 -->
       <a class="card zone-card z-pro" href="03-全能力清单-Skills+MCP+插件.html">
         <div class="zone-icon">🔧</div>
-        <div class="zone-title">资深 · 盘点 148 个 Skills / MCP / 插件</div>
+        <div class="zone-title">资深 · 盘点 <span id="idx-z-skills">—</span> 个 Skills / MCP / 插件</div>
         <p class="zone-desc">全能力清单 + 5 大高级功能(队长 / CEO / 经理 / 秘书 / 超级入口)
         + 9 部分 36 章唐霜权威指南。直达 <strong>03-全能力清单</strong>。</p>
         <span class="zone-cta">进入全能力清单</span>
@@ -239,9 +239,38 @@ body {
 
 <footer class="site-footer">
   <div class="container">
-    <span>MYCC · MYCC 全能力入口 · Claude Code 2.1.193 · oh-my-claudecode 4.15.0 · 官方直连</span>
+    <span>MYCC · MYCC 全能力入口 · <span id="idx-f-cc">Claude Code …</span> · <span id="idx-f-omc">oh-my-claudecode …</span> · 官方直连</span>
     <span>设计 · Fraunces · Inter · JetBrains Mono</span>
   </div>
 </footer>
+<script>
+(async () => {
+  try {
+    const r = await fetch('mycc-stats.json', { cache: 'no-store' });
+    const d = await r.json();
+    const c = d.counts || {};
+    const v = d.version || {};
+    const fill = (id, val) => { const el = document.getElementById(id); if (el && val != null) el.textContent = val; };
+    const ccVer = v.claude_code ? v.claude_code.replace(' (Claude Code)', '') : '—';
+    const omcVer = v.omc || '—';
+    fill('idx-cc-ver',  'Claude Code ' + ccVer);
+    fill('idx-omc-ver', 'oh-my-claudecode ' + omcVer);
+    fill('idx-skills',  c.skills);
+    fill('idx-agents',  c.agents_total);
+    fill('idx-m-skills', c.skills);
+    fill('idx-m-agents', c.agents_total);
+    fill('idx-m-hooks',  c.hooks_registered);
+    fill('idx-z-skills', c.skills);
+    fill('idx-f-cc',  'Claude Code ' + ccVer);
+    fill('idx-f-omc', 'oh-my-claudecode ' + omcVer);
+    if (d.generated_at) {
+      const dt = new Date(d.generated_at);
+      fill('idx-gen-at', '截至 ' + dt.toLocaleDateString('zh-CN', { year:'numeric', month:'2-digit', day:'2-digit' }));
+    }
+  } catch (e) {
+    console.warn('[index] stats load failed:', e.message);
+  }
+})();
+</script>
 </body>
 </html>
