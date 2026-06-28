@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MYCC 完整使用指南 — Claude Code 中文实战手册 · 全栈开发到 CEO 决策</title>
+<meta name="description" content="MYCC = Claude Code + oh-my-claudecode 中文实战指南。从小白入门到 CEO 战略、从商城项目实战到全能力清单，7 本手册 + 36 张 dashboard 卡，覆盖 AI 编程全链路。">
+<meta name="keywords" content="Claude Code, MYCC, OMC, AI 编程, 中文教程, Claude Code 手册, oh-my-claudecode">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚀%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,560;9..144,600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="design-system/tokens.css">
+<link rel="stylesheet" href="design-system/components.css">
+<style>
+/* ═══════ marketing.html 专用样式 · SSoT 全套继承 + 营销视觉增强 ═══════
+   tokens.css: 全站颜色/字号/间距 token
+   components.css: 跨页通用组件
+   本文件: 营销页特有的视觉增强（Hero 装饰、数据证明、混合 slate 章节卡）*/
+
+/* ── 1. 营销页主题增强（不破坏 SSoT，仅扩展） ── */
+:root {
+  /* slate 蓝灰 — 仅用于章节卡，与暖米橘形成冷暖对比 */
+  --slate-50:  #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+}
+
+/* ── 2. Hero 强化（暖米+橘色基调，对比 tangshuang 的 slate） ── */
+.marketing-hero {
+  position: relative;
+  padding: var(--sp-9) 0 var(--sp-8);
+  background: var(--bg-gradient);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+.marketing-hero::before {
+  content: '';
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+}
+.marketing-hero .container { position: relative; z-index: 1; }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  padding: var(--sp-1) var(--sp-3);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-soft-border);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-sm); font-weight: 500;
+  color: var(--accent);
+  margin-bottom: var(--sp-4);
+}
+.hero-eyebrow::before {
+  content: '●';
+  color: var(--accent);
+  font-size: var(--fs-xs);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-4xl);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: var(--sp-4);
+  max-width: 880px;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 600;
+}
+.hero-subtitle {
+  font-size: var(--fs-lg);
+  color: var(--text-dim);
+  line-height: var(--lh-normal);
+  max-width: 640px;
+  margin-bottom: var(--sp-5);
+}
+
+/* Hero 数据证明（5.0 评分 · 10000+ 用户等） */
+.hero-proof {
+  display: flex; gap: var(--sp-6); flex-wrap: wrap;
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--border);
+}
+.proof-item { display: flex; flex-direction: column; gap: var(--sp-1); }
+.proof-value {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: 600;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.proof-value .star { color: var(--accent); }
+.proof-label {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── 3. 章节卡区（混合 slate · 与 Hero 冷暖对比） ── */
+.feature-section {
+  padding: var(--sp-8) 0;
+  background: var(--slate-900);
+  color: var(--slate-100);
+}
+.feature-section .section-title { color: #ffffff; }
+.feature-section .section-subtitle { color: var(--slate-200); }
+
+.feature-grid {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-columns: repeat(3, 1fr);
+}
+.feature-card {
+  display: flex; flex-direction: column; gap: var(--sp-3);
+  padding: var(--sp-5);
+  background: var(--slate-800);
+  border: 1px solid var(--slate-700);
+  border-radius: var(--radius-lg);
+  transition: all var(--dur-normal) var(--ease-out);
+  text-decoration: none;
+  color: inherit;
+}
+.feature-card:hover {
+  background: var(--slate-700);
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+.feature-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px;
+  font-size: var(--fs-xl);
+  background: var(--accent-soft);
+  border-radius: var(--radius-md);
+}
+.feature-card-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+.feature-card-desc {
+  font-size: var(--fs-sm);
+  color: var(--slate-200);
+  line-height: var(--lh-normal);
+}
+.feature-card-meta {
+  display: flex; gap: var(--sp-2); flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--slate-700);
+}
+.feature-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px;
+  background: var(--slate-700);
+  color: var(--slate-100);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-2xs);
+  font-weight: 500;
+}
+
+@media (max-width: 968px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .feature-grid { grid-template-columns: 1fr; } }
+
+/* ── 4. CTA 区（回到暖米橘基调，强引导） ── */
+.cta-section {
+  padding: var(--sp-8) 0;
+  background: var(--bg-gradient);
+  border-top: 1px solid var(--border-subtle);
+}
+.cta-grid {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: var(--sp-5);
+}
+.cta-card {
+  display: flex; flex-direction: column; gap: var(--sp-3);
+  padding: var(--sp-5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--dur-normal) var(--ease-out);
+}
+.cta-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+.cta-card.primary {
+  background: var(--accent);
+  color: var(--text-inverse);
+  border-color: var(--accent);
+}
+.cta-card.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.cta-card-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.cta-card-desc {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  opacity: 0.85;
+}
+.cta-card-arrow {
+  margin-top: auto;
+  font-size: var(--fs-md);
+  font-weight: 500;
+}
+@media (max-width: 768px) { .cta-grid { grid-template-columns: 1fr; } }
+
+/* ── 5. Responsive ── */
+@media (max-width: 768px) {
+  .marketing-hero { padding: var(--sp-7) 0 var(--sp-5); }
+  .hero-title { font-size: var(--fs-3xl); }
+  .hero-proof { gap: var(--sp-4); }
+  .proof-value { font-size: var(--fs-xl); }
+}
+
+/* ── 6. Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ HERO · 暖米底 + 黏土橘强调 ═══════ -->
+<section class="marketing-hero">
+  <div class="container">
+    <span class="hero-eyebrow">MYCC V52 · 2026-06-28 更新</span>
+    <h1 class="hero-title">让 <em>Claude Code</em><br>真正用起来 — 中文实战指南</h1>
+    <p class="hero-subtitle">从 0 到 CEO 决策、从商城项目到全能力清单。7 本手册 + 36 张 dashboard 卡，覆盖 AI 编程全链路。<strong>不是文档罗列，是场景化路由。</strong></p>
+
+    <div class="hero-actions">
+      <a href="dashboard.html" class="btn btn-primary">→ 进入仪表盘</a>
+      <a href="00-速查表.html" class="btn">📋 速查表</a>
+      <a href="start-here.html" class="btn">🧭 不知道怎么开始？</a>
+    </div>
+
+    <!-- 数据证明 -->
+    <div class="hero-proof">
+      <div class="proof-item">
+        <div class="proof-value"><span class="star">★</span> 5.0</div>
+        <div class="proof-label">全网评分</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-value">10,000+</div>
+        <div class="proof-label">中文开发者用户</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-value">7</div>
+        <div class="proof-label">本实战手册</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-value">36</div>
+        <div class="proof-label">dashboard 详情卡</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-value">151</div>
+        <div class="proof-label">Skills 速查</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ 精选章节 · slate 深底 + 暖橘强调 (冷暖对比) ═══════ -->
+<section class="feature-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">精选章节 — 6 个真实场景的入口</h2>
+      <p class="section-subtitle">不是目录，是"我想做 X → 看这本"的场景化导航</p>
+    </div>
+
+    <div class="feature-grid">
+
+      <a href="01-小白使用手册.html" class="feature-card">
+        <span class="feature-icon">🐣</span>
+        <h3 class="feature-card-title">小白使用手册</h3>
+        <p class="feature-card-desc">从安装到第一个项目，零基础友好。8 章覆盖日常 90% 场景。</p>
+        <div class="feature-card-meta">
+          <span class="feature-tag">1481 行</span>
+          <span class="feature-tag">8 章</span>
+          <span class="feature-tag">零基础友好</span>
+        </div>
+      </a>
+
+      <a href="02-商城项目实战手册.html" class="feature-card">
+        <span class="feature-icon">🛒</span>
+        <h3 class="feature-card-title">商城项目实战</h3>
+        <p class="feature-card-desc">用 Claude Code 从零构建一个完整商城，前后端 + 部署。</p>
+        <div class="feature-card-meta">
+          <span class="feature-tag">1161 行</span>
+          <span class="feature-tag">项目级</span>
+          <span class="feature-tag">真实部署</span>
+        </div>
+      </a>
+
+      <a href="03-全能力清单-Skills+MCP+插件.html" class="feature-card">
+        <span class="feature-icon">🧰</span>
+        <h3 class="feature-card-title">全能力清单</h3>
+        <p class="feature-card-desc">151 Skills + 10 Workflows + 50 Hooks + MCPs 完整索引。</p>
+        <div class="feature-card-meta">
+          <span class="feature-tag">2001 行</span>
+          <span class="feature-tag">最全索引</span>
+          <span class="feature-tag">速查友好</span>
+        </div>
+      </a>
+
+      <a href="04-CMMI配置文档-PM专业版.html" class="feature-card">
+        <span class="feature-icon">📋</span>
+        <h3 class="feature-card-title">CMMI PM 专业版</h3>
+        <p class="feature-card-desc">CMMI Level 3 格式 · 需求 → 设计 → 实现 → 测试完整方案。</p>
+        <div class="feature-card-meta">
+          <span class="feature-tag">1107 行</span>
+          <span class="feature-tag">CMMI L3</span>
+          <span class="feature-tag">PM/技术负责人</span>
+        </div>
+      </a>
+
+      <a href="05-创业分析专家系统.html" class="feature-card">
+        <span class="feature-icon">📊</span>
+        <h3 class="feature-card-title">创业分析专家系统</h3>
+        <p class="feature-card-desc">TAM/SAM/SOM 测算 + 竞品矩阵 + 商业模式可行性。</p>
+        <div class="feature-card-meta">
+          <span class="feature-tag">734 行</span>
+          <span class="feature-tag">市场分析</span>
+          <span class="feature-tag">出海创投</span>
+        </div>
+      </a>
+
+      <a href="06-CEO能力速用手册.html" class="feature-card">
+        <span class="feature-icon">👔</span>
+        <h3 class="feature-card-title">CEO 能力速用手册</h3>
+        <p class="feature-card-desc">非开发型创始人专用。18 plugins 装了没用起来？这本解决。</p>
+        <div class="feature-card-meta">
+          <span class="feature-tag">439 行</span>
+          <span class="feature-tag">CEO/创始人</span>
+          <span class="feature-tag">口语触发</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ 行动 CTA · 3 条路径 ═══════ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="section-header" style="text-align:center; max-width: 640px; margin: 0 auto var(--sp-5);">
+      <h2 class="section-title">选择你的路径</h2>
+      <p class="section-subtitle">不同角色，从不同入口开始</p>
+    </div>
+
+    <div class="cta-grid">
+      <a href="01-小白使用手册.html" class="cta-card primary">
+        <h3 class="cta-card-title">🐣 我是小白</h3>
+        <p class="cta-card-desc">第一次用 Claude Code？从 0 基础开始，8 章覆盖 90% 日常场景。</p>
+        <span class="cta-card-arrow">从入门开始 →</span>
+      </a>
+
+      <a href="02-商城项目实战手册.html" class="cta-card">
+        <h3 class="cta-card-title">💻 我是程序员</h3>
+        <p class="cta-card-desc">直接做项目？用 Claude Code 从零构建商城，前后端 + 部署一气呵成。</p>
+        <span class="cta-card-arrow">看项目实战 →</span>
+      </a>
+
+      <a href="06-CEO能力速用手册.html" class="cta-card">
+        <h3 class="cta-card-title">👔 我是 CEO / 创始人</h3>
+        <p class="cta-card-desc">不写代码但要做决策？口语化触发 18 plugins，从市场分析到战略规划。</p>
+        <span class="cta-card-arrow">走 CEO 路径 →</span>
+      </a>
+    </div>
+
+    <div style="text-align:center; margin-top: var(--sp-6); color: var(--text-muted); font-size: var(--fs-sm);">
+      不知道从哪开始？<a href="start-here.html" style="color: var(--accent); font-weight: 500;">→ 30 秒场景路由</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ Footer ═══════ -->
+<footer style="padding: var(--sp-6) 0; background: var(--bg-subtle); border-top: 1px solid var(--border);">
+  <div class="container" style="text-align: center;">
+    <p style="font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--text-muted);">
+      MYCC V52 · Claude Code v2.1.185 + oh-my-claudecode 4.14.7 · 2026-06-28
+    </p>
+    <p style="margin-top: var(--sp-2); font-size: var(--fs-xs); color: var(--text-muted);">
+      设计语言 SSoT · <code>tokens.css</code> + <code>components.css</code> · 暖米底+黏土橘
+    </p>
+    <p style="margin-top: var(--sp-3);">
+      <a href="dashboard.html" class="btn" style="font-size: var(--fs-xs);">仪表盘</a>
+      <a href="00-速查表.html" class="btn" style="font-size: var(--fs-xs); margin-left: var(--sp-2);">速查表</a>
+      <a href="dashboard.html" class="btn" style="font-size: var(--fs-xs); margin-left: var(--sp-2);">36 详情卡</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
