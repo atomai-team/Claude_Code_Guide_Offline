@@ -28,16 +28,9 @@ import pytest
 HARD_FAIL_DRIFT_PCT = 20.0  # > 20% drift = dashboard 矛盾, 必须 fail
 WARN_DRIFT_PCT = 10.0       # > 10% drift = 警告, xfail
 
-# 已知漂移字段 (2026-06-29 实测 + QA-validator 边界修复捕获): 先以 xfail 标记,
-# 等 P1-2 (dashboard 数字归一) 完成后改为 strict. 此处 schema 只声明 (fb, expected_pct),
-# live_val 实时从 stats_json 取 — 避免 XFAIL 硬编码 live 漂成误导数据.
-KNOWN_DRIFT_XFAIL = {
-    # key: (fallback_val, expected_pct_close, reason)
-    "hooks_registered":     (54, -22.0, "stats 引擎 V53 重构后从 54 → 42, dashboard FALLBACK 未跟进"),
-    "intent_words_routes":  (95,  12.5, "intent-words 路由新增 12 条 (95 → 107), FALLBACK 未跟进"),
-    # 2026-06-29 QA-validator P0 边界 bug 修复后捕获: `>=` 命中
-    "agents_core":          ( 5,  20.0, "agents 核心角色新增 1 个 (5 → 6), FALLBACK 未跟进"),
-}
+# 历史遗留 (P1-2 commit 7573599 已删 dashboard.html L1370-1375 漂移字段):
+# 此 dict 留空, parametrize 自动零参数化, 未来新增漂移时再添加.
+KNOWN_DRIFT_XFAIL: dict[str, tuple] = {}
 
 
 # ─────────────────────────────────────────────────────────────────
@@ -101,16 +94,17 @@ class TestStatsParity:
         Code-reviewer P0 修: live_val 实时从 stats_json 取 (不再硬编码),
         expected_pct_close 用 ±容差. 下次 stats 跑过值变化, 测试仍准确.
         """
+        # 临时 stub: KNOWN_DRIFT_XFAIL 已空 (P1-2 commit 7573599 删 dashboard.html 漂移).
+        # 保留 parametrize 框架, 未来新漂移时往 dict 加 key 即可激活.
+        if not KNOWN_DRIFT_XFAIL:
+            pytest.skip("KNOWN_DRIFT_XFAIL 已空 (P1-2 dashboard.html 同步后无漂移)")
         fb_val, expected_pct, reason = KNOWN_DRIFT_XFAIL[key]
         actual_live = stats_json_local["counts"][key]
         actual_pct = (actual_live - fb_val) / fb_val * 100
-
-        # stderr 输出让工程师看到 (xfail 也打印)
         print(
             f"\n⚠️  KNOWN DRIFT [{key}]: fallback={fb_val} → live={actual_live} "
             f"({actual_pct:+.1f}%, expected ≈{expected_pct:+.1f}%) | reason: {reason}"
         )
-        # xfail: 这个测试现在 fail 是预期, 等升级
         pytest.xfail(reason=f"待 P1-2 同步 FALLBACK 后升级 strict: {reason}")
 
     def test_all_other_keys_drift_within_threshold(
