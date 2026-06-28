@@ -82,6 +82,55 @@
   color: var(--text-dim);
 }
 
+/* ── 3.1 Section 节奏 (P1-3 Designer #1 · 11 section 全覆盖) ── */
+/* 每个 section 开头视觉分隔: 左对齐色条 (2-3px) + motto 短句 (8-12 字)
+   6 色循环: cyan / orange / accent / green / purple / blue
+   节奏锚点: macOS 设置 1px hairline + 30px 留白 (Apple HIG 范式) */
+.section-rhythm {
+  position: relative;
+  padding: var(--sp-5) 0 var(--sp-3);
+  margin-bottom: var(--sp-5);
+  border-top: 1px solid var(--border-subtle);
+}
+.section-rhythm::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0;
+  width: 48px; height: 2px;
+  background: var(--cyan);
+}
+.section-rhythm--cyan::before   { background: var(--cyan); }
+.section-rhythm--orange::before { background: var(--orange); }
+.section-rhythm--accent::before { background: var(--accent); }
+.section-rhythm--green::before  { background: var(--green); }
+.section-rhythm--purple::before { background: var(--purple); }
+.section-rhythm--blue::before   { background: var(--blue); }
+.section-rhythm__motto {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  margin-bottom: var(--sp-2);
+}
+
+/* ── 3.2 Section 末尾锚点 (P1-3 · 4/6 section 末尾 "← 上一节 · 下一节 →") ── */
+.section-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-top: var(--sp-7);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border-subtle);
+  font-size: var(--fs-sm);
+}
+.section-pager a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.section-pager a:hover { color: var(--accent-hover); text-decoration: underline; }
+.section-pager__placeholder { visibility: hidden; }
+
 /* ── 4. 数据展示 ── */
 .metric {
   display: flex; flex-direction: column; gap: var(--sp-1);
@@ -127,6 +176,11 @@
 .callout-warn   { border-color: var(--orange); background: var(--orange-soft); }
 .callout-error  { border-color: var(--red);    background: var(--red-soft); }
 .callout-success{ border-color: var(--green);  background: var(--green-soft); }
+
+/* ── 6.1 Callout 扩展变体 (P1-3 Designer #1 · 6 section 6 色轮换) ── */
+.callout-accent { border-color: var(--accent); background: var(--accent-soft); }   /* 黏土橘 · s-knowledge */
+.callout-purple { border-color: var(--purple); background: var(--purple-soft); }   /* 紫 · s-brains */
+.callout-blue   { border-color: var(--blue);   background: var(--blue-soft);   }   /* 蓝 · s-architecture */
 
 /* ── 7. Modal (点击示例放大) ── */
 .modal-overlay {
