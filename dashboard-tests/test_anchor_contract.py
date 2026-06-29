@@ -21,6 +21,8 @@ from pathlib import Path
 
 import pytest
 
+from conftest import GZIP_SERVER
+
 # dashboard.html 路径（相对本测试文件）
 DASHBOARD_PATH = Path(__file__).parent.parent / "dashboard.html"
 
@@ -121,10 +123,10 @@ class TestHttpServing:
     """HTTP server 健康契约测试（验证 serve-gzip.py 是否在跑）"""
 
     def test_gzip_server_optional(self):
-        """serve-gzip server 在 18766 是可选的（不强依赖）"""
+        """serve-gzip server 在 GZIP_SERVER (默认 18766) 是可选的（不强依赖）"""
         try:
             req = urllib.request.Request(
-                "http://127.0.0.1:18766/dashboard.html",
+                f"{GZIP_SERVER}/dashboard.html",
                 headers={"Accept-Encoding": "gzip"}
             )
             with urllib.request.urlopen(req, timeout=3) as resp:

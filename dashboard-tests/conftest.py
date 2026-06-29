@@ -1,10 +1,11 @@
 """Shared pytest fixtures for dashboard-tests.
 
 SSoT (Single Source of Truth) for test data fetching:
-- Single HTTP endpoint: http://127.0.0.1:18771 (gzip-capable, see serve-gzip.py)
+- Single HTTP endpoint: http://127.0.0.1:18766 (gzip-capable, see serve-gzip.py default)
 - Single fixture per resource: avoids 11→N+ redundant fetches
 - requests lib auto-decodes gzip via Accept-Encoding header
 - Fallback to filesystem read if server down (graceful degradation)
+- DASHBOARD_GZIP_URL env var 可覆盖 (本地开发用 18771 等其他端口)
 """
 import json
 import os
@@ -18,7 +19,7 @@ import requests
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DASHBOARD_HTML = REPO_ROOT / "dashboard.html"
 STATS_JSON = REPO_ROOT / "mycc-stats.json"
-GZIP_SERVER = os.environ.get("DASHBOARD_GZIP_URL", "http://127.0.0.1:18771")
+GZIP_SERVER = os.environ.get("DASHBOARD_GZIP_URL", "http://127.0.0.1:18766")
 
 # 让 dashboard-tests/*.py 可直接 `import validate_stats` 等 lib/ 模块 (M1-2 2026-06-29)
 LIB_DIR = REPO_ROOT / "lib"

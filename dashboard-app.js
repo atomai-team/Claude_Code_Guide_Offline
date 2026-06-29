@@ -1267,7 +1267,7 @@ async function fetchRetry(url, opts = {}, n = 3) {
       last_err = e;
     }
     if (i < n - 1) {
-      const delay = Math.min(200 * Math.pow(2, i), 2000);  // 退避 200ms (i=1) / 400ms (i=2), 上限 2s
+      const delay = Math.min(200 * Math.pow(2, i), 2000);  // 退避 200ms (i=0) / 400ms (i=1), i=2 不 sleep 直接 throw, 上限 2s
       await new Promise(res => setTimeout(res, delay));
       console.warn(`[obs] fetch ${url} retry ${i + 1}/${n - 1} after ${delay}ms`);
     }

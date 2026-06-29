@@ -20,6 +20,8 @@ from datetime import datetime, timezone
 
 import pytest
 
+from conftest import GZIP_SERVER
+
 
 # ─────────────────────────────────────────────────────────────────
 # 配置: 阈值 + drift 容忍名单 (启动时实测后填, 工程师 review)
@@ -222,7 +224,7 @@ class TestStatsFreshness:
 # ─────────────────────────────────────────────────────────────────
 
 class TestLiveHttpParity:
-    """http://127.0.0.1:18766 (gzip) fetch 必须与本地文件 byte-for-byte 一致.
+    """GZIP_SERVER (默认 http://127.0.0.1:18766) fetch 必须与本地文件 byte-for-byte 一致.
 
     抓 gzip 透明契约: 若 serve-gzip.py 忘了透传 (用户 curl --compressed 才解码),
     dashboard 拉到的就是 gzip 字节, JSON.parse 炸. 接力包验证陷阱已实证.
@@ -248,6 +250,6 @@ class TestLiveHttpParity:
             pytest.skip("gzip server unreachable")
         # stats_json_live fixture 内部用 requests, 我们重测 Content-Type
         import requests
-        r = requests.get("http://127.0.0.1:18766/mycc-stats.json", timeout=3)
+        r = requests.get(f"{GZIP_SERVER}/mycc-stats.json", timeout=3)
         ct = r.headers.get("Content-Type", "")
         assert "json" in ct.lower(), f"Content-Type 不含 json: {ct!r}"

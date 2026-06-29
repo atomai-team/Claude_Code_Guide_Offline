@@ -6,8 +6,7 @@
 - 里程碑渲染
 - hero stats 数字非 '—'
 
-依赖: serve-gzip.py (18766 CI / 18771 本地), DASHBOARD_GZIP_URL 环境变量
-端口与路径 SSoT: dashboard-tests/conftest.py (GZIP_SERVER, REPO_ROOT)
+依赖: serve-gzip.py (default 18766, DASHBOARD_GZIP_URL 可覆盖), 端口与路径 SSoT: dashboard-tests/conftest.py
 """
 import pytest
 import requests
