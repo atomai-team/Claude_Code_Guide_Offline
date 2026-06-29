@@ -100,9 +100,22 @@
   let ticking = false;
   const onSpy = () => {
     ticking = false;
-    const ref = (header ? header.offsetHeight : 56) + 24;  // header 下方一点的参考线
-    let current = sections[0];
-    for (const sec of sections) { if (sec.getBoundingClientRect().top <= ref) current = sec; } // 取最后一个越过参考线的 section
+    // 算法 v4 (task #19 第三次修正): 找"第一个 top ≥ 0 的 section", 取其**前一个**
+    // 行业标准 scrollspy: 当前正在看的 section = 视口里最靠近顶部未越界 section
+    // 实测 scrollIntoView({block:'start'}) 后 #s-tasks top=73 (header 高度), 后面 sections 全 top < 0
+    let current = sections[0];  // 默认第一个 (顶部未滚动时)
+    for (let i = 0; i < sections.length; i++) {
+      const top = sections[i].getBoundingClientRect().top;
+      if (top >= 0) {
+        current = i > 0 ? sections[i - 1] : sections[0];
+        break;
+      }
+      // 此 section 已滚出顶部 (top < 0), 继续找
+    }
+    if (current.getBoundingClientRect().top < 0) {
+      // 全部 section 顶部都 < 0 (已滚到很后面), 兜底取最后一个
+      current = sections[sections.length - 1];
+    }
     if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = sections[sections.length - 1]; // 底部兜底
     setActive(current);
   };

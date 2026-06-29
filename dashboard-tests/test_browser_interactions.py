@@ -103,13 +103,12 @@ class TestScrollspyBrowser:
         active = page_loaded.query_selector_all(".side-nav .nav-link.active")
         assert len(active) >= 1, "顶部时至少 1 个 nav-link 应 .active"
 
-    @pytest.mark.xfail(reason="scrollspy 算法 bug (dashboard-app.js L30-34): 滚到 s-tasks 时激活其后 section (s-architecture), 应修算法取'当前滚到的 section'而非'最后≤ref'", strict=False)
     def test_scroll_deep_activates_deep_link(self, page_loaded):
         """滚到 #s-tasks (看板) → 对应 nav-link 应激活.
 
-        实现注 (2026-06-29): scrollspy 用"≤ ref 最后一个"位置法 (dashboard-app.js L30-34),
-        scrollIntoView({block:'start'}) 让 #s-tasks top=0, 但若其后 #s-architecture top 已跨参考线,
-        会激活 #s-architecture. 故断言用 tolerance: "#s-tasks 或其后任意 section".
+        算法修正后 (dashboard-app.js L101-114 task #19):
+        取"第一个 top > ref 之前一个" — 滚到 s-tasks 顶时, s-tasks top=0 ≤ ref,
+        下个 section (s-architecture) top 仍 > ref (s-tasks 内容很高), 所以激活 #s-tasks ✓
         """
         # scrollIntoView
         result = page_loaded.evaluate("""
@@ -127,25 +126,14 @@ class TestScrollspyBrowser:
         target_link = page_loaded.query_selector('.side-nav .nav-link[href="#s-tasks"]')
         assert target_link is not None, "找不到指向 #s-tasks 的 nav-link"
 
-        # 拿到 active hrefs + nav-link 顺序 (按 DOM 排)
+        # 严格断言: scrollspy 修正后, 滚到 #s-tasks 顶部应激活 #s-tasks 自身
         active_hrefs = page_loaded.evaluate("""
             () => [...document.querySelectorAll('.side-nav .nav-link.active')]
                   .map(l => l.getAttribute('href'))
         """)
-        all_hrefs = page_loaded.evaluate("""
-            () => [...document.querySelectorAll('.side-nav .nav-link')]
-                  .map(l => l.getAttribute('href'))
-        """)
-        # tolerance: "#s-tasks 或其后任意"  (scrollspy 算法特性, 见 dashboard-app.js L30-34)
-        if "#s-tasks" in all_hrefs:
-            t_idx = all_hrefs.index("#s-tasks")
-            acceptable = all_hrefs[t_idx:]   # #s-tasks 及其后所有 nav-link
-        else:
-            acceptable = ["#s-tasks"]
-        hit = any(h in acceptable for h in active_hrefs)
-        assert hit, (
-            f"scroll 到 #s-tasks 后 active 应至少包含其自身或后续 (tolerance); "
-            f"active={active_hrefs}, acceptable={acceptable}"
+        assert "#s-tasks" in active_hrefs, (
+            f"scroll 到 #s-tasks 后 active 应严格包含 #s-tasks (算法已修); "
+            f"actual active={active_hrefs}"
         )
 
 
