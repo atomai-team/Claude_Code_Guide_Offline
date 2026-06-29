@@ -407,6 +407,10 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
       <a href="#s-brains" class="nav-link">五大智能大脑</a>
       <a href="#s-architecture" class="nav-link">四系统架构宪法</a>
     </div>
+    <div class="nav-group">
+      <span class="nav-group-title">⑦ 任务看板</span>
+      <a href="#s-tasks" class="nav-link">任务看板 · ToDo</a>
+    </div>
   </nav>
 </aside>
 <div class="nav-backdrop" id="navBackdrop"></div>
@@ -1286,6 +1290,34 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
   </div>
 </section>
 
+<section class="section container" id="s-tasks">
+  <h2 class="section-title">任务看板 · ToDo</h2>
+  <p class="section-desc">工程级全局任务状态 · 数据源 <code>project-ledger.json</code> 单向投影 · <strong>只读</strong></p>
+
+  <div class="hero-stats" style="margin-bottom:var(--sp-6)">
+    <div class="hero-stat"><span class="hs-num" id="bt-doing">—</span><span class="hs-label">进行中</span></div>
+    <div class="hero-stat"><span class="hs-num" id="bt-blocked">—</span><span class="hs-label">卡点</span></div>
+    <div class="hero-stat"><span class="hs-num" id="bt-done">—</span><span class="hs-label">已完成</span></div>
+    <div class="hero-stat"><span class="hs-num" id="bt-evidence">—</span><span class="hs-label">有证据闭环</span></div>
+  </div>
+
+  <div id="bt-kanban" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--sp-4);margin-bottom:var(--sp-6)">
+    <p style="color:var(--text-dim);font-size:var(--fs-sm)">加载中…</p>
+  </div>
+
+  <h3 style="font-weight:700;font-size:var(--fs-base);margin-bottom:var(--sp-3)">里程碑</h3>
+  <div id="bt-milestones" style="margin-bottom:var(--sp-6)">—</div>
+
+  <details style="margin-top:var(--sp-2)">
+    <summary style="cursor:pointer;font-weight:600;color:var(--text);padding:var(--sp-2) 0;border-bottom:1px solid var(--border);margin-bottom:var(--sp-4);list-style:none;display:flex;align-items:center;gap:var(--sp-2)">
+      <span id="bt-details-arrow" style="transition:transform .2s">▸</span> 卡点 · 决策笔记 · 闭环统计
+    </summary>
+    <div id="bt-blockers" style="margin-bottom:var(--sp-4)"></div>
+    <div id="bt-notes" style="margin-bottom:var(--sp-4)"></div>
+    <div id="bt-closure"></div>
+  </details>
+</section>
+
 </main>
 
 <!-- ═══ Footer ═══ -->
@@ -1351,6 +1383,6 @@ const FALLBACK_COUNTS = {
 };
 const FALLBACK_VERSION = { claude_code: '2.1.195', omc: '4.15.0', cc_switch: 'OFF', stats_engine: 'V53' };
 </script>
-<script src="dashboard-app.js?v=20260629"></script>
+<script src="dashboard-app.js?v=20260629b"></script>
 </body>
 </html>

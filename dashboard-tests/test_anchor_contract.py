@@ -66,6 +66,7 @@ class TestAnchorContract:
         "s-health",
         "s-brains",
         "s-architecture",
+        "s-tasks",
     ]
 
     # s-catalog 是 div 不是 section（s-docs 内嵌），需特殊处理

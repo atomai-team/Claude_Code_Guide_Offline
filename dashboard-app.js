@@ -96,6 +96,7 @@
 
 let STATS = { counts: FALLBACK_COUNTS, lists: {}, version: FALLBACK_VERSION, generated_at: new Date().toISOString() };
 let DETAILS = null;
+let BOARD = null;
 
 async function loadStats() {
   try {
@@ -679,10 +680,121 @@ document.addEventListener('input', e => {
 })();
 
 /* ════════════════════════════════════════════════════════════════════
+   Board Tasks · board-tasks.json 看板数据
+   ════════════════════════════════════════════════════════════════════ */
+
+async function loadBoardTasks() {
+  try {
+    const r = await fetch('board-tasks.json', { cache: 'no-store' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    BOARD = await r.json();
+    console.log('[board] board-tasks.json loaded');
+  } catch (e) {
+    console.warn('[board] fetch failed:', e.message);
+  }
+  renderBoardTasks();
+}
+
+function renderBoardTasks() {
+  if (!BOARD) return;
+  const { kanban, milestones, blockers, notes, closure } = BOARD;
+
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('bt-doing',   (kanban?.['进行中'] || []).length);
+  set('bt-blocked', (blockers || []).length);
+  set('bt-done',    (kanban?.['审核中'] || []).length);
+  set('bt-evidence', closure?.with_evidence ?? '—');
+
+  // Kanban 四列
+  const kanbanEl = document.getElementById('bt-kanban');
+  if (kanbanEl && kanban) {
+    const cols    = ['待规划', '待办', '进行中', '审核中'];
+    const dotClr  = { '待规划': '#6b7280', '待办': '#f59e0b', '进行中': 'var(--accent)', '审核中': '#10b981' };
+    kanbanEl.innerHTML = cols.map(col => {
+      const cards   = kanban[col] || [];
+      const visible = cards.slice(0, col === '审核中' ? 5 : 30);
+      const rest    = cards.length - visible.length;
+      return `<div class="card" style="min-height:100px">
+        <div style="display:flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-3)">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${dotClr[col]};flex-shrink:0"></span>
+          <span style="font-weight:700;font-size:var(--fs-sm)">${esc(col)}</span>
+          <span style="color:var(--text-dim);font-size:var(--fs-xs)">(${cards.length})</span>
+        </div>
+        ${cards.length === 0 ? `<p style="color:var(--text-dim);font-size:var(--fs-xs);text-align:center">— 暂无 —</p>` : ''}
+        ${visible.map(c => `<div style="font-size:var(--fs-xs);padding:var(--sp-2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:var(--sp-2);background:var(--surface)">
+          <div style="font-weight:600">${esc(c.id)} · ${esc(c.title)}</div>
+          <div style="color:var(--text-dim);margin-top:2px">${esc(c.group)}</div>
+          ${c.closure_badge ? `<div style="color:var(--text-dim)">[${esc(c.closure_badge)}]</div>` : ''}
+          ${c.blocker ? `<div style="color:#ef4444;font-weight:600">⚠ ${esc(c.blocker)}</div>` : ''}
+        </div>`).join('')}
+        ${rest > 0 ? `<p style="color:var(--text-dim);font-size:var(--fs-xs);text-align:center">… 还有 ${rest} 项</p>` : ''}
+      </div>`;
+    }).join('');
+  }
+
+  // 里程碑
+  const milestonesEl = document.getElementById('bt-milestones');
+  if (milestonesEl && milestones) {
+    const icon = { done: '✅', doing: '🔄', todo: '⬜', blocked: '🚫' };
+    milestonesEl.innerHTML = `<div style="display:flex;flex-direction:column;gap:var(--sp-2)">
+      ${milestones.map(m => `<div style="display:flex;gap:var(--sp-3);align-items:flex-start;padding:var(--sp-2) var(--sp-3);border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface)">
+        <span style="flex-shrink:0">${icon[m.status] || '⬜'}</span>
+        <div><span style="font-weight:600;font-size:var(--fs-sm)">${esc(m.id)} · ${esc(m.title)}</span>${m.evidence ? `<code style="margin-left:var(--sp-2);font-size:var(--fs-xs);color:var(--text-dim)">${esc(m.evidence)}</code>` : ''}</div>
+      </div>`).join('')}
+    </div>`;
+  }
+
+  // 卡点
+  const blockersEl = document.getElementById('bt-blockers');
+  if (blockersEl && blockers && blockers.length) {
+    blockersEl.innerHTML = `<h4 style="font-weight:700;font-size:var(--fs-sm);margin-bottom:var(--sp-2)">卡点 (${blockers.length})</h4>
+      <div style="display:flex;flex-direction:column;gap:var(--sp-2)">
+      ${blockers.map(b => `<div style="display:flex;gap:var(--sp-2);padding:var(--sp-2) var(--sp-3);border-left:3px solid #ef4444;background:var(--surface);border-radius:0 var(--radius-sm) var(--radius-sm) 0">
+        <span style="font-size:var(--fs-xs);font-weight:600;color:var(--text-dim);flex-shrink:0">${esc(b.id)}</span>
+        <span style="font-size:var(--fs-xs)">${esc(b.title)}</span>
+        ${b.ref ? `<code style="margin-left:auto;font-size:var(--fs-xs);color:var(--text-dim);flex-shrink:0">${esc(b.ref)}</code>` : ''}
+      </div>`).join('')}
+    </div>`;
+  }
+
+  // 决策笔记
+  const notesEl = document.getElementById('bt-notes');
+  if (notesEl && notes && notes.length) {
+    notesEl.innerHTML = `<h4 style="font-weight:700;font-size:var(--fs-sm);margin-bottom:var(--sp-2);margin-top:var(--sp-4)">最近决策笔记 (${notes.length})</h4>
+      <div style="display:flex;flex-direction:column;gap:var(--sp-2)">
+      ${notes.map(n => `<div style="font-size:var(--fs-xs);padding:var(--sp-2) var(--sp-3);border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface)">
+        <span style="color:var(--text-dim);margin-right:var(--sp-2)">${esc(n.date)}</span>${esc(n.note)}
+      </div>`).join('')}
+    </div>`;
+  }
+
+  // 闭环统计
+  const closureEl = document.getElementById('bt-closure');
+  if (closureEl && closure) {
+    const pct = closure.total ? Math.round(closure.with_evidence / closure.total * 100) : 0;
+    closureEl.innerHTML = `<h4 style="font-weight:700;font-size:var(--fs-sm);margin-bottom:var(--sp-2);margin-top:var(--sp-4)">闭环统计</h4>
+      <div style="display:flex;gap:var(--sp-5);font-size:var(--fs-xs)">
+        <span>有证据 <strong>${closure.with_evidence}</strong></span>
+        <span>无证据 <strong>${closure.without_evidence}</strong></span>
+        <span>总计 <strong>${closure.total}</strong></span>
+        <span>闭环率 <strong>${pct}%</strong></span>
+      </div>`;
+  }
+
+  // details 展开箭头动画
+  const det = document.querySelector('#s-tasks details');
+  const arrow = document.getElementById('bt-details-arrow');
+  if (det && arrow) {
+    det.addEventListener('toggle', () => {
+      arrow.style.transform = det.open ? 'rotate(90deg)' : '';
+    });
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════
    Init
    ════════════════════════════════════════════════════════════════════ */
 (async function() {
-  await loadStats();
-  await loadDetails();
+  await Promise.all([loadStats(), loadDetails(), loadBoardTasks()]);
   startAutoRefresh();
 })();
