@@ -418,6 +418,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
       <a href="#s-entries" class="nav-link">11 高频入口<span class="nav-primer">新</span></a>
       <a href="#s-advanced-examples" class="nav-link">高级实战 5 例<span class="nav-primer">新</span></a>
       <a href="#s-paradigms" class="nav-link">3 范式对比<span class="nav-primer">新</span></a>
+      <a href="#s-agent-teams" class="nav-link">👥 Agent Teams<span class="nav-primer">新</span></a>
       <a href="#s-orchestration" class="nav-link">编排架构图<span class="nav-primer">新</span></a>
       <a href="#s-advanced" class="nav-link">高级指令专题<span class="nav-primer">新</span></a>
     </div>
@@ -1195,6 +1196,22 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
       <p class="deep-note"><strong>反讽 R5</strong>:memory-index-check 误报 101 真实孤儿 61 — 因 .archive/ 软链 + 索引刷新滞后。已修(2026-06-25 neat-freak+audit-all-better 接线)。详情 <a href="#s-knowledge" class="deep-inline">§s-knowledge 本机知识</a>。</p>
     </div>
 
+    <!-- 块 E · CLAUDE.md 5 类章节 + 12 规则分布 (F6) -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 E · CLAUDE.md 5 类章节 + 12 规则分布 (#2 路 0.72 conf · 反讽标注)</div>
+      <h3 class="deep-block-title">CLAUDE.md 改什么让错误率降? 行为约束/技术栈/命令/工作流/历史教训</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">① 行为约束</span><span class="deep-row-text"><span class="deep-row-name">不做什么 · 反讽 R5 例: "不要重命名导出的 API 除非任务明确要求" (具体可执行)</span><span class="deep-row-when">→ 反模式: 空泛规则 "注意安全" → 失约束力 · 出处 #2.1 L29-31</span></span></div>
+        <div class="deep-row"><span class="deep-key">② 技术栈</span><span class="deep-row-text"><span class="deep-row-name">Node 22.x / pnpm / ts-jest / prettier 3.4.x 等锁定版本</span><span class="deep-row-when">→ 反讽 R1: 案例数据自报 41%→3%, <strong>非论文级独立验证</strong>, 标"案例口径"</span></span></div>
+        <div class="deep-row"><span class="deep-key">③ 命令</span><span class="deep-row-text"><span class="deep-row-name">最常用 5-10 个命令 + 完整命令清单路径</span><span class="deep-row-when">→ 出处 #2.1 5 类章节 · 详见 <a href="#s-commands-deep" class="deep-inline">§s-commands-deep</a></span></span></div>
+        <div class="deep-row"><span class="deep-key">④ 工作流</span><span class="deep-row-text"><span class="deep-row-name">4 阶段 Explore→Plan→Implement→Commit · Explore 阶段限"别改文件"</span><span class="deep-row-when">→ 出处 #4.4 4 阶段 · 详见 <a href="#s-architecture" class="deep-inline">§s-architecture</a></span></span></div>
+        <div class="deep-row"><span class="deep-key">⑤ 历史教训</span><span class="deep-row-text"><span class="deep-row-name">本项目踩过的坑 + 修复 commit hash</span><span class="deep-row-when">→ 反讽 R5: 必具体到 commit, 不要"以前出过问题"</span></span></div>
+        <div class="deep-row"><span class="deep-key">12 规则分布示例</span><span class="deep-row-text"><span class="deep-row-name">#2.4 社区口径: 行为 3 + 技术栈 2 + 版本 1 + 工作流 4 + 质量门 2</span><span class="deep-row-when">→ 反讽 R1: <strong>12 是社区口径非 Anthropic 官方</strong> · 本机 mycc-core.md 12 铁律结构更工程</span></span></div>
+        <div class="deep-row"><span class="deep-key">CLAUDE.md 三层结构</span><span class="deep-row-text"><span class="deep-row-name">根目录 80-120 行 (高频行为+核心命令) + <code>docs/agent/</code> (project.md/conventions.md 事实层) + <code>docs/agent/tasks/</code> (migrations.md/api-endpoint.md/release-checklist.md 任务流程层)</span><span class="deep-row-when">→ 出处 #4.7 综合手册 · 详见 <a href="#s-knowledge" class="deep-inline">§s-knowledge 块 E</a></span></span></div>
+      </div>
+      <p class="deep-note"><strong>反讽 R1 标注 (#2 路 0.72 conf)</strong>: ① 41%→3% = <strong>Mnimiy 自报口径, 非论文级独立验证</strong>, 引用必标"案例数据·非独立基准" ② Dreaming 配置字段 GA 前未稳定 (仅 PDF 描述), <strong>不可当稳定功能引</strong> ③ 12 条 = 社区口径非 Anthropic 官方, 本机 mycc-core.md 12 铁律 <strong>结构更工程</strong> · 反讽 R5: "诚实披露"原则强于"假装完美"。</p>
+    </div>
+
   </div>
 </section>
 
@@ -1265,6 +1282,53 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
         <div class="deep-row"><span class="deep-key">总和 · 77 commits / 7d</span><span class="deep-row-text"><span class="deep-row-name">日均 11 次 commit</span><span class="deep-row-when">→ 历史最高 7 天 · 看板 + 知识 + 体检 三轴并行开发</span></span></div>
       </div>
       <p class="deep-note"><strong>反讽标注</strong>:热度 Top-1 是 dashboard 本身 — 这正是<a href="#s-tasks" class="deep-inline">#s-tasks 看板</a>出现的根因(本机项目管理中枢 = 自我指涉)。dashboard 不是"被看板管理的对象",而是"看板的样板项目"。</p>
+    </div>
+
+    <!-- 块 E · 配置即代码 7 构件 (F4 卡 1) -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 E · 配置即代码 7 构件 (#3+#4 路 0.85 双源印证)</div>
+      <h3 class="deep-block-title">CLAUDE.md / rules / commands / agents / hooks / skills / MCP</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">① CLAUDE.md</span><span class="deep-row-text"><span class="deep-row-name">每次加载 · 项目全局约束/命令/风格偏好</span><span class="deep-row-when">→ 必填 · 本机 <code>~/.claude/CLAUDE.md</code> · <strong>禁改 model/enabledPlugins/env.ANTHROPIC_*</strong></span></span></div>
+        <div class="deep-row"><span class="deep-key">② rules/</span><span class="deep-row-text"><span class="deep-row-name">每会话硬注入 · 治理铁律</span><span class="deep-row-when">→ 本机 11 条 [active] · 改前必写 change-log.jsonl</span></span></div>
+        <div class="deep-row"><span class="deep-key">③ commands/</span><span class="deep-row-text"><span class="deep-row-name">显式调用 · 带验收的可重复流程</span><span class="deep-row-when">→ markdown 文件 · $ARGUMENTS 注入 · frontmatter 配 description/argument-hint/allowed-tools</span></span></div>
+        <div class="deep-row"><span class="deep-key">④ agents/</span><span class="deep-row-text"><span class="deep-row-name">委派执行 · 隔离上下文</span><span class="deep-row-when">→ 58 个本机 agent · 调研/审查/验证 拆出去</span></span></div>
+        <div class="deep-row"><span class="deep-key">⑤ hooks/</span><span class="deep-row-text"><span class="deep-row-name">事件触发 · 必须发生的动作</span><span class="deep-row-when">→ 45 hook / 17 event / 61 file · 格式化/lint/阻断 类</span></span></div>
+        <div class="deep-row"><span class="deep-key">⑥ skills/</span><span class="deep-row-text"><span class="deep-row-name">上下文自动触发 · 领域知识/团队约定</span><span class="deep-row-when">→ 149 skill · 36 可自动触发 · 120 disable-model-invocation 休眠</span></span></div>
+        <div class="deep-row"><span class="deep-key">⑦ MCP</span><span class="deep-row-text"><span class="deep-row-name">连接外部系统</span><span class="deep-row-when">→ 4 server + 插件 MCP · chrome-devtools/firecrawl/qmd/github/notion/semgrep</span></span></div>
+      </div>
+      <p class="deep-note"><strong>Skill 治理 5 条规则</strong>(来自 #4.7 综合手册): ① 3 次以上稳定流程才沉淀 ② 必须有版本号 ③ 必须含测试 ④ 30 天未用标 stale ⑤ 90 天未用自动归档 ⑥ 第三方 Skill 必先人工审 · <strong>讨论的是流程本身,不是谁更会写 prompt</strong>。</p>
+    </div>
+
+    <!-- 块 F · Skills 9 类型 9 铁律 (F4 卡 2) -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 F · Skills 9 类型 9 铁律 (#3.2 + #3.6 双源印证)</div>
+      <h3 class="deep-block-title">Anthropic 官方机制 · 渐进式披露</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">9 类型</span><span class="deep-row-text"><span class="deep-row-name">Anthropic Skills 系统综述 + 实战指南 双源印证</span><span class="deep-row-when">→ #3.2 L48-72 + #3.6 L219-246 描述逐字一致 → <strong>HIGH 双源印证</strong></span></span></div>
+        <div class="deep-row"><span class="deep-key">9 铁律</span><span class="deep-row-text"><span class="deep-row-name">Anthropic Skills 实战指南 #3.2 列出 9 条</span><span class="deep-row-when">→ 双向印证 #3.6 一致 · <strong>HIGH 双源印证</strong></span></span></div>
+        <div class="deep-row"><span class="deep-key">SKILL.md 头部字段</span><span class="deep-row-text"><span class="deep-row-name"><code>name</code>(必填) + <code>description</code>(最关键, 路由规则+触发词) + <code>allowed-tools</code>(收敛执行面)</span><span class="deep-row-when">→ + <code>context: fork</code>(隔离噪音) + <code>user-invocable</code>(是否暴露 /xxx)</span></span></div>
+        <div class="deep-row"><span class="deep-key">渐进式披露</span><span class="deep-row-text"><span class="deep-row-name">启动只读 name/description → 命中才加载 SKILL.md → 执行中按需读 references/ 或跑 scripts/</span><span class="deep-row-when">→ <strong>最强不是"更会说"而是"更确定"</strong> · 确定性工作交给脚本, 模型只编排判断</span></span></div>
+        <div class="deep-row"><span class="deep-key">反讽 R1</span><span class="deep-row-text"><span class="deep-row-name">默认 <strong>5min 缓存 TTL</strong> + <strong>100KB context 注入上限</strong> (作者未提)</span><span class="deep-row-when">→ 实际"按需加载"不是无限制 · Skill 取代 90% 提示词模板 = 营销倾向, 实际解决流程稳定性, 不解决模型判断力</span></span></div>
+        <div class="deep-row"><span class="deep-key">5 常见坑</span><span class="deep-row-text"><span class="deep-row-name">① 入口文件太长 ② description 太泛触发率低 ③ 没验收标准 ④ 所有步骤交给模型推理 ⑤ Skill 变"个人技巧合集"</span><span class="deep-row-when">→ 反模式: 把 SOP 全塞一次性 prompt / 把易变信息当永恒事实 / 主会话承载所有试错日志 / 把 Skill 写成百科 / 把多步 UI 交互交给模型一步步点</span></span></div>
+      </div>
+      <p class="deep-note"><strong>能力栈分工</strong>(#4.6): <strong>Prompt</strong> 临时指挥 · <strong>Projects</strong> 长期背景 · <strong>Subagents</strong> 分工隔离 · <strong>Skills</strong> 方法流程 · <strong>MCP</strong> 连接外部 · 一句话: <strong>Skills 管"怎么做才稳定", MCP 管"怎么连到外部世界"</strong>。</p>
+    </div>
+
+    <!-- 块 G · MCP 5 件套 + 反"500%"营销话术 (F5) -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 G · MCP 5 件套 · 反"500% 效率暴涨"营销话术</div>
+      <h3 class="deep-block-title">context7 / chrome-devtools / deepwiki / excalidraw / serena</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">context7</span><span class="deep-row-text"><span class="deep-row-name">库文档实时检索 (npm/pypi/Maven)</span><span class="deep-row-when">→ 取代"凭印象答 API" · 何时用: 任何 SDK/库/框架用法问题 100% 必走</span></span></div>
+        <div class="deep-row"><span class="deep-key">chrome-devtools</span><span class="deep-row-text"><span class="deep-row-name">浏览器自动化 (Playwright/CDP)</span><span class="deep-row-when">→ 本机已双注册 · 何时用: 改完 .html 必 Playwright 实测 (CLAUDE.local.md L35 铁律)</span></span></div>
+        <div class="deep-row"><span class="deep-key">deepwiki</span><span class="deep-row-text"><span class="deep-row-name">GitHub repo 知识图谱</span><span class="deep-row-when">→ 外部 repo 评估前必走 · 节省调研时间 60%+ · <strong>调研去重</strong> 不重复造调研轮</span></span></div>
+        <div class="deep-row"><span class="deep-key">excalidraw</span><span class="deep-row-text"><span class="deep-row-name">架构图/流程图实时绘制</span><span class="deep-row-when">→ 取代 mermaid-fallback ASCII · 何时用: 文档/汇报需要图解</span></span></div>
+        <div class="deep-row"><span class="deep-key">serena</span><span class="deep-row-text"><span class="deep-row-name">LSP 符号级操作 (find_symbol/rename/replace_symbol_body)</span><span class="deep-row-when">→ 何时用: 精准重构/重命名/按符号编辑 · 与 claude-context / codebase-memory-mcp 三路分工正交</span></span></div>
+        <div class="deep-row"><span class="deep-key">反讽 R1</span><span class="deep-row-text"><span class="deep-row-name">"装这 6 个 MCP 效率暴涨 500%" 是 <strong>营销话术</strong></span><span class="deep-row-when">→ #3.3 评论员打脸: "playwright 是 E2E, 不是文件修改器" / "不装 filesystem 不能改文件?" · 推荐 5 件套, <strong>playwright 应进 E2E 测试栈非 MCP</strong></span></span></div>
+        <div class="deep-row"><span class="deep-key">三路代码检索分工</span><span class="deep-row-text"><span class="deep-row-name">语义 → claude-context · 关系 → codebase-memory · 符号 → serena</span><span class="deep-row-when">→ 三者正交不重叠 · 何时用: 改代码前先查"谁调用谁", 防破坏调用链</span></span></div>
+      </div>
+      <p class="deep-note"><strong>本机已就绪</strong>(实测 2026-06-30): chrome-devtools + context7 + codebase-memory-mcp + askecho-search-infinity + 插件 MCP (firecrawl / qmd / github / notion / semgrep) · <strong>覆盖率</strong> 4 server + 5 plugin = 9 MCP · 何时用哪个 MCP 看决策矩阵。</p>
     </div>
 
   </div>
@@ -2361,9 +2425,143 @@ S5 团队完整剧本 (3 步含并行):
 
     <p class="deep-note"><strong>反讽自检</strong>: 9 维度 × 3 范式对比矩阵借鉴 pane-manuals L2090 + 官方草案 · <strong>WebFetch 因 Plan Mode 限制未实测</strong> (实施阶段需 5 路并发 WebFetch 复核 code.claude.com/docs/en/{sub-agents,agent-teams,plan-mode,workflows,hooks}) · "建议复核"标注 (官方可能 2.2+ 改名或废弃) · OMC 体系映射为本机 5 入口实际对应 · 决策树 5 步可操作 · 不软化 (R4): 选错就重选, 不要"差不多就用"。</p>
 
+    <!-- 块 E · Sub-agent vs Teams 概念辨析 (F2) -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 E · Sub-agent vs Teams 概念辨析 (反术语混淆陷阱)</div>
+      <h3 class="deep-block-title">"嵌套"是 2 个机制, 不是 1 个</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">Sub-agent 嵌套</span><span class="deep-row-text"><span class="deep-row-name">v2.1.172+ 可 <strong>5 层硬上限</strong> · 不可配置</span><span class="deep-row-when">→ depth 5 不收 Agent 工具, 无法继续 spawn · 中间结果不回主 conversation, 只有顶层 summary 回</span></span></div>
+        <div class="deep-row"><span class="deep-key">Agent Teams 嵌套</span><span class="deep-row-text"><span class="deep-row-name"><strong>不可嵌套</strong> · 官方 L480 "No nested teams"</span><span class="deep-row-when">→ teammate 不能 spawn 自己的 teammate · 1 team/session · 不可跨 session 复用</span></span></div>
+        <div class="deep-row"><span class="deep-key">depth 计算</span><span class="deep-row-text"><span class="deep-row-name">不论前台/后台 = 距 main conversation 层数</span><span class="deep-row-when">→ v2.1.187+ background sub-agent depth 在 spawn 时固定, <strong>resume 不升层</strong></span></span></div>
+        <div class="deep-row"><span class="deep-key">配置入口</span><span class="deep-row-text"><span class="deep-row-name">subagent definition 的 <code>tools</code> 列表 <strong>显式包含 Agent</strong> 才能 spawn 子 subagent</span><span class="deep-row-when">→ 不带 Agent = 禁嵌套 · 带 Agent(agent_type) allowlist 语法被忽略 (子类型列表不生效)</span></span></div>
+        <div class="deep-row"><span class="deep-key">面板展示</span><span class="deep-row-text"><span class="deep-row-name">subagent 面板显示完整树 (每行 (+N) 后代计数)</span><span class="deep-row-when">→ 点开有 path back to main · /agents Running tab 是 flat list</span></span></div>
+      </div>
+      <p class="deep-note"><strong>反讽 R1</strong>: PDF2 标题"Sub-agent 可以继续派生 Sub-agent 了"易被误读为"Agent Teams 可嵌套" → <strong>官方 Agent Teams L480 明确"No nested teams"</strong>, 两个机制完全独立 · dashboard 引用时必须拆开, 不可混用术语。</p>
+    </div>
+
+    <!-- 块 F · Dynamic Workflow 决策树 (F3) -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 F · Dynamic Workflow 决策树 (4 问 + 4 边界)</div>
+      <h3 class="deep-block-title">Workflow = plan 搬到代码, 人类多一个可审查对象</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">决策问 ①</span><span class="deep-row-text"><span class="deep-row-name">任务能否拆成独立单元?</span><span class="deep-row-when">→ 否 → 别用 Workflow · 是 → 进入问 ②</span></span></div>
+        <div class="deep-row"><span class="deep-key">决策问 ②</span><span class="deep-row-text"><span class="deep-row-name">每个单元需要独立验证 (build/test)?</span><span class="deep-row-when">→ 否 → 别用 · 是 → 问 ③</span></span></div>
+        <div class="deep-row"><span class="deep-key">决策问 ③</span><span class="deep-row-text"><span class="deep-row-name">预算承受 token 暴增 (官方"消耗明显更多")?</span><span class="deep-row-when">→ 否 → 别用 · 是 → 问 ④</span></span></div>
+        <div class="deep-row"><span class="deep-key">决策问 ④</span><span class="deep-row-text"><span class="deep-row-name">停止条件可前置写死 (中途不能人工插入)?</span><span class="deep-row-when">→ 否 → 别用 · 是 → <strong>4 问全 YES 才进 Workflow 档</strong></span></span></div>
+        <div class="deep-row"><span class="deep-key">边界警告 ①</span><span class="deep-row-text"><span class="deep-row-name">单次最多 <strong>16 并发 agents</strong> (机器核少时更低)</span><span class="deep-row-when">→ 官方硬约束 · 并发超限静默降速</span></span></div>
+        <div class="deep-row"><span class="deep-key">边界警告 ②</span><span class="deep-row-text"><span class="deep-row-name">单次运行最多 <strong>1000 agents</strong></span><span class="deep-row-when">→ 总量上限 · 跨多 Workflow 不累加</span></span></div>
+        <div class="deep-row"><span class="deep-key">边界警告 ③</span><span class="deep-row-text"><span class="deep-row-name">sub-agent 以 <strong>acceptEdits</strong> 模式跑</span><span class="deep-row-when">→ 继承当前会话工具 allowlist · 文件编辑自动通过 · allowlist 外 shell/抓取/MCP 可能中弹</span></span></div>
+        <div class="deep-row"><span class="deep-key">边界警告 ④</span><span class="deep-row-text"><span class="deep-row-name"><strong>中途不能人工插入</strong> (仅权限提示可能暂停)</span><span class="deep-row-when">→ 流程设计必须前置 · 暂停可在同会话恢复 · 退出会话下次重新跑</span></span></div>
+      </div>
+      <p class="deep-note"><strong>4 能力横向对比</strong>(<strong>不是等级排序, 是不同工程问题</strong>): 隔离噪声 → <strong>Subagent</strong>; 流程沉淀 → <strong>Skill</strong>; 共享状态 → <strong>Agent Teams</strong>; 编排规模 → <strong>Dynamic Workflow</strong> · 反讽 R1: Bun 75 万行迁移 <strong>未进生产</strong>(PDF3 L156), 引用必标"非生产验证"。</p>
+    </div>
+
   </div>
 </section>
 
+<!-- ═══ Agent Teams 工程结构 · 4 组件 + mailbox + 3 display mode + 8 段式 prompt ═══ -->
+<section class="section container" id="s-agent-teams">
+  <div class="section-rhythm section-rhythm--purple section-header">
+    <div class="section-rhythm__motto">Agent Teams</div>
+    <h2 class="section-title">Agent Teams 工程结构 · 4 组件 + mailbox + 3 display mode + 8 段式 prompt</h2>
+    <p class="section-subtitle">官方 code.claude.com/docs/en/agent-teams HIGH 双源印证 · #1 路调研 0.92 conf · 5 块内容 · 数据快照 2026-06-30</p>
+  </div>
+
+  <div class="deep-stack">
+
+    <div class="callout callout-blue">
+      <strong>核心命题</strong> — Agent Teams <strong>不是"多开 Agent"</strong>, 而是补一层 <strong>协作状态</strong>: <strong>lead</strong> 拆任务、<strong>teammates</strong> 互相通信、<strong>共享 task list</strong>、<strong>mailbox</strong> 投递、权限边界、review gates · 比 subagent 多出 <strong>信息流结构</strong> 而不只是并发 · 出处 <code class="deep-inline">code.claude.com/docs/en/agent-teams</code> L272-285 (HIGH 双源印证)。
+    </div>
+
+    <!-- 块 A · 4 组件架构图 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 A · 4 组件架构图</div>
+      <h3 class="deep-block-title">lead + teammates + task list + mailbox 职责分工</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">① lead</span><span class="deep-row-text"><span class="deep-row-name">拆任务 + spawn teammates + 收 idle notification</span><span class="deep-row-when">→ 出 prompt 时分配名字, 后续按 name @ (官方 L349) · 不轮询 mailbox</span></span></div>
+        <div class="deep-row"><span class="deep-key">② teammates</span><span class="deep-row-text"><span class="deep-row-name">执行单元 · 互相通信 + 共享 task list</span><span class="deep-row-when">→ SendMessage 工具按 name 路由 · <strong>不可 spawn 自己的 teammate</strong> (L480 No nested teams)</span></span></div>
+        <div class="deep-row"><span class="deep-key">③ 共享 task list</span><span class="deep-row-text"><span class="deep-row-name">所有 agent 可看到任务状态</span><span class="deep-row-when">→ 持久化 <code>~/.claude/tasks/{team-name}/</code> · <strong>session 结束后仍在</strong> · resume 后任务可见</span></span></div>
+        <div class="deep-row"><span class="deep-key">④ mailbox</span><span class="deep-row-text"><span class="deep-row-name">Messaging system for communication (官方 L281)</span><span class="deep-row-when">→ 发送即投递, recipient 自动收到 · <strong>不向云上传 task 列表</strong> (铁律)</span></span></div>
+      </div>
+      <pre class="mermaid-fallback">
+┌──────────────┐         mailbox 投递          ┌─────────────────┐
+│   lead       │ ─────SendMessage────────────▶ │   teammate A    │
+│ (拆任务+收)  │ ◀─────idle notification─────── │   (执行单元)    │
+│              │                                └─────────────────┘
+│              │         mailbox 投递          ┌─────────────────┐
+│              │ ─────SendMessage────────────▶ │   teammate B    │
+└──────────────┘ ◀─────idle notification─────── └─────────────────┘
+       │
+       ▼
+┌──────────────────────────────────────────────────┐
+│  shared task list (持久化 ~/.claude/tasks/{name}/) │
+│  → 所有 agent 可见 · session 结束仍在 · 不上传云  │
+└──────────────────────────────────────────────────┘</pre>
+    </div>
+
+    <!-- 块 B · mailbox 机制详述 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 B · mailbox 机制详述 (3 种自动投递)</div>
+      <h3 class="deep-block-title">发送即投递 + idle notifications + shared task list</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">投递机制 ①</span><span class="deep-row-text"><span class="deep-row-name">发送即投递 · recipient 自动收到</span><span class="deep-row-when">→ 无需 lead 轮询 · 官方 L340 · 收件 teammate 自动接管并继续工作</span></span></div>
+        <div class="deep-row"><span class="deep-key">投递机制 ②</span><span class="deep-row-text"><span class="deep-row-name">Idle notifications · 完成时自动 notify lead</span><span class="deep-row-when">→ lead 收到后可决定下一步 · 官方 L341-345 · "乐观摘要"是翻车点</span></span></div>
+        <div class="deep-row"><span class="deep-key">投递机制 ③</span><span class="deep-row-text"><span class="deep-row-name">Shared task list 状态变更同步</span><span class="deep-row-when">→ 所有 agent 可看到 · 任务领取/完成自动广播</span></span></div>
+        <div class="deep-row"><span class="deep-key">持久化路径</span><span class="deep-row-text"><span class="deep-row-name">团队 config <code>~/.claude/teams/{team-name}/config.json</code></span><span class="deep-row-when">→ session 结束删除 config · task 列表本地持久化 · 永不上传</span></span></div>
+        <div class="deep-row"><span class="deep-key">命名规则</span><span class="deep-row-text"><span class="deep-row-name">spawn 时由 lead 分配 name · 后续按 name @</span><span class="deep-row-when">→ 官方 L349 · spawn 后可改 per-teammate 权限模式</span></span></div>
+      </div>
+      <p class="deep-note"><strong>反讽 R1</strong>: #1 路 PDF Agent Teams 实战 <strong>全文未提 "mailbox" 这个词</strong>, 仅描述"共享任务列表和成员之间直接通信"(PDF L151) · 具体投递机制全靠官方 docs L281-285 + L340-348 双源印证 HIGH conf · 借鉴时只抄 PDF 等于抄一半。</p>
+    </div>
+
+    <!-- 块 C · 3 display mode 决策表 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 C · 3 display mode 决策表 (用户原话命中)</div>
+      <h3 class="deep-block-title">in-process / tmux / iTerm2 split panes 配置矩阵 + breaking change 警告</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">in-process (默认)</span><span class="deep-row-text"><span class="deep-row-name">v2.1.179+ 默认 · 零配置 · 跨平台 (VS Code/Win Terminal/Ghostty)</span><span class="deep-row-when">→ <strong>↑↓ 切换 teammate</strong> · 官方 L131-135 · 适合任何终端</span></span></div>
+        <div class="deep-row"><span class="deep-key">tmux split panes</span><span class="deep-row-text"><span class="deep-row-name">macOS 最稳 · 所有 teammate 并排可见</span><span class="deep-row-when">→ 需装 tmux · <strong>orphan session 风险</strong> → 清理 <code>tmux kill-session -t &lt;name&gt;</code> (官方 L453-462)</span></span></div>
+        <div class="deep-row"><span class="deep-key">iTerm2 split panes</span><span class="deep-row-text"><span class="deep-row-name">v2.1.186+ · macOS + iTerm2 + 需装 <code>it2</code> CLI</span><span class="deep-row-when">→ 需 iTerm2 Python API 启用 (Settings→General→Magic→Enable) · 缺 it2 报错 (官方 L193-195)</span></span></div>
+        <div class="deep-row"><span class="deep-key">⚠️ breaking change</span><span class="deep-row-text"><span class="deep-row-name">v2.1.179+ 默认改 in-process</span><span class="deep-row-when">→ 升级会丢 split pane · 之前开 tmux 的 session 现在单终端 · <strong>必须显式设回</strong> <code>"teammateMode": "auto"</code> 或 <code>"tmux"</code></span></span></div>
+        <div class="deep-row"><span class="deep-key">配置方式</span><span class="deep-row-text"><span class="deep-row-name">全局 <code>settings.json</code> 设 <code>"teammateMode"</code> · 单次 <code>claude --teammate-mode tmux</code></span><span class="deep-row-when">→ 取值: <code>auto | in-process | tmux | iterm2</code> · 官方 L165-178</span></span></div>
+      </div>
+      <p class="deep-note"><strong>决策树</strong>: 单窗口视角 + 不装 tmux/it2 → in-process; macOS + 多视角 → tmux (注意 orphan 清理); macOS + iTerm2 原生体验 → iterm2 (需 it2 CLI + Python API); 已用 tmux 工作流的团队 → 升级前显式锁定 teammateMode 防回退。</p>
+    </div>
+
+    <!-- 块 D · 8 段式 prompt 模板 + 4 反模式 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 D · 8 段式 prompt 模板 + 4 反模式</div>
+      <h3 class="deep-block-title">把"工程边界"当 prompt 写, 不是写"4 个 Agent 分工"</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">1 · GOAL</span><span class="deep-row-text"><span class="deep-row-name">解决什么问题 · 为什么这个方案 · 改哪些文件 · 怎么验收</span><span class="deep-row-when">→ 4 问必答 · 不写"差不多就行"</span></span></div>
+        <div class="deep-row"><span class="deep-key">2 · SCOPE</span><span class="deep-row-text"><span class="deep-row-name">工作面边界 · 哪些文件允许改/读</span><span class="deep-row-when">→ 写死路径或 glob · 不写"相关代码"</span></span></div>
+        <div class="deep-row"><span class="deep-key">3 · WORKSTREAMS</span><span class="deep-row-text"><span class="deep-row-name">拆任务单元 · 每个独立可验收</span><span class="deep-row-when">→ 不是"4 个 Agent 分工" · 是"4 块独立可验收工作"</span></span></div>
+        <div class="deep-row"><span class="deep-key">4 · DEPENDENCIES</span><span class="deep-row-text"><span class="deep-row-name">任务间依赖图 · 串行/并行/屏障</span><span class="deep-row-when">→ 谁先谁后 · 谁等谁结果</span></span></div>
+        <div class="deep-row"><span class="deep-key">5 · PERMISSIONS</span><span class="deep-row-text"><span class="deep-row-name">白名单/黑名单/需确认 · 4 档</span><span class="deep-row-when">→ 允许读代码 · 改 src/** · 跑局部测试 · <strong>禁读 .env / 禁 git push / 禁 npm publish / 禁危险删</strong></span></span></div>
+        <div class="deep-row"><span class="deep-key">6 · REVIEW GATES</span><span class="deep-row-text"><span class="deep-row-name">每阶段 reviewer 卡口</span><span class="deep-row-when">→ 实现完必过 reviewer · 不放过"乐观摘要"</span></span></div>
+        <div class="deep-row"><span class="deep-key">7 · STOP</span><span class="deep-row-text"><span class="deep-row-name">停止条件 · 完成/超时/失败阈值</span><span class="deep-row-when">→ 5min 单 subagent 上限 (Dynamic Workflow 硬约束)</span></span></div>
+        <div class="deep-row"><span class="deep-key">8 · EVIDENCE</span><span class="deep-row-text"><span class="deep-row-name">最终 diff 摘要 + 已运行测试结果 + 未覆盖风险清单</span><span class="deep-row-when">→ 全部归 lead 汇总 · <strong>没 diff/测试/log/截图/PR 评论/风险清单 = 没证据</strong></span></span></div>
+      </div>
+      <p class="deep-note"><strong>4 反模式</strong>: ① 按岗位分工("4 个 Agent 做后端/前端/测试/审查") → 错位 ② 乐观摘要("已完成"无证据) → 最常见翻车点 ③ 无 diff/测试/风险清单 → 等于没证据 ④ spawn 后改 per-teammate 权限 → 官方 L484 禁止。</p>
+    </div>
+
+    <!-- 块 E · v2.1.172+ 关键修复时间线 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 E · v2.1.172+ 关键修复时间线</div>
+      <h3 class="deep-block-title">项目隔离 / 模型 allowlist / 1M context / 通配符 / 性能</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">后台 worker 项目隔离</span><span class="deep-row-text"><span class="deep-row-name">v2.1.172+ 继续收紧 · <strong>多仓库企业必须警惕</strong></span><span class="deep-row-when">→ 预热 worker 可能读另一项目 .mcp.json · A 项目信任串到 B 项目</span></span></div>
+        <div class="deep-row"><span class="deep-key">模型 allowlist 修复</span><span class="deep-row-text"><span class="deep-row-name">sub-agent model overrides / dispatch picker / advisor 真正约束</span><span class="deep-row-when">→ Bedrock /model picker 不再展示当前 provider 不提供的模型 · 避免静默切换错觉</span></span></div>
+        <div class="deep-row"><span class="deep-key">1M context 额度用尽</span><span class="deep-row-text"><span class="deep-row-name">之前永久卡住 → 现在自动压缩回标准限制</span><span class="deep-row-when">→ 失败模式可恢复 · PDF2 L68-70</span></span></div>
+        <div class="deep-row"><span class="deep-key">权限通配符修复</span><span class="deep-row-text"><span class="deep-row-name"><code>WebFetch(domain:*.example.com)</code> 现在匹配子域名</span><span class="deep-row-when">→ <code>Read(secrets-*/config.json)</code> 中间通配符启动时不再被拒 · PDF2 L85-90</span></span></div>
+        <div class="deep-row"><span class="deep-key">性能优化</span><span class="deep-row-text"><span class="deep-row-name">长对话冗余 message normalization 移除</span><span class="deep-row-when">→ /goal 状态 chip 不再 5Hz 重绘 (并行 Sub-agent 跑起来后 UI/CCPU 优化) · PDF2 L94-97</span></span></div>
+      </div>
+      <p class="deep-note"><strong>深度限制硬上限</strong>: Sub-agent v2.1.172+ 可 <strong>5 层嵌套</strong>(不可配置), depth 5 不收 Agent 工具, 无法继续 spawn · 完整 Sub-agent vs Teams 概念辨析见 <a href="#s-paradigms" class="deep-inline">§s-paradigms 块 E</a>。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ s-paradigms 块 E 增 · Sub-agent vs Teams 概念辨析 + Dynamic Workflow 决策树 ═══ -->
 <section class="section container" id="s-tasks">
   <h2 class="section-title">任务看板 · ToDo</h2>
   <p class="section-desc">工程级全局任务状态 · 数据源 <code>project-ledger.json</code> 单向投影 · <strong>只读</strong></p>

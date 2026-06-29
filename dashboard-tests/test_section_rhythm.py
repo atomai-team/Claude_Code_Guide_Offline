@@ -37,6 +37,7 @@ SECTION_RHYTHM_CONTRACT = [
     ("s-entries",       "red",    "11 入口"),
     ("s-advanced-examples", "accent", "高级实战"),
     ("s-paradigms",      "blue",   "范式对比"),
+    ("s-agent-teams",    "purple", "Agent Teams"),
     ("s-orchestration", "purple", "编排架构"),
     ("s-scenarios",     "orange", "5 大场景"),
     ("s-advanced",      "cyan",   "高级指令"),
@@ -91,16 +92,16 @@ class TestSectionRhythmContract:
     """每个 section-header 必须有 section-rhythm 类 + 色条 + motto."""
 
     def test_rhythm_count_is_12(self, rhythm_color_sequence):
-        """实测 22 section-rhythm: 21 + s-memory(accent) = 22. 全 25 section 中 3 个无节奏."""
-        assert len(rhythm_color_sequence) == 22, (
-            f"section-rhythm 数量 {len(rhythm_color_sequence)} ≠ 22. "
+        """实测 23 section-rhythm: 22 + s-agent-teams(purple) = 23. 全 26 section 中 3 个无节奏."""
+        assert len(rhythm_color_sequence) == 23, (
+            f"section-rhythm 数量 {len(rhythm_color_sequence)} ≠ 23. "
             f"实测: {rhythm_color_sequence}"
         )
 
     def test_color_sequence_cycles_6(self, rhythm_color_sequence):
-        """6 色循环 2 轮 (12) + s-resources(cyan) + s-health(purple) + s-architecture(blue) + s-evolution(blue) + s-advanced(cyan) + s-prompt(green) + s-entries(red) + s-advanced-examples(accent) + s-orchestration(purple) + s-scenarios(orange) + s-paradigms(blue) + s-memory(accent) = 22."""
+        """6 色循环 2 轮 (12) + s-resources(cyan) + s-health(purple) + s-architecture(blue) + s-evolution(blue) + s-advanced(cyan) + s-prompt(green) + s-entries(red) + s-advanced-examples(accent) + s-orchestration(purple) + s-scenarios(orange) + s-paradigms(blue) + s-memory(accent) + s-agent-teams(purple) = 23."""
         expected = ["cyan", "orange", "accent", "green", "purple", "blue",
-                    "cyan", "orange", "accent", "cyan", "accent", "green", "purple", "blue", "blue", "cyan", "green", "red", "accent", "purple", "orange", "blue"]
+                    "cyan", "orange", "accent", "cyan", "accent", "green", "purple", "blue", "blue", "cyan", "green", "red", "accent", "purple", "orange", "blue", "purple"]
         assert rhythm_color_sequence == expected, (
             f"section-rhythm 颜色序列错: 期望 {expected}, 实测 {rhythm_color_sequence}"
         )
