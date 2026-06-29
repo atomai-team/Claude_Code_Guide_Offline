@@ -732,12 +732,13 @@ function renderBoardTasks() {
   const { kanban, milestones, blockers, notes, closure, requirements, subplans, memory_system } = BOARD;
 
   const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-  set('bt-doing',   (kanban?.['进行中'] || []).length);
+  const subDoing = (subplans || []).filter(s => s.status === 'doing').length;
+  set('bt-doing',   (kanban?.['进行中'] || []).length + subDoing);
   set('bt-blocked', (blockers || []).length);
   set('bt-done',    (kanban?.['审核中'] || []).length);
   set('bt-evidence', closure?.with_evidence ?? '—');
 
-  // Kanban 四列 (evidence = session 代理锚点)
+  // Kanban 四列 + 虚拟第五列 "待优化"（来自 subplans todo/doing，不改 board-tasks.json）
   const kanbanEl = document.getElementById('bt-kanban');
   if (kanbanEl && kanban) {
     const cols   = ['待规划', '待办', '进行中', '审核中'];
@@ -762,6 +763,24 @@ function renderBoardTasks() {
         ${rest > 0 ? `<p style="color:var(--text-dim);font-size:var(--fs-xs);text-align:center">… 还有 ${rest} 项</p>` : ''}
       </div>`;
     }).join('');
+
+    // 虚拟第五列：subplans todo/doing（渲染层聚合，不修改 board-tasks.json）
+    const subPending = (subplans || []).filter(s => s.status === 'todo' || s.status === 'doing');
+    if (subPending.length > 0) {
+      kanbanEl.innerHTML += `<div class="card" style="min-height:80px;border-left:3px solid #8b5cf6">
+        <div style="display:flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-3)">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#8b5cf6;flex-shrink:0"></span>
+          <span style="font-weight:700;font-size:var(--fs-sm)">待优化</span>
+          <span style="color:var(--text-dim);font-size:var(--fs-xs)">(${subPending.length})</span>
+          <span style="margin-left:auto;font-size:9px;color:#8b5cf6;font-weight:600">subplans</span>
+        </div>
+        ${subPending.map(c => `<div style="font-size:var(--fs-xs);padding:var(--sp-2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:var(--sp-2);background:var(--surface)">
+          <div style="font-weight:600;line-height:1.4">${esc(c.id)} · ${esc(c.title)}</div>
+          <div style="color:var(--text-dim);margin-top:2px">${esc(c.group)}</div>
+          ${c.evidence ? `<code class="bt-ev" style="display:inline-block;margin-top:2px">${esc(c.evidence)}</code>` : ''}
+        </div>`).join('')}
+      </div>`;
+    }
   }
 
   // 里程碑

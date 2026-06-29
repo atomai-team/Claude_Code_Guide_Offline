@@ -98,7 +98,8 @@ class TestBoardTasksRender:
 
     def test_kanban_four_columns_rendered(self, page_loaded):
         cols = page_loaded.query_selector_all("#bt-kanban > div")
-        assert len(cols) == 4, f"看板列数 {len(cols)} ≠ 4"
+        # 4 主列 + 可选 1 虚拟"待优化"列（subplans todo/doing）
+        assert 4 <= len(cols) <= 5, f"看板列数 {len(cols)} 应在 [4,5]"
 
     def test_hero_doing_not_placeholder(self, page_loaded):
         val = page_loaded.text_content("#bt-doing")
