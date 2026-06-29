@@ -38,7 +38,7 @@
 
 /**
  * @typedef {Object} Stats
- * @property {Counts} counts        19 个标准字段
+ * @property {Counts} counts        18 个标准字段
  * @property {Object} lists         priority_routes / workflows / skill_desc 等
  * @property {Version} version      4 个版本字段
  * @property {string} generated_at  ISO 8601 时间戳
@@ -181,7 +181,16 @@
 let STATS = { counts: FALLBACK_COUNTS, lists: {}, version: FALLBACK_VERSION, generated_at: new Date().toISOString() };
 let DETAILS = null;
 let BOARD = null;
-Object.defineProperty(window, '__board', { get: () => BOARD, set: v => { BOARD = v; } });
+Object.defineProperty(window, '__board', {
+  get: () => BOARD,
+  set: v => {
+    if (v !== null && typeof v !== 'object') {
+      console.warn('[board] rejected non-object assignment:', typeof v);
+      return;
+    }
+    BOARD = v;
+  },
+});
 let KANBAN_VIEW = (function() { try { return localStorage.getItem('kanbanView') || 'card'; } catch(e) { return 'card'; } })();
 
 async function loadStats() {
