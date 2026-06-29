@@ -981,7 +981,7 @@ function tdSection(title, content) {
 // 可折叠区块 (Section 3/4/5)
 function tdCollapsible(title, content, isOpen) {
   return `<details ${isOpen ? 'open' : ''} style="margin-bottom:var(--sp-3);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden">
-    <summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:var(--sp-2);padding:var(--sp-2) var(--sp-3);font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;background:var(--surface);user-select:none">
+    <summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:var(--sp-2);padding:var(--sp-2) var(--sp-3);font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;background:var(--surface);user-select:none;transition:background .15s" onmouseenter="this.style.background='var(--bg-subtle)'" onmouseleave="this.style.background='var(--surface)'"  >
       <span style="font-size:9px">${isOpen ? '▾' : '▸'}</span> ${title}
     </summary>
     <div style="padding:var(--sp-2) var(--sp-3) var(--sp-3)">${content}</div>
