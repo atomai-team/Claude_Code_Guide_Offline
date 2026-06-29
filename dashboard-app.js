@@ -110,6 +110,16 @@ async function loadStats() {
     console.warn('[stats] fetch failed, fallback:', e.message);
   }
   renderStats();
+  fillDataStatsSpans();
+}
+
+function fillDataStatsSpans() {
+  // 填所有 <span data-stats-text="key">...</span> 节点,key 对应 STATS.counts 字段
+  const c = STATS.counts || FALLBACK_COUNTS;
+  document.querySelectorAll('[data-stats-text]').forEach(el => {
+    const key = el.getAttribute('data-stats-text');
+    if (key && c[key] != null) el.textContent = c[key];
+  });
 }
 
 function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }

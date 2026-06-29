@@ -9,6 +9,7 @@ SSoT (Single Source of Truth) for test data fetching:
 import json
 import os
 import re
+import sys
 from pathlib import Path
 
 import pytest
@@ -18,6 +19,11 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 DASHBOARD_HTML = REPO_ROOT / "dashboard.html"
 STATS_JSON = REPO_ROOT / "mycc-stats.json"
 GZIP_SERVER = os.environ.get("DASHBOARD_GZIP_URL", "http://127.0.0.1:18766")
+
+# 让 dashboard-tests/*.py 可直接 `import validate_stats` 等 lib/ 模块 (M1-2 2026-06-29)
+LIB_DIR = REPO_ROOT / "lib"
+if str(LIB_DIR) not in sys.path:
+    sys.path.insert(0, str(LIB_DIR))
 
 
 @pytest.fixture(scope="session")
