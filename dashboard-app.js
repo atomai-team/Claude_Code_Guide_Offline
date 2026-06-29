@@ -97,6 +97,7 @@
 let STATS = { counts: FALLBACK_COUNTS, lists: {}, version: FALLBACK_VERSION, generated_at: new Date().toISOString() };
 let DETAILS = null;
 let BOARD = null;
+Object.defineProperty(window, '__board', { get: () => BOARD, set: v => { BOARD = v; } });
 let KANBAN_VIEW = (function() { try { return localStorage.getItem('kanbanView') || 'card'; } catch(e) { return 'card'; } })();
 
 async function loadStats() {
@@ -707,8 +708,35 @@ window.reloadTasks = async function() {
   if (btn) { btn.disabled = true; btn.textContent = '⟳ 加载中…'; }
   await loadBoardTasks();
   if (btn) { btn.disabled = false; btn.textContent = '⟳ 重载数据'; }
+  checkBoardStaleness();
   showToast('✅ 看板数据已重载');
 };
+
+function checkBoardStaleness() {
+  const el = document.getElementById('bt-stale-warn');
+  if (!el || !BOARD?.meta?.generated_at) {
+    if (el) el.style.display = 'none';
+    return;
+  }
+  const genMs   = new Date(BOARD.meta.generated_at).getTime();
+  const ageMin  = Math.round((Date.now() - genMs) / 60000);
+  if (isNaN(ageMin)) { el.style.display = 'none'; return; }
+
+  let label, bg, color;
+  if (ageMin < 30) {
+    el.style.display = 'none';
+    return;
+  } else if (ageMin < 120) {
+    label = `数据 ${ageMin} 分钟前生成`;
+    bg    = '#f59e0b22'; color = '#d97706';
+  } else {
+    const h = Math.floor(ageMin / 60);
+    label = `数据已 ${h} 小时未更新 — 建议运行 hermes`;
+    bg    = '#ef444422'; color = '#dc2626';
+  }
+  el.textContent  = `⚠ ${label}`;
+  el.style.cssText = `display:inline-flex;align-items:center;padding:2px 8px;border-radius:var(--radius-pill);background:${bg};border:1px solid ${color};color:${color};font-size:10px;font-weight:600`;
+}
 
 // ─── 状态色板 & 工具函数 ───
 const STATUS_CLR = { done: '#10b981', partial: '#f59e0b', doing: 'var(--accent)', todo: '#9ca3af', blocked: '#ef4444' };
@@ -757,6 +785,7 @@ function renderBoardTasks() {
   const kanbanEl = document.getElementById('bt-kanban');
   if (kanbanEl) renderKanbanInto(kanbanEl, kanban, subplans);
   syncViewButtons();
+  checkBoardStaleness();
 
   // 里程碑
   const milestonesEl = document.getElementById('bt-milestones');
@@ -829,22 +858,23 @@ function renderBoardTasks() {
 function kanbanCardHtml(c, dotClr) {
   const cardData = encodeURIComponent(JSON.stringify(c));
   const evHash   = c.evidence ? c.evidence.split(':').pop().slice(-7) : null;
-  return `<div style="font-size:var(--fs-xs);padding:var(--sp-2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:var(--sp-2);background:var(--surface);cursor:pointer;transition:border-color .15s;position:relative" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--border)'" onclick="openTaskDetail(JSON.parse(decodeURIComponent('${cardData}')),'kanban')">
+  return `<div style="font-size:var(--fs-xs);padding:var(--sp-2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:var(--sp-2);background:var(--surface);cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s;position:relative" onmouseenter="this.style.borderColor='var(--accent)';this.style.boxShadow='0 4px 12px rgba(0,0,0,.12)';this.style.transform='translateY(-1px)';this.style.background='var(--surface)'" onmouseleave="this.style.borderColor='var(--border)';this.style.boxShadow='';this.style.transform=''" onclick="openTaskDetail(JSON.parse(decodeURIComponent('${cardData}')),'kanban')">
     ${c.closure_badge ? `<span style="position:absolute;top:4px;right:4px;font-size:9px;background:#10b981;color:#fff;border-radius:3px;padding:0 4px;font-weight:700">✓ done</span>` : ''}
     ${c.blocker ? `<span title="${esc(c.blocker)}" style="position:absolute;top:4px;right:${c.closure_badge ? '44' : '4'}px;width:14px;height:14px;border-radius:50%;background:#ef4444;color:#fff;font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;line-height:1">!</span>` : ''}
-    <div style="font-weight:600;line-height:1.4;padding-right:${c.blocker || c.closure_badge ? '18px' : '0'}">${esc(c.id)} · ${esc(c.title)}</div>
+    <div style="font-weight:500;line-height:1.4;padding-right:${c.blocker || c.closure_badge ? '18px' : '0'}">${esc(c.id)} · ${esc(c.title)}</div>
     <div style="display:flex;align-items:center;gap:var(--sp-2);margin-top:4px">
       <span style="color:var(--text-dim)">${esc(c.group)}</span>
-      ${evHash ? `<code class="bt-ev" style="margin-left:auto;flex-shrink:0">${evHash}</code>` : ''}
+      ${evHash ? `<code class="bt-ev" style="margin-left:auto;flex-shrink:0;opacity:0.7">${evHash}</code>` : ''}
     </div>
   </div>`;
 }
 
-function kanbanListRow(c, dotClr) {
+function kanbanListRow(c, dotClr, idx) {
   const cardData = encodeURIComponent(JSON.stringify(c));
   const evHash   = c.evidence ? c.evidence.split(':').pop().slice(-7) : null;
-  return `<div style="display:grid;grid-template-columns:60px 80px 1fr 80px 80px 24px;align-items:center;gap:4px;padding:5px var(--sp-2);border-radius:var(--radius-sm);cursor:pointer;font-size:var(--fs-xs);height:36px" onmouseenter="this.style.background='var(--bg-subtle)'" onmouseleave="this.style.background=''" onclick="openTaskDetail(JSON.parse(decodeURIComponent('${cardData}')),'kanban')">
-    <span style="display:inline-flex;align-items:center;justify-content:center;gap:3px;background:${dotClr}22;border:1px solid ${dotClr};border-radius:3px;padding:0 4px;font-size:9px;color:${dotClr};font-weight:700;white-space:nowrap;overflow:hidden">${esc(c.status)}</span>
+  const zebraBg  = (idx % 2 === 0) ? 'var(--bg-subtle)' : '';
+  return `<div style="display:grid;grid-template-columns:60px 80px 1fr 80px 80px 24px;align-items:center;gap:4px;padding:5px var(--sp-2);border-radius:var(--radius-sm);cursor:pointer;font-size:var(--fs-xs);height:36px;background:${zebraBg}" onmouseenter="this.style.background='var(--bg-subtle)'" onmouseleave="this.style.background='${zebraBg}'" onclick="openTaskDetail(JSON.parse(decodeURIComponent('${cardData}')),'kanban')">
+    <span style="display:inline-flex;align-items:center;justify-content:center;gap:3px;background:${dotClr}22;border:1px solid ${dotClr};border-radius:3px;padding:0 4px;font-size:10px;min-width:36px;color:${dotClr};font-weight:700;white-space:nowrap;overflow:hidden">${esc(c.status)}</span>
     <span style="font-weight:600;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c.id)}</span>
     <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c.title)}</span>
     <span style="color:var(--text-dim);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c.group)}</span>
@@ -870,7 +900,7 @@ function renderKanbanInto(kanbanEl, kanban, subplans) {
           <span style="font-weight:700;font-size:var(--fs-sm)">${esc(col)}</span>
           <span style="color:var(--text-dim);font-size:var(--fs-xs)">(${cards.length})</span>
         </div>
-        ${cards.map(c => kanbanListRow(c, dotClr[col])).join('')}
+        ${cards.map((c, i) => kanbanListRow(c, dotClr[col], i)).join('')}
       </div>`;
     }).join('');
     if (subPending.length) {
@@ -881,7 +911,7 @@ function renderKanbanInto(kanbanEl, kanban, subplans) {
           <span style="color:var(--text-dim);font-size:var(--fs-xs)">(${subPending.length})</span>
           <span style="margin-left:auto;font-size:9px;color:#8b5cf6;font-weight:600">subplans</span>
         </div>
-        ${subPending.map(c => kanbanListRow(c, '#8b5cf6')).join('')}
+        ${subPending.map((c, i) => kanbanListRow(c, '#8b5cf6', i)).join('')}
       </div>`;
     }
   } else {
