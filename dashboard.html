@@ -412,6 +412,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
       <a href="#s-health" class="nav-link">系统健康仪表盘</a>
       <a href="#s-brains" class="nav-link">五大智能大脑</a>
       <a href="#s-architecture" class="nav-link">四系统架构宪法</a>
+      <a href="#s-prompt" class="nav-link">提示词 8 招<span class="nav-primer">新</span></a>
       <a href="#s-orchestration" class="nav-link">编排架构图<span class="nav-primer">新</span></a>
       <a href="#s-advanced" class="nav-link">高级指令专题<span class="nav-primer">新</span></a>
     </div>
@@ -1571,6 +1572,51 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
     </div>
 
     <p class="deep-note"><strong>反讽自检</strong>: 这 7 个范式名在 dashboard 内文 <code>grep</code> 原 0 命中 (本 commit 修复) · 数据出处峰值版本 609963a (6/27) · 当前 dashboard 1456 行仅 14 section · 借签结构 (场景/触发/命令/边界 5 段叙事) + 套当前 deep-block 模板, 不复制峰值版 CSS class (避免污染)。</p>
+
+  </div>
+</section>
+
+<!-- ═══ 提示词怎么写 · 官方 best-practices ═══ -->
+<section class="section container" id="s-prompt">
+  <div class="section-rhythm section-rhythm--green section-header">
+    <div class="section-rhythm__motto">提示词</div>
+    <h2 class="section-title">提示词怎么写 · 官方 best-practices 8 招</h2>
+    <p class="section-subtitle">借鉴 pane-manuals L1186-1200 8 招表格 · 官方最佳实践 + 本机 OMC 实战补充 · 出处逐条标注 · 数据快照 2026-06-29</p>
+  </div>
+
+  <div class="deep-stack">
+
+    <div class="callout callout-accent">
+      <strong>8 招速记</strong> — <strong>先探索后动手</strong> + <strong>给可验证出口</strong> + <strong>具体 > 模糊</strong> + <strong>@ 引用文件</strong> + <strong>给上下文</strong> + <strong>让它先面试你</strong> + <strong>IMPORTANT 加权</strong> + <strong>及时 /clear</strong>。这 8 招覆盖 90% 常见错。
+    </div>
+
+    <div class="card deep-block">
+      <div class="deep-eyebrow">8 招逐条 · 来源 pane-manuals L1186-1200 + 本机 OMC 实战</div>
+      <h3 class="deep-block-title">技巧 / 怎么做 · 官方原文 code.claude.com/docs/en/best-practices.html</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">① 先探索后动手</span><span class="deep-row-text"><span class="deep-row-name">大改动先 <code>/plan</code> 只读分析 · 小改可直接做</span><span class="deep-row-when">→ 避免改了一半发现走错路重做</span></span></div>
+        <div class="deep-row"><span class="deep-key">② 给可验证出口</span><span class="deep-row-text"><span class="deep-row-name">告诉 Claude "完成后跑哪个测试/命令验证"</span><span class="deep-row-when">→ 它能自己循环到真完成 (verify-before-assert 铁律 8)</span></span></div>
+        <div class="deep-row"><span class="deep-key">③ 具体 > 模糊</span><span class="deep-row-text"><span class="deep-row-name">差: "修复 bug" · 好: "登录超时后失败, 查 src/auth 的 token 刷新, 先写失败测试再修"</span><span class="deep-row-when">→ 具体 = 路径 + 现象 + 期望 + 步骤</span></span></div>
+        <div class="deep-row"><span class="deep-key">④ @ 引用文件</span><span class="deep-row-text"><span class="deep-row-name"><code>@src/auth/login.ts</code> 直接读文件, 别描述 "第三个文件夹"</span><span class="deep-row-when">→ 路径即 SSoT, 描述必有歧义</span></span></div>
+        <div class="deep-row"><span class="deep-key">⑤ 给上下文</span><span class="deep-row-text"><span class="deep-row-name">拖截图进输入框 / 给文档 URL / <code>cat error.log | claude</code></span><span class="deep-row-when">→ 上下文越全 = 推理越准</span></span></div>
+        <div class="deep-row"><span class="deep-key">⑥ 让它先面试你</span><span class="deep-row-text"><span class="deep-row-name">大功能前说 "用 AskUserQuestion 面试我, 问边界和我没想到的, 再写 SPEC.md"</span><span class="deep-row-when">→ sp-brainstorming skill · 反讽 R3 前提挑战先于方案</span></span></div>
+        <div class="deep-row"><span class="deep-key">⑦ IMPORTANT 加权</span><span class="deep-row-text"><span class="deep-row-name">CLAUDE.md 关键规则前加 <code>IMPORTANT:</code> 提高遵守率</span><span class="deep-row-when">→ 6 类核心配置防改规则都用 IMPORTANT 标</span></span></div>
+        <div class="deep-row"><span class="deep-key">⑧ 及时 /clear</span><span class="deep-row-text"><span class="deep-row-name">不相关任务别堆同一会话, 切任务就 <code>/clear</code></span><span class="deep-row-when">→ 上下文膨胀导致遗忘早期 SSoT</span></span></div>
+      </div>
+    </div>
+
+    <div class="card deep-block">
+      <div class="deep-eyebrow">本机 OMC 实战补充 (2026-06-29) · 超越官方 8 招</div>
+      <h3 class="deep-block-title">4 条本机实战 · 与官方互补</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">⑨ 触发词 + 场景</span><span class="deep-row-text"><span class="deep-row-name">"队长/火力全开/做 app" 等触发词直接路由到对应剧本</span><span class="deep-row-when">→ 51 触发词 vs 4 大类意图词 (intent-words), 详见 <a href="#s-scenarios" class="deep-inline">5 大场景剧本</a></span></span></div>
+        <div class="deep-row"><span class="deep-key">⑩ 收口五段</span><span class="deep-row-text"><span class="deep-row-name">"完成后给我: ①总结 ②★推荐 ③实跑证据 ④回滚命令 ⑤状态"</span><span class="deep-row-when">→ 4 要素 4 出口 SOP · 禁"应该可以了"凭印象</span></span></div>
+        <div class="deep-row"><span class="deep-key">⑪ R1-R5 反讽刺</span><span class="deep-row-text"><span class="deep-row-name">"完成后必报盲点 (R1) / 不软化拒绝 (R4) / 给 ★Top-1 (R5)"</span><span class="deep-row-when">→ 任务完成前必过反讽刺铁律 5 关</span></span></div>
+        <div class="deep-row"><span class="deep-key">⑫ 异构对抗</span><span class="deep-row-text"><span class="deep-row-name">高风险决策先 ai-panel 5 联 CLI 异构对抗 (kimi/mmx/opencode/qwen/mavis)</span><span class="deep-row-when">→ 单 LLM 推理易偏, 多模型去偏</span></span></div>
+      </div>
+    </div>
+
+    <p class="deep-note"><strong>反讽自检</strong>: 8 招表格借鉴 pane-manuals L1186-1200 · 4 条本机补充 (⑨ 触发词 / ⑩ 收口五段 / ⑪ R1-R5 / ⑫ 异构对抗) 来自本机 OMC V4.15.0 实际经验 · <strong>标注"建议复核"</strong> (pane-manuals 是 6/25 抓取, 官方可能已更新) · 数据出处 = 官方 best-practices + memory <code>feedback-result-first-no-asking</code> / <code>active-blindspot-reporting</code>。</p>
 
   </div>
 </section>
