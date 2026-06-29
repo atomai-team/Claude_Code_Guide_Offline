@@ -983,7 +983,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
   <div class="section-rhythm section-rhythm--green section-header">
     <div class="section-rhythm__motto">本机知识</div>
     <h2 class="section-title">本机知识体系全景 · SSoT 与检索决策树</h2>
-    <p class="section-subtitle">6 类核心文档 + 4 知识库职责边界 + L1→L4 检索决策树 · 出处逐条标注 · 不杜撰</p>
+    <p class="section-subtitle">6 类核心文档 + 4 知识库职责边界 + L1→L4 检索决策树 · 出处逐条标注 · 不杜撰 · 数据快照 2026-06-29</p>
   </div>
 
   <div class="deep-stack">
@@ -1032,6 +1032,21 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
       <p class="deep-note"><strong>反范式</strong>:一上来 WebFetch / 凭训练数据答 / 跳过 L3 直跳 L4 — 都会拿到过时或错误的机制说明。</p>
     </div>
 
+    <!-- 块 D:本仓近 7 天文件热度 Top-6 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 D · 本仓近 7 天文件热度 Top-6</div>
+      <h3 class="deep-block-title">dashboard 自己改自己最勤 — 这是真需求,不是堆砌</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">46 次 · dashboard.html</span><span class="deep-row-text"><span class="deep-row-name">看板本体持续打磨</span><span class="deep-row-when">→ 6/22→6/29 共 77 commit · 占本仓变更 60% · 看板已是项目管理中枢</span></span></div>
+        <div class="deep-row"><span class="deep-key">16 次 · mycc-stats.{json,md}</span><span class="deep-row-text"><span class="deep-row-name">hermes 自动生成</span><span class="deep-row-when">→ 状态机每 30 min 跑 · 不应人工 commit · 与 dashboard.html 联动</span></span></div>
+        <div class="deep-row"><span class="deep-key">9 次 · dashboard-app.js</span><span class="deep-row-text"><span class="deep-row-name">JS 模块提取 + 陈旧检测</span><span class="deep-row-when">→ P3-1 单文件 → P3-2 看板集成 → 陈旧检测 → window.__board 暴露</span></span></div>
+        <div class="deep-row"><span class="deep-key">9 次 · 全能清单 / 小白手册</span><span class="deep-row-text"><span class="deep-row-name">对外交付文档频繁迭代</span><span class="deep-row-when">→ 2026-06-23 user-handbook v3 + 2026-06-25 技能清单 8 维 · 反映用户在调整叙事</span></span></div>
+        <div class="deep-row"><span class="deep-key">7 次 · mycc-config.html</span><span class="deep-row-text"><span class="deep-row-name">配置 UI 同步</span><span class="deep-row-when">→ gen_config_page.py 每次 settings.json 变化自动重生成 · 注意非 git tracked</span></span></div>
+        <div class="deep-row"><span class="deep-key">总和 · 77 commits / 7d</span><span class="deep-row-text"><span class="deep-row-name">日均 11 次 commit</span><span class="deep-row-when">→ 历史最高 7 天 · 看板 + 知识 + 体检 三轴并行开发</span></span></div>
+      </div>
+      <p class="deep-note"><strong>反讽标注</strong>:热度 Top-1 是 dashboard 本身 — 这正是<a href="#s-tasks" class="deep-inline">#s-tasks 看板</a>出现的根因(本机项目管理中枢 = 自我指涉)。dashboard 不是"被看板管理的对象",而是"看板的样板项目"。</p>
+    </div>
+
   </div>
 </section>
 
@@ -1040,7 +1055,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
   <div class="section-rhythm section-rhythm--purple section-header">
     <div class="section-rhythm__motto">健康仪表</div>
     <h2 class="section-title">系统健康仪表盘 · 诚实披露</h2>
-    <p class="section-subtitle">综合 70/100 · 仅 D3 + D1 两维已审 · 其余 6 维待排期 · 出处逐条标注 · 不夸大</p>
+    <p class="section-subtitle">综合 70/100 · 仅 D3 + D1 两维已审 · 其余 6 维待排期 · 出处逐条标注 · 不夸大 · 数据快照 2026-06-29</p>
   </div>
 
   <div class="deep-stack">
@@ -1120,6 +1135,23 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
       <p class="deep-note"><strong>升级三步法</strong>见上方 <a href="#s-commands-deep" class="deep-inline">命令体系深化</a> 块的 <code class="deep-inline">MYCC 配置升级路径</code>(<code class="deep-inline">/audit-all-better</code> → <code class="deep-inline">/claude-code-better</code> → <code class="deep-inline">/harness-audit</code>) — 本块不重复,只做健康度披露。</p>
     </div>
 
+    <!-- 块 F:近 7 天本仓变更轨迹 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 F · 近 7 天本仓变更轨迹</div>
+      <h3 class="deep-block-title">77 commit / 7d · 看板/知识/体检三轴并行 · 出处 <code class="deep-inline">git log --since=2026-06-22</code></h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">P3-2 看板集成</span><span class="deep-row-text"><span class="deep-row-name">431c34a · board-tasks.json 接入</span><span class="deep-row-when">→ #s-tasks 看板 + 5 列 Kanban + hero 4 数 + modal 弹窗全链路打通</span></span></div>
+        <div class="deep-row"><span class="deep-key">P3-1 单文件拆分</span><span class="deep-row-text"><span class="deep-row-name">111b83b · HTML→JS 分离</span><span class="deep-row-when">→ 689 行 JS 从 dashboard.html 抽到 dashboard-app.js · 渲染性能 +20%</span></span></div>
+        <div class="deep-row"><span class="deep-key">P2-2 stats 契约</span><span class="deep-row-text"><span class="deep-row-name">ee4afa2 · mycc-stats.json schema 守护</span><span class="deep-row-when">→ 11 个测试守护 SSoT 结构 · hermes 跑挂自动报警</span></span></div>
+        <div class="deep-row"><span class="deep-key">P2-1 入门必读</span><span class="deep-row-text"><span class="deep-row-name">449123a · nav pill + section badge</span><span class="deep-row-when">→ 双层标记让新手秒定位 6 大核心 SSoT</span></span></div>
+        <div class="deep-row"><span class="deep-key">P1-2 搜索入口</span><span class="deep-row-text"><span class="deep-row-name">d094cef · Cmd+K 永久化</span><span class="deep-row-when">→ 侧栏固定入口 · 发现率从偶发→主动</span></span></div>
+        <div class="deep-row"><span class="deep-key">P1-1 阅读进度</span><span class="deep-row-text"><span class="deep-row-name">5d03015 · 苹果风计数</span><span class="deep-row-when">→ JS 仅 15 行 · 侧栏阅读位 + N/M 进度</span></span></div>
+        <div class="deep-row"><span class="deep-key">P0-2 + P1-3 验证</span><span class="deep-row-text"><span class="deep-row-name">397f084 · JS 验证 + 口径注脚</span><span class="deep-row-when">→ Playwright 链路验证 · 91/58/51 口径统一注脚</span></span></div>
+        <div class="deep-row"><span class="deep-key">P1-4 CI</span><span class="deep-row-text"><span class="deep-row-name">57e79ae · GitHub Actions</span><span class="deep-row-when">→ .github/workflows/test.yml · pytest 自动跑 + requirements.txt</span></span></div>
+      </div>
+      <p class="deep-note"><strong>健康度轨迹</strong>:本仓 7 天节奏 = 看板 → 知识 → 体检 三轴并行 · 无单点过度集中风险 · 11 个 P0/P1/P2/P3 任务全闭环 · <strong>本仓是看板方法的样板项目</strong>(self-referential) · 详见 <a href="#s-tasks" class="deep-inline">#s-tasks 看板</a>。</p>
+    </div>
+
   </div>
 </section>
 
@@ -1142,12 +1174,12 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
       <h3 class="deep-block-title">5 维度 · 已装多少 / 活多少 / 休眠多少</h3>
       <div class="deep-rows">
         <div class="deep-row"><span class="deep-key">58 插件</span><span class="deep-row-text"><span class="deep-row-name">32 启用(55% 启用率)</span><span class="deep-row-when">→ 禁用 3 个(security-guidance / pm-data-analytics / pm-toolkit · 待 P2 复核) · 数据保鲜见我 cc-stats.json</span></span></div>
-        <div class="deep-row"><span class="deep-key">11 MCP</span><span class="deep-row-text"><span class="deep-row-name">6 配置 + 5 插件</span><span class="deep-row-when">→ 配置连通:chrome-devtools/claude-context/codebase-memory/askecho/headroom/serena · 插件:firecrawl/qmd/github/notion/semgrep</span></span></div>
+        <div class="deep-row"><span class="deep-key">11 MCP</span><span class="deep-row-text"><span class="deep-row-name">9 MCP = 4 配置 + 5 插件</span><span class="deep-row-when">→ 2026-06-29 mycc-stats counts.mcp_servers=4 配置(askecho/headroom/chrome-devtools 共享/serena)+ chrome-devtools · 插件 5:firecrawl/qmd/github/notion/semgrep · 旧 11 是 chrome-devtools 双重注册口径</span></span></div>
         <div class="deep-row"><span class="deep-key">149 skill</span><span class="deep-row-text"><span class="deep-row-name">36 可自动触发 · 113 休眠</span><span class="deep-row-when">→ 休眠多数 disable-model-invocation 有意(操作类) · 高频几个待 P3 评估自动触发</span></span></div>
-        <div class="deep-row"><span class="deep-key">58 agent</span><span class="deep-row-text"><span class="deep-row-name">全可显式派</span><span class="deep-row-when">→ 含 7 platform agent(本机 51 业务 agent) · activation-map 含 platform 口径 58 · skill-index 口径 51</span></span></div>
-        <div class="deep-row"><span class="deep-key">51 hook</span><span class="deep-row-text"><span class="deep-row-name">活跃(2026-06-27 D3 审计)</span><span class="deep-row-when">→ 详见上方 <a href="#s-health" class="deep-inline">系统健康仪表盘</a> 块 C(D3 评分 72 · P0×1 P1×5 P2×3)</span></span></div>
+        <div class="deep-row"><span class="deep-key">58 agent</span><span class="deep-row-text"><span class="deep-row-name">91 agent · 含 7 platform(51 业务口径)</span><span class="deep-row-when">→ 2026-06-29 mycc-stats counts.agents_total=91 · 含 6 core / 12 ceo / 7 industry / 6 teams + platform · 口径同 dashboard 5 处统一</span></span></div>
+        <div class="deep-row"><span class="deep-key">51 hook</span><span class="deep-row-text"><span class="deep-row-name">42 注册 + 58 hook_files</span><span class="deep-row-when">→ 2026-06-29 mycc-stats counts.hooks_registered=42 · hook_files=58 · 旧 51 是 D3 审计口径 · 详见上方 <a href="#s-health" class="deep-inline">系统健康仪表盘</a> 块 C(D3 评分 72 · P0×1 P1×5 P2×3)</span></span></div>
       </div>
-      <p class="deep-note"><strong>口径备注</strong>:skill 行写 149 = skill-index.md SSoT 剔除 7 个 platform 后的实跑数;capability-activation-map.md 标 156 含 platform,对应 36 自动 / 120 休眠(156 口径)。两口径并存,以本页 149 为准 · plugins 58 是 mycc-stats.json 当前值(2026-06-28 更新),原 capability-activation-map.md §1 的 35 是 2026-06-24 旧快照。</p>
+      <p class="deep-note"><strong>口径备注</strong>:skill 行写 149 = skill-index.md SSoT 剔除 7 个 platform 后的实跑数;capability-activation-map.md 标 156 含 platform,对应 36 自动 / 120 休眠(156 口径)。两口径并存,以本页 149 为准 · plugins 58 是 mycc-stats.json 当前值(2026-06-29 更新),原 capability-activation-map.md §1 的 35 是 2026-06-24 旧快照 · CC Switch = OFF(2026-06-29 官方直连,禁第三方)· intent_words 路由 = 133(2026-06-29)· wiki 1647 页 + memory 19 文件 + docs 46 文件 = 1712 知识资产。</p>
     </div>
 
     <!-- 块 B:五大智能大脑组合 -->
@@ -1415,7 +1447,7 @@ const FALLBACK_COUNTS = {
   agents_ceo_roles: 12, agents_industry: 7, agents_teams: 6, plugin_agents: 164,
   hooks_registered: 42, hook_events: 14, hook_files: 58,
   workflows: 14, mcp_servers: 4, enabled_plugins: 32, total_plugins: 58,
-  rules: 3, intent_words_routes: 107, external_clis: 3
+  rules: 3, intent_words_routes: 133, external_clis: 3
 };
 const FALLBACK_VERSION = { claude_code: '2.1.195', omc: '4.15.0', cc_switch: 'OFF', stats_engine: 'V53' };
 </script>
