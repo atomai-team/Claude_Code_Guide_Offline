@@ -93,6 +93,13 @@ def fallback_counts(dashboard_html: str) -> dict:
 
 
 @pytest.fixture(scope="session")
+def app_js() -> str:
+    """dashboard-app.js (extracted app logic). Returns empty string if file absent."""
+    js_path = REPO_ROOT / "dashboard-app.js"
+    return js_path.read_text(encoding="utf-8") if js_path.exists() else ""
+
+
+@pytest.fixture(scope="session")
 def fallback_version(dashboard_html: str) -> dict:
     """Parse FALLBACK_VERSION const block from dashboard.html.
 

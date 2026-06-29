@@ -136,24 +136,23 @@ class TestInertFocusTrap:
     关 Modal → removeAttribute('inert') on <main>
     """
 
-    def test_open_detail_sets_inert_on_main(self, dashboard_html: str):
-        """openDetail 函数内必须 <main>.setAttribute('inert', ...)."""
-        body = _extract_function_body(dashboard_html, "window.openDetail = function")
+    def test_open_detail_sets_inert_on_main(self, app_js: str):
+        """openDetail 函数内必须 <main>.setAttribute('inert', ...) (P3-1: 改读 app_js)."""
+        body = _extract_function_body(app_js, "window.openDetail = function")
         assert body, "openDetail 函数体未找到"
         assert "inert" in body, (
             "openDetail 没设 inert, 焦点陷阱失效. "
             "加: const mainEl = document.getElementById('main'); "
             "if (mainEl) mainEl.setAttribute('inert', '');"
         )
-        # 反讽 R1 防御: 不应加 inert 到 body (会冻结 Modal 自身)
         assert "document.body.setAttribute('inert'" not in body, (
             "openDetail 把 inert 加到 body 会冻结 Modal 自身. "
             "改: 加到 <main> 而非 <body>."
         )
 
-    def test_close_detail_removes_inert(self, dashboard_html: str):
-        """closeDetail 函数内必须 <main>.removeAttribute('inert')."""
-        body = _extract_function_body(dashboard_html, "window.closeDetail = function")
+    def test_close_detail_removes_inert(self, app_js: str):
+        """closeDetail 函数内必须 <main>.removeAttribute('inert') (P3-1: 改读 app_js)."""
+        body = _extract_function_body(app_js, "window.closeDetail = function")
         assert body, "closeDetail 函数体未找到"
         assert "inert" in body, (
             "closeDetail 没移除 inert, 下次开 Modal 焦点陷阱失效."
@@ -162,9 +161,9 @@ class TestInertFocusTrap:
             "closeDetail 应移除 <main> 的 inert, 不是 body."
         )
 
-    def test_open_cmdk_sets_inert_on_main(self, dashboard_html: str):
-        """openCmdK 函数内必须设 inert on <main>."""
-        body = _extract_function_body(dashboard_html, "function openCmdK")
+    def test_open_cmdk_sets_inert_on_main(self, app_js: str):
+        """openCmdK 函数内必须设 inert on <main> (P3-1: 改读 app_js)."""
+        body = _extract_function_body(app_js, "function openCmdK")
         assert body, "openCmdK 函数体未找到"
         assert "inert" in body, (
             "openCmdK 没设 inert. 加到 <main> 而非 <body>."
@@ -173,9 +172,9 @@ class TestInertFocusTrap:
             "openCmdK 不应加 inert 到 body."
         )
 
-    def test_close_cmdk_removes_inert(self, dashboard_html: str):
-        """closeCmdK 函数内必须移除 inert on <main>."""
-        body = _extract_function_body(dashboard_html, "function closeCmdK")
+    def test_close_cmdk_removes_inert(self, app_js: str):
+        """closeCmdK 函数内必须移除 inert on <main> (P3-1: 改读 app_js)."""
+        body = _extract_function_body(app_js, "function closeCmdK")
         assert body, "closeCmdK 函数体未找到"
         assert "inert" in body, (
             "closeCmdK 没移除 inert."

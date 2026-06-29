@@ -47,13 +47,16 @@ HERO_STAT_MAPPING = [
 # ─────────────────────────────────────────────────────────────────
 
 @pytest.fixture(scope="session")
-def hs_calls(dashboard_html: str) -> dict[str, str]:
-    """解析 dashboard.html 全部 hs(id, field) 调用, 返回 {id: field}."""
+def hs_calls(app_js: str) -> dict[str, str]:
+    """解析 dashboard-app.js 全部 hs(id, field) 调用, 返回 {id: field}.
+
+    P3-1 (2026-06-29): hs() 调用从 dashboard.html 提取到 dashboard-app.js,
+    fixture 改为读 app_js (conftest.py 新增), 保持 dashboard_html 纯 HTML.
+    """
     out = {}
-    # hs('hs-skills', c.skills || '?') → ('hs-skills', 'skills')
     for m in re.finditer(
         r"hs\(\s*['\"]([^'\"]+)['\"]\s*,\s*c\.([a-zA-Z_][a-zA-Z0-9_]*)",
-        dashboard_html,
+        app_js,
     ):
         out[m.group(1)] = m.group(2)
     return out
@@ -130,13 +133,13 @@ class TestRenderStatsFallback:
             f"fetch 失败时这些 hero stat 会显示 '?', 破坏用户信任."
         )
 
-    def test_hero_stat_calls_have_question_mark_fallback(self, dashboard_html: str):
+    def test_hero_stat_calls_have_question_mark_fallback(self, app_js: str):
         """每个 hs() 调用都必须有 '... || \\'?\\'' 兜底 (防 undefined)."""
-        # 反讽 R1: 兜底逻辑必须存在, 否则 fetch 失败 → TypeError, 全页崩
+        # P3-1: 改读 app_js (hs() 调用已迁移到 dashboard-app.js)
         hs_pattern = re.compile(
             r"hs\(\s*['\"]([^'\"]+)['\"]\s*,\s*c\.[a-zA-Z_][a-zA-Z0-9_]*[^)]*\)"
         )
-        calls = list(hs_pattern.finditer(dashboard_html))
+        calls = list(hs_pattern.finditer(app_js))
         assert len(calls) >= 6, (
             f"hs() 调用数 {len(calls)} < 6, hero stat 渲染缺失"
         )

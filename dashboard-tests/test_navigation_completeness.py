@@ -150,18 +150,17 @@ class TestScrollSpyContract:
     MCP 不可用时由 task-closer 加 Playwright 实测).
     """
 
-    def test_scrollspy_handler_exists(self, dashboard_html: str):
-        """JS 滚动监听 + nav-link 高亮逻辑必须存在."""
-        assert "IntersectionObserver" in dashboard_html, (
+    def test_scrollspy_handler_exists(self, app_js: str):
+        """JS 滚动监听 + nav-link 高亮逻辑必须存在 (P3-1: 改读 app_js)."""
+        assert "IntersectionObserver" in app_js, (
             "scroll-spy 用 IntersectionObserver, 代码缺失 = 整页导航高亮失效"
         )
-        assert "nav-link" in dashboard_html and ".active" in dashboard_html, (
+        assert "nav-link" in app_js and "classList.add('active')" in app_js, (
             "scroll-spy 添加 .active 类的逻辑缺失"
         )
 
-    def test_scrollspy_selects_correct_link(self, dashboard_html: str):
-        """scroll-spy 必须用 '.side-nav .nav-link' 选择器, 不是 '.nav-link' 通用."""
-        # 反讽 R1: '.nav-link' 通用选择器会命中 cmdK 内的 nav-link (若有), 误高亮
-        assert "'.side-nav .nav-link'" in dashboard_html or '".side-nav .nav-link"' in dashboard_html, (
+    def test_scrollspy_selects_correct_link(self, app_js: str):
+        """scroll-spy 必须用 '.side-nav .nav-link' 选择器 (P3-1: 改读 app_js)."""
+        assert "'.side-nav .nav-link'" in app_js or '".side-nav .nav-link"' in app_js, (
             "scroll-spy 应限定在 .side-nav 内的 .nav-link, 避免误命中 cmdK/footer 等"
         )
