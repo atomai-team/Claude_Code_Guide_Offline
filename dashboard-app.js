@@ -695,9 +695,41 @@ async function loadBoardTasks() {
   renderBoardTasks();
 }
 
+// ─── 状态色板 & 工具函数 ───
+const STATUS_CLR = { done: '#10b981', partial: '#f59e0b', doing: 'var(--accent)', todo: '#9ca3af', blocked: '#ef4444' };
+
+function groupBy(arr, key) {
+  return arr.reduce((acc, x) => { (acc[x[key]] = acc[x[key]] || []).push(x); return acc; }, {});
+}
+
+function renderGroupedList(elId, countId, items) {
+  const el = document.getElementById(elId);
+  if (!el || !items || !items.length) return;
+  const todo = items.filter(x => x.status === 'todo' || x.status === 'doing').length;
+  const countEl = document.getElementById(countId);
+  if (countEl) countEl.textContent = `${items.length} 条${todo ? ` · ⚡ ${todo} 待做` : ' · 全部完成'}`;
+  const groups = groupBy(items, 'group');
+  el.innerHTML = Object.entries(groups).map(([g, gItems]) => {
+    const gt = gItems.filter(x => x.status === 'todo' || x.status === 'doing').length;
+    return `<details style="margin-top:var(--sp-2)">
+      <summary style="cursor:pointer;list-style:none;display:flex;gap:var(--sp-2);align-items:center;padding:var(--sp-2) 0;font-size:var(--fs-xs);font-weight:600">
+        ${esc(g)} <span style="color:var(--text-dim);font-weight:400">(${gItems.length}${gt ? ` · ⚡${gt}` : ''})</span>
+      </summary>
+      <div style="padding-left:var(--sp-4);border-left:2px solid var(--border);margin-bottom:var(--sp-2)">
+        ${gItems.map(c => `<div style="display:flex;align-items:flex-start;gap:var(--sp-2);padding:2px 0;font-size:var(--fs-xs)">
+          <span class="bt-status" style="background:${STATUS_CLR[c.status] || '#9ca3af'};margin-top:4px"></span>
+          <span${c.status === 'todo' ? ' style="font-weight:600"' : ''}>
+            <span style="color:var(--text-dim)">${esc(c.id)}</span> ${esc(c.title)}${c.evidence ? ` <code class="bt-ev">${esc(c.evidence)}</code>` : ''}${c.blocker ? ` <span style="color:#ef4444"> ⚠${esc(c.blocker)}</span>` : ''}
+          </span>
+        </div>`).join('')}
+      </div>
+    </details>`;
+  }).join('');
+}
+
 function renderBoardTasks() {
   if (!BOARD) return;
-  const { kanban, milestones, blockers, notes, closure } = BOARD;
+  const { kanban, milestones, blockers, notes, closure, requirements, subplans, memory_system } = BOARD;
 
   const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
   set('bt-doing',   (kanban?.['进行中'] || []).length);
@@ -705,16 +737,16 @@ function renderBoardTasks() {
   set('bt-done',    (kanban?.['审核中'] || []).length);
   set('bt-evidence', closure?.with_evidence ?? '—');
 
-  // Kanban 四列
+  // Kanban 四列 (evidence = session 代理锚点)
   const kanbanEl = document.getElementById('bt-kanban');
   if (kanbanEl && kanban) {
-    const cols    = ['待规划', '待办', '进行中', '审核中'];
-    const dotClr  = { '待规划': '#6b7280', '待办': '#f59e0b', '进行中': 'var(--accent)', '审核中': '#10b981' };
+    const cols   = ['待规划', '待办', '进行中', '审核中'];
+    const dotClr = { '待规划': '#6b7280', '待办': '#f59e0b', '进行中': 'var(--accent)', '审核中': '#10b981' };
     kanbanEl.innerHTML = cols.map(col => {
       const cards   = kanban[col] || [];
       const visible = cards.slice(0, col === '审核中' ? 5 : 30);
       const rest    = cards.length - visible.length;
-      return `<div class="card" style="min-height:100px">
+      return `<div class="card" style="min-height:80px">
         <div style="display:flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-3)">
           <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${dotClr[col]};flex-shrink:0"></span>
           <span style="font-weight:700;font-size:var(--fs-sm)">${esc(col)}</span>
@@ -722,10 +754,10 @@ function renderBoardTasks() {
         </div>
         ${cards.length === 0 ? `<p style="color:var(--text-dim);font-size:var(--fs-xs);text-align:center">— 暂无 —</p>` : ''}
         ${visible.map(c => `<div style="font-size:var(--fs-xs);padding:var(--sp-2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:var(--sp-2);background:var(--surface)">
-          <div style="font-weight:600">${esc(c.id)} · ${esc(c.title)}</div>
+          <div style="font-weight:600;line-height:1.4">${esc(c.id)} · ${esc(c.title)}</div>
           <div style="color:var(--text-dim);margin-top:2px">${esc(c.group)}</div>
-          ${c.closure_badge ? `<div style="color:var(--text-dim)">[${esc(c.closure_badge)}]</div>` : ''}
-          ${c.blocker ? `<div style="color:#ef4444;font-weight:600">⚠ ${esc(c.blocker)}</div>` : ''}
+          ${c.evidence ? `<code class="bt-ev" style="display:inline-block;margin-top:2px">${esc(c.evidence)}</code>` : ''}
+          ${c.blocker ? `<div style="color:#ef4444;font-size:10px;margin-top:2px">⚠ ${esc(c.blocker)}</div>` : ''}
         </div>`).join('')}
         ${rest > 0 ? `<p style="color:var(--text-dim);font-size:var(--fs-xs);text-align:center">… 还有 ${rest} 项</p>` : ''}
       </div>`;
@@ -739,8 +771,22 @@ function renderBoardTasks() {
     milestonesEl.innerHTML = `<div style="display:flex;flex-direction:column;gap:var(--sp-2)">
       ${milestones.map(m => `<div style="display:flex;gap:var(--sp-3);align-items:flex-start;padding:var(--sp-2) var(--sp-3);border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface)">
         <span style="flex-shrink:0">${icon[m.status] || '⬜'}</span>
-        <div><span style="font-weight:600;font-size:var(--fs-sm)">${esc(m.id)} · ${esc(m.title)}</span>${m.evidence ? `<code style="margin-left:var(--sp-2);font-size:var(--fs-xs);color:var(--text-dim)">${esc(m.evidence)}</code>` : ''}</div>
+        <div><span style="font-weight:600;font-size:var(--fs-sm)">${esc(m.id)} · ${esc(m.title)}</span>${m.evidence ? `<code class="bt-ev" style="margin-left:var(--sp-2)">${esc(m.evidence)}</code>` : ''}</div>
       </div>`).join('')}
+    </div>`;
+  }
+
+  // 需求清单 & 子计划 (按 group 折叠)
+  renderGroupedList('bt-requirements', 'bt-req-count', requirements);
+  renderGroupedList('bt-subplans',     'bt-sub-count', subplans);
+
+  // 记忆体系
+  const memEl = document.getElementById('bt-memory');
+  if (memEl && memory_system) {
+    const countEl = document.getElementById('bt-mem-count');
+    if (countEl) countEl.textContent = `${memory_system.total_files} 文件 · ${(memory_system.categories || []).length} 类`;
+    memEl.innerHTML = `<div style="display:flex;flex-wrap:wrap;gap:var(--sp-2);padding-top:var(--sp-3)">
+      ${(memory_system.categories || []).map(c => `<span style="font-size:var(--fs-xs);padding:2px var(--sp-3);border:1px solid var(--border);border-radius:var(--radius-pill);background:var(--surface)">${esc(c.name)} <strong>${c.count}</strong></span>`).join('')}
     </div>`;
   }
 
@@ -752,7 +798,7 @@ function renderBoardTasks() {
       ${blockers.map(b => `<div style="display:flex;gap:var(--sp-2);padding:var(--sp-2) var(--sp-3);border-left:3px solid #ef4444;background:var(--surface);border-radius:0 var(--radius-sm) var(--radius-sm) 0">
         <span style="font-size:var(--fs-xs);font-weight:600;color:var(--text-dim);flex-shrink:0">${esc(b.id)}</span>
         <span style="font-size:var(--fs-xs)">${esc(b.title)}</span>
-        ${b.ref ? `<code style="margin-left:auto;font-size:var(--fs-xs);color:var(--text-dim);flex-shrink:0">${esc(b.ref)}</code>` : ''}
+        ${b.ref ? `<code class="bt-ev" style="margin-left:auto;flex-shrink:0">${esc(b.ref)}</code>` : ''}
       </div>`).join('')}
     </div>`;
   }
@@ -779,15 +825,6 @@ function renderBoardTasks() {
         <span>总计 <strong>${closure.total}</strong></span>
         <span>闭环率 <strong>${pct}%</strong></span>
       </div>`;
-  }
-
-  // details 展开箭头动画
-  const det = document.querySelector('#s-tasks details');
-  const arrow = document.getElementById('bt-details-arrow');
-  if (det && arrow) {
-    det.addEventListener('toggle', () => {
-      arrow.style.transform = det.open ? 'rotate(90deg)' : '';
-    });
   }
 }
 
