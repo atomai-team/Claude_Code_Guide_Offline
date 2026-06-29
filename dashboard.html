@@ -283,6 +283,9 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
 .nav-search-trigger { display: flex; align-items: center; justify-content: space-between; width: 100%; margin: 0 0 var(--sp-3); padding: var(--sp-2) var(--sp-3); background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-muted); font-size: var(--fs-xs); cursor: pointer; font-family: var(--font-sans); transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out); }
 .nav-search-trigger:hover { background: var(--surface-hover); color: var(--text); border-color: var(--border-strong); }
 .nav-search-trigger kbd { font-size: var(--fs-2xs); opacity: 0.7; }
+.nav-primer { display: inline-flex; align-items: center; padding: 1px 5px; margin-left: var(--sp-2); border-radius: var(--radius-pill); background: var(--accent-soft); color: var(--accent); font-size: var(--fs-2xs); font-weight: 600; border: 1px solid var(--accent-soft-border); line-height: 1.4; white-space: nowrap; vertical-align: middle; }
+.nav-link.active .nav-primer { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.primer-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px var(--sp-3); border-radius: var(--radius-pill); background: var(--accent-soft); color: var(--accent); font-size: var(--fs-xs); font-weight: 600; border: 1px solid var(--accent-soft-border); margin-bottom: var(--sp-3); letter-spacing: 0.02em; }
 .nav-backdrop { display: none; position: fixed; inset: 0; background: var(--surface-overlay); z-index: var(--z-overlay); opacity: 0; transition: opacity var(--dur-normal) var(--ease-out); }
 @media (min-width: 1024px) {
   #main { margin-left: var(--sidebar-width); }
@@ -375,11 +378,11 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
       <span class="nav-group-title">① 开始上手</span>
       <a href="#top" class="nav-link">首屏概览</a>
       <a href="#s-overview" class="nav-link">能力概览</a>
-      <a href="#s-entry" class="nav-link">入口编排 · 该喊谁</a>
+      <a href="#s-entry" class="nav-link">入口编排 · 该喊谁<span class="nav-primer">入门</span></a>
     </div>
     <div class="nav-group">
       <span class="nav-group-title">② 命令速查</span>
-      <a href="#s-commands" class="nav-link">50+ 命令速查</a>
+      <a href="#s-commands" class="nav-link">50+ 命令速查<span class="nav-primer">入门</span></a>
       <a href="#s-commands-deep" class="nav-link">命令体系深化</a>
     </div>
     <div class="nav-group">
@@ -389,7 +392,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
     </div>
     <div class="nav-group">
       <span class="nav-group-title">④ 学习中心</span>
-      <a href="#s-docs" class="nav-link">手册 + 全量目录</a>
+      <a href="#s-docs" class="nav-link">手册 + 全量目录<span class="nav-primer">入门</span></a>
       <a href="#s-github" class="nav-link">GitHub 生态 · 调研裁决</a>
       <a href="#s-knowledge" class="nav-link">本机知识体系</a>
     </div>
@@ -478,6 +481,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
 <!-- ═══ Section 2 · 入口编排 · 该喊谁（口语化速查）═══ -->
 <section class="section container" id="s-entry">
   <div class="section-rhythm section-rhythm--orange section-header">
+    <span class="primer-badge">★ 入门必读</span>
     <div class="section-rhythm__motto">不知道喊谁</div>
     <h2 class="section-title">入口编排 · 该喊谁</h2>
     <p class="section-subtitle">记不住命令？说一句口语就行 —— 不确定时，永远可以喊「队长」</p>
@@ -583,6 +587,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
 <!-- ═══ Section 3 · 50+ 命令 ═══ -->
 <section class="section container" id="s-commands">
   <div class="section-rhythm section-rhythm--accent section-header">
+    <span class="primer-badge">★ 入门必读</span>
     <div class="section-rhythm__motto">命令速查</div>
     <h2 class="section-title">50+ 命令速查</h2>
     <p class="section-subtitle">9 大分类 · 核心 10 + 进阶 20 + 启动参数 + 环境变量</p>
@@ -833,6 +838,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
 <!-- ═══ Section 7 · 文档目录 ═══ -->
 <section class="section container" id="s-docs">
   <div class="section-rhythm section-rhythm--orange section-header">
+    <span class="primer-badge">★ 入门必读</span>
     <div class="section-rhythm__motto">手册目录</div>
     <h2 class="section-title">手册 + 全量目录</h2>
     <p class="section-subtitle">7 本用户手册 + 149 skill · 42 hook · 91 agent 全量可点</p>
