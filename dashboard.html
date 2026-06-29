@@ -280,6 +280,9 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
 .nav-progress-bar { flex: 1; height: 2px; background: var(--border); border-radius: 99px; overflow: hidden; }
 .nav-progress-fill { height: 100%; background: var(--accent); border-radius: 99px; transition: width 0.35s var(--ease-out); }
 .nav-progress-count { font-size: var(--fs-2xs); color: var(--text-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.nav-search-trigger { display: flex; align-items: center; justify-content: space-between; width: 100%; margin: 0 0 var(--sp-3); padding: var(--sp-2) var(--sp-3); background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-muted); font-size: var(--fs-xs); cursor: pointer; font-family: var(--font-sans); transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out); }
+.nav-search-trigger:hover { background: var(--surface-hover); color: var(--text); border-color: var(--border-strong); }
+.nav-search-trigger kbd { font-size: var(--fs-2xs); opacity: 0.7; }
 .nav-backdrop { display: none; position: fixed; inset: 0; background: var(--surface-overlay); z-index: var(--z-overlay); opacity: 0; transition: opacity var(--dur-normal) var(--ease-out); }
 @media (min-width: 1024px) {
   #main { margin-left: var(--sidebar-width); }
@@ -364,6 +367,9 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
     <div class="nav-progress-bar"><div class="nav-progress-fill" id="navProgressFill" style="width:7%"></div></div>
     <span class="nav-progress-count" id="navProgressCount">1 / 15</span>
   </div>
+  <button class="nav-search-trigger" onclick="openCmdK()" type="button" aria-label="打开全局搜索 (Cmd+K)">
+    <span>搜索 skill / agent / 手册</span><kbd>⌘K</kbd>
+  </button>
   <nav>
     <div class="nav-group">
       <span class="nav-group-title">① 开始上手</span>
