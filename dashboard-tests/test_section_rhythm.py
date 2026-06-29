@@ -23,7 +23,7 @@ SECTION_RHYTHM_CONTRACT = [
     ("s-commands",      "accent", "命令速查"),
     ("s-commands-deep", "green",  "用得顺手"),
     ("s-data",          "purple", "引擎怎么算"),
-    ("s-agents",        "blue",   "89 个专家"),
+    ("s-agents",        "blue",   "专家天团"),
     ("s-workflows",     "cyan",   "工作流"),
     ("s-docs",          "orange", "手册目录"),
     ("s-github",        "accent", "外部调研"),
