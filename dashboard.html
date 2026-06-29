@@ -1305,6 +1305,11 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
     <div class="hero-stat"><span class="hs-num" id="bt-evidence">—</span><span class="hs-label">有证据闭环</span></div>
   </div>
 
+  <div style="display:flex;justify-content:flex-end;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-3)">
+    <span style="font-size:var(--fs-xs);color:var(--text-dim)">视图</span>
+    <button id="btn-view-card" onclick="setKanbanView('card')" title="卡片视图" style="padding:4px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--accent);color:#fff;cursor:pointer;font-size:var(--fs-xs)">⊞ 卡片</button>
+    <button id="btn-view-list" onclick="setKanbanView('list')" title="列表视图" style="padding:4px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);cursor:pointer;font-size:var(--fs-xs)">☰ 列表</button>
+  </div>
   <div id="bt-kanban" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--sp-4);margin-bottom:var(--sp-6)">
     <p style="color:var(--text-dim);font-size:var(--fs-sm)">加载中…</p>
   </div>
@@ -1358,6 +1363,17 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
     <h3 class="detail-title" id="detailTitle">—</h3>
     <div class="detail-meta" id="detailMeta">—</div>
     <div class="detail-body" id="detailBody"></div>
+  </div>
+</div>
+
+<!-- ═══ Task 详情浮层 ═══ -->
+<div class="modal-overlay" id="taskOverlay" style="display:none;z-index:calc(var(--z-modal) + 10)" onclick="if(event.target===this)closeTaskDetail()" role="dialog" aria-modal="true" aria-label="任务详情">
+  <div class="modal-panel" style="width:100%;max-width:600px;max-height:85vh;overflow-y:auto">
+    <button class="modal-close" onclick="closeTaskDetail()" aria-label="关闭">✕</button>
+    <div id="td-status-bar" style="margin-bottom:var(--sp-3)"></div>
+    <h3 class="detail-title" id="td-title" style="font-size:var(--fs-base);word-break:break-word">—</h3>
+    <div style="color:var(--text-dim);font-size:var(--fs-xs);margin-bottom:var(--sp-5)" id="td-group">—</div>
+    <div id="td-body"></div>
   </div>
 </div>
 

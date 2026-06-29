@@ -97,6 +97,7 @@
 let STATS = { counts: FALLBACK_COUNTS, lists: {}, version: FALLBACK_VERSION, generated_at: new Date().toISOString() };
 let DETAILS = null;
 let BOARD = null;
+let KANBAN_VIEW = (function() { try { return localStorage.getItem('kanbanView') || 'card'; } catch(e) { return 'card'; } })();
 
 async function loadStats() {
   try {
@@ -472,7 +473,13 @@ function initModal() {
     const mainEl = document.getElementById('main') || document.querySelector('main');
     if (mainEl) mainEl.removeAttribute('inert');
   };
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      const task = document.getElementById('taskOverlay');
+      if (task && task.style.display === 'flex') { closeTaskDetail(); return; }
+      closeDetail();
+    }
+  });
 }
 
 function initCatalog() {
@@ -738,50 +745,10 @@ function renderBoardTasks() {
   set('bt-done',    (kanban?.['审核中'] || []).length);
   set('bt-evidence', closure?.with_evidence ?? '—');
 
-  // Kanban 四列 + 虚拟第五列 "待优化"（来自 subplans todo/doing，不改 board-tasks.json）
+  // 看板渲染（提取为独立函数，支持卡片/列表切换）
   const kanbanEl = document.getElementById('bt-kanban');
-  if (kanbanEl && kanban) {
-    const cols   = ['待规划', '待办', '进行中', '审核中'];
-    const dotClr = { '待规划': '#6b7280', '待办': '#f59e0b', '进行中': 'var(--accent)', '审核中': '#10b981' };
-    kanbanEl.innerHTML = cols.map(col => {
-      const cards   = kanban[col] || [];
-      const visible = cards.slice(0, col === '审核中' ? 5 : 30);
-      const rest    = cards.length - visible.length;
-      return `<div class="card" style="min-height:80px">
-        <div style="display:flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-3)">
-          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${dotClr[col]};flex-shrink:0"></span>
-          <span style="font-weight:700;font-size:var(--fs-sm)">${esc(col)}</span>
-          <span style="color:var(--text-dim);font-size:var(--fs-xs)">(${cards.length})</span>
-        </div>
-        ${cards.length === 0 ? `<p style="color:var(--text-dim);font-size:var(--fs-xs);text-align:center">— 暂无 —</p>` : ''}
-        ${visible.map(c => `<div style="font-size:var(--fs-xs);padding:var(--sp-2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:var(--sp-2);background:var(--surface)">
-          <div style="font-weight:600;line-height:1.4">${esc(c.id)} · ${esc(c.title)}</div>
-          <div style="color:var(--text-dim);margin-top:2px">${esc(c.group)}</div>
-          ${c.evidence ? `<code class="bt-ev" style="display:inline-block;margin-top:2px">${esc(c.evidence)}</code>` : ''}
-          ${c.blocker ? `<div style="color:#ef4444;font-size:10px;margin-top:2px">⚠ ${esc(c.blocker)}</div>` : ''}
-        </div>`).join('')}
-        ${rest > 0 ? `<p style="color:var(--text-dim);font-size:var(--fs-xs);text-align:center">… 还有 ${rest} 项</p>` : ''}
-      </div>`;
-    }).join('');
-
-    // 虚拟第五列：subplans todo/doing（渲染层聚合，不修改 board-tasks.json）
-    const subPending = (subplans || []).filter(s => s.status === 'todo' || s.status === 'doing');
-    if (subPending.length > 0) {
-      kanbanEl.innerHTML += `<div class="card" style="min-height:80px;border-left:3px solid #8b5cf6">
-        <div style="display:flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-3)">
-          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#8b5cf6;flex-shrink:0"></span>
-          <span style="font-weight:700;font-size:var(--fs-sm)">待优化</span>
-          <span style="color:var(--text-dim);font-size:var(--fs-xs)">(${subPending.length})</span>
-          <span style="margin-left:auto;font-size:9px;color:#8b5cf6;font-weight:600">subplans</span>
-        </div>
-        ${subPending.map(c => `<div style="font-size:var(--fs-xs);padding:var(--sp-2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:var(--sp-2);background:var(--surface)">
-          <div style="font-weight:600;line-height:1.4">${esc(c.id)} · ${esc(c.title)}</div>
-          <div style="color:var(--text-dim);margin-top:2px">${esc(c.group)}</div>
-          ${c.evidence ? `<code class="bt-ev" style="display:inline-block;margin-top:2px">${esc(c.evidence)}</code>` : ''}
-        </div>`).join('')}
-      </div>`;
-    }
-  }
+  if (kanbanEl) renderKanbanInto(kanbanEl, kanban, subplans);
+  syncViewButtons();
 
   // 里程碑
   const milestonesEl = document.getElementById('bt-milestones');
@@ -846,6 +813,202 @@ function renderBoardTasks() {
       </div>`;
   }
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   Kanban 渲染（卡片 / 列表双模式）
+   ════════════════════════════════════════════════════════════════════ */
+
+function kanbanCardHtml(c, dotClr) {
+  const cardData = encodeURIComponent(JSON.stringify(c));
+  return `<div style="font-size:var(--fs-xs);padding:var(--sp-2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:var(--sp-2);background:var(--surface);cursor:pointer;transition:border-color .15s" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--border)'" onclick="openTaskDetail(JSON.parse(decodeURIComponent('${cardData}')),'kanban')">
+    <div style="font-weight:600;line-height:1.4">${esc(c.id)} · ${esc(c.title)}</div>
+    <div style="color:var(--text-dim);margin-top:2px">${esc(c.group)}</div>
+    ${c.evidence ? `<code class="bt-ev" style="display:inline-block;margin-top:2px">${esc(c.evidence)}</code>` : ''}
+    ${c.blocker ? `<div style="color:#ef4444;font-size:10px;margin-top:2px">⚠ ${esc(c.blocker)}</div>` : ''}
+  </div>`;
+}
+
+function kanbanListRow(c, dotClr) {
+  const cardData = encodeURIComponent(JSON.stringify(c));
+  return `<div style="display:flex;align-items:center;gap:var(--sp-2);padding:5px var(--sp-2);border-radius:var(--radius-sm);cursor:pointer;font-size:var(--fs-xs)" onmouseenter="this.style.background='var(--bg-subtle)'" onmouseleave="this.style.background=''" onclick="openTaskDetail(JSON.parse(decodeURIComponent('${cardData}')),'kanban')">
+    <span style="width:7px;height:7px;border-radius:50%;background:${dotClr};flex-shrink:0"></span>
+    <span style="font-weight:600;min-width:38px;flex-shrink:0;color:var(--text-muted)">${esc(c.id)}</span>
+    <span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c.title)}</span>
+    <span style="color:var(--text-dim);flex-shrink:0;font-size:10px;margin-left:var(--sp-2)">${esc(c.group)}</span>
+    ${c.evidence ? `<code class="bt-ev" style="flex-shrink:0">${esc(c.evidence)}</code>` : ''}
+    ${c.blocker ? `<span style="color:#ef4444;font-size:10px;flex-shrink:0">⚠</span>` : ''}
+  </div>`;
+}
+
+function renderKanbanInto(kanbanEl, kanban, subplans) {
+  if (!kanbanEl) return;
+  const cols   = ['待规划', '待办', '进行中', '审核中'];
+  const dotClr = { '待规划': '#6b7280', '待办': '#f59e0b', '进行中': 'var(--accent)', '审核中': '#10b981' };
+  const subPending = (subplans || []).filter(s => s.status === 'todo' || s.status === 'doing');
+
+  if (KANBAN_VIEW === 'list') {
+    kanbanEl.style.gridTemplateColumns = '1fr';
+    kanbanEl.innerHTML = [...cols, kanban ? null : null].filter(Boolean).map(col => {
+      const cards = (kanban || {})[col] || [];
+      if (!cards.length) return '';
+      return `<div class="card" style="padding:var(--sp-3) var(--sp-4)">
+        <div style="display:flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-2)">
+          <span style="width:8px;height:8px;border-radius:50%;background:${dotClr[col]};flex-shrink:0"></span>
+          <span style="font-weight:700;font-size:var(--fs-sm)">${esc(col)}</span>
+          <span style="color:var(--text-dim);font-size:var(--fs-xs)">(${cards.length})</span>
+        </div>
+        ${cards.map(c => kanbanListRow(c, dotClr[col])).join('')}
+      </div>`;
+    }).join('');
+    if (subPending.length) {
+      kanbanEl.innerHTML += `<div class="card" style="padding:var(--sp-3) var(--sp-4);border-left:3px solid #8b5cf6">
+        <div style="display:flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-2)">
+          <span style="width:8px;height:8px;border-radius:50%;background:#8b5cf6;flex-shrink:0"></span>
+          <span style="font-weight:700;font-size:var(--fs-sm)">待优化</span>
+          <span style="color:var(--text-dim);font-size:var(--fs-xs)">(${subPending.length})</span>
+          <span style="margin-left:auto;font-size:9px;color:#8b5cf6;font-weight:600">subplans</span>
+        </div>
+        ${subPending.map(c => kanbanListRow(c, '#8b5cf6')).join('')}
+      </div>`;
+    }
+  } else {
+    kanbanEl.style.gridTemplateColumns = 'repeat(auto-fill,minmax(200px,1fr))';
+    kanbanEl.innerHTML = cols.map(col => {
+      const cards   = (kanban || {})[col] || [];
+      const visible = cards.slice(0, col === '审核中' ? 5 : 30);
+      const rest    = cards.length - visible.length;
+      return `<div class="card" style="min-height:80px">
+        <div style="display:flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-3)">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${dotClr[col]};flex-shrink:0"></span>
+          <span style="font-weight:700;font-size:var(--fs-sm)">${esc(col)}</span>
+          <span style="color:var(--text-dim);font-size:var(--fs-xs)">(${cards.length})</span>
+        </div>
+        ${cards.length === 0 ? `<p style="color:var(--text-dim);font-size:var(--fs-xs);text-align:center">— 暂无 —</p>` : ''}
+        ${visible.map(c => kanbanCardHtml(c, dotClr[col])).join('')}
+        ${rest > 0 ? `<p style="color:var(--text-dim);font-size:var(--fs-xs);text-align:center">… 还有 ${rest} 项</p>` : ''}
+      </div>`;
+    }).join('');
+    if (subPending.length) {
+      kanbanEl.innerHTML += `<div class="card" style="min-height:80px;border-left:3px solid #8b5cf6">
+        <div style="display:flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-3)">
+          <span style="width:8px;height:8px;border-radius:50%;background:#8b5cf6;flex-shrink:0"></span>
+          <span style="font-weight:700;font-size:var(--fs-sm)">待优化</span>
+          <span style="color:var(--text-dim);font-size:var(--fs-xs)">(${subPending.length})</span>
+          <span style="margin-left:auto;font-size:9px;color:#8b5cf6;font-weight:600">subplans</span>
+        </div>
+        ${subPending.map(c => kanbanCardHtml(c, '#8b5cf6')).join('')}
+      </div>`;
+    }
+  }
+}
+
+function syncViewButtons() {
+  const btnCard = document.getElementById('btn-view-card');
+  const btnList = document.getElementById('btn-view-list');
+  if (!btnCard || !btnList) return;
+  const isCard = KANBAN_VIEW !== 'list';
+  btnCard.style.background = isCard ? 'var(--accent)' : 'var(--surface)';
+  btnCard.style.color = isCard ? '#fff' : 'var(--text)';
+  btnList.style.background = !isCard ? 'var(--accent)' : 'var(--surface)';
+  btnList.style.color = !isCard ? '#fff' : 'var(--text)';
+}
+
+window.setKanbanView = function(v) {
+  KANBAN_VIEW = v;
+  try { localStorage.setItem('kanbanView', v); } catch(e) {}
+  if (BOARD) {
+    const el = document.getElementById('bt-kanban');
+    if (el) renderKanbanInto(el, BOARD.kanban, BOARD.subplans);
+  }
+  syncViewButtons();
+};
+
+/* ════════════════════════════════════════════════════════════════════
+   Task 详情 Modal
+   ════════════════════════════════════════════════════════════════════ */
+
+function tdSection(title, content) {
+  return `<div style="margin-bottom:var(--sp-5)">
+    <div style="font-size:var(--fs-xs);font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;padding-bottom:var(--sp-1);border-bottom:1px solid var(--border);margin-bottom:var(--sp-2)">${title}</div>
+    <div style="padding-top:2px">${content}</div>
+  </div>`;
+}
+
+function tdReqItem(r) {
+  return `<div style="display:flex;gap:var(--sp-2);align-items:flex-start;padding:3px 0;font-size:var(--fs-xs)">
+    <span class="bt-status" style="background:${STATUS_CLR[r.status] || '#9ca3af'};margin-top:4px;flex-shrink:0"></span>
+    <span><span style="color:var(--text-muted)">${esc(r.id)}</span> ${esc(r.title)}${r.evidence ? ` <code class="bt-ev">${esc(r.evidence)}</code>` : ''}</span>
+  </div>`;
+}
+
+window.openTaskDetail = function(card, source) {
+  if (!BOARD || !card) return;
+  const overlay = document.getElementById('taskOverlay');
+  if (!overlay) return;
+  const mainEl = document.getElementById('main') || document.querySelector('main');
+  if (mainEl) mainEl.setAttribute('inert', '');
+
+  const { requirements, subplans, milestones } = BOARD;
+  const statusClr   = STATUS_CLR[card.status] || '#9ca3af';
+  const statusLabel = { done: '已完成', doing: '进行中', todo: '待办', partial: '进行中', blocked: '卡点' };
+
+  document.getElementById('td-status-bar').innerHTML =
+    `<span style="display:inline-flex;align-items:center;gap:5px;padding:2px 10px;border-radius:var(--radius-pill);background:${statusClr}22;border:1px solid ${statusClr};font-size:var(--fs-xs);font-weight:600;color:${statusClr}">
+       <span style="width:6px;height:6px;border-radius:50%;background:${statusClr}"></span>
+       ${esc(statusLabel[card.status] || card.status)}
+     </span>
+     ${source === 'subplans' ? '<span style="margin-left:8px;font-size:9px;color:#8b5cf6;font-weight:700">subplan</span>' : ''}`;
+
+  document.getElementById('td-title').textContent = card.id + ' · ' + card.title;
+  document.getElementById('td-group').textContent  = '分组: ' + card.group;
+
+  const relReqs = (requirements || []).filter(r => r.group === card.group);
+  const relSubs = (subplans || []).filter(s => s.group === card.group);
+  const icon    = { done: '✅', doing: '🔄', todo: '⬜', blocked: '🚫' };
+
+  let body = '';
+
+  // Session 锚点
+  body += tdSection('📎 Session 锚点 (evidence)', card.evidence
+    ? `<code class="bt-ev" style="font-size:var(--fs-xs)">${esc(card.evidence)}</code>`
+    : '<span style="color:var(--text-dim);font-size:var(--fs-xs)">暂无 evidence — 任务未关联 commit</span>');
+
+  // 关联需求 (WHAT)
+  body += tdSection('🎯 关联需求 (WHAT · 该分组)',
+    relReqs.length ? relReqs.map(tdReqItem).join('') : '<span style="color:var(--text-dim);font-size:var(--fs-xs)">该分组无关联需求</span>');
+
+  // 关联方案 (HOW)
+  body += tdSection('🔧 关联方案 (HOW · 该分组)',
+    relSubs.length ? relSubs.map(tdReqItem).join('') : '<span style="color:var(--text-dim);font-size:var(--fs-xs)">该分组无关联方案</span>');
+
+  // 里程碑
+  if (milestones && milestones.length) {
+    body += tdSection('⛳ 里程碑全览',
+      milestones.map(m =>
+        `<div style="display:flex;gap:var(--sp-2);align-items:center;padding:3px 0;font-size:var(--fs-xs)">
+           ${icon[m.status] || '⬜'} <span style="font-weight:600">${esc(m.id)}</span> ${esc(m.title)}
+           ${m.evidence ? `<code class="bt-ev">${esc(m.evidence)}</code>` : ''}
+         </div>`).join(''));
+  }
+
+  // 卡点 & 闭环
+  if (card.blocker) {
+    body += tdSection('⚠️ 卡点', `<div style="padding:var(--sp-2) var(--sp-3);border-left:3px solid #ef4444;font-size:var(--fs-xs);color:#ef4444">${esc(card.blocker)}</div>`);
+  }
+  if (card.closure_badge) {
+    body += tdSection('📋 闭环状态', `<code class="bt-ev">${esc(card.closure_badge)}</code>`);
+  }
+
+  document.getElementById('td-body').innerHTML = body;
+  overlay.style.display = 'flex';
+};
+
+window.closeTaskDetail = function() {
+  const o = document.getElementById('taskOverlay');
+  if (o) o.style.display = 'none';
+  const mainEl = document.getElementById('main') || document.querySelector('main');
+  if (mainEl) mainEl.removeAttribute('inert');
+};
 
 /* ════════════════════════════════════════════════════════════════════
    Init
