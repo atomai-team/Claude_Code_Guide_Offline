@@ -1206,6 +1206,60 @@ window.closeTaskDetail = function() {
    Init
    ════════════════════════════════════════════════════════════════════ */
 (async function() {
+  // M3: performance 标记 - 渲染起始点 (3 个 fetch 都完成后)
+  performance.mark('render-start');
   await Promise.all([loadStats(), loadDetails(), loadBoardTasks()]);
+  performance.mark('render-end');
+  try { performance.measure('render-time', 'render-start', 'render-end'); } catch(e) { /* 浏览器无 performance API */ }
   startAutoRefresh();
 })();
+
+/* ════════════════════════════════════════════════════════════════════
+   可观测性三件 (M3 2026-06-29)
+   - window.onerror → 聚合 window.__errs + console.warn (fail-quietly)
+   - performance.measure('render-time') → 渲染耗时埋点
+   - fetchRetry(url, opts, n=3) → 指数退避重试 helper
+   注入位置: dashboard 启动 IIFE 之后, 不污染现有逻辑
+   ════════════════════════════════════════════════════════════════════ */
+
+/** @type {Array<{msg:string, src:string, line:number, ts:number}>} */
+window.__errs = [];
+window.addEventListener('error', (ev) => {
+  window.__errs.push({
+    msg:  ev.message || 'unknown',
+    src:  ev.filename || '?',
+    line: ev.lineno || 0,
+    ts:   Date.now(),
+  });
+  // 限长 50 条, 防内存泄漏
+  if (window.__errs.length > 50) window.__errs.shift();
+  console.warn('[obs] window error:', ev.message, ev.filename, ev.lineno);
+});
+
+/**
+ * fetch wrapper · 指数退避重试 n 次 (默认 3).
+ * @param {string} url
+ * @param {RequestInit=} opts
+ * @param {number=} n 最大重试次数 (含首次)
+ * @returns {Promise<Response>}
+ */
+async function fetchRetry(url, opts = {}, n = 3) {
+  let last_err;
+  for (let i = 0; i < n; i++) {
+    try {
+      const r = await fetch(url, opts);
+      if (r.ok) return r;
+      last_err = new Error('HTTP ' + r.status);
+    } catch (e) {
+      last_err = e;
+    }
+    if (i < n - 1) {
+      const delay = Math.min(200 * Math.pow(2, i), 2000);  // 200/400/800ms, 上限 2s
+      await new Promise(res => setTimeout(res, delay));
+      console.warn(`[obs] fetch ${url} retry ${i + 1}/${n - 1} after ${delay}ms`);
+    }
+  }
+  throw last_err || new Error('fetch failed');
+}
+// 暴露给测试调用 (test_browser_observability.py)
+window.__fetchRetry = fetchRetry;
