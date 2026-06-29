@@ -400,6 +400,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
       <a href="#s-github" class="nav-link">GitHub 生态 · 调研裁决</a>
       <a href="#s-knowledge" class="nav-link">本机知识体系</a>
       <a href="#s-resources" class="nav-link">调研档案 + 资源<span class="nav-primer">新</span></a>
+      <a href="#s-scenarios" class="nav-link">5 大场景剧本<span class="nav-primer">新</span></a>
     </div>
     <div class="nav-group">
       <span class="nav-group-title">⑤ 数据检索</span>
@@ -1569,6 +1570,180 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
     </div>
 
     <p class="deep-note"><strong>反讽自检</strong>: 这 7 个范式名在 dashboard 内文 <code>grep</code> 原 0 命中 (本 commit 修复) · 数据出处峰值版本 609963a (6/27) · 当前 dashboard 1456 行仅 14 section · 借签结构 (场景/触发/命令/边界 5 段叙事) + 套当前 deep-block 模板, 不复制峰值版 CSS class (避免污染)。</p>
+
+  </div>
+</section>
+
+<!-- ═══ 5 大场景剧本 · 出海/做 app/升级/调研/团队 ═══ -->
+<section class="section container" id="s-scenarios">
+  <div class="section-rhythm section-rhythm--orange section-header">
+    <div class="section-rhythm__motto">5 大场景</div>
+    <h2 class="section-title">5 大场景剧本 · 触发词 → 完整链路 → 收口产出</h2>
+    <p class="section-subtitle">借鉴 pane-manuals L1886-1969 4 5 大场景结构 · 出海/做 app/升级/调研/团队 · 触发词口语化 · 收口产物明确 · 出处逐条标注 · 数据快照 2026-06-29</p>
+  </div>
+
+  <div class="deep-stack">
+
+    <div class="callout callout-warn">
+      <strong>实战</strong> · 用户说"出海/做 app/升级/调研/团队" → intake 自动路由到对应剧本;若意图模糊,先 sp-brainstorming 澄清(铁律 11)。5 大场景对应 5 种典型任务流,从用户口语到收口的完整剧本。
+    </div>
+
+    <!-- S1 出海创投 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">🌍 S1 · 出海创投</div>
+      <h3 class="deep-block-title">海外市场 + 创业融资 · 商业创业者 1 号剧本</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">触发词</span><span class="deep-row-text"><span class="deep-row-name">"出海" / "海外市场" / "BP" / "三表预测" / "Term Sheet"</span><span class="deep-row-when">→ /oh-my-claudecode:ceo-mode overseas-entry 或直接说 "帮我做 X 国家出海"</span></span></div>
+        <div class="deep-row"><span class="deep-key">完整链路</span><span class="deep-row-text"><span class="deep-row-name">market-analyst → overseas-entry → financial-analyst → capital-ir</span><span class="deep-row-when">→ 4 个 agent 串行, 每个产出作为下一个输入</span></span></div>
+        <div class="deep-row"><span class="deep-key">收口产出</span><span class="deep-row-text"><span class="deep-row-name">BP / 三表预测 / Term Sheet</span><span class="deep-row-when">→ 写进 docs/fundraising/ 目录 + Notion 协作推送</span></span></div>
+        <div class="deep-row"><span class="deep-key">边界</span><span class="deep-row-text"><span class="deep-row-name">不适用: 仅单点市场调研 / 国内业务 / 无融资需求</span><span class="deep-row-when">→ 改 S4 调研 (不融资) 或 S2 做 app (国内产品)</span></span></div>
+      </div>
+      <pre class="mermaid-fallback" style="background:var(--surface2);padding:12px;border-radius:6px;font-size:12px;line-height:1.7;margin-top:10px;color:var(--text-dim);overflow-x:auto">
+S1 出海 完整剧本 (4 步串行):
+  ┌──────────────────┐
+  │ 1. market-analyst │ TAM/SAM/SOM + 竞品矩阵 + 行业趋势
+  └────────┬─────────┘
+           ▼
+  ┌──────────────────┐
+  │ 2. overseas-entry │ 区域准入 + 法务/牌照 + 跨境支付
+  └────────┬─────────┘
+           ▼
+  ┌──────────────────┐
+  │ 3. financial-     │ 商业模式可行性 + 三情景财务预测
+  │    analyst        │
+  └────────┬─────────┘
+           ▼
+  ┌──────────────────┐
+  │ 4. capital-ir     │ BP 撰写 + 估值逻辑 + Term Sheet
+  └──────────────────┘
+      </pre>
+    </div>
+
+    <!-- S2 做 app / 全栈 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">📱 S2 · 做 app / 全栈</div>
+      <h3 class="deep-block-title">从 0 到上线的完整流水线 · 工程化 1 号剧本</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">触发词</span><span class="deep-row-text"><span class="deep-row-name">"做 app" / "全栈" / "上线" / "从 0 到 1" / "MVP"</span><span class="deep-row-when">→ /oh-my-claudecode:team-fullstack 或 /smart-flow-all "帮我做一个 X"</span></span></div>
+        <div class="deep-row"><span class="deep-key">完整链路</span><span class="deep-row-text"><span class="deep-row-name">product-manager → architect → engineer(TDD) → e2e-test → devops-deploy</span><span class="deep-row-when">→ 5 步串行, TDD 不可跳, deploy 必 Playwright 验证</span></span></div>
+        <div class="deep-row"><span class="deep-key">收口产出</span><span class="deep-row-text"><span class="deep-row-name">可上线代码 + 测试 + 部署脚本</span><span class="deep-row-when">→ GitHub repo + CI/CD + Playwright 截图</span></span></div>
+        <div class="deep-row"><span class="deep-key">边界</span><span class="deep-row-text"><span class="deep-row-name">不适用: 修一个 bug / 改一个文件 / 战略咨询</span><span class="deep-row-when">→ 改 S5 团队 (协作小任务) 或 S4 调研 (无代码)</span></span></div>
+      </div>
+      <pre class="mermaid-fallback" style="background:var(--surface2);padding:12px;border-radius:6px;font-size:12px;line-height:1.7;margin-top:10px;color:var(--text-dim);overflow-x:auto">
+S2 做 app 完整剧本 (5 步串行):
+  ┌──────────────────┐
+  │ 1. product-       │ JTBD + BDD + RICE 优先级
+  │    manager        │
+  └────────┬─────────┘
+           ▼
+  ┌──────────────────┐
+  │ 2. architect      │ C4 + ADR 决策 + 选型
+  └────────┬─────────┘
+           ▼
+  ┌──────────────────┐
+  │ 3. engineer (TDD) │ 红→绿→重构 不可跳
+  └────────┬─────────┘
+           ▼
+  ┌──────────────────┐
+  │ 4. e2e-test       │ Playwright + 浏览器实测
+  └────────┬─────────┘
+           ▼
+  ┌──────────────────┐
+  │ 5. devops-deploy  │ CI/CD + 灰度发布 + 监控
+  └──────────────────┘
+      </pre>
+    </div>
+
+    <!-- S3 升级 / 体检 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">⬆️ S3 · 升级 / 体检</div>
+      <h3 class="deep-block-title">6 专家审计 + HITL 门控 · 治本型升级</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">触发词</span><span class="deep-row-text"><span class="deep-row-name">"升级" / "体检" / "审计" / "全面检查" / "改前确认"</span><span class="deep-row-when">→ /oh-my-claudecode:claude-better-all-upgrade 或 /smart-flow-all "帮我做全面升级"</span></span></div>
+        <div class="deep-row"><span class="deep-key">完整链路</span><span class="deep-row-text"><span class="deep-row-name">audit-all-better(6 专家) → 配置改前 HITL → fix → 复核</span><span class="deep-row-when">→ 4 步, HITL 是 4 阶段硬门控(铁律 L3 配置改动必确认)</span></span></div>
+        <div class="deep-row"><span class="deep-key">收口产出</span><span class="deep-row-text"><span class="deep-row-name">P0/P1/P2 清单 + 修复 commit</span><span class="deep-row-when">→ docs/audit/ 目录存档 + commit 推 main</span></span></div>
+        <div class="deep-row"><span class="deep-row-key">边界</span><span class="deep-row-text"><span class="deep-row-name">不适用: 单点 bug 修 / 日常小改动 / 无配置改动</span><span class="deep-row-when">→ 改用 engineer (单点) 或 S5 团队 (小协作)</span></span></div>
+      </div>
+      <pre class="mermaid-fallback" style="background:var(--surface2);padding:12px;border-radius:6px;font-size:12px;line-height:1.7;margin-top:10px;color:var(--text-dim);overflow-x:auto">
+S3 升级完整剧本 (4 步含 HITL 门控):
+  ┌──────────────────┐
+  │ 1. audit-all-     │ 6 专家并行审计 8 维度
+  │    better         │ (配置/代码/技能/工作流/文档/hook/rule/memory)
+  └────────┬─────────┘
+           ▼
+  ┌──────────────────┐
+  │ 2. HITL 确认      │ ★ 硬门控: 用户拍板哪些 P0/P1 改
+  │    (铁律 L3)      │ 反讽 R4 必报: 不软化拒绝
+  └────────┬─────────┘
+           ▼
+  ┌──────────────────┐
+  │ 3. fix            │ P0 立即修 / P1 排期 / P2 攒批
+  └────────┬─────────┘
+           ▼
+  ┌──────────────────┐
+  │ 4. 复核           │ 派 reviewer 独立验证修复
+  └──────────────────┘
+      </pre>
+    </div>
+
+    <!-- S4 调研 / 评估 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">🔍 S4 · 调研 / 评估</div>
+      <h3 class="deep-block-title">5 渠道深研 + 异构对抗 · 决策可信度</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">触发词</span><span class="deep-row-text"><span class="deep-row-name">"调研" / "对比" / "选型" / "横评" / "技术评估"</span><span class="deep-row-when">→ /oh-my-claudecode:deep-research 或 /smart-flow-all "调研 X"</span></span></div>
+        <div class="deep-row"><span class="deep-key">完整链路</span><span class="deep-row-text"><span class="deep-row-name">researcher(5 渠道) → practical-comparator → 异构对抗(ai-panel)</span><span class="deep-row-when">→ 3 步, ai-panel 是 5 联 CLI 异构对抗(去偏)</span></span></div>
+        <div class="deep-row"><span class="deep-row-key">收口产出</span><span class="deep-row-text"><span class="deep-row-name">对比表 + ★推荐 + 引用</span><span class="deep-row-when">→ docs/research-library/INDEX.md 登记 + Notion 推送</span></span></div>
+        <div class="deep-row"><span class="deep-row-key">边界</span><span class="deep-row-text"><span class="deep-row-name">不适用: 简单查官方文档 / 已有结论的验证</span><span class="deep-row-when">→ 直接用 Explore agent 读 docs/ 即可</span></span></div>
+      </div>
+      <pre class="mermaid-fallback" style="background:var(--surface2);padding:12px;border-radius:6px;font-size:12px;line-height:1.7;margin-top:10px;color:var(--text-dim);overflow-x:auto">
+S4 调研完整剧本 (3 步 + 异构对抗):
+  ┌──────────────────┐
+  │ 1. researcher     │ 5 渠道深度调研
+  │    (5 渠道)       │ 官方 / GitHub 高星 / 英文社区 / 中文社区 / 视频
+  └────────┬─────────┘
+           ▼
+  ┌──────────────────┐
+  │ 2. practical-     │ 多方案对比 + ★推荐 + 反讽自检
+  │    comparator     │
+  └────────┬─────────┘
+           ▼
+  ┌──────────────────┐
+  │ 3. 异构对抗       │ ai-panel 5 联 CLI: kimi/mmx/opencode/
+  │    (ai-panel)     │ qwen/mavis 去偏差 + 共识报告
+  └──────────────────┘
+      </pre>
+    </div>
+
+    <!-- S5 团队 / 协作 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">👥 S5 · 团队 / 协作</div>
+      <h3 class="deep-block-title">N 角色 agent 并行 + verifier 共识 · 多视角涌现</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">触发词</span><span class="deep-row-text"><span class="deep-row-name">"组一个团队" / "协作" / "讨论" / "互相质询" / "多视角"</span><span class="deep-row-when">→ /oh-my-claudecode:team 或 /smart-flow-all "组团队做 X"</span></span></div>
+        <div class="deep-row"><span class="deep-key">完整链路</span><span class="deep-row-text"><span class="deep-row-name">team-lead → N 角色 agent 并行 → verifier 共识</span><span class="deep-row-when">→ 3 步, N 通常 2-5 个角色, 并行非串行</span></span></div>
+        <div class="deep-row"><span class="deep-row-key">收口产出</span><span class="deep-row-text"><span class="deep-row-name">多角色协作产物 + 共识报告</span><span class="deep-row-when">→ 写进 docs/ 目录 + 各角色 sign-off</span></span></div>
+        <div class="deep-row"><span class="deep-row-key">边界</span><span class="deep-row-text"><span class="deep-row-name">不适用: 单 agent 能搞定的简单任务 / 子任务无依赖</span><span class="deep-row-when">→ 改 S2 workflow (并行无协作) 或 engineer (单点)</span></span></div>
+      </div>
+      <pre class="mermaid-fallback" style="background:var(--surface2);padding:12px;border-radius:6px;font-size:12px;line-height:1.7;margin-top:10px;color:var(--text-dim);overflow-x:auto">
+S5 团队完整剧本 (3 步含并行):
+  ┌──────────────────┐
+  │ 1. team-lead      │ 根据任务选 N 角色
+  │    (N 角色)        │ (PM/架构师/工程师/QA/法务/财务...)
+  └────────┬─────────┘
+           ▼
+  ┌──────────────────┐
+  │ 2. N 角色并行     │ 各自领域产出 → 互相引用 + 质询
+  │    (并行非串行)    │
+  └────────┬─────────┘
+           ▼
+  ┌──────────────────┐
+  │ 3. verifier 共识  │ 派独立 verifier 找盲点 + 出共识报告
+  └──────────────────┘
+      </pre>
+    </div>
+
+    <p class="deep-note"><strong>反讽自检</strong>: 5 大场景是 pane-manuals L1886-1969 (4918 行版本) SSoT · 本 session 主仓 <code>grep "S1.*出海" = 0</code> 触发本改造 · Mermaid 流程图改纯文本 ASCII 版本(避免 +100KB CDN) · 数据出处 = pane-manuals/dashboard.html · 实际 SSoT = <code>~/.claude/memory/MEMORY.md</code> · agent 名称与 <code>~/.claude/agents/_industry/</code> 等目录对齐, 仍有 0.15 残余风险(6/25 旧版可能 agent 名已变)。</p>
 
   </div>
 </section>
