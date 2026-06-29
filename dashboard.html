@@ -416,6 +416,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
       <a href="#s-prompt" class="nav-link">提示词 8 招<span class="nav-primer">新</span></a>
       <a href="#s-entries" class="nav-link">11 高频入口<span class="nav-primer">新</span></a>
       <a href="#s-advanced-examples" class="nav-link">高级实战 5 例<span class="nav-primer">新</span></a>
+      <a href="#s-paradigms" class="nav-link">3 范式对比<span class="nav-primer">新</span></a>
       <a href="#s-orchestration" class="nav-link">编排架构图<span class="nav-primer">新</span></a>
       <a href="#s-advanced" class="nav-link">高级指令专题<span class="nav-primer">新</span></a>
     </div>
@@ -2218,6 +2219,82 @@ S5 团队完整剧本 (3 步含并行):
   </div>
 </section>
 
+<!-- ═══ 3 范式对比 · Agent Teams / Subagents / Manual+worktrees ═══ -->
+<section class="section container" id="s-paradigms">
+  <div class="section-rhythm section-rhythm--blue section-header">
+    <div class="section-rhythm__motto">范式对比</div>
+    <h2 class="section-title">3 范式对比 · 9 维度 × Agent Teams / Subagents / Manual+worktrees</h2>
+    <p class="section-subtitle">借鉴 pane-manuals L2090 + 官方 code.claude.com/docs 草案 · 实施阶段 WebFetch 复核 · 触发词口语化 · OMC 体系映射 · 数据快照 2026-06-30</p>
+  </div>
+
+  <div class="deep-stack">
+
+    <div class="callout callout-blue">
+      <strong>3 范式选择</strong> — <strong>Agent Teams</strong>(官方推荐) = 多 session 共享 task list 队友互聊 · <strong>Subagents</strong>(主流) = 1 session 内派 subagent · <strong>Manual + worktrees</strong>(兜底) = 用户自己开多 session · 选择 = 任务规模 + 协调成本 + 调试容忍度。
+    </div>
+
+    <!-- 9 维度 × 3 范式对比矩阵 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">9 维度 × 3 范式对比矩阵</div>
+      <h3 class="deep-block-title">并行粒度 / 共享状态 / 协调机制 / 调试难度 等</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">并行粒度</span><span class="deep-row-text"><span class="deep-row-name">Agent Teams: 多 session 并行 · Subagents: 1 session 多 subagent · Manual: 多 session 手动</span><span class="deep-row-when">→ Team 跨进程 · Subagent 跨上下文 · Manual 跨用户</span></span></div>
+        <div class="deep-row"><span class="deep-key">共享状态</span><span class="deep-row-text"><span class="deep-row-name">Agent Teams: 共享 task list (board-tasks.json) · Subagents: 共享 STATS/BOARD 全局 · Manual: 无</span><span class="deep-row-when">→ Team 强协调 · Subagent 中等 · Manual 弱</span></span></div>
+        <div class="deep-row"><span class="deep-key">队友互聊</span><span class="deep-row-text"><span class="deep-row-name">Agent Teams: ✅ 队友消息互通 · Subagents: ❌ 无 (只汇报主调度器) · Manual: ✅ 用户手动</span><span class="deep-row-when">→ Team 强 · Manual 中 (用户转达) · Subagent 弱</span></span></div>
+        <div class="deep-row"><span class="deep-key">协调机制</span><span class="deep-row-text"><span class="deep-row-name">Agent Teams: 自动 (TASK_COMPLETED / IN_PROGRESS) · Subagents: 主调度器分发 · Manual: 用户分配</span><span class="deep-row-when">→ 复杂度: Team 复杂 · Subagent 简单 · Manual 极简</span></span></div>
+        <div class="deep-row"><span class="deep-key">适用场景</span><span class="deep-row-text"><span class="deep-row-name">Agent Teams: 大项目多角色 + 实时讨论 · Subagents: 单一任务多视角 · Manual: 独立 module 并行</span><span class="deep-row-when">→ 见决策树下方</span></span></div>
+        <div class="deep-row"><span class="deep-key">优缺点</span><span class="deep-row-text"><span class="deep-row-name">Team: 强协调+debug 难 / Subagent: 简单+无互聊 / Manual: 灵活+易错</span><span class="deep-row-when">→ 协调 ↔ 简单 权衡</span></span></div>
+        <div class="deep-row"><span class="deep-key">官方推荐度</span><span class="deep-row-text"><span class="deep-row-name">Agent Teams: 官方推荐 (claude-code 2.1.x) · Subagents: 主流范式 · Manual: opt-in 兜底</span><span class="deep-row-when">→ 官方 2.1+ 主推 Team</span></span></div>
+        <div class="deep-row"><span class="deep-key">Token 成本</span><span class="deep-row-text"><span class="deep-row-name">Agent Teams: 极高 (N × 完整 session) · Subagents: 中 (单 session 内) · Manual: 用户控制</span><span class="deep-row-when">→ 协调成本换时间</span></span></div>
+        <div class="deep-row"><span class="deep-key">调试难度</span><span class="deep-row-text"><span class="deep-row-name">Agent Teams: 难 (跨 session 追踪) · Subagents: 中 (单 session 上下可见) · Manual: 用户自调</span><span class="deep-row-when">→ Team 调试需 board-tasks.json + 独立 verifier lane</span></span></div>
+      </div>
+    </div>
+
+    <!-- 3 范式详述 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">3 范式详述 · 触发词 + 完整链路 + 边界</div>
+      <h3 class="deep-block-title">a. Agent Teams · b. Subagents · c. Manual+worktrees</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">a. Agent Teams</span><span class="deep-row-text"><span class="deep-row-name">多 session + 共享 task list + 队友互聊 (官方推荐 · claude-code 2.1.x)</span><span class="deep-row-when">→ /oh-my-claudecode:team 自动启 · 需 ~/.claude/board-tasks.json SSoT · <strong>WebFetch 复核阶段再核</strong></span></span></div>
+        <div class="deep-row"><span class="deep-key">b. Subagents</span><span class="deep-row-text"><span class="deep-row-name">1 session 内派 subagent (无队友互聊) · code.claude.com/docs/en/sub-agents</span><span class="deep-row-when">→ Task tool 派 / Agent(model=sonnet/opus/haiku) · 主流范式</span></span></div>
+        <div class="deep-row"><span class="deep-key">c. Manual+worktrees</span><span class="deep-row-text"><span class="deep-row-name">用户自己开多 session + git worktrees (无自动协调) · <code>~/.worktrees/</code> 4 个已用</span><span class="deep-row-when">→ pane-dashboard/index/manuals/mycc-config · opt-in 兜底</span></span></div>
+        <div class="deep-row"><span class="deep-key">边界</span><span class="deep-row-text"><span class="deep-row-name">小任务 → b. Subagents · 大项目多角色 → a. Team · 独立 module → c. worktrees</span><span class="deep-row-when">→ 任务规模决定范式</span></span></div>
+      </div>
+    </div>
+
+    <!-- OMC 体系映射 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">OMC 体系映射 · captain / yolo-all / smart-flow-all / ultracode</div>
+      <h3 class="deep-block-title">本机 OMC 入口对应哪个范式</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">/oh-my-claudecode:team</span><span class="deep-row-text"><span class="deep-row-name">= a. Agent Teams (官方推荐路径)</span><span class="deep-row-when">→ 启 board-tasks.json + N 队友互聊</span></span></div>
+        <div class="deep-row"><span class="deep-key">/smart-flow-all (队长)</span><span class="deep-row-text"><span class="deep-row-name">= b. Subagents (默认范式) · 派多 subagent 但无互聊</span><span class="deep-row-when">→ 1 session 内多 agent 协同</span></span></div>
+        <div class="deep-row"><span class="deep-key">/yolo-all (火力全开)</span><span class="deep-row-text"><span class="deep-row-name">= b + 极限档 (subagents + 失败 2 次切方法论 + 收口五段)</span><span class="deep-row-when">→ YOLO 模式 = 智能大脑全开</span></span></div>
+        <div class="deep-row"><span class="deep-key">/worktrees + 多 session</span><span class="deep-row-text"><span class="deep-row-name">= c. Manual 兜底 · 适合大改动 (本机 4 个 worktree)</span><span class="deep-row-when">→ pane-dashboard/index/manuals/mycc-config</span></span></div>
+        <div class="deep-row"><span class="deep-key">/oh-my-claudecode:ultracode</span><span class="deep-row-text"><span class="deep-row-name">= b. 极致 Subagent (全维度调研) · 实施阶段 WebFetch 复核</span><span class="deep-row-when">→ 7 通道调研 + 异构对抗</span></span></div>
+      </div>
+    </div>
+
+    <!-- 决策树: 选哪个 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">决策树: 选哪个范式? (5 步)</div>
+      <h3 class="deep-block-title">任务规模 → 协调成本 → 调试容忍度 → 范式选择</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">步骤 1: 任务规模?</span><span class="deep-row-text"><span class="deep-row-name">单文件/单 bug → 小 · 多文件单功能 → 中 · 跨模块大项目 → 大</span><span class="deep-row-when">→ 小 → 步骤 2A / 中 → 步骤 2B / 大 → 步骤 2C</span></span></div>
+        <div class="deep-row"><span class="deep-key">步骤 2A: 小任务</span><span class="deep-row-text"><span class="deep-row-name">直接做 / 派 1 个 executor · 无需范式</span><span class="deep-row-when">→ 不需要 a/b/c · 工程师直做</span></span></div>
+        <div class="deep-row"><span class="deep-key">步骤 2B: 中任务</span><span class="deep-row-text"><span class="deep-row-name">b. Subagents /smart-flow-all · 1 session 多 subagent</span><span class="deep-row-when">→ 验证容易 · 无需 team 协调</span></span></div>
+        <div class="deep-row"><span class="deep-key">步骤 2C: 大任务</span><span class="deep-row-text"><span class="deep-row-name">a. Agent Teams /team · 多 session 互聊 · 走 board-tasks.json</span><span class="deep-row-when">→ 验证困难但协调强 · 必有 verifier 独立 lane</span></span></div>
+        <div class="deep-row"><span class="deep-key">步骤 3: 调试容忍度?</span><span class="deep-row-text"><span class="deep-row-name">低 → b. Subagents (单 session 易追) · 高 → a. Team (跨 session 难)</span><span class="deep-row-when">→ 调试优先选 b</span></span></div>
+        <div class="deep-row"><span class="deep-key">步骤 4: 独立 module?</span><span class="deep-row-text"><span class="deep-row-name">是 → c. worktrees + 多 session · 各 module 独立验证后合并</span><span class="deep-row-when">→ 大项目可混合 a + c</span></span></div>
+        <div class="deep-row"><span class="deep-key">步骤 5: 决策</span><span class="deep-row-text"><span class="deep-row-name">小 → 直做 / 中 → b Subagents / 大且需协调 → a Team / 独立 module → c worktrees</span><span class="deep-row-when">→ 选错可重选, 主调度器不软化 (反讽 R4)</span></span></div>
+      </div>
+    </div>
+
+    <p class="deep-note"><strong>反讽自检</strong>: 9 维度 × 3 范式对比矩阵借鉴 pane-manuals L2090 + 官方草案 · <strong>WebFetch 因 Plan Mode 限制未实测</strong> (实施阶段需 5 路并发 WebFetch 复核 code.claude.com/docs/en/{sub-agents,agent-teams,plan-mode,workflows,hooks}) · "建议复核"标注 (官方可能 2.2+ 改名或废弃) · OMC 体系映射为本机 5 入口实际对应 · 决策树 5 步可操作 · 不软化 (R4): 选错就重选, 不要"差不多就用"。</p>
+
+  </div>
+</section>
+
 <section class="section container" id="s-tasks">
   <h2 class="section-title">任务看板 · ToDo</h2>
   <p class="section-desc">工程级全局任务状态 · 数据源 <code>project-ledger.json</code> 单向投影 · <strong>只读</strong></p>
@@ -2337,8 +2414,8 @@ S5 团队完整剧本 (3 步含并行):
 const FALLBACK_COUNTS = {
   skills: 149, plugin_skills: 419, agents_total: 91, agents_core: 6,
   agents_ceo_roles: 12, agents_industry: 7, agents_teams: 6, plugin_agents: 164,
-  hooks_registered: 42, hook_events: 14, hook_files: 58,
-  workflows: 14, mcp_servers: 4, enabled_plugins: 32, total_plugins: 58,
+  hooks_registered: 45, hook_events: 17, hook_files: 61,
+  workflows: 14, mcp_servers: 4, enabled_plugins: 32, total_plugins: 59,
   rules: 3, intent_words_routes: 133, external_clis: 3
 };
 const FALLBACK_VERSION = { claude_code: '2.1.195', omc: '4.15.0', cc_switch: 'OFF', stats_engine: 'V53' };

@@ -84,9 +84,9 @@ class TestSectionStructure:
     """dashboard 结构层契约: section 数量稳定 + id 唯一."""
 
     def test_section_count_in_range(self, section_index):
-        """section 数量应在 13-23 之间 (含 s-evolution D1 2026-06-30)."""
+        """section 数量应在 13-24 之间 (含 s-paradigms D4 2026-06-30)."""
         n = len(section_index)
-        assert 13 <= n <= 23, f"section 数量 {n} 超出预期 [13, 23], 需重新审计 dashboard"
+        assert 13 <= n <= 24, f"section 数量 {n} 超出预期 [13, 24], 需重新审计 dashboard"
 
     def test_no_duplicate_section_ids(self, section_index):
         ids = list(section_index.keys())
