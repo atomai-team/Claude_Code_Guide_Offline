@@ -1,4 +1,75 @@
 /* ════════════════════════════════════════════════════════════════════
+   dashboard-app.js · 1100+ 行 JS 模块 (extracted from dashboard.html @ P3-1)
+
+   JSDoc 类型定义 (M2-替换 2026-06-29)
+   - 让 VS Code 智能提示生效 (jsconfig.json 配套)
+   - 零运行时开销 (JSDoc 是注释)
+   ════════════════════════════════════════════════════════════════════ */
+
+/**
+ * @typedef {Object} Counts
+ * @property {number} skills            本地 skill 数 (skill-index SSoT 口径 149)
+ * @property {number} workflows         workflow 数
+ * @property {number} hooks_registered  已注册 hook 数
+ * @property {number} hook_events       hook 事件类型数
+ * @property {number} hook_files        hook 文件数 (含未注册)
+ * @property {number} agents_total      agent 总数 (含 platform)
+ * @property {number} agents_core       核心 agent 数
+ * @property {number} agents_ceo_roles  CEO 角色 agent 数
+ * @property {number} agents_industry   行业 agent 数
+ * @property {number} agents_teams      team agent 数
+ * @property {number} plugin_skills     插件 skill 总数 (市场)
+ * @property {number} plugin_agents     插件 agent 总数 (市场)
+ * @property {number} mcp_servers       MCP server 数 (配置)
+ * @property {number} enabled_plugins   已启用插件数
+ * @property {number} total_plugins     插件总数
+ * @property {number} rules             顶层 rules 文件数
+ * @property {number} intent_words_routes  意图词路由数
+ * @property {number} external_clis     外部 CLI 数
+ */
+
+/**
+ * @typedef {Object} Version
+ * @property {string} claude_code  CLI 版本字符串
+ * @property {string} omc          OMC 版本
+ * @property {string} stats_engine stats 引擎版本 (V53)
+ * @property {string} cc_switch    CC Switch 状态 (OFF/ON/PackyCode/Kimi)
+ */
+
+/**
+ * @typedef {Object} Stats
+ * @property {Counts} counts        19 个标准字段
+ * @property {Object} lists         priority_routes / workflows / skill_desc 等
+ * @property {Version} version      4 个版本字段
+ * @property {string} generated_at  ISO 8601 时间戳
+ * @property {Object=} hooks        hook 分布 by_event
+ */
+
+/**
+ * @typedef {Object} BoardKanbanCard
+ * @property {string} id            卡片唯一 ID
+ * @property {string} title         卡片标题
+ * @property {string} group         分组 (看板/知识/体检/架构等)
+ * @property {'todo'|'doing'|'done'|'partial'|'blocked'} status
+ * @property {string=} evidence     执行凭证 (commit hash / URL)
+ * @property {string=} closure_badge 闭环徽章
+ * @property {boolean=} blocker     是否阻塞
+ */
+
+/**
+ * @typedef {Object} Board
+ * @property {Object} meta          { generated_at, ... }
+ * @property {Object<string, BoardKanbanCard[]>} kanban  4-5 列
+ * @property {Array} milestones
+ * @property {Array} blockers
+ * @property {Array} requirements
+ * @property {Array} subplans
+ * @property {Object} wbs
+ * @property {Object} memory_system
+ * @property {Object} closure
+ */
+
+/* ════════════════════════════════════════════════════════════════════
    分级导航：header 高度测量 + scroll-spy + 移动抽屉
    ════════════════════════════════════════════════════════════════════ */
 (function() {
@@ -124,6 +195,10 @@ function fillDataStatsSpans() {
 
 function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 
+/**
+ * 渲染 dashboard 所有依赖 STATS.counts 的节点 (hero / header / metric grid / entry table / hook bars)
+ * @returns {void}
+ */
 function renderStats() {
   const c = STATS.counts || FALLBACK_COUNTS;
   const v = STATS.version || FALLBACK_VERSION;
@@ -713,6 +788,11 @@ async function loadBoardTasks() {
   renderBoardTasks();
 }
 
+/**
+ * 重新加载 board-tasks.json 并重渲染 #s-tasks 看板.
+ * 不刷整页 (sentinel 留存), 仅 fetch + DOM update.
+ * @returns {Promise<void>}
+ */
 window.reloadTasks = async function() {
   const btn = document.getElementById('btn-reload-tasks');
   if (btn) { btn.disabled = true; btn.textContent = '⟳ 加载中…'; }
@@ -722,6 +802,11 @@ window.reloadTasks = async function() {
   showToast('✅ 看板数据已重载');
 };
 
+/**
+ * 检测 board-tasks.json 数据陈旧度并显示提示条 (#bt-stale-warn).
+ * 阈值: <30min 隐藏 / 30-120min 黄 / >120min 红.
+ * @returns {void}
+ */
 function checkBoardStaleness() {
   const el = document.getElementById('bt-stale-warn');
   if (!el || !BOARD?.meta?.generated_at) {
@@ -780,6 +865,11 @@ function renderGroupedList(elId, countId, items) {
   }).join('');
 }
 
+/**
+ * 渲染 #s-tasks 看板 (5 列 Kanban + hero 4 数 + modal + 列表视图).
+ * 依赖全局 BOARD (由 loadBoardTasks 注入), BOARD 为 null 时 early return.
+ * @returns {void}
+ */
 function renderBoardTasks() {
   if (!BOARD) return;
   const { kanban, milestones, blockers, notes, closure, requirements, subplans, memory_system } = BOARD;

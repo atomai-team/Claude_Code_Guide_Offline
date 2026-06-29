@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "checkJs": false,
+    "allowJs": true,
+    "noEmit": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "strict": false,
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@lib/*": ["lib/*"]
+    }
+  },
+  "include": ["dashboard-app.js", "lib/**/*.js", "dashboard.html"],
+  "exclude": ["node_modules", "dashboard-tests/.venv", ".worktrees", "_workspace"]
+}
