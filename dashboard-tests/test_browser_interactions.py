@@ -5,29 +5,26 @@
 - test_scrollspy_browser: 滚动 → nav-link active 联动
 - test_global_search: Cmd+K 打开 + 跨 section 搜索 + 命中跳转
 
-复用 test_board_tasks.py 的 page_loaded fixture 模式 (sync_playwright + chromium + networkidle)
+复用 dashboard-tests.conftest.GZIP_SERVER (端口 SSoT, 不再硬编码 18771)
+复用 conftest.page_loaded fixture 风格但带 file:// fallback.
 """
-import time
 import pytest
-from playwright.sync_api import sync_playwright, expect
+from playwright.sync_api import sync_playwright
+
+from conftest import GZIP_SERVER, REPO_ROOT
 
 
 @pytest.fixture(scope="module")
 def page_loaded():
-    """加载 dashboard.html 并等待所有 fetch 完成."""
-    import os
-    from pathlib import Path
+    """加载 dashboard.html 并等待所有 fetch 完成. 复用 conftest.GZIP_SERVER."""
     import requests
+    from pathlib import Path
 
-    GZIP = os.environ.get("DASHBOARD_GZIP_URL", "http://127.0.0.1:18771")
-    # Fallback: 直接读 file://
-    REPO = Path(__file__).resolve().parent.parent
-    HTML_FILE = REPO / "dashboard.html"
-
+    HTML_FILE = REPO_ROOT / "dashboard.html"
     try:
-        r = requests.get(f"{GZIP}/dashboard.html", timeout=3)
+        r = requests.get(f"{GZIP_SERVER}/dashboard.html", timeout=3)
         r.raise_for_status()
-        url = f"{GZIP}/dashboard.html"
+        url = f"{GZIP_SERVER}/dashboard.html"
     except requests.RequestException:
         url = f"file://{HTML_FILE}"
 

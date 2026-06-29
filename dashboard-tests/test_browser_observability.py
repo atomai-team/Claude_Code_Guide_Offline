@@ -5,27 +5,24 @@
 - performance.measure('render-time') → 渲染耗时埋点
 - fetchRetry(url, n=3) → 指数退避重试
 
-复用 test_browser_interactions.py 的 page_loaded fixture 模式.
+复用 dashboard-tests.conftest.GZIP_SERVER + page_loaded fixture 模式 (port SSoT).
 """
-import os
 import pytest
-from pathlib import Path
 from playwright.sync_api import sync_playwright
+
+from conftest import GZIP_SERVER, REPO_ROOT
 
 
 @pytest.fixture(scope="module")
 def page_loaded():
-    """加载 dashboard.html, 等所有 fetch 完成."""
+    """加载 dashboard.html, 等所有 fetch 完成. 复用 conftest.GZIP_SERVER."""
     import requests
 
-    GZIP = os.environ.get("DASHBOARD_GZIP_URL", "http://127.0.0.1:18771")
-    REPO = Path(__file__).resolve().parent.parent
-    HTML_FILE = REPO / "dashboard.html"
-
+    HTML_FILE = REPO_ROOT / "dashboard.html"
     try:
-        r = requests.get(f"{GZIP}/dashboard.html", timeout=3)
+        r = requests.get(f"{GZIP_SERVER}/dashboard.html", timeout=3)
         r.raise_for_status()
-        url = f"{GZIP}/dashboard.html"
+        url = f"{GZIP_SERVER}/dashboard.html"
     except requests.RequestException:
         url = f"file://{HTML_FILE}"
 
@@ -97,9 +94,8 @@ class TestObservability:
         """正常 fetch → fetchRetry 应一次成功, 不重试."""
         import requests as _req
 
-        GZIP = os.environ.get("DASHBOARD_GZIP_URL", "http://127.0.0.1:18771")
         try:
-            _req.get(f"{GZIP}/dashboard.html", timeout=3).raise_for_status()
+            _req.get(f"{GZIP_SERVER}/dashboard.html", timeout=3).raise_for_status()
         except _req.RequestException:
             pytest.skip("HTTP server 不在, 跳过 fetch 重试测试")
 
@@ -121,9 +117,8 @@ class TestObservability:
         """404 应触发 3 次重试后抛错 (不静默)."""
         import requests as _req
 
-        GZIP = os.environ.get("DASHBOARD_GZIP_URL", "http://127.0.0.1:18771")
         try:
-            _req.get(f"{GZIP}/dashboard.html", timeout=3).raise_for_status()
+            _req.get(f"{GZIP_SERVER}/dashboard.html", timeout=3).raise_for_status()
         except _req.RequestException:
             pytest.skip("HTTP server 不在, 跳过 fetch 重试测试")
 
