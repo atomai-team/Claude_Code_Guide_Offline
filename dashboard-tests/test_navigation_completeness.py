@@ -82,10 +82,10 @@ class TestNavigationCompleteness:
     """
 
     def test_nav_link_count_in_range(self, nav_links):
-        """nav-link 数量应在 13-21 之间 (含 s-prompt B3 2026-06-29)."""
+        """nav-link 数量应在 13-22 之间 (含 s-entries B4 2026-06-29)."""
         n = len(nav_links)
-        assert 13 <= n <= 21, (
-            f"nav-link 数量 {n} 超出预期 [13, 21], 需重新审计 dashboard 导航"
+        assert 13 <= n <= 22, (
+            f"nav-link 数量 {n} 超出预期 [13, 22], 需重新审计 dashboard 导航"
         )
 
     def test_nav_link_unique(self, nav_links):
