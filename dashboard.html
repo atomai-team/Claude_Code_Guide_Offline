@@ -412,6 +412,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
       <a href="#s-health" class="nav-link">系统健康仪表盘</a>
       <a href="#s-brains" class="nav-link">五大智能大脑</a>
       <a href="#s-architecture" class="nav-link">四系统架构宪法</a>
+      <a href="#s-orchestration" class="nav-link">编排架构图<span class="nav-primer">新</span></a>
       <a href="#s-advanced" class="nav-link">高级指令专题<span class="nav-primer">新</span></a>
     </div>
     <div class="nav-group">
@@ -1570,6 +1571,107 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
     </div>
 
     <p class="deep-note"><strong>反讽自检</strong>: 这 7 个范式名在 dashboard 内文 <code>grep</code> 原 0 命中 (本 commit 修复) · 数据出处峰值版本 609963a (6/27) · 当前 dashboard 1456 行仅 14 section · 借签结构 (场景/触发/命令/边界 5 段叙事) + 套当前 deep-block 模板, 不复制峰值版 CSS class (避免污染)。</p>
+
+  </div>
+</section>
+
+<!-- ═══ 编排架构图 · 怎么派/并行/串行 ═══ -->
+<section class="section container" id="s-orchestration">
+  <div class="section-rhythm section-rhythm--purple section-header">
+    <div class="section-rhythm__motto">编排架构</div>
+    <h2 class="section-title">编排架构图 · CE→CEX→CEXv 5 角色调用链</h2>
+    <p class="section-subtitle">借鉴 pane-manuals L1808-1908 编排架构 · 5 角色 + ASCII 流程图 · 主调度器→入口→专家→执行→验证 · 出处逐条标注 · 数据快照 2026-06-29</p>
+  </div>
+
+  <div class="deep-stack">
+
+    <div class="callout callout-purple">
+      <strong>CE→CEX→CEXv 编排范式</strong> · Creator (主调度器) → EXecutor (执行) → Verifier (验证) 3 阶段硬约束。Writer≠Reviewer 铁律: 写代码的人不能同时验代码, 必须独立 lane。每阶段必带 ★推荐 + 实跑证据 + 回滚命令。
+    </div>
+
+    <!-- 主调度器 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">👤 主调度器 (Main / Creator)</div>
+      <h3 class="deep-block-title">理解意图 → 路由 → 收口 · CE 第 1 阶段</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">职责</span><span class="deep-row-text"><span class="deep-row-name">理解用户意图 → 路由到 skill/agent/workflow → 收口五段 (总结/推荐/证据/回滚/状态)</span><span class="deep-row-when">→ 当前 session 主调度器正在执行这个角色</span></span></div>
+        <div class="deep-row"><span class="deep-key">铁律</span><span class="deep-row-text"><span class="deep-row-name">Writer ≠ Reviewer 铁律 10 · 派完必自检 R1-R5 (反讽刺铁律)</span><span class="deep-row-when">→ R1 发现问题必显式标 / R2 多模型一致不自动执行 / R3 前提挑战先于方案</span></span></div>
+        <div class="deep-row"><span class="deep-key">失败模式</span><span class="deep-row-text"><span class="deep-row-name">常见: "应该可以了" 凭印象 / "这是 trivial" 跳过验证 / LLM self-check 替代 hook</span><span class="deep-row-when">→ 必用 Bash + Grep + pytest 实测, 凭印象 = 反讽 R1 触发</span></span></div>
+      </div>
+    </div>
+
+    <!-- 入口路由器 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">🚪 入口路由器 (Intake)</div>
+      <h3 class="deep-block-title">用户口语 → 51 触发词匹配 → super/captain/ceo/start-work 入口</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">机制</span><span class="deep-row-text"><span class="deep-row-name">intake-gateway.sh (SessionStart hook) / intent-matcher (本机 51 触发词) / engineering-scenario-router (5 联 CLI 路由)</span><span class="deep-row-when">→ SessionStart[1] 自动跑, 命中触发词直接路由</span></span></div>
+        <div class="deep-row"><span class="deep-key">触发词样例</span><span class="deep-row-text"><span class="deep-row-name">"队长/leader/boss" → smart-flow-all (P95) · "火力全开" → yolo-all (P95) · "调研" → team-research (P80) · "code review" → code-reviewer (P75)</span><span class="deep-row-when">→ 完整 51 路由见 <a href="#s-scenarios" class="deep-inline">5 大场景剧本</a> 块 B</span></span></div>
+        <div class="deep-row"><span class="deep-key">歧义消解</span><span class="deep-row-text"><span class="deep-row-name">意图模糊 → sp-brainstorming 澄清 (铁律 11)</span><span class="deep-row-when">→ 必问 1-3 个选择题, 不静默调任意 skill</span></span></div>
+      </div>
+    </div>
+
+    <!-- 专家矩阵 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">🧠 专家矩阵 (Experts)</div>
+      <h3 class="deep-block-title">91+ agent / 42 hook / 149 skill · 按需调用</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">类型</span><span class="deep-row-text"><span class="deep-row-name">Agent (model=sonnet/opus/haiku) / Task (子任务) / Workflow (n-step-pipeline) / fork (并行)</span><span class="deep-row-when">→ 4 种调用方式, 按场景选</span></span></div>
+        <div class="deep-row"><span class="deep-key">模型边界</span><span class="deep-row-text"><span class="deep-row-name">opus = 架构/深度/终极决策 · sonnet = 标准工程任务 · haiku = 轻量查询/简单分类</span><span class="deep-row-when">→ 调研 subagent 默认 sonnet 省 75% (memory feedback-token-economy)</span></span></div>
+        <div class="deep-row"><span class="deep-key">实际数字</span><span class="deep-row-text"><span class="deep-row-name">mycc-stats SSoT: 91 agent / 42 hook / 149 skill / 32 启用插件 / 14 workflow</span><span class="deep-row-when">→ 数据快照 2026-06-29, 详见 dashboard hero stats (本页与 SSoT 一致)</span></span></div>
+      </div>
+    </div>
+
+    <!-- 执行器 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">⚡ 执行器 (Executor)</div>
+      <h3 class="deep-block-title">TDD 三阶段 + 闭环六步 · CEX 第 2 阶段</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">角色</span><span class="deep-row-text"><span class="deep-row-name">executor (通用) / engineer (TDD 强约束) / e2e-test-architect (端到端测试)</span><span class="deep-row-when">→ 选角色 = 选约束强度</span></span></div>
+        <div class="deep-row"><span class="deep-key">约束</span><span class="deep-row-text"><span class="deep-row-name">铁律 3 必带 3 件套: ★最优推荐 + 实跑证据 + 回滚命令 · 缺一不收口</span><span class="deep-row-when">→ 禁"应该可以了"凭印象</span></span></div>
+        <div class="deep-row"><span class="deep-key">失败 2 次切方法论</span><span class="deep-row-text"><span class="deep-row-name">同类失败 2 次 → error-circuit-breaker 切策略 · 5 思路选 1 + 验证</span><span class="deep-row-when">→ 不死磕同一招, 必升级方法论</span></span></div>
+      </div>
+    </div>
+
+    <!-- 验证器 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">✅ 验证器 (Verifier)</div>
+      <h3 class="deep-block-title">独立 lane 复核 · Writer≠Reviewer 铁律 · CEXv 第 3 阶段</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">角色</span><span class="deep-row-text"><span class="deep-row-name">verifier (通用) / code-reviewer (5 维) / test-engineer (BDD) / qa-validator (BDD 验收)</span><span class="deep-row-when">→ 选角色 = 选验证深度</span></span></div>
+        <div class="deep-row"><span class="deep-key">职责</span><span class="deep-row-text"><span class="deep-row-name">独立 lane 复核 (不可同 session) / 反推测扫描 / P0/P1/P2 缺陷分级</span><span class="deep-row-when">→ Writer≠Reviewer 铁律硬约束, 不可自验自</span></span></div>
+        <div class="deep-row"><span class="deep-key">收口标准</span><span class="deep-row-text"><span class="deep-row-name">反讽 R1 必报盲点 · 多模型一致 ≠ 自动执行 (R2) · 前提挑战先于方案 (R3)</span><span class="deep-row-when">→ 必给 ★Top-1 必改 / Top-3 不做</span></span></div>
+      </div>
+    </div>
+
+    <p class="deep-note"><strong>5 角色调用链 ASCII 流程图</strong>:</p>
+    <pre style="background:var(--surface2);padding:14px;border-radius:6px;font-size:12px;line-height:1.8;color:var(--text-dim);overflow-x:auto;margin-top:8px">
+[用户口语]  ──意图──▶  [主调度器 CE]
+                              │
+              ┌───────────────┼───────────────┐
+              ▼               ▼               ▼
+       [入口路由器]      [专家矩阵]      [并行子任务]
+       Intake 51         91 agent         fork/team
+       触发词匹配        42 hook          ultrawork
+              │               │               │
+              └───────────────┼───────────────┘
+                              ▼
+                       [执行器 CEX]
+                       engineer TDD
+                       e2e-test
+                              │
+                              ▼
+                       [验证器 CEXv]
+                       verifier · code-reviewer
+                       qa-validator · ★推荐
+                              │
+                              ▼
+                       [收口五段]
+                       ①总结 ②★推荐
+                       ③实跑证据
+                       ④回滚命令 ⑤状态</pre>
+
+    <p class="deep-note"><strong>反讽自检</strong>: 本节借鉴 pane-manuals L1808-1908 s-orchestration 结构, 但 pane-manuals 5 块用内联 style (色条 #8b5cf6 等) 与当前 dashboard CSS 体系不兼容, <strong>必须重写套用 .deep-block 模板</strong> · 5 角色 (CE/CEX/CEXv + 入口 + 专家) 是 OMC 标准编排范式, 数据出处 OMC V4.15.0 官方文档 · Mermaid 流程图改纯文本 ASCII (零依赖) · 数据快照 2026-06-29。</p>
 
   </div>
 </section>
