@@ -816,6 +816,87 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
     </div>
   </div>
   <p class="deep-note"><strong>口径说明</strong> · <strong>91</strong> = agents_total（mycc-stats.json SSoT，全量可显式调用）· <strong>58</strong> = activation-map 口径（含 7 个 platform agent）· <strong>51</strong> = 纯业务 agent（skill-index 口径，剔除 platform）。本页展示点统一以 91 为准。</p>
+
+  <!-- 块: 高频 Agent 实战案例库 (精选 30 个最常用) -->
+  <div class="deep-stack" style="margin-top:var(--sp-6)">
+
+    <div class="callout callout-blue">
+      <strong>实战库</strong> — 91 个 agent 全列意义不大, 精选 30 个高频常用 + 触发词 + 1 句话示例。来源: <code class="deep-inline">~/.claude/agents/</code> 顶层 21 + 5 子目录 70 文件 = 91 聚合口径。
+    </div>
+
+    <!-- 核心 5 (P0 高频) -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">⭐ 核心 5 · 每天必用</div>
+      <h3 class="deep-block-title">规划/执行/探索/审查/验证 — OMC 主链路</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">general-purpose</span><span class="deep-row-text"><span class="deep-row-name">复杂多步任务兜底</span><span class="deep-row-when">→ "派一个 agent 帮我做 X" 默认派这个</span></span></div>
+        <div class="deep-row"><span class="deep-key">Explore</span><span class="deep-row-text"><span class="deep-row-name">代码库搜索只读</span><span class="deep-row-when">→ "在 X 项目找 Y 函数" / "扫所有 .md 文件"</span></span></div>
+        <div class="deep-row"><span class="deep-key">Plan</span><span class="deep-row-text"><span class="deep-row-name">软件架构师规划</span><span class="deep-row-when">→ "设计 X 的实现方案" / 多文件改动前</span></span></div>
+        <div class="deep-row"><span class="deep-key">executor</span><span class="deep-row-text"><span class="deep-row-name">专注任务执行</span><span class="deep-row-when">→ "按 plan 直接实现, 不要多问"</span></span></div>
+        <div class="deep-row"><span class="deep-key">verifier</span><span class="deep-row-text"><span class="deep-row-name">独立证据验证</span><span class="deep-row-when">→ "verify-before-assert 铁律 8" + Writer≠Reviewer</span></span></div>
+      </div>
+    </div>
+
+    <!-- 工程 8 个 (P1 编码/审查) -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">🔧 工程 8 · 编码+审查</div>
+      <h3 class="deep-block-title">代码质量与工程化主力</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">engineer</span><span class="deep-row-text"><span class="deep-row-name">TDD 三阶段 + 变更闭环</span><span class="deep-row-when">→ "用 TDD 实现 X 功能" / 必测过才算完</span></span></div>
+        <div class="deep-row"><span class="deep-key">code-reviewer</span><span class="deep-row-text"><span class="deep-row-name">5 维审查</span><span class="deep-row-when">→ "审查这个 PR" / correctness+security+perf</span></span></div>
+        <div class="deep-row"><span class="deep-key">code-simplifier</span><span class="deep-row-text"><span class="deep-row-name">简化精炼代码</span><span class="deep-row-when">→ "simplify 这段" / 改完保留功能</span></span></div>
+        <div class="deep-row"><span class="deep-key">debugger</span><span class="deep-row-text"><span class="deep-row-name">根因分析 + 报错排查</span><span class="deep-row-when">→ "X 报错了, 帮我 debug" / 必有 root cause</span></span></div>
+        <div class="deep-row"><span class="deep-key">test-engineer</span><span class="deep-row-text"><span class="deep-row-name">BDD + 测试金字塔</span><span class="deep-row-when">→ "为 X 写测试" / Given-When-Then</span></span></div>
+        <div class="deep-row"><span class="deep-key">qa-validator</span><span class="deep-row-text"><span class="deep-row-name">独立 BDD 验收</span><span class="deep-row-when">→ "验收 X 是否真达标" / 不信自查</span></span></div>
+        <div class="deep-row"><span class="deep-key">security-reviewer</span><span class="deep-row-text"><span class="deep-row-name">OWASP + 漏洞扫描</span><span class="deep-row-when">→ "安全审查 X" / XSS+SQLi+密钥泄露</span></span></div>
+        <div class="deep-row"><span class="deep-key">architect</span><span class="deep-row-text"><span class="deep-row-name">C4 + ADR 决策记录</span><span class="deep-row-when">→ "设计 X 系统架构" / 必有 ADR</span></span></div>
+      </div>
+    </div>
+
+    <!-- 工程深耕 6 个 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">🛠️ 工程深耕 6 · 性能/迁移/CI</div>
+      <h3 class="deep-block-title">专项领域专家</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">performance-optimizer</span><span class="deep-row-text"><span class="deep-row-name">性能瓶颈优化</span><span class="deep-row-when">→ "X 性能差, 优化" / 找热点</span></span></div>
+        <div class="deep-row"><span class="deep-key">database-migrator</span><span class="deep-row-text"><span class="deep-row-name">数据库 schema 迁移</span><span class="deep-row-when">→ "生产库 schema 变更" / 必 backup+rollback</span></span></div>
+        <div class="deep-row"><span class="deep-key">deployment-engineer</span><span class="deep-row-text"><span class="deep-row-name">CI/CD 流水线</span><span class="deep-row-when">→ "搭 X 部署" / GitHub Actions + 灰度</span></span></div>
+        <div class="deep-row"><span class="deep-key">chaos-engineer</span><span class="deep-row-text"><span class="deep-row-name">混沌工程实验</span><span class="deep-row-when">→ "测试 X 容错" / 故障注入</span></span></div>
+        <div class="deep-row"><span class="deep-key">incident-responder</span><span class="deep-row-text"><span class="deep-row-name">生产事故 SRE</span><span class="deep-row-when">→ "生产挂了" / blameless post-mortem</span></span></div>
+        <div class="deep-row"><span class="deep-key">release-coordinator</span><span class="deep-row-text"><span class="deep-row-name">多服务发布</span><span class="deep-row-when">→ "X 服务联合发布" / 版本对齐</span></span></div>
+      </div>
+    </div>
+
+    <!-- 战略 + 商业 7 个 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">👔 战略+商业 7 · CEO/CFO/CMO 团</div>
+      <h3 class="deep-block-title">12 个 CEO 角色 + 商业实战</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">ceo-orchestrator</span><span class="deep-row-text"><span class="deep-row-name">战略拆解 + 团队调度</span><span class="deep-row-when">→ /ceo-mode 自动选这个</span></span></div>
+        <div class="deep-row"><span class="deep-key">cfo-advisor</span><span class="deep-row-text"><span class="deep-row-name">runway + 融资 + cap table</span><span class="deep-row-when">→ "X 业务现金流" / 估值</span></span></div>
+        <div class="deep-row"><span class="deep-key">cmo-advisor</span><span class="deep-row-text"><span class="deep-row-name">GTM + 品牌 + 增长</span><span class="deep-row-when">→ "X 产品怎么冷启动"</span></span></div>
+        <div class="deep-row"><span class="deep-key">coo-advisor</span><span class="deep-row-text"><span class="deep-row-name">SOP + OKR 落地</span><span class="deep-row-when">→ "X 团队怎么 scale"</span></span></div>
+        <div class="deep-row"><span class="deep-key">cro-advisor</span><span class="deep-row-text"><span class="deep-row-name">收入模型 + ARR</span><span class="deep-row-when">→ "X 收入预测"</span></span></div>
+        <div class="deep-row"><span class="deep-key">chief-of-staff</span><span class="deep-row-text"><span class="deep-row-name">跨部门决策路由</span><span class="deep-row-when">→ "X 决策谁拍板"</span></span></div>
+        <div class="deep-row"><span class="deep-key">product-manager</span><span class="deep-row-text"><span class="deep-row-name">JTBD + BDD + RICE</span><span class="deep-row-when">→ "X 需求优先级"</span></span></div>
+      </div>
+    </div>
+
+    <!-- 调研 + 内容 4 个 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">🔍 调研+内容 4 · 出海/调研/写作</div>
+      <h3 class="deep-block-title">信息采集与表达</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">researcher</span><span class="deep-row-text"><span class="deep-row-name">≥5 渠道深度调研</span><span class="deep-row-when">→ "调研 X 市场" / 官方+GitHub+社区+视频</span></span></div>
+        <div class="deep-row"><span class="deep-key">market-analyst</span><span class="deep-row-text"><span class="deep-row-name">TAM/SAM/SOM + 竞品</span><span class="deep-row-when">→ "X 市场多大"</span></span></div>
+        <div class="deep-row"><span class="deep-key">overseas-entry</span><span class="deep-row-text"><span class="deep-row-name">海外合规 + 本地化</span><span class="deep-row-when">→ "X 国家出海准入"</span></span></div>
+        <div class="deep-row"><span class="deep-key">writer</span><span class="deep-row-text"><span class="deep-row-name">README + API 文档</span><span class="deep-row-when">→ "给 X 项目写 README"</span></span></div>
+      </div>
+    </div>
+
+    <p class="deep-note"><strong>完整 91 个</strong>见 <code class="deep-inline">~/.claude/agents/</code> (21 顶层 + 12 ceo-roles + 7 core + 7 industry + 6 subagent + 5 teams + 5 deploy/perf/testing 等子目录 = 聚合 91, mycc-stats SSoT)。高频 30 个已列, 其余按 <code class="deep-inline">/Explore agent</code> 用法调用。</p>
+
+  </div>
 </section>
 
 <!-- ═══ Section 6 · 工作流 ═══ -->
