@@ -702,6 +702,14 @@ async function loadBoardTasks() {
   renderBoardTasks();
 }
 
+window.reloadTasks = async function() {
+  const btn = document.getElementById('btn-reload-tasks');
+  if (btn) { btn.disabled = true; btn.textContent = '⟳ 加载中…'; }
+  await loadBoardTasks();
+  if (btn) { btn.disabled = false; btn.textContent = '⟳ 重载数据'; }
+  showToast('✅ 看板数据已重载');
+};
+
 // ─── 状态色板 & 工具函数 ───
 const STATUS_CLR = { done: '#10b981', partial: '#f59e0b', doing: 'var(--accent)', todo: '#9ca3af', blocked: '#ef4444' };
 
@@ -1003,11 +1011,14 @@ window.openTaskDetail = function(card, source) {
   // ── Section 2: 执行凭证 (不可折叠) ──────────────────────
   const evFull = card.evidence || '';
   const evHash = evFull ? evFull.split(':').pop() : null;
+  const GITHUB_REPO = 'atomai-team/Claude_Code_Guide_Offline';
+  const ghLink = evHash ? `https://github.com/${GITHUB_REPO}/commit/${evHash}` : null;
   body += tdSection('📎 执行凭证 / Commit',
     evFull
-      ? `<div style="display:flex;align-items:center;gap:var(--sp-3)">
+      ? `<div style="display:flex;align-items:center;gap:var(--sp-2)">
            <code class="bt-ev" style="font-size:var(--fs-xs)">${esc(evFull)}</code>
-           <button onclick="navigator.clipboard.writeText('${esc(evHash || evFull)}').catch(()=>{})" title="复制 hash" style="border:none;background:none;cursor:pointer;color:var(--text-dim);font-size:11px;padding:0">⎘</button>
+           <button onclick="navigator.clipboard.writeText('${esc(evHash || evFull)}').catch(()=>{})" title="复制 hash" style="border:none;background:none;cursor:pointer;color:var(--text-dim);font-size:12px;padding:2px 4px;border-radius:3px" onmouseenter="this.style.color='var(--accent)'" onmouseleave="this.style.color='var(--text-dim)'">⎘</button>
+           ${ghLink ? `<a href="${ghLink}" target="_blank" rel="noopener" title="在 GitHub 查看此 commit" onclick="event.stopPropagation()" style="display:inline-flex;align-items:center;gap:3px;color:var(--accent);font-size:var(--fs-xs);text-decoration:none;border:1px solid var(--accent);border-radius:3px;padding:1px 6px;font-weight:600" onmouseenter="this.style.background='var(--accent)';this.style.color='#fff'" onmouseleave="this.style.background='';this.style.color='var(--accent)'"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> GitHub</a>` : ''}
          </div>`
       : `<span style="color:var(--text-dim);font-size:var(--fs-xs)">—— 暂无执行证据</span>`);
 

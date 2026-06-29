@@ -1305,7 +1305,8 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
     <div class="hero-stat"><span class="hs-num" id="bt-evidence">—</span><span class="hs-label">有证据闭环</span></div>
   </div>
 
-  <div style="display:flex;justify-content:flex-end;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-3)">
+  <div style="display:flex;justify-content:flex-end;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-3);flex-wrap:wrap">
+    <button id="btn-reload-tasks" onclick="reloadTasks()" title="重新 fetch board-tasks.json（不整页刷新）" style="padding:4px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text-dim);cursor:pointer;font-size:var(--fs-xs);margin-right:auto">⟳ 重载数据</button>
     <span style="font-size:var(--fs-xs);color:var(--text-dim)">视图</span>
     <button id="btn-view-card" onclick="setKanbanView('card')" title="卡片视图" style="padding:4px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--accent);color:#fff;cursor:pointer;font-size:var(--fs-xs)">⊞ 卡片</button>
     <button id="btn-view-list" onclick="setKanbanView('list')" title="列表视图" style="padding:4px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);cursor:pointer;font-size:var(--fs-xs)">☰ 列表</button>
@@ -1346,7 +1347,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
 <footer class="dash-footer">
   <div class="container dash-footer-row">
     <div>
-      <strong style="color:var(--text)">MYCC V53</strong> · 数据引擎自动刷新 · 生成时间 <time id="genTime">—</time>
+      <strong style="color:var(--text)">MYCC V53</strong> · 生成时间 <time id="genTime">—</time> · <span title="整页重载，会重读 board-tasks.json（需先运行 hermes 生成新数据）" style="cursor:help;border-bottom:1px dotted var(--text-muted)">自动刷新=整页重载</span>
     </div>
     <div class="row" style="gap:var(--sp-3)">
       <span class="countdown" id="autoRefreshCountdown">⏱ 5:00 后自动刷新</span>
