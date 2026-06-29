@@ -399,6 +399,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
       <a href="#s-docs" class="nav-link">手册 + 全量目录<span class="nav-primer">入门</span></a>
       <a href="#s-github" class="nav-link">GitHub 生态 · 调研裁决</a>
       <a href="#s-knowledge" class="nav-link">本机知识体系</a>
+      <a href="#s-resources" class="nav-link">调研档案 + 资源<span class="nav-primer">新</span></a>
     </div>
     <div class="nav-group">
       <span class="nav-group-title">⑤ 数据检索</span>
@@ -1056,6 +1057,67 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
       </div>
       <p class="deep-note"><strong>4 批调研流程</strong> —— 批1 总表（15 项）→ 批2（4 个 sonnet agent 实测）→ 批3（4 源债补齐，0 adopt）→ 批4（用户补 11 项，仅 SkillOpt 净增量）。每条 reject 都列本机已有能力对照，这是「消费方门」铁律:<strong>先证明现有的不够用，才引入新的</strong>。</p>
     </div>
+
+  </div>
+</section>
+
+<!-- ═══ 调研档案索引 + 第三方教学资源 ═══ -->
+<section class="section container" id="s-resources">
+  <div class="section-rhythm section-rhythm--cyan section-header">
+    <div class="section-rhythm__motto">资源索引</div>
+    <h2 class="section-title">调研档案 + 第三方教学资源</h2>
+    <p class="section-subtitle">30+ 外部项目裁决 + 官方/社区教程 · 出处逐条标注 · 数据快照 2026-06-29</p>
+  </div>
+
+  <div class="deep-stack">
+
+    <div class="callout callout-warn">
+      <strong>使用原则</strong> — 调研档案 = 决策 SSoT, <strong>调研任何外部项前先查</strong> <code class="deep-inline">~/.claude/docs/research-library/INDEX.md</code> 去重。第三方资源 = 学习脚手架, <strong>不是 SSoT</strong> (随时变)。
+    </div>
+
+    <!-- 调研档案 · 30+ 项目裁决速查 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 A · 调研档案速查 (4 批 30+ 项目裁决)</div>
+      <h3 class="deep-block-title">4 批调研结论索引 · 出处 = <code class="deep-inline">~/.claude/docs/research-library/INDEX.md</code></h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">✅ 已吸收 (5 项)</span><span class="deep-row-text"><span class="deep-row-name">spec-kit / mattpocock-skills / superpowers / 12-factor-agents / SkillOpt / CHANGELOG 2.1.187</span><span class="deep-row-when">→ 7 个配置范式 + 强制工作流 + 行为层方法论 + skill 训练 + 官方 3 项新能力</span></span></div>
+        <div class="deep-row"><span class="deep-key">🔵 部分借鉴 (4 项)</span><span class="deep-row-text"><span class="deep-row-name">SkillSpector / markitdown / skills-manager / taste-skill</span><span class="deep-row-when">→ 安全检测范式 / 条件依赖分组 / Preset 分组 / 反 AI 审美 prompt (按需懒装)</span></span></div>
+        <div class="deep-row"><span class="deep-key">❌ 劝退 · 第二记忆 (4 项)</span><span class="deep-row-text"><span class="deep-row-name">supermemory / cognee / claude-mem / soulforge</span><span class="deep-row-when">→ 违反"禁第二记忆"铁律 · auto-memory + qmd + MEMORY.md 已饱和覆盖</span></span></div>
+        <div class="deep-row"><span class="deep-key">❌ 劝退 · 团队 SaaS 化 (4 项)</span><span class="deep-row-text"><span class="deep-row-name">ruflo / omnigent / Chorus / agency-agents</span><span class="deep-row-when">→ 单人 CLI 场景错配 · 不需 federation / cloud sandbox / 多用户 OIDC</span></span></div>
+        <div class="deep-row"><span class="deep-key">❌ 劝退 · 平行编排 (3 项)</span><span class="deep-row-text"><span class="deep-row-name">oh-my-agent / lazycodex / Continuous-Claude</span><span class="deep-row-when">→ 与 OMC 重叠 70%+ · 范式已被 superpowers + karpathy 吸收</span></span></div>
+        <div class="deep-row"><span class="deep-key">❌ 劝退 · 非 harness 工具 (5 项)</span><span class="deep-row-text"><span class="deep-row-name">PaddleOCR / superset / YouDub / ppt-master / drawio-mcp</span><span class="deep-row-when">→ 项目层工具非配置层 · 真正做项目用到时再装</span></span></div>
+        <div class="deep-row"><span class="deep-key">❌ 劝退 · daemon 监工 (3 项)</span><span class="deep-row-text"><span class="deep-row-name">OpenWhip / proactive-agent / claude-tag</span><span class="deep-row-when">→ 撞"消费方门"铁律 · ralph 的 boulder 循环已是正解</span></span></div>
+        <div class="deep-row"><span class="deep-key">⏳ 待复审 (2 项)</span><span class="deep-row-text"><span class="deep-row-name">NVIDIA/SkillSpector / microsoft/markitdown</span><span class="deep-row-when">→ 批 2 复查工程范式非比功能 (上次草率判"重复"被纠正)</span></span></div>
+        <div class="deep-row"><span class="deep-key">🔄 调研流程</span><span class="deep-row-text"><span class="deep-row-name">批 1 总表 15 项 → 批 2 sonnet 实测 4 项 → 批 3 4 源债补齐 0 adopt → 批 4 用户补 11 项仅 SkillOpt 净增量</span><span class="deep-row-when">→ 4 批 30+ 项目每条 reject 都列"本机已有能力对照" · 消费方门 = 先证现有不够用才引入新</span></span></div>
+      </div>
+    </div>
+
+    <!-- 官方资源 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 B · 官方 Tier0 资源</div>
+      <h3 class="deep-block-title">code.claude.com/docs 是机制/用法 SSoT · 必查</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">官方文档</span><span class="deep-row-text"><span class="deep-row-name">code.claude.com/docs</span><span class="deep-row-when">→ 实操类问题 100% 必走 · 最高权威 · 验证后再下结论 (L3 决策树)</span></span></div>
+        <div class="deep-row"><span class="deep-key">官方 CHANGELOG</span><span class="deep-row-text"><span class="deep-row-name">每次版本新能力 (disableBundledSkills / --safe-mode / additionalContext)</span><span class="deep-row-when">→ 必读, 不少新能力 = 配置层硬化关键 (如 hook 注入 additionalContext)</span></span></div>
+        <div class="deep-row"><span class="deep-key">Anthropic 官方研究</span><span class="deep-row-text"><span class="deep-row-name">claude.com/research (agent 行为 / 评估方法论)</span><span class="deep-row-when">→ 高质量方法论源头 · 但 OMC 不直接照搬 (工程化改写后用)</span></span></div>
+      </div>
+    </div>
+
+    <!-- 社区资源 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 C · 社区/中文教学资源</div>
+      <h3 class="deep-block-title">学习脚手架 (非 SSoT) · 按需取用</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">awesome-claude-code</span><span class="deep-row-text"><span class="deep-row-name">GitHub 社区聚合仓库</span><span class="deep-row-when">→ 6000+⭐ · 入门资源汇总 · 调研前先看 (避免重复)</span></span></div>
+        <div class="deep-row"><span class="deep-key">Claude Code 中文教程</span><span class="deep-row-text"><span class="deep-row-name">国内社区博客 / 知乎 / 掘金 / B 站</span><span class="deep-row-when">→ T0 口语友好 · 适合本机用户 (商业创业者+边学边做画像)</span></span></div>
+        <div class="deep-row"><span class="deep-key">superpowers 项目</span><span class="deep-row-text"><span class="deep-row-name">obra/superpowers (已吸收, GitHub 源码)</span><span class="deep-row-when">→ 看 brainstorming / writing-plans / TDD / subagent-driven 4 个 skill 源码</span></span></div>
+        <div class="deep-row"><span class="deep-key">karpathy 编程哲学</span><span class="deep-row-text"><span class="deep-row-name">YouTube "Coding with AI" / 个人推文</span><span class="deep-row-when">→ 简洁/可测/KISS/YAGNI/DRY 三原则 + verify-before-assert 5 铁律</span></span></div>
+        <div class="deep-row"><span class="deep-key">12-factor-agents</span><span class="deep-row-text"><span class="deep-row-name">humanlayer/12-factor-agents (已吸收方向)</span><span class="deep-row-when">→ agent 行为层 12 原则 · 可叠加 R13-R24</span></span></div>
+        <div class="deep-row"><span class="deep-key">Claude Code YouTube</span><span class="deep-row-text"><span class="deep-row-name">Anthropic 官方频道 · 实战演示</span><span class="deep-row-when">→ 看 CLAUDE.md 最佳实践 / subagent 用法 / hook 配置演示</span></span></div>
+      </div>
+    </div>
+
+    <p class="deep-note"><strong>反讽自检</strong>: 本块原 dashboard <code>grep youtube/bilibili/udemy/coursera = 0</code> (本 commit 修复) · 调研档案和资源是两类: 前者决策 SSoT (research-library/) 后者学习脚手架 (官方+社区) · 不要混, 否则失去裁决权威。</p>
 
   </div>
 </section>

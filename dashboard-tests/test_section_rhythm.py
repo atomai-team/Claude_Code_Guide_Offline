@@ -30,6 +30,7 @@ SECTION_RHYTHM_CONTRACT = [
     ("s-knowledge",     "green",  "本机知识"),
     ("s-health",        "purple", "健康仪表"),
     ("s-architecture",  "blue",   "架构宪法"),
+    ("s-resources",     "cyan",   "资源索引"),
     ("s-advanced",      "cyan",   "高级指令"),
 ]
 
@@ -82,15 +83,20 @@ class TestSectionRhythmContract:
     """每个 section-header 必须有 section-rhythm 类 + 色条 + motto."""
 
     def test_rhythm_count_is_12(self, rhythm_color_sequence):
-        """实测 13 section: 12 原 + s-advanced 新增 (M2-替换 2026-06-29)."""
-        assert len(rhythm_color_sequence) == 13, (
-            f"section-rhythm 数量 {len(rhythm_color_sequence)} ≠ 13. "
+        """实测 14 section-rhythm: 12 循环 (2 轮) + s-resources(cyan) + s-advanced(cyan) = 14. 全 17 section 中 3 个无节奏."""
+        assert len(rhythm_color_sequence) == 14, (
+            f"section-rhythm 数量 {len(rhythm_color_sequence)} ≠ 14. "
             f"实测: {rhythm_color_sequence}"
         )
 
     def test_color_sequence_cycles_6(self, rhythm_color_sequence):
-        """6 色循环: cyan/orange/accent/green/purple/blue 重复 2 轮 + 第 13 开 cyan."""
-        expected = EXPECTED_COLOR_SEQUENCE * 2 + ["cyan"]
+        """6 色循环 2 轮 (12) + s-resources(cyan, 9位) + s-advanced(cyan) = 14. s-catalog 用 accent."""
+        # 实测序列按 HTML 实际顺序
+        expected = ["cyan", "orange", "accent", "green", "purple", "blue",
+                    "cyan", "orange", "accent", "cyan", "green", "purple", "blue", "cyan"]
+        assert rhythm_color_sequence == expected, (
+            f"section-rhythm 颜色序列错: 期望 {expected}, 实测 {rhythm_color_sequence}"
+        )
         assert rhythm_color_sequence == expected, (
             f"section-rhythm 颜色序列错: 期望 {expected}, 实测 {rhythm_color_sequence}"
         )
