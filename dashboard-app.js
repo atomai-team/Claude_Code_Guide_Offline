@@ -820,23 +820,28 @@ function renderBoardTasks() {
 
 function kanbanCardHtml(c, dotClr) {
   const cardData = encodeURIComponent(JSON.stringify(c));
-  return `<div style="font-size:var(--fs-xs);padding:var(--sp-2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:var(--sp-2);background:var(--surface);cursor:pointer;transition:border-color .15s" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--border)'" onclick="openTaskDetail(JSON.parse(decodeURIComponent('${cardData}')),'kanban')">
-    <div style="font-weight:600;line-height:1.4">${esc(c.id)} · ${esc(c.title)}</div>
-    <div style="color:var(--text-dim);margin-top:2px">${esc(c.group)}</div>
-    ${c.evidence ? `<code class="bt-ev" style="display:inline-block;margin-top:2px">${esc(c.evidence)}</code>` : ''}
-    ${c.blocker ? `<div style="color:#ef4444;font-size:10px;margin-top:2px">⚠ ${esc(c.blocker)}</div>` : ''}
+  const evHash   = c.evidence ? c.evidence.split(':').pop().slice(-7) : null;
+  return `<div style="font-size:var(--fs-xs);padding:var(--sp-2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:var(--sp-2);background:var(--surface);cursor:pointer;transition:border-color .15s;position:relative" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--border)'" onclick="openTaskDetail(JSON.parse(decodeURIComponent('${cardData}')),'kanban')">
+    ${c.closure_badge ? `<span style="position:absolute;top:4px;right:4px;font-size:9px;background:#10b981;color:#fff;border-radius:3px;padding:0 4px;font-weight:700">✓ done</span>` : ''}
+    ${c.blocker ? `<span title="${esc(c.blocker)}" style="position:absolute;top:4px;right:${c.closure_badge ? '44' : '4'}px;width:14px;height:14px;border-radius:50%;background:#ef4444;color:#fff;font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;line-height:1">!</span>` : ''}
+    <div style="font-weight:600;line-height:1.4;padding-right:${c.blocker || c.closure_badge ? '18px' : '0'}">${esc(c.id)} · ${esc(c.title)}</div>
+    <div style="display:flex;align-items:center;gap:var(--sp-2);margin-top:4px">
+      <span style="color:var(--text-dim)">${esc(c.group)}</span>
+      ${evHash ? `<code class="bt-ev" style="margin-left:auto;flex-shrink:0">${evHash}</code>` : ''}
+    </div>
   </div>`;
 }
 
 function kanbanListRow(c, dotClr) {
   const cardData = encodeURIComponent(JSON.stringify(c));
-  return `<div style="display:flex;align-items:center;gap:var(--sp-2);padding:5px var(--sp-2);border-radius:var(--radius-sm);cursor:pointer;font-size:var(--fs-xs)" onmouseenter="this.style.background='var(--bg-subtle)'" onmouseleave="this.style.background=''" onclick="openTaskDetail(JSON.parse(decodeURIComponent('${cardData}')),'kanban')">
-    <span style="width:7px;height:7px;border-radius:50%;background:${dotClr};flex-shrink:0"></span>
-    <span style="font-weight:600;min-width:38px;flex-shrink:0;color:var(--text-muted)">${esc(c.id)}</span>
-    <span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c.title)}</span>
-    <span style="color:var(--text-dim);flex-shrink:0;font-size:10px;margin-left:var(--sp-2)">${esc(c.group)}</span>
-    ${c.evidence ? `<code class="bt-ev" style="flex-shrink:0">${esc(c.evidence)}</code>` : ''}
-    ${c.blocker ? `<span style="color:#ef4444;font-size:10px;flex-shrink:0">⚠</span>` : ''}
+  const evHash   = c.evidence ? c.evidence.split(':').pop().slice(-7) : null;
+  return `<div style="display:grid;grid-template-columns:60px 80px 1fr 80px 80px 24px;align-items:center;gap:4px;padding:5px var(--sp-2);border-radius:var(--radius-sm);cursor:pointer;font-size:var(--fs-xs);height:36px" onmouseenter="this.style.background='var(--bg-subtle)'" onmouseleave="this.style.background=''" onclick="openTaskDetail(JSON.parse(decodeURIComponent('${cardData}')),'kanban')">
+    <span style="display:inline-flex;align-items:center;justify-content:center;gap:3px;background:${dotClr}22;border:1px solid ${dotClr};border-radius:3px;padding:0 4px;font-size:9px;color:${dotClr};font-weight:700;white-space:nowrap;overflow:hidden">${esc(c.status)}</span>
+    <span style="font-weight:600;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c.id)}</span>
+    <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c.title)}</span>
+    <span style="color:var(--text-dim);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c.group)}</span>
+    <span style="text-align:right">${evHash ? `<code class="bt-ev">${evHash}</code>` : ''}</span>
+    <span style="text-align:center">${c.blocker ? `<span title="${esc(c.blocker)}" style="width:14px;height:14px;border-radius:50%;background:#ef4444;color:#fff;font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">!</span>` : ''}</span>
   </div>`;
 }
 
@@ -927,17 +932,31 @@ window.setKanbanView = function(v) {
    Task 详情 Modal
    ════════════════════════════════════════════════════════════════════ */
 
+// 不可折叠区块
 function tdSection(title, content) {
-  return `<div style="margin-bottom:var(--sp-5)">
-    <div style="font-size:var(--fs-xs);font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;padding-bottom:var(--sp-1);border-bottom:1px solid var(--border);margin-bottom:var(--sp-2)">${title}</div>
+  return `<div style="margin-bottom:var(--sp-4)">
+    <div style="font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;padding-bottom:var(--sp-1);border-bottom:1px solid var(--border);margin-bottom:var(--sp-2)">${title}</div>
     <div style="padding-top:2px">${content}</div>
   </div>`;
 }
 
+// 可折叠区块 (Section 3/4/5)
+function tdCollapsible(title, content, isOpen) {
+  return `<details ${isOpen ? 'open' : ''} style="margin-bottom:var(--sp-3);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden">
+    <summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:var(--sp-2);padding:var(--sp-2) var(--sp-3);font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;background:var(--surface);user-select:none">
+      <span style="font-size:9px">${isOpen ? '▾' : '▸'}</span> ${title}
+    </summary>
+    <div style="padding:var(--sp-2) var(--sp-3) var(--sp-3)">${content}</div>
+  </details>`;
+}
+
 function tdReqItem(r) {
-  return `<div style="display:flex;gap:var(--sp-2);align-items:flex-start;padding:3px 0;font-size:var(--fs-xs)">
-    <span class="bt-status" style="background:${STATUS_CLR[r.status] || '#9ca3af'};margin-top:4px;flex-shrink:0"></span>
-    <span><span style="color:var(--text-muted)">${esc(r.id)}</span> ${esc(r.title)}${r.evidence ? ` <code class="bt-ev">${esc(r.evidence)}</code>` : ''}</span>
+  const evHash = r.evidence ? r.evidence.split(':').pop().slice(-7) : null;
+  return `<div style="display:flex;align-items:center;gap:var(--sp-2);padding:4px 0;font-size:var(--fs-xs);border-bottom:1px solid var(--border-faint,var(--border))">
+    <span class="bt-status" style="background:${STATUS_CLR[r.status] || '#9ca3af'};flex-shrink:0"></span>
+    <span style="color:var(--text-muted);min-width:36px;flex-shrink:0;font-size:10px">${esc(r.id)}</span>
+    <span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(r.title)}</span>
+    ${evHash ? `<code class="bt-ev" style="flex-shrink:0;margin-left:auto">${evHash}</code>` : ''}
   </div>`;
 }
 
@@ -948,55 +967,87 @@ window.openTaskDetail = function(card, source) {
   const mainEl = document.getElementById('main') || document.querySelector('main');
   if (mainEl) mainEl.setAttribute('inert', '');
 
-  const { requirements, subplans, milestones } = BOARD;
+  const { requirements, subplans, milestones, blockers } = BOARD;
   const statusClr   = STATUS_CLR[card.status] || '#9ca3af';
-  const statusLabel = { done: '已完成', doing: '进行中', todo: '待办', partial: '进行中', blocked: '卡点' };
+  const statusLabel = { done: '已完成', doing: '进行中', todo: '待办', partial: '部分完成', blocked: '卡点' };
 
+  // ── Section 1: 任务标头 ──────────────────────────────────
   document.getElementById('td-status-bar').innerHTML =
-    `<span style="display:inline-flex;align-items:center;gap:5px;padding:2px 10px;border-radius:var(--radius-pill);background:${statusClr}22;border:1px solid ${statusClr};font-size:var(--fs-xs);font-weight:600;color:${statusClr}">
-       <span style="width:6px;height:6px;border-radius:50%;background:${statusClr}"></span>
-       ${esc(statusLabel[card.status] || card.status)}
-     </span>
-     ${source === 'subplans' ? '<span style="margin-left:8px;font-size:9px;color:#8b5cf6;font-weight:700">subplan</span>' : ''}`;
+    `<div style="display:flex;align-items:center;gap:var(--sp-2);flex-wrap:wrap">
+       <span style="display:inline-flex;align-items:center;gap:5px;padding:2px 10px;border-radius:var(--radius-pill);background:${statusClr}22;border:1px solid ${statusClr};font-size:var(--fs-xs);font-weight:600;color:${statusClr}">
+         <span style="width:6px;height:6px;border-radius:50%;background:${statusClr}"></span>
+         ${esc(statusLabel[card.status] || card.status)}
+       </span>
+       ${source === 'subplans' ? `<span style="font-size:9px;color:#8b5cf6;font-weight:700;border:1px solid #8b5cf6;border-radius:3px;padding:0 5px">subplan</span>` : ''}
+       ${card.closure_badge ? `<span style="font-size:9px;background:#10b981;color:#fff;border-radius:3px;padding:0 6px;font-weight:700;margin-left:auto">✓ ${esc(card.closure_badge)}</span>` : ''}
+     </div>`;
 
   document.getElementById('td-title').textContent = card.id + ' · ' + card.title;
-  document.getElementById('td-group').textContent  = '分组: ' + card.group;
+  document.getElementById('td-group').textContent  = '分组: ' + card.group + (source ? '  ·  来源: ' + source : '');
 
-  const relReqs = (requirements || []).filter(r => r.group === card.group);
-  const relSubs = (subplans || []).filter(s => s.group === card.group);
-  const icon    = { done: '✅', doing: '🔄', todo: '⬜', blocked: '🚫' };
+  const relReqs = (requirements || []).filter(r => (r.group || '').trim() === (card.group || '').trim());
+  const relSubs = (subplans || []).filter(s => (s.group || '').trim() === (card.group || '').trim());
+  const relBlks = (blockers || []).filter(b => String(b.ref) === String(card.id));
+  const milArr  = milestones || [];
 
   let body = '';
 
-  // Session 锚点
-  body += tdSection('📎 Session 锚点 (evidence)', card.evidence
-    ? `<code class="bt-ev" style="font-size:var(--fs-xs)">${esc(card.evidence)}</code>`
-    : '<span style="color:var(--text-dim);font-size:var(--fs-xs)">暂无 evidence — 任务未关联 commit</span>');
-
-  // 关联需求 (WHAT)
-  body += tdSection('🎯 关联需求 (WHAT · 该分组)',
-    relReqs.length ? relReqs.map(tdReqItem).join('') : '<span style="color:var(--text-dim);font-size:var(--fs-xs)">该分组无关联需求</span>');
-
-  // 关联方案 (HOW)
-  body += tdSection('🔧 关联方案 (HOW · 该分组)',
-    relSubs.length ? relSubs.map(tdReqItem).join('') : '<span style="color:var(--text-dim);font-size:var(--fs-xs)">该分组无关联方案</span>');
-
-  // 里程碑
-  if (milestones && milestones.length) {
-    body += tdSection('⛳ 里程碑全览',
-      milestones.map(m =>
-        `<div style="display:flex;gap:var(--sp-2);align-items:center;padding:3px 0;font-size:var(--fs-xs)">
-           ${icon[m.status] || '⬜'} <span style="font-weight:600">${esc(m.id)}</span> ${esc(m.title)}
-           ${m.evidence ? `<code class="bt-ev">${esc(m.evidence)}</code>` : ''}
-         </div>`).join(''));
-  }
-
-  // 卡点 & 闭环
+  // blocker 警告条 — 行动信息，紧接 header
   if (card.blocker) {
-    body += tdSection('⚠️ 卡点', `<div style="padding:var(--sp-2) var(--sp-3);border-left:3px solid #ef4444;font-size:var(--fs-xs);color:#ef4444">${esc(card.blocker)}</div>`);
+    body += `<div style="display:flex;align-items:flex-start;gap:var(--sp-2);padding:var(--sp-2) var(--sp-3);border-left:3px solid #ef4444;background:#ef444411;border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin-bottom:var(--sp-4);font-size:var(--fs-xs);color:#ef4444">
+      <span style="font-weight:700;flex-shrink:0">⚠ 卡点</span>
+      <span>${esc(card.blocker)}</span>
+    </div>`;
   }
-  if (card.closure_badge) {
-    body += tdSection('📋 闭环状态', `<code class="bt-ev">${esc(card.closure_badge)}</code>`);
+
+  // ── Section 2: 执行凭证 (不可折叠) ──────────────────────
+  const evFull = card.evidence || '';
+  const evHash = evFull ? evFull.split(':').pop() : null;
+  body += tdSection('📎 执行凭证 / Commit',
+    evFull
+      ? `<div style="display:flex;align-items:center;gap:var(--sp-3)">
+           <code class="bt-ev" style="font-size:var(--fs-xs)">${esc(evFull)}</code>
+           <button onclick="navigator.clipboard.writeText('${esc(evHash || evFull)}').catch(()=>{})" title="复制 hash" style="border:none;background:none;cursor:pointer;color:var(--text-dim);font-size:11px;padding:0">⎘</button>
+         </div>`
+      : `<span style="color:var(--text-dim);font-size:var(--fs-xs)">—— 暂无执行证据</span>`);
+
+  // ── Section 3: 关联需求 WHAT (可折叠) ───────────────────
+  body += tdCollapsible('🎯 关联需求 (WHAT)',
+    relReqs.length
+      ? relReqs.map(tdReqItem).join('')
+      : `<span style="color:var(--text-dim);font-size:var(--fs-xs)">此分组暂无关联需求文档</span>`,
+    relReqs.length > 0);
+
+  // ── Section 4: 子计划 HOW (可折叠) ──────────────────────
+  body += tdCollapsible('🔧 子计划 (HOW)',
+    relSubs.length
+      ? relSubs.map(tdReqItem).join('')
+      : `<span style="color:var(--text-dim);font-size:var(--fs-xs)">此分组暂无子计划</span>`,
+    relSubs.length > 0);
+
+  // ── Section 5: 里程碑 & 关联阻塞 (可折叠，默认关闭，两者均空则不渲染) ──
+  if (milArr.length || relBlks.length) {
+    const icon = { done: '✅', doing: '🔄', todo: '⬜', blocked: '🚫' };
+    const milHtml = milArr.length
+      ? milArr.map(m => {
+          const mHash = m.evidence ? m.evidence.split(':').pop().slice(-7) : null;
+          return `<div style="display:flex;align-items:center;gap:var(--sp-2);padding:4px 0;font-size:var(--fs-xs)">
+            ${icon[m.status] || '⬜'}
+            <span style="font-weight:600;min-width:36px;flex-shrink:0">${esc(m.id)}</span>
+            <span style="flex:1">${esc(m.title)}</span>
+            ${mHash ? `<code class="bt-ev">${mHash}</code>` : ''}
+          </div>`;
+        }).join('')
+      : `<span style="color:var(--text-dim);font-size:var(--fs-xs)">暂无里程碑数据</span>`;
+    const blkHtml = relBlks.length
+      ? relBlks.map(b => `<div style="display:flex;align-items:center;gap:var(--sp-2);padding:3px 0;font-size:var(--fs-xs)">
+          <code class="bt-ev">${esc(b.id)}</code>
+          <span style="flex:1">${esc(b.title || '')}</span>
+          <span style="color:var(--text-dim);font-size:10px">→ ref:${esc(String(b.ref))}</span>
+        </div>`).join('')
+      : `<span style="color:var(--text-dim);font-size:var(--fs-xs)">无关联阻塞记录</span>`;
+    const s5content = tdSection('⛳ 里程碑', milHtml) + tdSection('🚧 关联阻塞', blkHtml);
+    body += tdCollapsible('⛳ 里程碑 & 关联阻塞', s5content, false);
   }
 
   document.getElementById('td-body').innerHTML = body;
