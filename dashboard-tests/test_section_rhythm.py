@@ -33,6 +33,7 @@ SECTION_RHYTHM_CONTRACT = [
     ("s-resources",     "cyan",   "资源索引"),
     ("s-prompt",        "green",  "提示词"),
     ("s-entries",       "red",    "11 入口"),
+    ("s-advanced-examples", "accent", "高级实战"),
     ("s-orchestration", "purple", "编排架构"),
     ("s-scenarios",     "orange", "5 大场景"),
     ("s-advanced",      "cyan",   "高级指令"),
@@ -87,16 +88,16 @@ class TestSectionRhythmContract:
     """每个 section-header 必须有 section-rhythm 类 + 色条 + motto."""
 
     def test_rhythm_count_is_12(self, rhythm_color_sequence):
-        """实测 18 section-rhythm: 17 + s-entries(red) = 18. 全 21 section 中 3 个无节奏."""
-        assert len(rhythm_color_sequence) == 18, (
-            f"section-rhythm 数量 {len(rhythm_color_sequence)} ≠ 18. "
+        """实测 19 section-rhythm: 18 + s-advanced-examples(accent) = 19. 全 22 section 中 3 个无节奏."""
+        assert len(rhythm_color_sequence) == 19, (
+            f"section-rhythm 数量 {len(rhythm_color_sequence)} ≠ 19. "
             f"实测: {rhythm_color_sequence}"
         )
 
     def test_color_sequence_cycles_6(self, rhythm_color_sequence):
-        """6 色循环 2 轮 (12) + s-resources(cyan) + s-health(purple) + s-architecture(blue) + s-advanced(cyan) + s-prompt(green) + s-entries(red) + s-orchestration(purple) + s-scenarios(orange) = 18."""
+        """6 色循环 2 轮 (12) + s-resources + s-health(purple) + s-architecture(blue) + s-advanced(cyan) + s-prompt(green) + s-entries(red) + s-advanced-examples(accent) + s-orchestration(purple) + s-scenarios(orange) = 19."""
         expected = ["cyan", "orange", "accent", "green", "purple", "blue",
-                    "cyan", "orange", "accent", "cyan", "green", "purple", "blue", "cyan", "green", "red", "purple", "orange"]
+                    "cyan", "orange", "accent", "cyan", "green", "purple", "blue", "cyan", "green", "red", "accent", "purple", "orange"]
         assert rhythm_color_sequence == expected, (
             f"section-rhythm 颜色序列错: 期望 {expected}, 实测 {rhythm_color_sequence}"
         )

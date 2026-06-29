@@ -414,6 +414,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
       <a href="#s-architecture" class="nav-link">四系统架构宪法</a>
       <a href="#s-prompt" class="nav-link">提示词 8 招<span class="nav-primer">新</span></a>
       <a href="#s-entries" class="nav-link">11 高频入口<span class="nav-primer">新</span></a>
+      <a href="#s-advanced-examples" class="nav-link">高级实战 5 例<span class="nav-primer">新</span></a>
       <a href="#s-orchestration" class="nav-link">编排架构图<span class="nav-primer">新</span></a>
       <a href="#s-advanced" class="nav-link">高级指令专题<span class="nav-primer">新</span></a>
     </div>
@@ -1769,6 +1770,85 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
     </div>
 
     <p class="deep-note"><strong>反讽自检</strong>: 11 入口借鉴 pane-manuals L1671-1890 C7 · <strong>手册链接已改为本机相对路径</strong> (避免 pane-manuals 相对路径断裂) · 触发词摘自 intent-words 路由 Top 11 (133 条中) · 5 大场景 vs 11 入口视角不同: <strong>场景=任务流, 入口=工具集</strong> · 数据快照 2026-06-29 · 不软化: 入口 6 删改是最高频触发, 但 p0 安全护栏, <strong>不要嫌烦跳过</strong>。</p>
+
+  </div>
+</section>
+
+<!-- ═══ 高级用法实战 · 5 场景复制即用 ═══ -->
+<section class="section container" id="s-advanced-examples">
+  <div class="section-rhythm section-rhythm--accent section-header">
+    <div class="section-rhythm__motto">高级实战</div>
+    <h2 class="section-title">高级用法实战 · 5 场景复制即用</h2>
+    <p class="section-subtitle">借鉴 pane-manuals L2090-2204 C10.7 5 EXAMPLES · 命令/预期/何时用/踩坑 4 段叙事 · 出处逐条标注 · 数据快照 2026-06-29</p>
+  </div>
+
+  <div class="deep-stack">
+
+    <div class="callout callout-accent">
+      <strong>实战原则</strong> — 每个示例含 ① 完整命令 ② 预期输出 ③ 何时用 ④ 踩坑提示。复制即用, 不需要现场拼参数。踩坑部分最关键: <strong>省你 2 小时试错</strong>。
+    </div>
+
+    <!-- 例 1: /loop 定时监控 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">例 1 · /loop 定时监控</div>
+      <h3 class="deep-block-title">每 30 分钟巡检服务状态 · 持续观察无终止</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">命令</span><span class="deep-row-text"><span class="deep-row-name"><code>/loop 每 30 分钟执行一次: ① 检查 localhost:3000 响应打印 HTTP 状态码 ② ≥500 输出警告+时间戳 ③ 200-499 输出"正常" ④ 超时标记跳过</code></span><span class="deep-row-when">→ /loop 是定时器, 决策来自 prompt 内的判断逻辑</span></span></div>
+        <div class="deep-row"><span class="deep-key">预期输出</span><span class="deep-row-text"><span class="deep-row-name">[10:00] HTTP 200 — 正常 / [10:30] HTTP 200 — 正常 / [11:00] HTTP 503 — ⚠ 服务异常 (2026-06-26 11:00:12)</span><span class="deep-row-when">→ 3 行输出, 30 分钟间隔</span></span></div>
+        <div class="deep-row"><span class="deep-key">何时用</span><span class="deep-row-text"><span class="deep-row-name">周期性巡检/监控/数据采集 · 不需要"完成", 只需"持续观察"</span><span class="deep-row-when">→ 有终止条件用 /goal, 只要定时跑用 /loop</span></span></div>
+        <div class="deep-row"><span class="deep-key">踩坑</span><span class="deep-row-text"><span class="deep-row-name">/loop 是定时器不决策! 4 条件分支必写进 prompt</span><span class="deep-row-when">→ 否则 Claude 只会报告, 不会自动判断异常</span></span></div>
+      </div>
+    </div>
+
+    <!-- 例 2: /goal 测试修复 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">例 2 · /goal 测试修复</div>
+      <h3 class="deep-block-title">让测试全绿且 lint 干净 · 好 goal = 可测量终态 + 证明方式 + 防失智约束</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">命令</span><span class="deep-row-text"><span class="deep-row-name"><code>/goal 让 test/auth 下所有测试通过且 lint 干净. 证明: npm test test/auth 与 npm run lint 退出码均为 0. 约束: 全程不得修改/删除/注释任何测试文件, 不能 skip 用例, 不得放宽断言.</code></span><span class="deep-row-when">→ 三要素缺一不可</span></span></div>
+        <div class="deep-row"><span class="deep-key">预期输出</span><span class="deep-row-text"><span class="deep-row-name">Claude 持续修改生产代码 → 每轮跑 npm test + npm run lint → 退出码 0 时自动停止, 汇报修改摘要</span><span class="deep-row-when">→ 4-8 轮循环</span></span></div>
+        <div class="deep-row"><span class="deep-key">何时用</span><span class="deep-row-text"><span class="deep-row-name">有可测量终态: 修 bug / 测通过 / lint 干净 / CI 变绿</span><span class="deep-row-when">→ 不要"写好代码"这种模糊 goal</span></span></div>
+        <div class="deep-row"><span class="deep-key">踩坑</span><span class="deep-row-text"><span class="deep-row-name">缺"约束"时 Claude 会注释掉断言 / skip 测试来"达成"目标</span><span class="deep-row-when">→ 必须明确写出禁止什么, 防止走捷径绕过</span></span></div>
+      </div>
+    </div>
+
+    <!-- 例 3: Dynamic Workflow -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">例 3 · Dynamic Workflow 并行审查</div>
+      <h3 class="deep-block-title">并行审查 80 个 API 端点 · 6 种编排模式选 1</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">命令</span><span class="deep-row-text"><span class="deep-row-name"><code>ultracode: 审查 src/routes/ 下每个 API 端点有没有漏掉鉴权检查, 输出"端点 → 问题"清单. use 20k tokens</code></span><span class="deep-row-when">→ 写 JS 编排脚本, 并行启动数十个 subagent</span></span></div>
+        <div class="deep-row"><span class="deep-key">预期输出</span><span class="deep-row-text"><span class="deep-row-name">Claude 写 JS 编排脚本 → 并行启动数十个 subagent → 汇总"端点 → 漏洞"报告</span><span class="deep-row-when">→ 单次 ultracode 调用, 输出 1 份报告</span></span></div>
+        <div class="deep-row"><span class="deep-key">何时用</span><span class="deep-row-text"><span class="deep-row-name">大批量同质任务: 审 N 端点 / 迁移 200 文件 / 扫一批日志</span><span class="deep-row-when">→ 6 编排: 分类路由 / 扇出合成 / 对抗验证 / 生成过滤 / 锦标赛 / 循环</span></span></div>
+        <div class="deep-row"><span class="deep-key">踩坑</span><span class="deep-row-text"><span class="deep-row-name">Token 消耗显著高 · 必写 <code>use Nk tokens</code> 设预算</span><span class="deep-row-when">→ 小任务不要开 Workflow, 杀鸡用牛刀</span></span></div>
+      </div>
+    </div>
+
+    <!-- 例 4: Agent Teams 并行 CR -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">例 4 · Agent Teams 并行 CR</div>
+      <h3 class="deep-block-title">3-5 角色 agent 并行评审 · 多视角盲评</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">命令</span><span class="deep-row-text"><span class="deep-row-name"><code>/team 评审这个 PR: ① 架构师检查接口设计 ② 安全专家查漏洞 ③ 性能工程师查瓶颈 ④ 汇总报告</code></span><span class="deep-row-when">→ 3 角色并行, 各自领域盲评</span></span></div>
+        <div class="deep-row"><span class="deep-key">预期输出</span><span class="deep-row-text"><span class="deep-row-name">3 份独立评审 + 1 份汇总 · 各自签字 + 共识/分歧</span><span class="deep-row-when">→ 总耗时 = max(单角色) 而非 sum</span></span></div>
+        <div class="deep-row"><span class="deep-key">何时用</span><span class="deep-row-text"><span class="deep-row-name">重要 PR 评审 · 架构变更 · 安全审计</span><span class="deep-row-when">→ 单人评审易盲, 多视角互相质询</span></span></div>
+        <div class="deep-row"><span class="deep-key">踩坑</span><span class="deep-row-text"><span class="deep-row-name">角色要明确边界, 否则 3 agent 重复同一处审查</span><span class="deep-row-when">→ 写 prompt 时给每个角色专属范围</span></span></div>
+      </div>
+    </div>
+
+    <!-- 例 5: Plan Mode + Tasks -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">例 5 · /plan + TodoWrite 复杂项目</div>
+      <h3 class="deep-block-title">大型改造的"先规划后执行" · 避免改一半发现走错</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">命令</span><span class="deep-row-text"><span class="deep-row-name"><code>/plan 改造 dashboard: M1 易腐快照 + M2 schema + M3 浏览器测试 + M4 可观测性. 先出 plan 再执行, 每 M 完结做 commit.</code></span><span class="deep-row-when">→ 大改造前必走 /plan, 避免改一半发现走错</span></span></div>
+        <div class="deep-row"><span class="deep-key">预期输出</span><span class="deep-row-text"><span class="deep-row-name">Plan agent 出 4 阶段 plan → TaskCreate 拆任务 → 每个 M 完结 git commit → 复核 → 下一 M</span><span class="deep-row-when">→ 本 session 8 commit 实际是此模式</span></span></div>
+        <div class="deep-row"><span class="deep-key">何时用</span><span class="deep-row-text"><span class="deep-row-name">多文件改动 · 跨阶段项目 · ≥ 3 commit 工作量</span><span class="deep-row-when">→ 反讽 R3 前提挑战先于方案 (本 session 6 commits 全是 plan 后实施)</span></span></div>
+        <div class="deep-row"><span class="deep-key">踩坑</span><span class="deep-row-text"><span class="deep-row-name">跳过 /plan 直接做 = 高返工概率 · 大改必先规划</span><span class="deep-row-when">→ TaskCreate 拆 3+ 步任务防迷路</span></span></div>
+      </div>
+    </div>
+
+    <p class="deep-note"><strong>反讽自检</strong>: 5 例借鉴 pane-manuals L2090-2204 C10.7 5 EXAMPLES · 简化用 <code>.deep-block</code> 模板 (原 pane-manuals 用 <code>&lt;details&gt;</code> 折叠, 与主仓风格不一致) · 4 段结构 (命令/预期/何时用/踩坑) 保留, 这是高级用法最实用信息 · 数据出处 pane-manuals/dashboard.html 6/25 抓取 · <strong>建议复核</strong> 官方命令是否仍生效。</p>
 
   </div>
 </section>
