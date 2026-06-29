@@ -30,6 +30,7 @@ SECTION_RHYTHM_CONTRACT = [
     ("s-knowledge",     "green",  "本机知识"),
     ("s-health",        "purple", "健康仪表"),
     ("s-architecture",  "blue",   "架构宪法"),
+    ("s-evolution",     "blue",   "演化历史"),
     ("s-resources",     "cyan",   "资源索引"),
     ("s-prompt",        "green",  "提示词"),
     ("s-entries",       "red",    "11 入口"),
@@ -88,16 +89,16 @@ class TestSectionRhythmContract:
     """每个 section-header 必须有 section-rhythm 类 + 色条 + motto."""
 
     def test_rhythm_count_is_12(self, rhythm_color_sequence):
-        """实测 19 section-rhythm: 18 + s-advanced-examples(accent) = 19. 全 22 section 中 3 个无节奏."""
-        assert len(rhythm_color_sequence) == 19, (
-            f"section-rhythm 数量 {len(rhythm_color_sequence)} ≠ 19. "
+        """实测 20 section-rhythm: 19 + s-evolution(blue) = 20. 全 23 section 中 3 个无节奏."""
+        assert len(rhythm_color_sequence) == 20, (
+            f"section-rhythm 数量 {len(rhythm_color_sequence)} ≠ 20. "
             f"实测: {rhythm_color_sequence}"
         )
 
     def test_color_sequence_cycles_6(self, rhythm_color_sequence):
-        """6 色循环 2 轮 (12) + s-resources + s-health(purple) + s-architecture(blue) + s-advanced(cyan) + s-prompt(green) + s-entries(red) + s-advanced-examples(accent) + s-orchestration(purple) + s-scenarios(orange) = 19."""
+        """6 色循环 2 轮 (12) + s-resources(cyan) + s-health(purple) + s-architecture(blue) + s-evolution(blue) + s-advanced(cyan) + s-prompt(green) + s-entries(red) + s-advanced-examples(accent) + s-orchestration(purple) + s-scenarios(orange) = 20."""
         expected = ["cyan", "orange", "accent", "green", "purple", "blue",
-                    "cyan", "orange", "accent", "cyan", "green", "purple", "blue", "cyan", "green", "red", "accent", "purple", "orange"]
+                    "cyan", "orange", "accent", "cyan", "green", "purple", "blue", "blue", "cyan", "green", "red", "accent", "purple", "orange"]
         assert rhythm_color_sequence == expected, (
             f"section-rhythm 颜色序列错: 期望 {expected}, 实测 {rhythm_color_sequence}"
         )
