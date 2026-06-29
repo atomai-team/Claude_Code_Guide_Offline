@@ -276,6 +276,10 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
 .nav-link { display: block; padding: var(--sp-1) var(--sp-3); margin: 1px 0; font-size: var(--fs-sm); color: var(--text-dim); text-decoration: none; border-left: 2px solid transparent; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
 .nav-link:hover { background: var(--surface-hover); color: var(--text); }
 .nav-link.active { color: var(--text); font-weight: 600; border-left-color: var(--accent); background: var(--accent-soft); }
+.nav-progress { display: flex; align-items: center; gap: var(--sp-2); padding: var(--sp-1) var(--sp-3) var(--sp-3); }
+.nav-progress-bar { flex: 1; height: 2px; background: var(--border); border-radius: 99px; overflow: hidden; }
+.nav-progress-fill { height: 100%; background: var(--accent); border-radius: 99px; transition: width 0.35s var(--ease-out); }
+.nav-progress-count { font-size: var(--fs-2xs); color: var(--text-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .nav-backdrop { display: none; position: fixed; inset: 0; background: var(--surface-overlay); z-index: var(--z-overlay); opacity: 0; transition: opacity var(--dur-normal) var(--ease-out); }
 @media (min-width: 1024px) {
   #main { margin-left: var(--sidebar-width); }
@@ -356,6 +360,10 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
 
 <!-- ═══ 分级导航侧栏 ═══ -->
 <aside class="side-nav" id="sideNav" aria-label="站内分级导航">
+  <div class="nav-progress" id="navProgress" aria-label="阅读进度">
+    <div class="nav-progress-bar"><div class="nav-progress-fill" id="navProgressFill" style="width:7%"></div></div>
+    <span class="nav-progress-count" id="navProgressCount">1 / 15</span>
+  </div>
   <nav>
     <div class="nav-group">
       <span class="nav-group-title">① 开始上手</span>
@@ -1342,6 +1350,13 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
     links.forEach(l => { l.classList.remove('active'); l.removeAttribute('aria-current'); });
     const a = map.get(el);
     if (a) { a.classList.add('active'); a.setAttribute('aria-current', 'location'); }
+    const idx = sections.indexOf(el), total = sections.length;
+    const fill = document.getElementById('navProgressFill');
+    const count = document.getElementById('navProgressCount');
+    if (fill && count && total > 0) {
+      fill.style.width = Math.round((idx + 1) / total * 100) + '%';
+      count.textContent = (idx + 1) + ' / ' + total;
+    }
   };
   let ticking = false;
   const onSpy = () => {
