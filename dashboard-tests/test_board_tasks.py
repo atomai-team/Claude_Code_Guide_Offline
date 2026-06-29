@@ -7,17 +7,13 @@
 - hero stats 数字非 '—'
 
 依赖: serve-gzip.py (18766 CI / 18771 本地), DASHBOARD_GZIP_URL 环境变量
+端口与路径 SSoT: dashboard-tests/conftest.py (GZIP_SERVER, REPO_ROOT)
 """
-import os
-import re
-from pathlib import Path
-
 import pytest
 import requests
 from playwright.sync_api import sync_playwright
 
-REPO_ROOT   = Path(__file__).resolve().parent.parent
-GZIP_SERVER = os.environ.get("DASHBOARD_GZIP_URL", "http://127.0.0.1:18771")
+from conftest import GZIP_SERVER, REPO_ROOT
 
 
 # ─────────────────────────────────────────────────────────────────
