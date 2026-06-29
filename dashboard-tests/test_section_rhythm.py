@@ -30,6 +30,7 @@ SECTION_RHYTHM_CONTRACT = [
     ("s-knowledge",     "green",  "本机知识"),
     ("s-health",        "purple", "健康仪表"),
     ("s-architecture",  "blue",   "架构宪法"),
+    ("s-advanced",      "cyan",   "高级指令"),
 ]
 
 EXPECTED_COLOR_SEQUENCE = ["cyan", "orange", "accent", "green", "purple", "blue"]
@@ -81,15 +82,15 @@ class TestSectionRhythmContract:
     """每个 section-header 必须有 section-rhythm 类 + 色条 + motto."""
 
     def test_rhythm_count_is_12(self, rhythm_color_sequence):
-        """实测 12 section (不是接力包说的 11, 不是 6)."""
-        assert len(rhythm_color_sequence) == 12, (
-            f"section-rhythm 数量 {len(rhythm_color_sequence)} ≠ 12. "
+        """实测 13 section: 12 原 + s-advanced 新增 (M2-替换 2026-06-29)."""
+        assert len(rhythm_color_sequence) == 13, (
+            f"section-rhythm 数量 {len(rhythm_color_sequence)} ≠ 13. "
             f"实测: {rhythm_color_sequence}"
         )
 
     def test_color_sequence_cycles_6(self, rhythm_color_sequence):
-        """6 色循环: cyan/orange/accent/green/purple/blue 重复 2 轮."""
-        expected = EXPECTED_COLOR_SEQUENCE * 2
+        """6 色循环: cyan/orange/accent/green/purple/blue 重复 2 轮 + 第 13 开 cyan."""
+        expected = EXPECTED_COLOR_SEQUENCE * 2 + ["cyan"]
         assert rhythm_color_sequence == expected, (
             f"section-rhythm 颜色序列错: 期望 {expected}, 实测 {rhythm_color_sequence}"
         )

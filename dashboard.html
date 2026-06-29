@@ -410,6 +410,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
       <a href="#s-health" class="nav-link">系统健康仪表盘</a>
       <a href="#s-brains" class="nav-link">五大智能大脑</a>
       <a href="#s-architecture" class="nav-link">四系统架构宪法</a>
+      <a href="#s-advanced" class="nav-link">高级指令专题<span class="nav-primer">新</span></a>
     </div>
     <div class="nav-group">
       <span class="nav-group-title">⑦ 任务看板</span>
@@ -1322,6 +1323,109 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
       </div>
       <p class="deep-note"><strong>10 项反讽修正</strong>已修 7 项 / 无残留 2 项 / 前提错 1 项 · 全部基于 4 路上游深读 + 举一反三全文档扫描 · <strong>出处</strong><code class="deep-inline">~/.claude/docs/system-of-systems.md</code> §0.6。</p>
     </div>
+
+  </div>
+</section>
+
+<!-- ═══ 高级指令专题 · ultracode/ultrawork/ralph/autopilot/team/ceo-mode/ultragoal ═══ -->
+<section class="section container" id="s-advanced">
+  <div class="section-rhythm section-rhythm--cyan section-header">
+    <div class="section-rhythm__motto">高级指令</div>
+    <h2 class="section-title">高级指令专题 · 7 种实战范式</h2>
+    <p class="section-subtitle">借鉴峰值版本 6/27 s-ae-* 结构 · 场景 / 触发 / 命令 / 产出 / 边界 5 段叙事 · 出处逐条标注 · 数据快照 2026-06-29</p>
+  </div>
+
+  <div class="deep-stack">
+
+    <div class="callout callout-info">
+      <strong>一句话结论</strong> — 高级指令 = 把 <strong>"让 Claude 干这活"</strong> 的口语指令转成 <strong>多 agent 编排 / 持久循环 / 自治 pipeline</strong>。7 种范式覆盖 90% 工程场景, 不需要写复杂提示词。挑 1-2 个组合用即可, 不要全部叠。
+    </div>
+
+    <!-- ① workflow · 多 agent 确定性编排 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">① workflow · 多 agent 确定性编排</div>
+      <h3 class="deep-block-title">L2 编排 · 同时做几件互不依赖的事</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">场景</span><span class="deep-row-text"><span class="deep-row-name">PM/架构师/工程师并行</span><span class="deep-row-when">→ 子任务相互独立, 三人同时干各干各的, 比串行快数倍</span></span></div>
+        <div class="deep-row"><span class="deep-key">触发词</span><span class="deep-row-text"><span class="deep-row-name">"帮我用并行方式同时搞定这几件事"</span><span class="deep-row-when">→ /oh-my-claudecode:ceo-mode 自动识别并选 L2 workflow</span></span></div>
+        <div class="deep-row"><span class="deep-key">实际命令</span><span class="deep-row-text"><span class="deep-row-name">/smart-flow-all 同时做：① 竞品调研 ② 技术可行性方案 ③ MVP 功能清单</span><span class="deep-row-when">→ Workflow 由 ceo-mode 自动选用, 无需手动触发</span></span></div>
+        <div class="deep-row"><span class="deep-key">边界</span><span class="deep-row-text"><span class="deep-row-name">不适用: 子任务有强依赖 / 需实时讨论 / 只有 1 件事</span><span class="deep-row-when">→ 强依赖改串行 pipeline; 实时讨论改 team; 1 件事直接派 executor</span></span></div>
+      </div>
+    </div>
+
+    <!-- ② ralph · PRD 持久循环 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">② ralph · PRD 持久循环</div>
+      <h3 class="deep-block-title">TIER-4 · 不达标准不停止</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">场景</span><span class="deep-row-text"><span class="deep-row-name">PRD / 复杂规范执行</span><span class="deep-row-when">→ 1 轮写不完, 需要持续迭代 (如跑测试全绿 / 全 review 过)</span></span></div>
+        <div class="deep-row"><span class="deep-key">触发词</span><span class="deep-row-text"><span class="deep-row-name">"让 ralph 持续到测试全过"</span><span class="deep-row-when">→ "The boulder never stops" 触发词; ralph-loop plugin</span></span></div>
+        <div class="deep-row"><span class="deep-key">实际命令</span><span class="deep-row-text"><span class="deep-row-name">/ralph-loop</span><span class="deep-row-when">→ 自定 5 段执行 (写→测→修→复审→闭环) 直到 PRD 全完成</span></span></div>
+        <div class="deep-row"><span class="deep-key">边界</span><span class="deep-row-text"><span class="deep-row-name">不适用: 单步任务 / 决策任务 / 无明确完成标准</span><span class="deep-row-when">→ 决策任务用 plan-mode; 无标准任务会无限循环烧 token</span></span></div>
+      </div>
+    </div>
+
+    <!-- ③ ultrawork · 并行执行引擎 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">③ ultrawork · 并行执行引擎</div>
+      <h3 class="deep-block-title">TIER-3 · 把一件事拆 N 份并发</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">场景</span><span class="deep-row-text"><span class="deep-row-name">高吞吐 task 完成</span><span class="deep-row-when">→ 单任务可拆 N 子任务并行 (如批量改 20 个文件的同一类问题)</span></span></div>
+        <div class="deep-row"><span class="deep-key">触发词</span><span class="deep-row-text"><span class="deep-row-name">"火力全开" / "ultrawork"</span><span class="deep-row-when">→ /oh-my-claudecode:ultrawork 自动启 DAG 并行</span></span></div>
+        <div class="deep-row"><span class="deep-key">实际命令</span><span class="deep-row-text"><span class="deep-row-name">/ultrawork 批量修这 30 个 hook 的 lint 问题</span><span class="deep-row-when">→ 自动拆 30 子任务并行, 5x 提速</span></span></div>
+        <div class="deep-row"><span class="deep-key">边界</span><span class="deep-row-text"><span class="deep-row-name">不适用: 子任务相互冲突 (如同时改同一文件)</span><span class="deep-row-when">→ 改 worktree 隔离或分批</span></span></div>
+      </div>
+    </div>
+
+    <!-- ④ team · 多 agent 协作组 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">④ team · 多 agent 协作组</div>
+      <h3 class="deep-block-title">L2 · 实时互相讨论修改方向</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">场景</span><span class="deep-row-text"><span class="deep-row-name">需要讨论 / 互相迭代</span><span class="deep-row-when">→ 子任务需实时修改方案 (如架构师 + 工程师互相质询)</span></span></div>
+        <div class="deep-row"><span class="deep-key">触发词</span><span class="deep-row-text"><span class="deep-row-name">"组一个团队"</span><span class="deep-row-when">→ /oh-my-claudecode:team 自动选 team</span></span></div>
+        <div class="deep-row"><span class="deep-key">实际命令</span><span class="deep-row-text"><span class="deep-row-name">/team 做一个 SaaS MVP</span><span class="deep-row-when">→ PM/架构师/工程师实时讨论, 产出对齐方案</span></span></div>
+        <div class="deep-row"><span class="deep-key">边界</span><span class="deep-row-text"><span class="deep-row-name">不适用: 任务已定义清楚 / 无需讨论</span><span class="deep-row-when">→ 直接用 workflow 或 executor</span></span></div>
+      </div>
+    </div>
+
+    <!-- ⑤ ceo-mode · CEO 编排 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">⑤ ceo-mode · CEO 总编排</div>
+      <h3 class="deep-block-title">TIER-1 · 战略拆解 + 团队调度 + 质量验收</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">场景</span><span class="deep-row-text"><span class="deep-row-name">复杂多阶段项目</span><span class="deep-row-when">→ 需求模糊 / 需多专家协同 / 质量门控 (如做 app / 出海调研)</span></span></div>
+        <div class="deep-row"><span class="deep-key">触发词</span><span class="deep-row-text"><span class="deep-row-name">"帮我规划 + 落地"</span><span class="deep-row-when">→ /oh-my-claudecode:ceo-mode</span></span></div>
+        <div class="deep-row"><span class="deep-key">实际命令</span><span class="deep-row-text"><span class="deep-row-name">/ceo-mode 做一个跨境电商 SaaS</span><span class="deep-row-when">→ PM/架构/工程/QA/法务 5 阶段流水线 + rubric 门控</span></span></div>
+        <div class="deep-row"><span class="deep-key">边界</span><span class="deep-row-text"><span class="deep-row-name">不适用: 单文件改 / 已知任务 / 时间紧</span><span class="deep-row-when">→ 5 阶段流程慢, 单任务用 ultrawork</span></span></div>
+      </div>
+    </div>
+
+    <!-- ⑥ ultragoal · 目标驱动持续达成 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">⑥ ultragoal · 目标驱动持续达成</div>
+      <h3 class="deep-block-title">TIER-4 · 自定 KPI 自动达成</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">场景</span><span class="deep-row-text"><span class="deep-row-name">有明确 KPI 的持续优化</span><span class="deep-row-when">→ 跑分到 N / 用户到 N / 性能到 X (如 daily-brief 推到 Notion)</span></span></div>
+        <div class="deep-row"><span class="deep-key">触发词</span><span class="deep-row-text"><span class="deep-row-name">"让 ultragoal 跑到 [KPI]"</span><span class="deep-row-when">→ /oh-my-claudecode:ultragoal 自动启 KPI 评估循环</span></span></div>
+        <div class="deep-row"><span class="deep-key">实际命令</span><span class="deep-row-text"><span class="deep-row-name">/ultragoal 测试覆盖率 ≥90%</span><span class="deep-row-when">→ 自动补测试直到达标, 适合 hard KPI</span></span></div>
+        <div class="deep-row"><span class="deep-key">边界</span><span class="deep-row-text"><span class="deep-row-name">不适用: KPI 不可衡量 / 任务无终止条件</span><span class="deep-row-when">→ 与 ralph 类似, 但 ultragoal 强调 KPI 而非 PRD</span></span></div>
+      </div>
+    </div>
+
+    <!-- ⑦ autopilot · 自动驾驶 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">⑦ autopilot · 自动驾驶</div>
+      <h3 class="deep-block-title">TIER-4 · 自主持续执行无需监督</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">场景</span><span class="deep-row-text"><span class="deep-row-name">无人值守持续运行</span><span class="deep-row-when">→ 长时任务 / 监控 / 自动修复 (如每天推送 daily-brief)</span></span></div>
+        <div class="deep-row"><span class="deep-key">触发词</span><span class="deep-row-text"><span class="deep-row-name">"让 Claude 自动跑"</span><span class="deep-row-when">→ /oh-my-claudecode:autopilot 启 cron 模式</span></span></div>
+        <div class="deep-row"><span class="deep-key">实际命令</span><span class="deep-row-text"><span class="deep-row-name">/autopilot 每天 9 点生成日报</span><span class="deep-row-when">→ LaunchAgent / cron 自动跑, 无需干预</span></span></div>
+        <div class="deep-row"><span class="deep-key">边界</span><span class="deep-row-text"><span class="deep-row-name">不适用: 一次性任务 / 高风险操作</span><span class="deep-row-when">→ 高风险操作必 HITL 确认, 不可 autopilot</span></span></div>
+      </div>
+    </div>
+
+    <p class="deep-note"><strong>反讽自检</strong>: 这 7 个范式名在 dashboard 内文 <code>grep</code> 原 0 命中 (本 commit 修复) · 数据出处峰值版本 609963a (6/27) · 当前 dashboard 1456 行仅 14 section · 借签结构 (场景/触发/命令/边界 5 段叙事) + 套当前 deep-block 模板, 不复制峰值版 CSS class (避免污染)。</p>
 
   </div>
 </section>
