@@ -400,6 +400,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
       <a href="#s-github" class="nav-link">GitHub 生态 · 调研裁决</a>
       <a href="#s-knowledge" class="nav-link">本机知识体系</a>
       <a href="#s-resources" class="nav-link">调研档案 + 资源<span class="nav-primer">新</span></a>
+      <a href="#s-memory" class="nav-link">记忆体系</a>
       <a href="#s-scenarios" class="nav-link">5 大场景剧本<span class="nav-primer">新</span></a>
     </div>
     <div class="nav-group">
@@ -1125,6 +1126,74 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--sp-3)); }
     </div>
 
     <p class="deep-note"><strong>反讽自检</strong>: 本块原 dashboard <code>grep youtube/bilibili/udemy/coursera = 0</code> (本 commit 修复) · 调研档案和资源是两类: 前者决策 SSoT (research-library/) 后者学习脚手架 (官方+社区) · 不要混, 否则失去裁决权威。</p>
+
+  </div>
+</section>
+
+<!-- ═══ 4 类记忆 + V26 4 层模型 + 知识栈三件套 ═══ -->
+<section class="section container" id="s-memory">
+  <div class="section-rhythm section-rhythm--accent section-header">
+    <div class="section-rhythm__motto">记忆体系</div>
+    <h2 class="section-title">4 类记忆 + V26 4 层模型 + 知识栈三件套</h2>
+    <p class="section-subtitle">auto-memory / rules / docs / 配置 · 加载位置≠阶层级(反讽修正 #2) · 本机=唯一真相源 · 出处逐条标 · 数据快照 2026-06-29</p>
+  </div>
+
+  <div class="deep-stack">
+
+    <div class="callout callout-orange">
+      <strong>反讽修正(v0.5 已锁)</strong> — 旧叙事"memory 2 系统×4 层 = 阶层级"已 <strong>v0.5 废止</strong>。system-of-systems.md §0.6 #2 实读官方 code.claude.com/docs/en/memory 后修正:<strong>2 系统 memory(CLAUDE.md project + conversation)</strong>;<strong>auto memory v2.1.59+ 四层是加载位置,不是阶层级</strong>; wiki/runtime 是本机自创非官方术语。详见 <code class="deep-inline">~/.claude/docs/system-of-systems.md</code> §0.6 #2 · conf 0.95。
+    </div>
+
+    <!-- 块 A:4 类记忆定义 + 寿命 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 A · 4 类记忆定义 + 寿命</div>
+      <h3 class="deep-block-title">按"装在哪/管多久"4 类,不要混</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">① auto-memory</span><span class="deep-row-text"><span class="deep-row-name">本机 <code>~/.claude/projects/*/memory/</code> 单文件 .md(frontmatter)</span><span class="deep-row-when">→ 寿命:核心永久 / 普通 7d · 触发:&lt;remember&gt; hook 或主调度器主动 · SSoT 出处 <code class="deep-inline">docs/memory-system-contract.md</code></span></span></div>
+        <div class="deep-row"><span class="deep-key">② rules</span><span class="deep-row-text"><span class="deep-row-name"><code>~/.claude/rules/*.md</code> + <code>CLAUDE.md</code> 每会话硬注入</span><span class="deep-row-when">→ 寿命:永久(规则铁律,直到显式改) · 改前必写 change-log.jsonl(auto-learned 铁律 #8)</span></span></div>
+        <div class="deep-row"><span class="deep-key">③ docs</span><span class="deep-row-text"><span class="deep-row-name"><code>~/.claude/docs/*.md</code> 战略/SOP/设计(7 类文档)</span><span class="deep-row-when">→ 寿命:永久(直到下个接力包覆盖) · 由 needs-analyst / planner / captain 引用</span></span></div>
+        <div class="deep-row"><span class="deep-key">④ 配置</span><span class="deep-row-text"><span class="deep-row-name"><code>settings.json</code> + <code>settings.local.json</code> + hook 配置</span><span class="deep-row-when">→ 寿命:永久 · L3 铁律:防改 model / enabledPlugins / env.ANTHROPIC_* · 改前 backup</span></span></div>
+      </div>
+      <p class="deep-note"><strong>三档寿命档(2026-06-23 立)</strong>:L0=短(本任务, ≤1h) / L1=中(本周记忆, 7d) / L2=长(永久铁律/宪法/规则)。归档 ≠ 删除(zero-sum 铁律, 加新必减旧)。</p>
+    </div>
+
+    <!-- 块 B:V26 4 层模型 + 加载位置矩阵 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 B · V26 4 层模型 = 加载位置矩阵(非阶层级)</div>
+      <h3 class="deep-block-title">反讽修正后:同一"层"可装多类记忆</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">加载位置 1 · 项目 CLAUDE.md</span><span class="deep-row-text"><span class="deep-row-name">每会话硬注入项目指令(本机改 .local, 跨项目改 CLAUDE.md)</span><span class="deep-row-when">→ 装啥:rules ① + ② · 不要装 docs(会塞爆) · 直接相关任务</span></span></div>
+        <div class="deep-row"><span class="deep-key">加载位置 2 · auto-memory v2.1.59+</span><span class="deep-row-text"><span class="deep-row-name">★ 单文件 .md(每条记忆 1 文件) + MEMORY.md 索引</span><span class="deep-row-when">→ 装啥:① auto-memory · 不装 docs/rules(越界) · 跨会话</span></span></div>
+        <div class="deep-row"><span class="deep-key">加载位置 3 · docs/ 战略 SSoT</span><span class="deep-row-text"><span class="deep-row-name">按需 Read(不自动注入, 会爆上下文)</span><span class="deep-row-when">→ 装啥:③ docs · 不装 rules/auto-memory · 战略级参考</span></span></div>
+        <div class="deep-row"><span class="deep-key">加载位置 4 · 配置层</span><span class="deep-row-text"><span class="deep-row-name">settings.json / hooks/ / CLAUDE.md 顶层</span><span class="deep-row-when">→ 装啥:④ 配置 · 严控 model/env/hooks · L3 改前 snapshot</span></span></div>
+      </div>
+      <p class="deep-note"><strong>反讽 R1 实证</strong>:旧"V26 4 层 = 阶层级"是失真描述 → 同一文档可能存在于多个加载位置(例如 system-of-systems.md 同时是 docs 又是 s-knowledge 引用源)。<strong>阶层级会让人误以为"上层优于下层"</strong> → 改"加载位置"是 binary 修正,避免决策错位。</p>
+    </div>
+
+    <!-- 块 C:知识栈三件套职责边界 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 C · 知识栈三件套职责边界(CEO 异构对抗裁决)</div>
+      <h3 class="deep-block-title">本机=唯一真相源 + Notion/Obsidian 只读单向投影</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">① 本机 <code>~/.claude/</code></span><span class="deep-row-text"><span class="deep-row-name">Claude 下次要读的(SSoT 工程目录)</span><span class="deep-row-when">→ auto-memory + rules + docs + 配置 · <strong>唯一真相源</strong> · 出处 <code class="deep-inline">CLAUDE.local.md</code> 第 4 重点</span></span></div>
+        <div class="deep-row"><span class="deep-key">② Notion</span><span class="deep-row-text"><span class="deep-row-name">要协作/人看的(CMMI 任务库单向推送)</span><span class="deep-row-when">→ 第三方读者本 · <strong>禁双向同步</strong> · 失同步 = 信任崩塌</span></span></div>
+        <div class="deep-row"><span class="deep-key">③ Obsidian(<code>~/Documents/Obsidian Vault</code>)</span><span class="deep-row-text"><span class="deep-row-name">长期知识沉淀(精炼摘要,非原始 session)</span><span class="deep-row-when">→ 单向管道 <code>lib/archive-task.py → obsidian-note.py</code> · <strong>禁第二记忆系统</strong></span></span></div>
+      </div>
+      <p class="deep-note"><strong>铁律(2026-06-17 立)</strong>:本机是唯一真相源,Notion/Obsidian 是只读单向投影(只出不进、可重建),禁双向同步、禁第二记忆系统。真实管道 <code>archive-task.py → obsidian-note.py</code>(写精炼摘要非原始 session)。</p>
+    </div>
+
+    <!-- 块 D:11 工具统一接口 + 健康检查 -->
+    <div class="card deep-block">
+      <div class="deep-eyebrow">块 D · 11 工具统一接口 + 4 步健康检查</div>
+      <h3 class="deep-block-title">5 类记忆 × 加载位置 = 统一接口矩阵</h3>
+      <div class="deep-rows">
+        <div class="deep-row"><span class="deep-key">MCP 工具(5)</span><span class="deep-row-text"><span class="deep-row-name">qmd / codebase-memory-mcp / firecrawl / chrome-devtools / github</span><span class="deep-row-when">→ 装:① 检索类 auto-memory · 何时:主调度器查不到时</span></span></div>
+        <div class="deep-row"><span class="deep-key">CLI 工具(3)</span><span class="deep-row-text"><span class="deep-row-name">kimi / mmx / opencode(ai-panel 5 联对抗)</span><span class="deep-row-when">→ 装:③ docs 调研 + 异构验证 · 何时:多模型裁决 / 跨库对比</span></span></div>
+        <div class="deep-row"><span class="deep-key">脚本(3)</span><span class="deep-row-text"><span class="deep-row-name">lib/archive-task.py / obsidian-note.py / board.py</span><span class="deep-row-when">→ 装:③ docs → ② auto-memory 投影 · 何时:任务结束 / 看板更新 / 单投</span></span></div>
+        <div class="deep-row"><span class="deep-key">4 步健康检查</span><span class="deep-row-text"><span class="deep-row-name">① MEMORY.md 索引存在 ② 单文件 .md frontmatter 完整 ③ rules/* < 12 条 ④ docs/ 7 类齐</span><span class="deep-row-when">→ 频率:周司聪自动跑 · 出处 <code class="deep-inline">~/.claude/scripts/memory-index-check</code> · 我的cc 已 101→61 真实孤儿(2026-06-25 audit)</span></span></div>
+      </div>
+      <p class="deep-note"><strong>反讽 R5</strong>:memory-index-check 误报 101 真实孤儿 61 — 因 .archive/ 软链 + 索引刷新滞后。已修(2026-06-25 neat-freak+audit-all-better 接线)。详情 <a href="#s-knowledge" class="deep-inline">§s-knowledge 本机知识</a>。</p>
+    </div>
 
   </div>
 </section>
