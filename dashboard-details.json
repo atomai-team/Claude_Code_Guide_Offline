@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T08:43:02.020657Z",
+  "generated_at": "2026-06-30T09:04:30.199296Z",
   "version": "P2-4-full",
   "counts": {
     "skills_total": 150,
@@ -1741,7 +1741,7 @@
       "registered": false,
       "what_protects": "draft-resume-injector.sh — C-draft cascade 的 C1（SessionStart 草稿续接注入）",
       "kill_switch": "",
-      "size_lines": 74
+      "size_lines": 79
     },
     {
       "id": "drift-check.sh",
