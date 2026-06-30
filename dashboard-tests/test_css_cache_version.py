@@ -11,8 +11,20 @@ import re
 import subprocess
 from pathlib import Path
 
+import pytest
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DASHBOARD_HTML = REPO_ROOT / "dashboard.html"
+
+
+def _is_shallow():
+    """shallow clone (CI checkout fetch-depth:1) 下 git log -- <file> 失真:
+    只返回 shallow 边界 commit 而非真正改该文件的 commit → 版本号守门会误判。"""
+    r = subprocess.run(
+        ["git", "rev-parse", "--is-shallow-repository"],
+        capture_output=True, text=True, cwd=str(REPO_ROOT),
+    )
+    return r.stdout.strip() == "true"
 
 
 def _css_refs():
@@ -37,7 +49,13 @@ def test_css_refs_present():
 
 
 def test_css_version_not_stale():
-    """每个 CSS ?v= 版本号必须 >= 该文件 git 最后提交日期 (防忘 bump→缓存 serve 旧样式)。"""
+    """每个 CSS ?v= 版本号必须 >= 该文件 git 最后提交日期 (防忘 bump→缓存 serve 旧样式)。
+
+    ⚠️ shallow clone (CI fetch-depth:1) 下 git log -- <file> 返回 shallow 边界 commit
+    而非真正改该文件的 commit → 误判, 故 skip。本地完整克隆守门有效。
+    """
+    if _is_shallow():
+        pytest.skip("shallow clone: git log -- <file> 不可靠, CSS 版本号守门仅本地完整克隆生效")
     stale = []
     for fname, ver in _css_refs():
         git_date = _git_last_date(f"design-system/{fname}")
