@@ -134,6 +134,56 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
     links.forEach(a => a.addEventListener('click', () => { if (window.matchMedia('(max-width: 1023px)').matches) closeNav(); }));
   }
+
+  // ─── v6 router 改造 · 方案 C (兼容锚点 + history 监听) ───
+  // 目标: 浏览器前进/后退可用 + 滚动时 URL hash 实时同步 + 100% 向后兼容旧 #s-X 链接
+  // 设计依据: docs/plans/v6-router-design.md 方案 C (★推荐)
+  // 反讽 R5: 与 scrollspy 协同不破坏 IntersectionObserver lazy load (scrollIntoView → 视口进入 → lazy 渲染)
+  // 反讽 R1: 防 lazy load 竞态 (offsetHeight===0 → 先等 lazy 渲染再 scroll)
+
+  // 1) hashchange → scroll + 高亮同步 (前进/后退 / nav-link 点击触发)
+  window.addEventListener('hashchange', () => {
+    const id = location.hash.slice(1);
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    // 防 lazy load 竞态: 元素未渲染时等 100ms 再 scroll
+    if (el.offsetHeight === 0) {
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setActive(el);
+      }, 100);
+    } else {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setActive(el);  // 立即高亮 (不等 scroll 事件)
+    }
+  });
+
+  // 2) scroll → URL hash 同步 (replaceState 不堆 history)
+  let hashTicking = false;
+  const onScrollToHash = () => {
+    if (hashTicking) return;
+    hashTicking = true;
+    setTimeout(() => {
+      // 复用 onSpy 核心算法 (4 行): 找"第一个 top ≥ 0 的 section, 取其前一个"
+      let current = sections[0];
+      for (let i = 0; i < sections.length; i++) {
+        const top = sections[i].getBoundingClientRect().top;
+        if (top >= 0) {
+          current = i > 0 ? sections[i - 1] : sections[0];
+          break;
+        }
+      }
+      if (current.getBoundingClientRect().top < 0) {
+        current = sections[sections.length - 1];
+      }
+      if (current && current.id && location.hash !== '#' + current.id) {
+        history.replaceState(null, '', '#' + current.id);
+      }
+      hashTicking = false;
+    }, 200);
+  };
+  window.addEventListener('scroll', onScrollToHash, { passive: true });
 })();
 
 /* ════════════════════════════════════════════════════════════════════

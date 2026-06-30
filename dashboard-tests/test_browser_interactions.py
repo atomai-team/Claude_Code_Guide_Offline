@@ -60,8 +60,10 @@ class TestAutoRefresh:
         btn.click()
         page_loaded.wait_for_timeout(2500)  # 等 reloadTasks 完成
 
-        # 1) URL 不变
-        assert page_loaded.url == before_url, f"URL 变了: {before_url} → {page_loaded.url}"
+        # 1) URL 不变 (但允许 #hash 变化 — v6 router 滚动→URL 同步, v5 P0-3 lazy load 都可能改 hash)
+        before_no_hash = before_url.split('#')[0]
+        after_no_hash = page_loaded.url.split('#')[0]
+        assert before_no_hash == after_no_hash, f"URL 整路径变了: {before_url} → {page_loaded.url}"
 
         # 2) sentinel 仍在 (证明 page 没被卸载)
         sentinel = page_loaded.evaluate("window.__reloadSentinel")
