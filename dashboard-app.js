@@ -931,6 +931,14 @@ window.updateTaskStatus = async function(id, status) {
   }
 };
 
+// 写回按钮事件委托: 避免 onclick 内联拼 card.id (esc 不转义 '/\\ → JS 注入).
+// data-tid 经 HTML 属性 + dataset 浏览器自动解码, id 含特殊字符也安全
+// (最终只进 fetch JSON body + board.py subprocess list args, 无注入面)。
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest && e.target.closest('.wb-status-btn');
+  if (btn && !btn.disabled) updateTaskStatus(btn.dataset.tid, btn.dataset.status);
+});
+
 /* ════════════════════════════════════════════════════════════════════
    Board Tasks · board-tasks.json 看板数据
    ════════════════════════════════════════════════════════════════════ */
@@ -1334,7 +1342,9 @@ window.openTaskDetail = function(card, source) {
     const cur = normStatus(card.status);
     const btns = WRITEBACK_STATUSES.map(([s, label]) => {
       const active = s === cur;
-      return `<button onclick="updateTaskStatus('${esc(String(card.id))}','${s}')"
+      // data-tid 走 HTML 属性(esc 转义 " 足够), 不在 onclick 内联拼 id 字符串
+      // (esc 不转义 '/\\ → JS 字面量注入). 点击由下方事件委托处理。
+      return `<button class="wb-status-btn" data-tid="${esc(String(card.id))}" data-status="${s}"
         style="cursor:${active ? 'default' : 'pointer'};font-size:var(--fs-xs);padding:3px 11px;border-radius:var(--radius-pill);border:1px solid ${active ? 'var(--accent)' : 'var(--border)'};background:${active ? 'var(--accent)' : 'var(--surface)'};color:${active ? '#fff' : 'var(--text-dim)'};font-weight:${active ? '700' : '500'};transition:all .12s"
         ${active ? 'disabled' : `onmouseenter="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseleave="this.style.borderColor='var(--border)';this.style.color='var(--text-dim)'"`}>${label}</button>`;
     }).join('');

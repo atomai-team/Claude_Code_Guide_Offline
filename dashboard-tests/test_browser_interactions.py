@@ -250,11 +250,19 @@ class TestWriteback:
         page_loaded.wait_for_timeout(400)
         r = page_loaded.evaluate("""() => {
           const body = document.getElementById('td-body');
-          const btns = [...body.querySelectorAll('button')]
-            .filter(b => /待办|进行中|完成|部分|卡点/.test(b.textContent));
+          const btns = [...body.querySelectorAll('.wb-status-btn')];
           return {hasWb: body.innerHTML.includes('改状态'), n: btns.length,
-                  onclickOK: btns.some(b => (b.getAttribute('onclick') || '').includes('updateTaskStatus'))};
+                  dataOK: btns.every(b => b.dataset.tid !== undefined && b.dataset.status !== undefined)};
         }""")
         assert r["hasWb"], "写回控件 (改状态) 未出现"
         assert r["n"] == 5, f"状态按钮应 5 个 (待办/进行中/完成/部分/卡点), 实际 {r['n']}"
-        assert r["onclickOK"], "状态按钮未绑定 updateTaskStatus"
+        assert r["dataOK"], "状态按钮缺 data-tid/data-status (事件委托契约)"
+
+    def test_writeback_no_onclick_id_injection(self, app_js):
+        """安全回归: 写回按钮禁用 onclick 内联拼 id (esc 不转义 '/\\\\ → JS 注入).
+
+        必须走 data-tid + 事件委托 (reviewer 2026-06-30 必改项)。
+        """
+        assert 'onclick="updateTaskStatus' not in app_js, \
+            "写回按钮不得用 onclick 内联拼 id (JS 字面量注入风险); 应 data-tid + 事件委托"
+        assert "wb-status-btn" in app_js, "写回按钮应有 wb-status-btn class (事件委托锚点)"
