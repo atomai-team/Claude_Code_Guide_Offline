@@ -1030,14 +1030,23 @@ function renderBoardTasks() {
 function kanbanCardHtml(c, dotClr) {
   const cardData = encodeURIComponent(JSON.stringify(c));
   const evHash   = c.evidence ? c.evidence.split(':').pop().slice(-7) : null;
+  // v7 多维度字段 (4 维度 MVP): session_id chip + priority 色块 + created/due 时间戳
+  const priorityColor = {urgent:'#ef4444',high:'#f59e0b',medium:'#3b82f6',low:'#9ca3af'}[c.priority] || '#9ca3af';
+  const sessionChip = c.session_name ? `<span style="display:inline-block;background:var(--accent2);color:#fff;font-size:9px;padding:1px 5px;border-radius:3px;margin-right:4px;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(c.session_name)}">📍 ${esc(c.session_name)}</span>` : '';
+  const dueDateStr = c.due_date ? new Date(c.due_date).toLocaleDateString('zh-CN', {month:'2-digit',day:'2-digit'}) : '';
+  const isOverdue = c.due_date && new Date(c.due_date) < new Date() && c.status !== 'done';
+  const dateLine = (c.created_at || dueDateStr) ? `<div style="font-size:9px;color:var(--text-muted);margin-top:4px">${c.created_at ? '📅 ' + new Date(c.created_at).toLocaleDateString('zh-CN', {month:'2-digit',day:'2-digit'}) : ''}${dueDateStr ? (c.created_at ? ' → ' : '⏰ ') + `<span style="color:${isOverdue ? '#ef4444' : 'var(--text-dim)'};font-weight:${isOverdue ? '700' : '400'}">${dueDateStr}</span>` : ''}</div>` : '';
   return `<div style="font-size:var(--fs-xs);padding:var(--sp-2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:var(--sp-2);background:var(--surface);cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s;position:relative" onmouseenter="this.style.borderColor='var(--accent)';this.style.boxShadow='0 4px 12px rgba(0,0,0,.12)';this.style.transform='translateY(-1px)';this.style.background='var(--surface)'" onmouseleave="this.style.borderColor='var(--border)';this.style.boxShadow='';this.style.transform=''" onclick="openTaskDetail(JSON.parse(decodeURIComponent('${cardData}')),'kanban')">
     ${c.closure_badge ? `<span style="position:absolute;top:4px;right:4px;font-size:9px;background:#10b981;color:#fff;border-radius:3px;padding:0 4px;font-weight:700">✓ done</span>` : ''}
     ${c.blocker ? `<span title="${esc(c.blocker)}" style="position:absolute;top:4px;right:${c.closure_badge ? '44' : '4'}px;width:14px;height:14px;border-radius:50%;background:#ef4444;color:#fff;font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;line-height:1">!</span>` : ''}
-    <div style="font-weight:500;line-height:1.4;padding-right:${c.blocker || c.closure_badge ? '18px' : '0'}">${esc(c.id)} · ${esc(c.title)}</div>
-    <div style="display:flex;align-items:center;gap:var(--sp-2);margin-top:4px">
+    ${c.priority && c.priority !== 'medium' ? `<span style="position:absolute;top:4px;left:4px;width:8px;height:8px;border-radius:50%;background:${priorityColor}" title="优先级: ${c.priority}"></span>` : ''}
+    <div style="font-weight:500;line-height:1.4;padding-right:${c.blocker || c.closure_badge ? '18' : '0'};padding-left:${c.priority && c.priority !== 'medium' ? '14' : '0'}px">${esc(c.id)} · ${esc(c.title)}</div>
+    <div style="display:flex;align-items:center;gap:var(--sp-2);margin-top:4px;flex-wrap:wrap">
+      ${sessionChip}
       <span style="color:var(--text-dim)">${esc(c.group)}</span>
       ${evHash ? `<code class="bt-ev" style="margin-left:auto;flex-shrink:0;opacity:0.7">${evHash}</code>` : ''}
     </div>
+    ${dateLine}
   </div>`;
 }
 
@@ -1060,6 +1069,29 @@ function renderKanbanInto(kanbanEl, kanban, subplans) {
   const cols   = ['待规划', '待办', '进行中', '审核中'];
   const dotClr = { '待规划': '#6b7280', '待办': '#f59e0b', '进行中': 'var(--accent)', '审核中': '#10b981' };
   const subPending = (subplans || []).filter(s => s.status === 'todo' || s.status === 'doing');
+
+  // v7 Phase 3 · 过滤栏 (priority + session) 应用到看板
+  const filterP = (document.getElementById('filter-priority') || {}).value || '';
+  const filterS = (document.getElementById('filter-session') || {}).value || '';
+  const matches = (c) => (!filterP || c.priority === filterP) && (!filterS || c.session_id === filterS || c.session_name === filterS);
+  const filtered = {};
+  for (const col of cols) {
+    const all = (kanban || {})[col] || [];
+    filtered[col] = all.filter(matches);
+  }
+  // v7 · 同步填充 session 下拉 (从全部 task 提取)
+  const sessionSel = document.getElementById('filter-session');
+  if (sessionSel && sessionSel.options.length <= 1) {
+    const allSessions = new Set();
+    Object.values(kanban || {}).forEach(arr => (arr || []).forEach(c => { if (c.session_id) allSessions.add(c.session_id); if (c.session_name) allSessions.add(c.session_name); }));
+    [...allSessions].sort().forEach(s => {
+      const opt = document.createElement('option');
+      opt.value = s; opt.textContent = s.slice(0, 18);
+      sessionSel.appendChild(opt);
+    });
+  }
+  // 替换 kanban 引用
+  kanban = filtered;
 
   if (KANBAN_VIEW === 'list') {
     kanbanEl.style.gridTemplateColumns = '1fr';
@@ -1136,6 +1168,14 @@ window.setKanbanView = function(v) {
     if (el) renderKanbanInto(el, BOARD.kanban, BOARD.subplans);
   }
   syncViewButtons();
+};
+
+// v7 Phase 3 · 过滤栏应用 (priority + session dropdowns)
+window.applyBoardFilters = function() {
+  if (BOARD) {
+    const el = document.getElementById('bt-kanban');
+    if (el) renderKanbanInto(el, BOARD.kanban, BOARD.subplans);
+  }
 };
 
 /* ════════════════════════════════════════════════════════════════════

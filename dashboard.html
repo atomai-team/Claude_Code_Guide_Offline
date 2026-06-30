@@ -2574,6 +2574,16 @@ S5 团队完整剧本 (3 步含并行):
     <span style="font-size:var(--fs-xs);color:var(--text-dim)">视图</span>
     <button id="btn-view-card" onclick="setKanbanView('card')" title="卡片视图" style="padding:4px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--accent);color:#fff;cursor:pointer;font-size:var(--fs-xs)">⊞ 卡片</button>
     <button id="btn-view-list" onclick="setKanbanView('list')" title="列表视图" style="padding:4px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);cursor:pointer;font-size:var(--fs-xs)">☰ 列表</button>
+    <select id="filter-priority" onchange="applyBoardFilters()" title="按优先级过滤" style="padding:3px 6px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);font-size:var(--fs-xs)">
+      <option value="">全部优先级</option>
+      <option value="urgent">🔴 urgent</option>
+      <option value="high">🟠 high</option>
+      <option value="medium">🔵 medium</option>
+      <option value="low">⚪ low</option>
+    </select>
+    <select id="filter-session" onchange="applyBoardFilters()" title="按 session 过滤" style="padding:3px 6px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);font-size:var(--fs-xs);max-width:140px">
+      <option value="">全部 session</option>
+    </select>
   </div>
 
   <!-- v5 P0-1 · 同步更新 Modal · 用户手动编辑任务并暂存 localStorage -->
