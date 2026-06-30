@@ -31,7 +31,11 @@ def page_loaded():
     with sync_playwright() as p:
         br = p.chromium.launch()
         page = br.new_page()
-        page.goto(url, wait_until="networkidle")
+        # domcontentloaded 而非 networkidle: dashboard 引外部 Google Fonts
+        # (fonts.gstatic.com), networkidle 会等外网空闲 → 国内网络间歇 30s
+        # timeout (2026-06-30 修复 · 9 个 browser-test error 根因). Playwright
+        # 官方亦弃用 networkidle. 后续 wait_for_timeout 保证本地 json fetch 完成.
+        page.goto(url, wait_until="domcontentloaded")
         page.wait_for_timeout(2000)  # 等 board-tasks + stats 都加载
         yield page
         br.close()

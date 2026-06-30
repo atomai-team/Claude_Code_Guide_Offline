@@ -36,7 +36,9 @@ def page_loaded():
     with sync_playwright() as p:
         br   = p.chromium.launch()
         page = br.new_page()
-        page.goto(f"{GZIP_SERVER}/dashboard.html", wait_until="networkidle")
+        # domcontentloaded 而非 networkidle: dashboard 引外部 Google Fonts,
+        # networkidle 等外网空闲会国内间歇 30s timeout (2026-06-30 修复).
+        page.goto(f"{GZIP_SERVER}/dashboard.html", wait_until="domcontentloaded")
         page.wait_for_timeout(1500)
         yield page
         br.close()
