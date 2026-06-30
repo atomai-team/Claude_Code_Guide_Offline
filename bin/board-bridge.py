@@ -31,8 +31,9 @@ LOCKFILE = os.path.expanduser("~/.omc/snapshots/board-bridge.lock")
 # 收窄到已知 dashboard 来源 (18766 serve-gzip / 18765 Playwright / 18771 旧端口 / 18767 自身)。
 ALLOWED_ORIGINS = {
     "http://127.0.0.1:18766", "http://localhost:18766",
-    "http://127.0.0.1:18765", "http://127.0.0.1:18771",
-    "http://127.0.0.1:18767",
+    "http://127.0.0.1:18765", "http://localhost:18765",
+    "http://127.0.0.1:18771", "http://localhost:18771",
+    "http://127.0.0.1:18767", "http://localhost:18767",
 }
 
 
@@ -138,6 +139,9 @@ class BridgeHandler(BaseHTTPRequestHandler):
                 task_id = body.get("id", "")
                 if status not in ("todo", "doing", "done", "partial", "block"):
                     self._json_response(400, {"error": "invalid_status", "status": status})
+                    return
+                if not task_id:
+                    self._json_response(400, {"error": "empty_id", "detail": "task id 不能为空"})
                     return
                 args = [status, task_id]
                 ok, out, err = _run_board_py(*args)

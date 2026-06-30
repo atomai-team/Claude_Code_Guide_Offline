@@ -911,7 +911,7 @@ async function checkBridge() {
 let __wbInflight = false;
 window.updateTaskStatus = async function(id, status) {
   if (!BRIDGE_OK) { showToast('⚠ board-bridge 未运行 — 本页只读'); return; }
-  if (__wbInflight) return;  // in-flight: 防 8s 内重复点击重复写回
+  if (__wbInflight) { showToast('⏳ 写回进行中，请稍候…'); return; }  // in-flight: 防重复点击 + 反馈
   __wbInflight = true;
   try {
     const r = await fetch(`${BRIDGE_URL}/api/board/update_status`, {

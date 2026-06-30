@@ -1,0 +1,7 @@
+# 数据生成物 (hermes/mycc-stats.py/extract-details.py/board.py 自动产出):
+# linguist-generated=true → GitHub 折叠 diff + 不计入语言统计, 减少 PR/commit 视图噪音。
+# architect P1 (2026-06-30): dashboard-details.json 345K + mycc-stats.json 87K 频繁 auto-commit。
+mycc-stats.json linguist-generated=true
+mycc-stats.md linguist-generated=true
+dashboard-details.json linguist-generated=true
+board-tasks.json linguist-generated=true
