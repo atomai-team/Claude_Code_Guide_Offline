@@ -3,11 +3,11 @@ name: Deploy to GitHub Pages
 # 把 repo 根作为静态站点发布到 GitHub Pages。
 # dashboard.html / 手册 html / *.json / design-system / dashboard-app.js
 # 全用相对路径 → 部署到 /Claude_Code_Guide_Offline/ 子路径天然正确, 无需 base href。
-# 触发: push main 自动部署 + 手动 workflow_dispatch。
+# 触发: 暂仅手动 workflow_dispatch — Pages 未启用(用户钦定 2026-06-30 暂不启用),
+# push 自动触发会因 Pages 未配置而每次红叉。启用 Pages(Settings→Pages→Source:
+# GitHub Actions)后, 在下方 on: 恢复 `push:\n    branches: [main]` 即可自动部署。
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 # GitHub Actions Pages 部署所需最小权限
