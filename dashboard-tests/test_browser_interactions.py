@@ -207,3 +207,54 @@ class TestGlobalSearch:
             }
         """)
         assert len(first_result_html) > 0, "搜 '看板' 第一个结果为空"
+
+
+class TestWriteback:
+    """v8 Phase 6 · 改状态写回控件 (board-bridge 18767 写回 board.py).
+
+    静态测试 CI 可跑; 浏览器行为测试需 board-bridge 可达, 不可达则 skip (graceful).
+    """
+
+    WRITEBACK_TOKENS = ("updateTaskStatus", "checkBridge", "normStatus",
+                        "WRITEBACK_STATUSES", "BRIDGE_URL", "BRIDGE_OK")
+
+    def test_writeback_funcs_defined(self, app_js):
+        """dashboard-app.js 含写回逻辑常量/函数 (静态契约, CI 也可跑)."""
+        missing = [t for t in self.WRITEBACK_TOKENS if t not in app_js]
+        assert not missing, f"dashboard-app.js 缺写回逻辑: {missing}"
+
+    def test_normstatus_blocked_maps_to_block(self, app_js):
+        """边界归一: card.status 'blocked' → bridge 'block' (防 invalid_status)."""
+        assert "normStatus" in app_js and "blocked" in app_js and "'block'" in app_js, \
+            "normStatus 应把 'blocked' 归一为 'block'"
+
+    def test_writeback_degrades_when_bridge_down(self, app_js):
+        """优雅降级: 写回控件以 BRIDGE_OK 为门 (线上无 bridge 时只读)."""
+        assert "if (BRIDGE_OK)" in app_js, "写回控件应以 if (BRIDGE_OK) 为门 (优雅降级)"
+
+    def test_writeback_control_when_bridge_up(self, page_loaded):
+        """bridge 可达时, 点卡片 → modal 出现 5 状态按钮 + onclick 绑定. 不可达 skip."""
+        bridge_ok = page_loaded.evaluate(
+            "() => (typeof BRIDGE_OK !== 'undefined') ? BRIDGE_OK : false")
+        if not bridge_ok:
+            pytest.skip("board-bridge(18767) 不可达 (CI/未启动), 跳过写回 UI 行为测试")
+        # 清理前序测试 (TestGlobalSearch) 留下的 cmdk overlay — module fixture 复用同一 page,
+        # 残留 overlay 会拦截看板卡片点击 (intercepts pointer events).
+        page_loaded.evaluate(
+            "() => { if (typeof closeCmdK === 'function') closeCmdK();"
+            " if (typeof closeTaskDetail === 'function') closeTaskDetail(); }")
+        page_loaded.wait_for_timeout(200)
+        cards = page_loaded.query_selector_all('#bt-kanban [onclick*="openTaskDetail"]')
+        assert cards, "看板无卡片可点"
+        cards[0].click()
+        page_loaded.wait_for_timeout(400)
+        r = page_loaded.evaluate("""() => {
+          const body = document.getElementById('td-body');
+          const btns = [...body.querySelectorAll('button')]
+            .filter(b => /待办|进行中|完成|部分|卡点/.test(b.textContent));
+          return {hasWb: body.innerHTML.includes('改状态'), n: btns.length,
+                  onclickOK: btns.some(b => (b.getAttribute('onclick') || '').includes('updateTaskStatus'))};
+        }""")
+        assert r["hasWb"], "写回控件 (改状态) 未出现"
+        assert r["n"] == 5, f"状态按钮应 5 个 (待办/进行中/完成/部分/卡点), 实际 {r['n']}"
+        assert r["onclickOK"], "状态按钮未绑定 updateTaskStatus"

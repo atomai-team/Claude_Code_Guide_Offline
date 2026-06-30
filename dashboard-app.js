@@ -872,6 +872,66 @@ document.addEventListener('input', e => {
 })();
 
 /* ════════════════════════════════════════════════════════════════════
+   v8 Phase 6 · board-bridge 写回 (改状态)
+   dashboard(18766) → POST 18767 → board.py → project-ledger.json → 投影回
+   board-tasks.json。优雅降级: GitHub Pages 线上访问不到 localhost:18767,
+   BRIDGE_OK=false 时写回控件隐藏 (只读)。
+   ════════════════════════════════════════════════════════════════════ */
+const BRIDGE_URL = 'http://127.0.0.1:18767';
+let BRIDGE_OK = false;
+
+// board.py 状态值。注意与 STATUS_CLR 的 'blocked' 区分: bridge 用 'block'。
+const WRITEBACK_STATUSES = [
+  ['todo', '待办'], ['doing', '进行中'], ['done', '完成'],
+  ['partial', '部分'], ['block', '卡点'],
+];
+
+/** card.status → bridge 接受值 (blocked→block 边界归一, 防 invalid_status). */
+function normStatus(s) { return s === 'blocked' ? 'block' : s; }
+
+/** 探测 board-bridge 是否可达 (2s 超时)。设 BRIDGE_OK。 */
+async function checkBridge() {
+  try {
+    const r = await fetch(`${BRIDGE_URL}/api/board/health`,
+      { method: 'POST', signal: AbortSignal.timeout(2000) });
+    BRIDGE_OK = r.ok;
+    console.log('[bridge] health:', BRIDGE_OK ? 'OK (可写回)' : 'down');
+  } catch (e) {
+    BRIDGE_OK = false;
+    console.log('[bridge] 不可达 (本页只读):', e.name);
+  }
+}
+
+/**
+ * 写回任务状态 → board-bridge → board.py。成功后刷新看板。
+ * @param {string} id 任务 id
+ * @param {string} status board.py 状态 (todo/doing/done/partial/block)
+ * @returns {Promise<void>}
+ */
+window.updateTaskStatus = async function(id, status) {
+  if (!BRIDGE_OK) { showToast('⚠ board-bridge 未运行 — 本页只读'); return; }
+  try {
+    const r = await fetch(`${BRIDGE_URL}/api/board/update_status`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, status }),
+    });
+    const data = await r.json().catch(() => ({}));
+    if (r.ok && data.ok) {
+      closeTaskDetail();
+      await reloadTasks();
+      showToast(`✅ ${id} → ${status} 已写回`);
+    } else if (r.status === 423) {
+      showToast('🔒 board.py 正被占用，请稍后重试');
+    } else {
+      showToast(`❌ 写回失败: ${data.error || ('HTTP ' + r.status)}`);
+    }
+  } catch (e) {
+    showToast(`❌ 写回网络错误: ${e.message}`);
+  }
+};
+
+/* ════════════════════════════════════════════════════════════════════
    Board Tasks · board-tasks.json 看板数据
    ════════════════════════════════════════════════════════════════════ */
 
@@ -1269,6 +1329,20 @@ window.openTaskDetail = function(card, source) {
 
   let body = '';
 
+  // ── v8 Phase 6 · 改状态写回控件 (仅 board-bridge 可达时显示, 线上只读) ──
+  if (BRIDGE_OK) {
+    const cur = normStatus(card.status);
+    const btns = WRITEBACK_STATUSES.map(([s, label]) => {
+      const active = s === cur;
+      return `<button onclick="updateTaskStatus('${esc(String(card.id))}','${s}')"
+        style="cursor:${active ? 'default' : 'pointer'};font-size:var(--fs-xs);padding:3px 11px;border-radius:var(--radius-pill);border:1px solid ${active ? 'var(--accent)' : 'var(--border)'};background:${active ? 'var(--accent)' : 'var(--surface)'};color:${active ? '#fff' : 'var(--text-dim)'};font-weight:${active ? '700' : '500'};transition:all .12s"
+        ${active ? 'disabled' : `onmouseenter="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseleave="this.style.borderColor='var(--border)';this.style.color='var(--text-dim)'"`}>${label}</button>`;
+    }).join('');
+    body += tdSection('🔄 改状态 · 写回 board.py',
+      `<div style="display:flex;gap:6px;flex-wrap:wrap">${btns}</div>
+       <div style="font-size:9px;color:var(--text-muted);margin-top:6px">写回 project-ledger.json (board.py 原子写)，看板自动刷新。当前: <strong>${esc(card.status)}</strong></div>`);
+  }
+
   // blocker 警告条 — 行动信息，紧接 header
   if (card.blocker) {
     body += `<div style="display:flex;align-items:flex-start;gap:var(--sp-2);padding:var(--sp-2) var(--sp-3);border-left:3px solid #ef4444;background:#ef444411;border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin-bottom:var(--sp-4);font-size:var(--fs-xs);color:#ef4444">
@@ -1347,7 +1421,7 @@ window.closeTaskDetail = function() {
 (async function() {
   // M3: performance 标记 - 渲染起始点 (3 个 fetch 都完成后)
   performance.mark('render-start');
-  await Promise.all([loadStats(), loadDetails(), loadBoardTasks()]);
+  await Promise.all([loadStats(), loadDetails(), loadBoardTasks(), checkBridge()]);
   performance.mark('render-end');
   try { performance.measure('render-time', 'render-start', 'render-end'); } catch(e) { /* 浏览器无 performance API */ }
   startAutoRefresh();
