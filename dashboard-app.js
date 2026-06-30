@@ -140,8 +140,35 @@
   // 设计依据: docs/plans/v6-router-design.md 方案 C (★推荐)
   // 反讽 R5: 与 scrollspy 协同不破坏 IntersectionObserver lazy load (scrollIntoView → 视口进入 → lazy 渲染)
   // 反讽 R1: 防 lazy load 竞态 (offsetHeight===0 → 先等 lazy 渲染再 scroll)
+  //
+  // v8 双轨改进 (2026-06-30): nav-link click → pushState 堆 history (后退可工作)
+  // scroll → replaceState 不堆 history (滚动流畅不污染)
+  // 反讽 R5: pushState 仅在 click handler, hashchange handler 不调 pushState (防双重污染)
+  // popstate: 浏览器后退/前进已自动 fire hashchange, 无需新增 popstate listener
 
-  // 1) hashchange → scroll + 高亮同步 (前进/后退 / nav-link 点击触发)
+  // 0) nav-link click 拦截 → pushState (堆 history) + scrollIntoView (不走 hashchange 路径)
+  links.forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      const el = document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();  // 阻止默认锚点跳转 (避免跳到 # 触发 hashchange 二次 fire)
+      history.pushState(null, '', '#' + id);
+      // 防 lazy load 竞态 (与 hashchange handler 一致: offsetHeight===0 → 等 100ms)
+      if (el.offsetHeight === 0) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setActive(el);
+        }, 100);
+      } else {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setActive(el);
+      }
+    });
+  });
+
+  // 1) hashchange → scroll + 高亮同步 (前进/后退 / 外部 #hash 直跳触发)
   window.addEventListener('hashchange', () => {
     const id = location.hash.slice(1);
     if (!id) return;
