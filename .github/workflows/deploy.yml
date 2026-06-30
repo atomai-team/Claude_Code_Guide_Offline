@@ -1,0 +1,46 @@
+name: Deploy to GitHub Pages
+
+# 把 repo 根作为静态站点发布到 GitHub Pages。
+# dashboard.html / 手册 html / *.json / design-system / dashboard-app.js
+# 全用相对路径 → 部署到 /Claude_Code_Guide_Offline/ 子路径天然正确, 无需 base href。
+# 触发: push main 自动部署 + 手动 workflow_dispatch。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# GitHub Actions Pages 部署所需最小权限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时刻只跑一个部署, 不取消进行中的(避免发布半成品)
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # checkout 只含 git-tracked 文件 (.venv/.worktrees 已 gitignore),
+          # 故整个 repo 根即静态站点内容。
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
