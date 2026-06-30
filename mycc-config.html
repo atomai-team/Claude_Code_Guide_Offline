@@ -98,7 +98,7 @@ td { padding:10px 12px; border-top:1px solid var(--border); word-break:break-wor
 
 <h1>⚙️ MYCC 配置全景</h1>
 <div class="subtitle">
-  <span>数据自动拉取自 <code>~/.claude/</code> · 生成时间 2026-06-30 16:00</span>
+  <span>数据自动拉取自 <code>~/.claude/</code> · 生成时间 2026-06-30 16:08</span>
   <a href="dashboard.html" class="back">← 返回主仪表盘</a>
   <div class="search-wrap">
     <input type="search" id="skill-search" placeholder="🔍 搜索 skills/agents/hooks..." />
@@ -113,20 +113,20 @@ td { padding:10px 12px; border-top:1px solid var(--border); word-break:break-wor
   <a href="#plugins">🧩 插件</a>
   <a href="#skills">🎯 Skills (150)</a>
   <a href="#agents">🤖 Agents</a>
-  <a href="#hooks">🪝 Hooks (61)</a>
+  <a href="#hooks">🪝 Hooks (47)</a>
   <a href="#scheduler">⏰ 定时任务</a>
   <a href="#router">🛣️ 工程场景路由</a>
 </div>
 
 <div class="section" id="overview">
-<h2>📊 一眼总览 <span class="count">2026-06-30 16:00</span></h2>
+<h2>📊 一眼总览 <span class="count">2026-06-30 16:08</span></h2>
 <div class="stat-row">
   <div class="stat-box"><div class="stat-num" data-stat="mcp_servers">4</div><div class="label">🔌 MCP 服务器</div></div>
   <div class="stat-box"><div class="stat-num" data-stat="enabled_plugins">32</div><div class="label">🧩 启用插件</div></div>
   <div class="stat-box"><div class="stat-num" data-stat="skills">150</div><div class="label">🎯 Skills</div></div>
   <div class="stat-box"><div class="stat-num" data-stat="agents_total">91</div><div class="label">🤖 Agents</div></div>
-  <div class="stat-box"><div class="stat-num" data-stat="hook_files">62</div><div class="label">🪝 Hooks</div></div>
-  <div class="stat-box"><div class="stat-num" data-stat="intent_words_routes">132</div><div class="label">🛣️ 口语路由词</div></div>
+  <div class="stat-box"><div class="stat-num" data-stat="hooks_registered">47</div><div class="label">🪝 Hooks</div></div>
+  <div class="stat-box"><div class="stat-num" data-stat="intent_words_routes">161</div><div class="label">🛣️ 口语路由词</div></div>
   <div class="stat-box"><div class="stat-num">11</div><div class="label">⏰ LaunchAgent</div></div>
   <div class="stat-box"><div class="stat-num">5</div><div class="label">🌟 高级功能</div></div>
 </div>
@@ -229,7 +229,7 @@ td { padding:10px 12px; border-top:1px solid var(--border); word-break:break-wor
 </div>
 
 <div class="section" id="hooks">
-<h2>🪝 Hooks <span class="count">61 个</span></h2>
+<h2>🪝 Hooks <span class="count">47 注册 · 61 文件</span></h2>
 <p style="font-size:12px;color:var(--text-dim);margin-bottom:16px">守护覆盖:安全/质量/记忆/并发/提示/自动归档 · 按文件大小降序</p>
 <div class="hooks-grid" id="hooks-grid">
 <div class="hook-tile"><code>error-circuit-breaker.sh</code><span class="sz">7299B</span></div><div class="hook-tile"><code>bash-safety-dispatcher.sh</code><span class="sz">7126B</span></div><div class="hook-tile"><code>mem-cascade.sh</code><span class="sz">6129B</span></div><div class="hook-tile"><code>env-sentinel.sh</code><span class="sz">5832B</span></div><div class="hook-tile"><code>research-standards-guard.sh</code><span class="sz">5377B</span></div><div class="hook-tile"><code>llm-judge-completion.sh</code><span class="sz">5346B</span></div><div class="hook-tile"><code>prompt-context-gateway.sh</code><span class="sz">5175B</span></div><div class="hook-tile"><code>smart-closure-learning-trace.sh</code><span class="sz">4710B</span></div><div class="hook-tile"><code>user-prompt-task-extractor.sh</code><span class="sz">4674B</span></div><div class="hook-tile"><code>auto-audit-trigger.sh</code><span class="sz">4081B</span></div><div class="hook-tile"><code>notion-queue-flusher.sh</code><span class="sz">3774B</span></div><div class="hook-tile"><code>session-state-reader.sh</code><span class="sz">3598B</span></div><div class="hook-tile"><code>auto-closure-detect.sh</code><span class="sz">3576B</span></div><div class="hook-tile"><code>hud-guard.sh</code><span class="sz">3567B</span></div><div class="hook-tile"><code>stop-completion-enforcer.sh</code><span class="sz">3563B</span></div><div class="hook-tile"><code>session-context-injector.sh</code><span class="sz">3531B</span></div><div class="hook-tile"><code>drift-check.sh</code><span class="sz">3274B</span></div><div class="hook-tile"><code>ccswitch-verify-start.sh</code><span class="sz">3232B</span></div><div class="hook-tile"><code>llm-judge-subagent.sh</code><span class="sz">3207B</span></div><div class="hook-tile"><code>teammate-quality-gate.sh</code><span class="sz">3159B</span></div><div class="hook-tile"><code>multi-session-guard.sh</code><span class="sz">3007B</span></div><div class="hook-tile"><code>config-protection.sh</code><span class="sz">3004B</span></div><div class="hook-tile"><code>draft-auto-save.sh</code><span class="sz">2930B</span></div><div class="hook-tile"><code>error-data-recorder.sh</code><span class="sz">2805B</span></div><div class="hook-tile"><code>decision-point-guard.sh</code><span class="sz">2747B</span></div><div class="hook-tile"><code>no-agent-for-grep.sh</code><span class="sz">2558B</span></div><div class="hook-tile"><code>smart-recommendation-injector.sh</code><span class="sz">2457B</span></div><div class="hook-tile"><code>sessionstart-guard-dispatcher.sh</code><span class="sz">2443B</span></div><div class="hook-tile"><code>retrieval-precheck.sh</code><span class="sz">2387B</span></div><div class="hook-tile"><code>official-paradigm-guard.sh</code><span class="sz">2346B</span></div><div class="hook-tile"><code>uncertainty-detector.sh</code><span class="sz">2341B</span></div><div class="hook-tile"><code>behavior-audit-pretool.sh</code><span class="sz">2219B</span></div><div class="hook-tile"><code>permission-request-handler.sh</code><span class="sz">2212B</span></div><div class="hook-tile"><code>session-end.sh</code><span class="sz">2177B</span></div><div class="hook-tile"><code>external-cli-router.sh</code><span class="sz">2052B</span></div><div class="hook-tile"><code>user-prompt-task-auto-split.sh</code><span class="sz">2012B</span></div><div class="hook-tile"><code>user-prompt-submit-dispatcher.sh</code><span class="sz">1984B</span></div><div class="hook-tile"><code>post-write-scripts-guard.sh</code><span class="sz">1904B</span></div><div class="hook-tile"><code>component-usage-tracker.sh</code><span class="sz">1893B</span></div><div class="hook-tile"><code>intent-persistence.sh</code><span class="sz">1880B</span></div><div class="hook-tile"><code>user-prompt-submit-confidence.sh</code><span class="sz">1828B</span></div><div class="hook-tile"><code>session-touched-recorder.sh</code><span class="sz">1813B</span></div><div class="hook-tile"><code>cmmi-stop-sync.sh</code><span class="sz">1779B</span></div><div class="hook-tile"><code>intake-gateway.sh</code><span class="sz">1773B</span></div><div class="hook-tile"><code>daily-brief-inject.sh</code><span class="sz">1615B</span></div><div class="hook-tile"><code>block-sensitive-files.sh</code><span class="sz">1552B</span></div><div class="hook-tile"><code>session-end-evolution-capture.sh</code><span class="sz">1494B</span></div><div class="hook-tile"><code>post-bash-token-guard.sh</code><span class="sz">1491B</span></div><div class="hook-tile"><code>precompact-snapshot.sh</code><span class="sz">1440B</span></div><div class="hook-tile"><code>edit-write-dispatcher.sh</code><span class="sz">1437B</span></div><div class="hook-tile"><code>chinese-language-enforce.sh</code><span class="sz">1370B</span></div><div class="hook-tile"><code>post-compact.sh</code><span class="sz">1275B</span></div><div class="hook-tile"><code>stop-failure-monitor.sh</code><span class="sz">1177B</span></div><div class="hook-tile"><code>post-write-hooks-guard.sh</code><span class="sz">1152B</span></div><div class="hook-tile"><code>version-change-guard.sh</code><span class="sz">1116B</span></div><div class="hook-tile"><code>agent-task-dispatcher.sh</code><span class="sz">1103B</span></div><div class="hook-tile"><code>teammate-task-completed.sh</code><span class="sz">1090B</span></div><div class="hook-tile"><code>teammate-task-created.sh</code><span class="sz">930B</span></div><div class="hook-tile"><code>two-probe-counter.sh</code><span class="sz">930B</span></div><div class="hook-tile"><code>teammate-idle.sh</code><span class="sz">887B</span></div><div class="hook-tile"><code>config-dir.sh</code><span class="sz">360B</span></div></div>
@@ -250,7 +250,7 @@ td { padding:10px 12px; border-top:1px solid var(--border); word-break:break-wor
 
 <div class="section" id="router">
 <h2>🛣️ 工程场景路由表 <span class="count">76 条</span></h2>
-<p style="font-size:12px;color:var(--text-dim);margin:-4px 0 6px">⚠️ 此表 = 工程场景兜底路由（router-table.json），与总览"口语路由词 132"（intent-words.json 全量口语触发）是两套不同的路由，数值不应相等。</p>
+<p style="font-size:12px;color:var(--text-dim);margin:-4px 0 6px">⚠️ 此表 = 工程场景兜底路由（router-table.json），与总览"口语路由词 161"（intent-words.json 全量口语触发）是两套不同的路由，数值不应相等。</p>
 <p style="font-size:12px;color:var(--text-dim);margin-bottom:8px">YOLO 档位分布：<span class="tag tag-green" style="margin-right:6px">?: 76</span></p>
 <div class="bar"><div class="bar-fill" style="width:100%"></div></div>
 <p style="font-size:12px;color:var(--text-dim);margin-top:8px">
@@ -259,7 +259,7 @@ td { padding:10px 12px; border-top:1px solid var(--border); word-break:break-wor
 </div>
 
 <div class="footer">
-  ⚙️ MYCC 配置全景 · 数据自动拉取于 2026-06-30 16:00 ·
+  ⚙️ MYCC 配置全景 · 数据自动拉取于 2026-06-30 16:08 ·
   <a href="dashboard.html">主仪表盘</a> ·
   <a href="start-here.md">start-here 索引</a>
 </div>
