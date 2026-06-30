@@ -908,13 +908,17 @@ async function checkBridge() {
  * @param {string} status board.py 状态 (todo/doing/done/partial/block)
  * @returns {Promise<void>}
  */
+let __wbInflight = false;
 window.updateTaskStatus = async function(id, status) {
   if (!BRIDGE_OK) { showToast('⚠ board-bridge 未运行 — 本页只读'); return; }
+  if (__wbInflight) return;  // in-flight: 防 8s 内重复点击重复写回
+  __wbInflight = true;
   try {
     const r = await fetch(`${BRIDGE_URL}/api/board/update_status`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id, status }),
+      signal: AbortSignal.timeout(8000),  // 8s 超时, 防 board-bridge hang 挂死 UI
     });
     const data = await r.json().catch(() => ({}));
     if (r.ok && data.ok) {
@@ -927,7 +931,11 @@ window.updateTaskStatus = async function(id, status) {
       showToast(`❌ 写回失败: ${data.error || ('HTTP ' + r.status)}`);
     }
   } catch (e) {
-    showToast(`❌ 写回网络错误: ${e.message}`);
+    showToast(e.name === 'TimeoutError'
+      ? '❌ 写回超时 (board-bridge 8s 无响应)'
+      : `❌ 写回网络错误: ${e.message}`);
+  } finally {
+    __wbInflight = false;
   }
 };
 

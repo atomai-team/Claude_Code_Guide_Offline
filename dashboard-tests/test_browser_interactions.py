@@ -266,3 +266,19 @@ class TestWriteback:
         assert 'onclick="updateTaskStatus' not in app_js, \
             "写回按钮不得用 onclick 内联拼 id (JS 字面量注入风险); 应 data-tid + 事件委托"
         assert "wb-status-btn" in app_js, "写回按钮应有 wb-status-btn class (事件委托锚点)"
+
+    def test_normstatus_behavior(self, page_loaded):
+        """normStatus 真行为 (浏览器实跑, 非子串形状): blocked→block, 其余原样."""
+        r = page_loaded.evaluate("""() => ({
+          blocked: normStatus('blocked'), todo: normStatus('todo'),
+          done: normStatus('done'), block: normStatus('block'),
+          partial: normStatus('partial')
+        })""")
+        assert r["blocked"] == "block", "normStatus('blocked') 须归一为 'block'"
+        assert r["todo"] == "todo" and r["done"] == "done", "非 blocked 状态须原样返回"
+        assert r["block"] == "block" and r["partial"] == "partial", "已正确值须幂等"
+
+    def test_writeback_has_timeout_and_inflight_guard(self, app_js):
+        """健壮性: 写回须有超时 (AbortSignal.timeout) + in-flight 防重复 (reviewer P2)."""
+        assert "AbortSignal.timeout" in app_js, "updateTaskStatus 须加 AbortSignal.timeout 防 hang"
+        assert "__wbInflight" in app_js, "updateTaskStatus 须有 in-flight 防重复点击 guard"

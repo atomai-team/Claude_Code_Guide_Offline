@@ -27,6 +27,14 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 BOARD_PY = os.path.expanduser("~/.claude/lib/board.py")
 LOCKFILE = os.path.expanduser("~/.omc/snapshots/board-bridge.lock")
 
+# CORS 白名单 (reviewer P2 加固): 原 Allow-Origin:* 任何本地网页可跨域 POST,
+# 收窄到已知 dashboard 来源 (18766 serve-gzip / 18765 Playwright / 18771 旧端口 / 18767 自身)。
+ALLOWED_ORIGINS = {
+    "http://127.0.0.1:18766", "http://localhost:18766",
+    "http://127.0.0.1:18765", "http://127.0.0.1:18771",
+    "http://127.0.0.1:18767",
+}
+
 
 def _run_board_py(*args):
     """调 board.py 子命令 → 返回 (success, stdout, stderr)."""
@@ -75,17 +83,22 @@ class BridgeHandler(BaseHTTPRequestHandler):
         """静默默认 access log (避免刷屏)."""
         sys.stderr.write(f"[bridge] {fmt % args}\n")
 
+    def _allow_origin(self):
+        """CORS: 回显白名单内 Origin, 否则默认 dashboard 18766 (拒绝未知来源跨域)。"""
+        origin = self.headers.get("Origin", "")
+        return origin if origin in ALLOWED_ORIGINS else "http://127.0.0.1:18766"
+
     def _json_response(self, status, data):
         self.send_response(status)
         self.send_header("Content-Type", "application/json; charset=utf-8")
-        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Origin", self._allow_origin())
         self.end_headers()
         self.wfile.write(json.dumps(data, ensure_ascii=False).encode())
 
     def do_OPTIONS(self):
         """CORS preflight."""
         self.send_response(204)
-        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Origin", self._allow_origin())
         self.send_header("Access-Control-Allow-Methods", "POST, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.end_headers()
