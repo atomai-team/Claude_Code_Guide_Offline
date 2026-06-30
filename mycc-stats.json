@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-06-28T16:31:22.625449Z",
+  "generated_at": "2026-06-30T08:43:00.501456Z",
   "version": {
-    "claude_code": "2.1.195 (Claude Code)",
+    "claude_code": "2.1.196 (Claude Code)",
     "omc": "4.15.0",
     "stats_engine": "V53",
     "cc_switch": "OFF"
   },
   "counts": {
-    "skills": 149,
+    "skills": 150,
     "workflows": 14,
-    "hooks_registered": 42,
-    "hook_events": 14,
-    "hook_files": 58,
+    "hooks_registered": 47,
+    "hook_events": 17,
+    "hook_files": 65,
     "agents_total": 91,
     "agents_core": 6,
     "agents_ceo_roles": 12,
@@ -21,9 +21,9 @@
     "plugin_agents": 164,
     "mcp_servers": 4,
     "enabled_plugins": 32,
-    "total_plugins": 58,
+    "total_plugins": 59,
     "rules": 3,
-    "intent_words_routes": 107,
+    "intent_words_routes": 161,
     "external_clis": 3
   },
   "lists": {
@@ -113,17 +113,6 @@
         ]
       },
       {
-        "name": "claude_code_better",
-        "priority": 85,
-        "keywords": [
-          "claude_code_better",
-          "claude code better",
-          "全面升级",
-          "配置优化",
-          "进化升级"
-        ]
-      },
-      {
         "name": "workflow_orchestrate",
         "priority": 85,
         "keywords": [
@@ -149,21 +138,21 @@
         "priority": 85,
         "keywords": [
           "更新",
-          "收口",
+          "步骤收口",
           "todo",
           "下一步",
           "/docs"
         ]
       },
       {
-        "name": "upgrade_full_v40",
-        "priority": 84,
+        "name": "claude_better_all_upgrade",
+        "priority": 85,
         "keywords": [
+          "claude_code_better",
+          "claude code better",
           "全面升级",
-          "全量升级",
-          "系统升级",
-          "融汇贯通",
-          "升级一下"
+          "配置优化",
+          "进化升级"
         ]
       },
       {
@@ -322,7 +311,9 @@
         "priority": 82,
         "keywords": [
           "配置审计",
-          "配置升级"
+          "配置升级",
+          "配置扫描",
+          "config audit"
         ]
       },
       {
@@ -330,7 +321,9 @@
         "priority": 82,
         "keywords": [
           "域审计",
-          "全域升级"
+          "全域升级",
+          "domain audit",
+          "域扫描"
         ]
       },
       {
@@ -513,6 +506,15 @@
         ]
       },
       {
+        "name": "auto-auditor-internal",
+        "priority": 80,
+        "keywords": [
+          "/ce-compound",
+          "月度进化",
+          "内部审计"
+        ]
+      },
+      {
         "name": "p0_deep_research",
         "priority": 80,
         "keywords": [
@@ -532,6 +534,26 @@
           "系统自检",
           "跑一下审计",
           "自查"
+        ]
+      },
+      {
+        "name": "gstack_careful_route",
+        "priority": 80,
+        "keywords": [
+          "破坏性操作",
+          "删前确认",
+          "危险命令确认",
+          "删除确认"
+        ]
+      },
+      {
+        "name": "omc_plan_route",
+        "priority": 80,
+        "keywords": [
+          "制定计划",
+          "做规划",
+          "战略规划方案",
+          "omc plan"
         ]
       }
     ],
@@ -632,19 +654,6 @@
         "target": ""
       },
       {
-        "name": "claude_code_better",
-        "priority": 85,
-        "keywords": [
-          "claude_code_better",
-          "claude code better",
-          "全面升级",
-          "配置优化",
-          "进化升级",
-          "自动进化"
-        ],
-        "target": ""
-      },
-      {
         "name": "workflow_orchestrate",
         "priority": 85,
         "keywords": [
@@ -673,7 +682,7 @@
         "priority": 85,
         "keywords": [
           "更新",
-          "收口",
+          "步骤收口",
           "todo",
           "下一步",
           "/docs",
@@ -682,17 +691,17 @@
         "target": ""
       },
       {
-        "name": "upgrade_full_v40",
-        "priority": 84,
+        "name": "claude_better_all_upgrade",
+        "priority": 85,
         "keywords": [
+          "claude_code_better",
+          "claude code better",
           "全面升级",
-          "全量升级",
-          "系统升级",
-          "融汇贯通",
-          "升级一下",
-          "进化"
+          "配置优化",
+          "进化升级",
+          "自动进化"
         ],
-        "target": "claude-code-better"
+        "target": ""
       },
       {
         "name": "ceo_pipeline_voice",
@@ -873,7 +882,9 @@
         "priority": 82,
         "keywords": [
           "配置审计",
-          "配置升级"
+          "配置升级",
+          "配置扫描",
+          "config audit"
         ],
         "target": ""
       },
@@ -882,7 +893,9 @@
         "priority": 82,
         "keywords": [
           "域审计",
-          "全域升级"
+          "全域升级",
+          "domain audit",
+          "域扫描"
         ],
         "target": ""
       },
@@ -1094,6 +1107,16 @@
         "target": ""
       },
       {
+        "name": "auto-auditor-internal",
+        "priority": 80,
+        "keywords": [
+          "/ce-compound",
+          "月度进化",
+          "内部审计"
+        ],
+        "target": ""
+      },
+      {
         "name": "p0_deep_research",
         "priority": 80,
         "keywords": [
@@ -1114,6 +1137,60 @@
           "系统自检",
           "跑一下审计",
           "自查"
+        ],
+        "target": ""
+      },
+      {
+        "name": "gstack_careful_route",
+        "priority": 80,
+        "keywords": [
+          "破坏性操作",
+          "删前确认",
+          "危险命令确认",
+          "删除确认"
+        ],
+        "target": ""
+      },
+      {
+        "name": "omc_plan_route",
+        "priority": 80,
+        "keywords": [
+          "制定计划",
+          "做规划",
+          "战略规划方案",
+          "omc plan"
+        ],
+        "target": ""
+      },
+      {
+        "name": "gstack_investigate_route",
+        "priority": 79,
+        "keywords": [
+          "深度调查",
+          "找根因",
+          "根因分析",
+          "深挖问题"
+        ],
+        "target": ""
+      },
+      {
+        "name": "gstack_ship_route",
+        "priority": 79,
+        "keywords": [
+          "提PR",
+          "发版",
+          "上线发版",
+          "gstack ship"
+        ],
+        "target": ""
+      },
+      {
+        "name": "mycc_skill_audit_route",
+        "priority": 79,
+        "keywords": [
+          "skill审计",
+          "技能生命周期审计",
+          "skill健康检查"
         ],
         "target": ""
       },
@@ -1180,6 +1257,96 @@
         "target": ""
       },
       {
+        "name": "gstack_review_route",
+        "priority": 78,
+        "keywords": [
+          "代码review",
+          "PR审查",
+          "代码检查"
+        ],
+        "target": ""
+      },
+      {
+        "name": "gstack_qa_route",
+        "priority": 78,
+        "keywords": [
+          "QA测试",
+          "质量验证",
+          "功能验收测试",
+          "gstack qa"
+        ],
+        "target": ""
+      },
+      {
+        "name": "sp_brainstorming_route",
+        "priority": 78,
+        "keywords": [
+          "脑暴需求",
+          "产品脑暴",
+          "需求澄清脑暴",
+          "产品想法梳理"
+        ],
+        "target": ""
+      },
+      {
+        "name": "codebase_memory_route",
+        "priority": 78,
+        "keywords": [
+          "索引代码库",
+          "代码库记忆",
+          "codebase memory",
+          "调用链",
+          "查caller",
+          "死代码"
+        ],
+        "target": ""
+      },
+      {
+        "name": "social_publisher_route",
+        "priority": 78,
+        "keywords": [
+          "发推文",
+          "发小红书",
+          "多平台发布",
+          "发朋友圈"
+        ],
+        "target": ""
+      },
+      {
+        "name": "smart_closure_route",
+        "priority": 77,
+        "keywords": [
+          "任务闭环SOP",
+          "闭环流程",
+          "smart closure",
+          "智能闭环"
+        ],
+        "target": ""
+      },
+      {
+        "name": "task_closer_route",
+        "priority": 77,
+        "keywords": [
+          "任务收口",
+          "验收任务",
+          "close task",
+          "闭环检查",
+          "任务验收"
+        ],
+        "target": ""
+      },
+      {
+        "name": "eng_experts_route",
+        "priority": 77,
+        "keywords": [
+          "卡帕西",
+          "资深dev专家",
+          "10x开发者",
+          "工程化专家"
+        ],
+        "target": ""
+      },
+      {
         "name": "research_quick",
         "priority": 76,
         "keywords": [
@@ -1193,15 +1360,70 @@
         "target": ""
       },
       {
+        "name": "start_work_route",
+        "priority": 76,
+        "keywords": [
+          "开工",
+          "开干",
+          "做工程化",
+          "启动项目工程化"
+        ],
+        "target": ""
+      },
+      {
+        "name": "omc_project_init_route",
+        "priority": 76,
+        "keywords": [
+          "项目初始化",
+          "新项目能力体系",
+          "omc init"
+        ],
+        "target": ""
+      },
+      {
+        "name": "sp_code_review_route",
+        "priority": 76,
+        "keywords": [
+          "请求代码审查",
+          "sp code review",
+          "发起review",
+          "发起code review",
+          "sp请求审查",
+          "任务完成审查"
+        ],
+        "target": ""
+      },
+      {
+        "name": "self_audit_loop_route",
+        "priority": 76,
+        "keywords": [
+          "自审",
+          "自检一遍",
+          "audit-loop",
+          "自我审查"
+        ],
+        "target": ""
+      },
+      {
+        "name": "marketing_route",
+        "priority": 76,
+        "keywords": [
+          "做营销",
+          "营销活动策划",
+          "推广计划",
+          "SEO优化"
+        ],
+        "target": ""
+      },
+      {
         "name": "bdd_tdd_ralph",
         "priority": 75,
         "keywords": [
           "bdd",
-          "tdd",
-          "先写测试",
-          "红绿重构",
-          "测试驱动开发",
-          "测试驱动"
+          "BDD场景",
+          "gherkin",
+          "given-when-then",
+          "行为驱动"
         ],
         "target": ""
       },
@@ -1267,6 +1489,91 @@
           "multica回滚",
           "multica backfill",
           "OrbStack"
+        ],
+        "target": ""
+      },
+      {
+        "name": "gstack_office_hours_route",
+        "priority": 75,
+        "keywords": [
+          "YC答疑",
+          "创业答疑",
+          "办公室时间"
+        ],
+        "target": ""
+      },
+      {
+        "name": "gstack_land_deploy_route",
+        "priority": 75,
+        "keywords": [
+          "落地部署",
+          "gstack部署",
+          "gstack land"
+        ],
+        "target": ""
+      },
+      {
+        "name": "sp_subagent_dev_route",
+        "priority": 75,
+        "keywords": [
+          "subagent驱动开发",
+          "sp subagent",
+          "多agent开发",
+          "多任务subagent",
+          "subagent实施计划"
+        ],
+        "target": ""
+      },
+      {
+        "name": "sp_writing_plans_route",
+        "priority": 75,
+        "keywords": [
+          "写执行计划",
+          "sp写计划",
+          "sp writing plans"
+        ],
+        "target": ""
+      },
+      {
+        "name": "handoff_route",
+        "priority": 75,
+        "keywords": [
+          "接力包",
+          "session交接",
+          "制作接力",
+          "跨session接力",
+          "会话交接",
+          "handoff文档"
+        ],
+        "target": ""
+      },
+      {
+        "name": "gstack_freeze_route",
+        "priority": 74,
+        "keywords": [
+          "冻结状态",
+          "gstack freeze",
+          "快照冻结"
+        ],
+        "target": ""
+      },
+      {
+        "name": "omc_reference_route",
+        "priority": 74,
+        "keywords": [
+          "omc参考",
+          "omc手册",
+          "omc reference"
+        ],
+        "target": ""
+      },
+      {
+        "name": "no_plugin_prompts_route",
+        "priority": 74,
+        "keywords": [
+          "无插件开发",
+          "纯prompt开发",
+          "no plugin"
         ],
         "target": ""
       },
@@ -1693,16 +2000,6 @@
         "target": ""
       },
       {
-        "name": "auto-auditor-internal",
-        "priority": 50,
-        "keywords": [
-          "/ce-compound",
-          "月度进化",
-          "内部审计"
-        ],
-        "target": ""
-      },
-      {
         "name": "auto-collector-community",
         "priority": 50,
         "keywords": [
@@ -1812,6 +2109,330 @@
           "xhs运营"
         ],
         "target": ""
+      },
+      {
+        "name": "rapid_prototype",
+        "priority": 50,
+        "keywords": [
+          "快速原型",
+          "原型验证",
+          "搭原型",
+          "做原型"
+        ],
+        "target": ""
+      },
+      {
+        "name": "api_interface_design_route",
+        "priority": 45,
+        "keywords": [
+          "API设计",
+          "接口设计",
+          "interface design",
+          "定义API契约",
+          "模块边界"
+        ],
+        "target": ""
+      },
+      {
+        "name": "baoyu_compress_image_route",
+        "priority": 45,
+        "keywords": [
+          "压缩图片",
+          "图片压缩",
+          "compress image",
+          "图片瘦身"
+        ],
+        "target": ""
+      },
+      {
+        "name": "baoyu_diagram_route",
+        "priority": 45,
+        "keywords": [
+          "生成示意图",
+          "信息图",
+          "diagram",
+          "画示意图"
+        ],
+        "target": ""
+      },
+      {
+        "name": "baoyu_image_gen_route",
+        "priority": 45,
+        "keywords": [
+          "生成图片",
+          "图片生成",
+          "image gen",
+          "AI画图"
+        ],
+        "target": ""
+      },
+      {
+        "name": "baoyu_md_to_html_route",
+        "priority": 45,
+        "keywords": [
+          "markdown转html",
+          "md转html",
+          "markdown to html",
+          "公众号排版"
+        ],
+        "target": ""
+      },
+      {
+        "name": "baoyu_url_to_md_route",
+        "priority": 45,
+        "keywords": [
+          "url转markdown",
+          "网页转markdown",
+          "url to markdown",
+          "文章转md"
+        ],
+        "target": ""
+      },
+      {
+        "name": "baoyu_youtube_transcript_route",
+        "priority": 45,
+        "keywords": [
+          "youtube转文字",
+          "视频转文字稿",
+          "youtube transcript",
+          "油管字幕"
+        ],
+        "target": ""
+      },
+      {
+        "name": "brand_route",
+        "priority": 45,
+        "keywords": [
+          "品牌定位",
+          "品牌设计",
+          "视觉系统",
+          "brand"
+        ],
+        "target": ""
+      },
+      {
+        "name": "card_xiaohongshu_route",
+        "priority": 45,
+        "keywords": [
+          "小红书卡片",
+          "小红书图文",
+          "xhs卡片",
+          "小红书内容"
+        ],
+        "target": ""
+      },
+      {
+        "name": "ce_code_review_route",
+        "priority": 45,
+        "keywords": [
+          "ce代码审查",
+          "context engineering审查",
+          "ce review",
+          "ce-code-review"
+        ],
+        "target": ""
+      },
+      {
+        "name": "ce_optimize_route",
+        "priority": 45,
+        "keywords": [
+          "ce优化",
+          "context优化",
+          "ce瘦身",
+          "ce-optimize"
+        ],
+        "target": ""
+      },
+      {
+        "name": "ce_plan_route",
+        "priority": 45,
+        "keywords": [
+          "ce规划",
+          "context规划",
+          "ce计划",
+          "ce-plan"
+        ],
+        "target": ""
+      },
+      {
+        "name": "ce_strategy_route",
+        "priority": 45,
+        "keywords": [
+          "ce战略",
+          "context治理",
+          "ce路线图",
+          "ce-strategy"
+        ],
+        "target": ""
+      },
+      {
+        "name": "ce_work_route",
+        "priority": 45,
+        "keywords": [
+          "ce工作流",
+          "ce执行",
+          "ce日常",
+          "ce-work"
+        ],
+        "target": ""
+      },
+      {
+        "name": "context_engineering_route",
+        "priority": 45,
+        "keywords": [
+          "上下文工程",
+          "context engineering",
+          "管理context窗口",
+          "上下文管理"
+        ],
+        "target": ""
+      },
+      {
+        "name": "deprecation_migration_route",
+        "priority": 45,
+        "keywords": [
+          "废弃与迁移",
+          "deprecation",
+          "版本迁移",
+          "迁移指南",
+          "API废弃"
+        ],
+        "target": ""
+      },
+      {
+        "name": "design_route",
+        "priority": 45,
+        "keywords": [
+          "通用设计",
+          "设计入口",
+          "ckm设计"
+        ],
+        "target": ""
+      },
+      {
+        "name": "design_system_route",
+        "priority": 45,
+        "keywords": [
+          "设计系统",
+          "design system",
+          "组件库对齐",
+          "design token"
+        ],
+        "target": ""
+      },
+      {
+        "name": "documentation_adrs_route",
+        "priority": 45,
+        "keywords": [
+          "写ADR",
+          "架构决策记录",
+          "documentation adr",
+          "文档撰写"
+        ],
+        "target": ""
+      },
+      {
+        "name": "ecc_eval_harness_route",
+        "priority": 45,
+        "keywords": [
+          "评测harness",
+          "eval harness",
+          "搭建评测",
+          "评测框架"
+        ],
+        "target": ""
+      },
+      {
+        "name": "ecc_skill_comply_route",
+        "priority": 45,
+        "keywords": [
+          "skill合规检查",
+          "skill comply",
+          "技能合规",
+          "评测skill合规"
+        ],
+        "target": ""
+      },
+      {
+        "name": "improve_codebase_arch_route",
+        "priority": 45,
+        "keywords": [
+          "改进代码架构",
+          "架构改进",
+          "codebase architecture",
+          "代码库架构优化"
+        ],
+        "target": ""
+      },
+      {
+        "name": "notion_spec_impl_route",
+        "priority": 45,
+        "keywords": [
+          "notion规格转实现",
+          "notion spec",
+          "规格转代码",
+          "notion转实现"
+        ],
+        "target": ""
+      },
+      {
+        "name": "slides_route",
+        "priority": 45,
+        "keywords": [
+          "生成幻灯片",
+          "PPT生成",
+          "slides",
+          "做slide",
+          "幻灯片制作"
+        ],
+        "target": ""
+      },
+      {
+        "name": "teach_route",
+        "priority": 45,
+        "keywords": [
+          "教我",
+          "讲解概念",
+          "teach",
+          "学习新技能",
+          "教学"
+        ],
+        "target": ""
+      },
+      {
+        "name": "triage_route",
+        "priority": 45,
+        "keywords": [
+          "问题分诊",
+          "优先级排序",
+          "triage",
+          "问题分类",
+          "分诊"
+        ],
+        "target": ""
+      },
+      {
+        "name": "ui_styling_route",
+        "priority": 45,
+        "keywords": [
+          "UI样式",
+          "样式调整",
+          "ui styling",
+          "界面样式"
+        ],
+        "target": ""
+      },
+      {
+        "name": "zoom_out_route",
+        "priority": 45,
+        "keywords": [
+          "放大视野",
+          "全局视角",
+          "zoom out",
+          "整体架构视角",
+          "拉远看"
+        ],
+        "target": ""
       }
     ],
     "skill_desc": {
@@ -1823,6 +2444,7 @@
       "audit-all-better": "mycc 自审统一入口——67 维全量诊断(基础设施/能力/事件/连接/知识/质量) + Harness 六层评分(L1 上下文/L2 工具/L3 编排/L4 记忆/L5 评估/L6 约束) + MEMORY/rules 记忆专项审计 + 12 R 行为层自检。触发词：健康检查/全身体检/cchealth/深度检查/audit all/全局审计/全面排查/系",
       "auto-collector-community": "通过 firecrawl 扫描 Reddit/HN/公众号的 Claude Code 新 insight，作为月度记忆进化 S3 步骤",
       "auto-collector-github": "扫描 OMC 相关 GitHub 仓库的新 commit/issue/release，作为月度记忆进化 S2 步骤",
+      "auto-collector-internal": "扫描本机 ~/.claude 内部的规则漂移/记忆过期/SOP 缺口/配置不一致，作为月度记忆进化 S4 步骤（治 \"外部调研已吸但内部未落地\"病根）",
       "auto-collector-official": "抓取 Anthropic 官方 Changelog 和 Claude Code docs 的增量内容，作为月度记忆进化 S1 步骤",
       "banner-design": "横版 banner / 大图视觉设计。",
       "baoyu-article-illustrator": "为文章自动配图,支持多种 art style。",
@@ -1854,14 +2476,13 @@
       "ceo-decision": "CEO一站式战略决策顾问委员会 — 输入任何战略问题，5位顾问并行分析，产出Decision Memo。触发词：ceo决策/战略分析/顾问委员会/帮我想清楚这件事。model: opus",
       "ceo-mode": "CEO 模式 — 像 CEO 一样按需组建团队/专家组，并行干活，用完下线。本地化吸收自 revfactory/harness（Apache-2.0）的团队工厂 + 官方 Agent Teams。触发场景：(1) '组建团队/建专家组/拉齐N专家/搭个X组' — 临时组队干活；(2) 'CEO模式/像CEO一样/动态团队' — 显式调用；(3) '解散组/团",
       "ci-template": "CI 模板生成。",
-      "claude-code-better": "V46.3全面配置升级流水线(动态N专家+调用audit-all-better 30维诊断+自身17维Phase2分析+8维环境预检+7维全球对标=67维全量)——按需N专家+双配置同步+Desktop对齐+★最优推荐合规+铁律1-12检查+audit-all全能力融合→输出升级方案→验证闭环。触发词：全面升级/配置优化/进化升级/自动进化/举一反三排查。",
+      "claude-better-all-upgrade": "V46.3 全面配置升级 67 维流水线(动态 N 专家 + audit-all-better 30 维 + 自身 17 维 Phase2 + 8 维环境预检 + 7 维全球对标 + 5 维其他) = 67 维全量——按需 N 专家 + 双配置同步 + Desktop 对齐 + ★ 最优推荐 + 铁律 1-12 检查 + audit-all 全能力融合 → ",
       "cmmi-tracker": "CMMI L3 持续可见追踪体系 — 需求/任务/错误/版本四库管理 + Notion同步。触发词：需求追踪/任务追踪/cmmi/版本追踪/错误追踪/追溯矩阵/待处理任务",
       "codebase-memory": "用代码库知识图谱回答结构性查询:探索架构、理解结构、查函数存在、看模块结构、查调用方、查被调用方、追踪调用链、找 caller、看依赖、影响分析、死代码、未用函数、高 fan-out、重构候选、代码质量审计、图查询语法、Cypher 示例、edge 类型、search_graph 用法。",
       "codesight": "预生成项目上下文摘要，减少代码探索的Token开销（~11x节省）。新项目开始时自动激活。触发词：codesight、项目摘要、代码索引、项目概览。",
       "cold-email": "【中】cold-email (中文翻译补充中, 见下方原英文). Write B2B cold emails and follow-up sequences that get replies. Use when the user wants to write cold outreach emails, prospecting emails, cold ema",
       "completion-self-check": "任务完成前自检 — 5 维（实跑证据/★推荐/4 要素/反讽刺/回滚）逐项过一遍。触发词：\"完成了吗\"/\"通过了吗\"/\"做完了吗\"/\"自检\"/\"completion check\"/\"self-check\"。",
       "composition-patterns": "React 组合模式 — 避免 boolean prop 泛滥，用复合组件/状态提升/内部组合。React 组件设计触发。",
-      "comprehensive-upgrade": "全面升级 deterministic 触发链。1 句\"全面升级\"→自动派 4-5 路 subagent 并行扫描 mycc 全部能力维度(配置/代码/技能/工作流/文档)→出综合升级清单+冲突矩阵。Intent-words 路由:全面升级/全面大改/系统升级→本 skill。",
       "content-engine": "多平台内容引擎 — X/LinkedIn/小红书/抖音/YouTube/公众号原生内容系统，一份素材自动适配多平台分发。触发词：写内容/内容日历/跨平台内容/多平台分发",
       "context-engineering": "优化 agent 上下文配置：新会话启动或输出质量下降时重建最优上下文",
       "customer-research": "【中】customer-research (中文翻译补充中, 见下方原英文). When the user wants to conduct, analyze, or synthesize customer research. Use when the user mentions \"customer research,\" \"ICP research,\" \"t",
@@ -1881,6 +2502,7 @@
       "ecc-skill-comply": "可视化 skill/rule/agent 是否真正被遵守：自动生成测试场景并输出合规率报告",
       "eng-experts": "工程化专家团队口语翻译层 — 把\"卡帕西/资深 dev/架构师\"等口语关键词路由到 ~/.claude/agents/ 下 3 个工程化 expert agent（karpathy-discipline-expert / senior-developer-mindset / architect）。当用户说卡帕西/Karpathy/严格审查/资深 dev/架构",
       "engineering-scenario-router": "工程化场景智能路由器（含 super 入口）。把口语意图路由到正确的 skill/agent（super/超级入口/万能入口/超级大脑/不知道找谁/工程化/卡帕西/架构师/开工/排查/梳理/收口/deep-interview/ultrawork/ultraqa/ultragoal/ralph/autopilot/team/走1/活力全开/队长 等 51 触发",
+      "faste-upgrade": "全面升级 8 维快查 deterministic 触发链。1 句\"快速升级/升级/一般升级/基础升级\"→自动派 8 路 subagent 并行扫描 8 维度(配置/代码/技能/工作流/文档/hook/rule/memory)→出综合升级清单+冲突矩阵。Intent-words 路由:快速升级/升级/一般升级/基础升级→本 skill。**需 /faste-u",
       "full-checkup": "全面体检 — gated 自动化样板：口语触发→只读诊断自动跑→改配置前 HITL 确认→修复→复核。触发词：全面体检/系统体检/三连体检/给系统做个体检/体检一下/checkup/全面检查并修复。对齐 Claude 官方 plan-mode(只读先行)+ omc-hitl(人确认门),把 audit→better→harness 串成'诊断不需你管、改动必",
       "gh-ci-fix": "GitHub PR 的 CI 检查红灯时，定位失败→拉 Actions 日志→诊断根因→给修复计划(需批准)→实施→回验的闭环。纯 gh 原生命令(无脚本依赖)。仅处理 GitHub Actions，外部 provider(Buildkite等)只报 URL 不接管。触发词：CI失败/PR检查红灯/fix ci/CI红了/check failed/Actio",
       "graphify": "把概念/代码转成知识图谱。",
@@ -1943,7 +2565,7 @@
       "sp-brainstorming": "Socratic 需求澄清 skill — 强迫用户输出具体 spec，禁\"我想要 X\"式模糊需求。触发词：脑暴/socratic/明确需求/具体化/想清楚",
       "sp-requesting-code-review": "按 superpowers 方法论在每个 task 完成后或 PR 前触发规范 code review 流程",
       "sp-subagent-driven-development": "每个任务派独立 subagent 并行执行，含两阶段 review（spec 合规 + 代码质量），不打断用户",
-      "sp-test-driven-development": "TDD 红绿重构 skill — 先写失败测试（红）→ 最小实现（绿）→ 重构（保持绿）。触发词：TDD/红绿重构/测试驱动/先写测试",
+      "sp-test-driven-development": "TDD 红绿重构工作流：先写失败测试（红）→ 最小实现（绿）→ 重构保持绿；强制 TDD 三阶段纪律",
       "sp-writing-plans": "将需求拆解为每步 2-5 分钟的细粒度任务列表，含 TDD 标注与复选框进度跟踪",
       "spec-generator": "口语需求→结构化 Spec/PRD。用户说\"帮我想清楚/分析需求/写规格/做个PRD/产品规格\"时触发。引导式访谈+结构化输出，吸收 GSD discuss+plan 思想。",
       "start-work": "工程化协作中心入口 — 用户说\"开工/开干/做工程化/启动项目/项目化\"时激活。本 skill 是\"manager 中心\"的轻量实现（≤120 行，避中台化）：调起 planner(opus) → 拉 3 工程化专家(karpathy/senior-dev/architect)并行 → 走 3 验证(test-engineer/code-reviewer/v",
@@ -1963,15 +2585,13 @@
       "vercel-react-best-practices": "Vercel React/Next.js 性能优化最佳实践。写/重构/审查 React/Next.js 时触发。",
       "web-access": "智能联网能力——5层通道调度(WebSearch→WebFetch→Jina→CDP→子Agent)+中文平台反爬(小红书/知乎/公众号)+站点经验积累。触发词：上网查、搜索、联网、web access、查资料。",
       "xhs-operations-method": "小红书运营方法论（人工可执行版，非自动化）。覆盖养号7天SOP、8级流量池机制、爆款四要素、六类标题公式、关键词选题、违禁词规避、转化率优化。触发词：小红书运营/小红书养号/小红书涨粉/爆款标题/小红书选题/xhs运营/小红书笔记/小红书引流/小红书种草",
-      "zoom-out": "放大视野获取更广上下文,理解代码整体架构和全局视角。",
-      "ecc-tdd-workflow": "TDD 开发工作流：新功能/修 bug/重构时强制先写失败测试，覆盖率要求 80%+ 含 E2E"
+      "zoom-out": "放大视野获取更广上下文,理解代码整体架构和全局视角。"
     },
     "skill_categories": {
       "dev": [
         "api-and-interface-design",
         "auto-collector-github",
         "ce-code-review",
-        "claude-code-better",
         "codebase-memory",
         "codesight",
         "deploy-ship",
@@ -2050,12 +2670,14 @@
       "system": [
         "ask-cli",
         "auto-collector-community",
+        "auto-collector-internal",
         "auto-collector-official",
         "caveman",
+        "claude-better-all-upgrade",
         "cmmi-tracker",
         "completion-self-check",
-        "comprehensive-upgrade",
         "ecc-skill-comply",
+        "faste-upgrade",
         "grill-me",
         "humanize-chinese",
         "humanizer",
@@ -2146,19 +2768,19 @@
       "bughunt",
       "n-step-pipeline",
       "dev-pipeline",
+      "claude-better-all-upgrade",
       "judge-panel",
       "harness-audit",
       "mycc-audit-pipeline",
       "overseas-compliance",
-      "boardroom",
-      "comprehensive-upgrade"
+      "boardroom"
     ],
     "workflow_map": {
       "boardroom": "董事会汇报准备",
       "bughunt": "系统性 Bug 排查",
       "ceo-pipeline": "CEO 全流水线 PM→Arch→Eng→QA→CEO",
       "code-review": "代码审查",
-      "comprehensive-upgrade": "综合升级流水线",
+      "faste-upgrade": "综合升级流水线",
       "config-audit-better": "配置审计",
       "dev-pipeline": "开发流水线 spec→scaffold→impl→test→review→deploy",
       "domain-audit-better": "域审计",
@@ -2221,7 +2843,7 @@
         {
           "say": "全面升级",
           "priority": 85,
-          "engine": "claude-code-better"
+          "engine": "claude-better-all-upgrade"
         },
         {
           "say": "又报错",
@@ -2244,7 +2866,7 @@
         "bughunt": "系统性 Bug 排查",
         "ceo-pipeline": "CEO 全流水线 PM→Arch→Eng→QA→CEO",
         "code-review": "代码审查",
-        "comprehensive-upgrade": "综合升级流水线",
+        "faste-upgrade": "综合升级流水线",
         "config-audit-better": "配置审计",
         "dev-pipeline": "开发流水线 spec→scaffold→impl→test→review→deploy",
         "domain-audit-better": "域审计",
@@ -2288,9 +2910,9 @@
     }
   },
   "hooks": {
-    "total_files": 58,
+    "total_files": 65,
     "by_event": {
-      "PreToolUse": 7,
+      "PreToolUse": 9,
       "SubagentStop": 3,
       "UserPromptSubmit": 1,
       "SessionStart": 6,
@@ -2303,7 +2925,10 @@
       "SessionEnd": 4,
       "SubagentStart": 1,
       "StopFailure": 1,
-      "MessageDisplay": 1
+      "MessageDisplay": 1,
+      "TeammateIdle": 1,
+      "TaskCreated": 1,
+      "TaskCompleted": 1
     }
   }
 }
