@@ -123,3 +123,77 @@ class TestBoardTasksRender:
     def test_evidence_closure_stat(self, page_loaded):
         val = page_loaded.text_content("#bt-evidence")
         assert val != "—" and val is not None, "bt-evidence 未渲染"
+
+
+# ─────────────────────────────────────────────────────────────────
+# TestBoardTasksV7 · 4 维度 + micro-server 契约 (2026-06-30 v7)
+# ─────────────────────────────────────────────────────────────────
+
+class TestBoardTasksV7Schema:
+    """board-tasks.json 必须含 v7 9 字段."""
+
+    @pytest.fixture()
+    def first_task(self, board_json):
+        all_tasks = board_json.get("requirements", []) + board_json.get("wbs", []) + board_json.get("subplans", [])
+        return all_tasks[0] if all_tasks else {}
+
+    @pytest.mark.parametrize("field", [
+        "session_id", "session_name", "project_id", "parent_id",
+        "created_at", "updated_at", "due_date", "completed_at", "priority",
+    ])
+    def test_v7_field_present(self, first_task, field):
+        """v7 9 字段必须每个 task 都有 (fallback 默认值)."""
+        assert field in first_task, f"v7 字段 {field!r} 缺失 · board.py _card() 未扩"
+
+
+class TestBoardTasksV7UI:
+    """dashboard.html UI 必须含 4 维度元素."""
+
+    def test_priority_filter_present(self, dashboard_html):
+        """filter-priority 下拉 (维度 A)."""
+        assert 'id="filter-priority"' in dashboard_html, "filter-priority 下拉缺失"
+
+    def test_session_filter_present(self, dashboard_html):
+        """filter-session 下拉 (维度 A)."""
+        assert 'id="filter-session"' in dashboard_html, "filter-session 下拉缺失"
+
+    def test_apply_filters_handler(self, dashboard_html):
+        """onchange=applyBoardFilters 绑定."""
+        assert "applyBoardFilters" in dashboard_html, "applyBoardFilters 绑定缺失"
+
+
+class TestBoardTasksV7JS:
+    """dashboard-app.js JS 必须实现 4 维度渲染."""
+
+    def test_priority_color_map(self, app_js):
+        """priority 色映射 4 色 (无引号 key 格式: urgent:)."""
+        for p in ("urgent", "high", "medium", "low"):
+            assert f"{p}:" in app_js or f"'{p}'" in app_js or f'"{p}"' in app_js, f"priority 色 {p} 缺失"
+
+    def test_session_chip_render(self, app_js):
+        """session chip 渲染."""
+        assert "session_name" in app_js and "📍" in app_js, "session chip 渲染缺失"
+
+    def test_due_date_render(self, app_js):
+        """due_date 时间戳."""
+        assert "due_date" in app_js and "toLocaleDateString" in app_js, "due_date 渲染缺失"
+
+
+class TestBoardBridgeV7:
+    """bin/board-bridge.py micro-server 端口 18767."""
+
+    def test_bridge_file_exists(self):
+        from pathlib import Path
+        p = Path(__file__).resolve().parent.parent / "bin" / "board-bridge.py"
+        assert p.exists(), "bin/board-bridge.py 缺失"
+
+    def test_bridge_port_18767(self):
+        from pathlib import Path
+        text = (Path(__file__).resolve().parent.parent / "bin" / "board-bridge.py").read_text()
+        assert "18767" in text, "micro-server 端口 ≠ 18767"
+
+    def test_bridge_endpoints(self):
+        from pathlib import Path
+        text = (Path(__file__).resolve().parent.parent / "bin" / "board-bridge.py").read_text()
+        for ep in ("update_status", "add_note", "create_task", "health"):
+            assert ep in text, f"endpoint {ep!r} 缺失"
