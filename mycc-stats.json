@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-06-30T09:04:27.382494Z",
+  "generated_at": "2026-07-01T08:56:06.202564Z",
   "version": {
-    "claude_code": "2.1.196 (Claude Code)",
+    "claude_code": "2.1.197 (Claude Code)",
     "omc": "4.15.0",
     "stats_engine": "V53",
     "cc_switch": "OFF"
   },
   "counts": {
-    "skills": 150,
+    "skills": 148,
     "workflows": 14,
-    "hooks_registered": 47,
+    "hooks_registered": 51,
     "hook_events": 17,
-    "hook_files": 65,
+    "hook_files": 67,
     "agents_total": 91,
     "agents_core": 6,
     "agents_ceo_roles": 12,
@@ -21,9 +21,9 @@
     "plugin_agents": 164,
     "mcp_servers": 4,
     "enabled_plugins": 32,
-    "total_plugins": 59,
+    "total_plugins": 64,
     "rules": 3,
-    "intent_words_routes": 161,
+    "intent_words_routes": 162,
     "external_clis": 3
   },
   "lists": {
@@ -1313,6 +1313,19 @@
         "target": ""
       },
       {
+        "name": "deep_interview_route",
+        "priority": 78,
+        "keywords": [
+          "深度访谈",
+          "需求访谈",
+          "需求很模糊",
+          "需求不清晰",
+          "deep interview",
+          "帮我理清需求"
+        ],
+        "target": ""
+      },
+      {
         "name": "smart_closure_route",
         "priority": 77,
         "keywords": [
@@ -1852,7 +1865,7 @@
           "web access route",
           "web_access_route",
           "上网查",
-          "搜索",
+          "联网搜索",
           "联网",
           "web"
         ],
@@ -2441,7 +2454,7 @@
       "api-and-interface-design": "指导稳定 API 与接口设计。用于设计 API、模块边界、任何 public interface,创建 REST/GraphQL endpoint,定义模块间 type contract,或建立前后端边界。",
       "article-writing": "长文创作 — 文章/指南/博客/教程/邮件 newsletter，按提供的风格示例写作（强调一致性+结构+可信度）。触发词：写文章/长文/写博客/写教程",
       "ask-cli": "把同一问题派发给本机钦定的外部 AI CLI 六联(kimi/mmx/opencode/qwen/mavis/codex)做异构对抗/交叉验证,Claude 综合各家观点裁决。复用已验证脚本 ai-cli.sh(单 CLI)/ai-panel.sh(多 CLI 并发),禁手拼裸 CLI 命令。触发词：异构对抗、交叉验证、问外部CLI、多模型验证、ask cl",
-      "audit-all-better": "mycc 自审统一入口——67 维全量诊断(基础设施/能力/事件/连接/知识/质量) + Harness 六层评分(L1 上下文/L2 工具/L3 编排/L4 记忆/L5 评估/L6 约束) + MEMORY/rules 记忆专项审计 + 12 R 行为层自检。触发词：健康检查/全身体检/cchealth/深度检查/audit all/全局审计/全面排查/系",
+      "audit-all-better": "mycc 自审统一入口——30 维全量诊断(基础设施/能力/事件/连接/知识/质量) + Harness 六层评分(L1 上下文/L2 工具/L3 编排/L4 记忆/L5 评估/L6 约束) + MEMORY/rules 记忆专项审计 + 12 R 行为层自检。触发词：健康检查/全身体检/cchealth/深度检查/audit all/全局审计/全面排查/系",
       "auto-collector-community": "通过 firecrawl 扫描 Reddit/HN/公众号的 Claude Code 新 insight，作为月度记忆进化 S3 步骤",
       "auto-collector-github": "扫描 OMC 相关 GitHub 仓库的新 commit/issue/release，作为月度记忆进化 S2 步骤",
       "auto-collector-internal": "扫描本机 ~/.claude 内部的规则漂移/记忆过期/SOP 缺口/配置不一致，作为月度记忆进化 S4 步骤（治 \"外部调研已吸但内部未落地\"病根）",
@@ -2476,7 +2489,7 @@
       "ceo-decision": "CEO一站式战略决策顾问委员会 — 输入任何战略问题，5位顾问并行分析，产出Decision Memo。触发词：ceo决策/战略分析/顾问委员会/帮我想清楚这件事。model: opus",
       "ceo-mode": "CEO 模式 — 像 CEO 一样按需组建团队/专家组，并行干活，用完下线。本地化吸收自 revfactory/harness（Apache-2.0）的团队工厂 + 官方 Agent Teams。触发场景：(1) '组建团队/建专家组/拉齐N专家/搭个X组' — 临时组队干活；(2) 'CEO模式/像CEO一样/动态团队' — 显式调用；(3) '解散组/团",
       "ci-template": "CI 模板生成。",
-      "claude-better-all-upgrade": "V46.3 全面配置升级 67 维流水线(动态 N 专家 + audit-all-better 30 维 + 自身 17 维 Phase2 + 8 维环境预检 + 7 维全球对标 + 5 维其他) = 67 维全量——按需 N 专家 + 双配置同步 + Desktop 对齐 + ★ 最优推荐 + 铁律 1-12 检查 + audit-all 全能力融合 → ",
+      "claude-better-all-upgrade": "V46.3 全面配置升级流水线(动态 N 专家 + 自身 17 维 Phase2 分析 + 8 维环境预检 + 7 维全球对标; 审计维度以 lib/upgrade-dimensions.json 的 canonical 67 维为准, audit-all-better 30 维外部复用)——按需 N 专家 + 双配置同步 + Desktop 对齐 + ★ ",
       "cmmi-tracker": "CMMI L3 持续可见追踪体系 — 需求/任务/错误/版本四库管理 + Notion同步。触发词：需求追踪/任务追踪/cmmi/版本追踪/错误追踪/追溯矩阵/待处理任务",
       "codebase-memory": "用代码库知识图谱回答结构性查询:探索架构、理解结构、查函数存在、看模块结构、查调用方、查被调用方、追踪调用链、找 caller、看依赖、影响分析、死代码、未用函数、高 fan-out、重构候选、代码质量审计、图查询语法、Cypher 示例、edge 类型、search_graph 用法。",
       "codesight": "预生成项目上下文摘要，减少代码探索的Token开销（~11x节省）。新项目开始时自动激活。触发词：codesight、项目摘要、代码索引、项目概览。",
@@ -2524,7 +2537,6 @@
       "humanize-chinese": "去 AI 味中文文本改写 — 评分/人性化/降AIGC/风格转换。触发：去AI味/降AIGC/论文降重/知网检测。",
       "humanizer": "Remove signs of AI-generated writing from text. Use when editing or reviewing text to make it sound more natural and human-written. Based on Wikipedia's comprehensive \"Signs of AI ",
       "improve-codebase-architecture": "代码库架构改进建议。",
-      "interview-me": "通过结构化访谈澄清需求:从粗到细、按维度追问、明确边界与优先级。触发:需求澄清/不确定怎么做/先聊一下。",
       "last30days": "【中】last30days (中文翻译补充中, 见下方原英文). \"Research what people actually say about any topic in the last 30 days. Pulls posts and engagement from Reddit, X, YouTube, TikTok, Hacker News, Po",
       "macos-automation": "macOS 桌面自动化——操作Finder/系统设置/截图/AppleScript/Shortcuts。触发词：打开应用、截图、系统设置、mac控制、桌面操作。",
       "marketing": "营销活动完整流水线 — SEO+推广+邮件+合规+KPI+多平台发布。说\"做营销/营销活动/推广/SEO\"触发",
@@ -2561,7 +2573,6 @@
       "smart-closure": "任务闭环 SOP — 按任务类型自动判断并执行对应验证/提交档位（三档：L1对话/L2显式/L3高风险）",
       "smart-flow-all": "Smart-Flow V46.3 全模式统一入口（队长=此入口）：说\"队长\"自动按需融合 YOLO全权限+ceo-mode/teams路由+Plan Graph编排器+Queue任务依赖+深度调研≥3层默认+铁律1-12全保护。Intent Schema解析→场景识别→复杂度路由→execution_mode传递→方案菜单→路由执行",
       "social-publisher": "多平台社媒发布编排 — X/LinkedIn/小红书/朋友圈/公众号/B站。说\"发推文/发小红书/发朋友圈/多平台发布\"触发",
-      "source-driven-development": "以官方文档为唯一依据驱动开发，用框架或库时杜绝过时 API 与错误模式",
       "sp-brainstorming": "Socratic 需求澄清 skill — 强迫用户输出具体 spec，禁\"我想要 X\"式模糊需求。触发词：脑暴/socratic/明确需求/具体化/想清楚",
       "sp-requesting-code-review": "按 superpowers 方法论在每个 task 完成后或 PR 前触发规范 code review 流程",
       "sp-subagent-driven-development": "每个任务派独立 subagent 并行执行，含两阶段 review（spec 合规 + 代码质量），不打断用户",
@@ -2585,7 +2596,8 @@
       "vercel-react-best-practices": "Vercel React/Next.js 性能优化最佳实践。写/重构/审查 React/Next.js 时触发。",
       "web-access": "智能联网能力——5层通道调度(WebSearch→WebFetch→Jina→CDP→子Agent)+中文平台反爬(小红书/知乎/公众号)+站点经验积累。触发词：上网查、搜索、联网、web access、查资料。",
       "xhs-operations-method": "小红书运营方法论（人工可执行版，非自动化）。覆盖养号7天SOP、8级流量池机制、爆款四要素、六类标题公式、关键词选题、违禁词规避、转化率优化。触发词：小红书运营/小红书养号/小红书涨粉/爆款标题/小红书选题/xhs运营/小红书笔记/小红书引流/小红书种草",
-      "zoom-out": "放大视野获取更广上下文,理解代码整体架构和全局视角。"
+      "zoom-out": "放大视野获取更广上下文,理解代码整体架构和全局视角。",
+      "source-driven-development": "以官方文档为唯一依据驱动开发，用框架或库时杜绝过时 API 与错误模式"
     },
     "skill_categories": {
       "dev": [
@@ -2601,7 +2613,6 @@
         "gstack-ship",
         "improve-codebase-architecture",
         "shipping-and-launch",
-        "source-driven-development",
         "sp-requesting-code-review",
         "sp-subagent-driven-development",
         "sp-test-driven-development",
@@ -2737,7 +2748,6 @@
         "gstack-qa",
         "gstack-repo",
         "gstack-review",
-        "interview-me",
         "last30days",
         "memory-checkup",
         "memory-dream-consolidation",
@@ -2910,14 +2920,14 @@
     }
   },
   "hooks": {
-    "total_files": 65,
+    "total_files": 67,
     "by_event": {
-      "PreToolUse": 9,
+      "PreToolUse": 10,
       "SubagentStop": 3,
       "UserPromptSubmit": 1,
-      "SessionStart": 6,
-      "PostToolUse": 7,
-      "Stop": 7,
+      "SessionStart": 8,
+      "PostToolUse": 6,
+      "Stop": 9,
       "PostToolUseFailure": 1,
       "PermissionRequest": 1,
       "PreCompact": 1,

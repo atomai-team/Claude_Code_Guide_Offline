@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-30T09:04:30.199296Z",
+  "generated_at": "2026-07-01T08:56:09.644351Z",
   "version": "P2-4-full",
   "counts": {
-    "skills_total": 150,
-    "hooks_total": 64,
+    "skills_total": 148,
+    "hooks_total": 65,
     "agents_total": 89
   },
   "skills": [
@@ -59,15 +59,15 @@
     },
     {
       "id": "audit-all-better",
-      "name_zh": "mycc 自审统一入口——67 维全量诊断(基础设施/能力/事件/连接/知识/质量) + Harness 六层评分(L1 上下文/L2 工具/L3 编排/L4",
+      "name_zh": "mycc 自审统一入口——30 维全量诊断(基础设施/能力/事件/连接/知识/质量) + Harness 六层评分(L1 上下文/L2 工具/L3 编排/L4",
       "name_en": "audit-all-better",
-      "description": "mycc 自审统一入口——67 维全量诊断(基础设施/能力/事件/连接/知识/质量) + Harness 六层评分(L1 上下文/L2 工具/L3 编排/L4 记忆/L5 评估/L6 约束) + MEMORY/rules 记忆专项审计 + 12 R 行为层自检。触发词：健康检查/全身体检/cchealth/深度检查/audit all/全局审计/全面排查/系统诊断/深度审计/harness审计/六层评分/L1-L6/harness audit/月度进化/内部审计/代码行为自审/12 R 审计/行为层自检/R1-R12 检查。",
+      "description": "mycc 自审统一入口——30 维全量诊断(基础设施/能力/事件/连接/知识/质量) + Harness 六层评分(L1 上下文/L2 工具/L3 编排/L4 记忆/L5 评估/L6 约束) + MEMORY/rules 记忆专项审计 + 12 R 行为层自检。触发词：健康检查/全身体检/cchealth/深度检查/audit all/全局审计/全面排查/系统诊断/深度审计/harness审计/六层评分/L1-L6/harness audit/月度进化/内部审计/代码行为自审/12 R 审计/行为层自检/R1-R12 检查。",
       "trigger_words": [
         "| 底层 workflow | 范围 |"
       ],
       "what_for": "",
       "example": "",
-      "body_short": "入口路由（2026-06-30 cross-reference · S4 闭环固化）\n\n本 skill 是审计三入口之一,底层统一调用 `mycc-audit-pipeline` workflow 的 8 阶段流水线。\n\n| 入口 | 触发词 | 底层 workflow | 范围 |\n|---|---|---|---|\n| `/audit-all-better`（本 skill） | 健康检查/全身体检/全局审计/30维 | `mycc-audit-pipeline` | 30 维诊断 + Harness 六层 |\n| `/claude-better-all-upgrade` | 全面升级/快速升级/配置优化/举一反三 | `claude-better-all-upgrade.js` | 67 维全量 + 审计+升级+收口 |\n| `/harness-audit` | 六层评分/Harness审计/12R | `mycc-audit-pipeline` {scope:'harness'} | D3/D4/D5/D7 子集 + 12R |\n| ⚠️ `harness-audit` | 当前**已归档**(archive 目录),六层评分功能由 `mycc-audit-pipeline {scope:'harness'}` 接管 | — | — |\n\n**跨入口不冲突**:\n- `/audit-all-better` 默认只诊断不修复(L0/L1 也只建议)\n- `/claude-better-all-upgrade` 含 audit → 升级 → 验证闭环\n- `/harness-audit` 聚焦 Harness 六层(D3 hooks/D4 workflows/D5 teams/D7 multi-layer)\n- 8 阶段流水线 SSoT: `docs/plan/mycc"
+      "body_short": "入口路由（2026-06-30 cross-reference · S4 闭环固化）\n\n本 skill 是审计三入口之一,底层统一调用 `mycc-audit-pipeline` workflow 的 8 阶段流水线。\n\n| 入口 | 触发词 | 底层 workflow | 范围 |\n|---|---|---|---|\n| `/audit-all-better`（本 skill） | 健康检查/全身体检/全局审计/30维 | `mycc-audit-pipeline` | 30 维诊断 + Harness 六层 |\n| `/claude-better-all-upgrade` | 全面升级/快速升级/配置优化/举一反三 | `claude-better-all-upgrade.js` | 67 维全量 + 审计+升级+收口 |\n| `/harness-audit` | 六层评分/Harness审计/12R | `harness-audit.js` workflow (Fowler 六层) | 上下文/工具/编排/记忆/评估/恢复 |\n| ⚠️ 注(2026-07-01 P1-G4) | harness-audit **skill** 已归档,但六层评分**存活实现 = `workflows/harness-audit.js`**(非 pipeline{scope:harness}); `mycc-audit-pipeline {scope:'harness'}` 是另一镜头(D3/D4/D5/D7 配置子集),互补非替代 | — | — |\n\n**跨入口不冲突**:\n- `/audit-all-better` 默认只诊断不修复(L0/L1 也只建议)\n- `/claude-better-all-upgrade` 含 audit → 升级 → 验证闭环\n- `/harness"
     },
     {
       "id": "auto-collector-community",
@@ -413,15 +413,15 @@
     },
     {
       "id": "claude-better-all-upgrade",
-      "name_zh": "V46.3 全面配置升级 67 维流水线(动态 N 专家 + audit-all-better 30 维 + 自身 17 维 Phase2 + 8 维环境预检",
+      "name_zh": "V46.3 全面配置升级流水线(动态 N 专家 + 自身 17 维 Phase2 分析 + 8 维环境预检 + 7 维全球对标; 审计维度以 lib/upgra",
       "name_en": "claude-better-all-upgrade",
-      "description": "V46.3 全面配置升级 67 维流水线(动态 N 专家 + audit-all-better 30 维 + 自身 17 维 Phase2 + 8 维环境预检 + 7 维全球对标 + 5 维其他) = 67 维全量——按需 N 专家 + 双配置同步 + Desktop 对齐 + ★ 最优推荐 + 铁律 1-12 检查 + audit-all 全能力融合 → 升级方案 + 验证闭环。**权威入口**(用户钦定 6-29):所有升级口语都走本 skill: 快速升级 / 升级 / 一般升级 / 基础升级 / 深度升级 / 大升级 / 全面升级 / 配置优化 / 进化升级 / 举一反三排查。8 维快查入口 /faste-upgrade 需显式点名。模型: opus。",
+      "description": "V46.3 全面配置升级流水线(动态 N 专家 + 自身 17 维 Phase2 分析 + 8 维环境预检 + 7 维全球对标; 审计维度以 lib/upgrade-dimensions.json 的 canonical 67 维为准, audit-all-better 30 维外部复用)——按需 N 专家 + 双配置同步 + Desktop 对齐 + ★ 最优推荐 + 铁律 1-12 检查 + audit-all 全能力融合 → 升级方案 + 验证闭环。**权威入口**(用户钦定 6-29):所有升级口语都走本 skill: 快速升级 / 升级 / 一般升级 / 基础升级 / 深度升级 / 大升级 / 全面升级 / 配置优化 / 进化升级 / 举一反三排查。8 维快查入口 /faste-upgrade 需显式点名。模型: opus。",
       "trigger_words": [
         "| 底层 | 范围 |"
       ],
       "what_for": "",
       "example": "",
-      "body_short": "入口路由（2026-06-30 cross-reference · S4 闭环固化）\n\n本 skill 是升级主入口(权威,用户钦定 6-29),底层调用 `mycc-audit-pipeline` workflow + `claude-better-all-upgrade.js` workflow。\n\n| 入口 | 触发词 | 底层 | 范围 |\n|---|---|---|---|\n| `/claude-better-all-upgrade`（本 skill · 权威入口） | 全面升级/快速升级/升级/配置优化/举一反三 | `claude-better-all-upgrade.js` (6 阶段) + `mycc-audit-pipeline` (8 阶段) | 67 维全量审计+升级+验证 |\n| `/audit-all-better` | 健康检查/全身体检/全局审计 | `mycc-audit-pipeline` (8 阶段) | 30 维诊断 + Harness 六层 |\n| `/harness-audit` | 六层评分/Harness审计/12R | `mycc-audit-pipeline` {scope:'harness'} | D3/D4/D5/D7 子集 |\n| `/faste-upgrade`（需显式点名） | 8 维快查/快速扫描 | 派 5 路 subagent 并行 | 配置/代码/技能/工作流/文档/hook/rule/memory |\n\n**跨入口不冲突**: 8 阶段流水线 SSoT: `docs/plan/mycc-audit-as-a-service-design-2026-06-27.md §2.2`\n\n---\n\n/claude-better-all-upgrade — V26.5.3 智能升级流水线\n\n> **审计/升级执行前"
+      "body_short": "入口路由（2026-06-30 cross-reference · S4 闭环固化）\n\n本 skill 是升级主入口(权威,用户钦定 6-29),底层调用 `mycc-audit-pipeline` workflow + `claude-better-all-upgrade.js` workflow。\n\n| 入口 | 触发词 | 底层 | 范围 |\n|---|---|---|---|\n| `/claude-better-all-upgrade`（本 skill · 权威入口） | 全面升级/快速升级/升级/配置优化/举一反三 | `claude-better-all-upgrade.js` (6 阶段) + `mycc-audit-pipeline` (8 阶段) | 67 维全量审计+升级+验证 |\n| `/audit-all-better` | 健康检查/全身体检/全局审计 | `mycc-audit-pipeline` (8 阶段) | 30 维诊断 + Harness 六层 |\n| `/harness-audit` | 六层评分/Harness审计/12R | `harness-audit.js` workflow (Fowler 六层, P1-G4 保独立) | 上下文/工具/编排/记忆/评估/恢复 |\n| `/faste-upgrade`（需显式点名） | 8 维快查/快速扫描 | 派 5 路 subagent 并行 | 配置/代码/技能/工作流/文档/hook/rule/memory |\n\n**跨入口不冲突**: 8 阶段流水线 SSoT: `docs/plan/mycc-audit-as-a-service-design-2026-06-27.md §2.2`\n**维度 SSoT** (2026-07-01 P1-G2 收敛): `lib/upgrade-d"
     },
     {
       "id": "cmmi-tracker",
@@ -894,16 +894,6 @@
       "body_short": "Improve Codebase Architecture\n\nSurface architectural friction and propose **deepening opportunities** — refactors that turn shallow modules into deep ones. The aim is testability and AI-navigability.\n\nGlossary\n\nUse these terms exactly in every suggestion. Consistent language is the point — don't drift into \"component,\" \"service,\" \"API,\" or \"boundary.\" Full definitions in LANGUAGE.md.\n\n- **Module** — anything with an interface and an implementation (function, class, package, slice).\n- **Interface** — everything a caller must know to use the module: types, invariants, error modes, ordering, config. Not just the type signature.\n- **Implementation** — the code inside.\n- **Depth** — leverage at the interface: a lot of behaviour behind a small interface. **Deep** = high leverage. **Shallow** = i"
     },
     {
-      "id": "interview-me",
-      "name_zh": "interview-me",
-      "name_en": "interview-me",
-      "description": "",
-      "trigger_words": [],
-      "what_for": "",
-      "example": "",
-      "body_short": "---\nname: interview-me\ndescription: |\n  通过结构化访谈澄清需求:从粗到细、按维度追问、明确边界与优先级。触发:需求澄清/不确定怎么做/先聊一下。"
-    },
-    {
       "id": "last30days",
       "name_zh": "Research what people actually say about any",
       "name_en": "last30days",
@@ -971,12 +961,11 @@
       "name_en": "mycc-audit-pipeline",
       "description": "mycc 67 维 8 大分组 dry-run 审计。1 句\"67 维 dry-run / mycc 67 维 / 8 大分组审计\"→自动跑 8 大分组(配置 12 + 技能 10 + hook 8 + agent 7 + 记忆 10 + 文档 8 + 工具 6 + 安全 6)→出 P0/P1/P2 健康报告。区别于 full-checkup 30 维 / audit-all-better 30 维。Intent-words 路由:67 维 dry-run / mycc 67 维 / 8 大分组 / dry-run 审计 → 本 skill。",
       "trigger_words": [
-        "差异化(intent-words priority 84)",
-        "/ G5 重复 / intent-words 路由 / SKILL.md 引用链 / 软链健康 / hook 接电率 / auto-memory / evolution-scout"
+        "差异化(intent-words priority 84)。"
       ],
       "what_for": "",
-      "example": "## 输入: \"全面体检\"\n\n### 输出 5 段收口\n\n**结论**: 67 维扫描已启动,预计 5-10 分钟(dry-run)\n**命令**: `/oh-my-claudecode:mycc-audit-pipeline`\n**预计**: 5-10 分钟完成,瓶颈=skill 层(10 维)+配置层(12 维)\n**下一步**: 完成后看 `~/.claude/.cache/audit-reports/audit-{ts}.md`\n**不推荐**: 体检前先停掉其他高 ",
-      "body_short": "mycc Audit Pipeline · 月度 67 维自动审计(mycc-audit-pipeline)\n\n接收\"全面体检/月度审计\"诉求 → 自动跑 mycc 67 维健康检查(8 类分组:配置/技能/hook/agent/记忆/文档/工具/安全) → 出 P0/P1/P2 健康报告 + 修复清单。\n本 skill 是登记册 T12\"专家再全面内审\"+ T14\"token 优化/配置冲突\"的核心落地。\n\n**只读诊断**: 默认 dry-run,只扫描不修改,避免误伤。\n**8 大分组 67 维**: 每个分组有标准 checklist(配置层 12 维 / 技能层 10 维 / hook 层 8 维 / agent 层 7 维 / 记忆层 10 维 / 文档层 8 维 / 工具层 6 维 / 安全层 6 维)。\n**优先级化**: P0=立即修 / P1=本月修 / P2=下次升级修。\n**可重入**: 月度自动跑 + 手动可触发,结果落 ~/.claude/.cache/audit-reports/。\n\n**SSoT 互引**(避免三套\"67 维\"重复):\n- 本 skill **67 维 8 大分组**: 配置/技能/hook/agent/记忆/文档/工具/安全 → SSoT 在本 SKILL.md `` 段\n- `claude-better-all-upgrade` 67 维: 聚焦**配置层升级**,与本 skill 配置层 12 维重叠,共享清单在 `~/.claude/docs/sot/67-dim-checklist.md`(待 reviewer 建)\n- `audit-all-better` 30 维: 聚焦**安全/工具健康**,与本 skill 安全 6 维 + 工具 6 维重叠\n- `full-checkup` 30 维: 聚焦**只读诊断**"
+      "example": "## 输入: \"全面体检\"\n\n### 输出 5 段收口\n\n**结论**: 67 维扫描已启动,预计 5-10 分钟(dry-run)\n**命令**: `/oh-my-claudecode:mycc-audit-pipeline`\n**预计**: 5-10 分钟完成,瓶颈=skill 层(10 维)+配置层(12 维)\n**下一步**: 完成后看 `~/.claude/docs/audit/mycc-global-audit-report-<date>.md`(永久报告; `.",
+      "body_short": "mycc Audit Pipeline · 月度 67 维自动审计(mycc-audit-pipeline)\n\n接收\"全面体检/月度审计\"诉求 → 自动跑 mycc 67 维健康检查(8 类分组:配置/技能/hook/agent/记忆/文档/工具/安全) → 出 P0/P1/P2 健康报告 + 修复清单。\n本 skill 是登记册 T12\"专家再全面内审\"+ T14\"token 优化/配置冲突\"的核心落地。\n\n**只读诊断**: 默认 dry-run,只扫描不修改,避免误伤。\n**8 大分组 67 维**: 每个分组有标准 checklist(配置层 12 维 / 技能层 10 维 / hook 层 8 维 / agent 层 7 维 / 记忆层 10 维 / 文档层 8 维 / 工具层 6 维 / 安全层 6 维)。\n**优先级化**: P0=立即修 / P1=本月修 / P2=下次升级修。\n**可重入**: 月度自动跑 + 手动可触发。**永久审计报告落 `docs/audit/mycc-global-audit-report-.md`**(对齐 workflow 实际写盘 mycc-audit-pipeline.js:225); `.cache/audit-reports/` 仅存轻量滚动件(config-edit 计数 / weekly stats), 非永久报告。\n\n**SSoT 互引**(2026-07-01 P1-G2 已收敛, 维度 SSoT 单一化):\n- **维度 SSoT = `lib/upgrade-dimensions.json`**(本 skill 的 8 层 67 维是 canonical, 已完整抽取入该文件); 人读投影 `docs/sot/67-dim-checklist.md`(由 json 生成, 勿手改)。\n- 本 skill **"
     },
     {
       "id": "mycc-selfheal",
@@ -1275,16 +1264,6 @@
       "body_short": "social-publisher — 多平台发布\n\n触发词\n\"发推文 / 发小红书 / 发朋友圈 / 发公众号 / 多平台发布 / 跨平台 / 同步发\"\n\n平台适配规则\n\n| 平台 | 字数 | 风格 | 特殊要求 |\n|---|---|---|---|\n| X (Twitter) | 280 字 | 简短+话题标签 | hook 在首句 |\n| LinkedIn | 1300 字 | 专业+故事 | 配图 + CTA |\n| 小红书 | 500 字 | 真实+表情 | 必有\"⭐⭐⭐\"卖点 + 9 张图 |\n| 朋友圈 | 200 字 | 个人化 | 不要 CTA，自然种草 |\n| 公众号 | 长文 | 深度 + 排版 | 标题党 + 头图 |\n| B站简介 | 250 字 | 信息密集 | 关键词 + 系列编号 |\n\n工作流\n1. 接收一份核心内容（marketing 给的素材）\n2. 按平台自动适配（字数/风格/格式）\n3. 提取关键词 → 平台话题标签\n4. 生成首图 prompt（如需）\n5. 输出 N 份适配版本（用户复制粘贴）\n\n不做\n- ❌ 不实际调用平台 API（敏感操作，留给用户手动）\n- ❌ 不生成内容（依赖 marketing/article-writing/content-engine 上游）"
     },
     {
-      "id": "source-driven-development",
-      "name_zh": "以官方文档为唯一依据驱动开发，用框架或库时杜绝过时 API 与错误模式",
-      "name_en": "source-driven-development",
-      "description": "",
-      "trigger_words": [],
-      "what_for": "",
-      "example": "",
-      "body_short": "---\nname: source-driven-development\ndescription: |\n  以官方文档为依据驱动开发,代码基于最新官方规范,避免过时模式。框架/库开发时保证正确性。\n\nIf pattern not found in docs:\n[代码块省略]\n\n参考文档\n- Common Rationalizations + Red Flags + Verification checklist"
-    },
-    {
       "id": "sp-brainstorming",
       "name_zh": "Socratic 需求澄清 skill — 强迫用户输出具体 spec，禁\"我想要 X\"式模糊需求。触发词：脑暴/socratic/明确需求/具体化/想清楚",
       "name_en": "sp-brainstorming",
@@ -1548,7 +1527,7 @@
       "registered": true,
       "what_protects": "Stop hook — 改文件类任务完成时自动归档（消除\"忘记归档\"反复提醒）",
       "kill_switch": "OMC_SKIP_HOOKS",
-      "size_lines": 80
+      "size_lines": 89
     },
     {
       "id": "auto-archive-trigger.sh",
@@ -1560,7 +1539,7 @@
       "registered": true,
       "what_protects": "OMC_SKIP_HOOKS 逃生门：异常时快速止血（2026-06-27 L3 batch step4/7）",
       "kill_switch": "",
-      "size_lines": 60
+      "size_lines": 61
     },
     {
       "id": "auto-audit-trigger.sh",
@@ -1585,7 +1564,7 @@
       "registered": true,
       "what_protects": "auto-closure-detect.sh — 任务类型自动检测 + 按需注入验证指令（2026-06-23）",
       "kill_switch": "",
-      "size_lines": 92
+      "size_lines": 93
     },
     {
       "id": "bash-safety-dispatcher.sh",
@@ -1648,6 +1627,18 @@
       "size_lines": 21
     },
     {
+      "id": "closure-deposit-gate.sh",
+      "name_zh": "closure-deposit-gate.sh — Stop: 收口经验沉淀闸（P0 经验闭环 · 沉淀半 · 2026-06-30）",
+      "hook_type": "advisory",
+      "events": [
+        "Stop"
+      ],
+      "registered": true,
+      "what_protects": "closure-deposit-gate.sh — Stop: 收口经验沉淀闸（P0 经验闭环 · 沉淀半 · 2026-06-30）",
+      "kill_switch": "OMC_SKIP_HOOKS",
+      "size_lines": 62
+    },
+    {
       "id": "cmmi-stop-sync.sh",
       "name_zh": "OMC_SKIP_HOOKS 逃生门：异常时快速止血（2026-06-27 L3 batch step4/7）",
       "hook_type": "advisory",
@@ -1657,7 +1648,7 @@
       "registered": true,
       "what_protects": "OMC_SKIP_HOOKS 逃生门：异常时快速止血（2026-06-27 L3 batch step4/7）",
       "kill_switch": "",
-      "size_lines": 45
+      "size_lines": 46
     },
     {
       "id": "component-usage-tracker.sh",
@@ -1736,9 +1727,9 @@
       "name_zh": "draft-resume-injector.sh — C-draft cascade 的 C1（SessionStart 草稿续接注入）",
       "hook_type": "advisory (SessionStart)",
       "events": [
-        "(未注册)"
+        "SessionStart"
       ],
-      "registered": false,
+      "registered": true,
       "what_protects": "draft-resume-injector.sh — C-draft cascade 的 C1（SessionStart 草稿续接注入）",
       "kill_switch": "",
       "size_lines": 79
@@ -1760,9 +1751,9 @@
       "name_zh": "OMC_SKIP_HOOKS 逃生门：异常时快速止血（2026-06-27 L3 batch step4+dispatcher fix）",
       "hook_type": "enforcement",
       "events": [
-        "PreToolUse"
+        "(未注册)"
       ],
-      "registered": true,
+      "registered": false,
       "what_protects": "OMC_SKIP_HOOKS 逃生门：异常时快速止血（2026-06-27 L3 batch step4+dispatcher fix）",
       "kill_switch": "",
       "size_lines": 44
@@ -1862,7 +1853,7 @@
       "registered": true,
       "what_protects": "V46.4 ★ LLM-as-judge Stop hook — 由司聪 P0-1 驱动升级（2026-06-05）",
       "kill_switch": "OMC_SKIP_HOOKS",
-      "size_lines": 115
+      "size_lines": 116
     },
     {
       "id": "llm-judge-subagent.sh",
@@ -1874,28 +1865,40 @@
       "registered": true,
       "what_protects": "V46.6 ★ SubagentStop hook — 三元组自检（铁律3 SUBAGENT-EVIDENCE 硬约束）",
       "kill_switch": "OMC_SKIP_HOOKS",
-      "size_lines": 55
+      "size_lines": 56
+    },
+    {
+      "id": "mem-cascade-consumer.sh",
+      "name_zh": "mem-cascade-consumer.sh — SessionStart: 闭合 qmd/codebase 消费方门",
+      "hook_type": "advisory",
+      "events": [
+        "SessionStart"
+      ],
+      "registered": true,
+      "what_protects": "mem-cascade-consumer.sh — SessionStart: 闭合 qmd/codebase 消费方门",
+      "kill_switch": "OMC_SKIP_HOOKS",
+      "size_lines": 35
     },
     {
       "id": "mem-cascade.sh",
-      "name_zh": "mem-cascade.sh — Stop hook: 检测 mem-mcp-queue.jsonl queued 条目 → 写各 backend flush-",
-      "hook_type": "advisory",
+      "name_zh": "mem-cascade.sh — Stop hook: 写各 backend flush-requested marker + qmd 后台自动 embed(A",
+      "hook_type": "(未标注)",
       "events": [
-        "(未注册)"
+        "Stop"
       ],
-      "registered": false,
-      "what_protects": "mem-cascade.sh — Stop hook: 检测 mem-mcp-queue.jsonl queued 条目 → 写各 backend flush-requested 通知主调度器",
-      "kill_switch": "",
-      "size_lines": 157
+      "registered": true,
+      "what_protects": "mem-cascade.sh — Stop hook: 写各 backend flush-requested marker + qmd 后台自动 embed(ADR-C0)",
+      "kill_switch": "OMC_SKIP_HOOKS(全禁)",
+      "size_lines": 179
     },
     {
       "id": "multi-session-guard.sh",
       "name_zh": "OMC_SKIP_HOOKS 逃生门：异常时快速止血（2026-06-27 L3 batch step4/7）",
       "hook_type": "enforcement",
       "events": [
-        "(未注册)"
+        "PreToolUse"
       ],
-      "registered": false,
+      "registered": true,
       "what_protects": "OMC_SKIP_HOOKS 逃生门：异常时快速止血（2026-06-27 L3 batch step4/7）",
       "kill_switch": "设",
       "size_lines": 80
@@ -1914,24 +1917,24 @@
     },
     {
       "id": "notion-queue-flusher.sh",
-      "name_zh": "notion-queue-flusher.sh — SessionStart 检测 Notion 推送队列并通知主调度器",
+      "name_zh": "notion-queue-flusher.sh — Stop 检测 Notion 推送队列并通知主调度器",
       "hook_type": "advisory",
       "events": [
         "Stop"
       ],
       "registered": true,
-      "what_protects": "notion-queue-flusher.sh — SessionStart 检测 Notion 推送队列并通知主调度器",
+      "what_protects": "notion-queue-flusher.sh — Stop 检测 Notion 推送队列并通知主调度器",
       "kill_switch": "",
-      "size_lines": 105
+      "size_lines": 128
     },
     {
       "id": "official-paradigm-guard.sh",
       "name_zh": "official-paradigm-guard.sh — PreToolUse(Edit|Write|MultiEdit) 官方范式守卫",
       "hook_type": "advisory",
       "events": [
-        "Edit"
+        "PreToolUse"
       ],
-      "registered": false,
+      "registered": true,
       "what_protects": "official-paradigm-guard.sh — PreToolUse(Edit|Write|MultiEdit) 官方范式守卫",
       "kill_switch": "OMC_SKIP_HOOKS",
       "size_lines": 48
@@ -2078,7 +2081,7 @@
       "registered": true,
       "what_protects": "session-end-evolution-capture.sh — SessionEnd hook",
       "kill_switch": "OMC_SKIP_HOOKS",
-      "size_lines": 36
+      "size_lines": 37
     },
     {
       "id": "session-end.sh",
@@ -2114,19 +2117,7 @@
       "registered": true,
       "what_protects": "sessionstart-guard-dispatcher.sh — W5-D (2026-06-22) + HUD guard (2026-06-23)",
       "kill_switch": "",
-      "size_lines": 64
-    },
-    {
-      "id": "smart-closure-learning-trace.sh",
-      "name_zh": "smart-closure-learning-trace.sh — 任务收口时提示用户写一条 learning-trace",
-      "hook_type": "advisory",
-      "events": [
-        "PostToolUse"
-      ],
-      "registered": true,
-      "what_protects": "smart-closure-learning-trace.sh — 任务收口时提示用户写一条 learning-trace",
-      "kill_switch": "",
-      "size_lines": 121
+      "size_lines": 66
     },
     {
       "id": "smart-recommendation-injector.sh",
@@ -2150,7 +2141,7 @@
       "registered": true,
       "what_protects": "stop-completion-enforcer.sh — Stop hook 升级版 (V52 已有 advisory 基础上加硬门)",
       "kill_switch": "OMC_SKIP_HOOKS",
-      "size_lines": 79
+      "size_lines": 80
     },
     {
       "id": "stop-failure-monitor.sh",
@@ -2186,7 +2177,7 @@
       "registered": true,
       "what_protects": "OMC_SKIP_HOOKS 逃生门：异常时快速止血（2026-06-27 L3 batch step4/7）",
       "kill_switch": "",
-      "size_lines": 85
+      "size_lines": 86
     },
     {
       "id": "teammate-task-completed.sh",
@@ -2258,7 +2249,7 @@
       "registered": true,
       "what_protects": "OMC_SKIP_HOOKS 逃生门：异常时快速止血",
       "kill_switch": "",
-      "size_lines": 58
+      "size_lines": 65
     },
     {
       "id": "user-prompt-task-auto-split.sh",
@@ -2436,7 +2427,7 @@
       "level": "?",
       "description": "需求优化与澄清专家。当用户需求模糊、不完整或口语化时自动激活。 将模糊需求转化为精确的任务蓝图，特别适合小白用户、非专业用户的需求优化。",
       "trigger_words": [],
-      "body_short": "你是 Smart-Flow V21 的需求分析与优化专家（needs-analyst）。\n同时扮演：Claude 首席教育专家 + 资深架构师 + 用户体验顾问。\n\n分析框架（5W1H+R）\n- **What**（做什么）：明确目标，消除歧义\n- **Why**（为什么）：理解业务动机，发现真实需求\n- **Who**（谁使用）：确定用户群体和使用场景\n- **Where**（在哪里）：运行环境、平台、约束条件\n- **When**（何时完成）：优先级和时间预期\n- **How**（如何实现）：推荐技术路线（给 2-3 个选项）\n- **Risk**（风险）：潜在问题和预防措施\n\n输出格式\n\n需求理解\n- 【原始需求】：{用户原话}\n- 【优化后需求】：{精确描述}\n- 【核心目标】：{真实意图}\n\n任务蓝图（DAG）\n1. {任务1}（独立，可并行）\n2. {任务2}（依赖任务1）\n3. {任务3}（独立，可并行）\n\n推荐方案\n- 【最优技术路线】：{方案A}\n- 【备选方案】：{方案B / C}\n- 【关键假设】：{需用户确认的假设清单}\n- 【验收标准】：{如何判断完成}\n\n执行建议\n- 并行度建议：{N} 个 agent\n- 复杂度评估：{R0-R4}\n- 推荐模型：sonnet / opus（haiku 不可用）\n\n智能升级协议（V26.5.3 增强）\n\n检测到以下信号时，自动升级为深度分析流程：\n\n升级触发条件\n| 信号 | 升级目标 | 说明 |\n|------|---------|------|\n| 需求涉及 ≥3 个模块 | → deep-dive | 根因分析 + 深度访谈 |\n| 需要外部信息/调研 | → deep-research | 5 层递进 + 多源验证 |\n| 需求需要结构化规划 | → ralplan | 共识规划 + DAG 分解 |\n"
+      "body_short": "你是 Smart-Flow V21 的需求分析与优化专家（needs-analyst）。\n同时扮演：Claude 首席教育专家 + 资深架构师 + 用户体验顾问。\n\n分析框架（5W1H+R）\n- **What**（做什么）：明确目标，消除歧义\n- **Why**（为什么）：理解业务动机，发现真实需求\n- **Who**（谁使用）：确定用户群体和使用场景\n- **Where**（在哪里）：运行环境、平台、约束条件\n- **When**（何时完成）：优先级和时间预期\n- **How**（如何实现）：推荐技术路线（给 2-3 个选项）\n- **Risk**（风险）：潜在问题和预防措施\n\n输出格式\n\n需求理解\n- 【原始需求】：{用户原话}\n- 【优化后需求】：{精确描述}\n- 【核心目标】：{真实意图}\n\n任务蓝图（DAG）\n1. {任务1}（独立，可并行）\n2. {任务2}（依赖任务1）\n3. {任务3}（独立，可并行）\n\n推荐方案\n- 【最优技术路线】：{方案A}\n- 【备选方案】：{方案B / C}\n- 【关键假设】：{需用户确认的假设清单}\n- 【验收标准】：{如何判断完成}\n\n执行建议\n- 并行度建议：{N} 个 agent\n- 复杂度评估：{R0-R4}\n- 推荐模型：sonnet / opus（haiku 不可用）\n\n澄清强制协议（FE1 · AskUserQuestion 触发 · 2026-07-01）\n\n当分析发现以下任一条件时，**必须在输出任何\"推荐方案\"之前**使用 `AskUserQuestion` 工具澄清：\n\n| 触发条件 | 示例 |\n|----------|------|\n| 5W1H 中 ≥2 项无法确定 | 目标用户/完成标准不明 |\n| 需求涉及 ≥3 模块且边界不清 | \"帮我做个系统\" |\n| 用户使用放弃决策词 | \"随便/都行/你"
     },
     {
       "id": "project-director",
