@@ -715,7 +715,7 @@ const GS_DOCS = [
   '03-全能力清单-Skills+MCP+插件.html','04-CMMI配置文档-PM专业版.html',
   '05-创业分析专家系统.html','06-CEO能力速用手册.html',
   'dashboard.html','mycc-stats.html','MYCC-能力全景总册.html',
-  'external-intel-prompt-v7.html','external-investigator-prompt.html',
+  'external-intel-prompt-v7.html',
   'requirements-summary-for-external-ai.html'
 ];
 let gsReady = false, gsMinisearch = null, gsDocs = [];
