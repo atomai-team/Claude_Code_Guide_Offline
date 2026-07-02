@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-01T08:56:06.202564Z",
+  "generated_at": "2026-07-02T08:56:11.525193Z",
   "version": {
-    "claude_code": "2.1.197 (Claude Code)",
+    "claude_code": "2.1.198 (Claude Code)",
     "omc": "4.15.0",
     "stats_engine": "V53",
     "cc_switch": "OFF"
   },
   "counts": {
-    "skills": 148,
+    "skills": 149,
     "workflows": 14,
     "hooks_registered": 51,
     "hook_events": 17,
@@ -23,7 +23,7 @@
     "enabled_plugins": 32,
     "total_plugins": 64,
     "rules": 3,
-    "intent_words_routes": 162,
+    "intent_words_routes": 163,
     "external_clis": 3
   },
   "lists": {
@@ -1360,6 +1360,19 @@
         "target": ""
       },
       {
+        "name": "needs_to_blueprint_route",
+        "priority": 77,
+        "keywords": [
+          "需求变蓝图",
+          "需求精确化",
+          "出任务蓝图",
+          "scalar转binary",
+          "把需求说清",
+          "需求转精确"
+        ],
+        "target": ""
+      },
+      {
         "name": "research_quick",
         "priority": 76,
         "keywords": [
@@ -2547,6 +2560,7 @@
       "mycc-selfheal": "mycc 自身问题自愈。",
       "mycc-skill-audit-cycle": "mycc Skill 工程化审计闭环（5步）— 审计→P1清单→用户决策→Agent并行修复→验证Workflow。月度自动触发（接入self-evolve-loop），用户说'开始修/fix skills/skill质量'即启动修复阶段。禁止跳过用户决策直接进入修复。",
       "neat-freak": "任务完成后自动三层对齐——项目文档↔CLAUDE.md↔跨会话记忆同步。解决'代码改7轮文档还停在第一版'的记忆腐烂。触发词：文档对齐、记忆同步、neat freak、整理文档。",
+      "needs-to-blueprint": "把模糊需求转成精确任务蓝图 — scalar→binary 断言 + artifact 目标 + verify-before-assert 验收。轻量默认,复杂时调 needs-analyst 深挖。触发词:需求变蓝图/需求精确化/出任务蓝图/scalar转binary/把需求说清",
       "no-plugin-prompts": "不依赖任何插件的 6 步并行开发 Prompt 套件。在 Claude Code / 任意强模型环境中，纯 prompt 复现\"并行 + 高质量 + 不放弃\"的工程执行效果。适合团队复用、零依赖落地。触发词：不依赖插件 / 纯 prompt 模式 / 团队复用 prompt / 人肉并行。",
       "notion-knowledge-capture": "把对话与决策整理为结构化 Notion 页面,触发:沉淀到 Notion/整理笔记/决策日志/知识沉淀。",
       "notion-spec-to-implementation": "Notion 规格说明 → 代码实现。",
@@ -2751,6 +2765,7 @@
         "last30days",
         "memory-checkup",
         "memory-dream-consolidation",
+        "needs-to-blueprint",
         "prototype",
         "ra-qm-team",
         "smart-closure",

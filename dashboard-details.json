@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-01T08:56:09.644351Z",
+  "generated_at": "2026-07-02T08:56:43.792762Z",
   "version": "P2-4-full",
   "counts": {
-    "skills_total": 148,
+    "skills_total": 149,
     "hooks_total": 65,
     "agents_total": 89
   },
@@ -996,6 +996,16 @@
       "what_for": "",
       "example": "",
       "body_short": "/neat-freak — V26.3 三层文档自动对齐\n\n> 补齐 V26.3 缺失的\"检测→修复\"闭环：document-management.md定义了文档规范，neat-freak 负责自动执行检查与修复。\n> 触发方式：主调度器在任务完成时手动 `/neat-freak`，或经 Stop/SubagentStop hook 链调用。\n> ⚠️ 历史勘误（2026-06-22 P0-2 实测修正）：旧文档称\"集成到 task-completed.sh hook\"——该 hook **从不存在**（实测 `hooks/` 无此文件，settings 无此注册）。真实任务完成钩子是 **Stop**（5 hook）/ **SubagentStop**（3 hook）。\n\n三层对齐模型\n\n[代码块省略]\n\n触发条件\n\n自动触发\n- **Stop / SubagentStop hook 链**：每次任务完成时自动调用（真实路径，task-completed hook 不存在）\n- **SubagentStop**：每次子 agent 完成时轻量检查\n\n手动触发\n- `/neat-freak` — 立即运行三层对齐\n- \"文档对齐\" / \"记忆同步\" / \"neat freak\" / \"整理文档\"\n\nLayer 1: 代码 ↔ 文档对齐\n\n检测规则\n\n| 代码变更类型 | 需要检查的文档 |\n|------------|-------------|\n| 新增 skill | skills/ 目录 + CLAUDE.md skills列表 + capability-registry.json |\n| 修改 hook | hooks/ 目录 + settings.local.json + CHANGELOG |\n| 修改规则 | rules/ 目录 + CLAUDE.md 引用 "
+    },
+    {
+      "id": "needs-to-blueprint",
+      "name_zh": "把模糊需求转成精确任务蓝图 — scalar→binary 断言 + artifact 目标 + verify-before-assert 验收。轻量默认,复杂",
+      "name_en": "needs-to-blueprint",
+      "description": "把模糊需求转成精确任务蓝图 — scalar→binary 断言 + artifact 目标 + verify-before-assert 验收。轻量默认,复杂时调 needs-analyst 深挖。触发词:需求变蓝图/需求精确化/出任务蓝图/scalar转binary/把需求说清",
+      "trigger_words": [],
+      "what_for": "| 命中 | 用本 skill |\n|---|---|\n| 用户给了模糊/口语需求,想要\"能开工的蓝图\" | ✅ 默认 |\n| 需求 ≤2 模块 + 无外部调研 | ✅ 直接产蓝图 |\n| 需求 ≥3 模块 / 边界不清 / 需调研 | ⏫ 先本 skill 框住,再升级 needs-analyst / deep-interview |\n| 用户只想快速填个 spec | ↩️ 转 sp-brainstorming(更轻) |",
+      "example": "",
+      "body_short": "Needs → Blueprint — scalar→binary 需求转换 SOP\n\n> 输入:一句模糊需求。输出:可直接执行、可验收的**精确任务蓝图**。\n> 与邻居的边界:`sp-brainstorming`=30秒捕获 spec(填空);本 skill=把 spec 转 **binary 蓝图**;`needs-analyst`/`deep-interview`=复杂时的深挖后端(本 skill 调它们)。\n> 自证:本 SOP 每条产出都是 binary(可判真假),不是 scalar(需解释)。这是 CLAUDE.md 规则 `claude-md-binary-not-scalar` 的可执行化。\n\n何时用\n\n| 命中 | 用本 skill |\n|---|---|\n| 用户给了模糊/口语需求,想要\"能开工的蓝图\" | ✅ 默认 |\n| 需求 ≤2 模块 + 无外部调研 | ✅ 直接产蓝图 |\n| 需求 ≥3 模块 / 边界不清 / 需调研 | ⏫ 先本 skill 框住,再升级 needs-analyst / deep-interview |\n| 用户只想快速填个 spec | ↩️ 转 sp-brainstorming(更轻) |\n\nStep 1 — 捕获原始需求(0 加工)\n\n原样记录用户原话,不脑补。缺失维度先标 `[?]`,不猜。\n\n[代码块省略]\n\nStep 2 — scalar→binary 转换(核心)\n\n逐条把\"需解释的形容词\"改写成\"可判真假的断言\"。这是本 skill 的立身之本。\n\n| scalar(禁) | binary(产出) |\n|---|---|\n| \"做个好用的登录\" | \"POST /login 接受 email+password,成功返 200+JWT,失败返 401\" |\n| \"性能要好\" | \"P95 延迟 < 200m"
     },
     {
       "id": "no-plugin-prompts",
