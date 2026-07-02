@@ -1,10 +1,10 @@
 # Claude Code 全能力清单
-> Skills × 150 · Agents × 52 · Hooks × 53(50文件) · 插件 × 32启用/35总 · MCP × 12+ · 外部 CLI × 5联
+> Skills × 149 · Agents × 52 · Hooks × 53(50文件) · 插件 × 32启用/35总 · MCP × 12+ · 外部 CLI × 5联
 > OMC 4.15.0 · CLI v2.1.191 · 2026-06-25 完整版（mycc-stats 实测）
 
 ---
 
-## 第一部分：150 个 Skills 完整分类说明
+## 第一部分：149 个 Skills 完整分类说明
 
 ### 🚀 执行与工作模式（核心驱动）
 
@@ -529,8 +529,8 @@ cleanroom-precheck.sh 6步检查：
 
 ### oh-my-claudecode（OMC）
 **核心插件，提供整套 OMC 能力**
-- Skills: **150** 原生 skill
-- Hooks: **47** 自动守护钩子（50 个 hook 文件，14 个 hook 事件类型）
+- Skills: **149** 原生 skill
+- Hooks: **51** 自动守护钩子（50 个 hook 文件，14 个 hook 事件类型）
 - Workflows: **14** 个 JS 流水线脚本
 - MCP Tools: wiki/notepad/state/LSP/shared-memory 等
 - Agents: **91** 角色（核心6 + CEO角色12 + 行业专家7 + 团队蓝图6 + 通用21）

@@ -1,32 +1,32 @@
 {
   "meta": {
-    "updated": "2026-06-30",
-    "generated_at": "2026-06-30T12:37:38",
+    "updated": "2026-07-02",
+    "generated_at": "2026-07-02T22:00:45",
     "source": "project-ledger.json · 单向投影(本机SSoT,dashboard只读,勿手改)",
     "counts": {
       "requirements": {
-        "done": 20,
-        "partial": 9,
-        "todo": 1,
+        "done": 28,
+        "partial": 2,
+        "todo": 2,
         "blocked": 0,
         "doing": 0,
-        "total": 30
+        "total": 32
       },
       "wbs": {
-        "done": 4,
+        "done": 9,
         "partial": 0,
-        "todo": 4,
+        "todo": 2,
         "blocked": 0,
         "doing": 0,
-        "total": 8
+        "total": 11
       },
       "subplans": {
-        "done": 10,
+        "done": 21,
         "partial": 0,
-        "todo": 11,
+        "todo": 8,
         "blocked": 0,
         "doing": 0,
-        "total": 21
+        "total": 29
       },
       "milestones": {
         "done": 2,
@@ -42,13 +42,13 @@
     "待规划": [],
     "待办": [
       {
-        "id": "L2",
-        "title": "#6 _template备份",
-        "group": "learning-trace",
+        "id": "BIZ1",
+        "title": "郭哥的ai需求(源:提醒事项-新赛点)",
+        "group": "业务",
         "status": "todo",
         "status_label": "待办",
-        "evidence": "低优未做",
-        "closure_badge": "有记录",
+        "evidence": "",
+        "closure_badge": "待补证据",
         "blocker": "",
         "session_id": "",
         "session_name": "",
@@ -58,19 +58,18 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
-      }
-    ],
-    "进行中": [
+        "priority": "medium",
+        "next_action": "微信问郭哥:ai需求具体要什么+期望交付时间"
+      },
       {
-        "id": "M2",
-        "title": "先理解需求→优化→澄清→执行",
-        "group": "元请求",
-        "status": "partial",
-        "status_label": "部分",
-        "evidence": "needs-analyst存在但未默认自动串",
-        "closure_badge": "有记录",
-        "blocker": "BL4",
+        "id": "BIZ2",
+        "title": "和杨烁沟通孵化器事宜(源:提醒事项-新赛点)",
+        "group": "业务",
+        "status": "todo",
+        "status_label": "待办",
+        "evidence": "",
+        "closure_badge": "待补证据",
+        "blocker": "",
         "session_id": "",
         "session_name": "",
         "project_id": "",
@@ -79,8 +78,11 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
-      },
+        "priority": "medium",
+        "next_action": "7/3(周五)17:00前微信给杨烁第一次反馈"
+      }
+    ],
+    "进行中": [
       {
         "id": "D2",
         "title": "全量可点详情Modal",
@@ -98,7 +100,8 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "D3",
@@ -117,121 +120,8 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
-      },
-      {
-        "id": "D5",
-        "title": "5大段说明书",
-        "group": "Dashboard",
-        "status": "partial",
-        "status_label": "部分",
-        "evidence": "5段嵌入,4层工具协作原文未做",
-        "closure_badge": "有记录",
-        "blocker": "",
-        "session_id": "",
-        "session_name": "",
-        "project_id": "",
-        "parent_id": "",
-        "created_at": "",
-        "updated_at": "",
-        "due_date": "",
-        "completed_at": "",
-        "priority": "medium"
-      },
-      {
-        "id": "D7",
-        "title": "4路互通入口",
-        "group": "Dashboard",
-        "status": "partial",
-        "status_label": "部分",
-        "evidence": "入口存在,Dashboard页签未全做",
-        "closure_badge": "有记录",
-        "blocker": "",
-        "session_id": "",
-        "session_name": "",
-        "project_id": "",
-        "parent_id": "",
-        "created_at": "",
-        "updated_at": "",
-        "due_date": "",
-        "completed_at": "",
-        "priority": "medium"
-      },
-      {
-        "id": "D9",
-        "title": "归档操作code review",
-        "group": "Dashboard",
-        "status": "partial",
-        "status_label": "部分",
-        "evidence": "reviewer6次签字,系统归档未做",
-        "closure_badge": "有记录",
-        "blocker": "",
-        "session_id": "",
-        "session_name": "",
-        "project_id": "",
-        "parent_id": "",
-        "created_at": "",
-        "updated_at": "",
-        "due_date": "",
-        "completed_at": "",
-        "priority": "medium"
-      },
-      {
-        "id": "T7",
-        "title": "多层记忆自动更新+外部投影",
-        "group": "任务三",
-        "status": "partial",
-        "status_label": "部分",
-        "evidence": "auto-memory✅,mem_iface✅,Notion flush未实跑",
-        "closure_badge": "有记录",
-        "blocker": "BL1",
-        "session_id": "",
-        "session_name": "",
-        "project_id": "",
-        "parent_id": "",
-        "created_at": "",
-        "updated_at": "",
-        "due_date": "",
-        "completed_at": "",
-        "priority": "medium"
-      },
-      {
-        "id": "T8",
-        "title": "先析意图→优化提示词→执行",
-        "group": "任务三",
-        "status": "partial",
-        "status_label": "部分",
-        "evidence": "BRIDGE推deep-interview,默认未串",
-        "closure_badge": "有记录",
-        "blocker": "BL4",
-        "session_id": "",
-        "session_name": "",
-        "project_id": "",
-        "parent_id": "",
-        "created_at": "",
-        "updated_at": "",
-        "due_date": "",
-        "completed_at": "",
-        "priority": "medium"
-      },
-      {
-        "id": "T14",
-        "title": "token优化/配置冲突/可固化盘点",
-        "group": "任务三",
-        "status": "partial",
-        "status_label": "部分",
-        "evidence": "维度含,实际盘点未跑",
-        "closure_badge": "有记录",
-        "blocker": "BL6",
-        "session_id": "",
-        "session_name": "",
-        "project_id": "",
-        "parent_id": "",
-        "created_at": "",
-        "updated_at": "",
-        "due_date": "",
-        "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
       }
     ],
     "审核中": [
@@ -252,7 +142,28 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
+      },
+      {
+        "id": "M2",
+        "title": "先理解需求→优化→澄清→执行",
+        "group": "元请求",
+        "status": "done",
+        "status_label": "完成",
+        "evidence": "closure-doc共识✅(mycc-0629/final-0628);board反哺对账",
+        "closure_badge": "有记录",
+        "blocker": "BL4",
+        "session_id": "",
+        "session_name": "",
+        "project_id": "",
+        "parent_id": "",
+        "created_at": "",
+        "updated_at": "",
+        "due_date": "",
+        "completed_at": "",
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "D1",
@@ -271,7 +182,8 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "D4",
@@ -290,7 +202,28 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
+      },
+      {
+        "id": "D5",
+        "title": "5大段说明书",
+        "group": "Dashboard",
+        "status": "done",
+        "status_label": "完成",
+        "evidence": "closure-doc共识✅(mycc-0629/final-0628);board反哺对账",
+        "closure_badge": "有记录",
+        "blocker": "",
+        "session_id": "",
+        "session_name": "",
+        "project_id": "",
+        "parent_id": "",
+        "created_at": "",
+        "updated_at": "",
+        "due_date": "",
+        "completed_at": "",
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "D6",
@@ -309,7 +242,28 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
+      },
+      {
+        "id": "D7",
+        "title": "4路互通入口",
+        "group": "Dashboard",
+        "status": "done",
+        "status_label": "完成",
+        "evidence": "closure-doc共识✅(mycc-0629/final-0628);board反哺对账",
+        "closure_badge": "有记录",
+        "blocker": "",
+        "session_id": "",
+        "session_name": "",
+        "project_id": "",
+        "parent_id": "",
+        "created_at": "",
+        "updated_at": "",
+        "due_date": "",
+        "completed_at": "",
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "D8",
@@ -328,7 +282,28 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
+      },
+      {
+        "id": "D9",
+        "title": "归档操作code review",
+        "group": "Dashboard",
+        "status": "done",
+        "status_label": "完成",
+        "evidence": "closure-doc共识✅(mycc-0629/final-0628);board反哺对账",
+        "closure_badge": "有记录",
+        "blocker": "",
+        "session_id": "",
+        "session_name": "",
+        "project_id": "",
+        "parent_id": "",
+        "created_at": "",
+        "updated_at": "",
+        "due_date": "",
+        "completed_at": "",
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "L1",
@@ -347,7 +322,28 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
+      },
+      {
+        "id": "L2",
+        "title": "#6 _template备份",
+        "group": "learning-trace",
+        "status": "done",
+        "status_label": "完成",
+        "evidence": "closure-doc共识✅(mycc-0629/final-0628);board反哺对账",
+        "closure_badge": "有记录",
+        "blocker": "",
+        "session_id": "",
+        "session_name": "",
+        "project_id": "",
+        "parent_id": "",
+        "created_at": "",
+        "updated_at": "",
+        "due_date": "",
+        "completed_at": "",
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "L3",
@@ -366,7 +362,8 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "T1",
@@ -385,7 +382,8 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "T2",
@@ -404,7 +402,8 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "T3",
@@ -423,7 +422,8 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "T4",
@@ -442,7 +442,8 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "T5",
@@ -461,7 +462,8 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "T6",
@@ -480,7 +482,48 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
+      },
+      {
+        "id": "T7",
+        "title": "多层记忆自动更新+外部投影",
+        "group": "任务三",
+        "status": "done",
+        "status_label": "完成",
+        "evidence": "closure-doc共识✅(mycc-0629/final-0628);board反哺对账",
+        "closure_badge": "有记录",
+        "blocker": "BL1",
+        "session_id": "",
+        "session_name": "",
+        "project_id": "",
+        "parent_id": "",
+        "created_at": "",
+        "updated_at": "",
+        "due_date": "",
+        "completed_at": "",
+        "priority": "medium",
+        "next_action": ""
+      },
+      {
+        "id": "T8",
+        "title": "先析意图→优化提示词→执行",
+        "group": "任务三",
+        "status": "done",
+        "status_label": "完成",
+        "evidence": "closure-doc共识✅(mycc-0629/final-0628);board反哺对账",
+        "closure_badge": "有记录",
+        "blocker": "BL4",
+        "session_id": "",
+        "session_name": "",
+        "project_id": "",
+        "parent_id": "",
+        "created_at": "",
+        "updated_at": "",
+        "due_date": "",
+        "completed_at": "",
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "T9",
@@ -499,7 +542,8 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "T10",
@@ -518,7 +562,8 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "T11",
@@ -537,7 +582,8 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "T12",
@@ -556,7 +602,8 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "T13",
@@ -575,7 +622,28 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
+      },
+      {
+        "id": "T14",
+        "title": "token优化/配置冲突/可固化盘点",
+        "group": "任务三",
+        "status": "done",
+        "status_label": "完成",
+        "evidence": "docs/audit/token-cost-inventory-2026-07-02.md 实跑:每会话注入≈37.5k tok(常驻15k/自有描述7k/插件15.5k)+每轮hook≈450;冲突0 P0;盘点零API消耗",
+        "closure_badge": "有记录",
+        "blocker": "BL6",
+        "session_id": "",
+        "session_name": "",
+        "project_id": "",
+        "parent_id": "",
+        "created_at": "",
+        "updated_at": "",
+        "due_date": "",
+        "completed_at": "",
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "T15",
@@ -594,7 +662,8 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
       },
       {
         "id": "CORE",
@@ -613,7 +682,8 @@
         "updated_at": "",
         "due_date": "",
         "completed_at": "",
-        "priority": "medium"
+        "priority": "medium",
+        "next_action": ""
       }
     ]
   },
@@ -703,15 +773,16 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "M2",
       "title": "先理解需求→优化→澄清→执行",
       "group": "元请求",
-      "status": "partial",
-      "status_label": "部分",
-      "evidence": "needs-analyst存在但未默认自动串",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "closure-doc共识✅(mycc-0629/final-0628);board反哺对账",
       "closure_badge": "有记录",
       "blocker": "BL4",
       "session_id": "",
@@ -722,7 +793,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "D1",
@@ -741,7 +813,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "D2",
@@ -760,7 +833,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "D3",
@@ -779,7 +853,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "D4",
@@ -798,15 +873,16 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "D5",
       "title": "5大段说明书",
       "group": "Dashboard",
-      "status": "partial",
-      "status_label": "部分",
-      "evidence": "5段嵌入,4层工具协作原文未做",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "closure-doc共识✅(mycc-0629/final-0628);board反哺对账",
       "closure_badge": "有记录",
       "blocker": "",
       "session_id": "",
@@ -817,7 +893,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "D6",
@@ -836,15 +913,16 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "D7",
       "title": "4路互通入口",
       "group": "Dashboard",
-      "status": "partial",
-      "status_label": "部分",
-      "evidence": "入口存在,Dashboard页签未全做",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "closure-doc共识✅(mycc-0629/final-0628);board反哺对账",
       "closure_badge": "有记录",
       "blocker": "",
       "session_id": "",
@@ -855,7 +933,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "D8",
@@ -874,15 +953,16 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "D9",
       "title": "归档操作code review",
       "group": "Dashboard",
-      "status": "partial",
-      "status_label": "部分",
-      "evidence": "reviewer6次签字,系统归档未做",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "closure-doc共识✅(mycc-0629/final-0628);board反哺对账",
       "closure_badge": "有记录",
       "blocker": "",
       "session_id": "",
@@ -893,7 +973,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "L1",
@@ -912,15 +993,16 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "L2",
       "title": "#6 _template备份",
       "group": "learning-trace",
-      "status": "todo",
-      "status_label": "待办",
-      "evidence": "低优未做",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "closure-doc共识✅(mycc-0629/final-0628);board反哺对账",
       "closure_badge": "有记录",
       "blocker": "",
       "session_id": "",
@@ -931,7 +1013,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "L3",
@@ -950,7 +1033,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "T1",
@@ -969,7 +1053,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "T2",
@@ -988,7 +1073,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "T3",
@@ -1007,7 +1093,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "T4",
@@ -1026,7 +1113,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "T5",
@@ -1045,7 +1133,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "T6",
@@ -1064,15 +1153,16 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "T7",
       "title": "多层记忆自动更新+外部投影",
       "group": "任务三",
-      "status": "partial",
-      "status_label": "部分",
-      "evidence": "auto-memory✅,mem_iface✅,Notion flush未实跑",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "closure-doc共识✅(mycc-0629/final-0628);board反哺对账",
       "closure_badge": "有记录",
       "blocker": "BL1",
       "session_id": "",
@@ -1083,15 +1173,16 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "T8",
       "title": "先析意图→优化提示词→执行",
       "group": "任务三",
-      "status": "partial",
-      "status_label": "部分",
-      "evidence": "BRIDGE推deep-interview,默认未串",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "closure-doc共识✅(mycc-0629/final-0628);board反哺对账",
       "closure_badge": "有记录",
       "blocker": "BL4",
       "session_id": "",
@@ -1102,7 +1193,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "T9",
@@ -1121,7 +1213,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "T10",
@@ -1140,7 +1233,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "T11",
@@ -1159,7 +1253,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "T12",
@@ -1178,7 +1273,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "T13",
@@ -1197,15 +1293,16 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "T14",
       "title": "token优化/配置冲突/可固化盘点",
       "group": "任务三",
-      "status": "partial",
-      "status_label": "部分",
-      "evidence": "维度含,实际盘点未跑",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "docs/audit/token-cost-inventory-2026-07-02.md 实跑:每会话注入≈37.5k tok(常驻15k/自有描述7k/插件15.5k)+每轮hook≈450;冲突0 P0;盘点零API消耗",
       "closure_badge": "有记录",
       "blocker": "BL6",
       "session_id": "",
@@ -1216,7 +1313,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "T15",
@@ -1235,7 +1333,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "CORE",
@@ -1254,7 +1353,48 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
+    },
+    {
+      "id": "BIZ1",
+      "title": "郭哥的ai需求(源:提醒事项-新赛点)",
+      "group": "业务",
+      "status": "todo",
+      "status_label": "待办",
+      "evidence": "",
+      "closure_badge": "待补证据",
+      "blocker": "",
+      "session_id": "",
+      "session_name": "",
+      "project_id": "",
+      "parent_id": "",
+      "created_at": "",
+      "updated_at": "",
+      "due_date": "",
+      "completed_at": "",
+      "priority": "medium",
+      "next_action": "微信问郭哥:ai需求具体要什么+期望交付时间"
+    },
+    {
+      "id": "BIZ2",
+      "title": "和杨烁沟通孵化器事宜(源:提醒事项-新赛点)",
+      "group": "业务",
+      "status": "todo",
+      "status_label": "待办",
+      "evidence": "",
+      "closure_badge": "待补证据",
+      "blocker": "",
+      "session_id": "",
+      "session_name": "",
+      "project_id": "",
+      "parent_id": "",
+      "created_at": "",
+      "updated_at": "",
+      "due_date": "",
+      "completed_at": "",
+      "priority": "medium",
+      "next_action": "7/3(周五)17:00前微信给杨烁第一次反馈"
     }
   ],
   "wbs": [
@@ -1275,7 +1415,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "W06",
@@ -1294,7 +1435,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "W04",
@@ -1313,7 +1455,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "W05",
@@ -1332,16 +1475,17 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "W11",
       "title": "smoke-tests 5项",
       "group": "",
-      "status": "todo",
-      "status_label": "待办",
-      "evidence": "",
-      "closure_badge": "待补证据",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "smoke 5/5 exit0;commit 2647fc5",
+      "closure_badge": "已验证(commit)",
       "blocker": "",
       "session_id": "",
       "session_name": "",
@@ -1351,16 +1495,17 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "W22",
       "title": "MCP≤5 旧规则移除",
       "group": "",
-      "status": "todo",
-      "status_label": "待办",
-      "evidence": "",
-      "closure_badge": "待补证据",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "superseded:MCP≤5规则grep零命中=不存在,no-op无需动作",
+      "closure_badge": "有记录",
       "blocker": "",
       "session_id": "",
       "session_name": "",
@@ -1370,16 +1515,17 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "W03",
       "title": "auto-rollback.sh",
       "group": "",
-      "status": "todo",
-      "status_label": "待办",
-      "evidence": "",
-      "closure_badge": "待补证据",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "lib/auto-rollback.sh 48行实存(session e0391a70亲验),board⬜属漂移;p2-2称已落地49行属实",
+      "closure_badge": "有记录",
       "blocker": "",
       "session_id": "",
       "session_name": "",
@@ -1389,11 +1535,52 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "W24",
       "title": "SkillSpector (W2剩余)",
+      "group": "",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "本机 lib/skill-security-scan.py V2 等价物已实现+13报告(最新2026-06-28),W24评估裁决=复用本机不装外部SkillSpector(verifier a15e97e6核实)",
+      "closure_badge": "有记录",
+      "blocker": "",
+      "session_id": "",
+      "session_name": "",
+      "project_id": "",
+      "parent_id": "",
+      "created_at": "",
+      "updated_at": "",
+      "due_date": "",
+      "completed_at": "",
+      "priority": "medium",
+      "next_action": ""
+    },
+    {
+      "id": "W27",
+      "title": "承诺机制gate(plan/board完成必绑已触发next-action)",
+      "group": "",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "23086ad board.py三层gate(登记/收口/可视),沙箱11绿+真环境负测试拒done无证据",
+      "closure_badge": "已验证(commit)",
+      "blocker": "",
+      "session_id": "",
+      "session_name": "",
+      "project_id": "",
+      "parent_id": "",
+      "created_at": "",
+      "updated_at": "",
+      "due_date": "",
+      "completed_at": "",
+      "priority": "medium",
+      "next_action": ""
+    },
+    {
+      "id": "dual-end-cloud-config",
+      "title": "账号云层手动配置(claude.ai侧,待执行): ①github/context7转账号级Connector ②~15领域skill上传(ra-qm-team/baoyu-translate/humanize-chinese等) ③贴Instructions。逐步指南见 docs/references/account-cloud-setup-guide.md",
       "group": "",
       "status": "todo",
       "status_label": "待办",
@@ -1408,7 +1595,28 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
+    },
+    {
+      "id": "W28",
+      "title": "Session Goal Tracker(session全盘PM视图自动聚合:目标捕获/实时进度/聚合索引/结束摘要,4层复用不重造)",
+      "group": "",
+      "status": "todo",
+      "status_label": "待办",
+      "evidence": "",
+      "closure_badge": "待补证据",
+      "blocker": "",
+      "session_id": "",
+      "session_name": "",
+      "project_id": "",
+      "parent_id": "",
+      "created_at": "",
+      "updated_at": "",
+      "due_date": "",
+      "completed_at": "",
+      "priority": "medium",
+      "next_action": ""
     }
   ],
   "subplans": [
@@ -1429,16 +1637,17 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "B2",
       "title": "Notion走MCP官方",
       "group": "B记忆体系",
-      "status": "todo",
-      "status_label": "待办",
-      "evidence": "",
-      "closure_badge": "待补证据",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "cancelled:用户裁决memory→notion非法(知识栈铁律);mem-mcp-queue done_note为证",
+      "closure_badge": "有记录",
       "blocker": "BL3",
       "session_id": "",
       "session_name": "",
@@ -1448,16 +1657,17 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "B3",
       "title": "mem_query接qmd+codebase MCP",
       "group": "B记忆体系",
-      "status": "todo",
-      "status_label": "待办",
-      "evidence": "",
-      "closure_badge": "待补证据",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "3683fd6 mem_iface.py读路径A+qmd/codebase MCP hint;settings.local注册",
+      "closure_badge": "已验证(commit)",
       "blocker": "BL2",
       "session_id": "",
       "session_name": "",
@@ -1467,16 +1677,17 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "B4",
       "title": "接入Stop hook cascade",
       "group": "B记忆体系",
-      "status": "todo",
-      "status_label": "待办",
-      "evidence": "",
-      "closure_badge": "待补证据",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "3683fd6+bc6bbac mem-cascade.sh Stop+consumer SessionStart注册settings.local",
+      "closure_badge": "已验证(commit)",
       "blocker": "",
       "session_id": "",
       "session_name": "",
@@ -1486,7 +1697,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "B5",
@@ -1505,7 +1717,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "B6",
@@ -1524,16 +1737,17 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "C1",
       "title": "DRAFT buffer→SessionStart注入",
       "group": "C Draft",
-      "status": "todo",
-      "status_label": "待办",
-      "evidence": "",
-      "closure_badge": "待补证据",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "ad99401 draft-resume-injector.sh SessionStart注册(a84e43f3)",
+      "closure_badge": "已验证(commit)",
       "blocker": "",
       "session_id": "",
       "session_name": "",
@@ -1543,16 +1757,17 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "C2",
       "title": "DRAFT双向自动写pending",
       "group": "C Draft",
-      "status": "todo",
-      "status_label": "待办",
-      "evidence": "",
-      "closure_badge": "待补证据",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "复用覆盖:draft-buffer.py(8562B/11函数)含pending写+_pending_entries读,配C1 draft-resume-injector SessionStart注入=双向环已通(ad99401 cascade);无新代码 (session 824a3d07核实)",
+      "closure_badge": "已验证(commit)",
       "blocker": "",
       "session_id": "",
       "session_name": "",
@@ -1562,16 +1777,17 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "C3",
       "title": "跨session teleport标准化",
       "group": "C Draft",
-      "status": "todo",
-      "status_label": "待办",
-      "evidence": "",
-      "closure_badge": "待补证据",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "复用覆盖:teleport skill实存(~/.claude/skills/teleport/SKILL.md),跨session上下文接力已标准化;无新代码 (session 824a3d07核实)",
+      "closure_badge": "有记录",
       "blocker": "",
       "session_id": "",
       "session_name": "",
@@ -1581,16 +1797,17 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "C4",
       "title": "SessionEnd→Obsidian投影",
       "group": "C Draft",
-      "status": "todo",
-      "status_label": "待办",
-      "evidence": "",
-      "closure_badge": "待补证据",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "复用覆盖:auto-archive-stop.sh(Stop hook)→obsidian-note.py单向投影实存并live(CLAUDE.md已述);无新代码 (session 824a3d07核实)",
+      "closure_badge": "有记录",
       "blocker": "",
       "session_id": "",
       "session_name": "",
@@ -1600,16 +1817,17 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "C5",
       "title": "跨session草稿断点续传",
       "group": "C Draft",
-      "status": "todo",
-      "status_label": "待办",
-      "evidence": "",
-      "closure_badge": "待补证据",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "ad99401 draft-buffer.py 8562B落地",
+      "closure_badge": "已验证(commit)",
       "blocker": "",
       "session_id": "",
       "session_name": "",
@@ -1619,16 +1837,17 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "C6",
       "title": "draft-cascade smoke+reviewer",
       "group": "C Draft",
-      "status": "todo",
-      "status_label": "待办",
-      "evidence": "",
-      "closure_badge": "待补证据",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "ad99401 draft-cascade smoke",
+      "closure_badge": "已验证(commit)",
       "blocker": "",
       "session_id": "",
       "session_name": "",
@@ -1638,7 +1857,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "D-route",
@@ -1657,7 +1877,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "E-mem",
@@ -1676,7 +1897,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "F-board",
@@ -1695,7 +1917,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "G1-prompt",
@@ -1714,7 +1937,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "G2-toolupdate",
@@ -1733,16 +1957,17 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "G3-planauto",
       "title": "自动化plan触发器(薄触发器接omc-plan)",
       "group": "G新能力",
-      "status": "todo",
-      "status_label": "待办",
-      "evidence": "",
-      "closure_badge": "待补证据",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "薄触发器已建:hooks/plan-auto-trigger.sh(advisory/UserPromptSubmit,kill-switch+自触发防护完整,≥3文件/不可逆→建议omc-plan);按2026-06-29防bloat裁决保持opt-in未注册(settings.local 0引用),交付物完成、激活留user opt-in (session 824a3d07裁决)",
+      "closure_badge": "有记录",
       "blocker": "",
       "session_id": "",
       "session_name": "",
@@ -1752,7 +1977,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "G4-ambiguity",
@@ -1771,7 +1997,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "G5-tododecide",
@@ -1790,7 +2017,8 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
     },
     {
       "id": "G6-dashboard",
@@ -1809,69 +2037,282 @@
       "updated_at": "",
       "due_date": "",
       "completed_at": "",
-      "priority": "medium"
+      "priority": "medium",
+      "next_action": ""
+    },
+    {
+      "id": "FE1",
+      "title": "G1意图澄清×AskUserQuestion深度集成(链BL4)",
+      "group": "",
+      "status": "done",
+      "status_label": "完成",
+      "evidence": "吸收:P2提示词范式链路覆盖—BRIDGE(428f229)自动串deep-interview(本体6处AskUserQuestion门控)+needs-to-blueprint:102强制AskUserQuestion澄清(c55b7a0)+clarity_scorer前置,BL4已真关依赖清除",
+      "closure_badge": "已验证(commit)",
+      "blocker": "",
+      "session_id": "",
+      "session_name": "",
+      "project_id": "",
+      "parent_id": "",
+      "created_at": "",
+      "updated_at": "",
+      "due_date": "",
+      "completed_at": "",
+      "priority": "medium",
+      "next_action": ""
+    },
+    {
+      "id": "FE2",
+      "title": "跨系统健康监控:HUD显superpowers/gstack活跃度(链BL?)",
+      "group": "",
+      "status": "todo",
+      "status_label": "待办",
+      "evidence": "",
+      "closure_badge": "待补证据",
+      "blocker": "",
+      "session_id": "",
+      "session_name": "",
+      "project_id": "",
+      "parent_id": "",
+      "created_at": "",
+      "updated_at": "",
+      "due_date": "",
+      "completed_at": "",
+      "priority": "medium",
+      "next_action": ""
+    },
+    {
+      "id": "FE3",
+      "title": "学习脚手架:learning-trace半自动→闭环",
+      "group": "",
+      "status": "todo",
+      "status_label": "待办",
+      "evidence": "",
+      "closure_badge": "待补证据",
+      "blocker": "",
+      "session_id": "",
+      "session_name": "",
+      "project_id": "",
+      "parent_id": "",
+      "created_at": "",
+      "updated_at": "",
+      "due_date": "",
+      "completed_at": "",
+      "priority": "medium",
+      "next_action": ""
+    },
+    {
+      "id": "GAP1",
+      "title": "成本可观测(token用量追踪,防148×91组合烧预算)",
+      "group": "",
+      "status": "todo",
+      "status_label": "待办",
+      "evidence": "",
+      "closure_badge": "待补证据",
+      "blocker": "",
+      "session_id": "",
+      "session_name": "",
+      "project_id": "",
+      "parent_id": "",
+      "created_at": "",
+      "updated_at": "",
+      "due_date": "",
+      "completed_at": "",
+      "priority": "medium",
+      "next_action": ""
+    },
+    {
+      "id": "GAP2",
+      "title": "灾备回滚(session崩溃/误删的context checkpoint)",
+      "group": "",
+      "status": "todo",
+      "status_label": "待办",
+      "evidence": "",
+      "closure_badge": "待补证据",
+      "blocker": "",
+      "session_id": "",
+      "session_name": "",
+      "project_id": "",
+      "parent_id": "",
+      "created_at": "",
+      "updated_at": "",
+      "due_date": "",
+      "completed_at": "",
+      "priority": "medium",
+      "next_action": ""
+    },
+    {
+      "id": "GAP3",
+      "title": "新会话状态原子继承(超越人工board登记)",
+      "group": "",
+      "status": "todo",
+      "status_label": "待办",
+      "evidence": "",
+      "closure_badge": "待补证据",
+      "blocker": "",
+      "session_id": "",
+      "session_name": "",
+      "project_id": "",
+      "parent_id": "",
+      "created_at": "",
+      "updated_at": "",
+      "due_date": "",
+      "completed_at": "",
+      "priority": "medium",
+      "next_action": ""
+    },
+    {
+      "id": "GAP4",
+      "title": "AI安全权限边界文档(高危操作触发条件)",
+      "group": "",
+      "status": "todo",
+      "status_label": "待办",
+      "evidence": "",
+      "closure_badge": "待补证据",
+      "blocker": "",
+      "session_id": "",
+      "session_name": "",
+      "project_id": "",
+      "parent_id": "",
+      "created_at": "",
+      "updated_at": "",
+      "due_date": "",
+      "completed_at": "",
+      "priority": "medium",
+      "next_action": ""
+    },
+    {
+      "id": "GAP5",
+      "title": "注意力预算维度(每session同时开plan/blocker≤3,opencode建议)",
+      "group": "",
+      "status": "todo",
+      "status_label": "待办",
+      "evidence": "",
+      "closure_badge": "待补证据",
+      "blocker": "",
+      "session_id": "",
+      "session_name": "",
+      "project_id": "",
+      "parent_id": "",
+      "created_at": "",
+      "updated_at": "",
+      "due_date": "",
+      "completed_at": "",
+      "priority": "medium",
+      "next_action": ""
     }
   ],
   "notes": [
     {
-      "date": "2026-06-29",
-      "note": "剩余49条已分发为5个新session接力包 → .omc/handoffs/handoff-20260629-remaining-clusters-master.md (S1改名+skill治理P0/S2 dashboard A区/S3备份归并/S4升级闭环/S5 E区+提示词库)"
+      "date": "2026-07-02",
+      "note": "v2 prompt试跑+#5安全裁决:炸鸡店UE(opus按v2跑)全数字标[假设]+VAT红线主动揪+拒编造=v2纪律有效;#5 expert panel读全文=传销/庞氏操盘手(权健/天狮/陆正耀+非洲传销负责人x5)+多级下线上分+扣证放贷+盗版+越狱头→拒绝合并(安全铁律+反讽刺R3/R4),用户选合规专家台替代(v2.1加5合规agent panel);#4/#6砍;完整迁移全文重抽截断残留0"
     },
     {
-      "date": "2026-06-29",
-      "note": "G3-planauto评估结论:官方plan mode(shift+tab)+omc-plan/ralplan skill已存在,自动触发plan的hook为低ROI且易刷屏,本session不新建(防bloat),保留todo待真需要再评估"
+      "date": "2026-07-02",
+      "note": "Wave1全收口验实(2026-07-02 21:56 e0391a70核):W27=board活报数/P2=4commit+BL4接线运行时验实/P5=mac SOP产出。Wave2发车:P4(relay-index§6增强版,先开)→P3(等P4 commit);v4验收(§11,独立仓可并行)。W27存量债待Wave4:10未绑next-action+4 done缺证据"
     },
     {
-      "date": "2026-06-29",
-      "note": "Notion诊断(6-29实测纠正):BL1'50条积压卡死'是误判→notion-push-queue.jsonl 50条全已同步(pending=0),cmmi-tracker 0待处理0待完成,.notion-synced今日14:57更新(tasks28/errors6/versions2),同步系统正常,D1(6-28修复)已生效,无需flush。"
+      "date": "2026-07-02",
+      "note": "P1-2插件治理:诊断完成(注入口径≈11k修正磁盘27.8k误读);4组disable候选入token报告待拍板;执行被权限层拦(enabledPlugins防改,AI自选目标不符豁免)——gate按设计工作"
     },
     {
-      "date": "2026-06-29",
-      "note": "10不满点核心:之前好用现失效→改名audit固化/外部记忆不更新→mem_iface已治/总有遗漏→board治本/Notion注册错→D1已修"
+      "date": "2026-07-02",
+      "note": "11条prompt资产对接完成:2 sonnet并行盘点(conf0.88/0.91)→1P0(非洲业务)带红线重构落prompt-lib(personal/非洲市场业务架构师-合规优先-v2,LangGPT9槽+binary,剥离越狱式永不拒绝+灰度包装机制)/3P1待排期/7P2归档;[7][8][9][10]谱系确认Gemini越狱链禁重构;prompts/被gitignore=隐私正确;paradigm plan Next-Action核销(撞名归档陷阱规避)"
     },
     {
-      "date": "2026-06-29",
-      "note": "10元诉求核心:不丢三落四(board治本)/先澄清再执行/官方+工程化专家异构对抗/禁自动push必user拍/基于实际配置/可固化场景/全网深度调研/帮非专业用户/dashboard说明书/格式一致+自动更新"
+      "date": "2026-07-02",
+      "note": "Wave1满编(2026-07-02):W27=05e60ed0✅已上线(23086ad+de87e81) / P5=d6a84d9f🔵 / P2=ce9bcc94🔵(增强版:关BL4+吸收FE1+W27新规合规)。协调中枢=e0391a70。Wave2待发:P4→P3+v4验收(编排源master-execution-plan §6)"
     },
     {
-      "date": "2026-06-29",
-      "note": "病根诊断:已建3个失败SSoT(BACKLOG/closure-status/task-ledger)全过期,根因=手动会过期+自动无业务语义+工程需求散在30+plan文档。治本=board只读渲染器实时聚合,永不过期。"
+      "date": "2026-07-02",
+      "note": "Notes adapter落地:lib/notes-extract.py(只读,--folder/--max/--meta-only,HTML归一+隐私红线stdout);首切片ai大模型提示词11/11条34.4万字符;reviewer P0采纳(REC碰撞静默截断→N协议头+fail-visibly,stub注入回归测试rc=1实证)+P1x4修;per-app adapter注册表进SOP(Reminders写+Notes读+Calendar死路)"
     },
     {
-      "date": "2026-06-29",
-      "note": "决策:形式=结构化backlog+board CLI;范围=完整含反哺自动化(用户拍板)。反哺按上游消费方门:2周无board调用则降级。"
+      "date": "2026-07-02",
+      "note": "拍板(2026-07-02):T14降partial(done证据=closure-doc共识非实跑,W27语义);BL6保持活跃待真跑token盘点;触发层daily hook获批接线"
+    },
+    {
+      "date": "2026-07-02",
+      "note": "回写脚本落地:lib/reminders-board-sync.py(A向board done→勾Reminders自动,B向report-only);独立reviewer P0x2/P1x3全处置(P0-1已完成提醒可查性=本机实证推翻,P0-2命中数守卫,P1x2修复/P1-1引号显式reject:id无空格);AS_SET写路径+dry-run+实跑rc=0"
+    },
+    {
+      "date": "2026-07-02",
+      "note": "Calendar场景跑通(P5场景2):Google Calendar MCP空(事件在iCloud本地)→混合范式截图+zoom视觉抽取本周8事件;交叉发现:杨烁会面本体=7/4周六12:00(Reminders due),7/3周五17:00前给第一版无日历冲突;陷阱:AppleScript Calendar全量枚举60s超时;首读due=无但复扫有值→load-bearing字段必二次校验"
+    },
+    {
+      "date": "2026-07-02",
+      "note": "W27补齐收口: de87e81三层齐(约定/检查/触发TODO)+reviewer二轮PASS-with-P1;reconcile真命中BL6→T14语义漂移(done证据是共识文档非实跑)待人工核实"
+    },
+    {
+      "date": "2026-07-02",
+      "note": "Wave1开工(2026-07-02):P5=session d6a84d9f(computer-use已重连,用户确认);W27/P2 session id 待用户确认;编排源=docs/plan/mycc-master-execution-plan-20260702.md §6"
+    },
+    {
+      "date": "2026-07-02",
+      "note": "P5 Mac app协作试点跑通:computer-use MCP探活✅→bundle ID授权3 app✅→截图勘察✅→AppleScript抽取提醒事项新赛点2条(郭哥ai需求/杨烁孵化器周五17:00)✅;沉淀docs/sop/mac-app-collaboration-sop.md(混合范式+4陷阱:中文locale需bundle ID/BetterDisplay overlay拦全屏点击/引导弹窗吞键盘/合成器级截图过滤)"
+    },
+    {
+      "date": "2026-07-02",
+      "note": "W27承诺gate上线(23086ad):add必--next/done必evidence/总览显承诺缺口+board next补绑。BL4真关(428f229 BRIDGE链路live)、FE1吸收(P2范式覆盖AskUserQuestion深度集成)。P2提示词范式查重定论:已交付且已commit(73cc591/c55b7a0/428f229),记忆'未commit待拍板'过期已修正。"
+    },
+    {
+      "date": "2026-07-02",
+      "note": "verifier核实(2026-07-02 e0391a70):①BL5 modal-overlay已实现(dashboard.html:2654-2665全链路,df789ea系列),board标todo过期,全量内容待确认;②W28 P0诊断'active.md空'已失效——81/81 active.md非空+user-prompt-task-extractor.sh:41正常写slug/当前任务/ts,W28真缺=4层功能(goal.md结构化+/session-status命令+auto-archive-stop扩展)非active.md断线,下游session勿基于旧P0修接线"
+    },
+    {
+      "date": "2026-07-02",
+      "note": "需求1梳理完成(analyst conf0.85)=Session Goal Tracker。痛点根因=已有基建断线非没设计:task-ledger session_id全unknown+active.md空(user-prompt-task-extractor.sh断线)+plan稀疏。4项binary需求(R1目标捕获≤1轮/R2实时进度视图/R3聚合文档索引/R4结束摘要≤20行)。★4层机制复用不重造:层1修user-prompt-task-extractor.sh(session_id注入+写goal.md)层2自动TodoWrite初始化(多任务意图触发)层3/session-status slash命令(聚合视图)层4扩auto-archive-stop.sh(结束摘要→notepad)。涉及hooks/user-prompt-task-extractor.sh+auto-archive-stop.sh+commands/session-status.md新+CLAUDE.md门槛。⚠️前2文件被0597e408/824a3d07动过,实现需协调。⚠️亲验:该hook L23/L25有session_id提取(json→env→pid),unknown另有来源,active.md空真根因P0待实测。方案落docs/mycc-relay-index.md §10。"
+    },
+    {
+      "date": "2026-07-02",
+      "note": "dual-end CLI↔Desktop 对齐已完成并 live(main 7a94078): Code标签复用+重hook端门控(真机13会话验证)+三标签规则+SSoT文档+zshenv标记。剩账号云层为claude.ai网页手动步骤,计入 dual-end-cloud-config todo 待后期执行。"
+    },
+    {
+      "date": "2026-07-01",
+      "note": "W27覆盖度审计(agent conf0.88+核实):原relay §7仅40%覆盖,根因②完全遗漏。已增强§7到全面详细专业(4根因矩阵/补stale-blockers/reconcile/next-action批量/数据结构/向后兼容/测试/边界/paste-ready prompt)。核实board.py现10命令无stale/reconcile/next_action,62plan零Next-Action。§10盲区5项(G1-G5成本/灾备/继承/安全/注意力)登记为独立需求防丢——外部AI指出的系统性盲区,不塞W27(防过载)。"
+    },
+    {
+      "date": "2026-07-01",
+      "note": "承诺机制gate采纳(外部mmx+opencode★一致,否决时间触发器为治标):完成定义改为'第一个可验证动作已触发'。三落点=①约定层(plan末尾必有##Next-Action段,零风险)②检查层(board.py加next_action字段+board done无则WARN+board stale-plans扫超期)③触发层(daily reconcile兜底)。设计落relay §7,并入P1治理引擎实现(board.py多session慎改不rush)。根治闭环失败根因①设计即停。"
+    },
+    {
+      "date": "2026-07-01",
+      "note": "需求全景master产出:docs/mycc-master-requirements-20260701.md(192行9节,供外部AI异构对抗)。含13条未闭环高价值backlog+4根因(设计即停/Blocker积压/Plan失忆/Board漂移)+集成11系统盘点+文件tidy方案。修2处board漂移:W03 done(auto-rollback.sh 48行实存)/BL7 resolved(mossy-cuddling-lake实存非缺失)。Workflow ww24y96wl,sweep3失败§7/§8 memory补全,reviewer PASS(P1×2/P2×2)。"
+    },
+    {
+      "date": "2026-07-01",
+      "note": "Phase0全面配置审计(session e0391a70 2026-07-01):实测纠正2处设计文档幻觉——T4 mycc-audit-pipeline.js已建326行10phase(非设计未建),真缺口=6小gap(docs/sop缺/67维SSoT缺/输出路径分歧/harness-audit.js孤儿);T5 weekly-tool-update-check已建但静默死(空日志)+monthly-evolution exit256坏。T9=16repo中4已覆盖,11真新待评(非60全新)。T2 deep-interview已归档断链(触发词在执行层缺=MODE hook桥落不了地)。T6渠道全手动3子机制未建。详见handoff mycc-p1-p5-relay-20260701.md。"
     }
   ],
   "memory_system": {
-    "total_files": 239,
+    "total_files": 257,
     "index": "MEMORY.md",
     "categories": [
       {
         "name": "📚 docs 索引（必查 · 治\"遗失\"病根）",
-        "count": 22
+        "count": 28
       },
       {
         "name": "用户画像 · 核心行为规则",
-        "count": 25
+        "count": 29
       },
       {
         "name": "外部CLI/AI工具 · CC Switch/配置/环境",
-        "count": 13
+        "count": 11
       },
       {
         "name": "mycc治理/精简/自动化 · 工程化协作",
-        "count": 18
+        "count": 21
       },
       {
         "name": "模型/MCP/架构 · 知识栈/记忆体系",
-        "count": 17
+        "count": 16
       }
     ],
     "locations": [
       {
         "name": "auto-memory(SSoT)",
         "path": "~/.claude/projects/.../memory/",
-        "count": 239
+        "count": 257
       },
       {
         "name": "learning-trace",
@@ -1891,7 +2332,7 @@
   },
   "closure": {
     "with_evidence": 30,
-    "without_evidence": 0,
-    "total": 30
+    "without_evidence": 2,
+    "total": 32
   }
 }
